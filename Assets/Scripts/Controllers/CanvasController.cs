@@ -68,6 +68,17 @@ public class CanvasController : MonoBehaviour
        
     }
 
+    public void FadeInSolo()
+    {
+        FadeInScreen.SetActive(true);
+        StartCoroutine(DelayFadeInSolo());
+    }
+
+    private IEnumerator DelayFadeInSolo()
+    {
+        yield return new WaitForSeconds(0.5f);
+        FadeInScreen.SetActive(false);
+    }
     public bool ScreenActivated()
     {
         return m_activated;
