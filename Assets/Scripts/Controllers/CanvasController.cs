@@ -9,6 +9,7 @@ public class CanvasController : MonoBehaviour
     public GameObject m_NotificationCanvas;
     public GameObject NotificationMessage;
     public GameObject MessageOpen;
+    public GameObject BedCanvas;
 
 
     private bool m_activated;
@@ -17,21 +18,21 @@ public class CanvasController : MonoBehaviour
         GameManager.GetManager().SetCanvas(this);
         m_activated=false;
     }
-    public void FadeIn()
+    public void FadeInComputer()
     {
         FadeInScreen.SetActive(true);
-        StartCoroutine(DelayFade());
+        StartCoroutine(DelayFadeComputer());
     }
 
     public void ComputerScreenIn()
     {
         m_activated = true;
-        FadeIn();
+        FadeInComputer();
         FadeInScreen.SetActive(true);
-        StartCoroutine(DelayFade());
+        StartCoroutine(DelayFadeComputer());
         
     }
-    private IEnumerator DelayFade()
+    private IEnumerator DelayFadeComputer()
     {
         
         yield return new WaitForSeconds(0.5f);
@@ -56,7 +57,7 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator DelayFadeClose()
     {
-        FadeIn();
+        FadeInComputer();
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(false);
         if (!GameManager.GetManager().GetNotificationController().m_CurrentNotRead)
@@ -68,15 +69,28 @@ public class CanvasController : MonoBehaviour
        
     }
 
-    public void FadeInSolo()
+
+    public void ActiveBedCanvas()
     {
-        FadeInScreen.SetActive(true);
-        StartCoroutine(DelayFadeInSolo());
+        //FadeIn();
+        BedCanvas.SetActive(true);
     }
 
-    private IEnumerator DelayFadeInSolo()
+    public void DesctiveBedCanvas()
     {
-        yield return new WaitForSeconds(0.5f);
+        
+        BedCanvas.SetActive(false);
+    }
+    //FADE IN SIN NADA
+    public void FadeIn()
+    {
+        FadeInScreen.SetActive(true);
+        StartCoroutine(DelayFadeIn());
+    }
+
+    private IEnumerator DelayFadeIn()
+    {
+        yield return new WaitForSeconds(0.7f);
         FadeInScreen.SetActive(false);
     }
     public bool ScreenActivated()

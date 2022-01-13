@@ -29,8 +29,10 @@ public class Alarm : MonoBehaviour
     {
         ResetTime();
         CanvasAlarm.SetActive(false);
-        GameManager.GetManager().GetCanvasManager().FadeInSolo();
+        /// GameManager.GetManager().GetCanvasManager().FadeInSolo();
         //animacion player se levanta
+
+        Debug.Log("Animación player se levanta");
 
     }
     public void StillSleeping()

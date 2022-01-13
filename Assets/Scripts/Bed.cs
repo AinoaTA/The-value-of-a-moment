@@ -4,37 +4,57 @@ using UnityEngine;
 
 public class Bed : MonoBehaviour,Iinteract
 {
+    private bool m_Done;
+    public GameObject m_SheetBad;
+    public GameObject m_Sheet;//sábana
     [HideInInspector]public string m_NameObject;
-    private bool m_WakeUp, m_Sleep;
 
+    private void Awake()
+    {
+        GameManager.GetManager().SetBed(this);
+    }
     private void Start()
     {
-        m_Sleep = true;
-        m_WakeUp = false;
+        m_SheetBad.SetActive(true);
+        m_NameObject = "Hacer la cama";
     }
 
-    private void SetSleep()
+    public void BedDone()
     {
+        m_Done = true;
+        m_Sheet.SetActive(true);
+        m_SheetBad.SetActive(false);
         m_NameObject = "Dormir";
-    }
-    private void SetTidy()
-    {
-        m_NameObject = "Recoger";
-
+        //Cambiamos la sábana u objeto cama.
     }
 
+    public void ResetBed()
+    {//para cuando se vuelve a dormir y despierta.
+        m_Done = false;
+        m_Sheet.SetActive(false);
+        m_SheetBad.SetActive(true);
+        m_NameObject = "Hacer la cama";
+    }
     public void Interaction()
     {
-        //if (m_Sleep)
-        //    SetWakeUp();
-        //else if (m_WakeUp)
-        //    SetTidy();
-        //else
-        //    SetSleep();
+        if (!m_Done)
+        {
+            //inicia minijuego
+
+            GameManager.GetManager().GetCanvasManager().ActiveBedCanvas();
+        }
+        else
+        {
+            GameManager.GetManager().GetCanvasManager().FadeIn();
+            ResetBed();
+            Debug.Log("MOMENTO MIMIR....");
+        }
+            
     }
 
     public string NameAction()
     {
+
         return m_NameObject;
     }
 
