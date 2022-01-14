@@ -46,10 +46,13 @@ public class Bed : MonoBehaviour,Iinteract
             //inicia minijuego
             m_miniGame.m_GameActive = true;
             GameManager.GetManager().GetCanvasManager().ActiveBedCanvas();
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         }
         else
         {
             GameManager.GetManager().GetCanvasManager().FadeIn();
+
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
             ResetBed();
             Debug.Log("MOMENTO MIMIR....");
         }

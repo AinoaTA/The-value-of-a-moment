@@ -3,7 +3,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-   
+
+    public enum StateGame
+    {
+        Init=0, //momento desperar-posponer
+        GamePlay, //una vez despertado y moviendose por el nivel
+        MiniGame //se ha iniciado un minigame
+    }
+
+    public StateGame m_CurrentStateGame;
+
     public LayerMask m_LayerMask;
     private Camera cam;
     private float m_Distance = 70f;
@@ -19,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     Bed m_Bed;
     Alarm m_Alarm;
+
+    
     public void SetCanvas(CanvasController canvas)
     {
         m_CanvasController = canvas;
@@ -53,12 +64,13 @@ public class GameManager : MonoBehaviour
     {
         m_GameManager = this;
         cam = Camera.main;
+        m_CurrentStateGame = StateGame.Init;
     }
 
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && m_CurrentStateGame == StateGame.GamePlay)
         {
             Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -74,7 +86,7 @@ public class GameManager : MonoBehaviour
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
         textHelp.transform.position =Input.mousePosition + helpOffset;
         TMP_Text text= textHelp.GetComponent<TMP_Text>();
-        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !m_CanvasController.ScreenActivated() && !m_Alarm.GetIsActive())
+        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !m_CanvasController.ScreenActivated() && !m_Alarm.GetIsActive() && m_CurrentStateGame==StateGame.GamePlay)
         {
             if(l_Hit.collider.GetComponent<Iinteract>()!=null)//da error si se cambia el objeto de la cama así q mejor pongo esto
             text.text = l_Hit.collider.GetComponent<Iinteract>().NameAction();

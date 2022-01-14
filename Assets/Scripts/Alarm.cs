@@ -23,7 +23,7 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         CanvasAlarm.SetActive(true);
-
+        m_Timer=0;
         //sonid
     }
 
@@ -31,10 +31,10 @@ public class Alarm : MonoBehaviour
     {
         m_Alarm = false;
         ResetTime();
-        
+
         /// GameManager.GetManager().GetCanvasManager().FadeInSolo();
         //animacion player se levanta
-
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         Debug.Log("Animación player se levanta");
         CanvasAlarm.SetActive(false);
     }
@@ -42,6 +42,7 @@ public class Alarm : MonoBehaviour
     {
         m_Alarm = true;
         ResetTime();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         CanvasAlarm.SetActive(false);
     }
 
@@ -57,7 +58,6 @@ public class Alarm : MonoBehaviour
 
     public void ResetTime()
     {
-        m_Alarm = false;
         m_Timer = 0;
         m_MaxTime = 10;
     }
