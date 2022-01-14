@@ -15,6 +15,10 @@ public class NotificationController : MonoBehaviour
     public TMP_Text m_name;
     public Image m_ProfilePic;
 
+
+    public delegate void SoundMessageDelegate();
+    public static SoundMessageDelegate m_MessageDelegate;
+    
     private void Awake()
     {
         GameManager.GetManager().SetNotificationController(this);
@@ -34,6 +38,9 @@ public class NotificationController : MonoBehaviour
         m_CurrentNotRead = true;
         GameManager.GetManager().GetCanvasManager().m_NotificationCanvas.SetActive(true);
         m_RandomValue = Random.Range(0, 2); //frase random elegida.
+
+        m_MessageDelegate?.Invoke();
+
 
         if (m_RandomValue == 0)
             SetTroll();
