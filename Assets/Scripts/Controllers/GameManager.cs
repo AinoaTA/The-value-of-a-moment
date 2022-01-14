@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     Autocontrol m_Autocontrol;
 
     Bed m_Bed;
+    Alarm m_Alarm;
     public void SetCanvas(CanvasController canvas)
     {
         m_CanvasController = canvas;
@@ -37,11 +38,17 @@ public class GameManager : MonoBehaviour
         m_Bed = _bed;
     }
 
+    public void SetAlarm(Alarm _Alarm)
+    {
+        m_Alarm = _Alarm;
+    }
+
     public static GameManager GetManager() => m_GameManager;
     public CanvasController GetCanvasManager() => m_CanvasController;
     public Autocontrol GetAutoControl() => m_Autocontrol;
     public NotificationController GetNotificationController() =>m_NotificationController;
     public Bed GetBed() => m_Bed;
+    public Alarm GetAlarm() => m_Alarm;
     private void Awake()
     {
         m_GameManager = this;
@@ -67,7 +74,7 @@ public class GameManager : MonoBehaviour
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
         textHelp.transform.position =Input.mousePosition + helpOffset;
         TMP_Text text= textHelp.GetComponent<TMP_Text>();
-        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !m_CanvasController.ScreenActivated())
+        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !m_CanvasController.ScreenActivated() && !m_Alarm.GetIsActive())
         {
             if(l_Hit.collider.GetComponent<Iinteract>()!=null)//da error si se cambia el objeto de la cama así q mejor pongo esto
             text.text = l_Hit.collider.GetComponent<Iinteract>().NameAction();

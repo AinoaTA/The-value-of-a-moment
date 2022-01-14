@@ -9,6 +9,7 @@ public class Bed : MonoBehaviour,Iinteract
     public GameObject m_Sheet;//sábana
     [HideInInspector]public string m_NameObject;
 
+    public BedMinigame m_miniGame;
     private void Awake()
     {
         GameManager.GetManager().SetBed(this);
@@ -25,11 +26,14 @@ public class Bed : MonoBehaviour,Iinteract
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
         m_NameObject = "Dormir";
+        GameManager.GetManager().GetAutoControl().AddAutoControl(5);
         //Cambiamos la sábana u objeto cama.
     }
 
     public void ResetBed()
     {//para cuando se vuelve a dormir y despierta.
+        GameManager.GetManager().GetAlarm().SetAlarmActive();
+        GameManager.GetManager().GetAlarm().ResetTime();
         m_Done = false;
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
@@ -40,7 +44,7 @@ public class Bed : MonoBehaviour,Iinteract
         if (!m_Done)
         {
             //inicia minijuego
-
+            m_miniGame.m_GameActive = true;
             GameManager.GetManager().GetCanvasManager().ActiveBedCanvas();
         }
         else
