@@ -10,6 +10,7 @@ public class CanvasController : MonoBehaviour
     public GameObject NotificationMessage;
     public GameObject MessageOpen;
     public GameObject BedCanvas;
+    public GameObject WindowCanvas;
 
 
     private bool m_activated;
@@ -68,7 +69,9 @@ public class CanvasController : MonoBehaviour
         MessageOpen.SetActive(false);
        
     }
-
+    /// <summary>
+    /// MINI GAMES CANVAS
+    /// </summary>
 
     public void ActiveBedCanvas()
     {
@@ -81,6 +84,21 @@ public class CanvasController : MonoBehaviour
         
         BedCanvas.SetActive(false);
     }
+
+    public void ActiveWindowCanvas()
+    {
+        //FadeIn();
+        WindowCanvas.SetActive(true);
+    }
+
+    public void DesctiveWindowCanvas()
+    {
+
+        WindowCanvas.SetActive(false);
+    }
+    /// <summary>
+    /// END MINI GAMES CANVAS
+    /// </summary>
     //FADE IN SIN NADA
     public void FadeIn()
     {
@@ -97,4 +115,7 @@ public class CanvasController : MonoBehaviour
     {
         return m_activated;
     }
+
+    ///
+
 }

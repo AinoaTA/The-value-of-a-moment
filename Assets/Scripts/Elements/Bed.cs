@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bed : MonoBehaviour,Iinteract
@@ -8,7 +7,7 @@ public class Bed : MonoBehaviour,Iinteract
     public GameObject m_SheetBad;
     public GameObject m_Sheet;//sábana
     [HideInInspector]public string m_NameObject;
-
+    public string[] m_HelpPhrases;
     public BedMinigame m_miniGame;
     private void Awake()
     {
@@ -51,18 +50,30 @@ public class Bed : MonoBehaviour,Iinteract
         else
         {
             GameManager.GetManager().GetCanvasManager().FadeIn();
-
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
-            ResetBed();
-            Debug.Log("MOMENTO MIMIR....");
+            StartCoroutine(DelaySleep());
         }
-            
     }
 
+    private IEnumerator DelaySleep()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().GetWindow().ResetWindow();
+        ResetBed();
+    }
     public string NameAction()
     {
 
         return m_NameObject;
     }
 
+    public bool GetDone()
+    {
+        return m_Done;
+    }
+
+    public string[] GetPhrases()
+    {
+        return m_HelpPhrases;
+    }
 }

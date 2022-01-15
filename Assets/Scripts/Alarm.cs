@@ -7,7 +7,7 @@ public class Alarm : MonoBehaviour
     private bool m_Alarm=true;
     public GameObject CanvasAlarm;
 
-
+    public ButtonTrigger WakeUpTrigger;
     private void Awake()
     {
         GameManager.GetManager().SetAlarm(this);
@@ -29,14 +29,26 @@ public class Alarm : MonoBehaviour
 
     public void WakeUp()
     {
-        m_Alarm = false;
-        ResetTime();
+        print(WakeUpTrigger.m_Counter + "in");
+        if (WakeUpTrigger.m_Counter > 3)
+        {
+            m_Alarm = false;
+            ResetTime();
 
-        /// GameManager.GetManager().GetCanvasManager().FadeInSolo();
-        //animacion player se levanta
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        Debug.Log("Animación player se levanta");
-        CanvasAlarm.SetActive(false);
+            GameManager.GetManager().GetDialogueControl().SetTimer();
+            ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
+            //animacion player se levanta
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+            Debug.Log("Animación player se levanta");
+            CanvasAlarm.SetActive(false);
+        }else if (WakeUpTrigger.m_Counter <=3)
+        {
+            if(WakeUpTrigger.m_Counter>1)
+                GameManager.GetManager().GetDialogueControl().SetDialogue("5 MINUTOS MÁS...");
+
+             WakeUpTrigger.LessEscaleWakeUp();
+        }
+        
     }
     public void StillSleeping()
     {

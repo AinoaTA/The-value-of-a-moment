@@ -1,41 +1,44 @@
 using System.Collections;
 using UnityEngine;
 
-public class BedMinigame : MonoBehaviour
+public class WindowMinigame : MonoBehaviour
 {
 
-    private int ValueConfident=5; //
     private Camera cam;
     private bool m_Completed;
     private Vector3 finalLimit;
     private Vector3 initPos;
-    public GameObject m_Sheet;
+    public GameObject m_Glass;
     public GameObject m_Limit;
     public LayerMask m_LayerMask;
-    [HideInInspector]public bool m_GameActive=false;
-    
+
+    [HideInInspector]public bool m_GameActive = false;
+    [SerializeField]private float m_Speed = 0.3f;
+    private Vector3 LastLeft;
     private void Awake()
     {
         cam = Camera.main;
-        initPos = m_Sheet.transform.position;
+        initPos = m_Glass.transform.position;
         finalLimit = m_Limit.transform.position;
-        finalLimit -= new Vector3(260, 0, 0);
+        finalLimit += new Vector3(0, 180, 0);
     }
     private void Update()
     {
+        if (!Input.GetMouseButton(0) && !m_Completed)
+            m_Glass.transform.position = Vector3.Lerp(m_Glass.transform.position, initPos, m_Speed * Time.deltaTime);
 
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButton(0) && Input.GetAxisRaw("Mouse X")>0 && !m_Completed)
+        if (Input.GetMouseButton(0) && Input.GetAxisRaw("Mouse Y") > 0 && !m_Completed)
         {
-           
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_LayerMask))
             {
-                m_Sheet.transform.position+= new Vector3(5, 0, 0);
+                m_Glass.transform.position += new Vector3(0, 2.5f, 0);
 
-                if (m_Sheet.transform.position.x >= finalLimit.x)
+                LastLeft = m_Glass.transform.position;
+                LastLeft.x = 0;
+                if (m_Glass.transform.position.y >= finalLimit.y)
                     MinigameCompleted();
             }
-            
         }
     }
 
@@ -43,21 +46,21 @@ public class BedMinigame : MonoBehaviour
     {
         m_Completed = true;
         //cualquier cosa que el jgador entienda que la hizo bien
+
         StartCoroutine(DelayCompleted());
     }
 
     private IEnumerator DelayCompleted()
     {
         yield return new WaitForSeconds(1f);
-        GameManager.GetManager().GetBed().BedDone();
-        GameManager.GetManager().GetCanvasManager().DesctiveBedCanvas();
-        GameManager.GetManager().GetAutoControl().AddAutoControl(ValueConfident);
+        GameManager.GetManager().GetWindow().WindowDone();
+        GameManager.GetManager().GetCanvasManager().DesctiveWindowCanvas();
 
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
 
         m_GameActive = false;
         ResetMinigame();
-    } 
+    }
 
     public bool GameActive()
     {
@@ -67,7 +70,7 @@ public class BedMinigame : MonoBehaviour
 
     private void ResetMinigame()
     {
-        m_Sheet.transform.position = initPos;
+        m_Glass.transform.position = initPos;
         m_Completed = false;
     }
 }
