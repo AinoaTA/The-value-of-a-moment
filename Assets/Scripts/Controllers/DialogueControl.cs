@@ -7,13 +7,13 @@ public class DialogueControl : MonoBehaviour
 {
     private TMP_Text m_Text;
     private float m_TimerShowDialogue =0;
-    private float m_MaxTimeShowDialogue=5; //dependiendo de la longitud de la frase.
+    private float m_MaxTimeShowDialogue=10; //dependiendo de la longitud de la frase.
     private bool m_DialogueActive;
 
-    private int maxInt;
-     //frases de ayuda.
-   
-    //private List<GameObject> m_ListInteract=new List<GameObject>();
+    private int maxInt=2;
+    //frases de ayuda.
+
+    private List<GameObject> m_ListInteract = new List<GameObject>();
 
     private float m_Timer=-100;
     public void SetTimer()
@@ -29,9 +29,9 @@ public class DialogueControl : MonoBehaviour
 
     private void Start()
     {
-        //m_ListInteract.Add(GameManager.GetManager().GetBed().gameObject);
-        //m_ListInteract.Add(GameManager.GetManager().GetWindow().gameObject);
-        //m_ListInteract.Add(GameManager.GetManager().GetBook().gameObject);
+        m_ListInteract.Add(GameManager.GetManager().GetBed().gameObject);
+        m_ListInteract.Add(GameManager.GetManager().GetWindow().gameObject);
+        m_ListInteract.Add(GameManager.GetManager().GetBook().gameObject);
 
     }
 
@@ -50,7 +50,7 @@ public class DialogueControl : MonoBehaviour
 
         m_Timer += Time.deltaTime;
         //print(m_Timer);
-        if (m_Timer > 12)
+        if (m_Timer > 12 && !m_DialogueActive)
             HelpDialogue();
     }
     public void SetDialogue(string dialogue)
@@ -62,14 +62,14 @@ public class DialogueControl : MonoBehaviour
 
     private void HelpDialogue()
     {
-        //for (int i = 0; i < m_ListInteract.Count; i++)
-        //{
-        //    if (!m_ListInteract[i].GetComponent<Iinteract>().GetDone())
-        //    {
-        //        int random = Random.Range(0, maxInt);
-        //        SetDialogue(m_ListInteract[i].GetComponent<Iinteract>().GetPhrases()[random]);
-        //    }
-        //}
+        for (int i = 0; i < m_ListInteract.Count; i++)
+        {
+            if (!m_ListInteract[i].GetComponent<Iinteract>().GetDone())
+            {
+                int random = Random.Range(0, maxInt);
+                SetDialogue(m_ListInteract[i].GetComponent<Iinteract>().GetPhrases()[random]);
+            }
+        }
     }
 
 }

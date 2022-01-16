@@ -64,6 +64,7 @@ public class Alarm : MonoBehaviour
         ResetTime();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         CanvasAlarm.SetActive(false);
+        GameManager.GetManager().GetAutoControl().RemoveAutoControl(5);
         GameManager.GetManager().GetDialogueControl().SetDialogue(m_phrases[m_count]);
         m_count++;
     }

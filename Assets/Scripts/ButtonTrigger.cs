@@ -11,10 +11,13 @@ public class ButtonTrigger : MonoBehaviour
     //public ButtonTrigger other;
 
     //private float randomPos;
+
+    public float ScaleValue = 0.004f;
     private Vector3 m_InitialScale;
     private Vector3 m_ScaleWakeUpButton;
-    private Vector3 m_NewScaleWakeUpButton = new Vector3 (0.005f,0.005f,0.005f);
+    private Vector3 m_NewScaleWakeUpButton;
     private Vector3 m_WakeScale;
+
 
     private void Awake()
     {
@@ -24,7 +27,10 @@ public class ButtonTrigger : MonoBehaviour
     {
         m_ScaleWakeUpButton = transform.localScale;
         m_InitialScale = transform.localScale;
+
+        m_NewScaleWakeUpButton = new Vector3(ScaleValue, ScaleValue, ScaleValue);
         m_NewScaleWakeUpButton += m_ScaleWakeUpButton;
+        
     }
 
     //WAKE UP BUTTON    
@@ -32,7 +38,7 @@ public class ButtonTrigger : MonoBehaviour
     {
         transform.localScale = m_ScaleWakeUpButton;
         
-        gameObject.transform.localScale -= new Vector3(0.004f, 0.004f, 0.004f);
+        gameObject.transform.localScale -= new Vector3(ScaleValue, ScaleValue, ScaleValue);
         m_ScaleWakeUpButton = gameObject.transform.localScale;
         print(gameObject.transform.localScale);
 
@@ -59,7 +65,7 @@ public class ButtonTrigger : MonoBehaviour
         if (m_Counter >= 4)
         {
             m_ScaleWakeUpButton = m_InitialScale;
-            m_NewScaleWakeUpButton= m_ScaleWakeUpButton+ new Vector3(0.005f, 0.005f, 0.005f);
+            m_NewScaleWakeUpButton= m_ScaleWakeUpButton + new Vector3(ScaleValue, ScaleValue, ScaleValue);
         }
                 
         else
