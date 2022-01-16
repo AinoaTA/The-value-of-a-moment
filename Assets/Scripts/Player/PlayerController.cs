@@ -5,8 +5,60 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+
+    public float movementSpeed;//
+    private void Start()
+    {
+        //colocamos valores
+        movementSpeed = 2f;
+
+        controller = this.GetComponent<CharacterController>();
+        anim = this.GetComponent<PlayerAnimations>();
+        SetIdle();
+    }
+    private void Move()
+    {
+                                                 //eje x          eje y        eje z   
+        Vector3 keyInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.Move((transform.TransformDirection(keyInput) * movementSpeed) * Time.deltaTime); //da movimiento
+
+
+
+        // Update animation (if so)
+        if (m_PlayerState != PlayerState.IDLE && keyInput == Vector3.zero)
+            m_PlayerState = PlayerState.IDLE;
+        else if (m_PlayerState != PlayerState.MOVE)
+            m_PlayerState = PlayerState.MOVE;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public PlayerAnimations anim;
-    public float movementSpeed = 2f;
     public PlayerState m_PlayerState;
     public enum PlayerState
     {
@@ -18,15 +70,10 @@ public class PlayerController : MonoBehaviour
     private bool busy;
 
     private Vector3 m_NextPos;
-    private float m_Speed = 2f;
-    
+    private float m_Speed;
 
-    private void Start()
-    {
-        controller = this.GetComponent<CharacterController>();
-        anim = this.GetComponent<PlayerAnimations>();
-        SetIdle();
-    }
+    
+   
 
     private void Update()
     {
@@ -37,17 +84,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Move()
-    {
-        Vector3 keyInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move((transform.TransformDirection(keyInput) * movementSpeed) * Time.deltaTime);
-
-        // Update animation (if so)
-        if (m_PlayerState != PlayerState.IDLE && keyInput == Vector3.zero)
-            m_PlayerState = PlayerState.IDLE;
-        else if (m_PlayerState != PlayerState.MOVE)
-            m_PlayerState = PlayerState.MOVE;
-    }
+    
 
     public void SetIdle()
     {
