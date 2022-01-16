@@ -8,6 +8,10 @@ public class Alarm : MonoBehaviour
     public GameObject CanvasAlarm;
 
     public ButtonTrigger WakeUpTrigger;
+    public string[] m_phrases;
+    private int m_count;
+    public delegate void DelegateSFX();
+    public static DelegateSFX m_DelegateSFX;
     private void Awake()
     {
         GameManager.GetManager().SetAlarm(this);
@@ -23,7 +27,8 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         CanvasAlarm.SetActive(true);
-        m_Timer=0;
+        m_DelegateSFX?.Invoke();
+        m_Timer =0;
         //sonid
     }
 
@@ -44,7 +49,7 @@ public class Alarm : MonoBehaviour
         }else if (WakeUpTrigger.m_Counter <=3)
         {
             if(WakeUpTrigger.m_Counter>1)
-                GameManager.GetManager().GetDialogueControl().SetDialogue("5 MINUTOS MÁS...");
+                GameManager.GetManager().GetDialogueControl().SetDialogue("5 Minutos más...");
 
              WakeUpTrigger.LessEscaleWakeUp();
         }
@@ -52,10 +57,15 @@ public class Alarm : MonoBehaviour
     }
     public void StillSleeping()
     {
+        if (m_count >= m_phrases.Length)
+            m_count=0;
+
         m_Alarm = true;
         ResetTime();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         CanvasAlarm.SetActive(false);
+        GameManager.GetManager().GetDialogueControl().SetDialogue(m_phrases[m_count]);
+        m_count++;
     }
 
     public bool GetIsActive()
@@ -70,6 +80,7 @@ public class Alarm : MonoBehaviour
 
     public void ResetTime()
     {
+        GameManager.GetManager().GetSoundController().StopSound();
         m_Timer = 0;
         m_MaxTime = 10;
     }

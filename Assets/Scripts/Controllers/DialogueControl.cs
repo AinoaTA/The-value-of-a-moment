@@ -13,7 +13,7 @@ public class DialogueControl : MonoBehaviour
     private int maxInt;
      //frases de ayuda.
    
-    private List<GameObject> m_ListInteract=new List<GameObject>();
+    //private List<GameObject> m_ListInteract=new List<GameObject>();
 
     private float m_Timer=-100;
     public void SetTimer()
@@ -29,9 +29,9 @@ public class DialogueControl : MonoBehaviour
 
     private void Start()
     {
-        m_ListInteract.Add(GameManager.GetManager().GetBed().gameObject);
-        m_ListInteract.Add(GameManager.GetManager().GetWindow().gameObject);
-        m_ListInteract.Add(GameManager.GetManager().GetBook().gameObject);
+        //m_ListInteract.Add(GameManager.GetManager().GetBed().gameObject);
+        //m_ListInteract.Add(GameManager.GetManager().GetWindow().gameObject);
+        //m_ListInteract.Add(GameManager.GetManager().GetBook().gameObject);
 
     }
 
@@ -62,14 +62,14 @@ public class DialogueControl : MonoBehaviour
 
     private void HelpDialogue()
     {
-        for (int i = 0; i < m_ListInteract.Count; i++)
-        {
-            if (!m_ListInteract[i].GetComponent<Iinteract>().GetDone())
-            {
-                int random = Random.Range(0, maxInt);
-                SetDialogue(m_ListInteract[i].GetComponent<Iinteract>().GetPhrases()[random]);
-            }
-        }
+        //for (int i = 0; i < m_ListInteract.Count; i++)
+        //{
+        //    if (!m_ListInteract[i].GetComponent<Iinteract>().GetDone())
+        //    {
+        //        int random = Random.Range(0, maxInt);
+        //        SetDialogue(m_ListInteract[i].GetComponent<Iinteract>().GetPhrases()[random]);
+        //    }
+        //}
     }
 
 }

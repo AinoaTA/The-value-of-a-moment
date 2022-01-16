@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Book : MonoBehaviour, Iinteract
 {
     private string m_NameObject = "Leer libro";
     private bool m_Done;
+    private int m_Counter = 0;
 
     public string[] m_HelpPhrases;
+    public string[] m_BookInteractPhrases;
 
+    public delegate void DelegateSFXBook();
+    public static DelegateSFXBook m_DelegateSFXBook;
     private void Awake()
     {
         GameManager.GetManager().SetBook(this);
@@ -16,13 +18,19 @@ public class Book : MonoBehaviour, Iinteract
     public void Interaction()
     {
         if (!m_Done)
-            print("Leidisimo");
-        
-    }
+        {
+            if (m_Counter >= m_BookInteractPhrases.Length)
+                m_Counter = 0;
 
-    public void BookRead()
-    {
-        m_Done = true;
+            GameManager.GetManager().GetDialogueControl().SetDialogue(m_BookInteractPhrases[m_Counter]);
+            m_DelegateSFXBook?.Invoke();
+            m_Counter++;
+           
+
+            m_Done = true;
+            m_NameObject = "";
+        }
+        
     }
 
     public string NameAction()
@@ -38,5 +46,11 @@ public class Book : MonoBehaviour, Iinteract
     public string[] GetPhrases()
     {
         return m_HelpPhrases;
+    }
+
+    public void ResetBookDay()
+    {
+        m_NameObject = "Continuar leyendo";
+        m_Done = false;
     }
 }

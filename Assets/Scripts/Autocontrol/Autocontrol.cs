@@ -21,10 +21,6 @@ public class Autocontrol : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            AddAutoControl(10);
-        if (Input.GetKeyDown(KeyCode.T))
-            RemoveAutoControl(10);
     }
     public void AddAutoControl(float value)
     {

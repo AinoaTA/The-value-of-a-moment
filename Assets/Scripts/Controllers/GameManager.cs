@@ -3,7 +3,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    static GameManager m_GameManager;
 
+    CanvasController m_CanvasController;
+    NotificationController m_NotificationController;
+    Autocontrol m_Autocontrol;
+
+    Bed m_Bed;
+    Window m_Window;
+    Book m_Book;
+    Alarm m_Alarm;
+    DialogueControl m_Dialogue;
+    SoundController m_SoundController;
     public enum StateGame
     {
         Init = 0, //momento desperar-posponer
@@ -19,17 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
 
-    static GameManager m_GameManager;
 
-    CanvasController m_CanvasController;
-    NotificationController m_NotificationController;
-    Autocontrol m_Autocontrol;
-
-    Bed m_Bed;
-    Window m_Window;
-    Book m_Book;
-    Alarm m_Alarm;
-    DialogueControl m_Dialogue;
 
 
     public void SetCanvas(CanvasController canvas)
@@ -70,6 +71,11 @@ public class GameManager : MonoBehaviour
     {
         m_Book = _book;
     }
+
+    public void SetSoundController(SoundController _SoundController)
+    {
+        m_SoundController = _SoundController;
+    }
     public static GameManager GetManager() => m_GameManager;
     public CanvasController GetCanvasManager() => m_CanvasController;
     public Autocontrol GetAutoControl() => m_Autocontrol;
@@ -78,8 +84,8 @@ public class GameManager : MonoBehaviour
     public Window GetWindow() => m_Window;
     public Alarm GetAlarm() => m_Alarm;
     public DialogueControl GetDialogueControl() => m_Dialogue;
-
     public Book GetBook() => m_Book;
+    public SoundController GetSoundController() => m_SoundController;
     private void Awake()
     {
         m_GameManager = this;

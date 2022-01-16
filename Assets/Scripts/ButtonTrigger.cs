@@ -3,14 +3,14 @@ using UnityEngine;
 public class ButtonTrigger : MonoBehaviour
 {
     public float m_Counter;
-    private float maxDistanceX=50f;
-    private float minDistanceX=10f;
-    private float maxDistanceY=50f;
-    private float mindistanceY=10f;
+    //private float maxDistanceX=50f;
+    //private float minDistanceX=10f;
+    //private float maxDistanceY=50f;
+    //private float mindistanceY=10f;
     //private ButtonTrigger current;
     //public ButtonTrigger other;
 
-    private float randomPos;
+    //private float randomPos;
     private Vector3 m_InitialScale;
     private Vector3 m_ScaleWakeUpButton;
     private Vector3 m_NewScaleWakeUpButton = new Vector3 (0.005f,0.005f,0.005f);
@@ -30,21 +30,17 @@ public class ButtonTrigger : MonoBehaviour
     //WAKE UP BUTTON    
     public void LessEscaleWakeUp()
     {
-        
-
         transform.localScale = m_ScaleWakeUpButton;
         
-        gameObject.transform.localScale -= new Vector3(0.005f, 0.005f, 0.005f);
+        gameObject.transform.localScale -= new Vector3(0.004f, 0.004f, 0.004f);
         m_ScaleWakeUpButton = gameObject.transform.localScale;
-        
+        print(gameObject.transform.localScale);
 
-        if (m_Counter <= 3)
+        if (m_Counter < 3)
             m_NewScaleWakeUpButton = m_ScaleWakeUpButton + new Vector3(0.001f, 0.001f, 0.001f);
-        else
-            transform.localScale = m_InitialScale;
+        
         
         m_Counter++;
-        print(m_Counter + "out");
     }
 
     public void RandomWakeUp()
@@ -60,7 +56,13 @@ public class ButtonTrigger : MonoBehaviour
 
     public void ButtonExitBoth()
     {
-       
-        transform.localScale = m_ScaleWakeUpButton;  
+        if (m_Counter >= 4)
+        {
+            m_ScaleWakeUpButton = m_InitialScale;
+            m_NewScaleWakeUpButton= m_ScaleWakeUpButton+ new Vector3(0.005f, 0.005f, 0.005f);
+        }
+                
+        else
+          transform.localScale = m_ScaleWakeUpButton;
     }
 }

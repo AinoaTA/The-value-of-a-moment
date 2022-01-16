@@ -53,7 +53,8 @@ public class NotificationController : MonoBehaviour
         m_name.text = m_troll.m_Name[0];
         m_RandomValue = Random.Range(0, m_troll.m_Phrases.Length); //frase random elegida.
         m_Desc.text = m_troll.m_Phrases[m_RandomValue];
-        m_ProfilePic.sprite = m_troll.m_ProfilePic;
+        m_RandomValue = Random.Range(0, m_troll.m_ProfilePic.Length);
+        m_ProfilePic.sprite = m_troll.m_ProfilePic[m_RandomValue];
     }
 
     private void SetPeople()
@@ -64,7 +65,8 @@ public class NotificationController : MonoBehaviour
         m_name.text = m_person.m_Name[m_RandomValue];
         m_RandomValue = Random.Range(0, m_person.m_Phrases.Length); //frase random elegida.
         m_Desc.text = m_person.m_Phrases[m_RandomValue];
-        m_ProfilePic.sprite = m_person.m_ProfilePic;
+        m_RandomValue = Random.Range(0, m_person.m_ProfilePic.Length);
+        m_ProfilePic.sprite = m_person.m_ProfilePic[m_RandomValue];
     }
 
 
