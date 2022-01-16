@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9158388669641260033}
   - component: {fileID: 9158388669641260032}
   - component: {fileID: 9158388669641260035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Reflejo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,8 +107,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9158388670300706582}
+  - component: {fileID: 8830054725280215599}
   - component: {fileID: 9158388670300706583}
-  m_Layer: 0
+  - component: {fileID: 3751820761873173776}
+  m_Layer: 6
   m_Name: Espejo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,6 +133,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0.853, z: 90}
+--- !u!114 &8830054725280215599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158388670300706585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b884bf21fb3b00242bb5c59d61cc2d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MirrorInteractPhrases:
+  - 'Tengo una pinta horrible. '
+  - "Parezco una zombie. \xA1Menudas ojeras!"
+  - "\xBFEn qu\xE9 momento me pareci\xF3 buena idea cortarme as\xED el pelo? "
 --- !u!114 &9158388670300706583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +164,19 @@ MonoBehaviour:
   mirrorCamera: {fileID: 9158388670349689638}
   reflexTexture: {fileID: 8400000, guid: 3fed0e1d3efe69140adb701033c1afa2, type: 2}
   fov: 60
+--- !u!65 &3751820761873173776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158388670300706585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5381765, y: 0.3007777, z: 0.50666124}
+  m_Center: {x: 0.006544587, y: 0.029043118, z: -0.005516346}
 --- !u!1 &9158388670349689643
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +189,7 @@ GameObject:
   - component: {fileID: 9158388670349689638}
   - component: {fileID: 9158388670349689641}
   - component: {fileID: 9158388670349689639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,6 +453,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 364aedabbabe6314c969a4ea6a852970, type: 3}
       propertyPath: m_Name
       value: Marco
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 364aedabbabe6314c969a4ea6a852970, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364aedabbabe6314c969a4ea6a852970, type: 3}

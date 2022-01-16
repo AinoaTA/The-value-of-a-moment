@@ -12,9 +12,11 @@ public class GameManager : MonoBehaviour
     Bed m_Bed;
     Window m_Window;
     Book m_Book;
+    Mirror m_Mirror;
     Alarm m_Alarm;
     DialogueControl m_Dialogue;
     SoundController m_SoundController;
+    FirstMinigameController m_FirstMinigame;
     public enum StateGame
     {
         Init = 0, //momento desperar-posponer
@@ -76,6 +78,18 @@ public class GameManager : MonoBehaviour
     {
         m_SoundController = _SoundController;
     }
+
+    public void SetFirstMiniGame(FirstMinigameController _First)
+    {
+        m_FirstMinigame = _First;
+    }
+
+    public void SetMirror(Mirror _Mirror)
+    {
+        m_Mirror = _Mirror;
+    }
+
+
     public static GameManager GetManager() => m_GameManager;
     public CanvasController GetCanvasManager() => m_CanvasController;
     public Autocontrol GetAutoControl() => m_Autocontrol;
@@ -86,6 +100,8 @@ public class GameManager : MonoBehaviour
     public DialogueControl GetDialogueControl() => m_Dialogue;
     public Book GetBook() => m_Book;
     public SoundController GetSoundController() => m_SoundController;
+    public FirstMinigameController GetFirstMinigameController() => m_FirstMinigame;
+    public Mirror GetMirror() => m_Mirror;
     private void Awake()
     {
         m_GameManager = this;

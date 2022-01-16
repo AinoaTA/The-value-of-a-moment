@@ -34,7 +34,6 @@ public class Alarm : MonoBehaviour
 
     public void WakeUp()
     {
-        print(WakeUpTrigger.m_Counter + "in");
         if (WakeUpTrigger.m_Counter > 3)
         {
             m_Alarm = false;

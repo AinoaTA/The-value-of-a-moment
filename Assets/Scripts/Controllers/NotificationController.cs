@@ -27,8 +27,7 @@ public class NotificationController : MonoBehaviour
             SendNotification();
 
         timer += Time.deltaTime;
-        //print(timer);
-        if (timer >= 15f && !m_CurrentNotRead && !GameManager.GetManager().GetCanvasManager().ScreenActivated())
+        if (timer >= 15f && !m_CurrentNotRead && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
             SendNotification();
     }
     private void SendNotification()

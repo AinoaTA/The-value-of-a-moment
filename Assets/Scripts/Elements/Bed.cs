@@ -60,6 +60,7 @@ public class Bed : MonoBehaviour,Iinteract
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().GetWindow().ResetWindow();
         GameManager.GetManager().GetBook().ResetBookDay();
+        GameManager.GetManager().GetMirror().ResetMirrorDay();
         ResetBed();
     }
     public string NameAction()

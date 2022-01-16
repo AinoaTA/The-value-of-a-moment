@@ -40,11 +40,9 @@ public class ButtonTrigger : MonoBehaviour
         
         gameObject.transform.localScale -= new Vector3(ScaleValue, ScaleValue, ScaleValue);
         m_ScaleWakeUpButton = gameObject.transform.localScale;
-        print(gameObject.transform.localScale);
 
         if (m_Counter < 3)
             m_NewScaleWakeUpButton = m_ScaleWakeUpButton + new Vector3(0.001f, 0.001f, 0.001f);
-        
         
         m_Counter++;
     }

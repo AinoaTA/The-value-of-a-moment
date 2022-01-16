@@ -11,6 +11,7 @@ public class CanvasController : MonoBehaviour
     public GameObject MessageOpen;
     public GameObject BedCanvas;
     public GameObject WindowCanvas;
+    public GameObject FirstMinigameCanvas;
 
 
     private bool m_activated;
@@ -116,6 +117,17 @@ public class CanvasController : MonoBehaviour
         return m_activated;
     }
 
-    ///
+    public void StartMinigame()
+    {
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+       
+        if(!GameManager.GetManager().GetFirstMinigameController().GetSolved())
+           FirstMinigameCanvas.SetActive(true);
+    }
+
+    public void FinishMiniGame()
+    {
+        FirstMinigameCanvas.SetActive(false);
+    }
 
 }
