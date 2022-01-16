@@ -3,7 +3,7 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     private AudioSource m_AudioSource;
-    
+    public AudioSource m_GlobalSource;
     public AudioClip m_Message;
     public AudioClip m_Alarm;
     public AudioClip m_Book;
@@ -47,7 +47,15 @@ public class SoundController : MonoBehaviour
     {
         m_AudioSource.Stop();
     }
+    public void SetMusic()
+    {
 
+    }
+
+    public void QuitMusic()
+    {
+
+    }
 
 }
 

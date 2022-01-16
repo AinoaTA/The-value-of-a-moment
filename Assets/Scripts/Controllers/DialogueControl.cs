@@ -13,12 +13,13 @@ public class DialogueControl : MonoBehaviour
     private int maxInt=2;
     //frases de ayuda.
 
-    private List<GameObject> m_ListInteract = new List<GameObject>();
+    [SerializeField]private List<GameObject> m_ListInteract = new List<GameObject>();
 
     private float m_Timer=-100;
     public void SetTimer()
     {
         m_Timer = 0;
+        m_TimerShowDialogue = 0;
     }
 
     private void Awake()

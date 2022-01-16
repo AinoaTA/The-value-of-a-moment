@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     DialogueControl m_Dialogue;
     SoundController m_SoundController;
     FirstMinigameController m_FirstMinigame;
+    VR m_VR;
     public enum StateGame
     {
         Init = 0, //momento desperar-posponer
@@ -89,6 +90,10 @@ public class GameManager : MonoBehaviour
         m_Mirror = _Mirror;
     }
 
+    public void SetVR(VR _VR)
+    {
+        m_VR = _VR;
+    }
 
     public static GameManager GetManager() => m_GameManager;
     public CanvasController GetCanvasManager() => m_CanvasController;
@@ -102,6 +107,7 @@ public class GameManager : MonoBehaviour
     public SoundController GetSoundController() => m_SoundController;
     public FirstMinigameController GetFirstMinigameController() => m_FirstMinigame;
     public Mirror GetMirror() => m_Mirror;
+    public VR GetVR() => m_VR;
     private void Awake()
     {
         m_GameManager = this;

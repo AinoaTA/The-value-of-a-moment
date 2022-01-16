@@ -7,7 +7,7 @@ public class NotificationProfile : ScriptableObject
 {
 
     public Sprite[] m_ProfilePic;
-    public string[] m_Name;
+    public string[] m_NameProfile;
     public string[] m_Phrases;
     public float minCofindent;
     public float maxConfident;

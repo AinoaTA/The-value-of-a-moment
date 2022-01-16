@@ -13,7 +13,6 @@ public class CanvasController : MonoBehaviour
     public GameObject WindowCanvas;
     public GameObject FirstMinigameCanvas;
 
-
     private bool m_activated;
     private void Awake()
     {
@@ -28,6 +27,7 @@ public class CanvasController : MonoBehaviour
 
     public void ComputerScreenIn()
     {
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
         FadeInComputer();
         FadeInScreen.SetActive(true);
@@ -68,7 +68,7 @@ public class CanvasController : MonoBehaviour
         }
         NotificationMessage.SetActive(false);
         MessageOpen.SetActive(false);
-       
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
     }
     /// <summary>
     /// MINI GAMES CANVAS
@@ -129,5 +129,7 @@ public class CanvasController : MonoBehaviour
     {
         FirstMinigameCanvas.SetActive(false);
     }
+
+
 
 }

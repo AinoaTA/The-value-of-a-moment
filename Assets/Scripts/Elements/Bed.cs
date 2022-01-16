@@ -61,6 +61,7 @@ public class Bed : MonoBehaviour,Iinteract
         GameManager.GetManager().GetWindow().ResetWindow();
         GameManager.GetManager().GetBook().ResetBookDay();
         GameManager.GetManager().GetMirror().ResetMirrorDay();
+        GameManager.GetManager().GetVR().ResetVRDay();
         ResetBed();
     }
     public string NameAction()

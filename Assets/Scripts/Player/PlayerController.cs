@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
         MOVE,
     }
 
-    private bool busy;
+    //private bool busy;
 
     private Vector3 m_NextPos;
     private float m_Speed;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (!busy)
+        if (GameManager.GetManager().m_CurrentStateGame== GameManager.StateGame.GamePlay)
         {
             Move();
             SetAnimations();

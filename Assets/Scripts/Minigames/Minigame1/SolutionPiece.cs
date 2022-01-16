@@ -9,6 +9,7 @@ public class SolutionPiece : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
+        
         if (collision.gameObject == m_CorrectPiece)
             m_Correct = true;
     }
