@@ -43,7 +43,7 @@ public class Alarm : MonoBehaviour
             ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
             //animacion player se levanta
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-            Debug.Log("Animación player se levanta");
+            GameManager.GetManager().GetPlayer().PlayerWakeUpPos();
             CanvasAlarm.SetActive(false);
         }else if (WakeUpTrigger.m_Counter <=3)
         {

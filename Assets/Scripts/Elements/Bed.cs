@@ -58,6 +58,7 @@ public class Bed : MonoBehaviour,Iinteract
     private IEnumerator DelaySleep()
     {
         yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().GetPlayer().PlayerSleepPos();
         GameManager.GetManager().GetWindow().ResetWindow();
         GameManager.GetManager().GetBook().ResetBookDay();
         GameManager.GetManager().GetMirror().ResetMirrorDay();

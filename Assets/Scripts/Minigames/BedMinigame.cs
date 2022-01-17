@@ -32,7 +32,6 @@ public class BedMinigame : MonoBehaviour
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_LayerMask))
             {
                 m_Sheet.transform.position+= new Vector3(5, 0, 0);
-                print(m_Sheet.transform.position);
                 if (m_Sheet.transform.position.x >= finalLimit.x)
                     MinigameCompleted();
             }
@@ -54,12 +53,11 @@ public class BedMinigame : MonoBehaviour
         GameManager.GetManager().GetCanvasManager().DesctiveBedCanvas();
         GameManager.GetManager().GetAutoControl().AddAutoControl(ValueConfident);
 
-       
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
 
         m_GameActive = false;
         ResetMinigame();
-        yield return new WaitForSeconds(1);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        
     } 
 
     public bool GameActive()

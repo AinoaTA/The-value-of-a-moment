@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     static GameManager m_GameManager;
 
     CanvasController m_CanvasController;
+    PlayerController m_PlayerController;
     NotificationController m_NotificationController;
     Autocontrol m_Autocontrol;
 
@@ -95,6 +96,11 @@ public class GameManager : MonoBehaviour
         m_VR = _VR;
     }
 
+    public void SetPlayer(PlayerController _player)
+    {
+        m_PlayerController = _player;
+    }
+
     public static GameManager GetManager() => m_GameManager;
     public CanvasController GetCanvasManager() => m_CanvasController;
     public Autocontrol GetAutoControl() => m_Autocontrol;
@@ -108,6 +114,7 @@ public class GameManager : MonoBehaviour
     public FirstMinigameController GetFirstMinigameController() => m_FirstMinigame;
     public Mirror GetMirror() => m_Mirror;
     public VR GetVR() => m_VR;
+    public PlayerController GetPlayer() => m_PlayerController;
     private void Awake()
     {
         m_GameManager = this;
