@@ -57,6 +57,7 @@ public class Bed : MonoBehaviour,Iinteract
 
     private IEnumerator DelaySleep()
     {
+        GameManager.GetManager().GetSoundController().QuitMusic();
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().GetPlayer().PlayerSleepPos();
         GameManager.GetManager().GetWindow().ResetWindow();

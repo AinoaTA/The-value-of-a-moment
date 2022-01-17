@@ -51,7 +51,7 @@ public class DialogueControl : MonoBehaviour
 
         m_Timer += Time.deltaTime;
         //print(m_Timer);
-        if (m_Timer > 12 && !m_DialogueActive)
+        if (m_Timer > 12 && !m_DialogueActive && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
             HelpDialogue();
     }
     public void SetDialogue(string dialogue)

@@ -26,6 +26,7 @@ public class Alarm : MonoBehaviour
     }
     private void StartAlarm()
     {
+        GameManager.GetManager().GetSoundController().QuitMusic();
         CanvasAlarm.SetActive(true);
         m_DelegateSFX?.Invoke();
         m_Timer =0;
@@ -44,6 +45,7 @@ public class Alarm : MonoBehaviour
             //animacion player se levanta
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
             GameManager.GetManager().GetPlayer().PlayerWakeUpPos();
+            GameManager.GetManager().GetSoundController().SetMusic();
             CanvasAlarm.SetActive(false);
         }else if (WakeUpTrigger.m_Counter <=3)
         {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SoundController : MonoBehaviour
@@ -7,11 +8,13 @@ public class SoundController : MonoBehaviour
     public AudioClip m_Message;
     public AudioClip m_Alarm;
     public AudioClip m_Book;
+    private bool Active;
 
     private void Awake()
     {
         m_AudioSource = GetComponent<AudioSource>();
         GameManager.GetManager().SetSoundController(this);
+        m_GlobalSource.volume = 0;
     }
 
 
@@ -49,12 +52,42 @@ public class SoundController : MonoBehaviour
     }
     public void SetMusic()
     {
-
+        if(!Active)
+        StartCoroutine(IcreaseAudioCo());
     }
 
     public void QuitMusic()
     {
+        StartCoroutine(DecreaseAudioCo());
+    }
 
+    private IEnumerator DecreaseAudioCo()
+    {
+        float counter = 0f;
+
+        while (counter < 0.5f)
+        {
+            counter += Time.deltaTime;
+
+            m_GlobalSource.volume = Mathf.Lerp(1f, 0f, counter / 0.5f);
+
+            yield return null;
+        }
+        Active = false;
+    }
+    private IEnumerator IcreaseAudioCo()
+    {
+        float counter = 0f;
+
+        while (counter < 5f)
+        {
+            counter += Time.deltaTime;
+
+            m_GlobalSource.volume = Mathf.Lerp(0f, 1f, counter / 1.5f);
+
+            yield return null;
+        }
+        Active = true;
     }
 
 }
