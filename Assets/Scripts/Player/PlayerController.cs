@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
     private bool m_OnGround;
     public enum PlayerState
     {
-        IDLE = 0,
-        MOVE,
+        //SLEEP=0,
+        //IDLE,
+        //MOVE,
     }
 
     //private bool busy;
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = this.GetComponent<CharacterController>();
         anim = this.GetComponent<PlayerAnimations>();
-        SetIdle();
+        //SetIdle();
     }
     private void Move()
     {
@@ -49,11 +50,12 @@ public class PlayerController : MonoBehaviour
 
         //controller.Move(l_movement);
         Gravity(l_movement);
-        // Update animation (if so)
-        //if (m_PlayerState != PlayerState.IDLE && keyInput == Vector3.zero)
-        //    m_PlayerState = PlayerState.IDLE;
-        //else if (m_PlayerState != PlayerState.MOVE)
-        //    m_PlayerState = PlayerState.MOVE;
+        //Update animation(if so)
+
+            //if (m_PlayerState != PlayerState.IDLE && keyInput == Vector3.zero)
+            //    m_PlayerState = PlayerState.IDLE;
+            //else if (m_PlayerState != PlayerState.MOVE)
+            //    m_PlayerState = PlayerState.MOVE;
     }
 
     private void Gravity(Vector3 movement)
@@ -78,10 +80,10 @@ public class PlayerController : MonoBehaviour
             //SetAnimations();
         }
     }
-    public void SetIdle()
-    {
-        m_PlayerState = PlayerState.IDLE;
-    }
+    //public void SetIdle()
+    //{
+    //    m_PlayerState = PlayerState.IDLE;
+    //}
 
     //private void SetAnimations()
     //{
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
     //    }
     //    else if (controller.velocity.magnitude >= 0.1f)
     //    {
+    //        print("a");
     //        anim.SetMovement(controller.velocity.magnitude);
     //    }
     //}
