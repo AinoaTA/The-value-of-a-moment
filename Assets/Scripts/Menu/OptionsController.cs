@@ -29,7 +29,8 @@ public class OptionsController : MonoBehaviour
     public void SetSFXVolume()
     {
         
-        TheMixer.SetFloat("SFXVol", (sfxSlider.value));
+        
+        TheMixer.SetFloat("SFXVol", Mathf.Log10((sfxSlider.value) * 20));
     }
 
 
