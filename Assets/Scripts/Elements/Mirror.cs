@@ -7,12 +7,18 @@ public class Mirror : MonoBehaviour,Iinteract
     private string m_NameObject = "Mirarse";
     private bool m_Done;
     private int m_Counter = 0;
+    public float distance;
 
     public string[] m_MirrorInteractPhrases;
 
     private void Awake()
     {
         GameManager.GetManager().SetMirror(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
     }
     public void Interaction()
     {
@@ -49,5 +55,10 @@ public class Mirror : MonoBehaviour,Iinteract
     public string[] GetPhrases()
     {
         throw new System.NotImplementedException();
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }

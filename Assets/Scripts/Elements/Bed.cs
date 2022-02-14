@@ -9,6 +9,7 @@ public class Bed : MonoBehaviour,Iinteract
     [HideInInspector]public string m_NameObject;
     public string[] m_HelpPhrases;
     public BedMinigame m_miniGame;
+    public float distance;
     private void Awake()
     {
         GameManager.GetManager().SetBed(this);
@@ -17,6 +18,10 @@ public class Bed : MonoBehaviour,Iinteract
     {
         m_SheetBad.SetActive(true);
         m_NameObject = "Hacer la cama";
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
     }
 
     public void BedDone()
@@ -80,5 +85,10 @@ public class Bed : MonoBehaviour,Iinteract
     public string[] GetPhrases()
     {
         return m_HelpPhrases;
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }

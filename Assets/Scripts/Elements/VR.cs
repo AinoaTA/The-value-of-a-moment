@@ -7,9 +7,14 @@ public class VR : MonoBehaviour, Iinteract
     private string m_NameObject = "Mirar VR";
     private bool m_Done;
     private int m_Counter = 0;
+    public float distance;
 
     public string[] m_MirrorInteractPhrases;
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
+    }
     private void Awake()
     {
         GameManager.GetManager().SetVR(this);
@@ -49,5 +54,10 @@ public class VR : MonoBehaviour, Iinteract
     public string[] GetPhrases()
     {
         throw new System.NotImplementedException();
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }

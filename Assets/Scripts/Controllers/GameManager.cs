@@ -131,7 +131,11 @@ public class GameManager : MonoBehaviour
 
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
                 if (l_Hit.collider.GetComponent<Iinteract>() != null)
-                    l_Hit.collider.GetComponent<Iinteract>().Interaction();
+                {
+                    GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
+                    //l_Hit.collider.GetComponent<Iinteract>().Interaction();
+                }
+
         }
         HelpText();
     }
