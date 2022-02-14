@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
+    //private CharacterController controller;
     public float movementSpeed = 2f;
     public PlayerAnimations anim;
-    //public PlayerState m_PlayerState;
     public Transform m_PlayerWakeUp;
     public Transform m_PlayerSleep;
+    public Transform MeshPlayer;
 
-    private Collider coll;
+    //private Collider coll;
     private Rigidbody rb;
     private Vector3 newPos;
     private bool movement;
@@ -19,18 +20,24 @@ public class PlayerController : MonoBehaviour
     private GameObject currentSelected;
     [SerializeField]private float minDistance=0.5f;
 
+    private NavMeshAgent navMeshAgent;
+    public float speed = 2f;
+
+  
     public Vector3 zero;
 
     private void Awake()
     {
         GameManager.GetManager().SetPlayer(this);
-        coll = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        //coll = GetComponent<Collider>();
+        //rb = GetComponent<Rigidbody>();
     }
     private void Start()
     {
-        controller = this.GetComponent<CharacterController>();
-        anim = this.GetComponent<PlayerAnimations>();
+        navMeshAgent.enabled = false;
+         //controller = this.GetComponent<CharacterController>();
+         anim = this.GetComponent<PlayerAnimations>();
         PlayerSleepPos();
         //SetIdle();
     }
@@ -66,24 +73,23 @@ public class PlayerController : MonoBehaviour
 
         if (Vector3.Distance(posPlayer, newPos)> minDistance)
         {
-            transform.position += m_Dir * movementSpeed * Time.deltaTime;
-
+            ///l_Player - l_DirectionToPlayer * m_MinDistanceToAttack;
+            navMeshAgent.destination = currentSelected.transform.position - m_Dir*minDistance;
+            
         }
         else
         {
             movement = false;
             currentSelected.GetComponent<Iinteract>().Interaction();
-
         }
-            
     }
 
     public void PlayerWakeUpPos()
     {
-        coll.enabled = true;
-        rb.isKinematic = false;
-
+        //coll.enabled = true;
+        //rb.isKinematic = false;
         //controller.enabled = false;
+        navMeshAgent.enabled = true;
         transform.position = m_PlayerWakeUp.position;
         transform.rotation = m_PlayerWakeUp.rotation;
         //controller.enabled = true;
@@ -93,13 +99,14 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerSleepPos()
     {
-      
+
         //controller.enabled = false;
+        navMeshAgent.enabled = false;
         transform.position = m_PlayerSleep.position;
         transform.rotation = m_PlayerSleep.rotation;
         //controller.enabled = true;
 
-        coll.enabled = false;
-        rb.isKinematic = true;
+        //coll.enabled = false;
+        //rb.isKinematic = true;
     }
 }
