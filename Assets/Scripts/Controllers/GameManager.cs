@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
 
-
+    private Interactables curr;
 
 
     public void SetCanvas(CanvasController canvas)
@@ -132,17 +132,24 @@ public class GameManager : MonoBehaviour
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
                 if (l_Hit.collider.GetComponent<Iinteract>() != null)
                 {
-                    GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
-                    //l_Hit.collider.GetComponent<Iinteract>().Interaction();
+                    curr = l_Hit.collider.GetComponent<Interactables>();
+                    curr.ShowCanvas();
+                    //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
+                    
                 }
 
         }
         HelpText();
     }
 
+    public void ActiveAction()
+    {
+        GetPlayer().ActiveMovement(curr.gameObject);
+    }
+
+    
     private void HelpText()
     {
-        print("??????");
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
         textHelp.transform.position = Input.mousePosition + helpOffset;
         TMP_Text text = textHelp.GetComponent<TMP_Text>();

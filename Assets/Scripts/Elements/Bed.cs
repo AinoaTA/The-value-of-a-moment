@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bed : MonoBehaviour,Iinteract
+public class Bed : Interactables,Iinteract
 {
     private bool m_Done;
     public GameObject m_SheetBad;
@@ -10,6 +10,13 @@ public class Bed : MonoBehaviour,Iinteract
     public string[] m_HelpPhrases;
     public BedMinigame m_miniGame;
     public float distance;
+
+    public Canvas OptionsCanvas;
+
+    public override void ShowCanvas()
+    {
+        OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
+    }
     private void Awake()
     {
         GameManager.GetManager().SetBed(this);

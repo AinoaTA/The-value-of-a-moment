@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
    
     private void Update()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay &&movement)
+        
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && movement)
         {
             Desplacement();
         }
@@ -96,6 +97,8 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
+    public void PlayerStopTrayectory() { movement = false; }
 
     public void PlayerSleepPos()
     {

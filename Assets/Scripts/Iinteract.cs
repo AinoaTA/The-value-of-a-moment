@@ -14,5 +14,7 @@ public interface Iinteract
 
     public float GetDistance();
 
+    
+
 
 }
