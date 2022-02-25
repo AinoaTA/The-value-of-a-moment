@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mirror : MonoBehaviour,Iinteract
+public class Mirror : Interactables,Iinteract
 {
     private string m_NameObject = "Mirarse";
     private bool m_Done;
@@ -10,7 +10,13 @@ public class Mirror : MonoBehaviour,Iinteract
     public float distance;
 
     public string[] m_MirrorInteractPhrases;
+    public Canvas OptionsCanvas;
 
+
+    public override void ShowCanvas()
+    {
+        OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
+    }
     private void Awake()
     {
         GameManager.GetManager().SetMirror(this);
