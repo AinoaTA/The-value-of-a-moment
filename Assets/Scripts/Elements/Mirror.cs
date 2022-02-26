@@ -10,13 +10,7 @@ public class Mirror : Interactables,Iinteract
     public float distance;
 
     public string[] m_MirrorInteractPhrases;
-    public Canvas OptionsCanvas;
-
-
-    public override void ShowCanvas()
-    {
-        OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
-    }
+    
     private void Awake()
     {
         GameManager.GetManager().SetMirror(this);

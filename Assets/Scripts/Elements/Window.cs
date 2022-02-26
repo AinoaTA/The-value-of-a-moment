@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Window : MonoBehaviour, Iinteract
+public class Window : Interactables, Iinteract
 {
     private bool m_Done;
     private Vector3 m_ClosePos;

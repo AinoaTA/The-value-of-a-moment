@@ -11,12 +11,6 @@ public class Bed : Interactables,Iinteract
     public BedMinigame m_miniGame;
     public float distance;
 
-    public Canvas OptionsCanvas;
-
-    public override void ShowCanvas()
-    {
-        OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
-    }
     private void Awake()
     {
         GameManager.GetManager().SetBed(this);
@@ -34,11 +28,13 @@ public class Bed : Interactables,Iinteract
     public void BedDone()
     {
         m_Done = true;
+        //Cambiamos la sábana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
+        //
         m_NameObject = "Dormir";
         GameManager.GetManager().GetAutoControl().AddAutoControl(5);
-        //Cambiamos la sábana u objeto cama.
+       
     }
 
     public void ResetBed()

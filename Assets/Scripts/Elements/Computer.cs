@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class Computer : MonoBehaviour, Iinteract
+public class Computer : Interactables, Iinteract
 {
     [HideInInspector]private string m_NameObject="Encender";
     private bool m_Done;
@@ -13,7 +13,6 @@ public class Computer : MonoBehaviour, Iinteract
     }
     public void Interaction()
     {
-        //m_Done = true;
         GameManager.GetManager().GetCanvasManager().ComputerScreenIn();
     }
 

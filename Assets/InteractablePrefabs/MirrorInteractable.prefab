@@ -404,6 +404,69 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3649409837017622593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6518150819770807401}
+  - component: {fileID: 383863404138505214}
+  - component: {fileID: 1393158977411826485}
+  m_Layer: 6
+  m_Name: Mirror
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6518150819770807401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649409837017622593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7653309530660394282}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383863404138505214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649409837017622593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b884bf21fb3b00242bb5c59d61cc2d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OptionsCanvas: {fileID: 941152734058569603}
+  distance: 0.66
+  m_MirrorInteractPhrases:
+  - 'Tengo una pinta horrible. '
+  - "Parezco una zombie. \xA1Menudas ojeras!"
+  - "\xBFEn qu\xE9 momento me pareci\xF3 buena idea cortarme as\xED el pelo? "
+--- !u!65 &1393158977411826485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649409837017622593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5381765, y: 0.3007777, z: 0.50666124}
+  m_Center: {x: 0.006544587, y: 0.029043118, z: -0.005516346}
 --- !u!1 &4037888555271366590
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,9 +926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653309530660394282}
-  - component: {fileID: 8044979786050023443}
   - component: {fileID: 7653309530660394283}
-  - component: {fileID: 2395352714159673132}
   m_Layer: 6
   m_Name: MirrorInteractable
   m_TagString: Untagged
@@ -880,34 +941,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7653309530660394277}
-  m_LocalRotation: {x: 0.50000006, y: 0.50000006, z: 0.49999994, w: 0.5}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: -8.0686, y: 5.47, z: -1.6119}
   m_LocalScale: {x: 1.0941, y: 1.0941, z: 1.0941}
   m_Children:
   - {fileID: 1604484762520099564}
   - {fileID: 7907402875112152662}
   - {fileID: 7653309530806058530}
+  - {fileID: 6518150819770807401}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8044979786050023443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7653309530660394277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b884bf21fb3b00242bb5c59d61cc2d99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.66
-  m_MirrorInteractPhrases:
-  - 'Tengo una pinta horrible. '
-  - "Parezco una zombie. \xA1Menudas ojeras!"
-  - "\xBFEn qu\xE9 momento me pareci\xF3 buena idea cortarme as\xED el pelo? "
-  OptionsCanvas: {fileID: 941152734058569603}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!114 &7653309530660394283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,19 +967,6 @@ MonoBehaviour:
   mirrorCamera: {fileID: 7653309530608255258}
   reflexTexture: {fileID: 8400000, guid: 3fed0e1d3efe69140adb701033c1afa2, type: 2}
   fov: 60
---- !u!65 &2395352714159673132
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7653309530660394277}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5381765, y: 0.3007777, z: 0.50666124}
-  m_Center: {x: 0.006544587, y: 0.029043118, z: -0.005516346}
 --- !u!1 &7653309530806058553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,18 +1186,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: PlayerStopTrayectory
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3179659372287946612}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger

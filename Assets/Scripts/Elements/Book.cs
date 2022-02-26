@@ -13,12 +13,7 @@ public class Book : Interactables, Iinteract
     public delegate void DelegateSFXBook();
     public static DelegateSFXBook m_DelegateSFXBook;
 
-    public Canvas OptionsCanvas;
-
-    public override void ShowCanvas()
-    {
-        OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
-    }
+    
     private void Awake()
     {
         GameManager.GetManager().SetBook(this);

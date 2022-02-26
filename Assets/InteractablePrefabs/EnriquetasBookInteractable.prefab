@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8731112819322714312}
   - component: {fileID: 6697844839968304216}
   m_Layer: 6
-  m_Name: Prop
+  m_Name: Enriqueta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,9 +31,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9129838702434251096}
-  - {fileID: 4465577877987046382}
   m_Father: {fileID: 6432242191900241596}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55.646}
 --- !u!65 &3307655548002198135
 BoxCollider:
@@ -76,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0b6288a45f27e40b2268ca7e9e9be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OptionsCanvas: {fileID: 2788581823003358849}
   m_HelpPhrases:
   - "Me apetece leerme un cap\xEDtulo del libro."
   - mmmm
@@ -90,7 +90,6 @@ MonoBehaviour:
   - "Muy poca gente conoce a Enriqueta Mart\xED; para variar, la Historia se olvida
     de las mujeres."
   distance: 0.82
-  OptionsCanvas: {fileID: 2788581823003358849}
 --- !u!1 &717864111300183899
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,18 +533,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4264538511402494303}
-  m_LocalRotation: {x: -0.3300343, y: -0.6253618, z: -0.33003423, w: 0.62536174}
-  m_LocalPosition: {x: 0, y: 0, z: 0.06399995}
+  m_LocalRotation: {x: -0.33003426, y: -0.6253618, z: -0.3300342, w: 0.62536174}
+  m_LocalPosition: {x: 0, y: 0, z: 0.093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8146004457109373753}
   - {fileID: 7888082604287941301}
-  m_Father: {fileID: 1198595426701789808}
-  m_RootOrder: 1
+  m_Father: {fileID: 8606683324931371356}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.30089164, y: 0.0045984685}
+  m_AnchoredPosition: {x: 0.143, y: 0.09}
   m_SizeDelta: {x: 1, y: 0.6503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2788581823003358849
@@ -640,6 +639,37 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &4921408843203609084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8606683324931371356}
+  m_Layer: 6
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8606683324931371356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921408843203609084}
+  m_LocalRotation: {x: -0.3582928, y: -0.6789072, z: 0.2991179, w: 0.56678027}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4465577877987046382}
+  m_Father: {fileID: 6432242191900241596}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4996220293573171377
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +842,7 @@ Transform:
   m_LocalPosition: {x: -7.66, y: 2.37, z: 2.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 8606683324931371356}
   - {fileID: 1198595426701789808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -841,9 +872,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8500653427779742690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.000000014901159, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.013040859, y: 0.09716196, z: 0.07864107}
+  m_LocalScale: {x: 0.013040858, y: 0.09716196, z: 0.07864107}
   m_Children: []
   m_Father: {fileID: 1198595426701789808}
   m_RootOrder: 0
