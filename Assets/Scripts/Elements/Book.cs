@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Book : MonoBehaviour, Iinteract
+public class Book : Interactables, Iinteract
 {
     private string m_NameObject = "Leer libro";
     private bool m_Done;
@@ -8,12 +8,20 @@ public class Book : MonoBehaviour, Iinteract
 
     public string[] m_HelpPhrases;
     public string[] m_BookInteractPhrases;
+    public float distance;
 
     public delegate void DelegateSFXBook();
     public static DelegateSFXBook m_DelegateSFXBook;
+
+    
     private void Awake()
     {
         GameManager.GetManager().SetBook(this);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
     }
     public void Interaction()
     {
@@ -52,5 +60,10 @@ public class Book : MonoBehaviour, Iinteract
     {
         m_NameObject = "Continuar leyendo";
         m_Done = false;
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }

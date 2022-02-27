@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     private float m_Distance = 70f;
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
-
+    
+    private Interactables curr;
     public void SetCanvas(CanvasController canvas) { m_CanvasController = canvas; }
     public void SetNotificationController(NotificationController notification) { m_NotificationController = notification; }
     public void SetAutocontrol(Autocontrol _Autocontrol) { m_Autocontrol = _Autocontrol; }
@@ -80,13 +81,22 @@ public class GameManager : MonoBehaviour
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
                 if (l_Hit.collider.GetComponent<Iinteract>() != null)
                 {
-                    l_Hit.collider.GetComponent<Iinteract>().Interaction();
+                    curr = l_Hit.collider.GetComponent<Interactables>();
+                    curr.ShowCanvas();
                     m_PlayerController.SetComputer(true);
+                    //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
                 }
+
         }
         HelpText();
     }
 
+    public void ActiveAction()
+    {
+        GetPlayer().ActiveMovement(curr.gameObject);
+    }
+
+    
     private void HelpText()
     {
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -95,7 +105,7 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !m_CanvasController.ScreenActivated() && !m_Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
-            if (l_Hit.collider.GetComponent<Iinteract>() != null)//da error si se cambia el objeto de la cama así q mejor pongo esto
+            if (l_Hit.collider.GetComponent<Iinteract>() != null)//da error si se cambia el objeto de la cama asï¿½ q mejor pongo esto
                 text.text = l_Hit.collider.GetComponent<Iinteract>().NameAction();
         }
         else

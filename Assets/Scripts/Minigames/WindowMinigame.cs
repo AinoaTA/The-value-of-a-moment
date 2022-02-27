@@ -20,7 +20,7 @@ public class WindowMinigame : MonoBehaviour
         cam = Camera.main;
         initPos = m_Glass.transform.position;
         finalLimit = m_Limit.transform.position;
-        finalLimit += new Vector3(0, 180, 0);
+        finalLimit += new Vector3(0, 70, 0);
     }
     private void Update()
     {
@@ -40,6 +40,8 @@ public class WindowMinigame : MonoBehaviour
                     MinigameCompleted();
             }
         }
+
+        print(m_Glass.transform.position.y + "aaaaa" + finalLimit.y);
     }
 
     private void MinigameCompleted()

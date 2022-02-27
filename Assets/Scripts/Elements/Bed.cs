@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bed : MonoBehaviour,Iinteract
+public class Bed : Interactables,Iinteract
 {
     private bool m_Done;
     public GameObject m_SheetBad;
@@ -9,6 +9,8 @@ public class Bed : MonoBehaviour,Iinteract
     [HideInInspector]public string m_NameObject;
     public string[] m_HelpPhrases;
     public BedMinigame m_miniGame;
+    public float distance;
+
     private void Awake()
     {
         GameManager.GetManager().SetBed(this);
@@ -18,15 +20,21 @@ public class Bed : MonoBehaviour,Iinteract
         m_SheetBad.SetActive(true);
         m_NameObject = "Hacer la cama";
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
+    }
 
     public void BedDone()
     {
         m_Done = true;
+        //Cambiamos la sábana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
+        //
         m_NameObject = "Dormir";
         GameManager.GetManager().GetAutoControl().AddAutoControl(5);
-        //Cambiamos la sábana u objeto cama.
+       
     }
 
     public void ResetBed()
@@ -80,5 +88,10 @@ public class Bed : MonoBehaviour,Iinteract
     public string[] GetPhrases()
     {
         return m_HelpPhrases;
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }

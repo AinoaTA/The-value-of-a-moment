@@ -1,10 +1,16 @@
 
 using UnityEngine;
 
-public class Computer : MonoBehaviour, Iinteract
+public class Computer : Interactables, Iinteract
 {
     [HideInInspector]private string m_NameObject="Encender";
     private bool m_Done;
+    public float distance;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
+    }
     public void Interaction()
     {
         //m_Done = true;
@@ -26,5 +32,10 @@ public class Computer : MonoBehaviour, Iinteract
     public string[] GetPhrases()
     {
         throw new System.NotImplementedException();
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }

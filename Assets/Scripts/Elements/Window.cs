@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Window : MonoBehaviour, Iinteract
+public class Window : Interactables, Iinteract
 {
     private bool m_Done;
     private Vector3 m_ClosePos;
@@ -9,6 +9,9 @@ public class Window : MonoBehaviour, Iinteract
     public Transform m_OpenPos;
     public WindowMinigame m_miniGame;
     public string[] m_HelpPhrases;
+    public float distance; 
+    
+    [HideInInspector] public string m_NameObject = "Abrir ventana";
     private void Awake()
     {
         GameManager.GetManager().SetWindow(this);
@@ -17,8 +20,12 @@ public class Window : MonoBehaviour, Iinteract
     {
         m_ClosePos = m_Glass.transform.position;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, distance);
+    }
 
-    [HideInInspector] public string m_NameObject = "Abrir ventana";
+    
 
     public void Interaction()
     {
@@ -65,5 +72,10 @@ public class Window : MonoBehaviour, Iinteract
     public string[] GetPhrases()
     {
         return m_HelpPhrases;
+    }
+
+    public float GetDistance()
+    {
+        return distance;
     }
 }
