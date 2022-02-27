@@ -16,4 +16,10 @@ public class PlayerAnimations : MonoBehaviour
     {
         anim.SetFloat("Speed",speed);
     }
+
+    public void SetComputer(bool value)
+    {
+        anim.SetBool("_Computer", value);
+        Debug.Log(anim.GetBool("_Computer"));
+    }
 }

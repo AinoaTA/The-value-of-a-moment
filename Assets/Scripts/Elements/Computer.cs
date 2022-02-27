@@ -8,7 +8,8 @@ public class Computer : MonoBehaviour, Iinteract
     public void Interaction()
     {
         //m_Done = true;
-        GameManager.GetManager().GetCanvasManager().ComputerScreenIn();
+        Debug.Log("I'm in");
+        //GameManager.GetManager().GetCanvasManager().ComputerScreenIn();
     }
 
     public string NameAction()

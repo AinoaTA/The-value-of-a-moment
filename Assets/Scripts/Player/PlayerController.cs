@@ -13,11 +13,14 @@ public class PlayerController : MonoBehaviour
     public Transform m_PlayerSleep;
     private float m_VerticalSpeed = 1;
     private bool m_OnGround;
+    private float turnSmoothTime = 0.15f;
+    private float turnSmoothVel;
     public enum PlayerState
     {
-        //SLEEP=0,
-        //IDLE,
-        //MOVE,
+        SLEEP = 0,
+        IDLE,
+        MOVE,
+        COMPUTER
     }
 
     //private bool busy;
@@ -39,23 +42,39 @@ public class PlayerController : MonoBehaviour
     }
     private void Move()
     {
-       
-        Vector3 keyInput = new Vector3(Input.GetAxis("Horizontal")*(xAxisInverted ? -1.0f : 1.0f), 0, Input.GetAxis("Vertical") * (yAxisInverted ? -1.0f : 1.0f)); //está la cámara mirando desde un lado
-        Vector3 l_movement = (transform.TransformDirection(keyInput) * movementSpeed) * Time.deltaTime;
-        
+
+        float horizontal = Input.GetAxis("Horizontal") * (xAxisInverted ? -1.0f : 1.0f);
+        float vertical = Input.GetAxis("Vertical") * (yAxisInverted ? -1.0f : 1.0f);
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 movement = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            //movement.y = m_VerticalSpeed * Time.deltaTime;
+            //Gravity(movement);
+            controller.Move(movement.normalized * movementSpeed * Time.deltaTime);
+        }
+
+        //Vector3 keyInput = new Vector3(Input.GetAxis("Horizontal")*(xAxisInverted ? -1.0f : 1.0f), 0, Input.GetAxis("Vertical") * (yAxisInverted ? -1.0f : 1.0f)); //está la cámara mirando desde un lado
+        //Vector3 l_movement = (transform.TransformDirection(keyInput) * movementSpeed) * Time.deltaTime;
 
 
-        l_movement.y = m_VerticalSpeed * Time.deltaTime;
-        m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
 
-        //controller.Move(l_movement);
-        Gravity(l_movement);
+        //l_movement.y = m_VerticalSpeed * Time.deltaTime;
+        //m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
+
+        ////controller.Move(l_movement);
+        //Gravity(l_movement);
         //Update animation(if so)
 
-            //if (m_PlayerState != PlayerState.IDLE && keyInput == Vector3.zero)
-            //    m_PlayerState = PlayerState.IDLE;
-            //else if (m_PlayerState != PlayerState.MOVE)
-            //    m_PlayerState = PlayerState.MOVE;
+        //if (m_PlayerState != PlayerState.IDLE && keyInput == Vector3.zero)
+        //    m_PlayerState = PlayerState.IDLE;
+        //else if (m_PlayerState != PlayerState.MOVE)
+        //    m_PlayerState = PlayerState.MOVE;
     }
 
     private void Gravity(Vector3 movement)
@@ -77,8 +96,18 @@ public class PlayerController : MonoBehaviour
         if (GameManager.GetManager().m_CurrentStateGame== GameManager.StateGame.GamePlay)
         {
             Move();
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                SetComputer(false);
+            }
             //SetAnimations();
         }
+    }
+
+    public void SetComputer(bool value)
+    {
+        m_PlayerState = PlayerState.COMPUTER;
+        anim.SetComputer(value);
     }
     //public void SetIdle()
     //{
