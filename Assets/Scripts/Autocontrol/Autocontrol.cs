@@ -11,7 +11,7 @@ public class Autocontrol : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.GetManager().SetAutocontrol(this);
+        GameManager.GetManager().Autocontrol = this;
     }
 
     private void Start()

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.GetManager().SetPlayer(this);
+        GameManager.GetManager().PlayerController = this;
     }
     private void Start()
     {

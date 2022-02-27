@@ -24,15 +24,15 @@ public class DialogueControl : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.GetManager().SetDialogueControll(this);
+        GameManager.GetManager().Dialogue = this;
         m_Text = GetComponent<TMP_Text>();
     }
 
     private void Start()
     {
-        m_ListInteract.Add(GameManager.GetManager().GetBed().gameObject);
-        m_ListInteract.Add(GameManager.GetManager().GetWindow().gameObject);
-        m_ListInteract.Add(GameManager.GetManager().GetBook().gameObject);
+        m_ListInteract.Add(GameManager.GetManager().Bed.gameObject);
+        m_ListInteract.Add(GameManager.GetManager().Window.gameObject);
+        m_ListInteract.Add(GameManager.GetManager().Book.gameObject);
 
     }
 

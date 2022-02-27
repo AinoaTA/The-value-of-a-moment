@@ -16,7 +16,7 @@ public class Book : Interactables, Iinteract
     
     private void Awake()
     {
-        GameManager.GetManager().SetBook(this);
+        GameManager.GetManager().Book = this;
     }
 
     private void OnDrawGizmos()
@@ -30,7 +30,7 @@ public class Book : Interactables, Iinteract
             if (m_Counter >= m_BookInteractPhrases.Length)
                 m_Counter = 0;
 
-            GameManager.GetManager().GetDialogueControl().SetDialogue(m_BookInteractPhrases[m_Counter]);
+            GameManager.GetManager().Dialogue.SetDialogue(m_BookInteractPhrases[m_Counter]);
             m_DelegateSFXBook?.Invoke();
             m_Counter++;
            

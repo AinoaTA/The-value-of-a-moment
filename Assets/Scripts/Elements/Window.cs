@@ -14,7 +14,7 @@ public class Window : Interactables, Iinteract
     [HideInInspector] public string m_NameObject = "Abrir ventana";
     private void Awake()
     {
-        GameManager.GetManager().SetWindow(this);
+        GameManager.GetManager().Window = this;
     }
     private void Start()
     {
@@ -33,7 +33,7 @@ public class Window : Interactables, Iinteract
         {
             //inicia minijuego
             m_miniGame.m_GameActive = true;
-            GameManager.GetManager().GetCanvasManager().ActiveWindowCanvas();
+            GameManager.GetManager().CanvasManager.ActiveWindowCanvas();
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         }
     }
@@ -43,7 +43,7 @@ public class Window : Interactables, Iinteract
     {
         m_Done = true;
         m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, m_OpenPos.transform.position.y,m_Glass.transform.position.z);
-        GameManager.GetManager().GetAutoControl().AddAutoControl(5);
+        GameManager.GetManager().Autocontrol.AddAutoControl(5);
         m_NameObject = "";
         //Cambiamos la sábana u objeto cama.
     }
