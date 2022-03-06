@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Book : Interactables, Iinteract
+public class Book : Interactables, IntfInteract
 {
     private string m_NameObject = "Leer libro";
     private bool m_Done;

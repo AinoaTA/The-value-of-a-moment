@@ -55,7 +55,7 @@ public class WindowMinigame : MonoBehaviour
     private IEnumerator DelayCompleted()
     {
         yield return new WaitForSeconds(1f);
-        GameManager.GetManager().Window.WindowDone();
+        GameManager.GetManager().Window.GetDone();
         GameManager.GetManager().CanvasManager.DesctiveWindowCanvas();
 
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;

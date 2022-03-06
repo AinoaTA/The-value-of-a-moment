@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mirror : Interactables,Iinteract
+public class Mirror : Interactables,IntfInteract
 {
     private string m_NameObject = "Mirarse";
     private bool m_Done;

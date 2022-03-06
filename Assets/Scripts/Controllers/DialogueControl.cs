@@ -33,7 +33,6 @@ public class DialogueControl : MonoBehaviour
         m_ListInteract.Add(GameManager.GetManager().Bed.gameObject);
         //m_ListInteract.Add(GameManager.GetManager().Window.gameObject);
         m_ListInteract.Add(GameManager.GetManager().Book.gameObject);
-
     }
 
     private void Update()
@@ -65,10 +64,10 @@ public class DialogueControl : MonoBehaviour
     {
         for (int i = 0; i < m_ListInteract.Count; i++)
         {
-            if (!m_ListInteract[i].GetComponent<Iinteract>().GetDone())
+            if (!m_ListInteract[i].GetComponent<IntfInteract>().GetDone())
             {
                 int random = Random.Range(0, maxInt);
-                SetDialogue(m_ListInteract[i].GetComponent<Iinteract>().GetPhrases()[random]);
+                SetDialogue(m_ListInteract[i].GetComponent<IntfInteract>().GetPhrases()[random]);
             }
         }
     }

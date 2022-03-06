@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class Computer : Interactables, Iinteract
+public class Computer : Interactables, IntfInteract
 {
     [HideInInspector]private string m_NameObject="Encender";
     private bool m_Done;

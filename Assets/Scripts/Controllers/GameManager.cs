@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
             {
-                if (l_Hit.collider.GetComponent<Iinteract>() != null)
+                if (l_Hit.collider.GetComponent<IntfInteract>() != null)
                 {
                     curr = l_Hit.collider.GetComponent<Interactables>();
                     curr.ShowCanvas();
@@ -79,9 +79,9 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
-            if (l_Hit.collider.GetComponent<Iinteract>() != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
+            if (l_Hit.collider.GetComponent<IntfInteract>() != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
             {
-                text.text = l_Hit.collider.GetComponent<Iinteract>().NameAction();
+                text.text = l_Hit.collider.GetComponent<IntfInteract>().NameAction();
             }
         }
         else

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VR : Interactables, Iinteract
+public class VR : Interactables, IntfInteract
 {
     private string m_NameObject = "Mirar VR";
     private bool m_Done;

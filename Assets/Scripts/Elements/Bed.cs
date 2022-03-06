@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bed : Interactables,Iinteract
+public class Bed : Interactables,IntfInteract
 {
     private bool m_Done;
     public GameObject m_SheetBad;

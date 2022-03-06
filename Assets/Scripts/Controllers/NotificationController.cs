@@ -33,7 +33,7 @@ public class NotificationController : MonoBehaviour
     private void SendNotification()
     {
         m_CurrentNotRead = true;
-        GameManager.GetManager().CanvasManager.m_NotificationCanvas.SetActive(true);
+        if(GameManager.GetManager().CanvasManager.m_NotificationCanvas) GameManager.GetManager().CanvasManager.m_NotificationCanvas.SetActive(true);
         m_RandomValue = Random.Range(0, 2); //frase random elegida.
 
         m_MessageDelegate?.Invoke();
