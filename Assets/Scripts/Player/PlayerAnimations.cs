@@ -14,12 +14,18 @@ public class PlayerAnimations : MonoBehaviour
 
     public void SetMovement(float speed)
     {
-        anim.SetFloat("Speed",speed);
+        anim.SetFloat("Speed", speed);
     }
 
-    public void SetComputer(bool value)
+    public void SetInteractable(string interactable)
     {
-        anim.SetBool("_Computer", value);
-        Debug.Log(anim.GetBool("_Computer"));
+        Debug.Log(interactable);
+        anim.SetTrigger(interactable);
+    }
+
+    public void ExitInteractable()
+    {
+        Debug.Log("exit interactable");
+        anim.SetTrigger("Exit");
     }
 }

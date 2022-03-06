@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             controller.Move(movement.normalized * movementSpeed * Time.deltaTime);
         }
 
-        //Vector3 keyInput = new Vector3(Input.GetAxis("Horizontal")*(xAxisInverted ? -1.0f : 1.0f), 0, Input.GetAxis("Vertical") * (yAxisInverted ? -1.0f : 1.0f)); //está la cámara mirando desde un lado
+        //Vector3 keyInput = new Vector3(Input.GetAxis("Horizontal")*(xAxisInverted ? -1.0f : 1.0f), 0, Input.GetAxis("Vertical") * (yAxisInverted ? -1.0f : 1.0f)); //estï¿½ la cï¿½mara mirando desde un lado
         //Vector3 l_movement = (transform.TransformDirection(keyInput) * movementSpeed) * Time.deltaTime;
 
 
@@ -98,17 +98,23 @@ public class PlayerController : MonoBehaviour
             Move();
             if (Input.GetKey(KeyCode.Escape))
             {
-                SetComputer(false);
+                ExitInteractable();
             }
             //SetAnimations();
         }
     }
 
-    public void SetComputer(bool value)
+    public void SetInteractable(string interactable)
     {
-        m_PlayerState = PlayerState.COMPUTER;
-        anim.SetComputer(value);
+        anim.SetInteractable(interactable);
     }
+
+    public void ExitInteractable()
+    {
+        anim.ExitInteractable();
+    }
+
+
     //public void SetIdle()
     //{
     //    m_PlayerState = PlayerState.IDLE;

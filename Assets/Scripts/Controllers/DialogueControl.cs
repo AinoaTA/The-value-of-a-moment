@@ -31,7 +31,7 @@ public class DialogueControl : MonoBehaviour
     private void Start()
     {
         m_ListInteract.Add(GameManager.GetManager().Bed.gameObject);
-        m_ListInteract.Add(GameManager.GetManager().Window.gameObject);
+        //m_ListInteract.Add(GameManager.GetManager().Window.gameObject);
         m_ListInteract.Add(GameManager.GetManager().Book.gameObject);
 
     }

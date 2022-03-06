@@ -53,14 +53,15 @@ public class GameManager : MonoBehaviour
             Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
+            {
                 if (l_Hit.collider.GetComponent<Iinteract>() != null)
                 {
                     curr = l_Hit.collider.GetComponent<Interactables>();
                     curr.ShowCanvas();
-                    PlayerController.SetComputer(true);
+                    //PlayerController.SetInteractable(curr.tag);
                     //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
                 }
-
+            }
         }
         HelpText();
     }
@@ -78,13 +79,20 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
-            if (l_Hit.collider.GetComponent<Iinteract>() != null)//da error si se cambia el objeto de la cama as� q mejor pongo esto
+            if (l_Hit.collider.GetComponent<Iinteract>() != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
+            {
                 text.text = l_Hit.collider.GetComponent<Iinteract>().NameAction();
+            }
         }
         else
             text.text = "";
 
         textHelp.GetComponent<TMP_Text>().text = text.text;
 
+    }
+
+    public void TurnOnComputer()
+    {
+        PlayerController.SetInteractable("Computer");
     }
 }
