@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     //}
     //private void Update()
     //{
-    //    if (GameManager.GetManager().m_CurrentStateGame== GameManager.StateGame.GamePlay)
+    //    if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
     //    {
     //        Move();
     //        if (Input.GetKey(KeyCode.Escape))
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
     public GameObject PlayerAsset;
 
     private Vector3 newPos;
-    private bool movement;
+    private bool AImomevent;
     private Vector3 m_Dir;
     private Vector3 m_PlayerDirAxis;
 
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        movement = false;
+        AImomevent = false;
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = false;
@@ -198,27 +198,26 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        print(navMeshAgent.pathStatus);
-        if (movement)/*GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && */
-        {
-            Desplacement();
-        }
-
-
         if (sleep)
             return;
+
+        if (AImomevent)/*GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && */
+        {
+            Desplacement();
+
+            
+            //SetAnimations();
+        }else if (Input.GetKey(KeyCode.Escape))
+            ExitInteractable();
 
         float z = Input.GetAxis("Horizontal");
         float x = Input.GetAxis("Vertical");
         m_PlayerDirAxis = new Vector3(x, 0, -z);
 
         if (m_PlayerDirAxis != Vector3.zero)
-        {
             transform.rotation = Quaternion.LookRotation(m_PlayerDirAxis);
-        }
 
         transform.position += m_PlayerDirAxis * Time.deltaTime;
-
         transform.position += new Vector3(x, 0, -z) * Time.deltaTime;
     }
 
@@ -240,7 +239,7 @@ public class PlayerController : MonoBehaviour
 
 
         navMeshAgent.enabled = true;
-        movement = true;
+        AImomevent = true;
     }
 
     private void Desplacement()
@@ -260,7 +259,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             navMeshAgent.enabled = false;
-            movement = false;
+            AImomevent = false;
             currentSelected.GetComponent<IntfInteract>().Interaction();
         }
     }
@@ -271,14 +270,14 @@ public class PlayerController : MonoBehaviour
         transform.position = m_PlayerWakeUp.position;
         transform.rotation = m_PlayerWakeUp.rotation;
         sleep = false;
-
+        
         StartCoroutine(DelayCollider());
     }
 
    
     public void PlayerStopTrayectory()
     {
-        movement = false;
+        AImomevent = false;
         col.enabled = true;
     }
 
