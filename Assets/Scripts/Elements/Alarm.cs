@@ -14,7 +14,7 @@ public class Alarm : MonoBehaviour
     public static DelegateSFX m_DelegateSFX;
     private void Awake()
     {
-        GameManager.GetManager().SetAlarm(this);
+        GameManager.GetManager().Alarm = this;
     }
     private void Update()
     {
@@ -26,7 +26,7 @@ public class Alarm : MonoBehaviour
     }
     private void StartAlarm()
     {
-        GameManager.GetManager().GetSoundController().QuitMusic();
+        GameManager.GetManager().SoundController.QuitMusic();
         CanvasAlarm.SetActive(true);
         m_DelegateSFX?.Invoke();
         m_Timer =0;
@@ -40,17 +40,17 @@ public class Alarm : MonoBehaviour
             m_Alarm = false;
             ResetTime();
 
-            GameManager.GetManager().GetDialogueControl().SetTimer();
+            GameManager.GetManager().Dialogue.SetTimer();
             ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
             //animacion player se levanta
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-            GameManager.GetManager().GetPlayer().PlayerWakeUpPos();
-            GameManager.GetManager().GetSoundController().SetMusic();
+            GameManager.GetManager().PlayerController.PlayerWakeUpPos();
+            GameManager.GetManager().SoundController.SetMusic();
             CanvasAlarm.SetActive(false);
         }else if (WakeUpTrigger.m_Counter <=3)
         {
             if(WakeUpTrigger.m_Counter>1)
-                GameManager.GetManager().GetDialogueControl().SetDialogue("5 Minutos más...");
+                GameManager.GetManager().Dialogue.SetDialogue("5 Minutos más...");
 
              WakeUpTrigger.LessEscaleWakeUp();
         }
@@ -65,8 +65,8 @@ public class Alarm : MonoBehaviour
         ResetTime();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         CanvasAlarm.SetActive(false);
-        GameManager.GetManager().GetAutoControl().RemoveAutoControl(5);
-        GameManager.GetManager().GetDialogueControl().SetDialogue(m_phrases[m_count]);
+        GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
+        GameManager.GetManager().Dialogue.SetDialogue(m_phrases[m_count]);
         m_count++;
     }
 
@@ -82,7 +82,7 @@ public class Alarm : MonoBehaviour
 
     public void ResetTime()
     {
-        GameManager.GetManager().GetSoundController().StopSound();
+        GameManager.GetManager().SoundController.StopSound();
         m_Timer = 0;
         m_MaxTime = 10;
     }

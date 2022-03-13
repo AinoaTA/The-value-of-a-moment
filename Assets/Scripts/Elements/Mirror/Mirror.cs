@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mirror : Interactables,Iinteract
+public class Mirror : Interactables,IntfInteract
 {
     private string m_NameObject = "Mirarse";
     private bool m_Done;
@@ -13,7 +13,7 @@ public class Mirror : Interactables,Iinteract
     
     private void Awake()
     {
-        GameManager.GetManager().SetMirror(this);
+        GameManager.GetManager().Mirror = this;
     }
 
     private void OnDrawGizmos()
@@ -27,8 +27,8 @@ public class Mirror : Interactables,Iinteract
             if (m_Counter >= m_MirrorInteractPhrases.Length)
                 m_Counter = 0;
 
-            GameManager.GetManager().GetDialogueControl().SetDialogue(m_MirrorInteractPhrases[m_Counter]);
-            GameManager.GetManager().GetAutoControl().RemoveAutoControl(5);
+            GameManager.GetManager().Dialogue.SetDialogue(m_MirrorInteractPhrases[m_Counter]);
+            GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
             m_Counter++;
 
             m_Done = true;

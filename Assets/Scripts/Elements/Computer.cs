@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class Computer : Interactables, Iinteract
+public class Computer : Interactables, IntfInteract
 {
     [HideInInspector]private string m_NameObject="Encender";
     private bool m_Done;
@@ -13,7 +13,9 @@ public class Computer : Interactables, Iinteract
     }
     public void Interaction()
     {
-        GameManager.GetManager().GetCanvasManager().ComputerScreenIn();
+        //m_Done = true;
+        Debug.Log("I'm in");
+        //GameManager.GetManager().GetCanvasManager().ComputerScreenIn();
     }
 
     public string NameAction()

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Iinteract 
+public interface IntfInteract 
 {
-   
     public void Interaction();
+
     public string NameAction();
 
     public bool GetDone();
@@ -13,8 +13,4 @@ public interface Iinteract
     public string[] GetPhrases();
 
     public float GetDistance();
-
-    
-
-
 }

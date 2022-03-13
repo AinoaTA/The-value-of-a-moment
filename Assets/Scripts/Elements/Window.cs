@@ -1,72 +1,81 @@
 using UnityEngine;
 
-public class Window : Interactables, Iinteract
+public class Window : Interactables, IntfInteract
 {
-    private bool m_Done;
-    private Vector3 m_ClosePos;
     public GameObject m_Glass;
-
-    public Transform m_OpenPos;
-    public WindowMinigame m_miniGame;
     public string[] m_HelpPhrases;
-    public float distance; 
     
-    [HideInInspector] public string m_NameObject = "Abrir ventana";
+    private float mOffset;
+    private float zWorldCoord;
+    private float minHeight;
+    private float maxHeight = 7.35f;
+    private bool isOpen = false;
+    private bool gameInitialized = false;
+
+    private string m_NameObject = "Abrir ventana";
+    public float distance;
+
     private void Awake()
     {
-        GameManager.GetManager().SetWindow(this);
-    }
-    private void Start()
-    {
-        m_ClosePos = m_Glass.transform.position;
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, distance);
+        GameManager.GetManager().Window = this;
+        minHeight = m_Glass.transform.position.y;
     }
 
+    void OnMouseDown()
+    {
+        zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
+
+        // offset = World pos - Mouse World pos
+        mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
+    }
+
+    void OnMouseDrag()
+    {
+        if (gameInitialized && !isOpen)
+        {
+            float height = m_Glass.transform.position.y;
+            float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
+
+            if (displacement < minHeight)
+                height = minHeight;
+
+            else if (displacement < maxHeight)
+                height = displacement;
+
+            else if (displacement > maxHeight)
+            {
+                height = maxHeight;
+                isOpen = true;
+            }
+
+            m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
+        }
+    }
     
+    private float GetMouseYaxisAsWorldPoint()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+        mousePoint.z = zWorldCoord; // set z coord
+
+        return Camera.main.ScreenToWorldPoint(mousePoint).y;
+    }
+
+    #region Interface Interact methods
 
     public void Interaction()
     {
-        if (!m_Done)
-        {
-            //inicia minijuego
-            m_miniGame.m_GameActive = true;
-            GameManager.GetManager().GetCanvasManager().ActiveWindowCanvas();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-        }
+        if (!isOpen)
+            gameInitialized = true; // Inicia minijuego
     }
 
-
-    public void WindowDone()
+    public bool GetDone()
     {
-        m_Done = true;
-        m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, m_OpenPos.transform.position.y,m_Glass.transform.position.z);
-        GameManager.GetManager().GetAutoControl().AddAutoControl(5);
-        m_NameObject = "";
-        //Cambiamos la sábana u objeto cama.
-    }
-    public void ResetWindow()
-    {
-        m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, m_ClosePos.y, m_Glass.transform.position.z);
-        m_NameObject = "Abrir ventana";
-        m_Done = false;
-    }
-
-    public bool GetIsCompleted()
-    {
-        return m_Done;
+        return isOpen;
     }
 
     public string NameAction()
     {
         return m_NameObject;
-    }
-
-    public bool GetDone()
-    {
-        return m_Done;
     }
 
     public string[] GetPhrases()
@@ -78,4 +87,13 @@ public class Window : Interactables, Iinteract
     {
         return distance;
     }
+
+    public void ResetWindow()
+    {
+        isOpen = false;
+        gameInitialized = false;
+        m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, minHeight, m_Glass.transform.position.z);
+    }
+
+    #endregion
 }

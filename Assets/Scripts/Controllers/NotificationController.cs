@@ -19,7 +19,7 @@ public class NotificationController : MonoBehaviour
     
     private void Awake()
     {
-        GameManager.GetManager().SetNotificationController(this);
+        GameManager.GetManager().NotificationController = this;
     }
     private void Update()
     {
@@ -33,7 +33,7 @@ public class NotificationController : MonoBehaviour
     private void SendNotification()
     {
         m_CurrentNotRead = true;
-        GameManager.GetManager().GetCanvasManager().m_NotificationCanvas.SetActive(true);
+        if(GameManager.GetManager().CanvasManager.m_NotificationCanvas) GameManager.GetManager().CanvasManager.m_NotificationCanvas.SetActive(true);
         m_RandomValue = Random.Range(0, 2); //frase random elegida.
 
         m_MessageDelegate?.Invoke();
@@ -71,20 +71,20 @@ public class NotificationController : MonoBehaviour
 
     public void ReadOption()
     {
-        GameManager.GetManager().GetCanvasManager().NotificationMessage.SetActive(false);
-        GameManager.GetManager().GetCanvasManager().MessageOpen.SetActive(true);
+        GameManager.GetManager().CanvasManager.NotificationMessage.SetActive(false);
+        GameManager.GetManager().CanvasManager.MessageOpen.SetActive(true);
         m_CurrentNotRead = false;
 
         float l_confident;
         if (m_troll.current)
         {
             l_confident = Random.Range(m_troll.minCofindent, m_troll.maxConfident);
-            GameManager.GetManager().GetAutoControl().RemoveAutoControl(l_confident);
+            GameManager.GetManager().Autocontrol.RemoveAutoControl(l_confident);
         }
         else
         {
             l_confident = Random.Range(m_person.minCofindent, m_person.maxConfident);
-            GameManager.GetManager().GetAutoControl().AddAutoControl(l_confident);
+            GameManager.GetManager().Autocontrol.AddAutoControl(l_confident);
         }
             
         timer = 0;
@@ -93,8 +93,8 @@ public class NotificationController : MonoBehaviour
     public void DeleteOption()
     {
         timer /= 2;
-        GameManager.GetManager().GetCanvasManager().MessageOpen.SetActive(false);
-        GameManager.GetManager().GetCanvasManager().NotificationMessage.SetActive(false);
+        GameManager.GetManager().CanvasManager.MessageOpen.SetActive(false);
+        GameManager.GetManager().CanvasManager.NotificationMessage.SetActive(false);
 
         m_CurrentNotRead = false;
     }

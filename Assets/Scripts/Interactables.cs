@@ -8,5 +8,11 @@ public class Interactables : MonoBehaviour
     // Start is called before the first frame update
 
     public Canvas OptionsCanvas;
-    public virtual void ShowCanvas() { OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas"); }
+    public virtual void ShowCanvas()
+    {
+        if (OptionsCanvas.GetComponent<Animator>())
+        {
+            OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
+        }
+    }
 }

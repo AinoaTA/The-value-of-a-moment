@@ -16,7 +16,7 @@ public class CanvasController : MonoBehaviour
     private bool m_activated;
     private void Awake()
     {
-        GameManager.GetManager().SetCanvas(this);
+        GameManager.GetManager().CanvasManager = this;
         m_activated=false;
     }
     public void FadeInComputer()
@@ -44,7 +44,7 @@ public class CanvasController : MonoBehaviour
 
         //si existe notificacion...
         yield return new WaitForSeconds(0.4f);
-        if (GameManager.GetManager().GetNotificationController().m_CurrentNotRead)
+        if (GameManager.GetManager().NotificationController.m_CurrentNotRead)
            NotificationMessage.SetActive(true);
        
 
@@ -62,7 +62,7 @@ public class CanvasController : MonoBehaviour
         FadeInComputer();
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(false);
-        if (!GameManager.GetManager().GetNotificationController().m_CurrentNotRead)
+        if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
         {
             m_NotificationCanvas.SetActive(false);
         }
@@ -121,7 +121,7 @@ public class CanvasController : MonoBehaviour
     {
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
        
-        if(!GameManager.GetManager().GetFirstMinigameController().GetSolved())
+        if(!GameManager.GetManager().FirstMinigame.GetSolved())
            FirstMinigameCanvas.SetActive(true);
     }
 

@@ -3,27 +3,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static GameManager m_GameManager;
+    private static GameManager m_GameManager;
 
-    CanvasController m_CanvasController;
-    PlayerController m_PlayerController;
-    NotificationController m_NotificationController;
-    Autocontrol m_Autocontrol;
-
-    Bed m_Bed;
-    Window m_Window;
-    Book m_Book;
-    Mirror m_Mirror;
-    Alarm m_Alarm;
-    DialogueControl m_Dialogue;
-    SoundController m_SoundController;
-    FirstMinigameController m_FirstMinigame;
-    VR m_VR;
     public enum StateGame
     {
-        Init = 0, //momento desperar-posponer
-        GamePlay, //una vez despertado y moviendose por el nivel
-        MiniGame //se ha iniciado un minigame
+        Init = 0,   // Momento despertar-posponer
+        GamePlay,   // Una vez despertado y moviendose por el nivel
+        MiniGame    // Se ha iniciado un minigame
     }
 
     public StateGame m_CurrentStateGame;
@@ -33,93 +19,30 @@ public class GameManager : MonoBehaviour
     private float m_Distance = 70f;
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
-
+    
     private Interactables curr;
 
-
-    public void SetCanvas(CanvasController canvas)
-    {
-        m_CanvasController = canvas;
-    }
-    public void SetNotificationController(NotificationController notification)
-    {
-        m_NotificationController = notification;
-    }
-
-    public void SetAutocontrol(Autocontrol _Autocontrol)
-    {
-        m_Autocontrol = _Autocontrol;
-    }
-
-    public void SetBed(Bed _bed)
-    {
-        m_Bed = _bed;
-    }
-
-    public void SetAlarm(Alarm _Alarm)
-    {
-        m_Alarm = _Alarm;
-    }
-
-    public void SetWindow(Window _Window)
-    {
-        m_Window = _Window;
-    }
-
-    public void SetDialogueControll(DialogueControl dialogue)
-    {
-        m_Dialogue = dialogue;
-    }
-
-    public void SetBook(Book _book)
-    {
-        m_Book = _book;
-    }
-
-    public void SetSoundController(SoundController _SoundController)
-    {
-        m_SoundController = _SoundController;
-    }
-
-    public void SetFirstMiniGame(FirstMinigameController _First)
-    {
-        m_FirstMinigame = _First;
-    }
-
-    public void SetMirror(Mirror _Mirror)
-    {
-        m_Mirror = _Mirror;
-    }
-
-    public void SetVR(VR _VR)
-    {
-        m_VR = _VR;
-    }
-
-    public void SetPlayer(PlayerController _player)
-    {
-        m_PlayerController = _player;
-    }
+    public CanvasController CanvasManager { get; set; }
+    public NotificationController NotificationController { get; set; }
+    public Autocontrol Autocontrol { get; set; }
+    public Bed Bed { get; set; }
+    public Alarm Alarm { get; set; }
+    public Window Window { get; set; }
+    public DialogueControl Dialogue { get; set; }
+    public Book Book { get; set; }
+    public SoundController SoundController { get; set; }
+    public FirstMinigameController FirstMinigame { get; set; }
+    public Mirror Mirror { get; set; }
+    public VR VR { get; set; }
+    public PlayerController PlayerController { get; set; }
 
     public static GameManager GetManager() => m_GameManager;
-    public CanvasController GetCanvasManager() => m_CanvasController;
-    public Autocontrol GetAutoControl() => m_Autocontrol;
-    public NotificationController GetNotificationController() => m_NotificationController;
-    public Bed GetBed() => m_Bed;
-    public Window GetWindow() => m_Window;
-    public Alarm GetAlarm() => m_Alarm;
-    public DialogueControl GetDialogueControl() => m_Dialogue;
-    public Book GetBook() => m_Book;
-    public SoundController GetSoundController() => m_SoundController;
-    public FirstMinigameController GetFirstMinigameController() => m_FirstMinigame;
-    public Mirror GetMirror() => m_Mirror;
-    public VR GetVR() => m_VR;
-    public PlayerController GetPlayer() => m_PlayerController;
+
     private void Awake()
     {
         m_GameManager = this;
         cam = Camera.main;
-        m_CurrentStateGame = StateGame.Init;
+        m_CurrentStateGame = StateGame.GamePlay;
     }
 
     private void Update()
@@ -130,39 +53,46 @@ public class GameManager : MonoBehaviour
             Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
-                if (l_Hit.collider.GetComponent<Iinteract>() != null)
+            {
+                if (l_Hit.collider.GetComponent<IntfInteract>() != null)
                 {
                     curr = l_Hit.collider.GetComponent<Interactables>();
                     curr.ShowCanvas();
+                    //PlayerController.SetInteractable(curr.tag);
                     //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
-                    
                 }
-
+            }
         }
         HelpText();
     }
 
-    public void ActiveAction()
-    {
-        GetPlayer().ActiveMovement(curr.gameObject);
-    }
+    //public void ActiveAction()
+    //{
+    //    GetPlayer().ActiveMovement(curr.gameObject);
+    //}
 
-    
     private void HelpText()
     {
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
         textHelp.transform.position = Input.mousePosition + helpOffset;
         TMP_Text text = textHelp.GetComponent<TMP_Text>();
 
-        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !m_CanvasController.ScreenActivated() && !m_Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
+        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
-            if (l_Hit.collider.GetComponent<Iinteract>() != null)//da error si se cambia el objeto de la cama así q mejor pongo esto
-                text.text = l_Hit.collider.GetComponent<Iinteract>().NameAction();
+            if (l_Hit.collider.GetComponent<IntfInteract>() != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
+            {
+                text.text = l_Hit.collider.GetComponent<IntfInteract>().NameAction();
+            }
         }
         else
             text.text = "";
 
         textHelp.GetComponent<TMP_Text>().text = text.text;
 
+    }
+
+    public void TurnOnComputer()
+    {
+        PlayerController.SetInteractable("Computer");
     }
 }

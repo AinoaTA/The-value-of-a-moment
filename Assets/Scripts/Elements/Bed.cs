@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bed : Interactables,Iinteract
+public class Bed : Interactables,IntfInteract
 {
     private bool m_Done;
     public GameObject m_SheetBad;
@@ -13,7 +13,7 @@ public class Bed : Interactables,Iinteract
 
     private void Awake()
     {
-        GameManager.GetManager().SetBed(this);
+        GameManager.GetManager().Bed = this;
     }
     private void Start()
     {
@@ -33,14 +33,14 @@ public class Bed : Interactables,Iinteract
         m_SheetBad.SetActive(false);
         //
         m_NameObject = "Dormir";
-        GameManager.GetManager().GetAutoControl().AddAutoControl(5);
+        GameManager.GetManager().Autocontrol.AddAutoControl(5);
        
     }
 
     public void ResetBed()
     {//para cuando se vuelve a dormir y despierta.
-        GameManager.GetManager().GetAlarm().SetAlarmActive();
-        GameManager.GetManager().GetAlarm().ResetTime();
+        GameManager.GetManager().Alarm.SetAlarmActive();
+        GameManager.GetManager().Alarm.ResetTime();
         m_Done = false;
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
@@ -52,12 +52,12 @@ public class Bed : Interactables,Iinteract
         {
             //inicia minijuego
             m_miniGame.m_GameActive = true;
-            GameManager.GetManager().GetCanvasManager().ActiveBedCanvas();
+            GameManager.GetManager().CanvasManager.ActiveBedCanvas();
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         }
         else
         {
-            GameManager.GetManager().GetCanvasManager().FadeIn();
+            GameManager.GetManager().CanvasManager.FadeIn();
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
             StartCoroutine(DelaySleep());
         }
@@ -65,13 +65,13 @@ public class Bed : Interactables,Iinteract
 
     private IEnumerator DelaySleep()
     {
-        GameManager.GetManager().GetSoundController().QuitMusic();
+        GameManager.GetManager().SoundController.QuitMusic();
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().GetPlayer().PlayerSleepPos();
-        GameManager.GetManager().GetWindow().ResetWindow();
-        GameManager.GetManager().GetBook().ResetBookDay();
-        GameManager.GetManager().GetMirror().ResetMirrorDay();
-        GameManager.GetManager().GetVR().ResetVRDay();
+        GameManager.GetManager().PlayerController.PlayerSleepPos();
+        GameManager.GetManager().Window.ResetWindow();
+        GameManager.GetManager().Book.ResetBookDay();
+        GameManager.GetManager().Mirror.ResetMirrorDay();
+        GameManager.GetManager().VR.ResetVRDay();
         ResetBed();
     }
     public string NameAction()

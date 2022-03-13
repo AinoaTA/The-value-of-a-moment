@@ -15,7 +15,7 @@ public class FirstMinigameController : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.GetManager().SetFirstMiniGame(this);
+        GameManager.GetManager().FirstMinigame = this;
     }
     private void Update()
     {
@@ -30,11 +30,11 @@ public class FirstMinigameController : MonoBehaviour
 
     private IEnumerator GameFinished()
     {
-        GameManager.GetManager().GetAutoControl().AddAutoControl(14);
+        GameManager.GetManager().Autocontrol.AddAutoControl(14);
         m_Solved = true;
         yield return new WaitForSeconds(2f);
         
-        GameManager.GetManager().GetCanvasManager().FinishMiniGame();
+        GameManager.GetManager().CanvasManager.FinishMiniGame();
     }
 
     private bool CheckSolutions()

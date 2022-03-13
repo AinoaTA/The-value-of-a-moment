@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VR : Interactables, Iinteract
+public class VR : Interactables, IntfInteract
 {
     private string m_NameObject = "Mirar VR";
     private bool m_Done;
@@ -17,7 +17,7 @@ public class VR : Interactables, Iinteract
     }
     private void Awake()
     {
-        GameManager.GetManager().SetVR(this);
+        GameManager.GetManager().VR = this;
     }
     public void Interaction()
     {
@@ -26,8 +26,8 @@ public class VR : Interactables, Iinteract
             if (m_Counter >= m_MirrorInteractPhrases.Length)
                 m_Counter = 0;
 
-            GameManager.GetManager().GetDialogueControl().SetDialogue(m_MirrorInteractPhrases[m_Counter]);
-            GameManager.GetManager().GetAutoControl().AddAutoControl(3);
+            GameManager.GetManager().Dialogue.SetDialogue(m_MirrorInteractPhrases[m_Counter]);
+            GameManager.GetManager().Autocontrol.AddAutoControl(3);
             m_Counter++;
 
             m_Done = true;

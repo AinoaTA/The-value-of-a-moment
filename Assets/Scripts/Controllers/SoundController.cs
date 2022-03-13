@@ -13,7 +13,7 @@ public class SoundController : MonoBehaviour
     private void Awake()
     {
         m_AudioSource = GetComponent<AudioSource>();
-        GameManager.GetManager().SetSoundController(this);
+        GameManager.GetManager().SoundController = this;
         m_GlobalSource.volume = 0;
     }
 
