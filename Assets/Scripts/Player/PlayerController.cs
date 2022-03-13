@@ -179,21 +179,19 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().PlayerController = this;
-
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        anim = this.GetComponent<PlayerAnimations>();
         col = GetComponent<Collider>();
 
     }
     private void Start()
     {
         AImomevent = false;
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = false;
-        anim = this.GetComponent<PlayerAnimations>();
-        //anim = GetComponent<PlayerAnimations>();
         col.enabled = false;
 
-        PlayerSleepPos();
+       // PlayerSleepPos();
+
     }
 
     private void Update()
@@ -219,6 +217,8 @@ public class PlayerController : MonoBehaviour
 
         transform.position += m_PlayerDirAxis * Time.deltaTime;
         transform.position += new Vector3(x, 0, -z) * Time.deltaTime;
+
+        print(sleep);
     }
 
     public void ActiveMovement(GameObject interactableObject)
@@ -266,9 +266,9 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerWakeUpPos()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
         transform.position = m_PlayerWakeUp.position;
         transform.rotation = m_PlayerWakeUp.rotation;
+        navMeshAgent.enabled = false;
         sleep = false;
         
         StartCoroutine(DelayCollider());

@@ -7,40 +7,44 @@ public class Plant : Interactables, IntfInteract
     private bool m_Done;
     [HideInInspector] public string m_NameObject;
     public string[] m_HelpPhrases;
-    //public BedMinigame m_miniGame;
     [SerializeField] private float distance;
-    public GameObject wateringCan;
-    public float maxX, maxZ;
+    public WaterCan waterCan;
     Vector3 wateringInitialPos;
 
-
-
+    private float timer;
+    [SerializeField] private float maxTimer = 3f;
     private void Start()
     {
         m_NameObject = "Regar";
-        wateringInitialPos = wateringCan.transform.position;
+        waterCan.GetComponent<WaterCan>();
+        waterCan.gameObject.SetActive(false);
     }
 
 
 
     public void Interaction()
     {
-        if (!m_Done) 
+        if (!m_Done)
         {
-            wateringCan.SetActive(true);
+            timer = 0;
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
 
-            float mouseX = Input.GetAxis("Mouse X")*Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y")*Time.deltaTime;
-
-            Vector3 Xpos = new Vector3(wateringInitialPos.x + mouseX, 0, wateringInitialPos.z + mouseY);
-
-            float XClamped = Mathf.Clamp(Xpos.x, Xpos.x - maxX, Xpos.x + maxX);
-            float ZClamped = Mathf.Clamp(Xpos.z, Xpos.z - maxZ, Xpos.z + maxZ);
-
-            wateringCan.transform.position += new Vector3(XClamped, wateringCan.transform.position.y, ZClamped);
+            waterCan.gameObject.SetActive(true);
         }
+        else
+            FinishInteraction();
+
     }
 
+
+    private void FinishInteraction()
+    {
+        m_Done = true;
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().PlayerController.ExitInteractable();
+
+        waterCan.gameObject.SetActive(false);
+    }
 
     public float GetDistance()
     {
@@ -61,5 +65,19 @@ public class Plant : Interactables, IntfInteract
     public string NameAction()
     {
         return m_NameObject;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!waterCan.dragg)
+            return;
+
+        print(timer);
+        if (timer <= maxTimer)
+            timer += Time.deltaTime;
+        else
+        {
+            FinishInteraction();
+        }
     }
 }

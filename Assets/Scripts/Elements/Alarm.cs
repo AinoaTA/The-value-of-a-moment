@@ -46,6 +46,7 @@ public class Alarm : MonoBehaviour
 
         m_Alarm = false;
         //ResetTime();
+        print("que ocurre");
 
         GameManager.GetManager().Dialogue.SetTimer();
         ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
