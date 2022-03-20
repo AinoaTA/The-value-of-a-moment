@@ -9,7 +9,7 @@ public class Bed : Interactables,IntfInteract
     [HideInInspector]public string m_NameObject;
     public string[] m_HelpPhrases;
     public BedMinigame m_miniGame;
-    public float distance;
+    [SerializeField] private float distance;
 
     private void Awake()
     {

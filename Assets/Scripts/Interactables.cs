@@ -10,7 +10,7 @@ public class Interactables : MonoBehaviour
     public Canvas OptionsCanvas;
     public virtual void ShowCanvas()
     {
-        if (OptionsCanvas.GetComponent<Animator>())
+        if (OptionsCanvas.GetComponent<Animator>() && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay )
         {
             OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
         }
