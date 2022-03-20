@@ -205,7 +205,8 @@ public class PlayerController : MonoBehaviour
 
             
             //SetAnimations();
-        }else if (Input.GetKey(KeyCode.Escape))
+        }
+        else if (Input.GetKey(KeyCode.Escape))
             ExitInteractable();
 
         float z = Input.GetAxis("Horizontal");
@@ -218,7 +219,7 @@ public class PlayerController : MonoBehaviour
         transform.position += m_PlayerDirAxis * Time.deltaTime;
         transform.position += new Vector3(x, 0, -z) * Time.deltaTime;
 
-        print(sleep);
+        // print(sleep);
     }
 
     public void ActiveMovement(GameObject interactableObject)
@@ -274,7 +275,6 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DelayCollider());
     }
 
-   
     public void PlayerStopTrayectory()
     {
         AImomevent = false;
