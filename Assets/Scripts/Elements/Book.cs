@@ -33,7 +33,6 @@ public class Book : Interactables, IntfInteract
             GameManager.GetManager().Dialogue.SetDialogue(m_BookInteractPhrases[m_Counter]);
             m_DelegateSFXBook?.Invoke();
             m_Counter++;
-           
 
             m_Done = true;
             m_NameObject = "";
