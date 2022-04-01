@@ -217,8 +217,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position += m_PlayerDirAxis * Time.deltaTime;
         transform.position += new Vector3(x, 0, -z) * Time.deltaTime;
-
-        print(sleep);
     }
 
     public void ActiveMovement(GameObject interactableObject)

@@ -37,8 +37,6 @@ public class Alarm : MonoBehaviour
             if (m_Timer > m_MaxTime)
                 StartAlarm();
         }
-        
-
     }
 
     private void ForceWakeUP()
@@ -46,8 +44,6 @@ public class Alarm : MonoBehaviour
 
         m_Alarm = false;
         //ResetTime();
-        print("que ocurre");
-
         GameManager.GetManager().Dialogue.SetTimer();
         ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
         //animacion player se levanta
