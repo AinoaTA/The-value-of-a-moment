@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mirror : Interactables,IntfInteract
+public class Mirror : Interactables
 {
-    private string m_NameObject = "Mirarse";
-    private bool m_Done;
     private int m_Counter = 0;
-    public float distance;
-
     public string[] m_MirrorInteractPhrases;
     
     private void Awake()
@@ -16,11 +12,7 @@ public class Mirror : Interactables,IntfInteract
         GameManager.GetManager().Mirror = this;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, distance);
-    }
-    public void Interaction()
+    public override void Interaction()
     {
         if (!m_Done)
         {
@@ -34,31 +26,11 @@ public class Mirror : Interactables,IntfInteract
             m_Done = true;
             m_NameObject = "";
         }
-
     }
 
-    public string NameAction()
-    {
-        return m_NameObject;
-    }
-
-    public bool GetDone()
-    {
-        return m_Done;
-    }
     public void ResetMirrorDay()
     {
         m_NameObject = "Mirarse";
         m_Done = false;
-    }
-
-    public string[] GetPhrases()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public float GetDistance()
-    {
-        return distance;
     }
 }

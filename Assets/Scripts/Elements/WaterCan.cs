@@ -11,9 +11,11 @@ public class WaterCan : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        dragg = true;
-       //no me preguntes por el offset, la acción sin offset no funciona basically.
-        transform.position =Camera.main.ScreenToWorldPoint(Input.mousePosition + offSet);
+           dragg = true;
+            //no me preguntes por el offset, la acción sin offset no funciona basically.
+            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + offSet);
+        
+       
     }
 
     private void OnMouseUp()

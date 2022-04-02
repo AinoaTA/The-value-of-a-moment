@@ -11,7 +11,6 @@ public class DialogueControl : MonoBehaviour
     private bool m_DialogueActive;
 
     private int maxInt=2;
-    //frases de ayuda.
 
     [SerializeField]private List<GameObject> m_ListInteract = new List<GameObject>();
 
@@ -31,7 +30,6 @@ public class DialogueControl : MonoBehaviour
     private void Start()
     {
         m_ListInteract.Add(GameManager.GetManager().Bed.gameObject);
-        //m_ListInteract.Add(GameManager.GetManager().Window.gameObject);
         m_ListInteract.Add(GameManager.GetManager().Book.gameObject);
     }
 
@@ -64,12 +62,13 @@ public class DialogueControl : MonoBehaviour
     {
         for (int i = 0; i < m_ListInteract.Count; i++)
         {
-            if (!m_ListInteract[i].GetComponent<IntfInteract>().GetDone())
+            Interactables l_interactable = m_ListInteract[i].GetComponent<Interactables>();
+
+            if (!l_interactable.GetDone())
             {
                 int random = Random.Range(0, maxInt);
-                SetDialogue(m_ListInteract[i].GetComponent<IntfInteract>().GetPhrases()[random]);
+                SetDialogue(l_interactable.GetPhrases()[random]);
             }
         }
     }
-
 }

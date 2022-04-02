@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class Window : Interactables, IntfInteract
+public class Window : Interactables
 {
     public GameObject m_Glass;
-    public string[] m_HelpPhrases;
     
     private float mOffset;
     private float zWorldCoord;
@@ -12,7 +11,6 @@ public class Window : Interactables, IntfInteract
     private bool isOpen = false;
     private bool gameInitialized = false;
 
-    private string m_NameObject = "Abrir ventana";
     public float distance;
 
     private void Awake()
@@ -60,32 +58,12 @@ public class Window : Interactables, IntfInteract
         return Camera.main.ScreenToWorldPoint(mousePoint).y;
     }
 
-    #region Interface Interact methods
+    #region Inherit Interactable methods
 
-    public void Interaction()
+    public override void Interaction()
     {
         if (!isOpen)
             gameInitialized = true; // Inicia minijuego
-    }
-
-    public bool GetDone()
-    {
-        return isOpen;
-    }
-
-    public string NameAction()
-    {
-        return m_NameObject;
-    }
-
-    public string[] GetPhrases()
-    {
-        return m_HelpPhrases;
-    }
-
-    public float GetDistance()
-    {
-        return distance;
     }
 
     public void ResetWindow()

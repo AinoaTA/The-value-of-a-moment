@@ -47,17 +47,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && m_CurrentStateGame == StateGame.GamePlay)
         {
             Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
             {
-                if (l_Hit.collider.GetComponent<IntfInteract>() != null)
+                if (l_Hit.collider.GetComponent<Interactables>() != null)
                 {
-                    curr = l_Hit.collider.GetComponent<Interactables>();
-                    curr.ShowCanvas();
+                    Interactables curr = l_Hit.collider.GetComponent<Interactables>();
+                    if(!curr.GetDone())
+                        curr.ShowCanvas();
                     //PlayerController.SetInteractable(curr.tag);
                     //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
                 }
@@ -79,9 +79,11 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
-            if (l_Hit.collider.GetComponent<IntfInteract>() != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
+            Interactables interact = l_Hit.collider.GetComponent<Interactables>();
+
+            if (interact != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
             {
-                text.text = l_Hit.collider.GetComponent<IntfInteract>().NameAction();
+                text.text = interact.NameAction();
             }
         }
         else

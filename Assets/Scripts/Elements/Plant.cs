@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class Plant : Interactables, IntfInteract
+public class Plant : Interactables
 {
     public bool water;
 
-    private bool m_Done;
-    [HideInInspector] public string m_NameObject;
-    public string[] m_HelpPhrases;
+    //[HideInInspector] public string m_NameObject;
+    //public string[] m_HelpPhrases;
     [SerializeField] private float distance;
     public WaterCan waterCan;
     Vector3 wateringInitialPos;
@@ -22,10 +21,11 @@ public class Plant : Interactables, IntfInteract
 
 
 
-    public void Interaction()
+    public override void Interaction()
     {
         if (!m_Done)
         {
+            GameManager.GetManager().PlayerController.SetInteractable("Plant");
             timer = 0;
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
 
@@ -42,30 +42,26 @@ public class Plant : Interactables, IntfInteract
         m_Done = true;
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().PlayerController.ExitInteractable();
-
+        m_NameObject = "";
         waterCan.gameObject.SetActive(false);
     }
 
-    public float GetDistance()
-    {
-        return distance;
-    }
 
-    public bool GetDone()
-    {
-        return m_Done;
-    }
+    //public override bool GetDone()
+    //{
+    //    return m_Done;
+    //}
 
-    public string[] GetPhrases()
-    {
-        return m_HelpPhrases;
-    }
+    //public override string[] GetPhrases()
+    //{
+    //    return m_HelpPhrases;
+    //}
 
 
-    public string NameAction()
-    {
-        return m_NameObject;
-    }
+    //public override string NameAction()
+    //{
+    //    return m_NameObject;
+    //}
 
     private void OnTriggerStay(Collider other)
     {

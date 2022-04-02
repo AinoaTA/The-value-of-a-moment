@@ -176,6 +176,9 @@ public class PlayerController : MonoBehaviour
 
     private bool sleep = true;
 
+
+    public Camera cam;
+
     private void Awake()
     {
         GameManager.GetManager().PlayerController = this;
@@ -211,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
         float z = Input.GetAxis("Horizontal");
         float x = Input.GetAxis("Vertical");
-        m_PlayerDirAxis = new Vector3(x, 0, -z);
+        m_PlayerDirAxis = new Vector3(x, 0, z);
 
         if (m_PlayerDirAxis != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(m_PlayerDirAxis);
@@ -233,7 +236,6 @@ public class PlayerController : MonoBehaviour
         newPos = interactableObject.transform.position;
         newPos.y = 0;
         currentSelected = interactableObject;
-        minDistance = currentSelected.GetComponent<IntfInteract>().GetDistance();
         m_Dir = newPos - transform.position;
         m_Dir.y = 0;
         m_Dir.Normalize();
@@ -261,7 +263,7 @@ public class PlayerController : MonoBehaviour
         {
             navMeshAgent.enabled = false;
             AImomevent = false;
-            currentSelected.GetComponent<IntfInteract>().Interaction();
+            currentSelected.GetComponent<Interactables>().Interaction();
         }
     }
 

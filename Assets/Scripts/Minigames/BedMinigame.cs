@@ -24,7 +24,6 @@ public class BedMinigame : MonoBehaviour
     }
     private void Update()
     {
-
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButton(0) && Input.GetAxisRaw("Mouse X")>0 && !m_Completed)
         {

@@ -1,15 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bed : Interactables,IntfInteract
+public class Bed : Interactables
 {
-    private bool m_Done;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;//sábana
-    [HideInInspector]public string m_NameObject;
-    public string[] m_HelpPhrases;
     public BedMinigame m_miniGame;
-    [SerializeField] private float distance;
+
+    private bool isDone = false;
+    private bool gameInitialized = false;
+    float minDesplacement = -3.13f;
+    float maxDesplacement =-3.069f;
 
     private void Awake()
     {
@@ -20,21 +21,38 @@ public class Bed : Interactables,IntfInteract
         m_SheetBad.SetActive(true);
         m_NameObject = "Hacer la cama";
     }
-    private void OnDrawGizmos()
+
+    void OnMouseDrag()
     {
-        Gizmos.DrawWireSphere(transform.position, distance);
+        if (gameInitialized && !isDone)
+        {
+            if (Input.GetAxisRaw("Mouse X") < 0)
+            {
+                if (m_SheetBad.transform.position.z < maxDesplacement)
+                {
+                    m_SheetBad.transform.position += new Vector3(0, 0, 0.003f);
+                }
+                else if ((m_SheetBad.transform.position.z >= maxDesplacement))
+                    m_SheetBad.transform.position = new Vector3(m_SheetBad.transform.position.x, m_SheetBad.transform.position.y,maxDesplacement);
+            }
+        }
     }
 
+    private void OnMouseUp()
+    {
+        if ((m_SheetBad.transform.position.z <= maxDesplacement) && (m_SheetBad.transform.position.z >= minDesplacement))
+            BedDone();
+    }
     public void BedDone()
     {
-        m_Done = true;
+        isDone=m_Done = true;
         //Cambiamos la sábana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
         //
         m_NameObject = "Dormir";
+        GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().Autocontrol.AddAutoControl(5);
-       
     }
 
     public void ResetBed()
@@ -45,14 +63,17 @@ public class Bed : Interactables,IntfInteract
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
         m_NameObject = "Hacer la cama";
+
+
+        isDone = false;
+        gameInitialized = false;
     }
-    public void Interaction()
+    public override void Interaction()
     {
+        m_Done = isDone;
         if (!m_Done)
         {
-            //inicia minijuego
-            m_miniGame.m_GameActive = true;
-            GameManager.GetManager().CanvasManager.ActiveBedCanvas();
+            gameInitialized = true;
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         }
         else
@@ -69,29 +90,9 @@ public class Bed : Interactables,IntfInteract
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Window.ResetWindow();
-        GameManager.GetManager().Book.ResetBookDay();
+        GameManager.GetManager().Book.ResetInteractable();
         GameManager.GetManager().Mirror.ResetMirrorDay();
         GameManager.GetManager().VR.ResetVRDay();
         ResetBed();
-    }
-    public string NameAction()
-    {
-
-        return m_NameObject;
-    }
-
-    public bool GetDone()
-    {
-        return m_Done;
-    }
-
-    public string[] GetPhrases()
-    {
-        return m_HelpPhrases;
-    }
-
-    public float GetDistance()
-    {
-        return distance;
     }
 }
