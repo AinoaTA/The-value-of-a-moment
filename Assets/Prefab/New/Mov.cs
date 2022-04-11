@@ -8,6 +8,8 @@ public class Mov : MonoBehaviour
     public float m_Speed;
     public float m_MaxSpeed = 2;
 
+    public GameObject prop;
+
     Vector3 m_Forward;
     Vector3 m_Right;
 
@@ -20,14 +22,22 @@ public class Mov : MonoBehaviour
 
     private void Start()
     {
+        Lock();
+
+
         m_Speed = m_MaxSpeed;
         m_CharacterController = GetComponent<CharacterController>();
         m_Anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
+        //parametros de la camara
         m_Forward = cam.transform.forward;
         m_Right = cam.transform.right;
+
+
+        //m_Forward = transform.forward;
+        //m_Right = transform.right;
 
         m_Forward.y = 0;
         m_Right.y = 0;
@@ -71,11 +81,30 @@ public class Mov : MonoBehaviour
 
         m_Movement.Normalize();
         if (m_Movement != Vector3.zero)
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(m_Movement), m_LerpRotationPercentatge);
+            prop.transform.rotation = Quaternion.Lerp(prop.transform.rotation, Quaternion.LookRotation(m_Movement), m_LerpRotationPercentatge);
 
         m_Movement *= m_Speed * Time.deltaTime;
 
         CollisionFlags m_CollisionFlags = m_CharacterController.Move(m_Movement);
+
+
+        
+        
+    }
+
+    void Lock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+    }
+
+    void UnLock()
+    {
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
     }
 
 }
