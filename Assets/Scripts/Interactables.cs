@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
-    //este  script estaria bien enfocarlo a las funciones GET que tiene iinteract (trasladrlas aquí para mayor comodidad)
-    // Start is called before the first frame update
     public bool m_Done;
     public string m_NameObject;
     public string m_ResetName;
     public VoiceOff[] m_HelpPhrases;
-    public string[] m_UsePhrases;
+    public string[] m_InteractPhrases;
+    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl; 
 
     public Canvas OptionsCanvas;
 

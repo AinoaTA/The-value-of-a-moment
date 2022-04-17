@@ -5,8 +5,7 @@ public class Autocontrol : MonoBehaviour
 {
     private float maxValue = 100f;
 
-    private float m_currentValue = 20; //modificado solo por función.
-  //  public float currentValue => m_currentValue;
+    private float m_currentValue = 20;
     public Slider m_Slider;
 
     private void Awake()

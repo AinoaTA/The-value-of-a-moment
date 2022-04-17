@@ -10,17 +10,17 @@ public class Mirror : Interactables
     private void Awake()
     {
         GameManager.GetManager().Mirror = this;
-        m_UsePhrases = m_MirrorInteractPhrases;
+        m_InteractPhrases = m_MirrorInteractPhrases;
     }
 
     public override void Interaction()
     {
         if (!m_Done)
         {
-            if (m_Counter >= m_UsePhrases.Length)
+            if (m_Counter >= m_InteractPhrases.Length)
                 m_Counter = 0;
 
-            GameManager.GetManager().Dialogue.SetDialogue(m_UsePhrases[m_Counter]);
+            GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
             GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
             m_Counter++;
 
