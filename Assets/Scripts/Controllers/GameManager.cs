@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public LayerMask m_LayerMask;
     private Camera cam;
-    private float m_Distance = 70f;
+    private float m_Distance = 30f;
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
     
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        HelpText();
+        InteractCanvas();
     }
 
     //public void ActiveAction()
@@ -71,25 +71,51 @@ public class GameManager : MonoBehaviour
     //    GetPlayer().ActiveMovement(curr.gameObject);
     //}
 
-    private void HelpText()
+    //private void HelpText()
+    //{
+    //    Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
+    //    textHelp.transform.position = Input.mousePosition + helpOffset;
+    //    TMP_Text text = textHelp.GetComponent<TMP_Text>();
+
+    //    if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
+    //    {
+    //        Interactables interact = l_Hit.collider.GetComponent<Interactables>();
+
+    //        if (interact != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
+    //        {
+    //            text.text = interact.NameAction();
+    //        }
+    //    }
+    //    else
+    //        text.text = "";
+
+    //    textHelp.GetComponent<TMP_Text>().text = text.text;
+
+    //}
+
+    private void InteractCanvas()
     {
         Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
-        textHelp.transform.position = Input.mousePosition + helpOffset;
-        TMP_Text text = textHelp.GetComponent<TMP_Text>();
-
+        //textHelp.transform.position = Input.mousePosition + helpOffset;
+        //  TMP_Text text = textHelp.GetComponent<TMP_Text>();
+        Interactables interact = null;
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
-            Interactables interact = l_Hit.collider.GetComponent<Interactables>();
+            interact = l_Hit.collider.GetComponent<Interactables>();
 
             if (interact != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
             {
-                text.text = interact.NameAction();
+                interact.ShowCanvas();
             }
-        }
-        else
-            text.text = "";
 
-        textHelp.GetComponent<TMP_Text>().text = text.text;
+
+        }
+        else if (interact != null)
+            interact.HideCanvas();
+
+
+
+      //  textHelp.GetComponent<TMP_Text>().text = text.text;
 
     }
 

@@ -108,7 +108,7 @@ public class DialogueControl : MonoBehaviour
         {
             Interactables l_interactable = m_ListInteract[i].GetComponent<Interactables>();
             
-            if (!l_interactable.GetDone())
+            if (!l_interactable.GetDone() && l_interactable.GetPhrases().Length !=0)
             {
                 int random = Random.Range(0, l_interactable.GetPhrases().Length-1);
 

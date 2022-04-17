@@ -10,17 +10,31 @@ public class Interactables : MonoBehaviour
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl; 
 
     public Canvas OptionsCanvas;
+    private Animator anim;
 
     public virtual string NameAction(){ return m_NameObject; }
     public virtual bool GetDone() { return m_Done; }
     public virtual VoiceOff[] GetPhrases() { return m_HelpPhrases; }
     public virtual void Interaction() { }
 
+    private void Start()
+    {
+        anim = OptionsCanvas.GetComponent<Animator>();
+    }
+
     public virtual void ShowCanvas()
     {
-        if (OptionsCanvas.GetComponent<Animator>() && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay )
+        if (anim && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay )
         {
-            OptionsCanvas.GetComponent<Animator>().SetTrigger("Canvas");
+            anim.SetTrigger("Show");
+        }
+    }
+
+    public virtual void HideCanvas()
+    {
+        if (anim && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+        {
+            anim.SetTrigger("Hide");
         }
     }
 
