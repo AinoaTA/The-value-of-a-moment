@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private void InteractCanvas()
     {
-        Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray l_Ray = cam.ViewportPointToRay(Input.mousePosition);
         //textHelp.transform.position = Input.mousePosition + helpOffset;
         //  TMP_Text text = textHelp.GetComponent<TMP_Text>();
         Interactables interact = null;
