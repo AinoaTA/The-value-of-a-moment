@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    private float m_Timer;
     public bool forceDebugMode = true; //REMOVER ESTO UNA VEZ LA BUIDL ESTE DONE
-    [SerializeField] private float m_MaxTime;
-    private bool m_Alarm = true;
-    public GameObject CanvasAlarm;
-
     public ButtonTrigger WakeUpTrigger;
     public string[] m_phrases;
+    public GameObject CanvasAlarm;
+
+    [SerializeField] private float m_MaxTime;
+    private bool m_Alarm = true;
     private int m_count;
+    private float m_Timer;
+
     public delegate void DelegateSFX();
     public static DelegateSFX m_DelegateSFX;
 
@@ -78,9 +79,10 @@ public class Alarm : MonoBehaviour
             CanvasAlarm.SetActive(false);
         }
         else if (WakeUpTrigger.m_Counter <= 3)
-        {
-            if (WakeUpTrigger.m_Counter > 1)
-                GameManager.GetManager().Dialogue.SetDialogue("5 Minutos más...");
+        { 
+            //***
+            //if (WakeUpTrigger.m_Counter > 1)
+            //    GameManager.GetManager().Dialogue.SetDialogue("5 Minutos más...");
 
             WakeUpTrigger.LessEscaleWakeUp();
         }
@@ -96,7 +98,7 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         CanvasAlarm.SetActive(false);
         GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
-        GameManager.GetManager().Dialogue.SetDialogue(m_phrases[m_count]);
+        GameManager.GetManager().Dialogue.SetDialogue(m_phrases[m_count],null);
         m_count++;
     }
 

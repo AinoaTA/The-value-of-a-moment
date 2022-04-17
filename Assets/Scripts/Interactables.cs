@@ -9,12 +9,14 @@ public class Interactables : MonoBehaviour
     public bool m_Done;
     public string m_NameObject;
     public string m_ResetName;
-    public string[] m_HelpPhrases;
+    public VoiceOff[] m_HelpPhrases;
+    public string[] m_UsePhrases;
+
     public Canvas OptionsCanvas;
 
     public virtual string NameAction(){ return m_NameObject; }
     public virtual bool GetDone() { return m_Done; }
-    public virtual string[] GetPhrases() { return m_HelpPhrases; }
+    public virtual VoiceOff[] GetPhrases() { return m_HelpPhrases; }
     public virtual void Interaction() { }
 
     public virtual void ShowCanvas()
