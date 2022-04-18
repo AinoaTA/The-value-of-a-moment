@@ -176,6 +176,8 @@ public class PlayerController : MonoBehaviour
 
     private bool sleep = true;
 
+    private CharacterController controller;
+
 
     public Camera cam;
 
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         anim = this.GetComponent<PlayerAnimations>();
         col = GetComponent<Collider>();
-
+        controller = GetComponent<CharacterController>();
     }
     private void Start()
     {
@@ -207,7 +209,7 @@ public class PlayerController : MonoBehaviour
             Desplacement();
 
             
-            //SetAnimations();
+            SetAnimations();
         }
         else if (Input.GetKey(KeyCode.Escape))
             ExitInteractable();
@@ -307,5 +309,20 @@ public class PlayerController : MonoBehaviour
     public void ExitInteractable()
     {
         anim.ExitInteractable();
+    }
+
+    private void SetAnimations()
+    {
+        if (controller.velocity.magnitude <= 0.00f)
+        {
+            anim.SetMovement(0);
+            this.speed = 0.0f;
+        }
+        else if (controller.velocity.magnitude >= 0.1f)
+        {
+            print("a");
+            anim.SetMovement(controller.velocity.magnitude);
+      this.speed = 0.0f;
+        }
     }
 }

@@ -5,15 +5,10 @@ using UnityEngine;
 public class Mov : MonoBehaviour
 {
     public Camera cam;
-    public float m_Speed;
-    public float m_MaxSpeed = 2;
-
+    public float m_Speed, m_MaxSpeed = 2, m_StopSpeedOffset = 0.2f;
     public GameObject prop;
 
-    Vector3 m_Forward;
-    Vector3 m_Right;
-
-    Vector3 m_Movement;
+    Vector3 m_Forward, m_Right, m_Movement;
 
     [SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
@@ -29,6 +24,7 @@ public class Mov : MonoBehaviour
         m_CharacterController = GetComponent<CharacterController>();
         m_Anim = GetComponentInChildren<Animator>();
     }
+
     void Update()
     {
         //parametros de la camara
@@ -88,23 +84,25 @@ public class Mov : MonoBehaviour
         CollisionFlags m_CollisionFlags = m_CharacterController.Move(m_Movement);
 
 
-        
-        
+        SetAnimations();
     }
 
+    private void SetAnimations()
+    {
+        if (m_CharacterController.velocity.magnitude <= m_MaxSpeed - m_StopSpeedOffset)
+        {
+            m_Speed = 0.0f;
+        }
+    }
     void Lock()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     void UnLock()
     {
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
     }
-
 }

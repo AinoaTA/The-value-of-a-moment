@@ -4,7 +4,7 @@ public class DayNightCycle : MonoBehaviour
 {
     public enum DayState { D, M, T, N }
 
-    [Tooltip("D=Mañana, M=Mediodia, T=Tarde, N=Noche")]
+    [Tooltip("D=Maï¿½ana, M=Mediodia, T=Tarde, N=Noche")]
     public DayState m_DayState;
 
     private Animator m_Anims;
@@ -32,7 +32,6 @@ public class DayNightCycle : MonoBehaviour
         //    default:
         //        break;
         //}
-       
 
         m_DayState = newState;
     }
