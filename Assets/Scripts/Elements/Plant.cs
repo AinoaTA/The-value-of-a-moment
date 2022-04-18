@@ -12,11 +12,14 @@ public class Plant : Interactables
 
     private float timer;
     [SerializeField] private float maxTimer = 3f;
+    private int currProcess=0;
+    public GameObject[] m_process;
     private void Start()
     {
         m_NameObject = "Regar";
         waterCan.GetComponent<WaterCan>();
         waterCan.gameObject.SetActive(false);
+        m_process[currProcess].SetActive(true);
     }
 
 
@@ -44,6 +47,24 @@ public class Plant : Interactables
         GameManager.GetManager().PlayerController.ExitInteractable();
         m_NameObject = "";
         waterCan.gameObject.SetActive(false);
+    }
+
+
+    public void NextDay()
+    {
+        //grow
+        if (m_Done)
+        {
+            m_process[currProcess].SetActive(false);
+            currProcess++;
+            m_process[currProcess].SetActive(true);
+        }
+        else //else no grow. future option.
+        { 
+        
+
+        
+        }
     }
 
 
