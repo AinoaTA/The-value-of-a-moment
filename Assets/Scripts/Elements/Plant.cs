@@ -14,10 +14,11 @@ public class Plant : Interactables
     [SerializeField] private float maxTimer = 3f;
     private int currProcess=0;
     public GameObject[] m_process;
+
     private void Start()
     {
         m_NameObject = "Regar";
-        waterCan.GetComponent<WaterCan>();
+        //waterCan=GetComponent<WaterCan>();
         waterCan.gameObject.SetActive(false);
         m_process[currProcess].SetActive(true);
     }

@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
                     Interactables curr = l_Hit.collider.GetComponent<Interactables>();
                     if (!curr.GetDone())
                     {
+                        print(curr);
                         curr.ShowCanvas();
                     }
                     //PlayerController.SetInteractable(curr.tag);
@@ -68,50 +69,25 @@ public class GameManager : MonoBehaviour
       //  InteractCanvas();
     }
 
-    //public void ActiveAction()
-    //{
-    //    GetPlayer().ActiveMovement(curr.gameObject);
-    //}
 
-    //private void HelpText()
-    //{
-    //    Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
-    //    textHelp.transform.position = Input.mousePosition + helpOffset;
-    //    TMP_Text text = textHelp.GetComponent<TMP_Text>();
 
+    //private void InteractCanvas()
+    //{
+    //    Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    //    //textHelp.transform.position = Input.mousePosition + helpOffset;
+    //    //  TMP_Text text = textHelp.GetComponent<TMP_Text>();
+
+    //    Interactables interact = null;
     //    if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
     //    {
-    //        Interactables interact = l_Hit.collider.GetComponent<Interactables>();
+    //        interact = l_Hit.collider.GetComponent<Interactables>();
 
     //        if (interact != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
     //        {
-    //            text.text = interact.NameAction();
+    //            interact.ShowCanvas();
     //        }
     //    }
-    //    else
-    //        text.text = "";
-
-    //    textHelp.GetComponent<TMP_Text>().text = text.text;
-
     //}
-
-    private void InteractCanvas()
-    {
-        Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        //textHelp.transform.position = Input.mousePosition + helpOffset;
-        //  TMP_Text text = textHelp.GetComponent<TMP_Text>();
-
-        Interactables interact = null;
-        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
-        {
-            interact = l_Hit.collider.GetComponent<Interactables>();
-
-            if (interact != null) //da error si se cambia el objeto de la cama asi q mejor pongo esto
-            {
-                interact.ShowCanvas();
-            }
-        }
-    }
 
     public void TurnOnComputer()
     {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Interactables : MonoBehaviour
@@ -10,30 +11,26 @@ public class Interactables : MonoBehaviour
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl; 
 
     public Canvas OptionsCanvas;
-    private Animator anim;
+    public Animator anim;
 
     public virtual string NameAction(){ return m_NameObject; }
     public virtual bool GetDone() { return m_Done; }
     public virtual VoiceOff[] GetPhrases() { return m_HelpPhrases; }
     public virtual void Interaction() { }
 
-    private void Awake()
-    {
-        anim = OptionsCanvas.GetComponent<Animator>();
-    }
-
     public virtual void ShowCanvas()
     {
-        if (anim && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
-            print("canvas active");
+            print("in if");
             anim.SetTrigger("Show");
         }
+        
     }
 
     public virtual void HideCanvas()
     {
-        if (anim && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
             anim.SetTrigger("Hide");
         }

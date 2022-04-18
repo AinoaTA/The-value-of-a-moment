@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610572992418988294}
-  m_LocalRotation: {x: -0.3582928, y: -0.6789072, z: 0.2991179, w: 0.56678027}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.5330531, y: -0.55239767, z: 0.44501513, w: 0.4611647}
+  m_LocalPosition: {x: 0.001, y: -0.047, z: -0.007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9129838702434251096}
   m_Father: {fileID: 6432242191900241596}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55.646}
+  m_LocalEulerAnglesHint: {x: 0, y: -100.287, z: 87.958}
 --- !u!65 &3307655548002198135
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,10 +75,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0b6288a45f27e40b2268ca7e9e9be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Done: 0
+  m_NameObject: 
+  m_ResetName: 
+  m_HelpPhrases: []
+  m_InteractPhrases: []
+  m_MaxAutoControl: 0
+  m_MiddleAutoControl: 0
+  m_MinAutoControl: 0
   OptionsCanvas: {fileID: 2788581823003358849}
-  m_HelpPhrases:
-  - "Me apetece leerme un cap\xEDtulo del libro."
-  - mmmm
+  anim: {fileID: 0}
   m_BookInteractPhrases:
   - "La biograf\xEDa de Enriqueta Mart\xED. Este libro ha sido toda una sorpresa.
     Tengo que seguir ley\xE9ndolo."
@@ -89,7 +95,6 @@ MonoBehaviour:
   - "\xBFSer\xE1 verdad todo lo que se cuenta? \xA1Da miedo!"
   - "Muy poca gente conoce a Enriqueta Mart\xED; para variar, la Historia se olvida
     de las mujeres."
-  distance: 0.82
 --- !u!1 &717864111300183899
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,29 +486,29 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 548531311669528182}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Canvas
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ActiveAction
-        m_Mode: 1
+      - m_Target: {fileID: 5310572}
+        m_TargetAssemblyTypeName: Grabbing, Assembly-CSharp
+        m_MethodName: SetAccessCamera
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerAnimations, Assembly-CSharp
+        m_MethodName: SetInteractable
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Grab
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &4264538511402494303
 GameObject:
@@ -790,31 +795,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5173101333041973506}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: PlayerStopTrayectory
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 548531311669528182}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Canvas
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6432242191900241587
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6432242191900241596}
+  - component: {fileID: 5310572}
   m_Layer: 0
   m_Name: EnriquetasBookInteractable
   m_TagString: Untagged
@@ -847,6 +829,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5310572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432242191900241587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a16bdcc2848b54bbb6fc25dc61c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 0}
+  MouseSensitivity: 1
+  turningSpeed: 50
+  yAxisInverted: 0
+  maxYCameraAngle: 90
+  minYCameraAngle: 50
+  canAccesCamera: 0
+  target: {fileID: 0}
+  grabbingSpeed: 5
 --- !u!1 &8500653427779742690
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,9 +910,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6905223671806817249, guid: b0154f1d6434a9042ba629515bec27e3, type: 3}
-  - {fileID: 7579947855379107030, guid: b0154f1d6434a9042ba629515bec27e3, type: 3}
-  - {fileID: 870925501541920543, guid: b0154f1d6434a9042ba629515bec27e3, type: 3}
+  - {fileID: 2100000, guid: 70f173b3f005e244a882dc21191f543c, type: 2}
+  - {fileID: 2100000, guid: 70f173b3f005e244a882dc21191f543c, type: 2}
+  - {fileID: 2100000, guid: 70f173b3f005e244a882dc21191f543c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
