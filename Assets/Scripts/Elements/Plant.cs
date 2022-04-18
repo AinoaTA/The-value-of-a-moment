@@ -22,8 +22,6 @@ public class Plant : Interactables
         m_process[currProcess].SetActive(true);
     }
 
-
-
     public override void Interaction()
     {
         if (!m_Done)

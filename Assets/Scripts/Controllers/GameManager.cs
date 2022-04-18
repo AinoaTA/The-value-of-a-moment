@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public LayerMask m_LayerMask;
     private Camera cam;
-    private float m_Distance = 30f;
+    [SerializeField]private float m_Distance = 30f;
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
     
@@ -49,21 +49,23 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && m_CurrentStateGame == StateGame.GamePlay)
         {
-            Ray l_Ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
             if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
             {
                 if (l_Hit.collider.GetComponent<Interactables>() != null)
                 {
                     Interactables curr = l_Hit.collider.GetComponent<Interactables>();
-                    if(!curr.GetDone())
+                    if (!curr.GetDone())
+                    {
                         curr.ShowCanvas();
+                    }
                     //PlayerController.SetInteractable(curr.tag);
                     //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
                 }
             }
         }
-        InteractCanvas();
+      //  InteractCanvas();
     }
 
     //public void ActiveAction()
@@ -95,9 +97,10 @@ public class GameManager : MonoBehaviour
 
     private void InteractCanvas()
     {
-        Ray l_Ray = cam.ViewportPointToRay(Input.mousePosition);
+        Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         //textHelp.transform.position = Input.mousePosition + helpOffset;
         //  TMP_Text text = textHelp.GetComponent<TMP_Text>();
+
         Interactables interact = null;
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask) && !CanvasManager.ScreenActivated() && !Alarm.GetIsActive() && m_CurrentStateGame == StateGame.GamePlay)
         {
@@ -107,16 +110,7 @@ public class GameManager : MonoBehaviour
             {
                 interact.ShowCanvas();
             }
-
-
         }
-        else if (interact != null)
-            interact.HideCanvas();
-
-
-
-      //  textHelp.GetComponent<TMP_Text>().text = text.text;
-
     }
 
     public void TurnOnComputer()

@@ -17,15 +17,16 @@ public class Interactables : MonoBehaviour
     public virtual VoiceOff[] GetPhrases() { return m_HelpPhrases; }
     public virtual void Interaction() { }
 
-    private void Start()
+    private void Awake()
     {
         anim = OptionsCanvas.GetComponent<Animator>();
     }
 
     public virtual void ShowCanvas()
     {
-        if (anim && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay )
+        if (anim && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
+            print("canvas active");
             anim.SetTrigger("Show");
         }
     }
