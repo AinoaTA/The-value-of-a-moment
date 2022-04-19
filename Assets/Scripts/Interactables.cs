@@ -41,4 +41,33 @@ public class Interactables : MonoBehaviour
         m_NameObject = m_ResetName;
         m_Done = false;
     }
+
+    private void OnMouseOver()
+    {
+        //If your mouse hovers over the GameObject with the script attached, output this message
+        Debug.Log($"Mouse is over {this.gameObject}");
+
+        if(this.gameObject.transform.childCount > 0 && this.gameObject.transform.GetChild(0).GetComponent<Renderer>() != null) {
+
+            foreach (var material in this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials){
+                material.SetFloat("_EmissiveExposureWeight", 0.95f);
+            }
+        }
+        else {
+            Debug.Log("Mouse is not attached to the scene");
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (this.gameObject.transform.childCount > 0 && this.gameObject.transform.GetChild(0).GetComponent<Renderer>() != null) {
+
+            foreach (var material in this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials) {
+                material.SetFloat("_EmissiveExposureWeight", 1f);
+            }
+        }
+        else {
+            Debug.Log("Mouse is not attached to the scene");
+        }
+    }
 }
