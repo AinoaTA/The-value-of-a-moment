@@ -22,14 +22,12 @@ public class VR : Interactables
             m_Counter++;
 
             m_Done = true;
-            m_NameObject = "";
         }
 
     }
 
     public void ResetVRDay()
     {
-        m_NameObject = "Mirar VR";
         m_Done = false;
     }
 

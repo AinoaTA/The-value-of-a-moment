@@ -5,6 +5,8 @@ public class Book : Interactables
     private int m_Counter = 0;
     public string[] m_BookInteractPhrases;
 
+    public Grabbing m_Grabbing;
+
     public delegate void DelegateSFXBook();
     public static DelegateSFXBook m_DelegateSFXBook;
 
@@ -18,6 +20,11 @@ public class Book : Interactables
     {
         if (!m_Done)
         {
+            m_Grabbing.SetAccessCamera(true);
+            GameManager.GetManager().PlayerController.SetInteractable("Grab");
+
+            HideCanvas();
+
             if (m_Counter >= m_InteractPhrases.Length)
                 m_Counter = 0;
 
@@ -26,7 +33,6 @@ public class Book : Interactables
             m_Counter++;
 
             m_Done = true;
-            m_NameObject = "";
         }
         
     }

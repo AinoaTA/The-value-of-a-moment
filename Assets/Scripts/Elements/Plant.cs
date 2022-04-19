@@ -17,7 +17,6 @@ public class Plant : Interactables
 
     private void Start()
     {
-        m_NameObject = "Regar";
         //waterCan=GetComponent<WaterCan>();
         waterCan.gameObject.SetActive(false);
         m_process[currProcess].SetActive(true);
@@ -44,7 +43,6 @@ public class Plant : Interactables
         m_Done = true;
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().PlayerController.ExitInteractable();
-        m_NameObject = "";
         waterCan.gameObject.SetActive(false);
     }
 

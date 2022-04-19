@@ -25,13 +25,11 @@ public class Mirror : Interactables
             m_Counter++;
 
             m_Done = true;
-            m_NameObject = "";
         }
     }
 
     public void ResetMirrorDay()
     {
-        m_NameObject = "Mirarse";
         m_Done = false;
     }
 }

@@ -19,7 +19,6 @@ public class Bed : Interactables
     private void Start()
     {
         m_SheetBad.SetActive(true);
-        m_NameObject = "Hacer la cama";
     }
 
     void OnMouseDrag()
@@ -50,7 +49,6 @@ public class Bed : Interactables
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
         //
-        m_NameObject = "Dormir";
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().Autocontrol.AddAutoControl(5);
     }
@@ -62,7 +60,6 @@ public class Bed : Interactables
         m_Done = false;
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
-        m_NameObject = "Hacer la cama";
 
 
         isDone = false;
