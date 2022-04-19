@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,6 +20,7 @@ public class GameManager : MonoBehaviour
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
     
     private Interactables currInteractable;
+    private Interactables lookingInteractable;
 
     public CanvasController CanvasManager { get; set; }
     public NotificationController NotificationController { get; set; }
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public Mirror Mirror { get; set; }
     public VR VR { get; set; }
     public PlayerController PlayerController { get; set; }
+    public Plant[] plants { get; set; }
 
     public static GameManager GetManager() => m_GameManager;
 
@@ -48,8 +49,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (m_CurrentStateGame != StateGame.GamePlay)
+            return;
 
-        if (currInteractable != null && m_CurrentStateGame == StateGame.GamePlay)
+        if (currInteractable != null)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -64,33 +67,50 @@ public class GameManager : MonoBehaviour
                 currInteractable.HideCanvas();
                 currInteractable = null;
             }
-
         }
 
-        print(currInteractable);
-        if (Input.GetMouseButtonDown(0) && m_CurrentStateGame == StateGame.GamePlay)
+        Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+       
+        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit_, m_Distance, m_LayerMask))
         {
-            Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            currInteractable = l_Hit_.collider.GetComponent<Interactables>();
 
-            if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
+            if (currInteractable != null && Input.GetMouseButtonDown(0))
             {
-                currInteractable = l_Hit.collider.GetComponent<Interactables>();
-
-                if (currInteractable != null)
-                {
-                    if (!currInteractable.GetDone())
-                    {
-                        print(currInteractable);
-                        currInteractable.ShowCanvas();
-                    }
-                    //PlayerController.SetInteractable(curr.tag);
-                    //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
+                if (!currInteractable.GetDone())
+                {   print("no alwais");
+                    lookingInteractable = currInteractable;
+                    lookingInteractable.ShowCanvas();
                 }
             }
+            else if (currInteractable != lookingInteractable && lookingInteractable != null)
+            {
+                print("no alwais2");
+                lookingInteractable.HideCanvas();
+                lookingInteractable = null;
+            }
         }
+        
 
 
-       
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
+        //    {
+        //        currInteractable = l_Hit.collider.GetComponent<Interactables>();
+
+        //        if (currInteractable != null)
+        //        {
+        //            if (!currInteractable.GetDone())
+        //            {
+        //                print(currInteractable);
+        //                currInteractable.ShowCanvas();
+        //            }
+        //            //PlayerController.SetInteractable(curr.tag);
+        //            //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
+        //        }
+        //    }
+        //}
     }
 
     public void TurnOnComputer()

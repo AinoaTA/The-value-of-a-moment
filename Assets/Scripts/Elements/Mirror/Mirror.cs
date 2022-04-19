@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mirror : Interactables
@@ -28,7 +26,7 @@ public class Mirror : Interactables
         }
     }
 
-    public void ResetMirrorDay()
+    public override void ResetInteractable()
     {
         m_Done = false;
     }

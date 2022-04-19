@@ -88,8 +88,17 @@ public class Bed : Interactables
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Window.ResetWindow();
         GameManager.GetManager().Book.ResetInteractable();
-        GameManager.GetManager().Mirror.ResetMirrorDay();
+        GameManager.GetManager().Mirror.ResetInteractable();
         GameManager.GetManager().VR.ResetVRDay();
+        
+
+        for (int i = 0; i < GameManager.GetManager().plants.Length; i++)
+        {
+
+            GameManager.GetManager().plants[i].NextDay();
+            GameManager.GetManager().plants[i].ResetInteractable();
+        }
+        
         ResetBed();
     }
 }

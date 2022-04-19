@@ -1186,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 661694170202796135, guid: 75dfbfb563465a7458ec5f3e21b697b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.04631865
+      value: -0.047881126
       objectReference: {fileID: 0}
     - target: {fileID: 661694170202796136, guid: 75dfbfb563465a7458ec5f3e21b697b8, type: 3}
       propertyPath: m_Follow
@@ -1584,6 +1584,14 @@ PrefabInstance:
       propertyPath: textHelp
       value: 
       objectReference: {fileID: 1795785958}
+    - target: {fileID: 835321057582321299, guid: a28cb3cd30c86374d9c59a467aae49a0, type: 3}
+      propertyPath: m_Distance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 835321057582321299, guid: a28cb3cd30c86374d9c59a467aae49a0, type: 3}
+      propertyPath: m_LayerMask.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 835321057582321300, guid: a28cb3cd30c86374d9c59a467aae49a0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9514,16 +9522,16 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &5374907094123581617
@@ -9534,7 +9542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04631865, y: 1.1120298, z: 14.839439}
+  m_LocalPosition: {x: -0.047881126, y: 1.1120298, z: 14.839439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
@@ -9790,8 +9798,8 @@ MonoBehaviour:
   flipYMode: 0
   xrRendering: 1
   fullscreenPassthrough: 0
-  allowDynamicResolution: 0
-  customRenderingSettings: 0
+  allowDynamicResolution: 1
+  customRenderingSettings: 1
   invertFaceCulling: 0
   probeLayerMask:
     serializedVersion: 2
