@@ -14,6 +14,8 @@ public class DialogueControl : MonoBehaviour
 
     private AudioSource m_AudioSource;
 
+    public Action soundSFX;
+
     [SerializeField]private List<Interactables> m_ListInteract = new List<Interactables>();
     
     private float m_Timer=-100;
