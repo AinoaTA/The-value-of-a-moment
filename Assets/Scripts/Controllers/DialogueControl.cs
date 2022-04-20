@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 public class DialogueControl : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class DialogueControl : MonoBehaviour
     
     private float m_Timer=-100;
 
-    public void SetTimer()
+    private void SetTimer()
     {
         m_Timer = 0;
         m_TimerShowDialogue = 0;
@@ -74,6 +76,7 @@ public class DialogueControl : MonoBehaviour
         m_CurrText = "[Elle] " + dialogue;
         m_AudioSource.clip = voice;
 
+        soundSFX?.Invoke();
 
         if (m_AudioSource.clip != null)
             m_AudioSource.Play();

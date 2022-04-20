@@ -4,10 +4,13 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     private AudioSource m_AudioSource;
+    public AudioSource m_ExtraSFX; 
+
     public AudioSource m_GlobalSource;
     public AudioClip m_Message;
     public AudioClip m_Alarm;
     public AudioClip m_Book;
+    public AudioClip dialogueBlip;
     private bool Active;
 
     private void Awake()
@@ -23,7 +26,8 @@ public class SoundController : MonoBehaviour
     {
         NotificationController.m_MessageDelegate += StartMessage;
         Alarm.m_DelegateSFX += StartAlarm;
-        Book.m_DelegateSFXBook += StartBook; 
+        Book.m_DelegateSFXBook += StartBook;
+        GameManager.GetManager().Dialogue.soundSFX += DialogueSound;
     }
 
     private void OnDisable()
@@ -31,6 +35,8 @@ public class SoundController : MonoBehaviour
         NotificationController.m_MessageDelegate -= StartMessage;
         Alarm.m_DelegateSFX -= StartAlarm;
         Book.m_DelegateSFXBook -= StartBook;
+
+        GameManager.GetManager().Dialogue.soundSFX -= DialogueSound;
     }
 
     public void StartMessage()
@@ -60,6 +66,13 @@ public class SoundController : MonoBehaviour
     public void QuitMusic()
     {
         StartCoroutine(DecreaseAudioCo());
+    }
+
+    public void DialogueSound()
+    {
+        m_ExtraSFX.PlayOneShot(dialogueBlip);
+
+
     }
 
     private IEnumerator DecreaseAudioCo()

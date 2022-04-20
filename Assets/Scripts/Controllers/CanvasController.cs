@@ -13,11 +13,15 @@ public class CanvasController : MonoBehaviour
     public GameObject WindowCanvas;
     public GameObject FirstMinigameCanvas;
 
+    public GameObject Pointer;
+
     private bool m_activated;
     private void Awake()
     {
         GameManager.GetManager().CanvasManager = this;
-        m_activated=false;
+        Lock(); 
+        m_activated = false;
+        Pointer.SetActive(false);
     }
     public void FadeInComputer()
     {
@@ -128,6 +132,19 @@ public class CanvasController : MonoBehaviour
     public void FinishMiniGame()
     {
         FirstMinigameCanvas.SetActive(false);
+    }
+
+    void Lock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void UnLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; 
+        Pointer.SetActive(false);
     }
 
 

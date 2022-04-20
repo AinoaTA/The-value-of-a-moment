@@ -92,27 +92,6 @@ public class GameManager : MonoBehaviour
                 lookingInteractable = null;
             }
         }
-        
-
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
-        //    {
-        //        currInteractable = l_Hit.collider.GetComponent<Interactables>();
-
-        //        if (currInteractable != null)
-        //        {
-        //            if (!currInteractable.GetDone())
-        //            {
-        //                print(currInteractable);
-        //                currInteractable.ShowCanvas();
-        //            }
-        //            //PlayerController.SetInteractable(curr.tag);
-        //            //GameManager.GetManager().GetPlayer().ActiveMovement(l_Hit.collider.gameObject);
-        //        }
-        //    }
-        //}
     }
 
     public void TurnOnComputer()

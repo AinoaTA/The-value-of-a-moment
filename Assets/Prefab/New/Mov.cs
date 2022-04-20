@@ -15,14 +15,13 @@ public class Mov : MonoBehaviour
 
     private void Start()
     {
-        Lock();
-
         m_Speed = m_MaxSpeed;
         m_CharacterController = GetComponent<CharacterController>();
     }
 
     void Update()
     {
+       
         if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
             return;
 
@@ -92,15 +91,5 @@ public class Mov : MonoBehaviour
             m_Speed = 0.0f;
         }
     }
-    void Lock()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    void UnLock()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
+   
 }

@@ -69,16 +69,17 @@ public class Alarm : MonoBehaviour
         else
             StartCoroutine(SecondWakeUpDialogue());
 
+        GameManager.GetManager().PlayerController.PlayerWakeUpPos();
         GameManager.GetManager().PlayerController.ExitInteractable();
 
         m_Alarm = false;
         ResetTime();
-
-        GameManager.GetManager().Dialogue.SetTimer();
+        GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
+        //GameManager.GetManager().Dialogue.SetTimer();
+        
         ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
         //animacion player se levanta
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        // GameManager.GetManager().PlayerController.PlayerWakeUpPos();
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
     }
@@ -125,7 +126,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator StartDay()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         int counter = 0;
 
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[counter]);
