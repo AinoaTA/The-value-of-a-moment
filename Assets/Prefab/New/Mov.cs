@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mov : MonoBehaviour
@@ -13,20 +11,21 @@ public class Mov : MonoBehaviour
     [SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
-    Animator m_Anim;
+    public Animator m_Anim;
 
     private void Start()
     {
         Lock();
 
-
         m_Speed = m_MaxSpeed;
         m_CharacterController = GetComponent<CharacterController>();
-        m_Anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
+        if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+            return;
+
         //parametros de la camara
         m_Forward = cam.transform.forward;
         m_Right = cam.transform.right;
@@ -82,7 +81,6 @@ public class Mov : MonoBehaviour
         m_Movement *= m_Speed * Time.deltaTime;
 
         CollisionFlags m_CollisionFlags = m_CharacterController.Move(m_Movement);
-
 
         SetAnimations();
     }

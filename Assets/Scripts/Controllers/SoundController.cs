@@ -15,6 +15,7 @@ public class SoundController : MonoBehaviour
         m_AudioSource = GetComponent<AudioSource>();
         GameManager.GetManager().SoundController = this;
         m_GlobalSource.volume = 0;
+        m_GlobalSource.gameObject.SetActive(false);
     }
 
 
@@ -48,7 +49,7 @@ public class SoundController : MonoBehaviour
     }
     public void StopSound()
     {
-        m_AudioSource.Stop();
+        m_AudioSource.Stop();// = null;
     }
     public void SetMusic()
     {
@@ -64,7 +65,7 @@ public class SoundController : MonoBehaviour
     private IEnumerator DecreaseAudioCo()
     {
         float counter = 0f;
-
+        
         while (counter < 0.5f)
         {
             counter += Time.deltaTime;
@@ -73,12 +74,13 @@ public class SoundController : MonoBehaviour
 
             yield return null;
         }
+        m_GlobalSource.gameObject.SetActive(false);
         Active = false;
     }
     private IEnumerator IcreaseAudioCo()
     {
         float counter = 0f;
-
+        m_GlobalSource.gameObject.SetActive(true);
         while (counter < 5f)
         {
             counter += Time.deltaTime;

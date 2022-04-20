@@ -153,153 +153,153 @@ public class PlayerController : MonoBehaviour
     //}
 
 
-    public float movementSpeed = 2f;
+    //public float movementSpeed = 2f;
     public PlayerAnimations anim;
-    //public PlayerAnimations anim;
-    public Transform m_PlayerWakeUp;
-    public Transform m_PlayerSleep;
-    public Transform MeshPlayer;
-    public GameObject PlayerAsset;
+    ////public PlayerAnimations anim;
+    //public Transform m_PlayerWakeUp;
+    //public Transform m_PlayerSleep;
+    //public Transform MeshPlayer;
+    //public GameObject PlayerAsset;
 
-    private Vector3 newPos;
-    private bool AImomevent;
-    private Vector3 m_Dir;
-    private Vector3 m_PlayerDirAxis;
+    //private Vector3 newPos;
+    //private bool AImomevent;
+    //private Vector3 m_Dir;
+    //private Vector3 m_PlayerDirAxis;
 
-    private GameObject currentSelected;
-    [SerializeField] private float minDistance = 0.5f;
+    //private GameObject currentSelected;
+    //[SerializeField] private float minDistance = 0.5f;
 
-    private NavMeshAgent navMeshAgent;
-    private Collider col;
-    public float speed = 2f;
-    public Vector3 zero;
+    //private NavMeshAgent navMeshAgent;
+    //private Collider col;
+    //public float speed = 2f;
+    //public Vector3 zero;
 
-    private bool sleep = true;
+    //private bool sleep = true;
 
-    private CharacterController controller;
+    //private CharacterController controller;
 
 
-    public Camera cam;
+    //public Camera cam;
 
     private void Awake()
     {
         GameManager.GetManager().PlayerController = this;
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        //navMeshAgent = GetComponent<NavMeshAgent>();
         anim = this.GetComponent<PlayerAnimations>();
-        col = GetComponent<Collider>();
-        controller = GetComponent<CharacterController>();
+        //col = GetComponent<Collider>();
+        //controller = GetComponent<CharacterController>();
     }
-    private void Start()
-    {
-        AImomevent = false;
-        navMeshAgent.enabled = false;
-        col.enabled = false;
+    //private void Start()
+    //{
+    //    AImomevent = false;
+    //    navMeshAgent.enabled = false;
+    //    col.enabled = false;
 
-       // PlayerSleepPos();
+    //   // PlayerSleepPos();
 
-    }
+    //}
 
-    private void Update()
-    {
-        if (sleep)
-            return;
+    //private void Update()
+    //{
+    //    if (sleep)
+    //        return;
 
-        if (AImomevent)/*GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && */
-        {
-            Desplacement();
-
-            
-            SetAnimations();
-        }
-        else if (Input.GetKey(KeyCode.Escape))
-            ExitInteractable();
-
-        float z = Input.GetAxis("Horizontal");
-        float x = Input.GetAxis("Vertical");
-        m_PlayerDirAxis = new Vector3(x, 0, z);
-
-        if (m_PlayerDirAxis != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(m_PlayerDirAxis);
-
-        transform.position += m_PlayerDirAxis * Time.deltaTime;
-        transform.position += new Vector3(x, 0, -z) * Time.deltaTime;
-
-        // print(sleep);
-    }
-
-    public void ActiveMovement(GameObject interactableObject)
-    {
-        //*** revisar esta funci�n porque seguramente hay cosas que debo quitar. (ainoa)
-        if (sleep)
-            return;
-
-        col.enabled = false;
-
-        newPos = interactableObject.transform.position;
-        newPos.y = 0;
-        currentSelected = interactableObject;
-        m_Dir = newPos - transform.position;
-        m_Dir.y = 0;
-        m_Dir.Normalize();
+    //    if (AImomevent)/*GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && */
+    //    {
+    //        Desplacement();
 
 
-        navMeshAgent.enabled = true;
-        AImomevent = true;
-    }
+    //        SetAnimations();
+    //    }
+    //    else if (Input.GetKey(KeyCode.Escape))
+    //        ExitInteractable();
 
-    private void Desplacement()
-    {
-        Vector3 posPlayer = transform.position;
-        posPlayer.y = 0;
+    //    float z = Input.GetAxis("Horizontal");
+    //    float x = Input.GetAxis("Vertical");
+    //    m_PlayerDirAxis = new Vector3(x, 0, z);
 
-        if (Vector3.Distance(posPlayer, newPos) > minDistance)
-        {
-            navMeshAgent.destination = currentSelected.transform.position - m_Dir * minDistance;
+    //    if (m_PlayerDirAxis != Vector3.zero)
+    //        transform.rotation = Quaternion.LookRotation(m_PlayerDirAxis);
 
-            Quaternion lookDir = Quaternion.LookRotation(m_Dir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, Time.deltaTime * 2);
+    //    transform.position += m_PlayerDirAxis * Time.deltaTime;
+    //    transform.position += new Vector3(x, 0, -z) * Time.deltaTime;
 
-            navMeshAgent.destination = currentSelected.transform.position;
-        }
-        else
-        {
-            navMeshAgent.enabled = false;
-            AImomevent = false;
-            currentSelected.GetComponent<Interactables>().Interaction();
-        }
-    }
+    //    // print(sleep);
+    //}
+
+    //public void ActiveMovement(GameObject interactableObject)
+    //{
+    //    //*** revisar esta funci�n porque seguramente hay cosas que debo quitar. (ainoa)
+    //    if (sleep)
+    //        return;
+
+    //    col.enabled = false;
+
+    //    newPos = interactableObject.transform.position;
+    //    newPos.y = 0;
+    //    currentSelected = interactableObject;
+    //    m_Dir = newPos - transform.position;
+    //    m_Dir.y = 0;
+    //    m_Dir.Normalize();
+
+
+    //    navMeshAgent.enabled = true;
+    //    AImomevent = true;
+    //}
+
+    //private void Desplacement()
+    //{
+    //    Vector3 posPlayer = transform.position;
+    //    posPlayer.y = 0;
+
+    //    if (Vector3.Distance(posPlayer, newPos) > minDistance)
+    //    {
+    //        navMeshAgent.destination = currentSelected.transform.position - m_Dir * minDistance;
+
+    //        Quaternion lookDir = Quaternion.LookRotation(m_Dir);
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, lookDir, Time.deltaTime * 2);
+
+    //        navMeshAgent.destination = currentSelected.transform.position;
+    //    }
+    //    else
+    //    {
+    //        navMeshAgent.enabled = false;
+    //        AImomevent = false;
+    //        currentSelected.GetComponent<Interactables>().Interaction();
+    //    }
+    //}
 
     public void PlayerWakeUpPos()
     {
-        transform.position = m_PlayerWakeUp.position;
-        transform.rotation = m_PlayerWakeUp.rotation;
-        navMeshAgent.enabled = false;
-        sleep = false;
-        
-        StartCoroutine(DelayCollider());
+        //transform.position = m_PlayerWakeUp.position;
+        //transform.rotation = m_PlayerWakeUp.rotation;
+        //navMeshAgent.enabled = false;
+        //sleep = false;
+
+        //StartCoroutine(DelayCollider());
     }
 
-    public void PlayerStopTrayectory()
-    {
-        AImomevent = false;
-        col.enabled = true;
-    }
+    //public void PlayerStopTrayectory()
+    //{
+    //    AImomevent = false;
+    //    col.enabled = true;
+    //}
 
-    public void PlayerSleepPos()
-    {
-        sleep = true;
-        navMeshAgent.enabled = false;
-        transform.position = m_PlayerSleep.position;
-        transform.rotation = m_PlayerSleep.rotation;
+    //public void PlayerSleepPos()
+    //{
+    //    sleep = true;
+    //    navMeshAgent.enabled = false;
+    //    transform.position = m_PlayerSleep.position;
+    //    transform.rotation = m_PlayerSleep.rotation;
 
-        col.enabled = false;
-    }
+    //    col.enabled = false;
+    //}
 
-    IEnumerator DelayCollider()
-    {
-        yield return new WaitForSeconds(0.1f);
-        col.enabled = true;
-    }
+    //IEnumerator DelayCollider()
+    //{
+    //    yield return new WaitForSeconds(0.1f);
+    //    col.enabled = true;
+    //}
 
     public void SetInteractable(string interactable)
     {
@@ -309,20 +309,5 @@ public class PlayerController : MonoBehaviour
     public void ExitInteractable()
     {
         anim.ExitInteractable();
-    }
-
-    private void SetAnimations()
-    {
-        if (controller.velocity.magnitude <= 0.00f)
-        {
-            anim.SetMovement(0);
-            this.speed = 0.0f;
-        }
-        else if (controller.velocity.magnitude >= 0.1f)
-        {
-            print("a");
-            anim.SetMovement(controller.velocity.magnitude);
-      this.speed = 0.0f;
-        }
     }
 }

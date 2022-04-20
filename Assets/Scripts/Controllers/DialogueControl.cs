@@ -42,7 +42,7 @@ public class DialogueControl : MonoBehaviour
         if (m_DialogueActive)
         {
             //m_TimerShowDialogue += Time.deltaTime;
-            if (!m_AudioSource.isPlaying)
+            if (!m_AudioSource.isPlaying && m_AudioSource.clip!=null)
             {
                 m_DialogueActive = false;
                 m_Text.text = "";
@@ -71,8 +71,9 @@ public class DialogueControl : MonoBehaviour
         StopDialogue();
         SetTimer();
         m_DialogueActive = true;
-        m_CurrText = dialogue;
+        m_CurrText = "[Elle] " + dialogue;
         m_AudioSource.clip = voice;
+
 
         if (m_AudioSource.clip != null)
             m_AudioSource.Play();
@@ -117,5 +118,11 @@ public class DialogueControl : MonoBehaviour
                 SetDialogue(l_VoiceOff.text,l_VoiceOff.voice);
             }
         }
+    }
+
+
+    public bool CheckDialogueIsPlaying()
+    {
+        return m_AudioSource.isPlaying;
     }
 }

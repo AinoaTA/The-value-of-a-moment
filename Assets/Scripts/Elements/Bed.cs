@@ -85,7 +85,7 @@ public class Bed : Interactables
     {
         GameManager.GetManager().SoundController.QuitMusic();
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().PlayerController.PlayerSleepPos();
+       // GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Window.ResetWindow();
         GameManager.GetManager().Book.ResetInteractable();
         GameManager.GetManager().Mirror.ResetInteractable();
