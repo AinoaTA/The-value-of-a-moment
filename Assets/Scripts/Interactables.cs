@@ -14,8 +14,6 @@ public class Interactables : MonoBehaviour
     public virtual VoiceOff[] GetPhrases() { return m_HelpPhrases; }
     public virtual void Interaction() { }
 
-    public bool open;
-
     public virtual void ShowCanvas()
     {
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
@@ -23,8 +21,6 @@ public class Interactables : MonoBehaviour
             Debug.Log("showing");
             // anim.SetTrigger("Show");
             OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
-            
-            open = true;
         }
     }
 
@@ -33,7 +29,6 @@ public class Interactables : MonoBehaviour
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
             anim.SetTrigger("Hide");
-            open = false;
         }
     }
 

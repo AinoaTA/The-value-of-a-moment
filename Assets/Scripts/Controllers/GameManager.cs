@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         m_GameManager = this;
         cam = Camera.main;
         m_CurrentStateGame = StateGame.GamePlay;
+        
     }
 
     private void Update()
