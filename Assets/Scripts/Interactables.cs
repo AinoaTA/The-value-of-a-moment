@@ -20,10 +20,12 @@ public class Interactables : MonoBehaviour
     {
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
-            anim.SetTrigger("Show");
+            Debug.Log("showing");
+            // anim.SetTrigger("Show");
+            OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
+            
             open = true;
         }
-        
     }
 
     public virtual void HideCanvas()
@@ -45,11 +47,9 @@ public class Interactables : MonoBehaviour
         //If your mouse hovers over the GameObject with the script attached, output this message
         Debug.Log($"Mouse is over {this.gameObject}");
 
-        if(this.gameObject.transform.childCount > 0 && this.gameObject.transform.GetChild(0).GetComponent<Renderer>() != null) {
-
-            foreach (var material in this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials){
-                material.SetFloat("_EmissiveExposureWeight", 0.95f);
-            }
+        if(this.gameObject.GetComponent<Renderer>() != null)
+        {
+            this.gameObject.GetComponent<Renderer>().material.SetFloat("_EmissiveExposureWeight", 0.95f);
         }
         else {
             Debug.Log("Mouse is not attached to the scene");

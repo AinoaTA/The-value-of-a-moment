@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         }
 
         Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-       
+
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit_, m_Distance, m_LayerMask))
         {
             currInteractable = l_Hit_.collider.GetComponent<Interactables>();
@@ -78,7 +78,8 @@ public class GameManager : MonoBehaviour
             if (currInteractable != null && Input.GetMouseButtonDown(0))
             {
                 if (!currInteractable.GetDone())
-                {   print("no alwais");
+                {   
+                    print("no alwais");
                     lookingInteractable = currInteractable;
                     lookingInteractable.ShowCanvas();
                 }
