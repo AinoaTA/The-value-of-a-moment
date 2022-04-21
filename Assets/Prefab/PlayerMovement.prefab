@@ -31,6 +31,9 @@ GameObject:
   - component: {fileID: 6823856116150766706}
   - component: {fileID: 6823856116150766711}
   - component: {fileID: 2048488410}
+  - component: {fileID: 3154980482208795491}
+  - component: {fileID: 5446795675922212524}
+  - component: {fileID: 2341420014530853902}
   m_Layer: 0
   m_Name: PlayerMovement
   m_TagString: Player
@@ -74,6 +77,7 @@ MonoBehaviour:
   prop: {fileID: 5940913295455438350}
   m_LerpRotationPercentatge: 0.25
   m_CurrVelocityPlayer: 0
+  m_Anim: {fileID: 0}
 --- !u!143 &6823856116150766711
 CharacterController:
   m_ObjectHideFlags: 0
@@ -106,6 +110,52 @@ CapsuleCollider:
   m_Height: 2.3828356
   m_Direction: 1
   m_Center: {x: 0.0076895272, y: 0.0045580235, z: -1.9031793e-10}
+--- !u!95 &3154980482208795491
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823856116150766701}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c279c7e8cdece4742ba0720fdb4d27e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5446795675922212524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823856116150766701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c6309f0acd51f41b7b58d084997532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  m_PlayerWakeUp: {fileID: 0}
+  m_PlayerSleep: {fileID: 0}
+--- !u!114 &2341420014530853902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823856116150766701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa04142454a61a74dbb992ef911ffaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6823856117123276015
 GameObject:
   m_ObjectHideFlags: 0
