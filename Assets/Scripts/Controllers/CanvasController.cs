@@ -18,7 +18,7 @@ public class CanvasController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().CanvasManager = this;
-        Lock(); 
+        Lock();
         m_activated = false;
         Pointer.SetActive(false);
     }
@@ -35,11 +35,11 @@ public class CanvasController : MonoBehaviour
         FadeInComputer();
         FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
-        
+
     }
     private IEnumerator DelayFadeComputer()
     {
-        
+
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(true);
         yield return new WaitForSeconds(0.5f);
@@ -48,8 +48,8 @@ public class CanvasController : MonoBehaviour
         //si existe notificacion...
         yield return new WaitForSeconds(0.4f);
         if (GameManager.GetManager().NotificationController.m_CurrentNotRead)
-           NotificationMessage.SetActive(true);
-       
+            NotificationMessage.SetActive(true);
+
 
     }
 
@@ -85,7 +85,7 @@ public class CanvasController : MonoBehaviour
 
     public void DesctiveBedCanvas()
     {
-        
+
         BedCanvas.SetActive(false);
     }
 
@@ -123,9 +123,9 @@ public class CanvasController : MonoBehaviour
     public void StartMinigame()
     {
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-       
-        if(!GameManager.GetManager().FirstMinigame.GetSolved())
-           FirstMinigameCanvas.SetActive(true);
+
+        if (!GameManager.GetManager().FirstMinigame.GetSolved())
+            FirstMinigameCanvas.SetActive(true);
     }
 
     public void FinishMiniGame()
@@ -133,19 +133,18 @@ public class CanvasController : MonoBehaviour
         FirstMinigameCanvas.SetActive(false);
     }
 
-    void Lock()
+    public void Lock()
     {
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+            Pointer.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    void UnLock()
+    public void UnLock()
     {
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true; 
+        Cursor.visible = true;
         Pointer.SetActive(false);
     }
-
-
-
 }
