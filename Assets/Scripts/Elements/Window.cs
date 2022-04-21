@@ -84,13 +84,16 @@ public class Window : Interactables
 
     private IEnumerator StartWindows()
     {
-        yield return new WaitForSeconds(2);
-        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
-        yield return new WaitForSeconds(3);
-        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-        GameManager.GetManager().Dialogue.StopDialogue();
+        if(m_PhrasesVoiceOff.Length == 2)
+        {
+            yield return new WaitForSeconds(2);
+            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
+            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
+            yield return new WaitForSeconds(3);
+            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
+            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+            GameManager.GetManager().Dialogue.StopDialogue();
+        }
     }
 }

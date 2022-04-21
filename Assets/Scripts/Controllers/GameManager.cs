@@ -79,15 +79,14 @@ public class GameManager : MonoBehaviour
             if (currInteractable != null && Input.GetMouseButtonDown(0))
             {
                 if (!currInteractable.GetDone())
-                {   
-                    print("no alwais");
+                {
                     lookingInteractable = currInteractable;
                     lookingInteractable.ShowCanvas();
                 }
             }
             else if (currInteractable != lookingInteractable && lookingInteractable != null)
             {
-                print("no alwais2");
+                print("no alwais");
                 lookingInteractable.HideCanvas();
                 lookingInteractable = null;
             }
