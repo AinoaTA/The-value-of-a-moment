@@ -137,6 +137,7 @@ public class CanvasController : MonoBehaviour
     {
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
             Pointer.SetActive(true);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
