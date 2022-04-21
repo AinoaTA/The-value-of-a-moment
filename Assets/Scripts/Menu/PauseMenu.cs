@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -13,8 +11,6 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         pauseCanvas.SetActive(false);
-        print(virtualCamera3D.GetCinemachineComponent<CinemachinePOV>());
-        
     }
 
     private void Update()
@@ -24,7 +20,6 @@ public class PauseMenu : MonoBehaviour
             PauseGame();
         }
     }
-
 
     public void PauseGame()
     {
@@ -41,7 +36,10 @@ public class PauseMenu : MonoBehaviour
         GameManager.GetManager().CanvasManager.Lock();
 
         pauseCanvas.SetActive(false);
+    }
 
-
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
