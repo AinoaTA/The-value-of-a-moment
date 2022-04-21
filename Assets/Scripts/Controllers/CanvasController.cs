@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CanvasController : MonoBehaviour
 {
-    
     public GameObject FadeInScreen;
     public GameObject ComputerScreen;
     public GameObject m_NotificationCanvas;

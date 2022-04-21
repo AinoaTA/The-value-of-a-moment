@@ -58,9 +58,9 @@ public class DialogueControl : MonoBehaviour
 
         m_Timer += Time.deltaTime;
         
-        //print(m_Timer);
-        if (m_Timer > 12 && !m_DialogueActive && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
-            HelpDialogue();
+        
+        //if (m_Timer > 12 && !m_DialogueActive && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
+        //    HelpDialogue();
 
     }
 
@@ -114,13 +114,13 @@ public class DialogueControl : MonoBehaviour
         {
             Interactables l_interactable = m_ListInteract[i].GetComponent<Interactables>();
             
-            if (!l_interactable.GetDone() && l_interactable.GetPhrases().Length !=0)
+            if (!l_interactable.GetDone() && l_interactable.GetPhrasesVoiceOff().Length !=0)
             {
-                int random = Random.Range(0, l_interactable.GetPhrases().Length-1);
+                int random = Random.Range(0, l_interactable.GetPhrasesVoiceOff().Length-1);
 
-                VoiceOff l_VoiceOff = l_interactable.GetPhrases()[random];
+                VoiceOff l_VoiceOff = l_interactable.GetPhrasesVoiceOff()[random];
                
-                SetDialogue(l_VoiceOff.text,l_VoiceOff.voice);
+                SetDialogue(l_VoiceOff);
             }
         }
     }
@@ -130,4 +130,6 @@ public class DialogueControl : MonoBehaviour
     {
         return m_AudioSource.isPlaying;
     }
+
+
 }

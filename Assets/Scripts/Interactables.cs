@@ -3,7 +3,9 @@ using UnityEngine;
 public class Interactables : MonoBehaviour
 {
     public bool m_Done;
-    public VoiceOff[] m_HelpPhrases;
+    public VoiceOff[] m_PhrasesVoiceOff;
+    public VoiceOff[] m_HelpPhrasesVoiceOff;
+    public string[] m_AnswersToVoiceOff;
     public string[] m_InteractPhrases;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl; 
 
@@ -11,7 +13,7 @@ public class Interactables : MonoBehaviour
     public Animator anim;
 
     public virtual bool GetDone() { return m_Done; }
-    public virtual VoiceOff[] GetPhrases() { return m_HelpPhrases; }
+    public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
     public virtual void Interaction() { }
 
     public virtual void ShowCanvas()

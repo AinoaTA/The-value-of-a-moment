@@ -82,6 +82,10 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
+
+
+        //First hint
+       
     }
 
 
@@ -150,6 +154,9 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[2]);
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.StopDialogue();
+
+        //temp hint
+        GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
     }
     private IEnumerator SecondWakeUpDialogue()
     {
@@ -159,6 +166,9 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[4]);
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.StopDialogue();
+
+        //temp hint
+        GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
     }
 
     private IEnumerator PosponerDialogue()
