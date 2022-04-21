@@ -74,22 +74,10 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit_, m_Distance, m_LayerMask))
         {
-            print(l_Hit_.collider.gameObject);
             currInteractable = l_Hit_.collider.gameObject.GetComponent<Interactables>();
-            print("asdfasoñfijaemrkfj`v0a9fb9aeri9tjqon3khut4gr8¡9v¡oc`pk" + currInteractable);
+
             if (currInteractable != null)
             {
-                print("no es null");
-                if (currInteractable.gameObject.GetComponent<Renderer>() != null)
-                {
-                    print("paosijfañijfñafjañofjañfjearovjeaorgjeggrkcs");
-                    currInteractable.gameObject.GetComponent<Renderer>().material.SetFloat("_EmissiveExposureWeight", 0.95f);
-                }
-                else
-                {
-                    Debug.Log("Mouse is not attached to the scene");
-                }
-
                 if (!currInteractable.GetDone() && Input.GetMouseButtonDown(0))
                 {
                     lookingInteractable = currInteractable;
