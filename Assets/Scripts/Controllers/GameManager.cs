@@ -58,15 +58,20 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Active Interaction");
+                lookingInteractable.HideCanvas();
+                lookingInteractable = null;
+
                 currInteractable.Interaction();
                 currInteractable = null;
+
+               
 
             }
             else if (Input.GetKeyDown(KeyCode.Q))
             {
-                Debug.Log("Quit interactable canvas");
-                currInteractable.HideCanvas();
-                currInteractable = null;
+                //Debug.Log("Quit interactable canvas");
+                //currInteractable.HideCanvas();
+                //currInteractable = null;
             }
         }
 

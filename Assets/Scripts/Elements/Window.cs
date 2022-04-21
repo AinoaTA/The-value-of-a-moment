@@ -45,6 +45,8 @@ public class Window : Interactables
             {
                 height = maxHeight;
                 isOpen = true;
+                GameManager.GetManager().CanvasManager.UnLock();
+                GameManager.GetManager().PlayerController.ExitInteractable();
             }
 
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
@@ -64,7 +66,11 @@ public class Window : Interactables
     public override void Interaction()
     {
         if (!isOpen)
-            gameInitialized = true; // Inicia minijuego
+            gameInitialized = true;
+
+        // Inicia minijuego
+
+        GameManager.GetManager().PlayerController.SetInteractable("Window");
     }
 
     public void ResetWindow()
