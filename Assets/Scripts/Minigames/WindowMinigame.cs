@@ -12,8 +12,8 @@ public class WindowMinigame : MonoBehaviour
     public GameObject m_Limit;
     public LayerMask m_LayerMask;
 
-    [HideInInspector]public bool m_GameActive = false;
-    [SerializeField]private float m_Speed = 0.3f;
+    [HideInInspector] public bool m_GameActive = false;
+    [SerializeField] private float m_Speed = 0.3f;
     private Vector3 LastLeft;
 
     private void Start()
