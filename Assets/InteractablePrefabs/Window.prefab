@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Window
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &778860835357053403
 Transform:
@@ -44,7 +44,7 @@ GameObject:
   m_TagString: Window
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &303026898362475768
 Transform:
@@ -76,13 +76,14 @@ GameObject:
   - component: {fileID: 2387976582083442542}
   - component: {fileID: 1102133608821891393}
   - component: {fileID: 1130633936692300976}
-  - component: {fileID: 8689983157195552469}
+  - component: {fileID: 1157826214}
+  - component: {fileID: 1875475721410490809}
   m_Layer: 0
   m_Name: window bottom half
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2387976582083442542
 Transform:
@@ -126,7 +127,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 1adcbdaaf8aa9dc498cb1d871b5c58a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +149,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8689983157195552469
+--- !u!114 &1157826214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,20 +162,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Done: 0
-  m_PhrasesVoiceOff:
-  - {fileID: 11400000, guid: 86fc9b506d327544c924a713c6b4519e, type: 2}
-  - {fileID: 11400000, guid: 3d6126f4bfbd4fa4d962e47a9e0fdce4, type: 2}
+  m_PhrasesVoiceOff: []
   m_HelpPhrasesVoiceOff: []
-  m_AnswersToVoiceOff:
-  - "Hace un d\xEDa horrible, no pienso abrir la venta."
+  m_AnswersToVoiceOff: []
   m_InteractPhrases: []
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
-  OptionsCanvas: {fileID: 0}
-  anim: {fileID: 0}
-  m_Glass: {fileID: 0}
+  OptionsCanvas: {fileID: 5281239054568181589}
+  anim: {fileID: 8451939642275617135}
+  m_Glass: {fileID: 4873420169986149609}
   distance: 0.88
+--- !u!65 &1875475721410490809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873420169986149609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.012674019, y: 0.00033358886, z: 0.0060735075}
+  m_Center: {x: 0.0000000016298145, y: -0.000031103235, z: 0.0028527142}
 --- !u!1 &8683653389505677446
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +203,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9080652685686535579
 Transform:
@@ -236,7 +247,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 1adcbdaaf8aa9dc498cb1d871b5c58a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -305,6 +316,10 @@ PrefabInstance:
     - target: {fileID: 148658033668588124, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1112109533865179034, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Pivot.x
@@ -390,6 +405,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2683675663582546337, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678812453628400389, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701608935061603118, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461713564454167888, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Name
       value: CanvasInteract
@@ -398,11 +429,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+--- !u!1 &5281239054568181589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+  m_PrefabInstance: {fileID: 1546746385526954236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &834684574781167335 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+  m_PrefabInstance: {fileID: 1546746385526954236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8451939642275617135 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6934549431300997523, guid: 8704316945337e14c974866f8a3f6322, type: 3}
   m_PrefabInstance: {fileID: 1546746385526954236}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1576380195750835533

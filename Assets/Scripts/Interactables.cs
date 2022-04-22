@@ -32,7 +32,7 @@ public class Interactables : MonoBehaviour
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
             anim.SetTrigger("Show");
-            //OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
+            // OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
         }
     }
 

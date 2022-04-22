@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5195807602292145026}
   - component: {fileID: 5027086184882014923}
   - component: {fileID: 3619667344917889921}
+  - component: {fileID: 6381179764121827411}
   m_Layer: 0
   m_Name: EnriquetaBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &6671878309654239679
 Transform:
@@ -26,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002535093822647955}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 2.5676312, y: 0.5624305, z: -2.3088088}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 3316966161281730081}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &5195807602292145026
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 3d8d4011f3b00be4492770203ee17fa6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Done: 0
-  m_HelpPhrases: []
+  m_PhrasesVoiceOff: []
+  m_HelpPhrasesVoiceOff: []
+  m_AnswersToVoiceOff: []
   m_InteractPhrases: []
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
@@ -106,6 +109,19 @@ MonoBehaviour:
   anim: {fileID: 5824856669490071977}
   m_BookInteractPhrases: []
   m_Grabbing: {fileID: 0}
+--- !u!65 &6381179764121827411
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002535093822647955}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0025850623, y: 0.002492235, z: 0.00030000013}
+  m_Center: {x: -0.0003032019, y: 0.00045079723, z: -3.1286612e-10}
 --- !u!1001 &3524765654325397562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +129,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6671878309654239679}
     m_Modifications:
+    - target: {fileID: 1112109533865179034, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -197,9 +217,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2683675663582546337, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678812453628400389, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3701608935061603118, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461713564454167888, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5622638959306131064, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_fontSize
@@ -216,6 +248,10 @@ PrefabInstance:
     - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7557149182173618168, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_fontSize

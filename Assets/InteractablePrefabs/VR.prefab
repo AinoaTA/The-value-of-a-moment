@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5350434119420346292}
   - component: {fileID: 7850959052723497627}
   - component: {fileID: 8758645291306155537}
+  - component: {fileID: 395981650}
   m_Layer: 0
   m_Name: VR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &2978656385518180524
 Transform:
@@ -62,9 +63,9 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1240639500064751845, guid: 21ea3d11afdfad44892a67d3d0586f3c, type: 3}
-  - {fileID: 8810720393433037400, guid: 21ea3d11afdfad44892a67d3d0586f3c, type: 3}
-  - {fileID: -6608471133274804591, guid: 21ea3d11afdfad44892a67d3d0586f3c, type: 3}
+  - {fileID: 2100000, guid: 2c4c97892a512b143baa59527db6b378, type: 2}
+  - {fileID: 2100000, guid: ff7d9255efa6ee6479f55b7fccd5f53b, type: 2}
+  - {fileID: 2100000, guid: d8e494782cf53fb41bb71d9fc54fb159, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,13 +100,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Done: 0
-  m_HelpPhrases: []
+  m_PhrasesVoiceOff: []
+  m_HelpPhrasesVoiceOff: []
+  m_AnswersToVoiceOff: []
   m_InteractPhrases: []
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
   OptionsCanvas: {fileID: 210265034789361823}
   anim: {fileID: 4533693587960598181}
+--- !u!64 &395981650
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825992185090101095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -553146374443820875, guid: 21ea3d11afdfad44892a67d3d0586f3c, type: 3}
 --- !u!1001 &6833822914233421622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2978656385518180524}
     m_Modifications:
+    - target: {fileID: 1112109533865179034, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -197,9 +218,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2683675663582546337, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678812453628400389, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3701608935061603118, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461713564454167888, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Name
@@ -208,6 +241,10 @@ PrefabInstance:
     - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8704316945337e14c974866f8a3f6322, type: 3}
