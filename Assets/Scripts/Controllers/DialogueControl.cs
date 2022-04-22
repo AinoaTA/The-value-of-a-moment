@@ -14,7 +14,8 @@ public class DialogueControl : MonoBehaviour
 
     private AudioSource m_AudioSource;
 
-    public Action soundSFX;
+    public delegate void SoundDelegate();
+    public static SoundDelegate soundSFX;
 
     [SerializeField]private List<Interactables> m_ListInteract = new List<Interactables>();
     
@@ -26,15 +27,16 @@ public class DialogueControl : MonoBehaviour
         m_TimerShowDialogue = 0;
     }
 
-    private void Awake()
+    void Awake()
     {
-        GameManager.GetManager().Dialogue = this;
         m_Text = GetComponent<TMP_Text>();
         m_AudioSource = GetComponentInChildren<AudioSource>();
     }
 
-    private void Start()
+    void Start()
     {
+        GameManager.GetManager().Dialogue = this;
+
         m_ListInteract.Add(GameManager.GetManager().Bed);
         m_ListInteract.Add(GameManager.GetManager().Book);
         m_ListInteract.Add(GameManager.GetManager().VR);
@@ -53,15 +55,10 @@ public class DialogueControl : MonoBehaviour
                // m_TimerShowDialogue = 0;
             }else
                 m_Text.text = m_CurrText;
-
         }
-
         m_Timer += Time.deltaTime;
-        
-        
         //if (m_Timer > 12 && !m_DialogueActive && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
         //    HelpDialogue();
-
     }
 
 
@@ -125,11 +122,8 @@ public class DialogueControl : MonoBehaviour
         }
     }
 
-
     public bool CheckDialogueIsPlaying()
     {
         return m_AudioSource.isPlaying;
     }
-
-
 }

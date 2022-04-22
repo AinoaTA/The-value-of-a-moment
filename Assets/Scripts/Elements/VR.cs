@@ -6,7 +6,7 @@ public class VR : Interactables
 {
     private int m_Counter = 0;
 
-    private void Awake()
+    private void Start()
     {
         GameManager.GetManager().VR = this;
     }

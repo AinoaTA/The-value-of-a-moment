@@ -14,13 +14,12 @@ public class BedMinigame : MonoBehaviour
     public LayerMask m_LayerMask;
     [HideInInspector]public bool m_GameActive=false;
     
-    private void Awake()
+    private void Start()
     {
         cam = Camera.main;
         initPos = m_Sheet.transform.position;
         finalLimit = m_Limit.transform.position;
         finalLimit += new Vector3(0, 0, 0);
-        print(finalLimit);
     }
     private void Update()
     {

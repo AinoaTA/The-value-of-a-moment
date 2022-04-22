@@ -4,8 +4,8 @@ public class Mirror : Interactables
 {
     private int m_Counter = 0;
     public string[] m_MirrorInteractPhrases;
-    
-    private void Awake()
+
+    private void Start()
     {
         GameManager.GetManager().Mirror = this;
         m_InteractPhrases = m_MirrorInteractPhrases;

@@ -45,14 +45,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         m_GameManager = this;
-        cam = Camera.main;
-        m_CurrentStateGame = StateGame.Init;
-
     }
-
     private void Start()
     {
-       
+        cam = Camera.main;
+        m_CurrentStateGame = StateGame.Init;
     }
 
     private void Update()

@@ -15,7 +15,8 @@ public class WindowMinigame : MonoBehaviour
     [HideInInspector]public bool m_GameActive = false;
     [SerializeField]private float m_Speed = 0.3f;
     private Vector3 LastLeft;
-    private void Awake()
+
+    private void Start()
     {
         cam = Camera.main;
         initPos = m_Glass.transform.position;

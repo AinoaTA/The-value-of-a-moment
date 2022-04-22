@@ -9,9 +9,13 @@ public class DayNightCycle : MonoBehaviour
 
     private Animator m_Anims;
 
-    private void Start()
+    private void Awake()
     {
         m_Anims = GetComponent<Animator>();
+    } 
+
+    private void Start()
+    {
         ChangeDay(m_DayState);
     }
     public void ChangeDay(DayState newState)

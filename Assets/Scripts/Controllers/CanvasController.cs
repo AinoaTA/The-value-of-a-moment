@@ -15,7 +15,7 @@ public class CanvasController : MonoBehaviour
     public GameObject Pointer;
 
     private bool m_activated;
-    private void Awake()
+    private void Start()
     {
         GameManager.GetManager().CanvasManager = this;
         Lock();

@@ -10,7 +10,7 @@ public class Book : Interactables
     public delegate void DelegateSFXBook();
     public static DelegateSFXBook m_DelegateSFXBook;
 
-    private void Awake()
+    private void Start()
     {
         GameManager.GetManager().Book = this;
         m_InteractPhrases = m_BookInteractPhrases;
@@ -34,6 +34,5 @@ public class Book : Interactables
 
             m_Done = true;
         }
-        
     }
 }

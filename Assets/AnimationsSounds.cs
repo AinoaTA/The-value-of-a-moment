@@ -5,10 +5,9 @@ using UnityEngine;
 public class AnimationsSounds : MonoBehaviour
 {
     private AudioSource Source;
-    public void Start()
+    public void Awake()
     {
         Source=GetComponentInChildren<AudioSource>();
-        print(Source);
     }
 
     public void OpenDoor()

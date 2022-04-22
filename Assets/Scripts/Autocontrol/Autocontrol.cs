@@ -8,19 +8,12 @@ public class Autocontrol : MonoBehaviour
     private float m_currentValue = 20;
     public Slider m_Slider;
 
-    private void Awake()
-    {
-        GameManager.GetManager().Autocontrol = this;
-    }
-
     private void Start()
     {
+        GameManager.GetManager().Autocontrol = this;
         m_Slider.value = m_currentValue / maxValue;
     }
 
-    private void Update()
-    {
-    }
     public void AddAutoControl(float value)
     {
         m_currentValue += value;

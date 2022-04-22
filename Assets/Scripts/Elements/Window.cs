@@ -13,15 +13,15 @@ public class Window : Interactables
     private bool gameInitialized = false;
 
     public float distance;
-    
-
+ 
     private void Awake()
     {
-        GameManager.GetManager().Window = this;
-    }
+        print(m_Glass);
+        print(m_Glass.transform.position);
+        print(m_Glass.transform.position.y);
+       
 
-    private void Start()
-    {
+        GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
     }
 
@@ -63,13 +63,11 @@ public class Window : Interactables
                 height = maxHeight;
                 isOpen = true;
                 
-                
                 GameManager.GetManager().PlayerController.ExitInteractable();
                 GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
                 GameManager.GetManager().CanvasManager.Lock();
                 GameManager.GetManager().OpenDoor();
                 StartCoroutine(GoodInteraction());
-                
             }
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
         }

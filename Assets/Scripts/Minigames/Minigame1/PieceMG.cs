@@ -7,7 +7,7 @@ public class PieceMG : MonoBehaviour
     private bool m_Selected = false;
     private Vector3 initialPos;
 
-    private void Awake()
+    private void Start()
     {
         initialPos = transform.position;
     }

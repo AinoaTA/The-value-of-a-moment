@@ -17,7 +17,7 @@ public class NotificationController : MonoBehaviour
     public delegate void SoundMessageDelegate();
     public static SoundMessageDelegate m_MessageDelegate;
     
-    private void Awake()
+    void Start()
     {
         GameManager.GetManager().NotificationController = this;
     }

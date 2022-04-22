@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 //[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -17,7 +14,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        sleep = true;
         GameManager.GetManager().PlayerController = this;
         anim = this.GetComponent<PlayerAnimations>();
         mov = GetComponent<Mov>();
@@ -25,6 +21,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        sleep = true;
         PlayerSleepPos();
     }
     public void PlayerWakeUpPos()

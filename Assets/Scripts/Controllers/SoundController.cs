@@ -15,19 +15,21 @@ public class SoundController : MonoBehaviour
 
     private void Awake()
     {
-        m_AudioSource = GetComponent<AudioSource>();
+        m_AudioSource = GetComponent<AudioSource>();    
+    }
+    void Start()
+    {
         GameManager.GetManager().SoundController = this;
         m_GlobalSource.volume = 0;
         m_GlobalSource.gameObject.SetActive(false);
     }
-
 
     private void OnEnable()
     {
         NotificationController.m_MessageDelegate += StartMessage;
         Alarm.m_DelegateSFX += StartAlarm;
         Book.m_DelegateSFXBook += StartBook;
-        GameManager.GetManager().Dialogue.soundSFX += DialogueSound;
+        DialogueControl.soundSFX += DialogueSound;
     }
 
     private void OnDisable()
@@ -35,8 +37,7 @@ public class SoundController : MonoBehaviour
         NotificationController.m_MessageDelegate -= StartMessage;
         Alarm.m_DelegateSFX -= StartAlarm;
         Book.m_DelegateSFXBook -= StartBook;
-
-        GameManager.GetManager().Dialogue.soundSFX -= DialogueSound;
+        DialogueControl.soundSFX -= DialogueSound;
     }
 
     public void StartMessage()

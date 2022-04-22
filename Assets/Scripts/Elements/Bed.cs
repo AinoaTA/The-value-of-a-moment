@@ -12,12 +12,9 @@ public class Bed : Interactables
     float minDesplacement = -3.13f;
     float maxDesplacement =-3.069f;
 
-    private void Awake()
-    {
-        GameManager.GetManager().Bed = this;
-    }
     private void Start()
     {
+        GameManager.GetManager().Bed = this;
         m_SheetBad.SetActive(true);
     }
 

@@ -16,19 +16,18 @@ public class Alarm : MonoBehaviour
     [SerializeField] private float m_Timer;
     private bool m_AlarmON;
     private int controlPosponer;
+
     public delegate void DelegateSFX();
     public static DelegateSFX m_DelegateSFX;
 
-    private void Awake()
-    {
-        GameManager.GetManager().Alarm = this;
-        CanvasAlarm.SetActive(false);
-    }
-
+    
     private void Start()
     {
+        print(GameManager.GetManager().PlayerController);
+       // GameManager.GetManager().PlayerController.SetInteractable("Alarm");
+        GameManager.GetManager().Alarm = this;
+        CanvasAlarm.SetActive(false);
         StartCoroutine(StartDay());
-        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
     }
 
     private void Update()

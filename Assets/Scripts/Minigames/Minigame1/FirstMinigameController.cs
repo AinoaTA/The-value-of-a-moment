@@ -13,7 +13,7 @@ public class FirstMinigameController : MonoBehaviour
 
     private bool m_Solved=false;
 
-    private void Awake()
+    void Start()
     {
         GameManager.GetManager().FirstMinigame = this;
     }
@@ -24,9 +24,7 @@ public class FirstMinigameController : MonoBehaviour
             print("FINISHED");
             StartCoroutine(GameFinished());
         }
-            
     }
-
 
     private IEnumerator GameFinished()
     {
