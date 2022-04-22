@@ -16,7 +16,7 @@ public class Interactables : MonoBehaviour
 
     public virtual bool GetDone() { return m_Done; }
     public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
-    public virtual void Interaction() { }
+    public virtual void Interaction() {}
 
 
     private void Start()
@@ -36,8 +36,8 @@ public class Interactables : MonoBehaviour
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
             Debug.Log("showing");
-            // anim.SetTrigger("Show");
-            OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
+            anim.SetTrigger("Show");
+            //OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
         }
     }
 

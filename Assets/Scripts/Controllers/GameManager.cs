@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
 
     public LayerMask m_LayerMask;
     private Camera cam;
-    [SerializeField]private float m_Distance = 30f;
+    [SerializeField] private float m_Distance = 30f;
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
-    
+
     private Interactables currInteractable;
     private Interactables lookingInteractable;
 
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public PlayerController PlayerController { get; set; }
     public Plant[] plants { get; set; }
 
+    public Animator door;
+
     public static GameManager GetManager() => m_GameManager;
 
 
@@ -45,7 +47,12 @@ public class GameManager : MonoBehaviour
         m_GameManager = this;
         cam = Camera.main;
         m_CurrentStateGame = StateGame.Init;
-        
+
+    }
+
+    private void Start()
+    {
+       
     }
 
     private void Update()
@@ -53,20 +60,23 @@ public class GameManager : MonoBehaviour
         if (m_CurrentStateGame != StateGame.GamePlay)
             return;
 
-        if (currInteractable != null)
+        if (lookingInteractable != null)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Active Interaction");
+
+                currInteractable.HideCanvas();
                 currInteractable.Interaction();
-                currInteractable = null;
+
+                lookingInteractable = null;
 
             }
             else if (Input.GetKeyDown(KeyCode.Q))
             {
-                Debug.Log("Quit interactable canvas");
-                currInteractable.HideCanvas();
-                currInteractable = null;
+                //Debug.Log("Quit interactable canvas");
+                //currInteractable.HideCanvas();
+                //currInteractable = null;
             }
         }
 
@@ -96,5 +106,10 @@ public class GameManager : MonoBehaviour
     public void TurnOnComputer()
     {
         PlayerController.SetInteractable("Computer");
+    }
+
+    public void OpenDoor()
+    {
+        door.SetTrigger("Open");
     }
 }

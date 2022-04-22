@@ -59,7 +59,6 @@ public class SoundController : MonoBehaviour
     }
     public void SetMusic()
     {
-        if(!Active)
         StartCoroutine(IcreaseAudioCo());
     }
 
@@ -71,14 +70,11 @@ public class SoundController : MonoBehaviour
     public void DialogueSound()
     {
         m_ExtraSFX.PlayOneShot(dialogueBlip);
-
-
     }
 
     private IEnumerator DecreaseAudioCo()
     {
         float counter = 0f;
-        
         while (counter < 0.5f)
         {
             counter += Time.deltaTime;
@@ -88,12 +84,13 @@ public class SoundController : MonoBehaviour
             yield return null;
         }
         m_GlobalSource.gameObject.SetActive(false);
-        Active = false;
     }
     private IEnumerator IcreaseAudioCo()
     {
         float counter = 0f;
         m_GlobalSource.gameObject.SetActive(true);
+
+        m_GlobalSource.Play();
         while (counter < 5f)
         {
             counter += Time.deltaTime;
@@ -102,7 +99,6 @@ public class SoundController : MonoBehaviour
 
             yield return null;
         }
-        Active = true;
     }
 
 }

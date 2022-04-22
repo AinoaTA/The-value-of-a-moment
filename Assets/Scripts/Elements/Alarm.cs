@@ -44,6 +44,7 @@ public class Alarm : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                ResetTime();
                 NormalWakeUp();
             }
             else if (Input.GetKeyDown(KeyCode.Q))
@@ -55,19 +56,18 @@ public class Alarm : MonoBehaviour
 
     private void StartAlarm()
     {
+        m_DelegateSFX?.Invoke();
         GameManager.GetManager().SoundController.QuitMusic();
         CanvasAlarm.SetActive(true);
-        m_DelegateSFX?.Invoke();
         m_Timer = 0;
         m_AlarmON = true;
         //sonid
     }
     public void NormalWakeUp()
     {
-        if (controlPosponer == 0)
-            StartCoroutine(WakeUpDialogue());
-        else
-            StartCoroutine(SecondWakeUpDialogue());
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().SoundController.SetMusic();
+        CanvasAlarm.SetActive(false);
 
         GameManager.GetManager().PlayerController.PlayerWakeUpPos();
         GameManager.GetManager().PlayerController.ExitInteractable();
@@ -75,17 +75,16 @@ public class Alarm : MonoBehaviour
         m_Alarm = false;
         ResetTime();
         GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
+
+        if (controlPosponer == 0)
+            StartCoroutine(WakeUpDialogue());
+        else
+            StartCoroutine(SecondWakeUpDialogue());
         //GameManager.GetManager().Dialogue.SetTimer();
-        
+
         ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
         //animacion player se levanta
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().SoundController.SetMusic();
-        CanvasAlarm.SetActive(false);
 
-
-        //First hint
-       
     }
 
 
@@ -126,6 +125,7 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().SoundController.StopSound();
         m_Timer = 0;
+        m_AlarmON = false;
     }
 
     private IEnumerator StartDay()
@@ -148,7 +148,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator WakeUpDialogue()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
         yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[2]);
@@ -160,7 +160,7 @@ public class Alarm : MonoBehaviour
     }
     private IEnumerator SecondWakeUpDialogue()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
         yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[4]);
@@ -190,33 +190,4 @@ public class Alarm : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.StopDialogue();
     }
-
-    //
-
-
-    //public void WakeUp()
-    //{
-    //    if (WakeUpTrigger.m_Counter > 3)
-    //    {
-    //        m_Alarm = false;
-    //        ResetTime();
-
-    //        GameManager.GetManager().Dialogue.SetTimer();
-    //        ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
-    //        //animacion player se levanta
-    //        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-    //        GameManager.GetManager().PlayerController.PlayerWakeUpPos();
-    //        GameManager.GetManager().SoundController.SetMusic();
-    //        CanvasAlarm.SetActive(false);
-    //    }
-    //    else if (WakeUpTrigger.m_Counter <= 3)
-    //    {
-    //        //***
-    //        //if (WakeUpTrigger.m_Counter > 1)
-    //        //    GameManager.GetManager().Dialogue.SetDialogue("5 Minutos más...");
-
-    //        WakeUpTrigger.LessEscaleWakeUp();
-    //    }
-
-    //}
 }

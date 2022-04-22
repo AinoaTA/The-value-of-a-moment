@@ -4,7 +4,7 @@ using UnityEngine;
 public class Window : Interactables
 {
     public GameObject m_Glass;
-    
+
     private float mOffset;
     private float zWorldCoord;
     private float minHeight;
@@ -13,6 +13,7 @@ public class Window : Interactables
     private bool gameInitialized = false;
 
     public float distance;
+    
 
     private void Awake()
     {
@@ -30,6 +31,18 @@ public class Window : Interactables
 
     void OnMouseDrag()
     {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            print("Temporal code");
+            StartCoroutine(GoodInteraction());
+            
+            GameManager.GetManager().PlayerController.ExitInteractable();
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+            GameManager.GetManager().CanvasManager.Lock();
+            GameManager.GetManager().OpenDoor();
+            StartCoroutine(GoodInteraction());
+        }
+
         if (gameInitialized && !isOpen)
         {
             float height = m_Glass.transform.position.y;
@@ -45,12 +58,20 @@ public class Window : Interactables
             {
                 height = maxHeight;
                 isOpen = true;
+                
+                
+                GameManager.GetManager().PlayerController.ExitInteractable();
+                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+                GameManager.GetManager().CanvasManager.Lock();
+                GameManager.GetManager().OpenDoor();
+                StartCoroutine(GoodInteraction());
+                
             }
-
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
         }
+        //tempo
     }
-    
+
     private float GetMouseYaxisAsWorldPoint()
     {
         Vector3 mousePoint = Input.mousePosition;
@@ -64,7 +85,12 @@ public class Window : Interactables
     public override void Interaction()
     {
         if (!isOpen)
-            gameInitialized = true; // Inicia minijuego
+            gameInitialized = true;
+
+        // Inicia minijuego
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+        GameManager.GetManager().CanvasManager.UnLock();
+        GameManager.GetManager().PlayerController.SetInteractable("Window");
     }
 
     public void ResetWindow()
@@ -84,7 +110,7 @@ public class Window : Interactables
 
     private IEnumerator StartWindows()
     {
-        if(m_PhrasesVoiceOff.Length == 2)
+        if (m_PhrasesVoiceOff.Length == 2)
         {
             yield return new WaitForSeconds(2);
             GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
@@ -96,4 +122,42 @@ public class Window : Interactables
             GameManager.GetManager().Dialogue.StopDialogue();
         }
     }
+
+
+    private IEnumerator GoodInteraction()
+    {
+        yield return new WaitForSeconds(2);
+        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
+        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
+        yield return new WaitForSeconds(1.25f);
+        GameManager.GetManager().Dialogue.StopDialogue();
+
+        StartCoroutine(NextAction());
+    }
+
+    private IEnumerator BadInteraction()
+    {
+        yield return new WaitForSeconds(2);
+        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
+        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
+        yield return new WaitForSeconds(2);
+        GameManager.GetManager().Dialogue.StopDialogue();
+
+        StartCoroutine(NextAction());
+    }
+
+    private IEnumerator NextAction()
+    {
+        yield return new WaitForSeconds(2);
+        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
+        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
+        yield return new WaitForSeconds(2);
+        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
+        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+        GameManager.GetManager().Dialogue.StopDialogue();
+    }
+
 }
