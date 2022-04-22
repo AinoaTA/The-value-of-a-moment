@@ -25,17 +25,12 @@ public class Interactables : MonoBehaviour
         {
             m_Material = this.gameObject.GetComponent<Renderer>().materials;
         }
-        else
-        {
-            Debug.Log("Mouse is not attached to the scene");
-        }
     }
 
     public virtual void ShowCanvas()
     {
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
         {
-            Debug.Log("showing");
             anim.SetTrigger("Show");
             //OptionsCanvas.SetActive(!OptionsCanvas.activeSelf);
         }
@@ -66,9 +61,7 @@ public class Interactables : MonoBehaviour
                 material.color = Color.red;
             }
         }
-        else {
-            Debug.Log("Mouse is not attached to the scene");
-        }
+
     }
 
     private void OnMouseExit()
@@ -77,8 +70,6 @@ public class Interactables : MonoBehaviour
         {
             for (int i = 0; i < m_Material.Length; i++)
             {
-                print(m_Material[i].color);
-                print(Color.black);
                 // TODO: need to recover the m_Material[i].color as such
                 this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
             }

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public void PlayerWakeUpPos()
     {
         character.enabled = false;
-           sleep = false;
+        sleep = false;
         mov.m_Anim.SetBool("Sleep", sleep);
 
         transform.SetPositionAndRotation(m_PlayerWakeUp.position, m_PlayerWakeUp.rotation);
