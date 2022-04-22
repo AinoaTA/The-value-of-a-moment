@@ -26,9 +26,10 @@ public class Plant : Interactables
     {
         if (!m_Done)
         {
-            GameManager.GetManager().PlayerController.SetInteractable("Plant");
             timer = 0;
+            GameManager.GetManager().PlayerController.SetInteractable("Plant");
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+            GameManager.GetManager().CanvasManager.UnLock();
 
             waterCan.gameObject.SetActive(true);
         }
@@ -40,6 +41,10 @@ public class Plant : Interactables
 
     private void FinishInteraction()
     {
+        GameManager.GetManager().PlayerController.ExitInteractable();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().CanvasManager.Lock();
+
         m_Done = true;
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().PlayerController.ExitInteractable();
@@ -63,23 +68,6 @@ public class Plant : Interactables
         
         }
     }
-
-
-    //public override bool GetDone()
-    //{
-    //    return m_Done;
-    //}
-
-    //public override string[] GetPhrases()
-    //{
-    //    return m_HelpPhrases;
-    //}
-
-
-    //public override string NameAction()
-    //{
-    //    return m_NameObject;
-    //}
 
     private void OnTriggerStay(Collider other)
     {
