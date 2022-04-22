@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 4408577902834031036}
   - component: {fileID: 1421880358811740326}
   - component: {fileID: 4500152750953195695}
+  - component: {fileID: 892792597}
   m_Layer: 0
   m_Name: Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 16
   m_IsActive: 1
 --- !u!4 &8238290566924602888
 Transform:
@@ -26,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269855286021248742}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 2.902781, y: 1.2098763, z: -3.3322797}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 91827910774593892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &4408577902834031036
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: a12a61b7a4de30449a1531e8a2c976fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,15 +98,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Done: 0
-  m_HelpPhrases: []
+  m_PhrasesVoiceOff: []
+  m_HelpPhrasesVoiceOff: []
+  m_AnswersToVoiceOff: []
   m_InteractPhrases: []
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
   OptionsCanvas: {fileID: 4871174323178504406}
   anim: {fileID: 9194111413878691564}
-  open: 0
   m_MirrorInteractPhrases: []
+--- !u!65 &892792597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269855286021248742}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0005, y: 0.00650952, z: 0.016999997}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2280084105453361023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8238290566924602888}
     m_Modifications:
+    - target: {fileID: 1112109533865179034, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -183,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00055
+      value: -0.00188
       objectReference: {fileID: 0}
     - target: {fileID: 2225412180098960923, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -197,13 +216,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2683675663582546337, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678812453628400389, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701608935061603118, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461713564454167888, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_Name
       value: CanvasInteract
       objectReference: {fileID: 0}
     - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6646643811944552361, guid: 8704316945337e14c974866f8a3f6322, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8704316945337e14c974866f8a3f6322, type: 3}

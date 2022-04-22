@@ -18,8 +18,8 @@ public class Plant : Interactables
     private void Start()
     {
         //waterCan=GetComponent<WaterCan>();
-        waterCan.gameObject.SetActive(false);
-        m_process[currProcess].SetActive(true);
+        if(waterCan != null) waterCan.gameObject.SetActive(false);
+        // m_process[currProcess].SetActive(true);
     }
 
     public override void Interaction()
