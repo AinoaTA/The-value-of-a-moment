@@ -20,11 +20,9 @@ public class Alarm : MonoBehaviour
     public delegate void DelegateSFX();
     public static DelegateSFX m_DelegateSFX;
 
-    
     private void Start()
     {
-        print(GameManager.GetManager().PlayerController);
-       // GameManager.GetManager().PlayerController.SetInteractable("Alarm");
+        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
         GameManager.GetManager().Alarm = this;
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDay());
