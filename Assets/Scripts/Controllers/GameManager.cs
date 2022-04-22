@@ -84,11 +84,11 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit_, m_Distance, m_LayerMask))
         {
-            currInteractable = l_Hit_.collider.GetComponent<Interactables>();
+            currInteractable = l_Hit_.collider.gameObject.GetComponent<Interactables>();
 
-            if (currInteractable != null && Input.GetMouseButtonDown(0))
+            if (currInteractable != null)
             {
-                if (!currInteractable.GetDone())
+                if (!currInteractable.GetDone() && Input.GetMouseButtonDown(0))
                 {
                     lookingInteractable = currInteractable;
                     lookingInteractable.ShowCanvas();

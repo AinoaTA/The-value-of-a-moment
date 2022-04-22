@@ -12,9 +12,24 @@ public class Interactables : MonoBehaviour
     public GameObject OptionsCanvas;
     public Animator anim;
 
+    private Material[] m_Material;
+
     public virtual bool GetDone() { return m_Done; }
     public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
     public virtual void Interaction() {}
+
+
+    private void Start()
+    {
+        if (this.gameObject.GetComponent<Renderer>() != null)
+        {
+            m_Material = this.gameObject.GetComponent<Renderer>().materials;
+        }
+        else
+        {
+            Debug.Log("Mouse is not attached to the scene");
+        }
+    }
 
     public virtual void ShowCanvas()
     {
@@ -42,11 +57,14 @@ public class Interactables : MonoBehaviour
     private void OnMouseOver()
     {
         //If your mouse hovers over the GameObject with the script attached, output this message
-        Debug.Log($"Mouse is over {this.gameObject}");
+        // Debug.Log($"Mouse is over {this.gameObject}");
 
-        if(this.gameObject.GetComponent<Renderer>() != null)
+        if(m_Material != null && m_Material.Length > 0)
         {
-            this.gameObject.GetComponent<Renderer>().material.SetFloat("_EmissiveExposureWeight", 0.95f);
+            foreach (var material in this.gameObject.GetComponent<Renderer>().materials)
+            {
+                material.color = Color.red;
+            }
         }
         else {
             Debug.Log("Mouse is not attached to the scene");
@@ -55,14 +73,15 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (this.gameObject.transform.childCount > 0 && this.gameObject.transform.GetChild(0).GetComponent<Renderer>() != null) {
-
-            foreach (var material in this.gameObject.transform.GetChild(0).GetComponent<Renderer>().materials) {
-                material.SetFloat("_EmissiveExposureWeight", 1f);
+        if (m_Material != null && m_Material.Length > 0)
+        {
+            for (int i = 0; i < m_Material.Length; i++)
+            {
+                print(m_Material[i].color);
+                print(Color.black);
+                // TODO: need to recover the m_Material[i].color as such
+                this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
             }
-        }
-        else {
-            Debug.Log("Mouse is not attached to the scene");
         }
     }
 }
