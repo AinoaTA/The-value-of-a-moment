@@ -72,12 +72,12 @@ public class GameManager : MonoBehaviour
                 lookingInteractable = null;
 
             }
-            else if (Input.GetKeyDown(KeyCode.Q))
-            {
-                //Debug.Log("Quit interactable canvas");
-                //currInteractable.HideCanvas();
-                //currInteractable = null;
-            }
+            //else if (Input.GetKeyDown(KeyCode.Q))
+            //{
+            //    //Debug.Log("Quit interactable canvas");
+            //    //currInteractable.HideCanvas();
+            //    //currInteractable = null;
+            //}
         }
 
         Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));

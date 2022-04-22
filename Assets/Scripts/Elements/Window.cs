@@ -18,6 +18,10 @@ public class Window : Interactables
     private void Awake()
     {
         GameManager.GetManager().Window = this;
+    }
+
+    private void Start()
+    {
         minHeight = m_Glass.transform.position.y;
     }
 
@@ -101,8 +105,6 @@ public class Window : Interactables
     }
 
     #endregion
-
-
     public void StartVoiceOffDialogueWindow()
     {
         StartCoroutine(StartWindows());
