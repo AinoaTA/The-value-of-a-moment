@@ -70,7 +70,6 @@ public class Window : Interactables
             }
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
         }
-        //tempo
     }
 
     private float GetMouseYaxisAsWorldPoint()
