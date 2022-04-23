@@ -21,15 +21,15 @@ public class NotificationController : MonoBehaviour
     {
         GameManager.GetManager().NotificationController = this;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A) && !m_CurrentNotRead)
-            SendNotification();
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A) && !m_CurrentNotRead)
+    //        SendNotification();
 
-        timer += Time.deltaTime;
-        if (timer >= 15f && !m_CurrentNotRead && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
-            SendNotification();
-    }
+    //    timer += Time.deltaTime;
+    //    if (timer >= 15f && !m_CurrentNotRead && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
+    //        SendNotification();
+    //}
     private void SendNotification()
     {
         m_CurrentNotRead = true;

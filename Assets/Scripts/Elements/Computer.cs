@@ -7,6 +7,6 @@ public class Computer : Interactables
     {
         //m_Done = true;
         Debug.Log("I'm in");
-        //GameManager.GetManager().GetCanvasManager().ComputerScreenIn();
+        GameManager.GetManager().CanvasManager.ComputerScreenIn();
     }
 }
