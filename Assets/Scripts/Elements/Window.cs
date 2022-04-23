@@ -45,7 +45,7 @@ public class Window : Interactables
         {
             float height = m_Glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
-			print(height);
+
             if (displacement < minHeight)
                 height = minHeight;
 
@@ -65,7 +65,6 @@ public class Window : Interactables
             }
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
         }
-        //tempo
     }
 
     private float GetMouseYaxisAsWorldPoint()

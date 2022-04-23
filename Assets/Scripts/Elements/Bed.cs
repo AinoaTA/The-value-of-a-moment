@@ -4,7 +4,7 @@ using UnityEngine;
 public class Bed : Interactables
 {
     public GameObject m_SheetBad;
-    public GameObject m_Sheet;//sábana
+    public GameObject m_Sheet;//sï¿½bana
     public BedMinigame m_miniGame;
 
     private bool isDone = false;
@@ -42,7 +42,7 @@ public class Bed : Interactables
     public void BedDone()
     {
         isDone=m_Done = true;
-        //Cambiamos la sábana u objeto cama.
+        //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
         //
@@ -51,7 +51,8 @@ public class Bed : Interactables
     }
 
     public void ResetBed()
-    {//para cuando se vuelve a dormir y despierta.
+    {
+        //para cuando se vuelve a dormir y despierta.
         GameManager.GetManager().Alarm.SetAlarmActive();
         GameManager.GetManager().Alarm.ResetTime();
         m_Done = false;
@@ -64,6 +65,7 @@ public class Bed : Interactables
     }
     public override void Interaction()
     {
+        GameManager.GetManager().PlayerController.SetInteractable("Bed");
         m_Done = isDone;
         if (!m_Done)
         {
