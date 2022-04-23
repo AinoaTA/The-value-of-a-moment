@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
 
 public class Autocontrol : MonoBehaviour
 {
@@ -16,18 +17,39 @@ public class Autocontrol : MonoBehaviour
 
     public void AddAutoControl(float value)
     {
-        m_currentValue += value;
-        if (m_currentValue > 100)
-            m_currentValue = 100;
-        m_Slider.value = m_currentValue / maxValue;
+        StartCoroutine(AddC(value));
     }
 
     public void RemoveAutoControl(float value)
     {
-        m_currentValue -= value;
-        if (m_currentValue < 0)
-            m_currentValue= 0;
+        StartCoroutine(RemoveC(value));
+    }
 
-        m_Slider.value = m_currentValue / maxValue;
+    IEnumerator RemoveC(float value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            if (m_currentValue > 0)
+                m_currentValue -= 1;
+
+            m_Slider.value = m_currentValue / maxValue;
+
+            yield return null;
+        }
+
+
+    }
+
+    IEnumerator AddC(float value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            if (m_currentValue < maxValue)
+                m_currentValue += 1;
+
+            m_Slider.value = m_currentValue / maxValue;
+
+            yield return null;
+        }
     }
 }

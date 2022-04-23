@@ -28,6 +28,9 @@ public class WaterCan : MonoBehaviour
 
         //no me preguntes por el offset, la acción sin offset no funciona basically.
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + offSet);
+
+
+
     }
 
     private void OnMouseUp()
