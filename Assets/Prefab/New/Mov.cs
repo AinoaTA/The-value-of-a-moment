@@ -11,8 +11,8 @@ public class Mov : MonoBehaviour
     [SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
+    
     public Animator m_Anim;
-
     private void Start()
     {
         m_Speed = m_MaxSpeed;
@@ -21,7 +21,7 @@ public class Mov : MonoBehaviour
 
     void Update()
     {
-       
+
         if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
             return;
 
@@ -71,9 +71,24 @@ public class Mov : MonoBehaviour
             m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
             m_Speed = m_MaxSpeed;
         }
+
+        if (CalculateWall(m_Forward) && m_CurrVelocityPlayer!=0)
+        {
+            print("?");
+            float t = 0;
+            float prev = m_CurrVelocityPlayer;
+            while (t < 2)
+            {
+                t += Time.deltaTime;
+                m_CurrVelocityPlayer = Mathf.Lerp(m_CurrVelocityPlayer, 0, t / 1);
+            }
+        }
+
         m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
 
         m_Movement.Normalize();
+
+
         if (m_Movement != Vector3.zero)
             prop.transform.rotation = Quaternion.Lerp(prop.transform.rotation, Quaternion.LookRotation(m_Movement), m_LerpRotationPercentatge);
 
@@ -91,5 +106,16 @@ public class Mov : MonoBehaviour
             m_Speed = 0.0f;
         }
     }
-   
+
+
+    private bool CalculateWall(Vector3 playerForward)
+    {
+        Vector3 otherPos = GameManager.GetManager().PlayerController.WallPoint - transform.position;
+        if (Vector3.Dot(playerForward, otherPos) > 30)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

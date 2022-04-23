@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public StateGame m_CurrentStateGame;
 
     public LayerMask m_LayerMask;
+    public LayerMask m_WallMask;
     private Camera cam;
     [SerializeField] private float m_Distance = 30f;
     public GameObject textHelp;
@@ -74,12 +75,15 @@ public class GameManager : MonoBehaviour
 
         Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         
-        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit_, m_Distance, m_LayerMask))
+        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
         {
-            currInteractable = l_Hit_.collider.gameObject.GetComponent<Interactables>();
+            currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
+            if (m_WallMask == (m_WallMask | (1 << l_Hit.collider.gameObject.layer)))
+                PlayerController.WallPoint = l_Hit.point;
 
-            if (currInteractable != null)
-            {
+
+                if (currInteractable != null)
+                {
                 if ( !currInteractable.GetDone())
                 {
                     lookingInteractable = currInteractable;

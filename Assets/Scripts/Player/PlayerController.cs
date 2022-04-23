@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool sleep;
 
     private CharacterController character;
+    public Vector3 WallPoint;
 
     private void Awake()
     {
