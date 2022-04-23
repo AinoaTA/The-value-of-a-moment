@@ -15,6 +15,7 @@ public class Plant : Interactables
     private int currProcess=0;
     public GameObject[] m_process;
 
+
     private void Start()
     {
         //waterCan=GetComponent<WaterCan>();
@@ -73,6 +74,8 @@ public class Plant : Interactables
     {
         if (!waterCan.dragg)
             return;
+
+      
 
         print(timer);
         if (timer <= maxTimer)
