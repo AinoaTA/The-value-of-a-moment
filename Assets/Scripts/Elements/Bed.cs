@@ -5,48 +5,87 @@ public class Bed : Interactables
 {
     public Camera camera;
     public GameObject m_SheetBad;
-    public GameObject m_Sheet;//s�bana
+    public GameObject m_Sheet;  //sabana
     public BedMinigame m_miniGame;
 
     private bool isDone = false;
     private bool gameInitialized = false;
-    float minDesplacement = -3.13f;
-    float maxDesplacement =-3.069f;
+    float minDesplacement;
+    float maxDesplacement = 2.17f;
+    private float zWorldCoord;
+    private float mOffset;
 
     private void Start()
     {
         GameManager.GetManager().Bed = this;
         m_SheetBad.SetActive(true);
+        minDesplacement = m_SheetBad.transform.position.x;
     }
 
     void OnMouseDrag()
     {
+        // if (gameInitialized && !isDone)
+        // {
+        //     if (Input.GetAxisRaw("Mouse X") < 0)
+        //     {
+        //         if (m_SheetBad.transform.position.z < maxDesplacement)
+        //         {
+        //             m_SheetBad.transform.position += new Vector3(0, 0, 0.003f);
+        //         }
+        //         else if ((m_SheetBad.transform.position.z >= maxDesplacement))
+        //             m_SheetBad.transform.position = new Vector3(m_SheetBad.transform.position.x, m_SheetBad.transform.position.y,maxDesplacement);
+        //     }
+        // }
+
+
         if (gameInitialized && !isDone)
         {
-            if (Input.GetAxisRaw("Mouse X") < 0)
-            {
-                if (m_SheetBad.transform.position.z < maxDesplacement)
-                {
-                    m_SheetBad.transform.position += new Vector3(0, 0, 0.003f);
-                }
-                else if ((m_SheetBad.transform.position.z >= maxDesplacement))
-                    m_SheetBad.transform.position = new Vector3(m_SheetBad.transform.position.x, m_SheetBad.transform.position.y,maxDesplacement);
+            print(m_SheetBad.transform.position.x);
+            float movement = m_SheetBad.transform.position.x;
+            float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
+            print(displacement);
+            if (displacement < minDesplacement){
+                print("not enough");
+                movement = minDesplacement;
             }
+
+            else if (displacement < maxDesplacement)
+                movement = displacement;
+
+            else if (displacement > maxDesplacement)
+            {
+                movement = maxDesplacement;
+                isDone = true;
+
+                GameManager.GetManager().PlayerController.ExitInteractable();
+                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+                GameManager.GetManager().CanvasManager.Lock();
+            }
+            m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
     }
 
-    private void OnMouseUp()
+    // private void OnMouseUp()
+    // {
+    //     if ((m_SheetBad.transform.position.z <= maxDesplacement) && (m_SheetBad.transform.position.z >= minDesplacement))
+    //         BedDone();
+    // }
+
+    void OnMouseDown()
     {
-        if ((m_SheetBad.transform.position.z <= maxDesplacement) && (m_SheetBad.transform.position.z >= minDesplacement))
-            BedDone();
+        zWorldCoord = Camera.main.WorldToScreenPoint(m_SheetBad.transform.position).z;
+
+        // offset = World pos - Mouse World pos
+        mOffset = m_SheetBad.transform.position.y - GetMouseXaxisAsWorldPoint();
     }
+
     public void BedDone()
     {
         isDone=m_Done = true;
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
-
+        //
         GameManager.GetManager().PlayerController.ExitInteractable();
 
         camera.cullingMask = 8 << 0;
@@ -73,7 +112,9 @@ public class Bed : Interactables
         if (!m_Done)
         {
             gameInitialized = true;
+            GameManager.GetManager().CanvasManager.UnLock();
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+            camera.cullingMask = 7 << 0;
         }
         else
         {
@@ -82,6 +123,15 @@ public class Bed : Interactables
             StartCoroutine(DelaySleep());
         }
     }
+
+    private float GetMouseXaxisAsWorldPoint()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+        mousePoint.z = zWorldCoord; // set z coord
+
+        return Camera.main.ScreenToWorldPoint(mousePoint).x;
+    }
+
 
     private IEnumerator DelaySleep()
     {
