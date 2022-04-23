@@ -9,10 +9,14 @@ public class Autocontrol : MonoBehaviour
     private float m_currentValue = 20;
     public Slider m_Slider;
 
+    Image[] img;
+
     private void Start()
     {
         GameManager.GetManager().Autocontrol = this;
+        img = GetComponentsInChildren<Image>();
         m_Slider.value = m_currentValue / maxValue;
+
     }
 
     public void AddAutoControl(float value)
@@ -52,4 +56,18 @@ public class Autocontrol : MonoBehaviour
             yield return null;
         }
     }
+
+
+    /// <summary>
+    /// 0 or 1 value.
+    /// </summary>
+    /// <param name="val"></param>
+    public void ShowAutocontroler(int val = 0)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            img[i].color = new Color(img[i].color.r, img[i].color.g, img[i].color.b, val);
+        }
+    }
+
 }

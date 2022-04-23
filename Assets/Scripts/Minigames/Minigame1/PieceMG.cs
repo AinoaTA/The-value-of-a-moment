@@ -11,6 +11,16 @@ public class PieceMG : MonoBehaviour
     {
         initialPos = transform.position;
     }
+
+    private void OnMouseDrag()
+    {
+
+        Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        print(newPos);
+        newPos.z =0;
+        transform.position = newPos;
+    }
+
     private void Update()
     {
         if (m_Selected)
@@ -19,12 +29,17 @@ public class PieceMG : MonoBehaviour
 
     private void Move()
     {
-        transform.position = Input.mousePosition; 
+        //transform.position = Input.mousePosition;
+
+        Vector3 newPos =Input.mousePosition;
+        print(newPos);
+        newPos.z = 0;
+        transform.position = newPos;
     }
 
     public void Select()
     {
-         m_Selected = !m_Selected;
+        m_Selected = !m_Selected;
     }
 
     public void ResetPiece()

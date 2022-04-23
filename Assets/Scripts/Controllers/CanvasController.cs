@@ -8,7 +8,7 @@ public class CanvasController : MonoBehaviour
     public GameObject m_NotificationCanvas;
     public GameObject NotificationMessage;
     public GameObject MessageOpen;
-    public GameObject BedCanvas;
+   // public GameObject BedCanvas;
     public GameObject WindowCanvas;
     public GameObject FirstMinigameCanvas;
 
@@ -30,64 +30,67 @@ public class CanvasController : MonoBehaviour
 
     public void ComputerScreenIn()
     {
+        GameManager.GetManager().PlayerController.SetInteractable("Computer");
+        GameManager.GetManager().CanvasManager.UnLock();
+        GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
-        FadeInComputer();
-        FadeInScreen.SetActive(true);
+       //FadeInComputer();
+       //FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
 
     }
     private IEnumerator DelayFadeComputer()
     {
-
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        FadeInScreen.SetActive(false);
+        //FadeInScreen.SetActive(false);
 
         //si existe notificacion...
         yield return new WaitForSeconds(0.4f);
         if (GameManager.GetManager().NotificationController.m_CurrentNotRead)
             NotificationMessage.SetActive(true);
-
-
     }
 
     public void CloseWindow()
     {
         m_activated = false;
+        GameManager.GetManager().CanvasManager.Lock();
         StartCoroutine(DelayFadeClose());
-
     }
 
     private IEnumerator DelayFadeClose()
     {
-        FadeInComputer();
+      // FadeInComputer();
+        GameManager.GetManager().PlayerController.ExitInteractable();
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(false);
         if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
         {
             m_NotificationCanvas.SetActive(false);
         }
+        GameManager.GetManager().Autocontrol.ShowAutocontroler(1);
         NotificationMessage.SetActive(false);
         MessageOpen.SetActive(false);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        
     }
     /// <summary>
     /// MINI GAMES CANVAS
     /// </summary>
 
-    public void ActiveBedCanvas()
-    {
-        //FadeIn();
-        BedCanvas.SetActive(true);
-    }
+    //public void ActiveBedCanvas()
+    //{
+    //    //FadeIn();
+    //    BedCanvas.SetActive(true);
+    //}
 
-    public void DesctiveBedCanvas()
-    {
+    //public void DesctiveBedCanvas()
+    //{
 
-        BedCanvas.SetActive(false);
-    }
+    //    BedCanvas.SetActive(false);
+    //}
 
     public void ActiveWindowCanvas()
     {

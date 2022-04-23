@@ -54,7 +54,7 @@ public class Plant : Interactables
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();
-        GameManager.GetManager().Autocontrol.RemoveAutoControl(m_MinAutoControl);
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
