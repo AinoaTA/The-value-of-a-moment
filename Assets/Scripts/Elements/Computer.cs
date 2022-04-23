@@ -9,4 +9,6 @@ public class Computer : Interactables
         Debug.Log("I'm in");
         GameManager.GetManager().CanvasManager.ComputerScreenIn();
     }
+
+    
 }
