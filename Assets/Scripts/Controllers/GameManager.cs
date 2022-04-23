@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
 
                 currInteractable.HideCanvas();
                 currInteractable.Interaction();
-
                 lookingInteractable = null;
 
             }
