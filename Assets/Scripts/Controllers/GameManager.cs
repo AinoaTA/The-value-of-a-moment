@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject textHelp;
     private Vector3 helpOffset = new Vector3(-10, 30, 0);
 
-    private Interactables currInteractable;
+    [SerializeField] private Interactables currInteractable;
     private Interactables lookingInteractable;
 
     public CanvasController CanvasManager { get; set; }
@@ -57,41 +57,44 @@ public class GameManager : MonoBehaviour
         if (m_CurrentStateGame != StateGame.GamePlay)
             return;
 
-        if (lookingInteractable != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (currInteractable != null)
             {
-                Debug.Log("Active Interaction");
-
                 currInteractable.HideCanvas();
                 currInteractable.Interaction();
-                lookingInteractable = null;
-
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                PlayerController.ExitInteractable();
                 currInteractable = null;
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerController.ExitInteractable();
+            currInteractable = null;
+        }
 
         Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
+        
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit_, m_Distance, m_LayerMask))
         {
             currInteractable = l_Hit_.collider.gameObject.GetComponent<Interactables>();
 
             if (currInteractable != null)
             {
-                if (!currInteractable.GetDone() && Input.GetMouseButtonDown(0))
+                if ( !currInteractable.GetDone())
                 {
                     lookingInteractable = currInteractable;
-                    lookingInteractable.ShowCanvas();
+                    currInteractable.ShowCanvas();
                 }
-            }
-            else if (currInteractable != lookingInteractable && lookingInteractable != null)
+                else //if (currInteractable.GetDone())
+                {
+                    print("2");
+                    lookingInteractable = currInteractable;
+                    currInteractable.HideCanvas();
+                    currInteractable = null;
+                }
+            }else if (currInteractable==null && lookingInteractable != null)
             {
-                print("no alwais");
+                print("+3");
                 lookingInteractable.HideCanvas();
                 lookingInteractable = null;
             }

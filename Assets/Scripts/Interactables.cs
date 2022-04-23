@@ -18,6 +18,7 @@ public class Interactables : MonoBehaviour
     public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
     public virtual void Interaction() {}
 
+    bool showing = false;
 
     private void Start()
     {
@@ -29,17 +30,21 @@ public class Interactables : MonoBehaviour
 
     public virtual void ShowCanvas()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && !showing)
         {
-            anim.SetTrigger("Show");
+            showing = true;
+            anim.SetBool("Showing", showing);
+          //  anim.SetTrigger("Show");
         }
     }
 
     public virtual void HideCanvas()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && showing)
         {
-            anim.SetTrigger("Hide");
+            showing = false;
+            anim.SetBool("Showing", showing);
+            //  anim.SetTrigger("Hide");
         }
     }
 

@@ -55,8 +55,7 @@ public class Window : Interactables
             else if (displacement > maxHeight)
             {
                 height = maxHeight;
-                isOpen = true;
-                
+                m_Done = isOpen = true;
                 GameManager.GetManager().PlayerController.ExitInteractable();
                 GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
                 GameManager.GetManager().CanvasManager.Lock();
@@ -90,7 +89,7 @@ public class Window : Interactables
 
     public void ResetWindow()
     {
-        isOpen = false;
+        m_Done=isOpen = false;
         gameInitialized = false;
         m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, minHeight, m_Glass.transform.position.z);
     }
