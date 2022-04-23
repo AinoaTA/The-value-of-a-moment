@@ -55,7 +55,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (m_CurrentStateGame != StateGame.GamePlay)
+        {
+            cam.cullingMask = -1;
             return;
+        }
 
         if (lookingInteractable != null)
         {
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour
 
                 currInteractable.HideCanvas();
                 currInteractable.Interaction();
+                cam.cullingMask = 7 << 0;
 
                 lookingInteractable = null;
 

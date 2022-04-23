@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bed : Interactables
 {
+    public Camera camera;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;//s�bana
     public BedMinigame m_miniGame;
@@ -45,8 +46,10 @@ public class Bed : Interactables
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
-        //
+
         GameManager.GetManager().PlayerController.ExitInteractable();
+
+        camera.cullingMask = 8 << 0;
         GameManager.GetManager().Autocontrol.AddAutoControl(5);
     }
 
