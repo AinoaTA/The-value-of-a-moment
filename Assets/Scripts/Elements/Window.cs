@@ -13,13 +13,24 @@ public class Window : Interactables
     private bool gameInitialized = false;
 
     public float distance;
- 
     private void Awake()
     {
         GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
     }
 
+    private void Update()
+    {
+        if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
+        {
+            StartCoroutine(GoodInteraction());
+
+            GameManager.GetManager().PlayerController.ExitInteractable();
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+            GameManager.GetManager().CanvasManager.Lock();
+            GameManager.GetManager().OpenDoor();
+        }
+    }
     void OnMouseDown()
     {
         zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
@@ -30,17 +41,6 @@ public class Window : Interactables
 
     void OnMouseDrag()
     {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            print("Temporal code");
-            StartCoroutine(GoodInteraction());
-            
-            GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-            GameManager.GetManager().CanvasManager.Lock();
-            GameManager.GetManager().OpenDoor();
-        }
-
         if (gameInitialized && !isOpen)
         {
             float height = m_Glass.transform.position.y;

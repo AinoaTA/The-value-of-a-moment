@@ -42,9 +42,14 @@ public class Plant : Interactables
 
     private void Update()
     {
-        if (started && Input.GetKeyDown(KeyCode.U))
+        if (started && Input.GetKeyDown(KeyCode.Escape))
         {
-            FinishInteraction();
+            GameManager.GetManager().PlayerController.ExitInteractable();
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+            GameManager.GetManager().CanvasManager.Lock();
+            GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+            started = false;
+            waterCan.gameObject.SetActive(false);
         }
     }
 

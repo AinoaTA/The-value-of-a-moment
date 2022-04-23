@@ -27,7 +27,16 @@ public class CanvasController : MonoBehaviour
         FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
     }
-
+    private void Update()
+    {
+        if (m_activated && Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.GetManager().PlayerController.ExitInteractable();
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+            GameManager.GetManager().CanvasManager.Lock();
+            CloseWindow();
+        }
+    }
     public void ComputerScreenIn()
     {
         GameManager.GetManager().PlayerController.SetInteractable("Computer");
