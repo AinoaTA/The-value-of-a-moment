@@ -60,6 +60,7 @@ public class Bed : Interactables
                 GameManager.GetManager().PlayerController.ExitInteractable();
                 GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
                 GameManager.GetManager().CanvasManager.Lock();
+                camera.cullingMask = -1;
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
@@ -88,7 +89,6 @@ public class Bed : Interactables
         //
         GameManager.GetManager().PlayerController.ExitInteractable();
 
-        camera.cullingMask = 8 << 0;
         GameManager.GetManager().Autocontrol.AddAutoControl(5);
     }
 
