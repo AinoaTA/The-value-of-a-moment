@@ -6,6 +6,7 @@ public class Plant : Interactables
 
     //[HideInInspector] public string m_NameObject;
     //public string[] m_HelpPhrases;
+
     [SerializeField] private float distance;
     public WaterCan waterCan;
     Vector3 wateringInitialPos;
@@ -14,18 +15,20 @@ public class Plant : Interactables
     [SerializeField] private float maxTimer = 3f;
     private int currProcess=0;
     public GameObject[] m_process;
+    private bool started;
+
 
     private void Start()
     {
-        //waterCan=GetComponent<WaterCan>();
         if(waterCan != null) waterCan.gameObject.SetActive(false);
-        // m_process[currProcess].SetActive(true);
+           m_process[currProcess].SetActive(true);
     }
 
     public override void Interaction()
     {
         if (!m_Done)
         {
+            started = true;
             timer = 0;
             GameManager.GetManager().PlayerController.SetInteractable("Plant");
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
@@ -35,7 +38,14 @@ public class Plant : Interactables
         }
         else
             FinishInteraction();
+    }
 
+    private void Update()
+    {
+        if (started && Input.GetKeyDown(KeyCode.U))
+        {
+            FinishInteraction();
+        }
     }
 
 
@@ -44,10 +54,11 @@ public class Plant : Interactables
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();
-
+        GameManager.GetManager().Autocontrol.RemoveAutoControl(m_MinAutoControl);
         m_Done = true;
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().PlayerController.ExitInteractable();
+        started = false;
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        //GameManager.GetManager().PlayerController.ExitInteractable();
         waterCan.gameObject.SetActive(false);
     }
 
@@ -61,12 +72,12 @@ public class Plant : Interactables
             currProcess++;
             m_process[currProcess].SetActive(true);
         }
-        else //else no grow. future option.
-        { 
+        //else //else no grow. future option.
+        //{ 
         
 
         
-        }
+        //}
     }
 
     private void OnTriggerStay(Collider other)
@@ -83,3 +94,4 @@ public class Plant : Interactables
         }
     }
 }
+
