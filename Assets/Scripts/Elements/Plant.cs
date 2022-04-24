@@ -67,6 +67,7 @@ public class Plant : Interactables
 
     private void FinishInteraction()
     {
+        waterCan.GrowUpParticle.Play();
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();

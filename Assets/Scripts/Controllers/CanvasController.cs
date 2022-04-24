@@ -8,7 +8,7 @@ public class CanvasController : MonoBehaviour
     public GameObject m_NotificationCanvas;
     public GameObject NotificationMessage;
     public GameObject MessageOpen;
-   // public GameObject BedCanvas;
+    // public GameObject BedCanvas;
     public GameObject WindowCanvas;
     public GameObject FirstMinigameCanvas;
 
@@ -44,8 +44,8 @@ public class CanvasController : MonoBehaviour
         GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
-       //FadeInComputer();
-       //FadeInScreen.SetActive(true);
+        //FadeInComputer();
+        //FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
 
     }
@@ -71,7 +71,7 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator DelayFadeClose()
     {
-      // FadeInComputer();
+        // FadeInComputer();
         GameManager.GetManager().PlayerController.ExitInteractable();
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(false);
@@ -83,7 +83,7 @@ public class CanvasController : MonoBehaviour
         NotificationMessage.SetActive(false);
         MessageOpen.SetActive(false);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        
+
     }
     /// <summary>
     /// MINI GAMES CANVAS
@@ -147,9 +147,7 @@ public class CanvasController : MonoBehaviour
 
     public void Lock()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
-            Pointer.SetActive(true);
-
+        Pointer.SetActive(GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

@@ -121,7 +121,9 @@ public class Bed : Interactables
             case 2:
                 GameManager.GetManager().CanvasManager.FadeIn();
                 GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+                GameManager.GetManager().CanvasManager.Lock();
                 GameManager.GetManager().Dialogue.StopDialogue();
+                
                 StartCoroutine(DelayReset());
                 break;
             default:
@@ -141,6 +143,7 @@ public class Bed : Interactables
     {
         GameManager.GetManager().SoundController.QuitMusic();
         yield return new WaitForSeconds(0.5f);
+       
         GameManager.GetManager().PlayerController.SetInteractable("Alarm");
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Dialogue.StopDialogue();
