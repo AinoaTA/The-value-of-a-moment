@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private bool sleep;
 
     private CharacterController character;
-    public Vector2 WallPoint;
 
     private void Awake()
     {
@@ -38,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         character.enabled = false;
         sleep = true;
-        transform.SetPositionAndRotation(m_PlayerSleep.position, m_PlayerSleep.rotation);
+        transform.SetPositionAndRotation(m_PlayerSleep.position, m_PlayerSleep.localRotation);
 
         mov.m_Anim.SetBool("Sleep", sleep);
         character.enabled = true;

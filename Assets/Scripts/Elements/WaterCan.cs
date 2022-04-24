@@ -8,7 +8,7 @@ public class WaterCan : MonoBehaviour
     private Vector3 offSetExit = new Vector3(0.5f, 0, 0.5f);
     public ParticleSystem particles;
 
-    public ParticleSystem parti;
+    public ParticleSystem GrowUpParticle;
 
     [HideInInspector] public bool dragg;
 
@@ -16,26 +16,23 @@ public class WaterCan : MonoBehaviour
     private void OnMouseDown()
     {
         particles.Play();
-        parti.Stop();
+        GrowUpParticle.Stop();
     }
 
     private void OnMouseDrag()
     {
         dragg = true;
 
-        if (!parti.isPlaying)
-            parti.Play();
+        if (!GrowUpParticle.isPlaying)
+            GrowUpParticle.Play();
 
-        //no me preguntes por el offset, la acción sin offset no funciona basically.
+        //Necessary OffSet
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + offSet);
-
-
-
     }
 
     private void OnMouseUp()
     {
-        parti.Stop();
+        GrowUpParticle.Stop();
         dragg = false;
         particles.Stop();
     }

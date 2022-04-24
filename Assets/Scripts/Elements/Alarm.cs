@@ -5,7 +5,6 @@ public class Alarm : MonoBehaviour
 {
     public string[] m_EllePhrases;
     public VoiceOff[] m_WakeUpVoice;
-
     public GameObject CanvasAlarm;
 
     public float m_Autocontrol;
@@ -16,6 +15,8 @@ public class Alarm : MonoBehaviour
     [SerializeField] private float m_Timer;
     private bool m_AlarmON;
     private int controlPosponer;
+    private bool temp;
+
 
     public delegate void DelegateSFX();
     public static DelegateSFX m_DelegateSFX;
@@ -30,12 +31,18 @@ public class Alarm : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ResetTime();
+            NormalWakeUp();
+        }
+#endif
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
 
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
-
 
         if (m_AlarmON && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.Init)
         {
@@ -55,7 +62,7 @@ public class Alarm : MonoBehaviour
     {
         m_DelegateSFX?.Invoke();
         GameManager.GetManager().SoundController.QuitMusic();
-        
+
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
         m_AlarmON = true;
@@ -74,15 +81,22 @@ public class Alarm : MonoBehaviour
         ResetTime();
         GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
 
-        if (controlPosponer == 0)
-            StartCoroutine(WakeUpDialogue());
-        else
-            StartCoroutine(SecondWakeUpDialogue());
-        //GameManager.GetManager().Dialogue.SetTimer();
 
+        //Temporal
+        if (!temp) 
+        {
+
+            if (controlPosponer == 0)
+                StartCoroutine(WakeUpDialogue());
+            else
+                StartCoroutine(SecondWakeUpDialogue());
+
+        }
+
+
+        //GameManager.GetManager().Dialogue.SetTimer();
         ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
         //animacion player se levanta
-
     }
 
 
@@ -102,8 +116,9 @@ public class Alarm : MonoBehaviour
 
         m_Alarm = true;
         ResetTime();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         CanvasAlarm.SetActive(false);
+
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
         GameManager.GetManager().Autocontrol.RemoveAutoControl(m_Autocontrol);
         //GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[m_count], null);
         m_count++;
@@ -120,7 +135,7 @@ public class Alarm : MonoBehaviour
     }
 
     public void ResetTime()
-    {
+    {   
         GameManager.GetManager().SoundController.StopSound();
         m_Timer = 0;
         m_AlarmON = false;
@@ -152,21 +167,23 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[2]);
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.StopDialogue();
+        temp = true;
 
         //temp hint
         GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
     }
     private IEnumerator SecondWakeUpDialogue()
     {
+       
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
         yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
         GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[4]);
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.StopDialogue();
-
         //temp hint
         GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
+        temp = true;
     }
 
     private IEnumerator PosponerDialogue()

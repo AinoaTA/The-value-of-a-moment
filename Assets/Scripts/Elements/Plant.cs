@@ -26,14 +26,14 @@ public class Plant : Interactables
            m_process[currProcess].SetActive(true);
     }
 
-    public override void Interaction(int optionsNumber)
+    public override void Interaction(int options)
     {
-        switch (optionsNumber)
+        switch (options)
         {
             case 1:
-
                 if (!m_Done)
                 {
+                    print("1");
                     started = true;
                     timer = 0;
                     GameManager.GetManager().PlayerController.SetInteractable("Plant");
@@ -42,8 +42,8 @@ public class Plant : Interactables
 
                     waterCan.gameObject.SetActive(true);
                 }
-                else
-                    FinishInteraction();
+                //else
+                //    FinishInteraction();
 
                 break;
             default:
@@ -84,6 +84,7 @@ public class Plant : Interactables
         //grow
         if (m_Done)
         {
+            waterCan.GrowUpParticle.Stop();
             m_process[currProcess].SetActive(false);
             currProcess++;
             m_process[currProcess].SetActive(true);
@@ -108,6 +109,13 @@ public class Plant : Interactables
         {
             FinishInteraction();
         }
+    }
+
+    public override void ExitInteraction()
+    {
+        waterCan.gameObject.SetActive(false);
+        timer = 0;
+        base.ExitInteraction();
     }
 }
 

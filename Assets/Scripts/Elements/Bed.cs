@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class Bed : Interactables
 {
-    public Camera camera;
+    public Camera cam;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
-    //public BedMinigame m_miniGame;
-
-    private bool isDone = false;
+    public GameObject bedText;
     private bool gameInitialized = false;
+    Vector3 initPosBadSheet;
     float minDesplacement;
     float maxDesplacement = 2.17f;
     private float zWorldCoord;
@@ -19,7 +19,9 @@ public class Bed : Interactables
     {
         options = 2;
         GameManager.GetManager().Bed = this;
+
         m_SheetBad.SetActive(true);
+        initPosBadSheet = m_SheetBad.transform.position;
         minDesplacement = m_SheetBad.transform.position.x;
     }
 
@@ -38,12 +40,12 @@ public class Bed : Interactables
         //     }
         // }
 
-        if (gameInitialized && !isDone)
+        if (gameInitialized && !m_Done)
         {
-            print(m_SheetBad.transform.position.x);
+            //print(m_SheetBad.transform.position.x);
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
-            print(displacement);
+            //print(displacement);
             if (displacement < minDesplacement)
             {
                 print("not enough");
@@ -56,79 +58,71 @@ public class Bed : Interactables
             else if (displacement > maxDesplacement)
             {
                 movement = maxDesplacement;
-                isDone = true;
+                m_Done = true;
 
-                GameManager.GetManager().PlayerController.ExitInteractable();
-                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-                GameManager.GetManager().CanvasManager.Lock();
-                camera.cullingMask = -1;
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
     }
 
-    // private void OnMouseUp()
-    // {
-    //     if ((m_SheetBad.transform.position.z <= maxDesplacement) && (m_SheetBad.transform.position.z >= minDesplacement))
-    //         BedDone();
-    // }
+    private void OnMouseUp()
+    {
+        if (m_Done)
+            BedDone();
+    }
 
     void OnMouseDown()
     {
         zWorldCoord = Camera.main.WorldToScreenPoint(m_SheetBad.transform.position).z;
-
         // offset = World pos - Mouse World pos
         mOffset = m_SheetBad.transform.position.y - GetMouseXaxisAsWorldPoint();
     }
 
     public void BedDone()
     {
-        isDone = m_Done = true;
+        m_Done = true;
+        cam.cullingMask = -1;
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
-        //
+        bedText.SetActive(false);
         GameManager.GetManager().PlayerController.ExitInteractable();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().CanvasManager.Lock();
 
-        GameManager.GetManager().Autocontrol.AddAutoControl(5);
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
     }
 
     public void ResetBed()
     {
-        //para cuando se vuelve a dormir y despierta.
-
         GameManager.GetManager().Alarm.SetAlarmActive();
         GameManager.GetManager().Alarm.ResetTime();
         m_Done = false;
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
-
-
-        isDone = false;
+        m_SheetBad.transform.position = initPosBadSheet;
+        bedText.SetActive(true);
         gameInitialized = false;
     }
-    public override void Interaction(int optionNumber)
+    public override void Interaction(int options)
     {
-        switch (optionNumber)
+        switch (options)
         {
             case 1:
-                GameManager.GetManager().PlayerController.SetInteractable("Bed");
-                m_Done = isDone;
                 if (!m_Done)
                 {
+                    GameManager.GetManager().PlayerController.SetInteractable("Bed");
                     gameInitialized = true;
                     GameManager.GetManager().CanvasManager.UnLock();
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                    camera.cullingMask = 7 << 0;
+                    cam.cullingMask = 7 << 0;
                 }
-
                 break;
             case 2:
                 GameManager.GetManager().CanvasManager.FadeIn();
                 GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
-                
+                GameManager.GetManager().Dialogue.StopDialogue();
                 StartCoroutine(DelayReset());
-
                 break;
             default:
                 break;
@@ -143,17 +137,16 @@ public class Bed : Interactables
         return Camera.main.ScreenToWorldPoint(mousePoint).x;
     }
 
-
     private IEnumerator DelayReset()
     {
         GameManager.GetManager().SoundController.QuitMusic();
         yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Dialogue.StopDialogue();
-        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
         GameManager.GetManager().Window.ResetWindow();
-        // GameManager.GetManager().Book.ResetInteractable();
-        //  GameManager.GetManager().Mirror.ResetInteractable();
+        //GameManager.GetManager().Book.ResetInteractable();
+        //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
 
         for (int i = 0; i < GameManager.GetManager().plants.Count; i++)
@@ -161,7 +154,15 @@ public class Bed : Interactables
             GameManager.GetManager().plants[i].NextDay();
             GameManager.GetManager().plants[i].ResetInteractable();
         }
-
+        //no borrar hasta que estén tooooooodas las animaciones colocadas aquí.
+        Debug.Log("NO FORGET: actions to reset.");
         ResetBed();
+    }
+
+    public override void ExitInteraction()
+    {
+        cam.cullingMask = -1;
+        base.ExitInteraction();
+
     }
 }

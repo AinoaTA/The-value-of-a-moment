@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Mov : MonoBehaviour
 {
-    public float m_angleCutOff = 30;
+    //[Range(0,1)]
+    //public float dotCutOff = 0.7f;
     public Camera cam;
     public float m_Speed, m_MaxSpeed = 2, m_StopSpeedOffset = 0.2f;
     public GameObject prop;
@@ -15,6 +16,7 @@ public class Mov : MonoBehaviour
     CharacterController m_CharacterController;
     
     public Animator m_Anim;
+   // bool cutOff;
     private void Start()
     {
         m_Speed = m_MaxSpeed;
@@ -72,18 +74,19 @@ public class Mov : MonoBehaviour
             m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
             m_Speed = m_MaxSpeed;
         }
+
         //print(CalculateWall(m_Forward));
         //Debug.DrawLine(transform.position, transform.position + m_Forward * 10);
-        //if (CalculateWall(m_Forward))
+
+        //if (cutOff)//(CalculateWall(m_Forward))
         //{
         //    m_CurrVelocityPlayer = 0;
-        //    //StartCoroutine(DelayAnimation());
+        //    StartCoroutine(DelayAnimation());
         //}
-       
+
         m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
 
         m_Movement.Normalize();
-
 
         if (m_Movement != Vector3.zero)
             prop.transform.rotation = Quaternion.Lerp(prop.transform.rotation, Quaternion.LookRotation(m_Movement), m_LerpRotationPercentatge);
@@ -103,29 +106,15 @@ public class Mov : MonoBehaviour
         }
     }
 
-
-    //private bool CalculateWall(Vector3 playerForward)
+    //private void OnCollisionEnter(Collision collision)
     //{
-    //    Vector3 otherPos = GameManager.GetManager().PlayerController.WallPoint - transform.position;
-    //    float cosAngle = Vector3.Dot(playerForward, otherPos);
-    //    float angle = Mathf.Acos(cosAngle) * Mathf.Rad2Deg;
-
-    //    Debug.DrawLine(GameManager.GetManager().PlayerController.WallPoint,GameManager.GetManager().PlayerController.WallPoint + otherPos * -10,Color.red);
-    //    return angle<m_angleCutOff;
-    //}
-
-    //IEnumerator DelayAnimation()
-    //{
-
-    //    float t = 0;
-    //    float prev = m_CurrVelocityPlayer;
-    //    while (t < 2)
+    //    if (collision.gameObject.layer == 3 << 3)
     //    {
-    //        yield return new WaitForSeconds(0.5f);
-    //        t += Time.deltaTime;
-    //        m_CurrVelocityPlayer = Mathf.Lerp(prev, 0, t / 1);
-    //        m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
+    //        Vector3 otherPos = collision.transform.position - transform.position;
+    //        float dot = Vector3.Dot(transform.forward, otherPos);
+            
+    //        cutOff = dot < dotCutOff;
+    //        print(cutOff + collision.collider.name);
     //    }
-
     //}
 }

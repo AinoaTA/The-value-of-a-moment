@@ -100,6 +100,7 @@ public class DialogueControl : MonoBehaviour
     public void StopDialogue()
     {
         SetTimer();
+        StopAllCoroutines();
         m_DialogueActive = false;
         m_Text.text = "";
         m_AudioSource.clip = null;
