@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
+    public int options = 1;
     public bool m_Done;
     public VoiceOff[] m_PhrasesVoiceOff;
     public VoiceOff[] m_HelpPhrasesVoiceOff;
@@ -16,7 +17,7 @@ public class Interactables : MonoBehaviour
 
     public virtual bool GetDone() { return m_Done; }
     public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
-    public virtual void Interaction() {}
+    public virtual void Interaction(int optionNumber) {}
 
     bool showing = false;
 

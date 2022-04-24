@@ -23,12 +23,9 @@ public class Window : Interactables
     {
         if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
         {
-            StartCoroutine(GoodInteraction());
-
             GameManager.GetManager().PlayerController.ExitInteractable();
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
             GameManager.GetManager().CanvasManager.Lock();
-            GameManager.GetManager().OpenDoor();
         }
     }
     void OnMouseDown()
@@ -76,20 +73,28 @@ public class Window : Interactables
 
     #region Inherit Interactable methods
 
-    public override void Interaction()
+    public override void Interaction(int optionsSelected)
     {
-        if (!isOpen)
-            gameInitialized = true;
+        switch (optionsSelected)
+        {
+            case 1:
+                if (!isOpen)
+                    gameInitialized = true;
 
-        // Inicia minijuego
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-        GameManager.GetManager().CanvasManager.UnLock();
-        GameManager.GetManager().PlayerController.SetInteractable("Window");
+                // Inicia minijuego
+                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                GameManager.GetManager().CanvasManager.UnLock();
+                GameManager.GetManager().PlayerController.SetInteractable("Window");
+                break;
+            case 2:
+                break;
+        } 
     }
 
     public void ResetWindow()
     {
-        m_Done=isOpen = false;
+        m_Done = false;
+        isOpen = m_Done;
         gameInitialized = false;
         m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, minHeight, m_Glass.transform.position.z);
     }

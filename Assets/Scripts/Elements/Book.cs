@@ -16,23 +16,28 @@ public class Book : Interactables
         m_InteractPhrases = m_BookInteractPhrases;
     }
 
-    public override void Interaction()
+    public override void Interaction(int options)
     {
-        if (!m_Done)
+        switch (options)
         {
-            m_Grabbing.SetAccessCamera(true);
-            GameManager.GetManager().PlayerController.SetInteractable("Grab");
+            case 1:
+                if (!m_Done)
+                {
+                    m_Grabbing.SetAccessCamera(true);
+                    GameManager.GetManager().PlayerController.SetInteractable("Grab");
 
-            HideCanvas();
+                    HideCanvas();
 
-            if (m_Counter >= m_InteractPhrases.Length)
-                m_Counter = 0;
+                    if (m_Counter >= m_InteractPhrases.Length)
+                        m_Counter = 0;
 
-            GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-            m_DelegateSFXBook?.Invoke();
-            m_Counter++;
+                    GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
+                    m_DelegateSFXBook?.Invoke();
+                    m_Counter++;
 
-            m_Done = true;
+                    m_Done = true;
+                }
+                break;
         }
     }
 }

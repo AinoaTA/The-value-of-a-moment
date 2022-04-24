@@ -6,7 +6,7 @@ public class Bed : Interactables
     public Camera camera;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
-    public BedMinigame m_miniGame;
+    //public BedMinigame m_miniGame;
 
     private bool isDone = false;
     private bool gameInitialized = false;
@@ -17,6 +17,7 @@ public class Bed : Interactables
 
     private void Start()
     {
+        options = 2;
         GameManager.GetManager().Bed = this;
         m_SheetBad.SetActive(true);
         minDesplacement = m_SheetBad.transform.position.x;
@@ -37,14 +38,14 @@ public class Bed : Interactables
         //     }
         // }
 
-
         if (gameInitialized && !isDone)
         {
             print(m_SheetBad.transform.position.x);
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
             print(displacement);
-            if (displacement < minDesplacement){
+            if (displacement < minDesplacement)
+            {
                 print("not enough");
                 movement = minDesplacement;
             }
@@ -82,7 +83,7 @@ public class Bed : Interactables
 
     public void BedDone()
     {
-        isDone=m_Done = true;
+        isDone = m_Done = true;
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
@@ -95,6 +96,7 @@ public class Bed : Interactables
     public void ResetBed()
     {
         //para cuando se vuelve a dormir y despierta.
+
         GameManager.GetManager().Alarm.SetAlarmActive();
         GameManager.GetManager().Alarm.ResetTime();
         m_Done = false;
@@ -105,22 +107,31 @@ public class Bed : Interactables
         isDone = false;
         gameInitialized = false;
     }
-    public override void Interaction()
+    public override void Interaction(int optionNumber)
     {
-        GameManager.GetManager().PlayerController.SetInteractable("Bed");
-        m_Done = isDone;
-        if (!m_Done)
+        switch (optionNumber)
         {
-            gameInitialized = true;
-            GameManager.GetManager().CanvasManager.UnLock();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-            camera.cullingMask = 7 << 0;
-        }
-        else
-        {
-            GameManager.GetManager().CanvasManager.FadeIn();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
-            StartCoroutine(DelaySleep());
+            case 1:
+                GameManager.GetManager().PlayerController.SetInteractable("Bed");
+                m_Done = isDone;
+                if (!m_Done)
+                {
+                    gameInitialized = true;
+                    GameManager.GetManager().CanvasManager.UnLock();
+                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                    camera.cullingMask = 7 << 0;
+                }
+
+                break;
+            case 2:
+                GameManager.GetManager().CanvasManager.FadeIn();
+                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+                
+                StartCoroutine(DelayReset());
+
+                break;
+            default:
+                break;
         }
     }
 
@@ -133,24 +144,24 @@ public class Bed : Interactables
     }
 
 
-    private IEnumerator DelaySleep()
+    private IEnumerator DelayReset()
     {
         GameManager.GetManager().SoundController.QuitMusic();
         yield return new WaitForSeconds(0.5f);
-       // GameManager.GetManager().PlayerController.PlayerSleepPos();
+        GameManager.GetManager().PlayerController.PlayerSleepPos();
+        GameManager.GetManager().Dialogue.StopDialogue();
+        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
         GameManager.GetManager().Window.ResetWindow();
-        GameManager.GetManager().Book.ResetInteractable();
-        GameManager.GetManager().Mirror.ResetInteractable();
-        GameManager.GetManager().VR.ResetVRDay();
-        
+        // GameManager.GetManager().Book.ResetInteractable();
+        //  GameManager.GetManager().Mirror.ResetInteractable();
+        //GameManager.GetManager().VR.ResetVRDay();
 
-        for (int i = 0; i < GameManager.GetManager().plants.Length; i++)
+        for (int i = 0; i < GameManager.GetManager().plants.Count; i++)
         {
-
             GameManager.GetManager().plants[i].NextDay();
             GameManager.GetManager().plants[i].ResetInteractable();
         }
-        
+
         ResetBed();
     }
 }

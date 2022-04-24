@@ -124,7 +124,7 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator DelayFadeIn()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(3f);
         FadeInScreen.SetActive(false);
     }
     public bool ScreenActivated()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,15 +11,12 @@ public class GameManager : MonoBehaviour
         GamePlay,   // Una vez despertado y moviendose por el nivel
         MiniGame    // Se ha iniciado un minigame
     }
-
     public StateGame m_CurrentStateGame;
 
     public LayerMask m_LayerMask;
-    public LayerMask m_WallMask;
+    //public LayerMask m_WallMask;
     private Camera cam;
     [SerializeField] private float m_Distance = 30f;
-    public GameObject textHelp;
-    private Vector3 helpOffset = new Vector3(-10, 30, 0);
 
     [SerializeField] private Interactables currInteractable;
     private Interactables lookingInteractable;
@@ -36,7 +34,7 @@ public class GameManager : MonoBehaviour
     public Mirror Mirror { get; set; }
     public VR VR { get; set; }
     public PlayerController PlayerController { get; set; }
-    public Plant[] plants { get; set; }
+    public List<Plant> plants = new List<Plant>();
 
     public Animator door;
 
@@ -63,9 +61,20 @@ public class GameManager : MonoBehaviour
             if (currInteractable != null)
             {
                 currInteractable.HideCanvas();
-                currInteractable.Interaction();
+                currInteractable.Interaction(1);
                 currInteractable = null;
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.Q)&&currInteractable.options>1)
+        {
+            if (currInteractable != null)
+            {
+                currInteractable.HideCanvas();
+                currInteractable.Interaction(2);
+                currInteractable = null;
+            }
+
+
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -78,9 +87,9 @@ public class GameManager : MonoBehaviour
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
         {
             currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
-            if (m_WallMask == (m_WallMask | (1 << l_Hit.collider.gameObject.layer)))
-                PlayerController.WallPoint = l_Hit.point;
-
+            //if (m_WallMask == (m_WallMask | (1 << l_Hit.collider.gameObject.layer)) 
+            //    && Vector3.Distance(PlayerController.transform.position,l_Hit.collider.transform.position)<1f)
+            //    PlayerController.WallPoint = l_Hit.point;
 
                 if (currInteractable != null)
                 {
@@ -91,14 +100,12 @@ public class GameManager : MonoBehaviour
                 }
                 else //if (currInteractable.GetDone())
                 {
-                    print("2");
                     lookingInteractable = currInteractable;
                     currInteractable.HideCanvas();
                     currInteractable = null;
                 }
             }else if (currInteractable==null && lookingInteractable != null)
             {
-                print("+3");
                 lookingInteractable.HideCanvas();
                 lookingInteractable = null;
             }

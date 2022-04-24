@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class Mov : MonoBehaviour
 {
+    public float m_angleCutOff = 30;
     public Camera cam;
     public float m_Speed, m_MaxSpeed = 2, m_StopSpeedOffset = 0.2f;
     public GameObject prop;
@@ -21,17 +23,16 @@ public class Mov : MonoBehaviour
 
     void Update()
     {
-
         if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+        {
+            m_CurrVelocityPlayer = 0;
+            m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
             return;
+        }
 
         //parametros de la camara
         m_Forward = cam.transform.forward;
         m_Right = cam.transform.right;
-
-
-        //m_Forward = transform.forward;
-        //m_Right = transform.right;
 
         m_Forward.y = 0;
         m_Right.y = 0;
@@ -71,19 +72,14 @@ public class Mov : MonoBehaviour
             m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
             m_Speed = m_MaxSpeed;
         }
-
-        if (CalculateWall(m_Forward) && m_CurrVelocityPlayer!=0)
-        {
-            print("?");
-            float t = 0;
-            float prev = m_CurrVelocityPlayer;
-            while (t < 2)
-            {
-                t += Time.deltaTime;
-                m_CurrVelocityPlayer = Mathf.Lerp(m_CurrVelocityPlayer, 0, t / 1);
-            }
-        }
-
+        //print(CalculateWall(m_Forward));
+        //Debug.DrawLine(transform.position, transform.position + m_Forward * 10);
+        //if (CalculateWall(m_Forward))
+        //{
+        //    m_CurrVelocityPlayer = 0;
+        //    //StartCoroutine(DelayAnimation());
+        //}
+       
         m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
 
         m_Movement.Normalize();
@@ -108,14 +104,28 @@ public class Mov : MonoBehaviour
     }
 
 
-    private bool CalculateWall(Vector3 playerForward)
-    {
-        Vector3 otherPos = GameManager.GetManager().PlayerController.WallPoint - transform.position;
-        if (Vector3.Dot(playerForward, otherPos) > 30)
-        {
-            return true;
-        }
-        return false;
-    }
+    //private bool CalculateWall(Vector3 playerForward)
+    //{
+    //    Vector3 otherPos = GameManager.GetManager().PlayerController.WallPoint - transform.position;
+    //    float cosAngle = Vector3.Dot(playerForward, otherPos);
+    //    float angle = Mathf.Acos(cosAngle) * Mathf.Rad2Deg;
 
+    //    Debug.DrawLine(GameManager.GetManager().PlayerController.WallPoint,GameManager.GetManager().PlayerController.WallPoint + otherPos * -10,Color.red);
+    //    return angle<m_angleCutOff;
+    //}
+
+    //IEnumerator DelayAnimation()
+    //{
+
+    //    float t = 0;
+    //    float prev = m_CurrVelocityPlayer;
+    //    while (t < 2)
+    //    {
+    //        yield return new WaitForSeconds(0.5f);
+    //        t += Time.deltaTime;
+    //        m_CurrVelocityPlayer = Mathf.Lerp(prev, 0, t / 1);
+    //        m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
+    //    }
+
+    //}
 }

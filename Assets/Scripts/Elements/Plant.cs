@@ -20,24 +20,35 @@ public class Plant : Interactables
 
     private void Start()
     {
+        GameManager.GetManager().plants.Add(this);
+
         if(waterCan != null) waterCan.gameObject.SetActive(false);
            m_process[currProcess].SetActive(true);
     }
 
-    public override void Interaction()
+    public override void Interaction(int optionsNumber)
     {
-        if (!m_Done)
+        switch (optionsNumber)
         {
-            started = true;
-            timer = 0;
-            GameManager.GetManager().PlayerController.SetInteractable("Plant");
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-            GameManager.GetManager().CanvasManager.UnLock();
+            case 1:
 
-            waterCan.gameObject.SetActive(true);
-        }
-        else
-            FinishInteraction();
+                if (!m_Done)
+                {
+                    started = true;
+                    timer = 0;
+                    GameManager.GetManager().PlayerController.SetInteractable("Plant");
+                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                    GameManager.GetManager().CanvasManager.UnLock();
+
+                    waterCan.gameObject.SetActive(true);
+                }
+                else
+                    FinishInteraction();
+
+                break;
+            default:
+                break;
+        } 
     }
 
     private void Update()
