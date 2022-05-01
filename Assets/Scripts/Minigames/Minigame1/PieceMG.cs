@@ -7,16 +7,17 @@ public class PieceMG : MonoBehaviour
     private bool m_Selected = false;
     private Vector3 initialPos;
 
+    public bool dragging = false;
+    public bool correct;
     private void Start()
     {
         initialPos = transform.position;
     }
+    //este script me deja loca, no se como funciona jaja no sé q hice en su momento. !!!
 
     private void OnMouseDrag()
     {
-
         Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        print(newPos);
         newPos.z =0;
         transform.position = newPos;
     }
@@ -27,12 +28,11 @@ public class PieceMG : MonoBehaviour
             Move();
     }
 
+    
     private void Move()
     {
-        //transform.position = Input.mousePosition;
-
         Vector3 newPos =Input.mousePosition;
-        print(newPos);
+        dragging = true;
         newPos.z = 0;
         transform.position = newPos;
     }
@@ -40,6 +40,9 @@ public class PieceMG : MonoBehaviour
     public void Select()
     {
         m_Selected = !m_Selected;
+
+        if (!m_Selected)
+            dragging = false;
     }
 
     public void ResetPiece()

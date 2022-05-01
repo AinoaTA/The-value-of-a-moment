@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public DialogueControl Dialogue { get; set; }
     public Book Book { get; set; }
     public SoundController SoundController { get; set; }
-    public FirstMinigameController FirstMinigame { get; set; }
+    public FirstMinigameController ProgramMinigame { get; set; }
     public Mirror Mirror { get; set; }
     public VR VR { get; set; }
     public PlayerController PlayerController { get; set; }

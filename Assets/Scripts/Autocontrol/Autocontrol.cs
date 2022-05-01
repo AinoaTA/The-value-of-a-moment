@@ -16,7 +16,6 @@ public class Autocontrol : MonoBehaviour
         GameManager.GetManager().Autocontrol = this;
         img = GetComponentsInChildren<Image>();
         m_Slider.value = m_currentValue / maxValue;
-
     }
 
     public void AddAutoControl(float value)

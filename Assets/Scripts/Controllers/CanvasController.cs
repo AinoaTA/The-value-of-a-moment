@@ -8,7 +8,6 @@ public class CanvasController : MonoBehaviour
     public GameObject m_NotificationCanvas;
     public GameObject NotificationMessage;
     public GameObject MessageOpen;
-    // public GameObject BedCanvas;
     public GameObject WindowCanvas;
     public GameObject FirstMinigameCanvas;
 
@@ -44,8 +43,6 @@ public class CanvasController : MonoBehaviour
         GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
-        //FadeInComputer();
-        //FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
 
     }
@@ -54,7 +51,6 @@ public class CanvasController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        //FadeInScreen.SetActive(false);
 
         //si existe notificacion...
         yield return new WaitForSeconds(0.4f);
@@ -71,7 +67,6 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator DelayFadeClose()
     {
-        // FadeInComputer();
         GameManager.GetManager().PlayerController.ExitInteractable();
         yield return new WaitForSeconds(0.5f);
         ComputerScreen.SetActive(false);
@@ -85,37 +80,7 @@ public class CanvasController : MonoBehaviour
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
 
     }
-    /// <summary>
-    /// MINI GAMES CANVAS
-    /// </summary>
 
-    //public void ActiveBedCanvas()
-    //{
-    //    //FadeIn();
-    //    BedCanvas.SetActive(true);
-    //}
-
-    //public void DesctiveBedCanvas()
-    //{
-
-    //    BedCanvas.SetActive(false);
-    //}
-
-    public void ActiveWindowCanvas()
-    {
-        //FadeIn();
-        WindowCanvas.SetActive(true);
-    }
-
-    public void DesctiveWindowCanvas()
-    {
-
-        WindowCanvas.SetActive(false);
-    }
-    /// <summary>
-    /// END MINI GAMES CANVAS
-    /// </summary>
-    //FADE IN SIN NADA
     public void FadeIn()
     {
         FadeInScreen.SetActive(true);
@@ -134,14 +99,16 @@ public class CanvasController : MonoBehaviour
 
     public void StartMinigame()
     {
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-
-        if (!GameManager.GetManager().FirstMinigame.GetSolved())
+        if (!GameManager.GetManager().ProgramMinigame.GetSolved())
+        {
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             FirstMinigameCanvas.SetActive(true);
+        }
     }
 
     public void FinishMiniGame()
     {
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         FirstMinigameCanvas.SetActive(false);
     }
 

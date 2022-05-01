@@ -9,25 +9,25 @@ public class FirstMinigameController : MonoBehaviour
     //minijuego 1 del ordenador (continuar juego).
     public List<SolutionPiece> m_AllSolutions=new List<SolutionPiece>();
     public List<PieceMG> m_AllPieces = new List<PieceMG>();
-    //private bool[] CorrectsSolutions = { false, false, false, false };
 
     private bool m_Solved=false;
-
+    private bool m_AllCorrected;
     void Start()
     {
-        GameManager.GetManager().FirstMinigame = this;
+        GameManager.GetManager().ProgramMinigame = this;
     }
-    private void Update()
-    {
-        if (CheckSolutions() &&!m_Solved && Input.GetMouseButtonUp(0))
-        {
-            print("FINISHED");
-            StartCoroutine(GameFinished());
-        }
-    }
+    //private void Update()
+    //{
+    //    if (CheckSolutions() &&!m_Solved)
+    //    {
+           
+    //        StartCoroutine(GameFinished());
+    //    }
+    //}
 
     private IEnumerator GameFinished()
     {
+        print("game completed");
         GameManager.GetManager().Autocontrol.AddAutoControl(14);
         m_Solved = true;
         yield return new WaitForSeconds(2f);
@@ -35,14 +35,23 @@ public class FirstMinigameController : MonoBehaviour
         GameManager.GetManager().CanvasManager.FinishMiniGame();
     }
 
-    private bool CheckSolutions()
+    public void CheckSolutions()
     {
+        if (m_Solved)
+            return;
+
         for (int i = 0; i < m_AllSolutions.Count; i++)
         {
             if (!m_AllSolutions[i].m_Correct)
-                return false;
+                m_AllCorrected = false;
+            else
+                m_AllCorrected = true;
         }
-        return true;
+        
+        if(m_AllCorrected)
+            StartCoroutine(GameFinished());
+
+
     }
     public void ResetAllGame()
     {
