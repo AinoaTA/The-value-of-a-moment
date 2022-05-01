@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GetManager() => m_GameManager;
 
-
     private void Awake()
     {
         m_GameManager = this;
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (currInteractable != null)
+            if (currInteractable != null && currInteractable.showing)
             {
                 print("interactuando button");
                 currInteractable.HideCanvas();
@@ -75,8 +74,6 @@ public class GameManager : MonoBehaviour
                 currInteractable.Interaction(2);
                 currInteractable = null;
             }
-
-
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -90,19 +87,11 @@ public class GameManager : MonoBehaviour
         {
             currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
 
-            if (currInteractable != null)
+            if (currInteractable != null && currInteractable!=lookingInteractable)
             {
-                //if ( !currInteractable.GetDone())
-                //{
                 lookingInteractable = currInteractable;
                 currInteractable.ShowCanvas();
-                //}
-                //else //if (currInteractable.GetDone())
-                //{
-                //    lookingInteractable = currInteractable;
-                //    currInteractable.HideCanvas();
-                //    currInteractable = null;
-                //}
+                print(currInteractable);
             }
             else if (currInteractable == null && lookingInteractable != null)
             {
