@@ -20,7 +20,7 @@ public class Plant : Interactables
 
     private void Start()
     {
-        GameManager.GetManager().plants.Add(this);
+        GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
            m_process[currProcess].SetActive(true);

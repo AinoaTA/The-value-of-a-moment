@@ -152,10 +152,10 @@ public class Bed : Interactables
         //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
 
-        for (int i = 0; i < GameManager.GetManager().plants.Count; i++)
+        for (int i = 0; i < GameManager.GetManager().Plants.Count; i++)
         {
-            GameManager.GetManager().plants[i].NextDay();
-            GameManager.GetManager().plants[i].ResetInteractable();
+            GameManager.GetManager().Plants[i].NextDay();
+            GameManager.GetManager().Plants[i].ResetInteractable();
         }
         //no borrar hasta que estén tooooooodas las animaciones colocadas aquí.
         Debug.Log("NO FORGET: actions to reset.");

@@ -7,6 +7,7 @@ public class InventoryTrash : MonoBehaviour
 
     private void Start()
     {
+        GameManager.GetManager().InventoryTrash = this;
         counterTrash.text = trashCollected.ToString() + "x Ropa sucia";
     }
 

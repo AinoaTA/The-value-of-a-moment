@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
     public Mirror Mirror { get; set; }
     public VR VR { get; set; }
     public PlayerController PlayerController { get; set; }
-    public List<Plant> plants = new List<Plant>();
+    public InventoryTrash InventoryTrash { get; set; }
+    public List<Plant> Plants = new List<Plant>();
 
     public Animator door;
 
