@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5789592356662019729}
   - component: {fileID: 4933324729519140022}
   m_Layer: 0
-  m_Name: ParticleWin
+  m_Name: GrowUpParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10021,7 +10021,7 @@ GameObject:
   - component: {fileID: 4432192870777827539}
   - component: {fileID: 4432192870777827538}
   m_Layer: 6
-  m_Name: Plant
+  m_Name: Plant_Interactable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10078,10 +10078,11 @@ MonoBehaviour:
   m_MinAutoControl: 0
   OptionsCanvas: {fileID: 0}
   anim: {fileID: 0}
+  showing: 0
   water: 0
   distance: 1
   waterCan: {fileID: 8447827552516609540}
-  maxTimer: 3
+  maxTimer: 6
   m_process:
   - {fileID: 923118616936383078}
   - {fileID: 3572702909620126704}
@@ -10315,7 +10316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offSet: {x: 0.7, y: 0, z: 0.7}
   particles: {fileID: 0}
-  parti: {fileID: 0}
+  GrowUpParticle: {fileID: 0}
   dragg: 0
 --- !u!136 &8447827552516609539
 CapsuleCollider:
@@ -10478,6 +10479,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6490680781990342519, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752996759025991977, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752996759025991977, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752996759025991977, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}

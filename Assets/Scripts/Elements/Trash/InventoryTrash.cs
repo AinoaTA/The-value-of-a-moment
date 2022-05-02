@@ -14,9 +14,9 @@ public class InventoryTrash : MonoBehaviour
 
     private void Start()
     {
+        GameManager.GetManager().InventoryTrash = this;
         dirtyClothesCounter.text = "";
         trashCounter.text = "";
-        GameManager.GetManager().InventoryTrash = this;
     }
 
     public void AddDirtyClothes()
