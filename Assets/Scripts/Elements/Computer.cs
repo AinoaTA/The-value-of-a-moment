@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Computer : Interactables
 {
-    
     public override void Interaction(int options)
     {
         switch (options)
@@ -13,8 +12,5 @@ public class Computer : Interactables
                 GameManager.GetManager().CanvasManager.ComputerScreenIn();
                 break;
         }
-       
     }
-
-    
 }
