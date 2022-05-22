@@ -30,8 +30,6 @@ public class Mirror : Interactables
                 }
                 break;
         }
-
-       
     }
 
     public override void ResetInteractable()

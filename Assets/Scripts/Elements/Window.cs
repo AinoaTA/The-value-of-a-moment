@@ -21,6 +21,7 @@ public class Window : Interactables
         GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
+        print(GameManager.GetManager().m_CurrentStateGame);
     }
 
     private void Update()
@@ -28,14 +29,15 @@ public class Window : Interactables
         if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
             GameManager.GetManager().CanvasManager.Lock();
+            GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
         }
     }
 
     #region OnMouse Region
     void OnMouseDown()
     {
+        print(GameManager.GetManager().m_CurrentStateGame);
         zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
         // offset = World pos - Mouse World pos
         mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();

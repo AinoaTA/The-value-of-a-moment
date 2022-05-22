@@ -115,9 +115,7 @@ public class DialogueControl : MonoBehaviour
             if (!l_interactable.GetDone() && l_interactable.GetPhrasesVoiceOff().Length !=0)
             {
                 int random = Random.Range(0, l_interactable.GetPhrasesVoiceOff().Length-1);
-
                 VoiceOff l_VoiceOff = l_interactable.GetPhrasesVoiceOff()[random];
-               
                 SetDialogue(l_VoiceOff);
             }
         }

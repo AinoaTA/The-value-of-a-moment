@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
                 currInteractable.HideCanvas();
                 currInteractable.Interaction(1);
                 currInteractable = null;
+                m_CurrentStateGame = StateGame.MiniGame;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Q) && currInteractable.options > 1)
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             PlayerController.ExitInteractable();
+            m_CurrentStateGame = StateGame.GamePlay;
             currInteractable = null;
         }
 
@@ -101,6 +104,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeGameState(StateGame state)
+    {
+        StartCoroutine(Delay(state));
+    }
+
     public void TurnOnComputer()
     {
         PlayerController.SetInteractable("Computer");
@@ -109,5 +117,12 @@ public class GameManager : MonoBehaviour
     public void OpenDoor()
     {
         door.SetTrigger("Open");
+    }
+
+    private IEnumerator Delay(StateGame state)
+    {
+        yield return new WaitForSecondsRealtime(1);
+        m_CurrentStateGame = state;
+
     }
 }
