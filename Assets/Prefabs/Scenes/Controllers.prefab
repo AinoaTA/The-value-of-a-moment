@@ -927,6 +927,7 @@ GameObject:
   - component: {fileID: 8226822097715706395}
   - component: {fileID: 3359085114380778392}
   - component: {fileID: 7650185790743832909}
+  - component: {fileID: 1672910242}
   m_Layer: 5
   m_Name: InventoryTrash
   m_TagString: Untagged
@@ -988,10 +989,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1016,6 +1017,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1672910242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902129169812508453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58280366e0522d8479fb192a210a85c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dirtyClothesCounter: {fileID: 5391881687271177844}
+  trashCounter: {fileID: 4718666595355984178}
 --- !u!1 &1434750634542307042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,7 +4266,7 @@ Animator:
   m_GameObject: {fileID: 6828494670056199305}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f72fd3ad5d0f51b49b7c17136f48e41e, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7372,7 +7387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 170.23462, y: 57.483505}
+  m_AnchoredPosition: {x: 170.23462, y: 57.48352}
   m_SizeDelta: {x: 340.46924, y: 114.96701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1680671736970012554
