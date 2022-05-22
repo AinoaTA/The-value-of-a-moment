@@ -17,7 +17,8 @@ public class CanvasController : MonoBehaviour
     private void Start()
     {
         GameManager.GetManager().CanvasManager = this;
-        Lock();
+        // Lock();
+        Debug.Log("there is a Lock() commented here");
         m_activated = false;
         Pointer.SetActive(false);
     }
