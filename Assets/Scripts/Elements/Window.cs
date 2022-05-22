@@ -4,7 +4,7 @@ using UnityEngine;
 public class Window : Interactables
 {
     public GameObject m_Glass;
-
+    public GameObject m_Tutorial;
     private Vector3 initPos;
     private float mOffset;
     private float zWorldCoord;
@@ -12,6 +12,7 @@ public class Window : Interactables
     private float maxHeight = 1.38f;
     private bool isOpen = false;
     private bool gameInitialized = false;
+    private bool tutorialShowed = false;
 
     public float distance;
     bool temp = false;
@@ -26,12 +27,21 @@ public class Window : Interactables
 
     private void Update()
     {
-        if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
+        if(gameInitialized)
         {
-            GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().CanvasManager.Lock();
-            GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+            if(!tutorialShowed)
+            {
+                InitTutorial();
+            }
+
+            if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.GetManager().PlayerController.ExitInteractable();
+                GameManager.GetManager().CanvasManager.Lock();
+                GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+            }
         }
+
     }
 
     #region OnMouse Region
@@ -126,6 +136,14 @@ public class Window : Interactables
         isOpen = m_Done;
         gameInitialized = false;
         m_Glass.transform.position = initPos;
+    }
+
+    private void InitTutorial()
+    {
+        m_Tutorial.SetActive(true);
+        Animator animator = m_Tutorial.GetComponent<Animator>();
+        if(animator != null) animator.SetBool("show", true);
+        tutorialShowed = true;
     }
 
     #endregion
