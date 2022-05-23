@@ -31,18 +31,10 @@ public class Window : Interactables
         if(gameInitialized)
         {
             if(!tutorialShowed)
-            {
                 InitTutorial();
-            }
 
             if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-            {
-                minigameCanvas.SetActive(false);
-                GameManager.GetManager().PlayerController.ExitInteractable();
-                GameManager.GetManager().CanvasManager.Lock();
-                GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
-
-            }
+                EndMinigame();
         }
 
     }
@@ -100,8 +92,16 @@ public class Window : Interactables
             temp = true;
             StartCoroutine(GoodInteraction());
         }
-        
     }
+
+    public void EndMinigame()
+    {
+        minigameCanvas.SetActive(false);
+        GameManager.GetManager().PlayerController.ExitInteractable();
+        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+    }
+
     private float GetMouseYaxisAsWorldPoint()
     {
         Vector3 mousePoint = Input.mousePosition;
