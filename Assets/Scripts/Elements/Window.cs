@@ -60,6 +60,8 @@ public class Window : Interactables
     {
         if (gameInitialized && !isOpen)
         {
+            if(tutorialShowed) m_Tutorial.SetActive(false);
+
             float height = m_Glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
 
@@ -145,14 +147,21 @@ public class Window : Interactables
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
+        StartCoroutine(HideTutorial());
         Animator animator = m_Tutorial.GetComponent<Animator>();
         if(animator != null) animator.SetBool("show", true);
         tutorialShowed = true;
     }
 
+    private IEnumerator HideTutorial()
+    {
+        yield return new WaitForSecondsRealtime(8);
+        m_Tutorial.SetActive(false);
+    }
+
     private IEnumerator ActivateMinigameCanvas()
     {
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(1.5f);
         minigameCanvas.SetActive(true);
     }
 
