@@ -108,7 +108,12 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(Delay(state));
     }
+    private IEnumerator Delay(StateGame state)
+    {
+        yield return new WaitForSecondsRealtime(1);
+        m_CurrentStateGame = state;
 
+    }
     public void TurnOnComputer()
     {
         PlayerController.SetInteractable("Computer");
@@ -119,10 +124,4 @@ public class GameManager : MonoBehaviour
         door.SetTrigger("Open");
     }
 
-    private IEnumerator Delay(StateGame state)
-    {
-        yield return new WaitForSecondsRealtime(1);
-        m_CurrentStateGame = state;
-
-    }
 }

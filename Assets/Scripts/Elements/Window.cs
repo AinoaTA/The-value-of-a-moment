@@ -14,15 +14,16 @@ public class Window : Interactables
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
+    private GameObject minigameCanvas = null;
     public float distance;
     bool temp = false;
 
     private void Start()
     {
+        minigameCanvas = m_Tutorial.transform.parent.gameObject;
         GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
-        print(GameManager.GetManager().m_CurrentStateGame);
     }
 
     private void Update()
@@ -36,9 +37,11 @@ public class Window : Interactables
 
             if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
             {
+                minigameCanvas.SetActive(false);
                 GameManager.GetManager().PlayerController.ExitInteractable();
                 GameManager.GetManager().CanvasManager.Lock();
                 GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+
             }
         }
 
@@ -89,6 +92,7 @@ public class Window : Interactables
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();
         GameManager.GetManager().OpenDoor();
+        minigameCanvas.SetActive(false);
         if (!temp)
         {
             temp = true;
@@ -140,10 +144,16 @@ public class Window : Interactables
 
     private void InitTutorial()
     {
-        m_Tutorial.SetActive(true);
+        StartCoroutine(ActivateMinigameCanvas());
         Animator animator = m_Tutorial.GetComponent<Animator>();
         if(animator != null) animator.SetBool("show", true);
         tutorialShowed = true;
+    }
+
+    private IEnumerator ActivateMinigameCanvas()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        minigameCanvas.SetActive(true);
     }
 
     #endregion
