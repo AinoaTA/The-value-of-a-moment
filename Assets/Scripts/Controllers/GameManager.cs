@@ -112,8 +112,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         m_CurrentStateGame = state;
-
     }
+
     public void TurnOnComputer()
     {
         PlayerController.SetInteractable("Computer");
@@ -124,4 +124,11 @@ public class GameManager : MonoBehaviour
         door.SetTrigger("Open");
     }
 
+
+    public void EndMinigame()
+    {
+        PlayerController.ExitInteractable();
+        CanvasManager.Lock();
+        ChangeGameState(GameManager.StateGame.GamePlay);
+    }
 }

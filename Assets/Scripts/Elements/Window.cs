@@ -34,7 +34,10 @@ public class Window : Interactables
                 InitTutorial();
 
             if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-                EndMinigame();
+			{
+				minigameCanvas.SetActive(false);
+				GameManager.GetManager().EndMinigame();
+			}
         }
 
     }
@@ -42,7 +45,6 @@ public class Window : Interactables
     #region OnMouse Region
     void OnMouseDown()
     {
-        print(GameManager.GetManager().m_CurrentStateGame);
         zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
         // offset = World pos - Mouse World pos
         mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
@@ -82,9 +84,7 @@ public class Window : Interactables
     private void WindowDone()
     {
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().EndMinigame();
         GameManager.GetManager().OpenDoor();
         minigameCanvas.SetActive(false);
         if (!temp)
@@ -92,14 +92,6 @@ public class Window : Interactables
             temp = true;
             StartCoroutine(GoodInteraction());
         }
-    }
-
-    public void EndMinigame()
-    {
-        minigameCanvas.SetActive(false);
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().CanvasManager.Lock();
-        GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
     }
 
     private float GetMouseYaxisAsWorldPoint()
