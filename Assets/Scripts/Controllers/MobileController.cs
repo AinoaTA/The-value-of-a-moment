@@ -7,7 +7,7 @@ public class MobileController : MonoBehaviour
 {
     public enum Chats { first, second, third, four }
     public Chats currChat;
-    public GameObject standarMessagePrefab;
+    public GameObject standardMessagePrefab,standardReplyPrefab;
 
     private int currentFirstMomentChat;
     private int currentSecondMomentChat;
@@ -46,16 +46,15 @@ public class MobileController : MonoBehaviour
     [SerializeField] private GameObject[] openGeneralChats;
     [SerializeField] private GameObject[] visualChats;
     [SerializeField] private GameObject[] answerChat;
- 
+
+    private List<GameObject> currAnswersShowing = new List<GameObject>();
+    private int openedChat;
+    private int numberSelected;
+
     private void Awake()
     {
         GameManager.GetManager().mobile = this;
     }
-    [Space(15)]
-
-    [SerializeField]private List<GameObject> currAnswersShowing = new List<GameObject>();
-    private int openedChat;
-    [SerializeField]private int numberSelected;
 
     public void OpenChat(int number)
     {
@@ -77,7 +76,7 @@ public class MobileController : MonoBehaviour
 
                 for (int i = 0; i < firstChatAnswers[currentFirstMomentChat].ellePossibleAnswer.Length; i++)
                 {
-                    GameObject answer = Instantiate(standarMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
+                    GameObject answer = Instantiate(standardMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
                     answer.GetComponent<TriggerAnswerChat>().value = i;
                     answer.GetComponent<Image>().color = Color.yellow;
                     currAnswersShowing.Add(answer);
@@ -88,7 +87,7 @@ public class MobileController : MonoBehaviour
                     return;
                 for (int i = 0; i < SecondChatAnswers[currentSecondMomentChat].ellePossibleAnswer.Length; i++)
                 {
-                    GameObject answer = Instantiate(standarMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
+                    GameObject answer = Instantiate(standardMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
                     answer.GetComponent<TriggerAnswerChat>().value = i;
                     answer.GetComponent<Image>().color = Color.cyan;
                     currAnswersShowing.Add(answer);
@@ -97,7 +96,7 @@ public class MobileController : MonoBehaviour
             case Chats.third:
                 for (int i = 0; i < ThirdChatAnswers[currentThirdMomentChat].ellePossibleAnswer.Length; i++)
                 {
-                    GameObject answer = Instantiate(standarMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
+                    GameObject answer = Instantiate(standardMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
                     answer.GetComponent<TriggerAnswerChat>().value = i;
                     answer.GetComponent<Image>().color = Color.yellow;
                     currAnswersShowing.Add(answer);
@@ -123,7 +122,9 @@ public class MobileController : MonoBehaviour
                 break;
         }
         currAnswersShowing[numberSelected].GetComponent<Button>().enabled = false;
-        currAnswersShowing[numberSelected].transform.parent = visualChats[openedChat].transform;
+        currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
+
+        GameObject newReply = Instantiate(standardReplyPrefab, transform.position, Quaternion.identity, visualChats[openedChat].transform);
 
         this.numberSelected = numberSelected;
         ClearAnswers();
@@ -151,6 +152,5 @@ public class MobileController : MonoBehaviour
     {
         ClearAnswers(true);
         openGeneralChats[(int)currChat].SetActive(false);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
     }
 }

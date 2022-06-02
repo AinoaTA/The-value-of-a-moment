@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
+    [Header("Interactable Options")]
     public int options = 1;
     public bool m_Done;
     public VoiceOff[] m_PhrasesVoiceOff;
     public VoiceOff[] m_HelpPhrasesVoiceOff;
     public string[] m_AnswersToVoiceOff;
     public string[] m_InteractPhrases;
-    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl; 
+    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
 
+    [Header("Calendar extra")]
+    public bool m_DoneByCalendar;
+    public float m_ExtraAutoControlCalendar;
+
+    [Header("Others")]
     public GameObject OptionsCanvas;
     public Animator anim;
 
