@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tareas Disponibles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 2828970ba042ca14ebfe5173622506fd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 1915374815253030463}
   - component: {fileID: 1915374815253030592}
   - component: {fileID: 3156954516204863391}
+  - component: {fileID: 8625063304841495926}
   m_Layer: 0
   m_Name: Task1
   m_TagString: Untagged
@@ -228,10 +229,13 @@ MonoBehaviour:
   - {r: 1, g: 0.29622638, b: 0.29622638, a: 1}
   - {r: 0.7112171, g: 0.40920252, b: 0.9150943, a: 1}
   - {r: 0.047418986, g: 0.67289525, b: 0.6792453, a: 1}
-  enterColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 0}
+  - {r: 0.87415564, g: 0.9528302, b: 0.27326447, a: 1}
+  enterColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   interactableAttached: {fileID: 0}
   task: 2
   nameTask: Limpiar Piso
+  InAnySpaceCalendar: 0
+  calendar: {fileID: 0}
 --- !u!114 &3156954516204863391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +281,64 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 5
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1915374815253030592}
+          m_TargetAssemblyTypeName: TaskType, Assembly-CSharp
+          m_MethodName: DragTask
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 13
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1915374815253030592}
+          m_TargetAssemblyTypeName: TaskType, Assembly-CSharp
+          m_MethodName: SelectTask
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1915374815253030592}
+          m_TargetAssemblyTypeName: TaskType, Assembly-CSharp
+          m_MethodName: DropTask
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!65 &8625063304841495926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915374815253030594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 48.91475, y: 44.05217, z: 5}
+  m_Center: {x: 7.962761, y: 6.3639145, z: 0}

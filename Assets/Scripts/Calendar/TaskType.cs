@@ -3,17 +3,21 @@ using UnityEngine.UI;
 using TMPro;
 public class TaskType : MonoBehaviour
 {
-    [Tooltip("1 - Work, 2 - Ocio, 3 - Clean")]
+    [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
     public Color[] colors;
     public Color enterColor;
     public Interactables interactableAttached;
     private Image sprite;
-    public enum Task { Work, Ocio, Clean }
+    public enum Task { Work, Ocio, Clean, Autocuidado }
     public Task task;
     public string nameTask;
     private TMP_Text text;
     Transform parentTransform;
 
+
+    public bool InAnySpaceCalendar;
+    public SpaceCalendar calendar;
+    private Transform oldParent;
     private void Awake()
     {
         parentTransform = gameObject.transform.parent;
@@ -38,10 +42,10 @@ public class TaskType : MonoBehaviour
 
     public void SelectTask()
     {
-      
         print("select begin drag");
-        transform.SetParent(null);
-        sprite.maskable = false;
+        oldParent = transform.parent;
+        transform.SetParent(GameManager.GetManager().calendarController.TaskMovement);
+        //sprite.maskable = false;
     }
 
     public void DragTask()
@@ -52,9 +56,19 @@ public class TaskType : MonoBehaviour
 
     public void DropTask()
     {
-
-        print("drop");
-        transform.SetParent(parentTransform);
-        sprite.maskable = true;
+        if (!InAnySpaceCalendar)
+        {
+            print("drop no calendar");
+            transform.SetParent(parentTransform);
+            sprite.maskable = true;
+        }
+        else if (calendar.ThereIsSpace())
+        {
+            transform.SetParent(calendar.transform);
+        }
+        else
+        {
+            transform.SetParent(oldParent);
+        }
     }
 }
