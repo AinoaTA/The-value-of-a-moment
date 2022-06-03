@@ -119,7 +119,7 @@ public class Window : Interactables
                 break;
             case 2:
                 break;
-        } 
+        }
     }
 
     public override void ExitInteraction()

@@ -72,7 +72,6 @@ public class Interactables : MonoBehaviour
                 material.color = Color.red;
             }
         }
-
     }
 
     private void OnMouseExit()

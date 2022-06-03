@@ -62,7 +62,6 @@ public class Plant : Interactables
         }
     }
 
-
     private void FinishInteraction()
     {
         waterCan.GrowUpParticle.Play();
@@ -90,8 +89,6 @@ public class Plant : Interactables
         }
         //else //else no grow. future option.
         //{ 
-        
-
         
         //}
     }

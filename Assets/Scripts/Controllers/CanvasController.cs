@@ -79,7 +79,6 @@ public class CanvasController : MonoBehaviour
         NotificationMessage.SetActive(false);
         MessageOpen.SetActive(false);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-
     }
 
     public void FadeIn()
