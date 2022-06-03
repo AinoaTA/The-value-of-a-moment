@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public PlayerController PlayerController { get; set; }
     public InventoryTrash InventoryTrash { get; set; }
     public List<Plant> Plants = new List<Plant>();
+    public MobileController mobile { get; set; }
+    public CalendarController calendarController { get; set; }
 
     public Animator door;
 
