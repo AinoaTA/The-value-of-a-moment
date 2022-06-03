@@ -101,7 +101,6 @@ public class Plant : Interactables
         if (!waterCan.dragg)
             return;
 
-        print(timer);
         if (timer <= maxTimer)
             timer += Time.deltaTime;
         else

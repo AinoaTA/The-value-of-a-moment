@@ -17,8 +17,8 @@ public class Regadera : Interactables
         {
             this.gameObject.SetActive(false);
             GameManager.GetManager().WaterCanGrabbed = true;
-            GameManager.GetManager().EndMinigame();
             grabbed = true;
+            GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
         }
     }
 
