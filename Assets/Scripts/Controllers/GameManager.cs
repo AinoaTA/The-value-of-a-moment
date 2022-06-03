@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                 m_CurrentStateGame = StateGame.MiniGame;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && currInteractable.options > 1)
+        else if (Input.GetKeyDown(KeyCode.Q) && currInteractable != null && currInteractable.options > 1)
         {
             if (currInteractable != null)
             {

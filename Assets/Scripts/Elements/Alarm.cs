@@ -174,7 +174,6 @@ public class Alarm : MonoBehaviour
     }
     private IEnumerator SecondWakeUpDialogue()
     {
-       
         yield return new WaitForSeconds(1.5f);
         GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
         yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());

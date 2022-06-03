@@ -143,7 +143,7 @@ public class Bed : Interactables
     {
         GameManager.GetManager().SoundController.QuitMusic();
         yield return new WaitForSeconds(0.5f);
-       
+
         GameManager.GetManager().PlayerController.SetInteractable("Alarm");
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Dialogue.StopDialogue();
@@ -157,7 +157,7 @@ public class Bed : Interactables
             GameManager.GetManager().Plants[i].NextDay();
             GameManager.GetManager().Plants[i].ResetInteractable();
         }
-        //no borrar hasta que estén tooooooodas las animaciones colocadas aquí.
+        //no borrar hasta que estï¿½n tooooooodas las animaciones colocadas aquï¿½.
         Debug.Log("NO FORGET: actions to reset.");
         ResetBed();
     }
