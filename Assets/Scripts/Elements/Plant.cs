@@ -16,7 +16,6 @@ public class Plant : Interactables
     public GameObject[] m_process;
     private bool started;
 
-
     private void Start()
     {
         GameManager.GetManager().Plants.Add(this);
@@ -71,6 +70,7 @@ public class Plant : Interactables
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
+        CheckDoneTask();
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         //GameManager.GetManager().PlayerController.ExitInteractable();
         waterCan.gameObject.SetActive(false);

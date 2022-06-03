@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public Regadera WaterCan { get; set; }
 
     public bool WaterCanGrabbed { get; set; }
+    public DayNightCycle dayNightCycle { get; set; }
 
     public Animator door;
 
