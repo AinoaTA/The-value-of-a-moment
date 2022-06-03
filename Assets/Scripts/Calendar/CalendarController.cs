@@ -5,13 +5,14 @@ public class CalendarController : MonoBehaviour
 {
     public Transform TaskMovement;
     public List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
-
-    public Dictionary<TaskType, SpaceCalendar> calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
+    public List<TaskType> allTask = new List<TaskType>();
+    public Dictionary<TaskType, SpaceCalendar> calendarInformation;
     public CanvasGroup canvasGroup;
     [SerializeField]private bool modified;
     private void Start()
     {
         GameManager.GetManager().calendarController = this;
+        calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
     }
     public void BackCalendar()
     {
@@ -30,6 +31,7 @@ public class CalendarController : MonoBehaviour
                 for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
                 {
                     calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
+                    allTask.Add(allTimeTable[a].taskSave[i]);
                     print(calendarInformation.Keys);
                 }
             }

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class SpaceCalendar : MonoBehaviour
 {
-    public enum SpaceType { Morning, Midnoon, Afternoon, Night }
+    public enum SpaceType { Mañana, MedioDia, Tarde, Noche }
     public SpaceType type;
 
     public List<TaskType> taskSave = new List<TaskType>();

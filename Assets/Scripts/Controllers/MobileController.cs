@@ -77,7 +77,7 @@ public class MobileController : MonoBehaviour
                 for (int i = 0; i < firstChatAnswers[currentFirstMomentChat].ellePossibleAnswer.Length; i++)
                 {
                     GameObject answer = Instantiate(standardMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
-                    answer.GetComponent<TriggerAnswerChat>().value = i;
+                  //  answer.GetComponent<TriggerAnswerChat>().value = i;
                     answer.GetComponent<Image>().color = Color.yellow;
                     currAnswersShowing.Add(answer);
                 }
