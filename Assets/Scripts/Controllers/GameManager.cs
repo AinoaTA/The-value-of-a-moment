@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public PlayerController PlayerController { get; set; }
     public InventoryTrash InventoryTrash { get; set; }
     public List<Plant> Plants = new List<Plant>();
+    public MobileController mobile { get; set; }
+    public CalendarController calendarController { get; set; }
 
     public Animator door;
 
@@ -112,8 +114,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         m_CurrentStateGame = state;
-
     }
+
     public void TurnOnComputer()
     {
         PlayerController.SetInteractable("Computer");
@@ -124,4 +126,11 @@ public class GameManager : MonoBehaviour
         door.SetTrigger("Open");
     }
 
+
+    public void EndMinigame()
+    {
+        PlayerController.ExitInteractable();
+        CanvasManager.Lock();
+        ChangeGameState(GameManager.StateGame.GamePlay);
+    }
 }
