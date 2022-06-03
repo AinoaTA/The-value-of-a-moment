@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Plant : Interactables
@@ -30,14 +32,13 @@ public class Plant : Interactables
             case 1:
                 if (!m_Done)
                 {
-                    print("1");
                     started = true;
                     timer = 0;
                     GameManager.GetManager().PlayerController.SetInteractable("Plant");
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
                     GameManager.GetManager().CanvasManager.UnLock();
 
-                    waterCan.gameObject.SetActive(true);
+                    StartCoroutine(ActivateWaterCan());
                 }
                 //else
                 //    FinishInteraction();
@@ -114,6 +115,12 @@ public class Plant : Interactables
         waterCan.gameObject.SetActive(false);
         timer = 0;
         base.ExitInteraction();
+    }
+
+    private IEnumerator ActivateWaterCan()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        waterCan.gameObject.SetActive(true);
     }
 }
 

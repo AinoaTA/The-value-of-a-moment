@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Regadera : Interactables
 {
+    private bool grabbed = false;
+
     private void Start()
     {
         GameManager.GetManager().WaterCan = this;
@@ -11,9 +13,13 @@ public class Regadera : Interactables
 
     public void Grab()
     {
-        this.gameObject.SetActive(false);
-        GameManager.GetManager().WaterCanGrabbed = true;
-        GameManager.GetManager().EndMinigame();
+        if(!grabbed)
+        {
+            this.gameObject.SetActive(false);
+            GameManager.GetManager().WaterCanGrabbed = true;
+            GameManager.GetManager().EndMinigame();
+            grabbed = true;
+        }
     }
 
     public override void Interaction(int optionsSelected)
