@@ -4,9 +4,6 @@ public class Plant : Interactables
 {
     public bool water;
 
-    //[HideInInspector] public string m_NameObject;
-    //public string[] m_HelpPhrases;
-
     [SerializeField] private float distance;
     public WaterCan waterCan;
     Vector3 wateringInitialPos;
@@ -23,7 +20,7 @@ public class Plant : Interactables
         GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
-           m_process[currProcess].SetActive(true);
+            m_process[currProcess].SetActive(true);
     }
 
     public override void Interaction(int options)

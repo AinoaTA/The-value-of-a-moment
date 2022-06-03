@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     public List<Plant> Plants = new List<Plant>();
     public MobileController mobile { get; set; }
     public CalendarController calendarController { get; set; }
+    public WaterCan WaterCan { get; set; }
+
+    public bool WaterCanGrabbed { get; set; }
 
     public Animator door;
 

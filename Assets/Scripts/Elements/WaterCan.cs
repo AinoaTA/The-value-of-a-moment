@@ -12,6 +12,18 @@ public class WaterCan : MonoBehaviour
 
     [HideInInspector] public bool dragg;
 
+    private bool grabbed = false;
+
+    private void Start()
+    {
+        GameManager.GetManager().WaterCan = this;
+    }
+
+    public void Grab()
+    {
+        this.gameObject.SetActive(false);
+        GameManager.GetManager().WaterCanGrabbed = true;
+    }
 
     private void OnMouseDown()
     {
