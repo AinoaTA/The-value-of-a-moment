@@ -14,6 +14,7 @@ public class Interactables : MonoBehaviour
     [Header("Calendar extra")]
     public bool m_DoneByCalendar;
     public float m_ExtraAutoControlCalendar;
+    public TaskType taskAssociated;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
@@ -84,6 +85,16 @@ public class Interactables : MonoBehaviour
                 // TODO: need to recover the m_Material[i].color as such
                 this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
             }
+        }
+    }
+
+    public void CheckDoneTask()
+    {
+        if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+        {
+            m_DoneByCalendar = true;
+            taskAssociated.Done();
+            GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
         }
     }
 }

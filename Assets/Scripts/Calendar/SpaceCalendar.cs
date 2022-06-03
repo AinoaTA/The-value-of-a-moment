@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class SpaceCalendar : MonoBehaviour
 {
-    public enum SpaceType { morning, midnoon, afternoon, night }
+    public enum SpaceType { Morning, Midnoon, Afternoon, Night }
     public SpaceType type;
 
     public List<TaskType> taskSave = new List<TaskType>();
@@ -15,9 +14,6 @@ public class SpaceCalendar : MonoBehaviour
     {
         if (gameObject.transform.childCount>=maxTaskSaved)
             return;
-
-        print("hola " + other.name);
-
         TaskType task = other.GetComponent<TaskType>();
 
         if (!taskSave.Contains(task))
@@ -33,17 +29,11 @@ public class SpaceCalendar : MonoBehaviour
         if (!ThereIsSpace())
             return;
 
-        print("adios " + other.name);
-
         TaskType task = other.GetComponent<TaskType>();
         task.InAnySpaceCalendar = false;
         task.calendar = null;
         taskSave.Remove(task);
     }
 
-
-    public bool ThereIsSpace()
-    {
-        return gameObject.transform.childCount < maxTaskSaved;
-    } 
+    public bool ThereIsSpace(){  return gameObject.transform.childCount < maxTaskSaved;} 
 }

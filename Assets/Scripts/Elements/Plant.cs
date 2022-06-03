@@ -4,9 +4,6 @@ public class Plant : Interactables
 {
     public bool water;
 
-    //[HideInInspector] public string m_NameObject;
-    //public string[] m_HelpPhrases;
-
     [SerializeField] private float distance;
     public WaterCan waterCan;
     Vector3 wateringInitialPos;
@@ -16,7 +13,6 @@ public class Plant : Interactables
     private int currProcess=0;
     public GameObject[] m_process;
     private bool started;
-
 
     private void Start()
     {
@@ -74,6 +70,7 @@ public class Plant : Interactables
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
+        CheckDoneTask();
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         //GameManager.GetManager().PlayerController.ExitInteractable();
         waterCan.gameObject.SetActive(false);

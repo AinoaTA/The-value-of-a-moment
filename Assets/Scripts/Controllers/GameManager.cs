@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public List<Plant> Plants = new List<Plant>();
     public MobileController mobile { get; set; }
     public CalendarController calendarController { get; set; }
+    public DayNightCycle dayNightCycle { get; set; }
 
     public Animator door;
 

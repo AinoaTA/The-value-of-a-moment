@@ -13,10 +13,10 @@ public class TaskType : MonoBehaviour
     public string nameTask;
     private TMP_Text text;
     Transform parentTransform;
+    bool done;
 
-
-    public bool InAnySpaceCalendar;
-    public SpaceCalendar calendar;
+    [HideInInspector] public bool InAnySpaceCalendar;
+    [HideInInspector] public SpaceCalendar calendar;
     private Transform oldParent;
     private void Awake()
     {
@@ -26,18 +26,21 @@ public class TaskType : MonoBehaviour
     }
     private void Start()
     {
+        interactableAttached.taskAssociated = this;
         sprite.color = colors[(int)task];
         text.text = nameTask;
     }
 
     public void ClicEnter()
     {
+        if(!done)
         sprite.color = enterColor;
     }
 
     public void ClicExit()
     {
-        sprite.color = colors[(int)task];
+        if (!done)
+            sprite.color = colors[(int)task];
     }
 
     public void SelectTask()
@@ -45,12 +48,11 @@ public class TaskType : MonoBehaviour
         print("select begin drag");
         oldParent = transform.parent;
         transform.SetParent(GameManager.GetManager().calendarController.TaskMovement);
-        //sprite.maskable = false;
     }
 
     public void DragTask()
     {
-        transform.position = /*Camera.main.ScreenToWorldPoint(*/Input.mousePosition;/*);*/
+        transform.position = Input.mousePosition;
         print("drag");
     }
 
@@ -70,5 +72,10 @@ public class TaskType : MonoBehaviour
         {
             transform.SetParent(oldParent);
         }
+    }
+
+    public void Done()
+    {
+        sprite.color = Color.green;
     }
 }

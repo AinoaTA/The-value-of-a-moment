@@ -126,4 +126,5 @@ public class CanvasController : MonoBehaviour
         Cursor.visible = true;
         Pointer.SetActive(false);
     }
+
 }
