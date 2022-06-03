@@ -14,8 +14,8 @@ public class CanvasLookAt : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-           lookRotation = cam.transform.rotation;
-           transform.rotation = lookRotation;
+            lookRotation = cam.transform.rotation;
+            transform.rotation = lookRotation;
         }
     }
 }

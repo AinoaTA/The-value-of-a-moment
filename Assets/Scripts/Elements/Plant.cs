@@ -1,11 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Plant : Interactables
 {
     public bool water;
-
-    //[HideInInspector] public string m_NameObject;
-    //public string[] m_HelpPhrases;
 
     [SerializeField] private float distance;
     public WaterCan waterCan;
@@ -23,7 +22,7 @@ public class Plant : Interactables
         GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
-           m_process[currProcess].SetActive(true);
+            m_process[currProcess].SetActive(true);
     }
 
     public override void Interaction(int options)
@@ -33,14 +32,13 @@ public class Plant : Interactables
             case 1:
                 if (!m_Done)
                 {
-                    print("1");
                     started = true;
                     timer = 0;
                     GameManager.GetManager().PlayerController.SetInteractable("Plant");
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
                     GameManager.GetManager().CanvasManager.UnLock();
 
-                    waterCan.gameObject.SetActive(true);
+                    StartCoroutine(ActivateWaterCan());
                 }
                 //else
                 //    FinishInteraction();
@@ -63,7 +61,6 @@ public class Plant : Interactables
             waterCan.gameObject.SetActive(false);
         }
     }
-
 
     private void FinishInteraction()
     {
@@ -93,8 +90,6 @@ public class Plant : Interactables
         //else //else no grow. future option.
         //{ 
         
-
-        
         //}
     }
 
@@ -103,7 +98,6 @@ public class Plant : Interactables
         if (!waterCan.dragg)
             return;
 
-        print(timer);
         if (timer <= maxTimer)
             timer += Time.deltaTime;
         else
@@ -117,6 +111,12 @@ public class Plant : Interactables
         waterCan.gameObject.SetActive(false);
         timer = 0;
         base.ExitInteraction();
+    }
+
+    private IEnumerator ActivateWaterCan()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        waterCan.gameObject.SetActive(true);
     }
 }
 

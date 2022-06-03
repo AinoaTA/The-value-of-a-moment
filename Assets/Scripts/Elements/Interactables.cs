@@ -62,8 +62,7 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //If your mouse hovers over the GameObject with the script attached, output this message
-        // Debug.Log($"Mouse is over {this.gameObject}");
+        Debug.Log($"Mouse is over {this.gameObject}");
 
         if(m_Material != null && m_Material.Length > 0)
         {
@@ -72,7 +71,6 @@ public class Interactables : MonoBehaviour
                 material.color = Color.red;
             }
         }
-
     }
 
     private void OnMouseExit()

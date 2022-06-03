@@ -5,13 +5,12 @@ using UnityEngine;
 public class WaterCan : MonoBehaviour
 {
     public Vector3 offSet;
-    private Vector3 offSetExit = new Vector3(0.5f, 0, 0.5f);
+    private Vector3 offSetExit = new Vector3(0.5f, 0f, 0.5f);
     public ParticleSystem particles;
 
     public ParticleSystem GrowUpParticle;
 
     [HideInInspector] public bool dragg;
-
 
     private void OnMouseDown()
     {
@@ -27,7 +26,7 @@ public class WaterCan : MonoBehaviour
             GrowUpParticle.Play();
 
         //Necessary OffSet
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + offSet);
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + offSetExit);
     }
 
     private void OnMouseUp()

@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     public List<Plant> Plants = new List<Plant>();
     public MobileController mobile { get; set; }
     public CalendarController calendarController { get; set; }
+    public Regadera WaterCan { get; set; }
+
+    public bool WaterCanGrabbed { get; set; }
 
     public Animator door;
 
@@ -70,7 +73,7 @@ public class GameManager : MonoBehaviour
                 m_CurrentStateGame = StateGame.MiniGame;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && currInteractable.options > 1)
+        else if (Input.GetKeyDown(KeyCode.Q) && currInteractable != null && currInteractable.options > 1)
         {
             if (currInteractable != null)
             {
