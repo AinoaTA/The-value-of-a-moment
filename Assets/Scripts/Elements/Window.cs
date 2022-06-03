@@ -5,6 +5,7 @@ public class Window : Interactables
 {
     public GameObject m_Glass;
     public GameObject m_Tutorial;
+    private GameObject minigameCanvas = null;
     private Vector3 initPos;
     private float mOffset;
     private float zWorldCoord;
@@ -14,7 +15,6 @@ public class Window : Interactables
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
-    private GameObject minigameCanvas = null;
     public float distance;
     bool temp = false;
 
