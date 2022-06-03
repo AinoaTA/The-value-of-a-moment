@@ -181,7 +181,6 @@ public class Window : Interactables
         }
     }
 
-
     private IEnumerator GoodInteraction()
 	{
 		if (m_PhrasesVoiceOff.Length >= 2)
