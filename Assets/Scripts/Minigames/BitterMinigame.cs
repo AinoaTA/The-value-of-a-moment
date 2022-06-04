@@ -36,10 +36,6 @@ public class BitterMinigame : MonoBehaviour
         {
             // Aumentar confianza
         }
-        else
-        {
-            Debug.Log("Error. User cannot be recognizable");
-        }
         ActivateNextBeet();
     }
 
@@ -52,10 +48,6 @@ public class BitterMinigame : MonoBehaviour
         else if (activeBeet.name.Contains("amig"))
         {
             // Disminuir confianza
-        }
-        else
-        {
-            Debug.Log("Error. User cannot be recognizable");
         }
         ActivateNextBeet();
     }

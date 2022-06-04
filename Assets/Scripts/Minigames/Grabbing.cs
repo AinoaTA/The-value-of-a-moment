@@ -29,7 +29,6 @@ public class Grabbing : MonoBehaviour
     void Start()
     {
         //cam = brain.ActiveVirtualCamera;
-        //Debug.Log(cam);
     }
 
     // Update is called once per frame
