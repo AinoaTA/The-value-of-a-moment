@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bed : Interactables
 {
     public Camera cam;
+    public GameObject m_Tutorial;
+    private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
     public GameObject bedText;
@@ -14,9 +16,11 @@ public class Bed : Interactables
     float maxDesplacement = 2.17f;
     private float zWorldCoord;
     private float mOffset;
+    private bool tutorialShowed = false;
 
     private void Start()
     {
+        minigameCanvas = m_Tutorial.transform.parent.gameObject;
         options = 2;
         GameManager.GetManager().Bed = this;
 
@@ -116,6 +120,7 @@ public class Bed : Interactables
 
     public void BedDone()
     {
+        minigameCanvas.SetActive(false);
         m_Done = true;
         cam.cullingMask = -1;
         //Cambiamos la sabana u objeto cama.
