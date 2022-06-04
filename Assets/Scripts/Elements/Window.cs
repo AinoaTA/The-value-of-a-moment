@@ -87,6 +87,8 @@ public class Window : Interactables
         GameManager.GetManager().EndMinigame();
         GameManager.GetManager().OpenDoor();
         minigameCanvas.SetActive(false);
+        CheckDoneTask();
+        GameManager.GetManager().dayNightCycle.TaskDone();
         if (!temp)
         {
             temp = true;

@@ -5,24 +5,20 @@ using UnityEngine;
 public class Bed : Interactables
 {
     public Camera cam;
-    public GameObject m_Tutorial;
-    private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
-    public GameObject interactuarBedText;
+    public GameObject bedText;
     private bool gameInitialized = false;
     Vector3 initPosBadSheet;
     float minDesplacement;
     float maxDesplacement = 2.17f;
     private float zWorldCoord;
     private float mOffset;
-    private bool tutorialShowed = false;
 
     private void Start()
     {
         options = 2;
         GameManager.GetManager().Bed = this;
-        minigameCanvas = m_Tutorial.transform.parent.gameObject;
 
         m_SheetBad.SetActive(true);
         initPosBadSheet = m_SheetBad.transform.position;
@@ -141,7 +137,7 @@ public class Bed : Interactables
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
         m_SheetBad.transform.position = initPosBadSheet;
-        interactuarBedText.SetActive(true);
+        bedText.SetActive(true);
         gameInitialized = false;
     }
     public override void Interaction(int options)
