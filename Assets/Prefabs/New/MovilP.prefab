@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458676847736651560}
   m_LocalRotation: {x: -0.7071058, y: -0, z: -0, w: 0.7071078}
-  m_LocalPosition: {x: 0, y: -0.0001732707, z: 0.00017285347}
+  m_LocalPosition: {x: 0, y: 0.001, z: 0.00017285347}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 7210207570551351713}
@@ -92,7 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7210207570551351713}
   - component: {fileID: 6092913507643133911}
-  m_Layer: 0
+  - component: {fileID: 1368716471}
+  m_Layer: 6
   m_Name: MovilP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4217141205834324042}
-  m_LocalRotation: {x: -0.45170665, y: -0.54462326, z: 0.42372063, w: 0.5655153}
+  m_LocalRotation: {x: -0.45170754, y: -0.5446228, z: 0.42372265, w: 0.56551343}
   m_LocalPosition: {x: -0.6437827, y: 1.3075408, z: -2.5263982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -128,6 +129,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20025742, y: 0.05046439, z: 0.103701234}
   m_Center: {x: -0.003178656, y: 0.0023072958, z: 0.00054496527}
+--- !u!114 &1368716471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217141205834324042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332e025161f410c4aaac6986268f6fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options: 1
+  m_Done: 0
+  m_PhrasesVoiceOff: []
+  m_HelpPhrasesVoiceOff: []
+  m_AnswersToVoiceOff: []
+  m_InteractPhrases: []
+  m_MaxAutoControl: 0
+  m_MiddleAutoControl: 0
+  m_MinAutoControl: 0
+  m_DoneByCalendar: 0
+  m_ExtraAutoControlCalendar: 0
+  taskAssociated: {fileID: 0}
+  OptionsCanvas: {fileID: 2221130132420414099}
+  anim: {fileID: 8484808614086689549}
+  showing: 0
+  getMobile: 0
+  realMobile: {fileID: 458676847736651560}
+  mobileCanvas: {fileID: 0}
+  stateDriven: {fileID: 0}
 --- !u!1001 &936633551929391528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,15 +177,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.028
       objectReference: {fileID: 0}
     - target: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.114
       objectReference: {fileID: 0}
     - target: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.052
       objectReference: {fileID: 0}
     - target: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -197,8 +229,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+--- !u!1 &2221130132420414099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309594586995454779, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 936633551929391528}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3309659401593567795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 936633551929391528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8484808614086689549 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8736859282042616485, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 936633551929391528}
   m_PrefabAsset: {fileID: 0}
