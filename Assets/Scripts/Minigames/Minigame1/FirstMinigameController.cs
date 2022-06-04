@@ -18,7 +18,6 @@ public class FirstMinigameController : MonoBehaviour
 
     private void Update()
     {
-        CheckSolutions();
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.GetManager().EndMinigame();
