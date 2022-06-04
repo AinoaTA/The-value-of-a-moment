@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bed : Interactables
 {
     public Camera cam;
+    public GameObject m_Tutorial;
+    private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
     public GameObject interactuarBedText;
@@ -14,11 +16,13 @@ public class Bed : Interactables
     float maxDesplacement = 2.17f;
     private float zWorldCoord;
     private float mOffset;
+    private bool tutorialShowed = false;
 
     private void Start()
     {
         options = 2;
         GameManager.GetManager().Bed = this;
+        minigameCanvas = m_Tutorial.transform.parent.gameObject;
 
         m_SheetBad.SetActive(true);
         initPosBadSheet = m_SheetBad.transform.position;
@@ -42,7 +46,14 @@ public class Bed : Interactables
 
         if (gameInitialized && !m_Done)
         {
-            //print(m_SheetBad.transform.position.x);
+            if(!tutorialShowed)
+                InitTutorial();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				minigameCanvas.SetActive(false);
+				GameManager.GetManager().EndMinigame();
+			}
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
             //print(displacement);
@@ -63,6 +74,27 @@ public class Bed : Interactables
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
+    }
+    
+    private void InitTutorial()
+    {
+        StartCoroutine(ActivateMinigameCanvas());
+        StartCoroutine(HideTutorial());
+        Animator animator = m_Tutorial.GetComponent<Animator>();
+        if(animator != null) animator.SetBool("show", true);
+        tutorialShowed = true;
+    }
+    
+    private IEnumerator HideTutorial()
+    {
+        yield return new WaitForSecondsRealtime(8);
+        m_Tutorial.SetActive(false);
+    }
+
+    private IEnumerator ActivateMinigameCanvas()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        minigameCanvas.SetActive(true);
     }
 
     private void OnMouseUp()
