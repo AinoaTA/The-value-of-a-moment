@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public bool WaterCanGrabbed { get; set; }
     public DayNightCycle dayNightCycle { get; set; }
+    public Mobile mobileReal { get; set; }
 
     public Animator door;
 

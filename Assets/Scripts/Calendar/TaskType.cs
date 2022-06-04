@@ -16,6 +16,8 @@ public class TaskType : MonoBehaviour
     Transform parentTransform;
     bool done;
 
+    public delegate void TaskTypeDelegate(TaskType type);
+    public static TaskTypeDelegate taskDelegate;
     [HideInInspector] public bool InAnySpaceCalendar;
     [HideInInspector] public SpaceCalendar calendar;
     private Transform oldParent;
@@ -77,6 +79,7 @@ public class TaskType : MonoBehaviour
     public void Done()
     {
         sprite.color = Color.green;
+        //taskDelegate?.Invoke(this);
     }
     public void ResetTask()
     {

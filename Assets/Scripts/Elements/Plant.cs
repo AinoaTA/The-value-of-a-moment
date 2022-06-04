@@ -71,6 +71,7 @@ public class Plant : Interactables
         m_Done = true;
         started = false;
         CheckDoneTask();
+        GameManager.GetManager().dayNightCycle.TaskDone();
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         //GameManager.GetManager().PlayerController.ExitInteractable();
         waterCan.gameObject.SetActive(false);
