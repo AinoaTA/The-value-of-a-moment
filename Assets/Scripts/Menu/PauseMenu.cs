@@ -32,6 +32,8 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         virtualCamera3D.enabled = false;
         Time.timeScale = pausedScale;
         GameManager.GetManager().CanvasManager.UnLock();
@@ -41,6 +43,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         virtualCamera3D.enabled = true;
         Time.timeScale = resumeScale;
         GameManager.GetManager().CanvasManager.Lock();
