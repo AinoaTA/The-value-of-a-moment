@@ -6,24 +6,25 @@ using System.Collections;
 
 public class FirstMinigameController : MonoBehaviour
 {
-    //minijuego 1 del ordenador (continuar juego).
     public List<SolutionPiece> m_AllSolutions=new List<SolutionPiece>();
     public List<PieceMG> m_AllPieces = new List<PieceMG>();
-
-    private bool m_Solved=false;
+    private bool m_Solved = false;
     private bool m_AllCorrected;
+
     void Start()
     {
         GameManager.GetManager().ProgramMinigame = this;
     }
-    //private void Update()
-    //{
-    //    if (CheckSolutions() &&!m_Solved)
-    //    {
-           
-    //        StartCoroutine(GameFinished());
-    //    }
-    //}
+
+    private void Update()
+    {
+        CheckSolutions();
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.GetManager().EndMinigame();
+            this.gameObject.SetActive(false);
+        }
+    }
 
     private IEnumerator GameFinished()
     {
@@ -50,9 +51,8 @@ public class FirstMinigameController : MonoBehaviour
         
         if(m_AllCorrected)
             StartCoroutine(GameFinished());
-
-
     }
+
     public void ResetAllGame()
     {
         for (int i = 0; i < m_AllPieces.Count; i++)
