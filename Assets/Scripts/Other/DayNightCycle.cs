@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    public enum DayState { D, M, T, N }
+    public enum DayState { Mañana, MedioDia, Tarde, Noche }
 
-    [Tooltip("D=Ma�ana, M=Mediodia, T=Tarde, N=Noche")]
     public DayState m_DayState;
     private int counter;
 

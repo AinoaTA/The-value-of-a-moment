@@ -46,10 +46,12 @@ public class Mobile : Interactables
             if (mobileCanvas.alpha == 0)
             {
                 GameManager.GetManager().ChangeGameState(GameManager.StateGame.MiniGame);
+                GameManager.GetManager().CanvasManager.UnLock();
                 CanvasMobile(true);
             }
             else
             {
+                GameManager.GetManager().CanvasManager.Lock();
                 GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
                 CanvasMobile(false);
             }

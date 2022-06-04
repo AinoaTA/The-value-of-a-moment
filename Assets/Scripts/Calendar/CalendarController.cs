@@ -16,6 +16,7 @@ public class CalendarController : MonoBehaviour
     }
     public void BackCalendar()
     {
+        canvasGroup.gameObject.SetActive(false);
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
@@ -32,9 +33,9 @@ public class CalendarController : MonoBehaviour
                 {
                     calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
                     allTask.Add(allTimeTable[a].taskSave[i]);
-                    print(calendarInformation.Keys);
                 }
             }
+
         }
     }
     public void RevisionCalendar()
@@ -44,6 +45,7 @@ public class CalendarController : MonoBehaviour
 
     public void ShowCalendar()
     {
+        canvasGroup.gameObject.SetActive(true);
         if (!modified)
         {
             canvasGroup.alpha = 1;
