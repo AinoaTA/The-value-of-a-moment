@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Computer : Interactables
 {
@@ -7,8 +9,6 @@ public class Computer : Interactables
         switch (options)
         {
             case 1:
-                //m_Done = true;
-                Debug.Log("I'm in");
                 GameManager.GetManager().CanvasManager.ComputerScreenIn();
                 break;
         }

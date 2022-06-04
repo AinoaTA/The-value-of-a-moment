@@ -49,7 +49,7 @@ public class CanvasController : MonoBehaviour
     }
     private IEnumerator DelayFadeComputer()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         ComputerScreen.SetActive(true);
         yield return new WaitForSeconds(0.5f);
 
