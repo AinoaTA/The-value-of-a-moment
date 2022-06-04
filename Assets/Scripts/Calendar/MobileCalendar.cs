@@ -33,6 +33,6 @@ public class MobileCalendar : MonoBehaviour
     {
         selected.SetActive(false);
         noselected.SetActive(false);
-        gameObject.transform.parent.gameObject.SetActive(false);
+        //gameObject.transform.parent.gameObject.SetActive(false);
     }
 }
