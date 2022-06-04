@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
             {
                 lookingInteractable = currInteractable;
                 currInteractable.ShowCanvas();
-                print(currInteractable);
             }
             else if (currInteractable == null && lookingInteractable != null)
             {

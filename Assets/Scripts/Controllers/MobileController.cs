@@ -94,6 +94,8 @@ public class MobileController : MonoBehaviour
                 }
                 break;
             case Chats.third:
+                if (currentThirdMomentChat >= ThirdChatAnswers.Length)
+                    return;
                 for (int i = 0; i < ThirdChatAnswers[currentThirdMomentChat].ellePossibleAnswer.Length; i++)
                 {
                     GameObject answer = Instantiate(standardMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);

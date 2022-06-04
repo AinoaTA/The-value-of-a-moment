@@ -70,12 +70,13 @@ public class Alarm : MonoBehaviour
     }
     public void NormalWakeUp()
     {
+        GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
 
         GameManager.GetManager().PlayerController.PlayerWakeUpPos();
-        GameManager.GetManager().PlayerController.ExitInteractable();
+        
 
         m_Alarm = false;
         ResetTime();

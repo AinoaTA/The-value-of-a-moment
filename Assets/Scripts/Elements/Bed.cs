@@ -9,7 +9,7 @@ public class Bed : Interactables
     private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
-    public GameObject bedText;
+    public GameObject interactuarBedText;
     private bool gameInitialized = false;
     Vector3 initPosBadSheet;
     float minDesplacement;
@@ -141,7 +141,7 @@ public class Bed : Interactables
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
         m_SheetBad.transform.position = initPosBadSheet;
-        bedText.SetActive(true);
+        interactuarBedText.SetActive(true);
         gameInitialized = false;
     }
     public override void Interaction(int options)
@@ -188,6 +188,7 @@ public class Bed : Interactables
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Dialogue.StopDialogue();
         GameManager.GetManager().Window.ResetWindow();
+        GameManager.GetManager().calendarController.GlobalReset();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
@@ -206,5 +207,6 @@ public class Bed : Interactables
     {
         cam.cullingMask = -1;
         base.ExitInteraction();
+
     }
 }
