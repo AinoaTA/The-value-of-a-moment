@@ -8,6 +8,7 @@ public class Mobile : Interactables
     public bool getMobile;
     public GameObject realMobile;
     public CanvasGroup mobileCanvas;
+    public GameObject[] canvasFunctions;
     private BoxCollider col;
     public CinemachineStateDrivenCamera stateDriven;
 
@@ -54,7 +55,16 @@ public class Mobile : Interactables
                 GameManager.GetManager().CanvasManager.Lock();
                 GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
                 CanvasMobile(false);
+                CanvasMultiple(false);
             }
+        }
+    }
+
+    public void CanvasMultiple(bool val)
+    {
+        for (int i = 0; i < canvasFunctions.Length; i++)
+        {
+            canvasFunctions[i].SetActive(val);
         }
     }
 

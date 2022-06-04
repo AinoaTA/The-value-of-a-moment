@@ -12,6 +12,7 @@ public class TaskType : MonoBehaviour
     public Task task;
     public string nameTask;
     private TMP_Text text;
+    public Transform content;
     Transform parentTransform;
     bool done;
 
@@ -26,11 +27,10 @@ public class TaskType : MonoBehaviour
     }
     private void Start()
     {
+        text.text = nameTask;
         interactableAttached.taskAssociated = this;
         sprite.color = colors[(int)task];
-        text.text = nameTask;
     }
-
     public void ClicEnter()
     {
         if(!done)
@@ -77,5 +77,11 @@ public class TaskType : MonoBehaviour
     public void Done()
     {
         sprite.color = Color.green;
+    }
+    public void ResetTask()
+    {
+        transform.SetParent(content);
+        sprite.color = colors[(int)task];
+        sprite.maskable = true;
     }
 }

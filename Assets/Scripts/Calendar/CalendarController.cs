@@ -5,7 +5,7 @@ public class CalendarController : MonoBehaviour
 {
     public Transform TaskMovement;
     public List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
-    public List<TaskType> allTask = new List<TaskType>();
+    //public List<TaskType> allTask = new List<TaskType>();
     public Dictionary<TaskType, SpaceCalendar> calendarInformation;
     public CanvasGroup canvasGroup;
     [SerializeField]private bool modified;
@@ -32,7 +32,7 @@ public class CalendarController : MonoBehaviour
                 for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
                 {
                     calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
-                    allTask.Add(allTimeTable[a].taskSave[i]);
+                    //allTask.Add(allTimeTable[a].taskSave[i]);
                 }
             }
 
@@ -60,5 +60,21 @@ public class CalendarController : MonoBehaviour
     {
         return (int)type == (int)time;
            
+    }
+
+
+    public void GlobalReset()
+    {
+        for (int i = 0; i < allTimeTable.Count; i++)
+        {
+            for (int n = 0; n < allTimeTable[i].taskSave.Count; n++)
+            {
+                allTimeTable[i].taskSave[n].ResetTask();
+            }
+            allTimeTable[i].taskSave.Clear();
+        }
+
+        calendarInformation.Clear();
+        modified = false;
     }
 }

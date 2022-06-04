@@ -148,6 +148,7 @@ public class Bed : Interactables
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Dialogue.StopDialogue();
         GameManager.GetManager().Window.ResetWindow();
+        GameManager.GetManager().calendarController.GlobalReset();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
