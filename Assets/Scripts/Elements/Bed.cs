@@ -42,7 +42,13 @@ public class Bed : Interactables
 
         if (gameInitialized && !m_Done)
         {
-            //print(m_SheetBad.transform.position.x);
+            if(!tutorialShowed)
+                InitTutorial();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+			{
+                Exit();
+			}
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
             //print(displacement);
@@ -65,6 +71,36 @@ public class Bed : Interactables
         }
     }
 
+    public void Exit()
+    {
+        minigameCanvas.SetActive(false);
+        GameManager.GetManager().PlayerController.ExitInteractable();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().EndMinigame();
+    }
+    
+    private void InitTutorial()
+    {
+        StartCoroutine(ActivateMinigameCanvas());
+        StartCoroutine(HideTutorial());
+        Animator animator = m_Tutorial.GetComponent<Animator>();
+        if(animator != null) animator.SetBool("show", true);
+        tutorialShowed = true;
+    }
+    
+    private IEnumerator HideTutorial()
+    {
+        yield return new WaitForSecondsRealtime(8);
+        m_Tutorial.SetActive(false);
+    }
+
+    private IEnumerator ActivateMinigameCanvas()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        minigameCanvas.SetActive(true);
+    }
+
     private void OnMouseUp()
     {
         if (m_Done)
@@ -85,7 +121,7 @@ public class Bed : Interactables
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
-        bedText.SetActive(false);
+        // bedText.SetActive(false);
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();
