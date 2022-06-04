@@ -63,7 +63,6 @@ public class CalendarController : MonoBehaviour
     public bool CheckTimeTaskDone(DayNightCycle.DayState type, SpaceCalendar.SpaceType time)
     {
         return (int)type == (int)time;
-           
     }
 
 
