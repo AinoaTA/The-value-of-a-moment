@@ -7,7 +7,7 @@ public class Bed : Interactables
     public Camera cam;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
-    public GameObject bedText;
+    public GameObject interactuarBedText;
     private bool gameInitialized = false;
     Vector3 initPosBadSheet;
     float minDesplacement;
@@ -85,7 +85,7 @@ public class Bed : Interactables
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
-        bedText.SetActive(false);
+        interactuarBedText.SetActive(false);
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();
@@ -101,7 +101,7 @@ public class Bed : Interactables
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
         m_SheetBad.transform.position = initPosBadSheet;
-        bedText.SetActive(true);
+        interactuarBedText.SetActive(true);
         gameInitialized = false;
     }
     public override void Interaction(int options)
@@ -167,5 +167,6 @@ public class Bed : Interactables
     {
         cam.cullingMask = -1;
         base.ExitInteraction();
+
     }
 }

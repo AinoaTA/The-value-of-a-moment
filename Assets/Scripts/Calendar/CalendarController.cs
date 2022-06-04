@@ -75,6 +75,11 @@ public class CalendarController : MonoBehaviour
         }
 
         calendarInformation.Clear();
+
+        for (int i = 0; i < allTimeTable.Count; i++)
+        {
+            allTimeTable[i].taskSave.Clear();
+        }
         modified = false;
     }
 }

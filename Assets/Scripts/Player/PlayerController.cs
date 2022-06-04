@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
 
     public void ExitInteractable()
     {
-        anim.ExitInteractable();
+        if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+        {
+            print("Esc");
+            anim.ExitInteractable();
+        }
     }
 }
