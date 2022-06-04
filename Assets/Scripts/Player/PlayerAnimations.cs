@@ -17,13 +17,11 @@ public class PlayerAnimations : MonoBehaviour
 
     public void SetInteractable(string interactable)
     {
-        Debug.Log(interactable);
         anim.SetTrigger(interactable);
     }
 
     public void ExitInteractable()
     {
-        Debug.Log("exit interactable");
         anim.SetTrigger("Exit");
     }
 }
