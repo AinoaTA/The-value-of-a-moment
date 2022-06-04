@@ -69,7 +69,7 @@ public class Interactables : MonoBehaviour
         {
             foreach (var material in this.gameObject.GetComponent<Renderer>().materials)
             {
-                material.color = Color.red;
+                // material.color = Color.red;
             }
         }
     }
@@ -81,7 +81,7 @@ public class Interactables : MonoBehaviour
             for (int i = 0; i < m_Material.Length; i++)
             {
                 // TODO: need to recover the m_Material[i].color as such
-                this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
+                // this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
             }
         }
     }
