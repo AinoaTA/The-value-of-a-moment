@@ -166,6 +166,5 @@ public class Bed : Interactables
     {
         cam.cullingMask = -1;
         base.ExitInteraction();
-
     }
 }
