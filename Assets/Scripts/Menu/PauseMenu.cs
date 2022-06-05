@@ -19,7 +19,8 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && Input.GetKeyDown(KeyCode.Escape))
+        if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay
+            && Input.GetKeyDown(KeyCode.Escape) && !GameManager.GetManager().CanvasManager.m_activated)
         {
             PauseGame();
         }
@@ -32,7 +33,6 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        print("A");
         GameManager.GetManager().CanvasManager.UnLock();
         virtualCamera3D.enabled = false;
         Time.timeScale = pausedScale;

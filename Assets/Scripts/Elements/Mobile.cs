@@ -42,9 +42,9 @@ public class Mobile : Interactables
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile)
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
         {
-            if (mobileCanvas.alpha == 0)
+            if (mobileCanvas.alpha == 0 && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
             {
                 GameManager.GetManager().ChangeGameState(GameManager.StateGame.MiniGame);
                 GameManager.GetManager().CanvasManager.UnLock();

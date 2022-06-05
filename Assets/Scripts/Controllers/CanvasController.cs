@@ -13,7 +13,7 @@ public class CanvasController : MonoBehaviour
 
     public GameObject Pointer;
 
-    private bool m_activated;
+    public bool m_activated;
     private void Start()
     {
         GameManager.GetManager().CanvasManager = this;
@@ -27,15 +27,14 @@ public class CanvasController : MonoBehaviour
         FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
     }
-    private void Update()
+
+    public void ComputerScreenOut()
     {
-        if (m_activated && Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-            GameManager.GetManager().CanvasManager.Lock();
-            CloseWindow();
-        }
+        GameManager.GetManager().PlayerController.ExitInteractable();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().CanvasManager.Lock();
+        m_activated = false;
+        CloseWindow();
     }
     public void ComputerScreenIn()
     {
@@ -101,6 +100,7 @@ public class CanvasController : MonoBehaviour
     {
         if (!GameManager.GetManager().ProgramMinigame.GetSolved())
         {
+            GameManager.GetManager().ProgramMinigame.m_started = true;
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             FirstMinigameCanvas.SetActive(true);
         }

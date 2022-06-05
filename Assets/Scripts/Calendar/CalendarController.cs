@@ -9,6 +9,7 @@ public class CalendarController : MonoBehaviour
     public Dictionary<TaskType, SpaceCalendar> calendarInformation;
     public CanvasGroup canvasGroup;
     public CanvasGroup modifiedBlock;
+    public MobileCalendar mobileCalendar;
     [SerializeField]private bool modified;
     private void Start()
     {
@@ -68,6 +69,7 @@ public class CalendarController : MonoBehaviour
 
     public void GlobalReset()
     {
+        mobileCalendar.ResetCalendar();
         for (int i = 0; i < allTimeTable.Count; i++)
         {
             for (int n = 0; n < allTimeTable[i].taskSave.Count; n++)

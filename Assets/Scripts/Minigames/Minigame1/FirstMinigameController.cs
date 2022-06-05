@@ -10,11 +10,12 @@ public class FirstMinigameController : MonoBehaviour
     public List<PieceMG> m_AllPieces = new List<PieceMG>();
     private bool m_Solved = false;
     private bool m_AllCorrected;
-    private bool m_started;
+    public bool m_started;
 
     void Start()
     {
         GameManager.GetManager().ProgramMinigame = this;
+      
     }
 
     private void Update()

@@ -9,7 +9,8 @@ public class Bed : Interactables
     private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
-    public GameObject bedText;
+    public GameObject interactTextBed;
+    public GameObject sleepTextBed;
     private bool gameInitialized;
     Vector3 initPosBadSheet;
     float minDesplacement;
@@ -17,6 +18,9 @@ public class Bed : Interactables
     private float zWorldCoord;
     private float mOffset;
     private bool tutorialShowed = false;
+    private Vector3 initPosDormirText;
+    private Vector3  lastPosDormirText;
+
 
     private void Start()
     {
@@ -27,6 +31,8 @@ public class Bed : Interactables
         m_SheetBad.SetActive(true);
         initPosBadSheet = m_SheetBad.transform.position;
         minDesplacement = m_SheetBad.transform.position.x;
+        initPosDormirText = sleepTextBed.transform.localPosition;
+        lastPosDormirText = new Vector3(-0.03f, lastPosDormirText.y, lastPosDormirText.z);
     }
 
     void OnMouseDrag()
@@ -126,7 +132,8 @@ public class Bed : Interactables
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
-        // bedText.SetActive(false);
+        interactTextBed.SetActive(false);
+        sleepTextBed.transform.localPosition = lastPosDormirText;
         GameManager.GetManager().PlayerController.ExitInteractable();
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         GameManager.GetManager().CanvasManager.Lock();
@@ -141,8 +148,9 @@ public class Bed : Interactables
         m_Done = false;
         m_Sheet.SetActive(false);
         m_SheetBad.SetActive(true);
+        sleepTextBed.transform.localPosition = initPosDormirText;
         m_SheetBad.transform.position = initPosBadSheet;
-        bedText.SetActive(true);
+        interactTextBed.SetActive(true);
         gameInitialized = false;
     }
     public override void Interaction(int options)

@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour
         {
             if (currInteractable != null && currInteractable.showing)
             {
-                print("interactuando button");
                 currInteractable.HideCanvas();
                 currInteractable.Interaction(1);
                 currInteractable = null;
@@ -86,7 +85,6 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("escape");
             PlayerController.ExitInteractable();
             m_CurrentStateGame = StateGame.GamePlay;
             currInteractable = null;
@@ -136,6 +134,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerController.ExitInteractable();
         CanvasManager.Lock();
-        ChangeGameState(GameManager.StateGame.GamePlay);
+        ChangeGameState(StateGame.GamePlay);
     }
 }
