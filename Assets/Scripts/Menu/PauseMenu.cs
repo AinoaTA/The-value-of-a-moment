@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.MiniGame && Input.GetKeyDown(KeyCode.Escape))
+        if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }
@@ -32,19 +32,16 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        print("A");
+        GameManager.GetManager().CanvasManager.UnLock();
         virtualCamera3D.enabled = false;
         Time.timeScale = pausedScale;
-        GameManager.GetManager().CanvasManager.UnLock();
         pauseCanvas.SetActive(true);
         StartCoroutine(WaitToPauseGame());
     }
 
     public void ResumeGame()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         virtualCamera3D.enabled = true;
         Time.timeScale = resumeScale;
         GameManager.GetManager().CanvasManager.Lock();

@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            print("escape");
             PlayerController.ExitInteractable();
             m_CurrentStateGame = StateGame.GamePlay;
             currInteractable = null;

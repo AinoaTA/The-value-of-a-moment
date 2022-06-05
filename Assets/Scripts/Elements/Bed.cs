@@ -10,7 +10,7 @@ public class Bed : Interactables
     public GameObject m_SheetBad;
     public GameObject m_Sheet;  //sabana
     public GameObject bedText;
-    private bool gameInitialized = false;
+    private bool gameInitialized;
     Vector3 initPosBadSheet;
     float minDesplacement;
     float maxDesplacement = 2.17f;
@@ -23,7 +23,7 @@ public class Bed : Interactables
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
         options = 2;
         GameManager.GetManager().Bed = this;
-
+        gameInitialized = false;
         m_SheetBad.SetActive(true);
         initPosBadSheet = m_SheetBad.transform.position;
         minDesplacement = m_SheetBad.transform.position.x;
