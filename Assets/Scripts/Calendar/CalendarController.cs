@@ -29,7 +29,7 @@ public class CalendarController : MonoBehaviour
         if (!modified)
         {
             modified = true;
-
+            RevisionCalendar();
             for (int a = 0; a <allTimeTable.Count ; a++)
             {
                 for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
@@ -45,6 +45,8 @@ public class CalendarController : MonoBehaviour
     {
         modifiedBlock.gameObject.SetActive(true);
         canvasGroup.alpha = 1;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void ShowCalendar()

@@ -21,6 +21,7 @@ public class MobileCalendar : MonoBehaviour
     }
     public void OpenCalendar()
     {
+        textTime.text = "Hora del día: " + GameManager.GetManager().dayNightCycle.m_DayState.ToString();
         if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
         {
             noselected.SetActive(true);
@@ -28,7 +29,6 @@ public class MobileCalendar : MonoBehaviour
         }
         else
         {
-            textTime.text = "Hora del día: "+ GameManager.GetManager().dayNightCycle.m_DayState.ToString();
             selected.SetActive(true);
         }
 

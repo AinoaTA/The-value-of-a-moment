@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         {
             currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
 
-            if (currInteractable != null && currInteractable!=lookingInteractable)
+            if (currInteractable != null && currInteractable!=lookingInteractable && !currInteractable.GetDone())
             {
                 lookingInteractable = currInteractable;
                 currInteractable.ShowCanvas();

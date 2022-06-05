@@ -11,7 +11,7 @@ public class Window : Interactables
     private float zWorldCoord;
     private float minHeight;
     private float maxHeight = 1.912f;
-    private bool isOpen = false;
+    public bool isOpen = false;
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
@@ -87,6 +87,8 @@ public class Window : Interactables
         GameManager.GetManager().EndMinigame();
         GameManager.GetManager().OpenDoor();
         minigameCanvas.SetActive(false);
+        isOpen = true;
+        m_Done = true;
         CheckDoneTask();
         GameManager.GetManager().dayNightCycle.TaskDone();
         if (!temp)
@@ -113,7 +115,6 @@ public class Window : Interactables
             case 1:
                 if (!isOpen)
                     gameInitialized = true;
-                    m_Done = false;
                     // Inicia minijuego
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
                     GameManager.GetManager().CanvasManager.UnLock();
