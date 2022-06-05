@@ -11,7 +11,7 @@ public class Window : Interactables
     private float zWorldCoord;
     private float minHeight;
     private float maxHeight = 1.912f;
-    public bool isOpen = false;
+    private bool isOpen = false;
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
