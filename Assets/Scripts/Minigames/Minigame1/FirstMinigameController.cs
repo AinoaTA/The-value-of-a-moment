@@ -22,7 +22,7 @@ public class FirstMinigameController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape) && m_started)
         {
-            GameManager.GetManager().EndMinigame();
+            GameManager.GetManager().StartThirdPersonCamera();
             this.gameObject.SetActive(false);
         }
     }

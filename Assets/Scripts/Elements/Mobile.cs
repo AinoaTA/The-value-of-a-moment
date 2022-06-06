@@ -52,8 +52,7 @@ public class Mobile : Interactables
             }
             else
             {
-                GameManager.GetManager().CanvasManager.Lock();
-                GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+                GameManager.GetManager().StartThirdPersonCamera();
                 CanvasMobile(false);
                 CanvasMultiple(false);
             }

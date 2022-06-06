@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     public bool WaterCanGrabbed { get; set; }
     public DayNightCycle dayNightCycle { get; set; }
     public Mobile mobileReal { get; set; }
+    public Cinemachine.CinemachineStateDrivenCamera stateDriven { get; set; }
 
     public Animator door;
 
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         m_GameManager = this;
+        stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
     }
     private void Start()
     {
@@ -96,10 +98,13 @@ public class GameManager : MonoBehaviour
         {
             currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
 
-            if (currInteractable != null && currInteractable!=lookingInteractable && !currInteractable.GetDone())
+            if (currInteractable != null && currInteractable!=lookingInteractable)
             {
-                lookingInteractable = currInteractable;
-                currInteractable.ShowCanvas();
+                if (currInteractable.options > 1 || !currInteractable.GetDone())
+                {
+                    lookingInteractable = currInteractable;
+                    currInteractable.ShowCanvas();
+                }
             }
             else if (currInteractable == null && lookingInteractable != null)
             {
@@ -130,10 +135,25 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void EndMinigame()
+    #region SetStateGames
+    /// <summary>
+    /// Lock(), ExitInteractable and ChangeState
+    /// </summary>
+    /// <param name="state"></param>
+    public void StartThirdPersonCamera()
+    {
+        //PlayerController.ExitInteractable();
+        CanvasManager.Lock();
+        //ChangeGameState(StateGame.GamePlay);
+        StartCoroutine(EndMiniGameRoutine());
+    }
+
+    IEnumerator EndMiniGameRoutine()
     {
         PlayerController.ExitInteractable();
         CanvasManager.Lock();
+        yield return new WaitForSeconds(0.5f);
         ChangeGameState(StateGame.GamePlay);
     }
+    #endregion
 }

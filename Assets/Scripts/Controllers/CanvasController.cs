@@ -30,9 +30,10 @@ public class CanvasController : MonoBehaviour
 
     public void ComputerScreenOut()
     {
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().StartThirdPersonCamera();
+        //GameManager.GetManager().PlayerController.ExitInteractable();
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        //GameManager.GetManager().CanvasManager.Lock();
         m_activated = false;
         CloseWindow();
     }
@@ -67,17 +68,19 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator DelayFadeClose()
     {
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        yield return new WaitForSeconds(0.5f);
-        ComputerScreen.SetActive(false);
-        if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
-        {
-            m_NotificationCanvas.SetActive(false);
-        }
+        GameManager.GetManager().StartThirdPersonCamera();
+        //GameManager.GetManager().PlayerController.ExitInteractable();
+        //yield return new WaitForSeconds(0.5f);
+        //ComputerScreen.SetActive(false);
+        //if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
+        //{
+        //    m_NotificationCanvas.SetActive(false);
+        //}
         GameManager.GetManager().Autocontrol.ShowAutocontroler(1);
-        NotificationMessage.SetActive(false);
-        MessageOpen.SetActive(false);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        //NotificationMessage.SetActive(false);
+        //MessageOpen.SetActive(false);
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        yield return null;
     }
 
     public void FadeIn()

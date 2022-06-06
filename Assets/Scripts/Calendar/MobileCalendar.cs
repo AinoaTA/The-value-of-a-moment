@@ -34,7 +34,6 @@ public class MobileCalendar : MonoBehaviour
 
         if (content.childCount == 0)
         {
-            
             foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
             {
                 GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);

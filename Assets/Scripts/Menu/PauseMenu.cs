@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using Cinemachine;
@@ -20,12 +19,12 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
         if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay
-            && Input.GetKeyDown(KeyCode.Escape) && !GameManager.GetManager().CanvasManager.m_activated)
+            && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
         {
             PauseGame();
         }
 
-        if(paused && Input.GetKeyDown(KeyCode.Escape))
+        if(paused && Input.GetKeyDown(KeyCode.P))
         {
             ResumeGame();
         }

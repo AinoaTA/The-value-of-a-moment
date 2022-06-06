@@ -52,9 +52,7 @@ public class Plant : Interactables
     {
         if (started && Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-            GameManager.GetManager().CanvasManager.Lock();
+            GameManager.GetManager().StartThirdPersonCamera();
             GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
             started = false;
             waterCan.gameObject.SetActive(false);
@@ -64,16 +62,12 @@ public class Plant : Interactables
     private void FinishInteraction()
     {
         waterCan.GrowUpParticle.Play();
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
         CheckDoneTask();
         GameManager.GetManager().dayNightCycle.TaskDone();
-        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        //GameManager.GetManager().PlayerController.ExitInteractable();
         waterCan.gameObject.SetActive(false);
     }
 

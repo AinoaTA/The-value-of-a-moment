@@ -54,11 +54,8 @@ public class Bed : Interactables
         {
             if(!tutorialShowed)
                 InitTutorial();
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-			{
-                Exit();
-			}
+            print("Bed before");
+            
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
             //print(displacement);
@@ -80,14 +77,20 @@ public class Bed : Interactables
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && gameInitialized)
+        {
+            Exit();
+        }
+    }
     public void Exit()
     {
+        print("HOLA?????");
+        gameInitialized = false;
+        cam.cullingMask = -1;
         minigameCanvas.SetActive(false);
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().CanvasManager.Lock();
-        GameManager.GetManager().EndMinigame();
+        GameManager.GetManager().StartThirdPersonCamera();
     }
     
     private void InitTutorial()
@@ -133,10 +136,8 @@ public class Bed : Interactables
         m_Sheet.SetActive(true);
         m_SheetBad.SetActive(false);
         interactTextBed.SetActive(false);
-        sleepTextBed.transform.localPosition = lastPosDormirText;
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        GameManager.GetManager().CanvasManager.Lock();
+        sleepTextBed.transform.localPosition = lastPosDormirText; 
+        GameManager.GetManager().StartThirdPersonCamera();
 
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
     }

@@ -28,16 +28,17 @@ public class Window : Interactables
 
     private void Update()
     {
-        if(gameInitialized)
+        if (gameInitialized)
         {
-            if(!tutorialShowed)
+            if (!tutorialShowed)
                 InitTutorial();
 
             if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-			{
-				minigameCanvas.SetActive(false);
-				GameManager.GetManager().EndMinigame();
-			}
+            {
+                minigameCanvas.SetActive(false);
+                gameInitialized = false;
+                GameManager.GetManager().StartThirdPersonCamera();
+            }
         }
 
     }
@@ -54,7 +55,7 @@ public class Window : Interactables
     {
         if (gameInitialized && !isOpen)
         {
-            if(tutorialShowed) m_Tutorial.SetActive(false);
+            if (tutorialShowed) m_Tutorial.SetActive(false);
 
             float height = m_Glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
@@ -69,7 +70,7 @@ public class Window : Interactables
             {
                 height = maxHeight;
                 m_Done = isOpen = true;
-                
+
             }
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
         }
@@ -83,13 +84,15 @@ public class Window : Interactables
     #endregion
     private void WindowDone()
     {
+        if (!m_Done)
+            CheckDoneTask();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
-        GameManager.GetManager().EndMinigame();
+        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().OpenDoor();
         minigameCanvas.SetActive(false);
         isOpen = true;
         m_Done = true;
-        CheckDoneTask();
+
         GameManager.GetManager().dayNightCycle.TaskDone();
         if (!temp)
         {
@@ -115,10 +118,10 @@ public class Window : Interactables
             case 1:
                 if (!isOpen)
                     gameInitialized = true;
-                    // Inicia minijuego
-                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                    GameManager.GetManager().CanvasManager.UnLock();
-                    GameManager.GetManager().PlayerController.SetInteractable("Window");
+                // Inicia minijuego
+                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                GameManager.GetManager().CanvasManager.UnLock();
+                GameManager.GetManager().PlayerController.SetInteractable("Window");
                 break;
             case 2:
                 break;
@@ -144,7 +147,7 @@ public class Window : Interactables
         StartCoroutine(ActivateMinigameCanvas());
         StartCoroutine(HideTutorial());
         Animator animator = m_Tutorial.GetComponent<Animator>();
-        if(animator != null) animator.SetBool("show", true);
+        if (animator != null) animator.SetBool("show", true);
         tutorialShowed = true;
     }
 
@@ -185,48 +188,48 @@ public class Window : Interactables
     }
 
     private IEnumerator GoodInteraction()
-	{
-		if (m_PhrasesVoiceOff.Length >= 2)
-		{
-			yield return new WaitForSeconds(2);
-			GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
-			yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-			GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
-			yield return new WaitForSeconds(1.25f);
-			GameManager.GetManager().Dialogue.StopDialogue();
+    {
+        if (m_PhrasesVoiceOff.Length >= 2)
+        {
+            yield return new WaitForSeconds(2);
+            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
+            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
+            yield return new WaitForSeconds(1.25f);
+            GameManager.GetManager().Dialogue.StopDialogue();
 
-			StartCoroutine(NextAction());
-		}
+            StartCoroutine(NextAction());
+        }
     }
 
     private IEnumerator BadInteraction()
     {
-		if (m_PhrasesVoiceOff.Length >= 4)
-		{
-			yield return new WaitForSeconds(2);
-			GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
-			yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-			GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
-			yield return new WaitForSeconds(2);
-			GameManager.GetManager().Dialogue.StopDialogue();
+        if (m_PhrasesVoiceOff.Length >= 4)
+        {
+            yield return new WaitForSeconds(2);
+            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
+            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
+            yield return new WaitForSeconds(2);
+            GameManager.GetManager().Dialogue.StopDialogue();
 
-			StartCoroutine(NextAction());
-		}
+            StartCoroutine(NextAction());
+        }
     }
 
     private IEnumerator NextAction()
     {
-		if (m_PhrasesVoiceOff.Length >= 6)
-		{
-			yield return new WaitForSeconds(2);
-			GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
-			yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-			//GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
-			//yield return new WaitForSeconds(2);
-			//GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
-			//yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-			GameManager.GetManager().Dialogue.StopDialogue();
-		}
+        if (m_PhrasesVoiceOff.Length >= 6)
+        {
+            yield return new WaitForSeconds(2);
+            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
+            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+            //GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
+            //yield return new WaitForSeconds(2);
+            //GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
+            //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+            GameManager.GetManager().Dialogue.StopDialogue();
+        }
     }
     #endregion
 }

@@ -70,14 +70,10 @@ public class Alarm : MonoBehaviour
     }
     public void NormalWakeUp()
     {
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
-
         GameManager.GetManager().PlayerController.PlayerWakeUpPos();
-        
-
         m_Alarm = false;
         ResetTime();
         GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
@@ -86,12 +82,10 @@ public class Alarm : MonoBehaviour
         //Temporal
         if (!temp) 
         {
-
             if (controlPosponer == 0)
                 StartCoroutine(WakeUpDialogue());
             else
                 StartCoroutine(SecondWakeUpDialogue());
-
         }
 
 
