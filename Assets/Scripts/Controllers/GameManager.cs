@@ -59,6 +59,12 @@ public class GameManager : MonoBehaviour
     {
         cam = Camera.main;
         m_CurrentStateGame = StateGame.Init;
+
+        // Log some debug information only if this is a debug build
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("This is a debug build!");
+        }
     }
 
     private void Update()
@@ -152,7 +158,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerController.ExitInteractable();
         CanvasManager.Lock();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         ChangeGameState(StateGame.GamePlay);
     }
     #endregion

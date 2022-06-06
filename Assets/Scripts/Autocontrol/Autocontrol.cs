@@ -18,6 +18,11 @@ public class Autocontrol : MonoBehaviour
         m_Slider.value = m_currentValue / maxValue;
     }
 
+    private void Update()
+    {
+        print(m_currentValue);
+    }
+
     public void AddAutoControl(float value)
     {
         StartCoroutine(AddC(value));

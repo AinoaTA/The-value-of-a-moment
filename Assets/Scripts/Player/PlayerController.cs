@@ -50,9 +50,9 @@ public class PlayerController : MonoBehaviour
 
     public void ExitInteractable()
     {
-        if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
-        {
+        //if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+        //{
             anim.ExitInteractable();
-        }
+        //}
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Plant : Interactables
@@ -53,7 +52,7 @@ public class Plant : Interactables
         if (started && Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.GetManager().StartThirdPersonCamera();
-            GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+           // GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
             started = false;
             waterCan.gameObject.SetActive(false);
         }
@@ -64,6 +63,7 @@ public class Plant : Interactables
         waterCan.GrowUpParticle.Play();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        print("plant");
         m_Done = true;
         started = false;
         CheckDoneTask();
@@ -101,12 +101,12 @@ public class Plant : Interactables
         }
     }
 
-    public override void ExitInteraction()
-    {
-        waterCan.gameObject.SetActive(false);
-        timer = 0;
-        base.ExitInteraction();
-    }
+    //public override void ExitInteraction()
+    //{
+    //    waterCan.gameObject.SetActive(false);
+    //    timer = 0;
+    //    base.ExitInteraction();
+    //}
 
     private IEnumerator ActivateWaterCan()
     {

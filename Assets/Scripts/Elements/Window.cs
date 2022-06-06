@@ -92,7 +92,7 @@ public class Window : Interactables
         minigameCanvas.SetActive(false);
         isOpen = true;
         m_Done = true;
-
+        print("plant");
         GameManager.GetManager().dayNightCycle.TaskDone();
         if (!temp)
         {

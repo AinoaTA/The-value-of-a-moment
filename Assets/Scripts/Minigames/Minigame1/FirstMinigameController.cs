@@ -20,7 +20,7 @@ public class FirstMinigameController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && m_started)
+        if(Input.GetKeyDown(KeyCode.Space) && m_started)
         {
             GameManager.GetManager().StartThirdPersonCamera();
             this.gameObject.SetActive(false);

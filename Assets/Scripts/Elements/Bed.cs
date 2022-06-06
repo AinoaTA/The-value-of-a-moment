@@ -54,7 +54,6 @@ public class Bed : Interactables
         {
             if(!tutorialShowed)
                 InitTutorial();
-            print("Bed before");
             
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
@@ -86,7 +85,6 @@ public class Bed : Interactables
     }
     public void Exit()
     {
-        print("HOLA?????");
         gameInitialized = false;
         cam.cullingMask = -1;
         minigameCanvas.SetActive(false);
@@ -116,7 +114,7 @@ public class Bed : Interactables
 
     private void OnMouseUp()
     {
-        if (m_Done)
+        if (m_Done&& gameInitialized)
             BedDone();
     }
 
@@ -129,6 +127,7 @@ public class Bed : Interactables
 
     public void BedDone()
     {
+        gameInitialized = false;
         minigameCanvas.SetActive(false);
         m_Done = true;
         cam.cullingMask = -1;
@@ -138,7 +137,7 @@ public class Bed : Interactables
         interactTextBed.SetActive(false);
         sleepTextBed.transform.localPosition = lastPosDormirText; 
         GameManager.GetManager().StartThirdPersonCamera();
-
+        print("bed");
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
     }
 
