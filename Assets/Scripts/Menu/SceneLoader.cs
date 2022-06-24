@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
    [SerializeField] private string[] m_LevelNames;
     private string m_LoadingSceneName;
+    private Slider sliderLoading;
+    private bool sliderMoving;
     private void Awake()
     {
         if (GameManager.GetManager().sceneLoader == null)
@@ -62,6 +65,7 @@ public class SceneLoader : MonoBehaviour
             if (fromMenu)
             {
                 StartCoroutine(LoadLoadingSceneFromMenu(m_LoadingSceneName));
+                sliderLoading = FindObjectOfType<MenuController>().loadingSlider;
             }
             else
             {
@@ -101,28 +105,52 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator LoadLoadingSceneFromMenu(string scene)
     {
-        //First load loading scene and save in var
-        //also load loading scene
         yield return new WaitForSeconds(0.5f);
         AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
         l_LoadLevel.allowSceneActivation = false;
         yield return new WaitForSeconds(1f);
-        while (!l_LoadLevel.isDone)
-        {
-            // m_effects.m_TextPercentatge.text = "Loading progress: " + Mathf.Round((l_LoadLevel.progress * 100)) + " %";
-            print("?");
-            if (l_LoadLevel.progress >= 0.9f)
-            {
-                // yield return new WaitForSecondsRealtime(3.5f);
-                yield return new WaitForSeconds(2);
-                l_LoadLevel.allowSceneActivation = true;
-            }
-            yield return null;
-        }
+
+        StartCoroutine(ForcedSlider(0.3f));
+        yield return new WaitUntil(() => !sliderMoving);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(ForcedSlider(0.8f));
+        yield return new WaitUntil(() => !sliderMoving);
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => l_LoadLevel.progress >= 0.9f);
+        StartCoroutine(ForcedSlider(1f));
+        yield return new WaitUntil(() => !sliderMoving);
+        yield return new WaitForSeconds(0.75f);
+        l_LoadLevel.allowSceneActivation = true;
+
+        //while (!l_LoadLevel.isDone)
+        //{
+        //    if (l_LoadLevel.progress >= 0.9f)
+        //    { 
+        //        yield return new WaitForSeconds(2f);
+        //        l_LoadLevel.allowSceneActivation = true;
+        //    }
+        //    yield return null;
+        //}
         //l_LoadLevel.completed += (asyncOperation) =>
         //{
         //    GameManager.GetManager().GetLevelData().m_GameStarted = true;
         //    StartCoroutine(GameManager.GetManager().StartGame());
         //};
+
+        IEnumerator ForcedSlider(float val)
+        {
+            sliderMoving = true;
+            float t = 0;
+            float curr=sliderLoading.value;
+            while(t<1f)
+            {
+                t += Time.deltaTime;
+                sliderLoading.value = Mathf.Lerp(curr, val, t / 1f);
+
+                print(sliderLoading.value);
+                yield return null;
+            }
+            sliderMoving = false;
+        }
     }
 }

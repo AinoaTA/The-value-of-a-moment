@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     public AudioSource MusicAudio;
+    public CanvasGroup loading, menuButtons;
+    public Slider loadingSlider;
    // public Animator m_Anim;
 
     private void Start()
@@ -37,12 +40,12 @@ public class MenuController : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
-
+        menuButtons.gameObject.SetActive(false);
+        StartCoroutine(CanvasGroupLoading(loading,1));
         StartCoroutine(DecreaseAudioCo());
-        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, false);
-        yield return null;//new WaitForSeconds(1f);
-       
-        //SceneManager.LoadScene(i);
+        yield return new WaitForSeconds(0.35f);
+        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, true);
+        yield return null;
     }
 
     private IEnumerator DecreaseAudioCo()
@@ -68,6 +71,18 @@ public class MenuController : MonoBehaviour
 
             MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 1.5f);
 
+            yield return null;
+        }
+    }
+
+    IEnumerator CanvasGroupLoading(CanvasGroup canvas, float alpha)
+    {
+        float t = 0;
+        float currAlpha = canvas.alpha;
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / 0.3f);
             yield return null;
         }
     }
