@@ -5,22 +5,34 @@ using System.Collections;
 public class Autocontrol : MonoBehaviour
 {
     private float maxValue = 100f;
-
-    private float m_currentValue = 20;
+    CanvasGroup canvasGroup;
+    private float m_currentValue = 10;
     public Slider m_Slider;
 
-    Image[] img;
+    public Image stateImage;
+    public Image backgroundBar;
+    public Sprite[] statesColor;
+    public Sprite[] barBackGroundColor;
 
+    public ParticleSystem particles;
+    public RawImage rawImage;
+    public RenderTexture renderTexture;
+    [SerializeField]private Vector2Int renderTextureResolution;
+    public Camera particlesCamera;
+    private void Awake()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
     private void Start()
     {
         GameManager.GetManager().Autocontrol = this;
-        img = GetComponentsInChildren<Image>();
+        renderTextureResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
+        renderTexture = new RenderTexture(renderTextureResolution.x, renderTextureResolution.y,32);
+        particlesCamera.targetTexture = renderTexture;
+        rawImage.texture = renderTexture;
         m_Slider.value = m_currentValue / maxValue;
-    }
+        UpdateAutcontrol();
 
-    private void Update()
-    {
-        print(m_currentValue);
     }
 
     public void AddAutoControl(float value)
@@ -35,6 +47,8 @@ public class Autocontrol : MonoBehaviour
 
     IEnumerator RemoveC(float value)
     {
+        particles.Play();
+       
         for (int i = 0; i < value; i++)
         {
             if (m_currentValue > 0)
@@ -42,36 +56,67 @@ public class Autocontrol : MonoBehaviour
 
             m_Slider.value = m_currentValue / maxValue;
 
+            UpdateAutcontrol();
+
+
             yield return null;
         }
+        yield return new WaitForSeconds(1);
+        particles.Stop();
 
 
     }
 
     IEnumerator AddC(float value)
     {
+        particles.Play();
         for (int i = 0; i < value; i++)
         {
             if (m_currentValue < maxValue)
                 m_currentValue += 1;
 
             m_Slider.value = m_currentValue / maxValue;
-
+            UpdateAutcontrol();
             yield return null;
         }
+        yield return new WaitForSeconds(1);
+        particles.Stop();
     }
 
+    private void UpdateAutcontrol() 
+    {
+        if (m_Slider.value <= 0.3f)
+        {
+            stateImage.sprite = statesColor[0];
+            backgroundBar.sprite = barBackGroundColor[0];
+        }
+        else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
+        {
+            stateImage.sprite = statesColor[1];
+            backgroundBar.sprite = barBackGroundColor[1];
 
+        }
+        else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
+        {
+            stateImage.sprite = statesColor[2];
+            backgroundBar.sprite = barBackGroundColor[2];
+
+        }
+        else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)
+        {
+            stateImage.sprite = statesColor[3];
+            backgroundBar.sprite = barBackGroundColor[3];
+
+        }
+
+    }
     /// <summary>
     /// 0 or 1 value.
     /// </summary>
     /// <param name="val"></param>
     public void ShowAutocontroler(int val = 0)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            img[i].color = new Color(img[i].color.r, img[i].color.g, img[i].color.b, val);
-        }
+        canvasGroup.alpha = val;
     }
 
 }
