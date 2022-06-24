@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public LayerMask m_LayerMask;
     public LayerMask m_WallMask;
-    private Camera cam;
+    public Camera cam { private get;  set; }
     [SerializeField] private float m_Distance = 30f;
 
     [SerializeField] private Interactables currInteractable;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public Mobile mobileReal { get; set; }
     public Cinemachine.CinemachineStateDrivenCamera stateDriven { get; set; }
     public SceneLoader sceneLoader { get; set; }
+    public CameraController cameraController { get; set; }
     public LevelData levelData { get; set; }
 
     //public Animator door;
@@ -67,15 +68,11 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        cam = Camera.main;
+       // cam = Camera.main;
         m_CurrentStateGame = StateGame.Init;
-
-        // Log some debug information only if this is a debug build
-        if (Debug.isDebugBuild)
-        {
-            Debug.Log("This is a debug build!");
-        }
     }
+
+   
 
     private void Update()
     {

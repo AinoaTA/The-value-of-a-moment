@@ -147,7 +147,6 @@ public class SceneLoader : MonoBehaviour
                 t += Time.deltaTime;
                 sliderLoading.value = Mathf.Lerp(curr, val, t / 1f);
 
-                print(sliderLoading.value);
                 yield return null;
             }
             sliderMoving = false;

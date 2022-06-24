@@ -9,13 +9,14 @@ public class MenuController : MonoBehaviour
     public AudioSource MusicAudio;
     public CanvasGroup loading, menuButtons;
     public Slider loadingSlider;
+    private IEnumerator routine;
    // public Animator m_Anim;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        StartCoroutine(IcreaseAudioCo());
+        StartCoroutine(routine=IcreaseAudioCo());
     }
     public void StartGame()
     {
@@ -50,6 +51,7 @@ public class MenuController : MonoBehaviour
 
     private IEnumerator DecreaseAudioCo()
     {
+        StopCoroutine(routine);
         float counter = 0f;
 
         while (counter < 0.5f)
@@ -65,11 +67,11 @@ public class MenuController : MonoBehaviour
     {
         float counter = 0f;
 
-        while (counter < 5f)
+        while (counter < 4f)
         {
             counter += Time.deltaTime;
 
-            MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 1.5f);
+            MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 4f);
 
             yield return null;
         }
@@ -79,10 +81,10 @@ public class MenuController : MonoBehaviour
     {
         float t = 0;
         float currAlpha = canvas.alpha;
-        while (t < 0.3f)
+        while (t < 1f)
         {
             t += Time.deltaTime;
-            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / 0.3f);
+            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / 1f);
             yield return null;
         }
     }
