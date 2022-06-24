@@ -39,8 +39,9 @@ public class MenuController : MonoBehaviour
     {
 
         StartCoroutine(DecreaseAudioCo());
-        yield return new WaitForSeconds(1f);
         GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, false);
+        yield return null;//new WaitForSeconds(1f);
+       
         //SceneManager.LoadScene(i);
     }
 
