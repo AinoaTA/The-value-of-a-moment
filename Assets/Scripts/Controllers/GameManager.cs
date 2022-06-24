@@ -45,14 +45,24 @@ public class GameManager : MonoBehaviour
     public DayNightCycle dayNightCycle { get; set; }
     public Mobile mobileReal { get; set; }
     public Cinemachine.CinemachineStateDrivenCamera stateDriven { get; set; }
+    public SceneLoader sceneLoader { get; set; }
+    public LevelData levelData { get; set; }
 
-    public Animator door;
+    //public Animator door;
 
     public static GameManager GetManager() => m_GameManager;
 
     private void Awake()
     {
-        m_GameManager = this;
+        if (m_GameManager == null)
+        {
+            m_GameManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (m_GameManager != this)
+        {
+            Destroy(gameObject);
+        }
         stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
     }
     private void Start()
@@ -137,7 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        door.SetTrigger("Open");
+      // door.SetTrigger("Open");
     }
 
 

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     public AudioSource MusicAudio;
-    public Animator m_Anim;
+   // public Animator m_Anim;
 
     private void Start()
     {
@@ -22,22 +22,26 @@ public class MenuController : MonoBehaviour
 
     public void OptionsMenu()
     {
-        m_Anim.SetTrigger("Options");
+       // m_Anim.SetTrigger("Options");
         
     }
     public void OptionsBack()
     {
-        m_Anim.SetTrigger("Menu");
+       // m_Anim.SetTrigger("Menu");
 
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private IEnumerator LoadScene()
     {
 
         StartCoroutine(DecreaseAudioCo());
-        int i = SceneManager.GetActiveScene().buildIndex + 1;
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(i);
+        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, false);
+        //SceneManager.LoadScene(i);
     }
 
     private IEnumerator DecreaseAudioCo()
