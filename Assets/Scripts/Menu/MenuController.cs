@@ -10,6 +10,7 @@ public class MenuController : MonoBehaviour
     public CanvasGroup loading, menuButtons;
     public Slider loadingSlider;
     private IEnumerator routine;
+    public Animator anim;
    // public Animator m_Anim;
 
     private void Start()
@@ -27,11 +28,13 @@ public class MenuController : MonoBehaviour
     public void OptionsMenu()
     {
        // m_Anim.SetTrigger("Options");
+       anim.Play("Show");
         
     }
     public void OptionsBack()
     {
-       // m_Anim.SetTrigger("Menu");
+        // m_Anim.SetTrigger("Menu");
+        anim.Play("Hide");
 
     }
     public void ExitGame()
