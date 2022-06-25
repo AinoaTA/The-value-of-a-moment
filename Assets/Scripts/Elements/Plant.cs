@@ -9,7 +9,7 @@ public class Plant : Interactables
     public WaterCan waterCan;
     Vector3 wateringInitialPos;
 
-    private float timer;
+    [SerializeField]private float timer;
     [SerializeField] private float maxTimer = 3f;
     private int currProcess=0;
     public GameObject[] m_process;
@@ -60,6 +60,7 @@ public class Plant : Interactables
 
     private void FinishInteraction()
     {
+
         waterCan.GrowUpParticle.Play();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
@@ -71,16 +72,26 @@ public class Plant : Interactables
         waterCan.gameObject.SetActive(false);
     }
 
-
+    public override void ResetInteractable()
+    {
+        base.ResetInteractable();
+        waterCan.ResetWaterCan();
+        timer = 0;
+        started = false;
+    }
     public void NextDay()
     {
         //grow
         if (m_Done)
         {
             waterCan.GrowUpParticle.Stop();
-            m_process[currProcess].SetActive(false);
-            currProcess++;
-            m_process[currProcess].SetActive(true);
+            if (currProcess < m_process.Length)
+            {
+                m_process[currProcess].SetActive(false);
+                currProcess++;
+                waterCan.GrowUpParticle.Play();
+                m_process[currProcess].SetActive(true);
+            }
         }
         //else //else no grow. future option.
         //{ 

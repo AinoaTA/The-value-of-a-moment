@@ -190,7 +190,7 @@ public class Bed : Interactables
 
     private IEnumerator DelayReset()
     {
-        GameManager.GetManager().SoundController.QuitMusic();
+        GameManager.GetManager().SoundController.QuitAllMusic();
         yield return new WaitForSeconds(0.5f);
 
         GameManager.GetManager().PlayerController.SetInteractable("Alarm");

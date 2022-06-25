@@ -83,7 +83,7 @@ public class Autocontrol : MonoBehaviour
         particles.Stop();
     }
 
-    private void UpdateAutcontrol() 
+    public void UpdateAutcontrol() 
     {
         if (m_Slider.value <= 0.3f)
         {
@@ -95,14 +95,14 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
-
+            GameManager.GetManager().SoundController.ChangeMusicMood(1);
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
 
-            GameManager.GetManager().SoundController.ChangeMusicMood(1);
+            GameManager.GetManager().SoundController.ChangeMusicMood(2);
 
         }
         else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)
