@@ -61,7 +61,7 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         m_DelegateSFX?.Invoke();
-        GameManager.GetManager().SoundController.QuitMusic();
+        GameManager.GetManager().SoundController.QuitAllMusic();
 
         CanvasAlarm.SetActive(true);
         m_Timer = 0;

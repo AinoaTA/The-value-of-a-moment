@@ -15,12 +15,12 @@ public class SoundController : MonoBehaviour
 
     public AudioClip[] introMusic;
     public AudioClip[] loopMusic;
-    public float[] timingsIntroLoop;
-    private int currIndex;
+    private int currIndex = 0;
 
     void Start()
     {
         GameManager.GetManager().SoundController = this;
+
         introLoop.volume = 0;
     }
 
@@ -60,12 +60,32 @@ public class SoundController : MonoBehaviour
     }
     public void SetMusic()
     {
-        StartCoroutine(IcreaseAudioCo(0));
+        StartCoroutine(SetMusicDelay());
+        
     }
 
-    public void QuitMusic()
+    IEnumerator SetMusicDelay()
     {
+        yield return null;
+        if (currIndex > 0)
+        {
+            currIndex = 5;
+            GameManager.GetManager().Autocontrol.UpdateAutcontrol();
+        }
+        else
+            StartCoroutine(StartSaddest());
+    }
+
+    public void QuitMusic(AudioSource source)
+    {
+        StartCoroutine(DecreaseAudioCo(source));
+    }
+    public void QuitAllMusic()
+    {
+        StopAllCoroutines();
+        
         StartCoroutine(DecreaseAudioCo(introLoop));
+        StartCoroutine(DecreaseAudioCo(loop));
     }
 
     public void DialogueSound()
@@ -85,23 +105,20 @@ public class SoundController : MonoBehaviour
         source.Stop();
     }
     private IEnumerator IcreaseAudioCo(int index)
-    {
-       
-           currIndex = index;
-       // introLoop.gameObject.SetActive(true);
+    { 
+        // introLoop.gameObject.SetActive(true);
         float counter = 0f;
         introLoop.clip = introMusic[index];
-        
         loop.clip = loopMusic[index];
 
         introLoop.Play();
+        print("dormir");
         while (counter < 4f)
         {
             counter += Time.deltaTime;
             introLoop.volume = Mathf.Lerp(0f, 1f, counter / 4);
             yield return null;
         }
-
         yield return new WaitUntil(() => !introLoop.isPlaying);
         loop.volume = 1;
         loop.Play();
@@ -115,9 +132,31 @@ public class SoundController : MonoBehaviour
     {
         if (currIndex != index)
         {
+            currIndex = index;
             StartCoroutine(DecreaseAudioCo(loop));
             yield return new WaitUntil(() => !loop.isPlaying);
-            StartCoroutine(IcreaseAudioCo(index));
+            if (index == 0)
+                StartCoroutine(StartSaddest());
+            else
+            {
+                print(index);
+                StartCoroutine(IcreaseAudioCo(index));
+            }
+        }
+    }
+
+    IEnumerator StartSaddest()
+    {
+        currIndex = 0;
+        float counter = 0;
+        loop.volume = 0;
+        loop.clip = loopMusic[0];
+        loop.Play();
+        while (counter < 3)
+        {
+            counter += Time.deltaTime;
+            loop.volume = Mathf.Lerp(0f, 1f, counter / 3);
+            yield return null;
         }
     }
 }
