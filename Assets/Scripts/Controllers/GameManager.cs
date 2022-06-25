@@ -72,8 +72,6 @@ public class GameManager : MonoBehaviour
         m_CurrentStateGame = StateGame.Init;
     }
 
-   
-
     private void Update()
     {
         if (m_CurrentStateGame != StateGame.GamePlay)
