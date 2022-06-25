@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
-    private AudioSource m_AudioSource;
-    public AudioSource m_ExtraSFX; 
+    public AudioSource m_ExtraSFX1;
+    public AudioSource m_ExtraSFX;
 
-    public AudioSource m_GlobalSource;
+    public AudioSource introLoop, loop;
     public AudioClip m_Message;
     public AudioClip m_Alarm;
     public AudioClip m_Book;
     public AudioClip dialogueBlip;
     private bool Active;
 
-    private void Awake()
-    {
-        m_AudioSource = GetComponent<AudioSource>();    
-    }
+    public AudioClip[] introMusic;
+    public AudioClip[] loopMusic;
+    public float[] timingsIntroLoop;
+    private int currIndex;
+
     void Start()
     {
         GameManager.GetManager().SoundController = this;
-        m_GlobalSource.volume = 0;
-        m_GlobalSource.gameObject.SetActive(false);
+        introLoop.volume = 0;
     }
 
     private void OnEnable()
@@ -42,30 +42,30 @@ public class SoundController : MonoBehaviour
 
     public void StartMessage()
     {
-        m_AudioSource.PlayOneShot(m_Message);
+        m_ExtraSFX1.PlayOneShot(m_Message);
     }
 
     public void StartAlarm()
     {
-        m_AudioSource.PlayOneShot(m_Alarm);
+        m_ExtraSFX1.PlayOneShot(m_Alarm);
     }
 
     public void StartBook()
     {
-        m_AudioSource.PlayOneShot(m_Book);
+        m_ExtraSFX1.PlayOneShot(m_Book);
     }
     public void StopSound()
     {
-        m_AudioSource.Stop();// = null;
+        m_ExtraSFX1.Stop();
     }
     public void SetMusic()
     {
-        StartCoroutine(IcreaseAudioCo());
+        StartCoroutine(IcreaseAudioCo(0));
     }
 
     public void QuitMusic()
     {
-        StartCoroutine(DecreaseAudioCo());
+        StartCoroutine(DecreaseAudioCo(introLoop));
     }
 
     public void DialogueSound()
@@ -73,34 +73,52 @@ public class SoundController : MonoBehaviour
         m_ExtraSFX.PlayOneShot(dialogueBlip);
     }
 
-    private IEnumerator DecreaseAudioCo()
+    private IEnumerator DecreaseAudioCo(AudioSource source)
     {
         float counter = 0f;
-        while (counter < 0.5f)
+        while (counter < 0.5)
         {
             counter += Time.deltaTime;
-
-            m_GlobalSource.volume = Mathf.Lerp(1f, 0f, counter / 0.5f);
-
+            source.volume = Mathf.Lerp(1f, 0f, counter / 0.5f);
             yield return null;
         }
-        m_GlobalSource.gameObject.SetActive(false);
+        source.Stop();
     }
-    private IEnumerator IcreaseAudioCo()
+    private IEnumerator IcreaseAudioCo(int index)
     {
+       
+           currIndex = index;
+       // introLoop.gameObject.SetActive(true);
         float counter = 0f;
-        m_GlobalSource.gameObject.SetActive(true);
+        introLoop.clip = introMusic[index];
+        
+        loop.clip = loopMusic[index];
 
-        m_GlobalSource.Play();
-        while (counter < 5f)
+        introLoop.Play();
+        while (counter < 4f)
         {
             counter += Time.deltaTime;
-
-            m_GlobalSource.volume = Mathf.Lerp(0f, 1f, counter / 1.5f);
-
+            introLoop.volume = Mathf.Lerp(0f, 1f, counter / 4);
             yield return null;
         }
+
+        yield return new WaitUntil(() => !introLoop.isPlaying);
+        loop.volume = 1;
+        loop.Play();
     }
 
+    public void ChangeMusicMood(int index)
+    {
+        StartCoroutine(ChangeMusic(index));
+    }
+    private IEnumerator ChangeMusic(int index)
+    {
+        if (currIndex != index)
+        {
+            StartCoroutine(DecreaseAudioCo(loop));
+            yield return new WaitUntil(() => !loop.isPlaying);
+            StartCoroutine(IcreaseAudioCo(index));
+        }
+    }
 }
 

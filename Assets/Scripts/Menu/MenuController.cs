@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     public AudioSource MusicAudio;
-    public Animator m_Anim;
+    public CanvasGroup loading, menuButtons;
+    public Slider loadingSlider;
+    private IEnumerator routine;
+   // public Animator m_Anim;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        StartCoroutine(IcreaseAudioCo());
+        StartCoroutine(routine=IcreaseAudioCo());
     }
     public void StartGame()
     {
@@ -22,26 +26,32 @@ public class MenuController : MonoBehaviour
 
     public void OptionsMenu()
     {
-        m_Anim.SetTrigger("Options");
+       // m_Anim.SetTrigger("Options");
         
     }
     public void OptionsBack()
     {
-        m_Anim.SetTrigger("Menu");
+       // m_Anim.SetTrigger("Menu");
 
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private IEnumerator LoadScene()
     {
-
+        menuButtons.gameObject.SetActive(false);
+        StartCoroutine(CanvasGroupLoading(loading,1));
         StartCoroutine(DecreaseAudioCo());
-        int i = SceneManager.GetActiveScene().buildIndex + 1;
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(i);
+        yield return new WaitForSeconds(0.35f);
+        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, true);
+        yield return null;
     }
 
     private IEnumerator DecreaseAudioCo()
     {
+        StopCoroutine(routine);
         float counter = 0f;
 
         while (counter < 0.5f)
@@ -57,12 +67,24 @@ public class MenuController : MonoBehaviour
     {
         float counter = 0f;
 
-        while (counter < 5f)
+        while (counter < 4f)
         {
             counter += Time.deltaTime;
 
-            MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 1.5f);
+            MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 4f);
 
+            yield return null;
+        }
+    }
+
+    IEnumerator CanvasGroupLoading(CanvasGroup canvas, float alpha)
+    {
+        float t = 0;
+        float currAlpha = canvas.alpha;
+        while (t < 1f)
+        {
+            t += Time.deltaTime;
+            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / 1f);
             yield return null;
         }
     }

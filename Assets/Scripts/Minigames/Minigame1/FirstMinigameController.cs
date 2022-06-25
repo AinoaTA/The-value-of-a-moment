@@ -11,6 +11,7 @@ public class FirstMinigameController : MonoBehaviour
     private bool m_Solved = false;
     private bool m_AllCorrected;
     public bool m_started;
+    public float m_Autocontrol=5;
 
     void Start()
     {
@@ -20,21 +21,20 @@ public class FirstMinigameController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && m_started)
-        {
-            GameManager.GetManager().StartThirdPersonCamera();
-            this.gameObject.SetActive(false);
-        }
+        //if(Input.GetKeyDown(KeyCode.Escape) && m_started)
+        //{
+        //    GameManager.GetManager().StartThirdPersonCamera();
+        //    this.gameObject.SetActive(false);
+        //}
     }
 
     private IEnumerator GameFinished()
     {
         print("game completed");
-        GameManager.GetManager().Autocontrol.AddAutoControl(14);
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
         m_Solved = true;
         m_started = false;
         yield return new WaitForSeconds(2f);
-        
         GameManager.GetManager().CanvasManager.FinishMiniGame();
     }
 

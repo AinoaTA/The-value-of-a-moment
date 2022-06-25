@@ -30,10 +30,10 @@ public class CanvasController : MonoBehaviour
 
     public void ComputerScreenOut()
     {
+        FirstMinigameCanvas.SetActive(false);
+        // FirstMinigameCanvas.GetComponent<FirstMinigameController>().re
+        // GameManager.GetManager().ProgramMinigame.
         GameManager.GetManager().StartThirdPersonCamera();
-        //GameManager.GetManager().PlayerController.ExitInteractable();
-        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        //GameManager.GetManager().CanvasManager.Lock();
         m_activated = false;
         CloseWindow();
     }
@@ -69,9 +69,8 @@ public class CanvasController : MonoBehaviour
     private IEnumerator DelayFadeClose()
     {
         GameManager.GetManager().StartThirdPersonCamera();
-        //GameManager.GetManager().PlayerController.ExitInteractable();
-        //yield return new WaitForSeconds(0.5f);
-        //ComputerScreen.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        ComputerScreen.SetActive(false);
         //if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
         //{
         //    m_NotificationCanvas.SetActive(false);
@@ -80,7 +79,6 @@ public class CanvasController : MonoBehaviour
         //NotificationMessage.SetActive(false);
         //MessageOpen.SetActive(false);
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-        yield return null;
     }
 
     public void FadeIn()
@@ -111,7 +109,6 @@ public class CanvasController : MonoBehaviour
 
     public void FinishMiniGame()
     {
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         FirstMinigameCanvas.SetActive(false);
     }
 

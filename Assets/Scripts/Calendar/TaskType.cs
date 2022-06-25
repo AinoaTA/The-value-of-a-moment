@@ -4,11 +4,11 @@ using TMPro;
 public class TaskType : MonoBehaviour
 {
     [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
-    public Color[] colors;
+    public Sprite[] colors;
     public Color enterColor;
     public Interactables interactableAttached;
     private Image sprite;
-    public enum Task { Work, Ocio, Clean, Autocuidado }
+    public enum Task { Work, Ocio, Basic}
     public Task task;
     public string nameTask;
     private TMP_Text text;
@@ -31,7 +31,7 @@ public class TaskType : MonoBehaviour
     {
         text.text = nameTask;
         interactableAttached.taskAssociated = this;
-        sprite.color = colors[(int)task];
+        sprite.sprite = colors[(int)task];
     }
     public void ClicEnter()
     {
@@ -42,27 +42,24 @@ public class TaskType : MonoBehaviour
     public void ClicExit()
     {
         if (!done)
-            sprite.color = colors[(int)task];
+            sprite.color = Color.white;//colors[(int)task];
     }
 
     public void SelectTask()
-    {
-        print("select begin drag");
+    { 
         oldParent = transform.parent;
         transform.SetParent(GameManager.GetManager().calendarController.TaskMovement);
     }
 
     public void DragTask()
     {
-        transform.position = Input.mousePosition;
-        print("drag");
+        transform.position = Input.mousePosition; 
     }
 
     public void DropTask()
     {
         if (!InAnySpaceCalendar)
-        {
-            print("drop no calendar");
+        { 
             transform.SetParent(parentTransform);
             sprite.maskable = true;
         }
@@ -84,7 +81,7 @@ public class TaskType : MonoBehaviour
     public void ResetTask()
     {
         transform.SetParent(content);
-        sprite.color = colors[(int)task];
+        sprite.sprite = colors[(int)task];
         sprite.maskable = true;
     }
 }

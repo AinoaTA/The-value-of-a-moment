@@ -8,8 +8,8 @@ public class MobileCalendar : MonoBehaviour
     public Transform content;
     public GameObject prefab;
     public GameObject selected, noselected;
-    public TMP_Text textTime;
-
+    public Image bgDay; 
+    public Sprite[] timeDaySprites;
     private void OnEnable()
     {
         TaskType.taskDelegate += TaskDone;
@@ -21,7 +21,7 @@ public class MobileCalendar : MonoBehaviour
     }
     public void OpenCalendar()
     {
-        textTime.text = "Hora del día: " + GameManager.GetManager().dayNightCycle.m_DayState.ToString();
+        bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayNightCycle.m_DayState];
         if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
         {
             noselected.SetActive(true);
@@ -56,7 +56,6 @@ public class MobileCalendar : MonoBehaviour
         {
             Destroy(content.GetChild(i).gameObject);
         }
-    
     }
 
     public void TaskDone(TaskType tipe)
