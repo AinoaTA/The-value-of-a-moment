@@ -121,7 +121,7 @@ public class CanvasController : MonoBehaviour
 
     public void UnLock()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Pointer.SetActive(false);
     }
