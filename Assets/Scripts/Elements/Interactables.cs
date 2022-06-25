@@ -12,7 +12,6 @@ public class Interactables : MonoBehaviour
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
 
     [Header("Calendar extra")]
-    public bool m_DoneByCalendar;
     public float m_ExtraAutoControlCalendar;
     public TaskType taskAssociated;
 
@@ -30,9 +29,9 @@ public class Interactables : MonoBehaviour
 
     private void Start()
     {
-        if (this.gameObject.GetComponent<Renderer>() != null)
+        if (gameObject.GetComponent<Renderer>() != null)
         {
-            m_Material = this.gameObject.GetComponent<Renderer>().materials;
+            m_Material = gameObject.GetComponent<Renderer>().materials;
         }
     }
 
@@ -63,15 +62,15 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseOver()
     {
-        // Debug.Log($"Mouse is over {this.gameObject}");
+        //// Debug.Log($"Mouse is over {this.gameObject}");
 
-        if(m_Material != null && m_Material.Length > 0)
-        {
-            foreach (var material in this.gameObject.GetComponent<Renderer>().materials)
-            {
-                // material.color = Color.red;
-            }
-        }
+        //if(m_Material != null && m_Material.Length > 0)
+        //{
+        //    foreach (var material in this.gameObject.GetComponent<Renderer>().materials)
+        //    {
+        //        // material.color = Color.red;
+        //    }
+        //}
     }
 
     private void OnMouseExit()
@@ -88,11 +87,13 @@ public class Interactables : MonoBehaviour
 
     public void CheckDoneTask()
     {
-        if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+        if(taskAssociated != null && !GetDone())
         {
-            m_DoneByCalendar = true;
-            taskAssociated.Done();
-            GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
+            if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                taskAssociated.Done();
+                GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ public class MobileCalendar : MonoBehaviour
     public GameObject selected, noselected;
     public TMP_Text textTime;
 
-
     private void OnEnable()
     {
         TaskType.taskDelegate += TaskDone;
@@ -22,7 +21,7 @@ public class MobileCalendar : MonoBehaviour
     }
     public void OpenCalendar()
     {
-
+        textTime.text = "Hora del día: " + GameManager.GetManager().dayNightCycle.m_DayState.ToString();
         if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
         {
             noselected.SetActive(true);
@@ -30,13 +29,11 @@ public class MobileCalendar : MonoBehaviour
         }
         else
         {
-            textTime.text = "Hora del día: "+ GameManager.GetManager().dayNightCycle.m_DayState.ToString();
             selected.SetActive(true);
         }
 
         if (content.childCount == 0)
         {
-            
             foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
             {
                 GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
@@ -52,6 +49,14 @@ public class MobileCalendar : MonoBehaviour
         selected.SetActive(false);
         noselected.SetActive(false);
         //gameObject.transform.parent.gameObject.SetActive(false);
+    }
+    public void ResetCalendar()
+    {
+        for (int i = 0; i < content.childCount; i++)
+        {
+            Destroy(content.GetChild(i).gameObject);
+        }
+    
     }
 
     public void TaskDone(TaskType tipe)

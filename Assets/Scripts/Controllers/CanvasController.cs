@@ -13,11 +13,11 @@ public class CanvasController : MonoBehaviour
 
     public GameObject Pointer;
 
-    private bool m_activated;
+    public bool m_activated;
     private void Start()
     {
         GameManager.GetManager().CanvasManager = this;
-        //Lock();
+        Lock();
         Debug.Log("there is a Lock() commented here");
         m_activated = false;
         Pointer.SetActive(false);
@@ -27,15 +27,15 @@ public class CanvasController : MonoBehaviour
         FadeInScreen.SetActive(true);
         StartCoroutine(DelayFadeComputer());
     }
-    private void Update()
+
+    public void ComputerScreenOut()
     {
-        if (m_activated && Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-            GameManager.GetManager().CanvasManager.Lock();
-            CloseWindow();
-        }
+        GameManager.GetManager().StartThirdPersonCamera();
+        //GameManager.GetManager().PlayerController.ExitInteractable();
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        //GameManager.GetManager().CanvasManager.Lock();
+        m_activated = false;
+        CloseWindow();
     }
     public void ComputerScreenIn()
     {
@@ -68,17 +68,19 @@ public class CanvasController : MonoBehaviour
 
     private IEnumerator DelayFadeClose()
     {
-        GameManager.GetManager().PlayerController.ExitInteractable();
-        yield return new WaitForSeconds(0.5f);
-        ComputerScreen.SetActive(false);
-        if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
-        {
-            m_NotificationCanvas.SetActive(false);
-        }
+        GameManager.GetManager().StartThirdPersonCamera();
+        //GameManager.GetManager().PlayerController.ExitInteractable();
+        //yield return new WaitForSeconds(0.5f);
+        //ComputerScreen.SetActive(false);
+        //if (!GameManager.GetManager().NotificationController.m_CurrentNotRead)
+        //{
+        //    m_NotificationCanvas.SetActive(false);
+        //}
         GameManager.GetManager().Autocontrol.ShowAutocontroler(1);
-        NotificationMessage.SetActive(false);
-        MessageOpen.SetActive(false);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        //NotificationMessage.SetActive(false);
+        //MessageOpen.SetActive(false);
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        yield return null;
     }
 
     public void FadeIn()
@@ -101,6 +103,7 @@ public class CanvasController : MonoBehaviour
     {
         if (!GameManager.GetManager().ProgramMinigame.GetSolved())
         {
+            GameManager.GetManager().ProgramMinigame.m_started = true;
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             FirstMinigameCanvas.SetActive(true);
         }
@@ -114,7 +117,7 @@ public class CanvasController : MonoBehaviour
 
     public void Lock()
     {
-        Pointer.SetActive(GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay);
+        Pointer.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

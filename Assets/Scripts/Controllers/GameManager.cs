@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     public bool WaterCanGrabbed { get; set; }
     public DayNightCycle dayNightCycle { get; set; }
     public Mobile mobileReal { get; set; }
+    public Cinemachine.CinemachineStateDrivenCamera stateDriven { get; set; }
 
     public Animator door;
 
@@ -52,11 +53,18 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         m_GameManager = this;
+        stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
     }
     private void Start()
     {
         cam = Camera.main;
         m_CurrentStateGame = StateGame.Init;
+
+        // Log some debug information only if this is a debug build
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("This is a debug build!");
+        }
     }
 
     private void Update()
@@ -68,7 +76,6 @@ public class GameManager : MonoBehaviour
         {
             if (currInteractable != null && currInteractable.showing)
             {
-                print("interactuando button");
                 currInteractable.HideCanvas();
                 currInteractable.Interaction(1);
                 currInteractable = null;
@@ -99,8 +106,11 @@ public class GameManager : MonoBehaviour
 
             if (currInteractable != null && currInteractable!=lookingInteractable)
             {
-                lookingInteractable = currInteractable;
-                currInteractable.ShowCanvas();
+                if (currInteractable.options > 1 || !currInteractable.GetDone())
+                {
+                    lookingInteractable = currInteractable;
+                    currInteractable.ShowCanvas();
+                }
             }
             else if (currInteractable == null && lookingInteractable != null)
             {
@@ -131,10 +141,25 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void EndMinigame()
+    #region SetStateGames
+    /// <summary>
+    /// Lock(), ExitInteractable and ChangeState
+    /// </summary>
+    /// <param name="state"></param>
+    public void StartThirdPersonCamera()
+    {
+        //PlayerController.ExitInteractable();
+        CanvasManager.Lock();
+        //ChangeGameState(StateGame.GamePlay);
+        StartCoroutine(EndMiniGameRoutine());
+    }
+
+    IEnumerator EndMiniGameRoutine()
     {
         PlayerController.ExitInteractable();
         CanvasManager.Lock();
-        ChangeGameState(GameManager.StateGame.GamePlay);
+        yield return new WaitForSeconds(1f);
+        ChangeGameState(StateGame.GamePlay);
     }
+    #endregion
 }

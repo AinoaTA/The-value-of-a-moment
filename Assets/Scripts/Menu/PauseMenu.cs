@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using Cinemachine;
@@ -7,8 +6,6 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseCanvas;
     public CinemachineVirtualCamera virtualCamera3D;
-    public float pausedScale = 0;
-    public float resumeScale = 1;
 
     private bool paused = false;
 
@@ -19,12 +16,13 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.MiniGame && Input.GetKeyDown(KeyCode.Escape))
+        if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay
+            && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
         {
             PauseGame();
         }
 
-        if(paused && Input.GetKeyDown(KeyCode.Escape))
+        if(paused && Input.GetKeyDown(KeyCode.P))
         {
             ResumeGame();
         }
@@ -32,9 +30,9 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        virtualCamera3D.enabled = false;
-        Time.timeScale = pausedScale;
         GameManager.GetManager().CanvasManager.UnLock();
+        virtualCamera3D.enabled = false;
+        Time.timeScale = 0;
         pauseCanvas.SetActive(true);
         StartCoroutine(WaitToPauseGame());
     }
@@ -42,7 +40,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         virtualCamera3D.enabled = true;
-        Time.timeScale = resumeScale;
+        Time.timeScale = 1;
         GameManager.GetManager().CanvasManager.Lock();
         pauseCanvas.SetActive(false);
         paused = false;

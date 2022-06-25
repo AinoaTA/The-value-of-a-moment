@@ -9,6 +9,7 @@ public class CalendarController : MonoBehaviour
     public Dictionary<TaskType, SpaceCalendar> calendarInformation;
     public CanvasGroup canvasGroup;
     public CanvasGroup modifiedBlock;
+    public MobileCalendar mobileCalendar;
     [SerializeField]private bool modified;
     private void Start()
     {
@@ -28,7 +29,7 @@ public class CalendarController : MonoBehaviour
         if (!modified)
         {
             modified = true;
-
+            RevisionCalendar();
             for (int a = 0; a <allTimeTable.Count ; a++)
             {
                 for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
@@ -44,6 +45,8 @@ public class CalendarController : MonoBehaviour
     {
         modifiedBlock.gameObject.SetActive(true);
         canvasGroup.alpha = 1;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void ShowCalendar()
@@ -63,12 +66,12 @@ public class CalendarController : MonoBehaviour
     public bool CheckTimeTaskDone(DayNightCycle.DayState type, SpaceCalendar.SpaceType time)
     {
         return (int)type == (int)time;
-           
     }
 
 
     public void GlobalReset()
     {
+        mobileCalendar.ResetCalendar();
         for (int i = 0; i < allTimeTable.Count; i++)
         {
             for (int n = 0; n < allTimeTable[i].taskSave.Count; n++)
