@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa2ecb67af7eb343b50b4ed460568c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  options: 1
   m_Done: 0
   m_PhrasesVoiceOff: []
   m_HelpPhrasesVoiceOff: []
@@ -348,13 +349,20 @@ MonoBehaviour:
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
+  m_ExtraAutoControlCalendar: 0
+  taskAssociated: {fileID: 0}
   OptionsCanvas: {fileID: 7049744341575319027}
   anim: {fileID: 776496329209721965}
+  showing: 0
   water: 0
   distance: 0
   waterCan: {fileID: 0}
   maxTimer: 3
-  m_process: []
+  m_process:
+  - {fileID: 3552090987569699218}
+  - {fileID: 8942830460512426061}
+  - {fileID: 6459519154559794892}
+  - {fileID: 8856839873657723086}
 --- !u!1 &8856839873657723086
 GameObject:
   m_ObjectHideFlags: 0
