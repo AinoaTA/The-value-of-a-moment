@@ -10,7 +10,7 @@ public class Window : Interactables
     private float mOffset;
     private float zWorldCoord;
     private float minHeight;
-    private float maxHeight = 1.912f;
+    private float maxHeight = 3.5f;
     private bool isOpen = false;
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
@@ -21,6 +21,7 @@ public class Window : Interactables
     private void Start()
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
+        minigameCanvas.SetActive(false);
         GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
@@ -70,7 +71,6 @@ public class Window : Interactables
             {
                 height = maxHeight;
                 m_Done = isOpen = true;
-
             }
             m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
         }
@@ -86,6 +86,7 @@ public class Window : Interactables
     {
         if (!m_Done)
             CheckDoneTask();
+
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().OpenDoor();

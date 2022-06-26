@@ -98,9 +98,9 @@ public class Bed : Interactables
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
-        StartCoroutine(HideTutorial());
         Animator animator = m_Tutorial.GetComponent<Animator>();
         if(animator != null) animator.SetBool("show", true);
+        StartCoroutine(HideTutorial());
         tutorialShowed = true;
     }
     
@@ -112,7 +112,7 @@ public class Bed : Interactables
 
     private IEnumerator ActivateMinigameCanvas()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSeconds(0.5f);
         minigameCanvas.SetActive(true);
     }
 
