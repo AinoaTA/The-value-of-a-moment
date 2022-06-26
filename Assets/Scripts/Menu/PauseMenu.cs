@@ -48,7 +48,8 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.GetManager().sceneLoader.LoadLevel(0);
+        //Application.Quit();
     }
     
     private IEnumerator WaitToPauseGame()

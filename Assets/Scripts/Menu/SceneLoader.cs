@@ -39,9 +39,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
-            // GameManager.GetManager().levelData().ResetTotalTime();
             m_LoadingSceneName = m_LevelNames[level];
-            // GameManager.GetManager().levelData().m_CurrentLevelPlayed = level;
             LoadSceneAsync(m_LoadingSceneName);
         }
         else
