@@ -21,6 +21,7 @@ public class Window : Interactables
     private void Start()
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
+        minigameCanvas.SetActive(false);
         GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
