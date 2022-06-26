@@ -21,7 +21,6 @@ public class MenuController : MonoBehaviour
     }
     public void StartGame()
     {
-
         StartCoroutine(LoadScene());
     }
 
@@ -49,7 +48,7 @@ public class MenuController : MonoBehaviour
         StartCoroutine(ShowCanvasGroup(loading, 1));
         StartCoroutine(DecreaseAudioCo());
         yield return new WaitForSeconds(0.35f);
-        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, true);
+        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(0, true);
         yield return null;
     }
 
