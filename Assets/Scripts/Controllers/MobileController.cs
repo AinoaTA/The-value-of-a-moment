@@ -30,6 +30,7 @@ public class MobileController : MonoBehaviour
     {
         public Sprite[] ellePossibleAnswer;
         public Sprite[] someonesReply;
+        public bool groupChat;
     }
     //---//
     [SerializeField] AllThirdChatAsnwers[] ThirdChatAnswers;
