@@ -48,6 +48,8 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+        Time.timeScale = 1;
         GameManager.GetManager().sceneLoader.LoadLevel(0);
         //Application.Quit();
     }
