@@ -9,9 +9,6 @@ public class Interruptor : Interactables
     public TextMeshProUGUI textDisplay;
     private bool isLightOn = false;
 
-    // 10000
-    // 40000
-
     private void Start()
     {
         // Reset values
