@@ -7,32 +7,35 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     public AudioSource MusicAudio;
-    public CanvasGroup loading, menuButtons;
+    public CanvasGroup loading, menuButtons, optionsButtons;
     public Slider loadingSlider;
     private IEnumerator routine;
-   // public Animator m_Anim;
+    public Animator anim;
+    // public Animator m_Anim;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        StartCoroutine(routine=IcreaseAudioCo());
+        StartCoroutine(routine = IcreaseAudioCo());
     }
     public void StartGame()
     {
-        
         StartCoroutine(LoadScene());
     }
 
     public void OptionsMenu()
     {
-       // m_Anim.SetTrigger("Options");
-        
+        StartCoroutine(HideCanvasGroup(menuButtons, 0.25f, 0));
+        StartCoroutine(ShowCanvasGroup(optionsButtons, 1,1.5f, true));
+        anim.Play("Show");
     }
+   
     public void OptionsBack()
     {
-       // m_Anim.SetTrigger("Menu");
-
+        StartCoroutine(HideCanvasGroup(optionsButtons, 0.25f,0));
+        StartCoroutine(ShowCanvasGroup(menuButtons, 1 , 1.5f, true));
+        anim.Play("Hide");
     }
     public void ExitGame()
     {
@@ -42,10 +45,10 @@ public class MenuController : MonoBehaviour
     private IEnumerator LoadScene()
     {
         menuButtons.gameObject.SetActive(false);
-        StartCoroutine(CanvasGroupLoading(loading,1));
+        StartCoroutine(ShowCanvasGroup(loading, 1));
         StartCoroutine(DecreaseAudioCo());
         yield return new WaitForSeconds(0.35f);
-        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, true);
+        GameManager.GetManager().sceneLoader.LoadWithLoadingScene(0, true);
         yield return null;
     }
 
@@ -77,15 +80,38 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    IEnumerator CanvasGroupLoading(CanvasGroup canvas, float alpha)
+    IEnumerator ShowCanvasGroup(CanvasGroup canvas, float alpha, float time=1, bool interactable = false)
+    {
+        yield return new WaitForSeconds(0.5f);
+        float t = 0;
+        float currAlpha = canvas.alpha;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / time);
+            yield return null;
+        }
+
+        if (interactable)
+        {
+            canvas.interactable = true;
+            canvas.blocksRaycasts = true;
+        }
+    }
+
+    IEnumerator HideCanvasGroup(CanvasGroup canvas, float time=1, float alpha = 0)
     {
         float t = 0;
         float currAlpha = canvas.alpha;
-        while (t < 1f)
+        while (t < time)
         {
             t += Time.deltaTime;
-            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / 1f);
+            canvas.alpha = Mathf.Lerp(currAlpha, alpha, t / time);
             yield return null;
         }
+
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
+
     }
 }
