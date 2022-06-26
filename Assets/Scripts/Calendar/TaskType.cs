@@ -6,7 +6,6 @@ public class TaskType : MonoBehaviour
     [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
     public Sprite[] colors;
     public Color enterColor;
-    public Interactables interactableAttached;
     private Image sprite;
     public enum Task { Work, Ocio, Basic}
     public Task task;
@@ -30,7 +29,6 @@ public class TaskType : MonoBehaviour
     private void Start()
     {
         text.text = nameTask;
-        interactableAttached.taskAssociated = this;
         sprite.sprite = colors[(int)task];
     }
     public void ClicEnter()

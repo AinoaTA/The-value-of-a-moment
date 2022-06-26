@@ -6,8 +6,8 @@ public class InventoryTrash : MonoBehaviour
 {
     public TMP_Text dirtyClothesCounter;
     public TMP_Text trashCounter;
-    private string dirtyClothesPhrase = " x Ropa sucia";
-    private string trashPhrase = " x basura";
+    private string dirtyClothesPhrase = "x ";
+    private string trashPhrase = "x ";
 
     private int trashCollected;
     private int dirtyClothes;
@@ -15,18 +15,22 @@ public class InventoryTrash : MonoBehaviour
     private void Start()
     {
         GameManager.GetManager().InventoryTrash = this;
+        dirtyClothesCounter.gameObject.SetActive(false);
+        trashCounter.gameObject.SetActive(false);
         dirtyClothesCounter.text = "";
         trashCounter.text = "";
     }
 
     public void AddDirtyClothes()
     {
+        dirtyClothesCounter.gameObject.SetActive(true);
         dirtyClothes++;
         dirtyClothesCounter.text = dirtyClothes.ToString() + dirtyClothesPhrase;
     }
 
-    public void AddTrash() 
+    public void AddTrash()
     {
+        trashCounter.gameObject.SetActive(true);
         trashCollected++;
         trashCounter.text = trashCollected.ToString() + trashPhrase;
     }
@@ -34,12 +38,14 @@ public class InventoryTrash : MonoBehaviour
     public void RemoveTrash()
     {
         StartCoroutine(RemoveTrashDelay(trashCollected, trashCounter, trashPhrase));
+        trashCounter.gameObject.SetActive(false);
         trashCollected = 0;
     }
 
     public void RemoveDirtyClothes()
     {
         StartCoroutine(RemoveTrashDelay(dirtyClothes, dirtyClothesCounter, dirtyClothesPhrase));
+        dirtyClothesCounter.gameObject.SetActive(false);
         dirtyClothes = 0;
     }
 
