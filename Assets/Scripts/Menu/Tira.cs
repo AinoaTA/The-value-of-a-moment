@@ -9,7 +9,7 @@ public class Tira : MonoBehaviour
     [SerializeField] AudioSource Source;
     [SerializeField] bool finalRecord;
 
-
+    bool block;
     public delegate void EndButton();
     public static EndButton buttonEnd;
     private void OnTriggerEnter(Collider other)
@@ -22,10 +22,10 @@ public class Tira : MonoBehaviour
                 Source.clip = audioToPlay;
                 Source.Play();
 
-                if (finalRecord)
+                if (finalRecord && !block)
                 {
+                    block = true;
                     StartCoroutine(FinalRecord());
-                    GetComponent<BoxCollider>().enabled = false;
                 }
             }
         }   
@@ -35,11 +35,6 @@ public class Tira : MonoBehaviour
     {
         ScrollRect a = FindObjectOfType<ScrollRect>();
         yield return null;
-        a.enabled = false;
-        yield return null;
         buttonEnd?.Invoke();
-        //yield return new WaitUntil(() => !Source.isPlaying);
-        //GameManager.GetManager().sceneLoader.LoadWithLoadingScene(1, false);
-
     }
 }
