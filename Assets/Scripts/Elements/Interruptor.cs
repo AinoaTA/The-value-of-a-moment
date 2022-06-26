@@ -7,11 +7,15 @@ public class Interruptor : Interactables
 {
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
+    private bool isLightOn = false;
+
+    // 10000
+    // 40000
 
     private void Start()
     {
         // Reset values
-        lights.SetActive(false);
+        // lights.SetActive(false);
         textDisplay.text = "[E] Encender";
     }
 
@@ -26,15 +30,21 @@ public class Interruptor : Interactables
                 break;
         }
     }
-    
+
     private void TurnLights()
     {
-        lights.SetActive(!lights.activeInHierarchy);
+        foreach (var light in lights.GetComponentsInChildren<Light>())
+        {
+            if(isLightOn) light.intensity = 6000;
+            else light.intensity = 12000;
+        }
+        isLightOn = !isLightOn;
+        // lights.SetActive(!lights.activeInHierarchy);
     }
 
     private void ChangeText()
     {
-        if(lights.activeInHierarchy) 
+        if(isLightOn) 
         {
             textDisplay.text = "[E] Apagar";
         }
