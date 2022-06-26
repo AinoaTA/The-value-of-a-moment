@@ -27,6 +27,7 @@ public class MichiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
         if (reset)
         {
             // if(!animator.GetAnimatorTransitionInfo(0).IsName("idle -> walk")) return;
@@ -42,7 +43,6 @@ public class MichiController : MonoBehaviour
         else
         {
             if(animator.GetAnimatorTransitionInfo(0).IsName("miau -> idle")) reset = true;
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
             this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
             this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
 
