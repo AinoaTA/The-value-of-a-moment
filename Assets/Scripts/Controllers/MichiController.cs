@@ -33,7 +33,7 @@ public class MichiController : MonoBehaviour
 
             newPos = new Vector3(xDist, this.transform.position.y,zDist);
             path = "dfa";
-            Debug.Log("michi newpos: " + newPos);
+            // Debug.Log("michi newpos: " + newPos);
 
             animator.SetBool("walking", true);
         }
@@ -58,7 +58,9 @@ public class MichiController : MonoBehaviour
     {
         if(other.gameObject.layer != 9)
         {
-            Debug.Log("Michi collided");
+            animator.SetBool("walking", false);
+            animator.SetTrigger("hasArrived");
+            Debug.Log("Michi collided with " + other.gameObject);
             path = null;
         }
     }
