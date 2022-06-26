@@ -8,6 +8,13 @@ public class Interruptor : Interactables
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
 
+    private void Start()
+    {
+        // Reset values
+        lights.SetActive(false);
+        textDisplay.text = "[E] Encender";
+    }
+
     public override void Interaction(int options)
     {
         switch (options)
@@ -15,6 +22,7 @@ public class Interruptor : Interactables
             case 1:
                 TurnLights();
                 ChangeText();
+                GameManager.GetManager().EndMinigameForLights();
                 break;
         }
     }
@@ -28,11 +36,11 @@ public class Interruptor : Interactables
     {
         if(lights.activeInHierarchy) 
         {
-            textDisplay.text = "Apagar";
+            textDisplay.text = "[E] Apagar";
         }
         else
         {
-            textDisplay.text = "Encender";
+            textDisplay.text = "[E] Encender";
         }
     }
 }

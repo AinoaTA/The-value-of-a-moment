@@ -166,5 +166,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ChangeGameState(StateGame.GamePlay);
     }
+
+    public void EndMinigameForLights()
+    {
+        PlayerController.ExitInteractable();
+        CanvasManager.Lock();
+        ChangeGameState(StateGame.GamePlay);
+    }
     #endregion
 }
