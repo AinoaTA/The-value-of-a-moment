@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8795747024061517930}
   - component: {fileID: 2493128887645529481}
   - component: {fileID: 3111636531954527389}
+  - component: {fileID: 8248532050120286010}
   m_Layer: 0
   m_Name: Interruptor
   m_TagString: Untagged
@@ -111,39 +112,21 @@ MonoBehaviour:
   OptionsCanvas: {fileID: 7501171438221004990}
   anim: {fileID: 219147797065242912}
   showing: 0
-  lights: {fileID: 2712158123886024217}
---- !u!114 &7363728242688413840
-MonoBehaviour:
+  lights: {fileID: 0}
+  textDisplay: {fileID: 1039108592022149281}
+--- !u!65 &8248532050120286010
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7501171438221004990}
+  m_GameObject: {fileID: 5604794179397853830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20dc0718f9fec5a45b981bfd930fb742, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options: 1
-  m_Done: 0
-  m_PhrasesVoiceOff: []
-  m_HelpPhrasesVoiceOff: []
-  m_AnswersToVoiceOff: []
-  m_InteractPhrases: []
-  m_MaxAutoControl: 0
-  m_MiddleAutoControl: 0
-  m_MinAutoControl: 0
-  m_ExtraAutoControlCalendar: 0
-  taskAssociated: {fileID: 0}
-  OptionsCanvas: {fileID: 0}
-  anim: {fileID: 0}
-  showing: 0
-  cam: {fileID: 0}
-  m_Tutorial: {fileID: 0}
-  m_SheetBad: {fileID: 0}
-  m_Sheet: {fileID: 0}
-  interactTextBed: {fileID: 0}
-  sleepTextBed: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.5483769, y: 0.58161026, z: 0.6}
+  m_Center: {x: 0.001521764, y: -0.016849717, z: 0.06599719}
 --- !u!1001 &8805978699105788805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,8 +219,14 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8736859282042616485, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 8805978699105788805}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2712158123886024217 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6887863693614380444, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+--- !u!114 &1039108592022149281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 8805978699105788805}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

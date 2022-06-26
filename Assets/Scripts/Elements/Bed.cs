@@ -24,7 +24,11 @@ public class Bed : Interactables
 
     private void Start()
     {
-        minigameCanvas = m_Tutorial.transform.parent.gameObject;
+        if(m_Tutorial != null)
+        {
+            minigameCanvas = m_Tutorial.transform.parent.gameObject;
+            minigameCanvas.SetActive(false);
+        }
         options = 2;
         GameManager.GetManager().Bed = this;
         gameInitialized = false;
