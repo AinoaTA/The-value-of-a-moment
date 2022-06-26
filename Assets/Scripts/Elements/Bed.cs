@@ -164,6 +164,7 @@ public class Bed : Interactables
             case 1:
                 if (!m_Done)
                 {
+                   
                     GameManager.GetManager().PlayerController.SetInteractable("Bed");
                     gameInitialized = true;
                     GameManager.GetManager().CanvasManager.UnLock();

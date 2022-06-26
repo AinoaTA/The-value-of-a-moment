@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
                 currInteractable.HideCanvas();
                 currInteractable.Interaction(1);
                 currInteractable = null;
-                m_CurrentStateGame = StateGame.MiniGame;
+                
             }
         }
         else if (Input.GetKeyDown(KeyCode.Q) && currInteractable != null && currInteractable.options > 1)
@@ -164,13 +164,6 @@ public class GameManager : MonoBehaviour
         PlayerController.ExitInteractable();
         CanvasManager.Lock();
         yield return new WaitForSeconds(1f);
-        ChangeGameState(StateGame.GamePlay);
-    }
-
-    public void EndMinigameForLights()
-    {
-        PlayerController.ExitInteractable();
-        CanvasManager.Lock();
         ChangeGameState(StateGame.GamePlay);
     }
     #endregion

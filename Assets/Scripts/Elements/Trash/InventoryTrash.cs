@@ -26,6 +26,7 @@ public class InventoryTrash : MonoBehaviour
         dirtyClothesCounter.gameObject.SetActive(true);
         dirtyClothes++;
         dirtyClothesCounter.text = dirtyClothes.ToString() + dirtyClothesPhrase;
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
     }
 
     public void AddTrash()
@@ -33,19 +34,20 @@ public class InventoryTrash : MonoBehaviour
         trashCounter.gameObject.SetActive(true);
         trashCollected++;
         trashCounter.text = trashCollected.ToString() + trashPhrase;
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
     }
 
     public void RemoveTrash()
     {
         StartCoroutine(RemoveTrashDelay(trashCollected, trashCounter, trashPhrase));
-        trashCounter.gameObject.SetActive(false);
+       
         trashCollected = 0;
     }
 
     public void RemoveDirtyClothes()
     {
         StartCoroutine(RemoveTrashDelay(dirtyClothes, dirtyClothesCounter, dirtyClothesPhrase));
-        dirtyClothesCounter.gameObject.SetActive(false);
+        
         dirtyClothes = 0;
     }
 
@@ -64,5 +66,8 @@ public class InventoryTrash : MonoBehaviour
 
         yield return new WaitUntil(() => curr <= 0);
         text.text = "";
+        yield return null;
+        dirtyClothesCounter.gameObject.SetActive(false);
+        trashCounter.gameObject.SetActive(false);
     }
 }

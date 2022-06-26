@@ -23,7 +23,7 @@ public class Interactables : MonoBehaviour
 
     public virtual bool GetDone() { return m_Done; }
     public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
-    public virtual void Interaction(int optionNumber) {}
+    public virtual void Interaction(int optionNumber) {  }
     public virtual void ExitInteraction() { }
     public bool showing = false;
 

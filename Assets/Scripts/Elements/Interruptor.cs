@@ -23,7 +23,7 @@ public class Interruptor : Interactables
             case 1:
                 TurnLights();
                 ChangeText();
-                GameManager.GetManager().EndMinigameForLights();
+            //    GameManager.GetManager().EndMinigameForLights();
                 break;
         }
     }
