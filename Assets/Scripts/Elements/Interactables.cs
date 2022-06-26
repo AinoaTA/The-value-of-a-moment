@@ -62,7 +62,7 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //// Debug.Log($"Mouse is over {this.gameObject}");
+        Debug.Log($"Mouse is over {this.gameObject}");
 
         //if(m_Material != null && m_Material.Length > 0)
         //{
