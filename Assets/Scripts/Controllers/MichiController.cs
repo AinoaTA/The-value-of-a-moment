@@ -9,6 +9,7 @@ public class MichiController : MonoBehaviour
     private string path;
     private int i;
     public Vector3 newPos;
+    private float turningRate = 3f;
 
     [Range(0.1f, 2f)] public float walkSpeed;
 
@@ -27,48 +28,38 @@ public class MichiController : MonoBehaviour
         {
             if(i != 0 && !animator.GetAnimatorTransitionInfo(0).IsName("miau -> idle")) return;
             // Calculate new random position
-            float xDist = Random.Range(0.0f, 15.0f);
-            float zDist = Random.Range(0.0f, 15.0f);
+            float xDist = Random.Range(-10.0f, 10.0f);
+            float zDist = Random.Range(-10.0f, 10.0f);
 
-            newPos = new Vector3(xDist, this.transform.position.y, zDist);
+            newPos = new Vector3(xDist, this.transform.position.y,zDist);
             path = "dfa";
-            //Debug.Log("michi newpos: " + newPos);
+            Debug.Log("michi newpos: " + newPos);
 
             animator.SetBool("walking", true);
-            // path = new List<NodePathfinding>();
-            //path = pathfinding.FindPath(this.transform.position, newPos, -1);
         }
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
-            this.transform.LookAt(newPos);
+            // this.transform.LookAt(newPos);
+            var targetRotation = Quaternion.LookRotation(newPos - this.transform.position);
+            this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, newPos) < 4f)
+            if (Vector3.Distance(transform.position, newPos) < 2f)
             {
+                Debug.Log("MICHI has arrived");
                 path = null;
                 animator.SetBool("walking", false);
                 animator.SetTrigger("hasArrived");
             }
-
-            //if (Vector3.Distance(this.transform.position, path[i].mWorldPosition) < 1f)
-            //{
-            //    i++;
-            //    if (i >= path.Count)
-            //    {
-            //        animator.SetBool("walking", false);
-            //        animator.SetTrigger("hasArrived");
-            //        path = null;
-            //        i = 0;
-            //        return;
-            //    }
-            //}
-
-            //this.transform.position = Vector3.MoveTowards(this.transform.position, path[i].mWorldPosition, walkSpeed * Time.deltaTime);
-            //this.transform.LookAt(path[i].mWorldPosition);
         }
     }
 
-    private void OnCollisionEnter(Collision other) {
-        path = null;
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.layer != 9)
+        {
+            Debug.Log("Michi collided");
+            path = null;
+        }
     }
 }
