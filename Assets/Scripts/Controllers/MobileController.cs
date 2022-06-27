@@ -8,6 +8,7 @@ public class MobileController : MonoBehaviour
     public enum Chats { first, second, third, four }
     public Chats currChat;
     public GameObject standardMessagePrefab,standardReplyPrefab;
+    public GameObject standarZoeMessage, standarAriMessage;
 
     private int currentFirstMomentChat;
     private int currentSecondMomentChat;
@@ -28,9 +29,9 @@ public class MobileController : MonoBehaviour
     [Serializable]
     public struct AllSecondChatAsnwers
     {
-        public Sprite[] ellePossibleAnswer;
-        public Sprite[] someonesReply;
-        public bool groupChat;
+        public string[] ellePossibleAnswer;
+        public string[] ZoeReply;
+        public string[] AriReply;
     }
     //---//
     [SerializeField] AllThirdChatAsnwers[] ThirdChatAnswers;
@@ -90,6 +91,7 @@ public class MobileController : MonoBehaviour
                 {
                     GameObject answer = Instantiate(standardMessagePrefab, transform.position, Quaternion.identity, answerChat[(int)currChat].transform);
                     answer.GetComponent<TriggerAnswerChat>().value = i;
+                    answer.GetComponent<TriggerAnswerChat>().text.text = SecondChatAnswers[currentSecondMomentChat].ellePossibleAnswer[i];
                     answer.GetComponent<Image>().color = Color.cyan;
                     currAnswersShowing.Add(answer);
                 }
@@ -116,18 +118,37 @@ public class MobileController : MonoBehaviour
         {
             case Chats.first:
                 currentFirstMomentChat++;
+                currAnswersShowing[numberSelected].GetComponent<Button>().enabled = false;
+                currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
                 break;
             case Chats.second:
+                
+                currAnswersShowing[numberSelected].GetComponent<Button>().enabled = false;
+                currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
+
+                if (SecondChatAnswers[currentSecondMomentChat].ZoeReply[numberSelected].Length>0)
+                {
+                    GameObject newReplyZoe = Instantiate(standarZoeMessage, transform.position, Quaternion.identity, visualChats[openedChat].transform);
+                    newReplyZoe.GetComponent<TriggerAnswerChat>().text.text = SecondChatAnswers[currentSecondMomentChat].ZoeReply[numberSelected];
+                }
+
+                if (SecondChatAnswers[currentSecondMomentChat].AriReply[numberSelected].Length > 0)
+                {
+                    GameObject newReplyAri = Instantiate(standarAriMessage, transform.position, Quaternion.identity, visualChats[openedChat].transform);
+                    newReplyAri.GetComponent<TriggerAnswerChat>().text.text = SecondChatAnswers[currentSecondMomentChat].AriReply[numberSelected];
+                }
+
                 currentSecondMomentChat++;
                 break;
             case Chats.third:
                 currentThirdMomentChat++;
+                currAnswersShowing[numberSelected].GetComponent<Button>().enabled = false;
+                currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
                 break;
         }
-        currAnswersShowing[numberSelected].GetComponent<Button>().enabled = false;
-        currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
+      
 
-        GameObject newReply = Instantiate(standardReplyPrefab, transform.position, Quaternion.identity, visualChats[openedChat].transform);
+      //GameObject newReply = Instantiate(standardReplyPrefab, transform.position, Quaternion.identity, visualChats[openedChat].transform);
 
         this.numberSelected = numberSelected;
         ClearAnswers();

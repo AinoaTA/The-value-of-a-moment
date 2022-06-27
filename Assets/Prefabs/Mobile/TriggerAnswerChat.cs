@@ -13,7 +13,7 @@ public class TriggerAnswerChat : MonoBehaviour
     }
     private void Start()
     {
-        text.text = value.ToString();
+       // text.text = value.ToString();
     }
     public void Select()
     {
