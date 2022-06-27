@@ -85,7 +85,10 @@ public class Window : Interactables
     private void WindowDone()
     {
         if (!m_Done)
+        {
+            print("check " + m_Done);
             CheckDoneTask();
+        }
 
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         GameManager.GetManager().StartThirdPersonCamera();

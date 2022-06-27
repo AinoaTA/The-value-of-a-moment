@@ -12,6 +12,7 @@ public class InventoryTrash : MonoBehaviour
     private int trashCollected;
     private int dirtyClothes;
     Trash current;
+    TrashBucket currentbucket;
 
     private void Start()
     {
@@ -43,14 +44,13 @@ public class InventoryTrash : MonoBehaviour
     public void RemoveTrash()
     {
         StartCoroutine(RemoveTrashDelay(current,trashCollected, trashCounter, trashPhrase));
-       
         trashCollected = 0;
     }
 
-    public void RemoveDirtyClothes()
+    public void RemoveDirtyClothes(TrashBucket bucket)
     {
+        currentbucket = bucket;
         StartCoroutine(RemoveTrashDelay(current,dirtyClothes, dirtyClothesCounter, dirtyClothesPhrase));
-        
         dirtyClothes = 0;
     }
 
@@ -65,12 +65,13 @@ public class InventoryTrash : MonoBehaviour
             curr -= 1;
             text.text = curr + finalText;
             //  
-            type.Cleaned();
+            currentbucket.SomethingCleaned();
             yield return new WaitForSeconds(0.1f);
         }
 
         yield return new WaitUntil(() => curr <= 0);
         text.text = "";
+        currentbucket = null;
         yield return null;
 
         dirtyClothesCounter.gameObject.SetActive(false);

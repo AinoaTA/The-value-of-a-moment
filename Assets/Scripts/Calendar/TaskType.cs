@@ -6,7 +6,8 @@ public class TaskType : MonoBehaviour
     [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
     public Sprite[] colors;
     public Color enterColor;
-    private Image sprite;
+    [HideInInspector]public Image sprite;
+    public Sprite completed;
     public enum Task { Work, Ocio, Basic}
     public Task task;
     public string nameTask;
@@ -73,7 +74,9 @@ public class TaskType : MonoBehaviour
 
     public void Done()
     {
-        sprite.color = Color.green;
+        print("uy");
+        sprite.sprite = completed;
+        //sprite.color = Color.green;
         //taskDelegate?.Invoke(this);
     }
     public void ResetTask()
