@@ -13,7 +13,7 @@ public class Plant : Interactables
 
     [SerializeField] private float timer;
     [SerializeField] private float maxTimer = 3f;
-    private int currProcess=0;
+    private int currProcess = 0;
     public GameObject[] m_process;
     private bool started;
 
@@ -58,7 +58,6 @@ public class Plant : Interactables
         if (started && Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.GetManager().StartThirdPersonCamera();
-           // GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
             started = false;
             waterCan.gameObject.SetActive(false);
         }
@@ -70,7 +69,6 @@ public class Plant : Interactables
         waterCan.GrowUpParticle.Play();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
-        print("plant");
         m_Done = true;
         started = false;
         CheckDoneTask();
