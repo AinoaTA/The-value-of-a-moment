@@ -19,6 +19,9 @@ public class Mirror : Interactables
             case 1:
                 if (!m_Done)
                 {
+                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                    GameManager.GetManager().PlayerController.SetInteractable("Mirror");
+                    
                     if(m_MirrorInteractPhrases.Length > 0)
                     {
                         if (m_Counter >= m_InteractPhrases.Length)

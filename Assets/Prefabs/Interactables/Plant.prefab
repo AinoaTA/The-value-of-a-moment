@@ -9988,7 +9988,7 @@ GameObject:
   - component: {fileID: 5930667465804971046}
   - component: {fileID: 1824282648826369859}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: WaterCan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10052,7 +10052,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a3c35d0cd715744a511c091e59ce2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPos: {x: 0, y: 0, z: 0}
   offSet: {x: 0.7, y: 0, z: 0.7}
+  clamp: {x: 0, y: 0, z: 0}
   particles: {fileID: 400767803688192397}
   GrowUpParticle: {fileID: 5789592356662019729}
   dragg: 0
@@ -10124,14 +10126,15 @@ MonoBehaviour:
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
-  m_DoneByCalendar: 0
   m_ExtraAutoControlCalendar: 0
+  taskAssociated: {fileID: 0}
   OptionsCanvas: {fileID: 7032668196916930296}
   anim: {fileID: 759450386761363302}
   showing: 0
   water: 0
   distance: 1
   waterCan: {fileID: 8447827552516609540, guid: dbe36dafbd3601249b317208622d2808, type: 3}
+  timer: 0
   maxTimer: 6
   m_process:
   - {fileID: 923118616936383078}
@@ -10396,6 +10399,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.001
       objectReference: {fileID: 0}
+    - target: {fileID: 6097991572488728446, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6490680781990342519, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10415,6 +10422,10 @@ PrefabInstance:
     - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_text
       value: '[E] Regar'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
