@@ -11,6 +11,7 @@ public class InventoryTrash : MonoBehaviour
 
     private int trashCollected;
     private int dirtyClothes;
+    Trash current;
 
     private void Start()
     {
@@ -21,32 +22,34 @@ public class InventoryTrash : MonoBehaviour
         trashCounter.text = "";
     }
 
-    public void AddDirtyClothes()
+    public void AddDirtyClothes(Trash t)
     {
         dirtyClothesCounter.gameObject.SetActive(true);
         dirtyClothes++;
+        current = t;
         dirtyClothesCounter.text = dirtyClothes.ToString() + dirtyClothesPhrase;
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
     }
 
-    public void AddTrash()
+    public void AddTrash(Trash t)
     {
         trashCounter.gameObject.SetActive(true);
         trashCollected++;
+        current = t;
         trashCounter.text = trashCollected.ToString() + trashPhrase;
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
     }
 
     public void RemoveTrash()
     {
-        StartCoroutine(RemoveTrashDelay(trashCollected, trashCounter, trashPhrase));
+        StartCoroutine(RemoveTrashDelay(current,trashCollected, trashCounter, trashPhrase));
        
         trashCollected = 0;
     }
 
     public void RemoveDirtyClothes()
     {
-        StartCoroutine(RemoveTrashDelay(dirtyClothes, dirtyClothesCounter, dirtyClothesPhrase));
+        StartCoroutine(RemoveTrashDelay(current,dirtyClothes, dirtyClothesCounter, dirtyClothesPhrase));
         
         dirtyClothes = 0;
     }
@@ -54,14 +57,15 @@ public class InventoryTrash : MonoBehaviour
     public int CurrentDirtyClothes() { return dirtyClothes; }
     public int CurrentTrash() { return trashCollected; }
 
-    IEnumerator RemoveTrashDelay(int trash, TMP_Text text, string finalText)
+    IEnumerator RemoveTrashDelay(Trash type, int trash, TMP_Text text, string finalText)
     {
         int curr = trash;
         for (int i = 0; i < trash; i++)
         {
             curr -= 1;
             text.text = curr + finalText;
-            GameManager.GetManager().Autocontrol.AddAutoControl(4);
+            //  
+            type.Cleaned();
             yield return new WaitForSeconds(0.1f);
         }
 

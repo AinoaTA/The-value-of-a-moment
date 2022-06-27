@@ -93,10 +93,6 @@ public class Plant : Interactables
                 m_process[currProcess].SetActive(true);
             }
         }
-        //else //else no grow. future option.
-        //{ 
-        
-        //}
     }
 
     private void OnTriggerStay(Collider other)
@@ -111,14 +107,6 @@ public class Plant : Interactables
             FinishInteraction();
         }
     }
-
-    //public override void ExitInteraction()
-    //{
-    //    waterCan.gameObject.SetActive(false);
-    //    timer = 0;
-    //    base.ExitInteraction();
-    //}
-
     private IEnumerator ActivateWaterCan()
     {
         yield return new WaitForSecondsRealtime(1.5f);
