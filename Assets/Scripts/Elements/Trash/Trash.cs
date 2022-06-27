@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Trash : Interactables
@@ -6,7 +7,13 @@ public class Trash : Interactables
     public TrashType type = TrashType.TRASH;
 
     //5 prendas de ropas
-     private int numberTrash;
+
+
+    private void Start()
+    {
+        GameManager.GetManager().trashes.Add(this);
+    }
+    private int numberTrash;
     public int maxTras=5;
     public override void Interaction(int optionNumber)
     {

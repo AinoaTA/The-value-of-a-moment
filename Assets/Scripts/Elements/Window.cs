@@ -84,12 +84,7 @@ public class Window : Interactables
     #endregion
     private void WindowDone()
     {
-        if (!m_Done)
-        {
-            print("check " + m_Done);
-            CheckDoneTask();
-        }
-
+        CheckDoneTask();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().OpenDoor();

@@ -8,6 +8,11 @@ public class TrashBucket : Interactables
     private int numberTrash;
     public int maxTras = 5;
 
+    private void Start()
+    {
+        GameManager.GetManager().bucket = this;
+    }
+
     public override void Interaction(int optionNumber)
     {
         switch (optionNumber)
@@ -16,11 +21,6 @@ public class TrashBucket : Interactables
                 if (type == TypeBucket.CLOTHES)
                 {
                     GameManager.GetManager().InventoryTrash.RemoveDirtyClothes(this);
-
-                    if (numberTrash >= maxTras)
-                    {
-                        CheckDoneTask();
-                    }
                 }
                 else if (type == TypeBucket.TRASH)
                 {

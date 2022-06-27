@@ -4,11 +4,12 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-public class FirstMinigameController : MonoBehaviour
+public class FirstMinigameController : Interactables
 {
     public List<SolutionPiece> m_AllSolutions = new List<SolutionPiece>();
     public List<PieceMG> m_AllPieces = new List<PieceMG>();
     private bool m_Solved = false;
+    private bool checking;
     private bool m_AllCorrected;
     public bool m_started;
     public float m_Autocontrol=5;
@@ -16,33 +17,30 @@ public class FirstMinigameController : MonoBehaviour
     void Start()
     {
         GameManager.GetManager().ProgramMinigame = this;
-      
-    }
-
-    private void Update()
-    {
-        //if(Input.GetKeyDown(KeyCode.Escape) && m_started)
-        //{
-        //    GameManager.GetManager().StartThirdPersonCamera();
-        //    this.gameObject.SetActive(false);
-        //}
     }
 
     private IEnumerator GameFinished()
     {
-        print("game completed");
+        CheckDoneTask();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
         m_Solved = true;
         m_started = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().CanvasManager.FinishMiniGame();
     }
 
+    public void QuitMiniGame()
+    {
+        GameManager.GetManager().CanvasManager.FinishMiniGame();
+    }
+
+
     public void CheckSolutions()
     {
-        if (m_Solved)
+        if (m_Solved || checking)
             return;
 
+        checking = true;
         for (int i = 0; i < m_AllSolutions.Count; i++)
         {
             if (!m_AllSolutions[i].m_Correct)
@@ -50,8 +48,9 @@ public class FirstMinigameController : MonoBehaviour
             else
                 m_AllCorrected = true;
         }
-        
-        if(m_AllCorrected)
+        checking = false;
+
+        if (m_AllCorrected)
             StartCoroutine(GameFinished());
     }
 
