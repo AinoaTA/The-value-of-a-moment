@@ -89,7 +89,6 @@ public class Interactables : MonoBehaviour
     {
         if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
         {
-            print(taskAssociated.calendar);
             if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
             {
                 taskAssociated.Done();

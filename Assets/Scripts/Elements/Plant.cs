@@ -16,7 +16,7 @@ public class Plant : Interactables
     private int currProcess = 0;
     public GameObject[] m_process;
     private bool started;
-
+    public Regadera regadera;
     private bool tutorialShowed = false;
 
     private void Start()
@@ -34,7 +34,7 @@ public class Plant : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!m_Done && regadera.grabbed)
                 {
                     started = true;
                     timer = 0;
@@ -83,6 +83,7 @@ public class Plant : Interactables
     public override void ResetInteractable()
     {
         base.ResetInteractable();
+        regadera.ResetInteractable();
         waterCan.ResetWaterCan();
         timer = 0;
         started = false;

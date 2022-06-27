@@ -202,7 +202,6 @@ public class Bed : Interactables
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
-        print(GameManager.GetManager().trashes.Count);
 
         for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
         {

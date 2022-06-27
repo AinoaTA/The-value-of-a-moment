@@ -56,10 +56,8 @@ public class MichiController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("OnCollisionEnter");
         if(other.gameObject.layer != 9)
         {
-            Debug.Log("Collision");
             Miau();
         }
     }

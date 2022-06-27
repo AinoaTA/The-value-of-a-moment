@@ -35,7 +35,7 @@ public class Alarm : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             ResetTime();
-            NormalWakeUp();
+            StartCoroutine(NormalWakeUp());
         }
 #endif
         if (m_Alarm && !m_AlarmON)
@@ -49,7 +49,7 @@ public class Alarm : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ResetTime();
-                NormalWakeUp();
+               StartCoroutine(NormalWakeUp());
             }
             else if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -68,18 +68,17 @@ public class Alarm : MonoBehaviour
         m_AlarmON = true;
         //sonid
     }
-    public void NormalWakeUp()
+    public IEnumerator NormalWakeUp()
     {
-        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
+        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().PlayerController.PlayerWakeUpPos();
+        GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
         m_Alarm = false;
         ResetTime();
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
-
-
-        //Temporal
+        //Temporal <- ajá
+        yield return null;
         if (!temp) 
         {
             if (controlPosponer == 0)
@@ -87,12 +86,8 @@ public class Alarm : MonoBehaviour
             else
                 StartCoroutine(SecondWakeUpDialogue());
         }
-
-
-        //GameManager.GetManager().Dialogue.SetTimer();
-        ///GameManager.GetManager().GetCanvasManager().FadeInSolo();
-        //animacion player se levanta
     }
+
 
 
     public void StillSleeping()

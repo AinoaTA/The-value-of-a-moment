@@ -5,7 +5,7 @@ using UnityEngine;
 public class Regadera : Interactables
 {
     public WaterCan waterCan;
-    private bool grabbed = false;
+    [HideInInspector]public bool grabbed = false;
 
     private void Start()
     {

@@ -124,7 +124,7 @@ public class Autocontrol : MonoBehaviour
 
     public void AutocontrolSleep()
     {
-        StartCoroutine(RemoveC(m_currentValue * 0.30f));
+        StartCoroutine(RemoveC(m_currentValue * 0.4f));
     }
 
 }
