@@ -6,8 +6,8 @@ public class InventoryTrash : MonoBehaviour
 {
     public TMP_Text dirtyClothesCounter;
     public TMP_Text trashCounter;
-    private string dirtyClothesPhrase = "x ";
-    private string trashPhrase = "x ";
+    private string dirtyClothesPhrase = "";
+    private string trashPhrase = "";
 
     private int trashCollected;
     private int dirtyClothes;
