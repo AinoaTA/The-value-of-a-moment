@@ -72,7 +72,7 @@ public class DialogueControl : MonoBehaviour
         StopDialogue();
         SetTimer();
         m_DialogueActive = true;
-        m_CurrText = "[Elle] " + dialogue;
+        m_CurrText = "(Elle) " + dialogue;
         m_AudioSource.clip = voice;
 
         soundSFX?.Invoke();
