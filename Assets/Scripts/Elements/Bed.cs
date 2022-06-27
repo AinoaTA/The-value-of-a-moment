@@ -19,8 +19,7 @@ public class Bed : Interactables
     private float mOffset;
     private bool tutorialShowed = false;
     private Vector3 initPosDormirText;
-    private Vector3  lastPosDormirText;
-
+    private Vector3 lastPosDormirText;
 
     private void Start()
     {
@@ -41,19 +40,6 @@ public class Bed : Interactables
 
     void OnMouseDrag()
     {
-        // if (gameInitialized && !isDone)
-        // {
-        //     if (Input.GetAxisRaw("Mouse X") < 0)
-        //     {
-        //         if (m_SheetBad.transform.position.z < maxDesplacement)
-        //         {
-        //             m_SheetBad.transform.position += new Vector3(0, 0, 0.003f);
-        //         }
-        //         else if ((m_SheetBad.transform.position.z >= maxDesplacement))
-        //             m_SheetBad.transform.position = new Vector3(m_SheetBad.transform.position.x, m_SheetBad.transform.position.y,maxDesplacement);
-        //     }
-        // }
-
         if (gameInitialized && !m_Done)
         {
             if(!tutorialShowed)
@@ -61,13 +47,12 @@ public class Bed : Interactables
             
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
-            //print(displacement);
+
             if (displacement < minDesplacement)
             {
                 print("not enough");
                 movement = minDesplacement;
             }
-
             else if (displacement < maxDesplacement)
                 movement = displacement;
 
@@ -75,7 +60,6 @@ public class Bed : Interactables
             {
                 movement = maxDesplacement;
                 m_Done = true;
-
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
@@ -112,7 +96,7 @@ public class Bed : Interactables
 
     private IEnumerator ActivateMinigameCanvas()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
         minigameCanvas.SetActive(true);
     }
 
@@ -157,6 +141,7 @@ public class Bed : Interactables
         interactTextBed.SetActive(true);
         gameInitialized = false;
     }
+
     public override void Interaction(int options)
     {
         switch (options)
@@ -164,12 +149,12 @@ public class Bed : Interactables
             case 1:
                 if (!m_Done)
                 {
-                   
                     GameManager.GetManager().PlayerController.SetInteractable("Bed");
                     gameInitialized = true;
                     GameManager.GetManager().CanvasManager.UnLock();
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
                     cam.cullingMask = 7 << 0;
+                    StartCoroutine(ActivateMinigameCanvas());
                 }
                 break;
             case 2:
