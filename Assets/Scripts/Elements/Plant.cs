@@ -69,10 +69,12 @@ public class Plant : Interactables
     {
         minigameCanvas.SetActive(false);
         waterCan.GrowUpParticle.Play();
+        waterCan.gameObject.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
+        waterCan.dragg = false;
         CheckDoneTask();
         GameManager.GetManager().dayNightCycle.TaskDone();
         waterCan.gameObject.SetActive(false);

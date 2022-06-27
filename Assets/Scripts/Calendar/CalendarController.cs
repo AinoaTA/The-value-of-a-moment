@@ -11,6 +11,7 @@ public class CalendarController : MonoBehaviour
     public CanvasGroup modifiedBlock;
     public MobileCalendar mobileCalendar;
     [SerializeField]private bool modified;
+
     private void Start()
     {
         GameManager.GetManager().calendarController = this;
