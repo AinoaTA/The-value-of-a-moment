@@ -37,7 +37,6 @@ public class MichiController : MonoBehaviour
             newPos = new Vector3(xDist, this.transform.position.y, zDist);
             targetRotation = Quaternion.LookRotation(newPos - this.transform.position);
             reset = false;
-            Debug.Log("michi newpos: " + newPos);
             animator.SetBool("walking", true);
         }
         else
@@ -50,7 +49,6 @@ public class MichiController : MonoBehaviour
 
             if (Vector3.Distance(transform.position, newPos) < .2f)
             {
-                Debug.Log("MICHI has arrived");
                 Miau();
             }
         }
@@ -61,7 +59,6 @@ public class MichiController : MonoBehaviour
     {
         if(other.gameObject.layer != 9)
         {
-            Debug.Log("MICHI has collided");
             this.transform.Rotate(new Vector3(-this.transform.rotation.x, -this.transform.rotation.y, -this.transform.rotation.z));
             Miau();
         }

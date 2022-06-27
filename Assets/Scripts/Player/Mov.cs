@@ -61,7 +61,7 @@ public class Mov : MonoBehaviour
         }
 
         //slow anim transition (walk to idle) 
-        if (!Input.anyKey)
+        if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             m_Speed -= 0.03f;
             m_Speed = Mathf.Clamp(m_Speed, 0.0f, m_MaxSpeed);
