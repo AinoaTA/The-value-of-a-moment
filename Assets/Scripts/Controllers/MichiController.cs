@@ -27,44 +27,48 @@ public class MichiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
         if (reset)
         {
             // if(!animator.GetAnimatorTransitionInfo(0).IsName("idle -> walk")) return;
             // Calculate new random position
-            float xDist = Random.Range(-10.0f, 10.0f);
-            float zDist = Random.Range(-10.0f, 10.0f);
-            newPos = new Vector3(xDist, this.transform.position.y,zDist);
+            float xDist = Random.Range(-5.0f, 5.0f);
+            float zDist = Random.Range(-5.0f, 5.0f);
+            newPos = new Vector3(xDist, this.transform.position.y, zDist);
             targetRotation = Quaternion.LookRotation(newPos - this.transform.position);
             reset = false;
-            // Debug.Log("michi newpos: " + newPos);
+            Debug.Log("michi newpos: " + newPos);
             animator.SetBool("walking", true);
         }
         else
         {
-            if(animator.GetAnimatorTransitionInfo(0).IsName("miau -> idle")) reset = true;
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
+            if(animator.GetAnimatorTransitionInfo(0).IsName("sitting -> idle"))
+                reset = true;
+            
             this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
             this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, newPos) < 2f)
+            if (Vector3.Distance(transform.position, newPos) < .2f)
             {
                 Debug.Log("MICHI has arrived");
                 Miau();
             }
         }
+        Debug.DrawLine(this.transform.position, newPos, Color.white);
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.layer != 9)
         {
+            Debug.Log("MICHI has collided");
+            this.transform.Rotate(new Vector3(-this.transform.rotation.x, -this.transform.rotation.y, -this.transform.rotation.z));
             Miau();
         }
     }
 
     private void Miau()
     {
-        Debug.Log("Miau");
         animator.SetBool("walking", false);
         animator.ResetTrigger("hasArrived");
         animator.SetTrigger("hasArrived");
