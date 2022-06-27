@@ -55,6 +55,8 @@ public class Plant : Interactables
         if (!tutorialShowed && started)
             InitTutorial();
 
+        if(tutorialShowed && waterCan.dragg) m_Tutorial.SetActive(false);
+
         if (started && Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.GetManager().StartThirdPersonCamera();
