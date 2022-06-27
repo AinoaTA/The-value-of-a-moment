@@ -50,7 +50,9 @@ public class Bed : Interactables
         {
             if(!tutorialShowed)
                 InitTutorial();
-            
+            else
+                m_Tutorial.SetActive(false);
+
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
 
