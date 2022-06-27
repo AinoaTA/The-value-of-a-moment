@@ -41,7 +41,7 @@ public class MichiController : MonoBehaviour
         }
         else
         {
-            if(animator.GetAnimatorTransitionInfo(0).IsName("sitting -> idle"))
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 reset = true;
             
             this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
