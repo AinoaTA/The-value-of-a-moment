@@ -20,7 +20,6 @@ public class SoundController : MonoBehaviour
     void Start()
     {
         GameManager.GetManager().SoundController = this;
-
         introLoop.volume = 0;
     }
 
@@ -112,7 +111,6 @@ public class SoundController : MonoBehaviour
         loop.clip = loopMusic[index];
 
         introLoop.Play();
-        print("dormir");
         while (counter < 4f)
         {
             counter += Time.deltaTime;
