@@ -4,6 +4,8 @@ using UnityEngine;
 public class Plant : Interactables
 {
     public bool water;
+    public GameObject m_Tutorial;
+    private GameObject minigameCanvas = null;
 
     [SerializeField] private float distance;
     public WaterCan waterCan;
@@ -15,8 +17,12 @@ public class Plant : Interactables
     public GameObject[] m_process;
     private bool started;
 
+    private bool tutorialShowed = false;
+
     private void Start()
     {
+        minigameCanvas = m_Tutorial.transform.parent.gameObject;
+        minigameCanvas.SetActive(false);
         GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
@@ -49,6 +55,9 @@ public class Plant : Interactables
 
     private void Update()
     {
+        if (!tutorialShowed)
+            InitTutorial();
+
         if (started && Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.GetManager().StartThirdPersonCamera();
@@ -110,6 +119,27 @@ public class Plant : Interactables
     {
         yield return new WaitForSecondsRealtime(1.5f);
         waterCan.gameObject.SetActive(true);
+    }
+
+    private void InitTutorial()
+    {
+        StartCoroutine(ActivateMinigameCanvas());
+        StartCoroutine(HideTutorial());
+        Animator animator = m_Tutorial.GetComponent<Animator>();
+        if (animator != null) animator.SetBool("show", true);
+        tutorialShowed = true;
+    }
+
+    private IEnumerator HideTutorial()
+    {
+        yield return new WaitForSecondsRealtime(8);
+        m_Tutorial.SetActive(false);
+    }
+
+    private IEnumerator ActivateMinigameCanvas()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        minigameCanvas.SetActive(true);
     }
 }
 
