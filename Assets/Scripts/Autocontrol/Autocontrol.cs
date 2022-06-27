@@ -17,7 +17,7 @@ public class Autocontrol : MonoBehaviour
     public ParticleSystem particles;
     public RawImage rawImage;
     public RenderTexture renderTexture;
-    [SerializeField]private Vector2Int renderTextureResolution;
+    [SerializeField] private Vector2Int renderTextureResolution;
     public Camera particlesCamera;
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Autocontrol : MonoBehaviour
     {
         GameManager.GetManager().Autocontrol = this;
         renderTextureResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
-        renderTexture = new RenderTexture(renderTextureResolution.x, renderTextureResolution.y,32);
+        renderTexture = new RenderTexture(renderTextureResolution.x, renderTextureResolution.y, 32);
         particlesCamera.targetTexture = renderTexture;
         rawImage.texture = renderTexture;
         m_Slider.value = m_currentValue / maxValue;
@@ -48,7 +48,7 @@ public class Autocontrol : MonoBehaviour
     IEnumerator RemoveC(float value)
     {
         particles.Play();
-       
+
         for (int i = 0; i < value; i++)
         {
             if (m_currentValue > 0)
@@ -83,7 +83,7 @@ public class Autocontrol : MonoBehaviour
         particles.Stop();
     }
 
-    public void UpdateAutcontrol() 
+    public void UpdateAutcontrol()
     {
         if (m_Slider.value <= 0.3f)
         {
@@ -120,6 +120,11 @@ public class Autocontrol : MonoBehaviour
     public void ShowAutocontroler(int val = 0)
     {
         canvasGroup.alpha = val;
+    }
+
+    public void AutocontrolSleep()
+    {
+        StartCoroutine(RemoveC(m_currentValue * 0.30f));
     }
 
 }
