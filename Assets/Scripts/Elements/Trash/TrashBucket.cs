@@ -8,6 +8,11 @@ public class TrashBucket : Interactables
     private int numberTrash;
     public int maxTras = 5;
 
+    private void Start()
+    {
+        GameManager.GetManager().bucket = this;
+    }
+
     public override void Interaction(int optionNumber)
     {
         switch (optionNumber)

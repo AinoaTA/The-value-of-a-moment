@@ -22,12 +22,11 @@ public class FirstMinigameController : Interactables
     private IEnumerator GameFinished()
     {
         CheckDoneTask();
-        print("game completed");
         GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
         m_Solved = true;
         m_started = false;
-        yield return new WaitForSeconds(2f);
-        
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().CanvasManager.FinishMiniGame();
     }
 
     public void QuitMiniGame()

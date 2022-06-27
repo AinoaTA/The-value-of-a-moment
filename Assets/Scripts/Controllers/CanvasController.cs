@@ -41,7 +41,7 @@ public class CanvasController : MonoBehaviour
     {
         GameManager.GetManager().PlayerController.SetInteractable("Computer");
         GameManager.GetManager().CanvasManager.UnLock();
-        GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
+       // GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
         StartCoroutine(DelayFadeComputer());
@@ -75,7 +75,7 @@ public class CanvasController : MonoBehaviour
         //{
         //    m_NotificationCanvas.SetActive(false);
         //}
-        GameManager.GetManager().Autocontrol.ShowAutocontroler(1);
+       // GameManager.GetManager().Autocontrol.ShowAutocontroler(1);
         //NotificationMessage.SetActive(false);
         //MessageOpen.SetActive(false);
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;

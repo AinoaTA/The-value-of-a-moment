@@ -187,6 +187,7 @@ public class Bed : Interactables
     private IEnumerator DelayReset()
     {
         GameManager.GetManager().SoundController.QuitAllMusic();
+        GameManager.GetManager().CanvasManager.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
 
         GameManager.GetManager().PlayerController.SetInteractable("Alarm");
@@ -195,10 +196,17 @@ public class Bed : Interactables
         GameManager.GetManager().Window.ResetWindow();
         GameManager.GetManager().calendarController.GlobalReset();
         GameManager.GetManager().ProgramMinigame.ResetAllGame();
-        GameManager.GetManager().Autocontrol.AutocontrolSleep();
+        GameManager.GetManager().bucket.ResetInteractable();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
+        print(GameManager.GetManager().trashes.Count);
+
+        for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
+        {
+            GameManager.GetManager().trashes[i].gameObject.SetActive(true);
+            GameManager.GetManager().trashes[i].ResetInteractable();
+        }
 
         for (int i = 0; i < GameManager.GetManager().Plants.Count; i++)
         {
@@ -208,6 +216,8 @@ public class Bed : Interactables
         //no borrar hasta que est�n tooooooodas las animaciones colocadas aqu�.
         Debug.Log("NO FORGET: actions to reset.");
         ResetBed();
+        yield return new WaitForSeconds(2);
+        GameManager.GetManager().Autocontrol.AutocontrolSleep();
     }
 
     public override void ExitInteraction()
