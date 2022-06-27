@@ -69,6 +69,7 @@ public class Plant : Interactables
 
     private void FinishInteraction()
     {
+        minigameCanvas.SetActive(false);
         waterCan.GrowUpParticle.Play();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
@@ -125,8 +126,8 @@ public class Plant : Interactables
     {
         StartCoroutine(ActivateMinigameCanvas());
         StartCoroutine(HideTutorial());
-        Animator animator = m_Tutorial.GetComponent<Animator>();
-        if (animator != null) animator.SetBool("show", true);
+        if(m_Tutorial.GetComponent<Animator>() != null)
+            m_Tutorial.GetComponent<Animator>().SetBool("show", true);
         tutorialShowed = true;
     }
 
