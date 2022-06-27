@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Regadera : Interactables
 {
+    public WaterCan waterCan;
     private bool grabbed = false;
 
     private void Start()
@@ -16,6 +17,7 @@ public class Regadera : Interactables
         if(!grabbed)
         {
             this.gameObject.SetActive(false);
+            waterCan.tengoRegadera = true;
             GameManager.GetManager().WaterCanGrabbed = true;
             grabbed = true;
             GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
@@ -32,5 +34,11 @@ public class Regadera : Interactables
             case 2:
                 break;
         } 
+    }
+
+    public override void ResetInteractable()
+    {
+        grabbed = false;
+        waterCan.tengoRegadera = false;
     }
 }

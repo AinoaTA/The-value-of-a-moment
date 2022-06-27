@@ -7,12 +7,15 @@ public class WaterCan : MonoBehaviour
     private Vector3 offSetExit = new Vector3(0.5f, 0f, 0.5f);
     public Vector3 clamp;
     public ParticleSystem particles;
+    public bool tengoRegadera;
 
     public ParticleSystem GrowUpParticle;
 
     [HideInInspector] public bool dragg;
+
     private void Start()
     {
+        tengoRegadera = false;
         startPos = transform.position;
     }
     private void OnMouseDown()
@@ -50,5 +53,4 @@ public class WaterCan : MonoBehaviour
         particles.Stop();
         transform.position = startPos;
     }
-
 }

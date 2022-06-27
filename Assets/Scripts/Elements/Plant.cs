@@ -9,7 +9,7 @@ public class Plant : Interactables
     public WaterCan waterCan;
     Vector3 wateringInitialPos;
 
-    [SerializeField]private float timer;
+    [SerializeField] private float timer;
     [SerializeField] private float maxTimer = 3f;
     private int currProcess=0;
     public GameObject[] m_process;
