@@ -5,9 +5,9 @@ public class Trash : Interactables
     public enum TrashType { CLOTHES, TRASH }
     public TrashType type = TrashType.TRASH;
 
-    private int numberTrash;
-    public int maxTras=5; //5 prendas de ropas
-
+    //5 prendas de ropas
+     private int numberTrash;
+    public int maxTras=5;
     public override void Interaction(int optionNumber)
     {
         switch (optionNumber)
@@ -28,13 +28,7 @@ public class Trash : Interactables
     public void Cleaned()
     {
         GameManager.GetManager().Autocontrol.AddAutoControl(4);
-        numberTrash++;
-
-        if (numberTrash >= maxTras)
-        {
-            m_Done = true;
-            CheckDoneTask();
-        }
+        
     }
 
     public override void ResetInteractable()
