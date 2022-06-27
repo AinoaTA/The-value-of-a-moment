@@ -13,7 +13,7 @@ public class Interruptor : Interactables
     {
         // Reset values
         // lights.SetActive(false);
-        textDisplay.text = "[E] Encender";
+        textDisplay.text = "E Encender";
     }
 
     public override void Interaction(int options)
@@ -43,11 +43,11 @@ public class Interruptor : Interactables
     {
         if(isLightOn) 
         {
-            textDisplay.text = "[E] Apagar";
+            textDisplay.text = "E Apagar";
         }
         else
         {
-            textDisplay.text = "[E] Encender";
+            textDisplay.text = "E Encender";
         }
     }
 }
