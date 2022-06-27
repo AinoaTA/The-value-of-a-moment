@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         character.enabled = false;
         sleep = true;
-        transform.SetPositionAndRotation(m_PlayerSleep.position, m_PlayerSleep.localRotation);
+        transform.SetPositionAndRotation(m_PlayerSleep.position, m_PlayerSleep.rotation);
 
         mov.m_Anim.SetBool("Sleep", sleep);
         character.enabled = true;

@@ -143,7 +143,7 @@ public class Bed : Interactables
         GameManager.GetManager().Alarm.ResetTime();
         m_Done = false;
         m_Sheet.SetActive(false);
-        m_SheetBad.SetActive(true);
+        badBed.SetActive(true);
         sleepTextBed.transform.localPosition = initPosDormirText;
         m_SheetBad.transform.position = initPosBadSheet;
         interactTextBed.SetActive(true);
@@ -215,7 +215,7 @@ public class Bed : Interactables
             GameManager.GetManager().Plants[i].NextDay();
             GameManager.GetManager().Plants[i].ResetInteractable();
         }
-        //no borrar hasta que est�n tooooooodas las animaciones colocadas aqu�.
+        //no borrar hasta que estan tooooooodas las animaciones colocadas aqui.
         Debug.Log("NO FORGET: actions to reset.");
         ResetBed();
         yield return new WaitForSeconds(2);
