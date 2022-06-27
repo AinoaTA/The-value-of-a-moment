@@ -52,7 +52,7 @@ public class Plant : Interactables
 
     private void Update()
     {
-        if (!tutorialShowed)
+        if (!tutorialShowed && started)
             InitTutorial();
 
         if (started && Input.GetKeyDown(KeyCode.Escape))
