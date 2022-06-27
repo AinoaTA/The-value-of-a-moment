@@ -1,9 +1,11 @@
-
+using Cinemachine;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     public Camera MainCamera;
+
+    public CinemachineVirtualCamera[] cameras;
 
     private void Start()
     {

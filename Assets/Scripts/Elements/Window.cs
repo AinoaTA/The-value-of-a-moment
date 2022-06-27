@@ -117,9 +117,9 @@ public class Window : Interactables
                 if (!isOpen)
                     gameInitialized = true;
                 // Inicia minijuego
-                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                GameManager.GetManager().CanvasManager.UnLock();
                 GameManager.GetManager().PlayerController.SetInteractable("Window");
+                GameManager.GetManager().CanvasManager.UnLock();
+                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
                 break;
             case 2:
                 break;
