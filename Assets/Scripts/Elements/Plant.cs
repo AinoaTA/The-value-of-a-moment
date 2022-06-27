@@ -60,7 +60,6 @@ public class Plant : Interactables
 
     private void FinishInteraction()
     {
-
         waterCan.GrowUpParticle.Play();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);

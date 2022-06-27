@@ -2751,6 +2751,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.23897982
       objectReference: {fileID: 0}
+    - target: {fileID: 4176183174412925001, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4362865056370373836, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: anim
       value: 
@@ -2776,16 +2780,48 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: moveWithTransform
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: EmissionModule.rateOverTime.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487692702113410683, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: ShapeModule.m_TextureColorAffectsParticles
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6859219928544055574, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: cam

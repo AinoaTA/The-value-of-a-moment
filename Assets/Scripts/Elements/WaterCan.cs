@@ -15,6 +15,7 @@ public class WaterCan : MonoBehaviour
 
     private void Start()
     {
+        dragg = false;
         tengoRegadera = false;
         startPos = transform.position;
     }
