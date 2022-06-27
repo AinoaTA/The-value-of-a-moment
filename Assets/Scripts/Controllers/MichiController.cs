@@ -60,7 +60,6 @@ public class MichiController : MonoBehaviour
         if(other.gameObject.layer != 9)
         {
             Debug.Log("Collision");
-            // this.transform.Rotate(new Vector3(-this.transform.rotation.x, -this.transform.rotation.y, -this.transform.rotation.z));
             Miau();
         }
     }
