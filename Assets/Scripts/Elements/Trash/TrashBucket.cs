@@ -16,11 +16,6 @@ public class TrashBucket : Interactables
                 if (type == TypeBucket.CLOTHES)
                 {
                     GameManager.GetManager().InventoryTrash.RemoveDirtyClothes(this);
-
-                    if (numberTrash >= maxTras)
-                    {
-                        CheckDoneTask();
-                    }
                 }
                 else if (type == TypeBucket.TRASH)
                 {

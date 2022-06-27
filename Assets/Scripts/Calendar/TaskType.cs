@@ -76,8 +76,6 @@ public class TaskType : MonoBehaviour
     {
         print("uy");
         sprite.sprite = completed;
-        //sprite.color = Color.green;
-        //taskDelegate?.Invoke(this);
     }
     public void ResetTask()
     {
