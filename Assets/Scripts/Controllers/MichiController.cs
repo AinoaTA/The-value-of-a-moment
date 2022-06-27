@@ -30,7 +30,6 @@ public class MichiController : MonoBehaviour
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
         if (reset)
         {
-            // if(!animator.GetAnimatorTransitionInfo(0).IsName("idle -> walk")) return;
             // Calculate new random position
             float xDist = Random.Range(-5.0f, 5.0f);
             float zDist = Random.Range(-5.0f, 5.0f);
