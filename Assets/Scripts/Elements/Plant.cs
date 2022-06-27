@@ -44,13 +44,10 @@ public class Plant : Interactables
 
                     StartCoroutine(ActivateWaterCan());
                 }
-                //else
-                //    FinishInteraction();
-
                 break;
             default:
                 break;
-        } 
+        }
     }
 
     private void Update()
@@ -88,6 +85,7 @@ public class Plant : Interactables
         timer = 0;
         started = false;
     }
+
     public void NextDay()
     {
         //grow
