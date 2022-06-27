@@ -20,6 +20,7 @@ public class Bed : Interactables
     private bool tutorialShowed = false;
     private Vector3 initPosDormirText;
     private Vector3 lastPosDormirText;
+    private GameObject badBed;
 
     private void Start()
     {
@@ -28,12 +29,17 @@ public class Bed : Interactables
             minigameCanvas = m_Tutorial.transform.parent.gameObject;
             minigameCanvas.SetActive(false);
         }
+        if(m_SheetBad != null)
+        {
+            badBed = m_SheetBad.transform.parent.gameObject;
+            m_SheetBad.SetActive(true);
+            initPosBadSheet = m_SheetBad.transform.position;
+            minDesplacement = m_SheetBad.transform.position.x;
+        }
         options = 2;
         GameManager.GetManager().Bed = this;
         gameInitialized = false;
-        m_SheetBad.SetActive(true);
-        initPosBadSheet = m_SheetBad.transform.position;
-        minDesplacement = m_SheetBad.transform.position.x;
+
         initPosDormirText = sleepTextBed.transform.localPosition;
         lastPosDormirText = new Vector3(-0.03f, lastPosDormirText.y, lastPosDormirText.z);
     }
@@ -121,7 +127,7 @@ public class Bed : Interactables
         cam.cullingMask = -1;
         //Cambiamos la sabana u objeto cama.
         m_Sheet.SetActive(true);
-        m_SheetBad.SetActive(false);
+        badBed.SetActive(false);
         interactTextBed.SetActive(false);
         sleepTextBed.transform.localPosition = lastPosDormirText; 
         GameManager.GetManager().StartThirdPersonCamera();
