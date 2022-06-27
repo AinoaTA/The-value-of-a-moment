@@ -30,14 +30,12 @@ public class MichiController : MonoBehaviour
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
         if (reset)
         {
-            // if(!animator.GetAnimatorTransitionInfo(0).IsName("idle -> walk")) return;
             // Calculate new random position
             float xDist = Random.Range(-5.0f, 5.0f);
             float zDist = Random.Range(-5.0f, 5.0f);
             newPos = new Vector3(xDist, this.transform.position.y, zDist);
             targetRotation = Quaternion.LookRotation(newPos - this.transform.position);
             reset = false;
-            Debug.Log("michi newpos: " + newPos);
             animator.SetBool("walking", true);
         }
         else
@@ -50,7 +48,6 @@ public class MichiController : MonoBehaviour
 
             if (Vector3.Distance(transform.position, newPos) < .2f)
             {
-                Debug.Log("MICHI has arrived");
                 Miau();
             }
         }
@@ -61,7 +58,6 @@ public class MichiController : MonoBehaviour
     {
         if(other.gameObject.layer != 9)
         {
-            Debug.Log("MICHI has collided");
             this.transform.Rotate(new Vector3(-this.transform.rotation.x, -this.transform.rotation.y, -this.transform.rotation.z));
             Miau();
         }
