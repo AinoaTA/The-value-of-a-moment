@@ -22,9 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Interactables currInteractable;
     private Interactables lookingInteractable;
 
-
-
-
     public CanvasController CanvasManager { get; set; }
     public NotificationController NotificationController { get; set; }
     public Autocontrol Autocontrol { get; set; }
@@ -53,8 +50,6 @@ public class GameManager : MonoBehaviour
     public SceneLoader sceneLoader { get; set; }
     public CameraController cameraController { get; set; }
     public LevelData levelData { get; set; }
-
-
 
     //public Animator door;
 

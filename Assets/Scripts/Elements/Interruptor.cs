@@ -11,8 +11,6 @@ public class Interruptor : Interactables
 
     private void Start()
     {
-        // Reset values
-        // lights.SetActive(false);
         textDisplay.text = "E Encender";
     }
 
@@ -23,7 +21,6 @@ public class Interruptor : Interactables
             case 1:
                 TurnLights();
                 ChangeText();
-            //    GameManager.GetManager().EndMinigameForLights();
                 break;
         }
     }
@@ -32,11 +29,10 @@ public class Interruptor : Interactables
     {
         foreach (var light in lights.GetComponentsInChildren<Light>())
         {
-            if(isLightOn) light.intensity = 6000;
-            else light.intensity = 12000;
+            if(isLightOn) light.intensity = 10000;
+            else light.intensity = 15000;
         }
         isLightOn = !isLightOn;
-        // lights.SetActive(!lights.activeInHierarchy);
     }
 
     private void ChangeText()

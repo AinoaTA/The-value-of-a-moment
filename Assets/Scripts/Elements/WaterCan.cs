@@ -19,6 +19,7 @@ public class WaterCan : MonoBehaviour
         tengoRegadera = false;
         startPos = transform.position;
     }
+
     private void OnMouseDown()
     {
         particles.Play();
@@ -30,10 +31,11 @@ public class WaterCan : MonoBehaviour
         dragg = true;
 
         if (!GrowUpParticle.isPlaying)
+        {
             GrowUpParticle.Play();
+        }
 
         //Necessary OffSet
-
         Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + offSetExit);
         float x = Mathf.Clamp(newPos.x, startPos.x - 0.3f, startPos.x + 0.3f);
         float z = Mathf.Clamp(newPos.z, startPos.z - 0.3f, startPos.z + 0.3f);
