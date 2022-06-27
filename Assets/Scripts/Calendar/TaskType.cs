@@ -7,6 +7,7 @@ public class TaskType : MonoBehaviour
     public Sprite[] colors;
     public Color enterColor;
     [HideInInspector]public Image sprite;
+    public Sprite completed;
     public enum Task { Work, Ocio, Basic}
     public Task task;
     public string nameTask;
@@ -73,7 +74,9 @@ public class TaskType : MonoBehaviour
 
     public void Done()
     {
-        sprite.color = Color.green;
+        print("uy");
+        sprite.sprite = completed;
+        //sprite.color = Color.green;
         //taskDelegate?.Invoke(this);
     }
     public void ResetTask()

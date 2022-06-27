@@ -44,7 +44,6 @@ public class InventoryTrash : MonoBehaviour
     public void RemoveTrash()
     {
         StartCoroutine(RemoveTrashDelay(current,trashCollected, trashCounter, trashPhrase));
-       
         trashCollected = 0;
     }
 
@@ -66,7 +65,6 @@ public class InventoryTrash : MonoBehaviour
             curr -= 1;
             text.text = curr + finalText;
             //  
-            type.Cleaned();
             currentbucket.SomethingCleaned();
             yield return new WaitForSeconds(0.1f);
         }

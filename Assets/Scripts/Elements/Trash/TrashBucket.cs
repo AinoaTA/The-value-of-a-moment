@@ -34,14 +34,12 @@ public class TrashBucket : Interactables
 
     public void SomethingCleaned()
     {
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         numberTrash++;
         if (numberTrash >= maxTras)
-        { 
-        
-        
+        {
+            CheckDoneTask();
         }
-
-
     }
 
     public override void ShowCanvas()
@@ -53,7 +51,10 @@ public class TrashBucket : Interactables
 
         base.ShowCanvas();
     }
-
+    public override void ResetInteractable()
+    {
+        numberTrash = 0;
+    }
     public override void HideCanvas()
     {
         base.HideCanvas();

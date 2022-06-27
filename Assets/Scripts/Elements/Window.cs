@@ -85,7 +85,10 @@ public class Window : Interactables
     private void WindowDone()
     {
         if (!m_Done)
+        {
+            print("check " + m_Done);
             CheckDoneTask();
+        }
 
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
         GameManager.GetManager().StartThirdPersonCamera();
@@ -93,7 +96,6 @@ public class Window : Interactables
         minigameCanvas.SetActive(false);
         isOpen = true;
         m_Done = true;
-        print("plant");
         GameManager.GetManager().dayNightCycle.TaskDone();
         if (!temp)
         {

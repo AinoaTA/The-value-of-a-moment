@@ -24,13 +24,6 @@ public class Trash : Interactables
         }
     }
 
-
-    public void Cleaned()
-    {
-        GameManager.GetManager().Autocontrol.AddAutoControl(4);
-        
-    }
-
     public override void ResetInteractable()
     {
         numberTrash = 0;
