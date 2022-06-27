@@ -61,12 +61,14 @@ public class InventoryTrash : MonoBehaviour
         {
             curr -= 1;
             text.text = curr + finalText;
+            GameManager.GetManager().Autocontrol.AddAutoControl(4);
             yield return new WaitForSeconds(0.1f);
         }
 
         yield return new WaitUntil(() => curr <= 0);
         text.text = "";
         yield return null;
+
         dirtyClothesCounter.gameObject.SetActive(false);
         trashCounter.gameObject.SetActive(false);
     }
