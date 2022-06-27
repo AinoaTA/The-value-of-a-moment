@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
+        Screen.fullScreen = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         StartCoroutine(routine = IcreaseAudioCo());

@@ -70,15 +70,15 @@ public class Alarm : MonoBehaviour
     }
     public IEnumerator NormalWakeUp()
     {
+        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
-        GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().PlayerController.PlayerWakeUpPos();
         GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
         m_Alarm = false;
         ResetTime();
         //Temporal <- ajá
-        yield return null;
+        
         if (!temp) 
         {
             if (controlPosponer == 0)
@@ -86,6 +86,7 @@ public class Alarm : MonoBehaviour
             else
                 StartCoroutine(SecondWakeUpDialogue());
         }
+        yield return null;
     }
 
 
