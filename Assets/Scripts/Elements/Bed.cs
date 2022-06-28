@@ -221,6 +221,7 @@ public class Bed : Interactables
         yield return new WaitForSeconds(2);
         GameManager.GetManager().Autocontrol.AutocontrolSleep();
         GameManager.GetManager().dayNightCycle.NewDay();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
     }
 
     public override void ExitInteraction()
