@@ -127,6 +127,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetTrash()
+    { 
+        foreach(var trash in trashes)
+        {
+            trash.ResetInteractable();
+        }
+        bucket.ResetInteractable();
+        InventoryTrash.ResetInventory();
+    }
+
     public void ChangeGameState(StateGame state)
     {
         StartCoroutine(Delay(state));
