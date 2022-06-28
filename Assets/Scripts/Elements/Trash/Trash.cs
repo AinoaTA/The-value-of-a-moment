@@ -10,7 +10,7 @@ public class Trash : Interactables
     public Transform target;
 
     private int numberTrash;
-    private float grabbingSpeed = 2f;
+    private float grabbingSpeed = 10f;
     private bool grabbing = false;
     
     private void Start()
@@ -48,6 +48,7 @@ public class Trash : Interactables
 
     public override void ResetInteractable()
     {
+        grabbing = false;
         numberTrash = 0;
         m_Done = false;
     }

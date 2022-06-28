@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Book : Interactables
@@ -20,26 +21,29 @@ public class Book : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if(m_Grabbing != null)
                 {
-                    if(m_Grabbing != null)
-                    {
-                        m_Grabbing.SetAccessCamera(true);
-                        GameManager.GetManager().PlayerController.SetInteractable("Grab");
-                        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-                        HideCanvas();
+                    m_Grabbing.SetAccessCamera(true);
+                    GameManager.GetManager().PlayerController.SetInteractable("Grab");
+                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+                    HideCanvas();
 
-                        if (m_Counter >= m_InteractPhrases.Length)
-                            m_Counter = 0;
+                    if (m_Counter >= m_InteractPhrases.Length)
+                        m_Counter = 0;
 
-                        GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-                        m_DelegateSFXBook?.Invoke();
-                        m_Counter++;
-
-                        m_Done = true;
-                    }
+                    StartCoroutine(DelayDialogue());
                 }
                 break;
         }
+    }
+
+    IEnumerator DelayDialogue()
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
+        m_DelegateSFXBook?.Invoke();
+        m_Counter++;
+        yield return new WaitForSeconds(3f);
+        GameManager.GetManager().Dialogue.StopDialogue();
     }
 }
