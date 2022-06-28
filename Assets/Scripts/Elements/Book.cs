@@ -4,7 +4,6 @@ public class Book : Interactables
 {
     private int m_Counter = 0;
     public string[] m_BookInteractPhrases;
-
     public Grabbing m_Grabbing;
 
     public delegate void DelegateSFXBook();
@@ -27,7 +26,7 @@ public class Book : Interactables
                     {
                         m_Grabbing.SetAccessCamera(true);
                         GameManager.GetManager().PlayerController.SetInteractable("Grab");
-
+                        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
                         HideCanvas();
 
                         if (m_Counter >= m_InteractPhrases.Length)

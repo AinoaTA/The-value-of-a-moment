@@ -68,8 +68,6 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Debug.Log($"Mouse is over {this.gameObject}");
-
         //if(m_Material != null && m_Material.Length > 0)
         //{
         //    foreach (var material in this.gameObject.GetComponent<Renderer>().materials)

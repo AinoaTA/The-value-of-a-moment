@@ -81,7 +81,6 @@ public class Alarm : MonoBehaviour
         ResetTime();
         yield return new WaitForSeconds(3f);
         GameManager.GetManager().StartThirdPersonCamera();
-        //Temporal <- aj�
 
         if (!temp) 
         {

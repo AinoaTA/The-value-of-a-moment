@@ -19,24 +19,37 @@ public class Grabbing : MonoBehaviour
     public float minYCameraAngle = 50.0f;
     private float cameraPitch = 0.0f;
     public bool canAccesCamera = false;
-
+    private bool once = true;
+    private Vector3 previousPos;
     [SerializeField] private Transform target;
     [SerializeField] private float grabbingSpeed = 0.01f;
     private bool isObjectGrabbed = false;
-    
+    private bool leaving = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        previousPos = this.transform.position;
         //cam = brain.ActiveVirtualCamera;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
+        {
+            leaving = true;
+            isObjectGrabbed = false;
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+            GameManager.GetManager().PlayerController.ExitInteractable();
+        }
+
+        if (leaving)
+            LeaveObject();
+
         if(canAccesCamera)
         {
-            if(!isObjectGrabbed)
+            if(!isObjectGrabbed && once)
                 GrabObject();
 
             Vector2 MouseRot;
@@ -62,11 +75,25 @@ public class Grabbing : MonoBehaviour
 
     private void GrabObject()
     {
-        transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, target.position) < 0.5f)
+        if (Vector3.Distance(this.transform.position, target.position) < 0.5f)
         {
             isObjectGrabbed = true;
+            once = false;
+        }
+    }
+
+    private void LeaveObject()
+    {
+        this.transform.position = Vector3.MoveTowards(this.transform.position, previousPos, grabbingSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(this.transform.position, previousPos) < 0.5f)
+        {
+            isObjectGrabbed = false;
+            once = true;
+            leaving = false;
+            SetAccessCamera(false);
         }
     }
 }
