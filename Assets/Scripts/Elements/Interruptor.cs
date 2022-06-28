@@ -8,16 +8,11 @@ public class Interruptor : Interactables
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
     private bool isLightOn = false;
-    public int minLight=6000, maxLight=12000;
+
     private void Start()
     {
         // Reset values
         textDisplay.text = "E Encender";
-        foreach (var light in lights.GetComponentsInChildren<Light>())
-        {
-             light.intensity = minLight;
-        }
-
     }
 
     public override void Interaction(int options)
@@ -35,8 +30,8 @@ public class Interruptor : Interactables
     {
         foreach (var light in lights.GetComponentsInChildren<Light>())
         {
-            if(isLightOn) light.intensity = minLight;
-            else light.intensity = maxLight;
+            if(isLightOn) light.intensity = 6000;
+            else light.intensity = 12000;
         }
         isLightOn = !isLightOn;
     }

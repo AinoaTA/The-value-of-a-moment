@@ -76,7 +76,6 @@ public class Bed : Interactables
     {
         if (Input.GetKeyDown(KeyCode.Escape) && gameInitialized)
         {
-            Debug.Log("Exit");
             Exit();
         }
     }
@@ -111,7 +110,7 @@ public class Bed : Interactables
 
     private void OnMouseUp()
     {
-        if (m_Done && gameInitialized)
+        if (m_Done&& gameInitialized)
             BedDone();
     }
 
@@ -135,6 +134,7 @@ public class Bed : Interactables
         sleepTextBed.transform.localPosition = lastPosDormirText;
         GameManager.GetManager().dayNightCycle.TaskDone();
         GameManager.GetManager().StartThirdPersonCamera();
+        print("bed");
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
     }
 
@@ -201,7 +201,6 @@ public class Bed : Interactables
         GameManager.GetManager().ProgramMinigame.ResetAllGame();
         GameManager.GetManager().bucket.ResetInteractable();
         GameManager.GetManager().Mirror.ResetInteractable();
-        GameManager.GetManager().ResetTrash();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
 

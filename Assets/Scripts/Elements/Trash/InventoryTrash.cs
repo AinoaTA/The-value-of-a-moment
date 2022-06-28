@@ -47,12 +47,6 @@ public class InventoryTrash : MonoBehaviour
         trashCollected = 0;
     }
 
-    public void ResetInventory()
-    {
-        trashCollected = 0;
-        // dirtyClothes = 0;
-    }
-
     public void RemoveDirtyClothes(TrashBucket bucket)
     {
         currentbucket = bucket;
