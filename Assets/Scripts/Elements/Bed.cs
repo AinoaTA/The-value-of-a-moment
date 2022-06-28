@@ -199,8 +199,8 @@ public class Bed : Interactables
         GameManager.GetManager().calendarController.GlobalReset();
         GameManager.GetManager().ProgramMinigame.ResetAllGame();
         GameManager.GetManager().bucket.ResetInteractable();
+        GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().Book.ResetInteractable();
-        //GameManager.GetManager().Mirror.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
 
         for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)

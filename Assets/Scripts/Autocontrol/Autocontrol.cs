@@ -6,7 +6,7 @@ public class Autocontrol : MonoBehaviour
 {
     private float maxValue = 100f;
     CanvasGroup canvasGroup;
-    private float m_currentValue = 10;
+    public float m_currentValue { get; private set; }
     public Slider m_Slider;
 
     public Image stateImage;
@@ -25,6 +25,7 @@ public class Autocontrol : MonoBehaviour
     }
     private void Start()
     {
+        m_currentValue = 10;
         GameManager.GetManager().Autocontrol = this;
         renderTextureResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
         renderTexture = new RenderTexture(renderTextureResolution.x, renderTextureResolution.y, 32);
