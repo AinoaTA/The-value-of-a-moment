@@ -11,6 +11,7 @@ public class Interruptor : Interactables
 
     private void Start()
     {
+        // Reset values
         textDisplay.text = "E Encender";
     }
 
@@ -29,8 +30,8 @@ public class Interruptor : Interactables
     {
         foreach (var light in lights.GetComponentsInChildren<Light>())
         {
-            if(isLightOn) light.intensity = 10000;
-            else light.intensity = 15000;
+            if(isLightOn) light.intensity = 6000;
+            else light.intensity = 12000;
         }
         isLightOn = !isLightOn;
     }
