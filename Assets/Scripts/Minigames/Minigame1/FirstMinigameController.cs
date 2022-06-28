@@ -21,6 +21,7 @@ public class FirstMinigameController : Interactables
 
     private IEnumerator GameFinished()
     {
+        GameManager.GetManager().dayNightCycle.TaskDone();
         CheckDoneTask();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
         m_Solved = true;

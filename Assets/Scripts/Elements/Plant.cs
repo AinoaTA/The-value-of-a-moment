@@ -62,6 +62,7 @@ public class Plant : Interactables
             GameManager.GetManager().StartThirdPersonCamera();
             started = false;
             waterCan.gameObject.SetActive(false);
+            waterCan.ResetWaterCan();
         }
     }
 

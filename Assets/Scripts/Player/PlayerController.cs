@@ -55,4 +55,14 @@ public class PlayerController : MonoBehaviour
             anim.ExitInteractable();
         //}
     }
+
+    public void SadMoment()
+    {
+        mov.m_Anim.Play("Sad");
+    }
+
+    public void HappyMoment()
+    {
+        mov.m_Anim.Play("Happy");
+    }
 }

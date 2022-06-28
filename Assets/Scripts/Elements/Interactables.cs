@@ -27,6 +27,12 @@ public class Interactables : MonoBehaviour
     public virtual void ExitInteraction() { }
     public bool showing = false;
 
+    private void Update()
+    {
+        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.Init)
+            HideCanvas();
+    }
+
     private void Start()
     {
         if (gameObject.GetComponent<Renderer>() != null)

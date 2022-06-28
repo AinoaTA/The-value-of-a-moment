@@ -131,7 +131,8 @@ public class Bed : Interactables
         m_Sheet.SetActive(true);
         badBed.SetActive(false);
         interactTextBed.SetActive(false);
-        sleepTextBed.transform.localPosition = lastPosDormirText; 
+        sleepTextBed.transform.localPosition = lastPosDormirText;
+        GameManager.GetManager().dayNightCycle.TaskDone();
         GameManager.GetManager().StartThirdPersonCamera();
         print("bed");
         GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
@@ -219,6 +220,8 @@ public class Bed : Interactables
         ResetBed();
         yield return new WaitForSeconds(2);
         GameManager.GetManager().Autocontrol.AutocontrolSleep();
+        GameManager.GetManager().dayNightCycle.NewDay();
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
     }
 
     public override void ExitInteraction()

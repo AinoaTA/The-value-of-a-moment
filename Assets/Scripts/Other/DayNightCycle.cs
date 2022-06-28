@@ -27,10 +27,18 @@ public class DayNightCycle : MonoBehaviour
         m_DayState = newState;
     }
 
+    public void NewDay()
+    {
+
+        counter = 0;
+        counterTaskDay = 0;
+        ChangeDay((DayState)counter);
+    }
+
     public void TaskDone()
     {
         counterTaskDay++;
-        if (counterTaskDay % 4 == 0)
+        if (counterTaskDay % 2 == 0)
         {
             counter = counter < 4 ? counter + 1 : 0;
             ChangeDay((DayState)counter);

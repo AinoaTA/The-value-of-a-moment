@@ -20,7 +20,7 @@ public class Regadera : Interactables
             waterCan.tengoRegadera = true;
             GameManager.GetManager().WaterCanGrabbed = true;
             grabbed = true;
-            GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+           // GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
         }
     }
 
