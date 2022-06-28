@@ -161,7 +161,7 @@ public class Bed : Interactables
                     gameInitialized = true;
                     GameManager.GetManager().CanvasManager.UnLock();
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                    cam.cullingMask = 7 << 0;
+                    cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
                 }
                 break;

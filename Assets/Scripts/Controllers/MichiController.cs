@@ -56,7 +56,7 @@ public class MichiController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.layer != 9)
+        if(other.gameObject.layer != 2)
         {
             Miau();
         }
