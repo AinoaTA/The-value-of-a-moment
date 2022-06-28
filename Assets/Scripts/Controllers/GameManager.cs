@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            print("is it here??");
             PlayerController.ExitInteractable();
             m_CurrentStateGame = StateGame.GamePlay;
             currInteractable = null;
@@ -164,6 +165,7 @@ public class GameManager : MonoBehaviour
     /// <param name="state"></param>
     public void StartThirdPersonCamera()
     {
+        print("StartThirdPersonCamera");
         //PlayerController.ExitInteractable();
         CanvasManager.Lock();
         //ChangeGameState(StateGame.GamePlay);
@@ -172,6 +174,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndMiniGameRoutine()
     {
+        print("EndMiniGameRoutine");
         PlayerController.ExitInteractable();
         CanvasManager.Lock();
         yield return new WaitForSeconds(1f);
