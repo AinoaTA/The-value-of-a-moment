@@ -70,15 +70,19 @@ public class Alarm : MonoBehaviour
     }
     public IEnumerator NormalWakeUp()
     {
-        GameManager.GetManager().StartThirdPersonCamera();
+        
+        GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
+        yield return new WaitForSeconds(0.9f);
         GameManager.GetManager().PlayerController.PlayerWakeUpPos();
         GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
         m_Alarm = false;
         ResetTime();
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().StartThirdPersonCamera();
         //Temporal <- ajá
-        
+
         if (!temp) 
         {
             if (controlPosponer == 0)
