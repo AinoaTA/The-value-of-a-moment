@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Grabbing : MonoBehaviour
 {
-    public CinemachineBrain brain;
-    private ICinemachineCamera cam;
+    public Camera cam;
 
     [Header("Mouse Sensitivity")]
     [Range(0.01f, 3f)]
@@ -42,7 +41,6 @@ public class Grabbing : MonoBehaviour
         {
             leaving = true;
             isObjectGrabbed = false;
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             GameManager.GetManager().PlayerController.ExitInteractable();
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         }
@@ -78,10 +76,12 @@ public class Grabbing : MonoBehaviour
 
     private void GrabObject()
     {
+        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
         if (Vector3.Distance(this.transform.position, target.position) < 0.5f)
         {
+            StartCoroutine(MakePlayerDissapear());
             isObjectGrabbed = true;
             once = false;
         }
@@ -93,10 +93,18 @@ public class Grabbing : MonoBehaviour
         this.transform.rotation = previousQuat;
         if (Vector3.Distance(this.transform.position, previousPos) < 0.1f)
         {
+            cam.cullingMask = -1;
             isObjectGrabbed = false;
             once = true;
             leaving = false;
             SetAccessCamera(false);
         }
     }
+
+    private IEnumerator MakePlayerDissapear()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
+    }
+
 }
