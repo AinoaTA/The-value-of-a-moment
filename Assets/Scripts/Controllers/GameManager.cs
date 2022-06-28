@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public LayerMask m_LayerMask;
     public LayerMask m_WallMask;
     public Camera cam { private get;  set; }
-    [SerializeField] private float m_Distance = 30f;
+    [SerializeField] private float m_Distance = 50f;
 
     [SerializeField] private Interactables currInteractable;
     private Interactables lookingInteractable;
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         {
             currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
 
-            if (currInteractable != null && currInteractable!=lookingInteractable)
+            if (currInteractable != null && currInteractable != lookingInteractable)
             {
                 if (currInteractable.options > 1 || !currInteractable.GetDone())
                 {
@@ -146,7 +146,6 @@ public class GameManager : MonoBehaviour
     {
       // door.SetTrigger("Open");
     }
-
 
     #region SetStateGames
     /// <summary>
