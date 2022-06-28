@@ -49,7 +49,7 @@ public class Alarm : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ResetTime();
-               StartCoroutine(NormalWakeUp());
+                StartCoroutine(NormalWakeUp());
             }
             else if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -81,7 +81,7 @@ public class Alarm : MonoBehaviour
         ResetTime();
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().StartThirdPersonCamera();
-        //Temporal <- ajá
+        //Temporal <- ajï¿½
 
         if (!temp) 
         {
