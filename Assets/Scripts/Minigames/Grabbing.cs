@@ -39,7 +39,6 @@ public class Grabbing : MonoBehaviour
         if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
         {
             leaving = true;
-            Debug.Log("EXittt");
             isObjectGrabbed = false;
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             GameManager.GetManager().PlayerController.ExitInteractable();
@@ -91,7 +90,6 @@ public class Grabbing : MonoBehaviour
 
         if (Vector3.Distance(this.transform.position, previousPos) < 0.5f)
         {
-            Debug.Log("Leaved");
             isObjectGrabbed = false;
             once = true;
             leaving = false;
