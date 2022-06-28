@@ -38,6 +38,7 @@ public class TrashBucket : Interactables
         numberTrash++;
         if (numberTrash >= maxTras)
         {
+            GameManager.GetManager().dayNightCycle.TaskDone();
             CheckDoneTask();
         }
     }
