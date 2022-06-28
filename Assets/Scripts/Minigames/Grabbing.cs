@@ -21,6 +21,7 @@ public class Grabbing : MonoBehaviour
     public bool canAccesCamera = false;
     private bool once = true;
     private Vector3 previousPos;
+    private Quaternion previousQuat;
     [SerializeField] private Transform target;
     [SerializeField] private float grabbingSpeed = 0.01f;
     private bool isObjectGrabbed = false;
@@ -30,6 +31,7 @@ public class Grabbing : MonoBehaviour
     void Start()
     {
         previousPos = this.transform.position;
+        previousQuat = this.transform.rotation;
         //cam = brain.ActiveVirtualCamera;
     }
 
@@ -42,6 +44,7 @@ public class Grabbing : MonoBehaviour
             isObjectGrabbed = false;
             GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             GameManager.GetManager().PlayerController.ExitInteractable();
+            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
         }
 
         if (leaving)
@@ -87,8 +90,8 @@ public class Grabbing : MonoBehaviour
     private void LeaveObject()
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, previousPos, grabbingSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(this.transform.position, previousPos) < 0.5f)
+        this.transform.rotation = previousQuat;
+        if (Vector3.Distance(this.transform.position, previousPos) < 0.1f)
         {
             isObjectGrabbed = false;
             once = true;
