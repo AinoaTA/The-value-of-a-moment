@@ -23,7 +23,7 @@ public class Alarm : MonoBehaviour
 
     private void Start()
     {
-        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
+        GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().Alarm = this;
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDay());
@@ -70,8 +70,9 @@ public class Alarm : MonoBehaviour
     }
     public IEnumerator NormalWakeUp()
     {
-        
-        GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
+
+        // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
+        GameManager.GetManager().cameraController.StartInteractCam(2);
         GameManager.GetManager().SoundController.SetMusic();
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);

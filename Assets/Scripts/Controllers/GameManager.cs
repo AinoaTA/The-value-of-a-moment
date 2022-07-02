@@ -51,21 +51,28 @@ public class GameManager : MonoBehaviour
     public CameraController cameraController { get; set; }
     public LevelData levelData { get; set; }
 
+    
+    
     //public Animator door;
 
     public static GameManager GetManager() => m_GameManager;
 
+
+    private void OnEnable()
+    {
+        if (m_GameManager == null)
+        {
+            m_GameManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (m_GameManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Awake()
     {
-        //if (m_GameManager == null)
-        //{
-        //    m_GameManager = this;
-        //    DontDestroyOnLoad(gameObject);
-        //}
-        //else if (m_GameManager != this)
-        //{
-        //    Destroy(gameObject);
-        //}
+        
         stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
     }
     private void Start()
@@ -175,7 +182,7 @@ public class GameManager : MonoBehaviour
     IEnumerator EndMiniGameRoutine()
     {
         print("EndMiniGameRoutine");
-        PlayerController.ExitInteractable();
+        cameraController.ExitInteractCam();
         CanvasManager.Lock();
         yield return new WaitForSeconds(1f);
         ChangeGameState(StateGame.GamePlay);

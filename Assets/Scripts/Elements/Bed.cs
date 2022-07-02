@@ -158,7 +158,8 @@ public class Bed : Interactables
             case 1:
                 if (!m_Done)
                 {
-                    GameManager.GetManager().PlayerController.SetInteractable("Bed");
+                    GameManager.GetManager().cameraController.StartInteractCam(3);
+                    //GameManager.GetManager().PlayerController.SetInteractable("Bed");
                     gameInitialized = true;
                     GameManager.GetManager().CanvasManager.UnLock();
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
@@ -193,7 +194,7 @@ public class Bed : Interactables
         GameManager.GetManager().CanvasManager.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
 
-        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
+        GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().PlayerController.PlayerSleepPos();
         GameManager.GetManager().Dialogue.StopDialogue();
         GameManager.GetManager().Window.ResetWindow();

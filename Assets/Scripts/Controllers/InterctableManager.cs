@@ -11,7 +11,4 @@ public class InterctableManager : MonoBehaviour
     {
         allInteractables = FindObjectsOfType<Interactables>().ToList();
     }
-
-
-
 }

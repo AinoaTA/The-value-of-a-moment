@@ -38,7 +38,7 @@ public class Plant : Interactables
                 {
                     started = true;
                     timer = 0;
-                    GameManager.GetManager().PlayerController.SetInteractable("Plant");
+                    GameManager.GetManager().cameraController.StartInteractCam(6);
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
                     GameManager.GetManager().CanvasManager.UnLock();
 

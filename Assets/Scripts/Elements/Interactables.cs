@@ -27,6 +27,9 @@ public class Interactables : MonoBehaviour
     public virtual void ExitInteraction() { }
     public bool showing = false;
 
+    private int cameraID;
+    public string nameInteractable;
+
     private void Update()
     {
         if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.Init)
@@ -39,6 +42,8 @@ public class Interactables : MonoBehaviour
         {
             m_Material = gameObject.GetComponent<Renderer>().materials;
         }
+
+       // cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
     }
 
     public virtual void ShowCanvas()
@@ -47,7 +52,6 @@ public class Interactables : MonoBehaviour
         {
             showing = true;
             anim.SetBool("Showing", showing);
-          //  anim.SetTrigger("Show");
         }
     }
 
@@ -57,7 +61,6 @@ public class Interactables : MonoBehaviour
         {
             showing = false;
             anim.SetBool("Showing", showing);
-            //  anim.SetTrigger("Hide");
         }
     }
 

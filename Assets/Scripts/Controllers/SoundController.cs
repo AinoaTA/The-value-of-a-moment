@@ -17,7 +17,7 @@ public class SoundController : MonoBehaviour
     public AudioClip[] loopMusic;
     private int currIndex = 0;
 
-    void Start()
+    void Awake()
     {
         GameManager.GetManager().SoundController = this;
         introLoop.volume = 0;

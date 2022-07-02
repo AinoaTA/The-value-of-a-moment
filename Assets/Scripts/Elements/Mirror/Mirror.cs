@@ -22,7 +22,7 @@ public class Mirror : Interactables
                 {
                     m_Done = true;
                     GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                    GameManager.GetManager().PlayerController.SetInteractable("Mirror");
+                    GameManager.GetManager().cameraController.StartInteractCam(7);
 
                     StartCoroutine(LookUp());
                     //if (m_MirrorInteractPhrases.Length > 0)

@@ -16,10 +16,17 @@ public class CameraController : MonoBehaviour
         public CinemachineVirtualCamera cameraType;
     }
 
-    private void Start()
+    private void Awake()
     {
         GameManager.GetManager().cameraController = this;
         GameManager.GetManager().cam = MainCamera;
+    }
+    private void Start()
+    {
+        for (int i = 0; i < virtualCameras.Length; i++)
+        {
+            virtualCameras[i].ID = i;
+        }
     }
 
     private void SetPriorityCam(int id)
@@ -35,8 +42,22 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public int GetID(string name)
+    {
+        for (int v = 0; v < virtualCameras.Length; v++)
+        {
+            if (name == virtualCameras[v].Name)
+            {
+                Debug.Log("Camera ID " + name + " set");
+                return virtualCameras[v].ID;
+            }
+        }
+        Debug.Log("There is not a " + name + " Camera set in CamerasController");
+        return 0;
+    }
+
     /// <summary>
-    /// Set ID 0 because is player (3D) camera
+    /// ID 0 by default because is player (3D) camera.
     /// </summary>
     public void ExitInteractCam()
     {

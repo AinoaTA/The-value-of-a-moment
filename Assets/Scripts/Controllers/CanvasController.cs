@@ -39,7 +39,7 @@ public class CanvasController : MonoBehaviour
     }
     public void ComputerScreenIn()
     {
-        GameManager.GetManager().PlayerController.SetInteractable("Computer");
+        GameManager.GetManager().cameraController.StartInteractCam(5);
         GameManager.GetManager().CanvasManager.UnLock();
        // GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
         GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
