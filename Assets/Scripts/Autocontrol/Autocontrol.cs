@@ -90,7 +90,7 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
-            print(GameManager.GetManager().SoundController);
+          
             GameManager.GetManager().SoundController.ChangeMusicMood(0);
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)

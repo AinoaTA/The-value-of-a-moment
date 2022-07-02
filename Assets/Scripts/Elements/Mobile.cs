@@ -44,16 +44,16 @@ public class Mobile : Interactables
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
         {
-            if (mobileCanvas.alpha == 0 && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
+            if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
             {
-                GameManager.GetManager().ChangeGameState(GameManager.StateGame.MiniGame);
+                GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().CanvasManager.UnLock();
                 CanvasMobile(true);
             }
             else
             {
                 //  GameManager.GetManager().StartThirdPersonCamera();
-                GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+                GameManager.GetManager().gameStateController.ChangeGameState(1);
                 GameManager.GetManager().CanvasManager.Lock();
                 CanvasMobile(false);
                 CanvasMultiple(false);

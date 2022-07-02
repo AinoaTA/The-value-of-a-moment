@@ -47,11 +47,11 @@ public class BedMinigame : MonoBehaviour
     private IEnumerator DelayCompleted()
     {
         yield return new WaitForSeconds(1f);
-        GameManager.GetManager().Bed.BedDone();
+        //GameManager.GetManager().Bed.BedDone();
        // GameManager.GetManager().CanvasManager.DesctiveBedCanvas();
         GameManager.GetManager().Autocontrol.AddAutoControl(ValueConfident);
 
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+          GameManager.GetManager().gameStateController.ChangeGameState(1);
 
         m_GameActive = false;
         ResetMinigame();

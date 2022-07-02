@@ -10,7 +10,7 @@ public class TrashBucket : Interactables
 
     private void Start()
     {
-        GameManager.GetManager().bucket = this;
+        //GameManager.GetManager().bucket = this;
     }
 
     public override void Interaction(int optionNumber)
@@ -20,11 +20,11 @@ public class TrashBucket : Interactables
             case 1:
                 if (type == TypeBucket.CLOTHES)
                 {
-                    GameManager.GetManager().InventoryTrash.RemoveDirtyClothes(this);
+                    //GameManager.GetManager().InventoryTrash.RemoveDirtyClothes(this);
                 }
                 else if (type == TypeBucket.TRASH)
                 {
-                    GameManager.GetManager().InventoryTrash.RemoveTrash();
+                    //GameManager.GetManager().InventoryTrash.RemoveTrash();
                 }
                 break;
             default:
@@ -45,10 +45,10 @@ public class TrashBucket : Interactables
 
     public override void ShowCanvas()
     {
-        if (type == TypeBucket.CLOTHES && GameManager.GetManager().InventoryTrash.CurrentDirtyClothes() <= 0)
-            return;
-        else if (type == TypeBucket.TRASH && GameManager.GetManager().InventoryTrash.CurrentTrash() <= 0)
-            return;
+        //if (type == TypeBucket.CLOTHES && GameManager.GetManager().InventoryTrash.CurrentDirtyClothes() <= 0)
+        //    return;
+        //else if (type == TypeBucket.TRASH && GameManager.GetManager().InventoryTrash.CurrentTrash() <= 0)
+        //    return;
 
         base.ShowCanvas();
     }

@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         print("Se está llamado");
         //if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
         //{
-            anim.ExitInteractable();
+            //anim.ExitInteractable();
         //}
     }
 

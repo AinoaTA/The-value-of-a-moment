@@ -23,7 +23,7 @@ public class Plant : Interactables
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
-        GameManager.GetManager().Plants.Add(this);
+        //GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
             m_process[currProcess].SetActive(true);
@@ -39,7 +39,7 @@ public class Plant : Interactables
                     started = true;
                     timer = 0;
                     GameManager.GetManager().cameraController.StartInteractCam(6);
-                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     GameManager.GetManager().CanvasManager.UnLock();
 
                     StartCoroutine(ActivateWaterCan());

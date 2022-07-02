@@ -5,15 +5,11 @@ public class Interactables : MonoBehaviour
     [Header("Interactable Options")]
     public int options = 1;
     public bool m_Done;
-    public VoiceOff[] m_PhrasesVoiceOff;
-    public VoiceOff[] m_HelpPhrasesVoiceOff;
-    public string[] m_AnswersToVoiceOff;
-    public string[] m_InteractPhrases;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
 
-    [Header("Calendar extra")]
-    public float m_ExtraAutoControlCalendar;
-    public TaskType taskAssociated;
+    //[Header("Calendar extra")]
+    //public float m_ExtraAutoControlCalendar;
+    //public TaskType taskAssociated;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
@@ -22,7 +18,7 @@ public class Interactables : MonoBehaviour
     private Material[] m_Material;
 
     public virtual bool GetDone() { return m_Done; }
-    public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
+   // public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
     public virtual void Interaction(int optionNumber) {  }
     public virtual void ExitInteraction() { }
     public bool showing = false;
@@ -32,7 +28,7 @@ public class Interactables : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.Init)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
             HideCanvas();
     }
 
@@ -48,20 +44,20 @@ public class Interactables : MonoBehaviour
 
     public virtual void ShowCanvas()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && !showing)
-        {
-            showing = true;
-            anim.SetBool("Showing", showing);
-        }
+        //if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && !showing)
+        //{
+        //    showing = true;
+        //    anim.SetBool("Showing", showing);
+        //}
     }
 
     public virtual void HideCanvas()
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && showing)
-        {
-            showing = false;
-            anim.SetBool("Showing", showing);
-        }
+        //if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && showing)
+        //{
+        //    showing = false;
+        //    anim.SetBool("Showing", showing);
+        //}
     }
 
     public virtual void ResetInteractable()
@@ -78,6 +74,12 @@ public class Interactables : MonoBehaviour
         //        // material.color = Color.red;
         //    }
         //}
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)
+        {
+            showing = true;
+            anim.SetBool("Showing", showing);
+        }
+
     }
 
     private void OnMouseExit()
@@ -90,17 +92,23 @@ public class Interactables : MonoBehaviour
                 // this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
             }
         }
+
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing)
+        {
+            showing = false;
+            anim.SetBool("Showing", showing);
+        }
     }
 
     public void CheckDoneTask()
     {
-        if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
-        {
-            if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
-            {
-                taskAssociated.Done();
-                GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
-            }
-        }
+        //if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
+        //{
+        //    if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+        //    {
+        //        taskAssociated.Done();
+        //        GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
+        //    }
+        //}
     }
 }

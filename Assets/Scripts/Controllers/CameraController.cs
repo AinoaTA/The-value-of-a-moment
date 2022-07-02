@@ -19,14 +19,12 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().cameraController = this;
-        GameManager.GetManager().cam = MainCamera;
+     //   GameManager.GetManager().cam = MainCamera;
     }
     private void Start()
     {
         for (int i = 0; i < virtualCameras.Length; i++)
-        {
             virtualCameras[i].ID = i;
-        }
     }
 
     private void SetPriorityCam(int id)

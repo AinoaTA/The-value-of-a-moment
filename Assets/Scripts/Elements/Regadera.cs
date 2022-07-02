@@ -9,7 +9,7 @@ public class Regadera : Interactables
 
     private void Start()
     {
-        GameManager.GetManager().WaterCan = this;
+        //GameManager.GetManager().WaterCan = this;
     }
 
     public void Grab()

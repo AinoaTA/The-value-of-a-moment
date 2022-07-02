@@ -16,7 +16,7 @@ public class Trash : Interactables
     private void Start()
     {
         initPos = transform.position;
-        GameManager.GetManager().trashes.Add(this);
+        //GameManager.GetManager().trashes.Add(this);
     }
 
     public override void Interaction(int optionNumber)
@@ -37,10 +37,10 @@ public class Trash : Interactables
 
             if(Vector3.Distance(this.transform.position, target.position) < 0.1f)
             {
-                if (type == TrashType.TRASH)
-                    GameManager.GetManager().InventoryTrash.AddTrash(this);
-                else
-                    GameManager.GetManager().InventoryTrash.AddDirtyClothes(this);
+                //if (type == TrashType.TRASH)
+                //    GameManager.GetManager().InventoryTrash.AddTrash(this);
+                //else
+                //    GameManager.GetManager().InventoryTrash.AddDirtyClothes(this);
 
                 this.gameObject.SetActive(false);
             }

@@ -8,7 +8,7 @@ public class VR : Interactables
 
     private void Start()
     {
-        GameManager.GetManager().VR = this;
+        //GameManager.GetManager().VR = this;
     }
     public override void Interaction(int options)
     {
@@ -17,10 +17,10 @@ public class VR : Interactables
             case 1:
                 if (!m_Done)
                 {
-                    if (m_Counter >= m_HelpPhrasesVoiceOff.Length - 1)
-                        m_Counter = 0;
+                    //if (m_Counter >= m_HelpPhrasesVoiceOff.Length - 1)
+                    //    m_Counter = 0;
 
-                    GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
+                    //GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
                     GameManager.GetManager().Autocontrol.AddAutoControl(3);
                     m_Counter++;
 

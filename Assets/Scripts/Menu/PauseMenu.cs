@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay
+        if (!paused && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay
             && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
         {
             PauseGame();
@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+        GameManager.GetManager().gameStateController.ChangeGameState(0);
         Time.timeScale = 1;
         GameManager.GetManager().sceneLoader.LoadLevel(0);
         //Application.Quit();

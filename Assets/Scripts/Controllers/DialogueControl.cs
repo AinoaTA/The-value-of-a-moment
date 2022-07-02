@@ -35,12 +35,12 @@ public class DialogueControl : MonoBehaviour
 
     void Start()
     {
-        GameManager.GetManager().Dialogue = this;
+        //GameManager.GetManager().Dialogue = this;
 
-        m_ListInteract.Add(GameManager.GetManager().Bed);
-        m_ListInteract.Add(GameManager.GetManager().Book);
-        m_ListInteract.Add(GameManager.GetManager().VR);
-        m_ListInteract.Add(GameManager.GetManager().Window);
+        //m_ListInteract.Add(GameManager.GetManager().Bed);
+        //m_ListInteract.Add(GameManager.GetManager().Book);
+        //m_ListInteract.Add(GameManager.GetManager().VR);
+        //m_ListInteract.Add(GameManager.GetManager().Window);
     }
 
     private void Update()
@@ -111,13 +111,13 @@ public class DialogueControl : MonoBehaviour
         for (int i = 0; i < m_ListInteract.Count; i++)
         {
             Interactables l_interactable = m_ListInteract[i].GetComponent<Interactables>();
-            
-            if (!l_interactable.GetDone() && l_interactable.GetPhrasesVoiceOff().Length !=0)
-            {
-                int random = Random.Range(0, l_interactable.GetPhrasesVoiceOff().Length-1);
-                VoiceOff l_VoiceOff = l_interactable.GetPhrasesVoiceOff()[random];
-                SetDialogue(l_VoiceOff);
-            }
+
+            //if (!l_interactable.GetDone() && l_interactable.GetPhrasesVoiceOff().Length != 0)
+            //{
+            //    int random = Random.Range(0, l_interactable.GetPhrasesVoiceOff().Length - 1);
+            //    VoiceOff l_VoiceOff = l_interactable.GetPhrasesVoiceOff()[random];
+            //    SetDialogue(l_VoiceOff);
+            //}
         }
     }
 

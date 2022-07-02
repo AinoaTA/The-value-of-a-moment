@@ -42,7 +42,7 @@ public class CanvasController : MonoBehaviour
         GameManager.GetManager().cameraController.StartInteractCam(5);
         GameManager.GetManager().CanvasManager.UnLock();
        // GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+       // GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
         StartCoroutine(DelayFadeComputer());
 
@@ -102,7 +102,7 @@ public class CanvasController : MonoBehaviour
         if (!GameManager.GetManager().ProgramMinigame.GetSolved())
         {
             GameManager.GetManager().ProgramMinigame.m_started = true;
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+           // GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             FirstMinigameCanvas.SetActive(true);
         }
     }

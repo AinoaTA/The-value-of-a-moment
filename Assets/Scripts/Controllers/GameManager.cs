@@ -4,44 +4,18 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager m_GameManager;
+    private static GameManager gameManager;
+    public static GameManager GetManager() => gameManager;
 
-    public enum StateGame
-    {
-        Init = 0,   // Momento despertar-posponer
-        GamePlay,   // Una vez despertado y moviendose por el nivel
-        MiniGame    // Se ha iniciado un minigame
-    }
-    public StateGame m_CurrentStateGame;
-
-    public LayerMask m_LayerMask;
-    public LayerMask m_WallMask;
-    public Camera cam { private get;  set; }
-    [SerializeField] private float m_Distance = 50f;
-
-    [SerializeField] private Interactables currInteractable;
-    private Interactables lookingInteractable;
-
+    public GameStateController gameStateController { get; set; }
     public CanvasController CanvasManager { get; set; }
     public NotificationController NotificationController { get; set; }
     public Autocontrol Autocontrol { get; set; }
-    public Bed Bed { get; set; }
-    public Alarm Alarm { get; set; }
-    public Window Window { get; set; }
-    public DialogueControl Dialogue { get; set; }
-    public Book Book { get; set; }
     public SoundController SoundController { get; set; }
     public FirstMinigameController ProgramMinigame { get; set; }
-    public Mirror Mirror { get; set; }
-    public VR VR { get; set; }
     public PlayerController PlayerController { get; set; }
-    public InventoryTrash InventoryTrash { get; set; }
-    public List<Plant> Plants = new List<Plant>();
     public MobileController mobile { get; set; }
     public CalendarController calendarController { get; set; }
-    public Regadera WaterCan { get; set; }
-    public List<Trash> trashes = new List<Trash>();
-    public TrashBucket bucket { get;set; }
 
     public bool WaterCanGrabbed { get; set; }
     public DayNightCycle dayNightCycle { get; set; }
@@ -50,114 +24,74 @@ public class GameManager : MonoBehaviour
     public SceneLoader sceneLoader { get; set; }
     public CameraController cameraController { get; set; }
     public LevelData levelData { get; set; }
-
+    public InterctableManager interactableManager { get; set; }
     
-    
-    //public Animator door;
-
-    public static GameManager GetManager() => m_GameManager;
-
-
     private void OnEnable()
     {
-        if (m_GameManager == null)
+        if (gameManager == null)
         {
-            m_GameManager = this;
+            gameManager = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if (m_GameManager != this)
+        else if (gameManager != this)
         {
             Destroy(gameObject);
         }
     }
     private void Awake()
     {
-        
         stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
     }
     private void Start()
     {
        // cam = Camera.main;
-        m_CurrentStateGame = StateGame.Init;
+        //m_CurrentStateGame = StateGame.Init;
     }
 
-    private void Update()
-    {
-        if (m_CurrentStateGame != StateGame.GamePlay)
-            return;
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        if (currInteractable != null && currInteractable.showing)
+    //        {
+    //            currInteractable.HideCanvas();
+    //            currInteractable.Interaction(1);
+    //            currInteractable = null;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (currInteractable != null && currInteractable.showing)
-            {
-                currInteractable.HideCanvas();
-                currInteractable.Interaction(1);
-                currInteractable = null;
-                
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Q) && currInteractable != null && currInteractable.options > 1)
-        {
-            if (currInteractable != null)
-            {
-                currInteractable.HideCanvas();
-                currInteractable.Interaction(2);
-                currInteractable = null;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            print("is it here??");
-            PlayerController.ExitInteractable();
-            m_CurrentStateGame = StateGame.GamePlay;
-            currInteractable = null;
-        }
+    //        }
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Q) && currInteractable != null && currInteractable.options > 1)
+    //    {
+    //        if (currInteractable != null)
+    //        {
+    //            currInteractable.HideCanvas();
+    //            currInteractable.Interaction(2);
+    //            currInteractable = null;
+    //        }
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        print("is it here??");
+    //        PlayerController.ExitInteractable();
+    //        m_CurrentStateGame = StateGame.GamePlay;
+    //        currInteractable = null;
+    //    }
+    //}
 
-        Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    //public void ResetTrash()
+    //{ 
+    //    foreach(var trash in trashes)
+    //    {
+    //        trash.ResetInteractable();
+    //    }
+    //    bucket.ResetInteractable();
+    //    InventoryTrash.ResetInventory();
+    //}
 
-        if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
-        {
-            currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
-
-            if (currInteractable != null && currInteractable != lookingInteractable)
-            {
-                if (currInteractable.options > 1 || !currInteractable.GetDone())
-                {
-                    lookingInteractable = currInteractable;
-                    currInteractable.ShowCanvas();
-                }
-            }
-            else if (currInteractable == null && lookingInteractable != null)
-            {
-                lookingInteractable.HideCanvas();
-                lookingInteractable = null;
-            }
-        }
-    }
-
-    public void ResetTrash()
-    { 
-        foreach(var trash in trashes)
-        {
-            trash.ResetInteractable();
-        }
-        bucket.ResetInteractable();
-        InventoryTrash.ResetInventory();
-    }
-
-    public void ChangeGameState(StateGame state)
-    {
-        StartCoroutine(Delay(state));
-    }
-    private IEnumerator Delay(StateGame state)
-    {
-        yield return new WaitForSecondsRealtime(1);
-        m_CurrentStateGame = state;
-    }
 
     public void TurnOnComputer()
     {
-        PlayerController.SetInteractable("Computer");
+        cameraController.StartInteractCam(6);
     }
 
     public void OpenDoor()
@@ -185,7 +119,7 @@ public class GameManager : MonoBehaviour
         cameraController.ExitInteractCam();
         CanvasManager.Lock();
         yield return new WaitForSeconds(1f);
-        ChangeGameState(StateGame.GamePlay);
+        gameStateController.ChangeGameState(1);
     }
     #endregion
 }

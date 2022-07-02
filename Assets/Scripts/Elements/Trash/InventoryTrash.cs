@@ -16,7 +16,7 @@ public class InventoryTrash : MonoBehaviour
 
     private void Start()
     {
-        GameManager.GetManager().InventoryTrash = this;
+        //GameManager.GetManager().InventoryTrash = this;
         dirtyClothesCounter.gameObject.SetActive(false);
         trashCounter.gameObject.SetActive(false);
         dirtyClothesCounter.text = "";
@@ -29,7 +29,7 @@ public class InventoryTrash : MonoBehaviour
         dirtyClothes++;
         current = t;
         dirtyClothesCounter.text = dirtyClothes.ToString() + dirtyClothesPhrase;
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().gameStateController.ChangeGameState(1);
     }
 
     public void AddTrash(Trash t)
@@ -38,7 +38,7 @@ public class InventoryTrash : MonoBehaviour
         trashCollected++;
         current = t;
         trashCounter.text = trashCollected.ToString() + trashPhrase;
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+        GameManager.GetManager().gameStateController.ChangeGameState(1);
     }
 
     public void RemoveTrash()

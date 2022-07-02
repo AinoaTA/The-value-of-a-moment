@@ -22,7 +22,7 @@ public class Window : Interactables
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
-        GameManager.GetManager().Window = this;
+        //GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
     }
@@ -95,7 +95,7 @@ public class Window : Interactables
         if (!temp)
         {
             temp = true;
-            StartCoroutine(GoodInteraction());
+            //StartCoroutine(GoodInteraction());
         }
     }
 
@@ -119,7 +119,7 @@ public class Window : Interactables
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(4);
                 GameManager.GetManager().CanvasManager.UnLock();
-                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                GameManager.GetManager().gameStateController.ChangeGameState(2);
                 break;
             case 2:
                 break;
@@ -165,69 +165,69 @@ public class Window : Interactables
 
     #region Dialogues Region
 
-    public void StartVoiceOffDialogueWindow()
-    {
-        StartCoroutine(StartWindows());
-    }
+    //public void StartVoiceOffDialogueWindow()
+    //{
+    //    StartCoroutine(StartWindows());
+    //}
 
-    private IEnumerator StartWindows()
-    {
-        if (m_PhrasesVoiceOff.Length >= 2)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
-            yield return new WaitForSeconds(3);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.StopDialogue();
-        }
-    }
+    //private IEnumerator StartWindows()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 2)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
+    //        yield return new WaitForSeconds(3);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.StopDialogue();
+    //    }
+    //}
 
-    private IEnumerator GoodInteraction()
-    {
-        if (m_PhrasesVoiceOff.Length >= 2)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
-            yield return new WaitForSeconds(1.25f);
-            GameManager.GetManager().Dialogue.StopDialogue();
+    //private IEnumerator GoodInteraction()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 2)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
+    //        yield return new WaitForSeconds(1.25f);
+    //        GameManager.GetManager().Dialogue.StopDialogue();
 
-            StartCoroutine(NextAction());
-        }
-    }
+    //        StartCoroutine(NextAction());
+    //    }
+    //}
 
-    private IEnumerator BadInteraction()
-    {
-        if (m_PhrasesVoiceOff.Length >= 4)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.StopDialogue();
+    //private IEnumerator BadInteraction()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 4)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.StopDialogue();
 
-            StartCoroutine(NextAction());
-        }
-    }
+    //        StartCoroutine(NextAction());
+    //    }
+    //}
 
-    private IEnumerator NextAction()
-    {
-        if (m_PhrasesVoiceOff.Length >= 6)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            //GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
-            //yield return new WaitForSeconds(2);
-            //GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
-            //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.StopDialogue();
-        }
-    }
+    //private IEnumerator NextAction()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 6)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        //GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
+    //        //yield return new WaitForSeconds(2);
+    //        //GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
+    //        //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.StopDialogue();
+    //    }
+    //}
     #endregion
 }

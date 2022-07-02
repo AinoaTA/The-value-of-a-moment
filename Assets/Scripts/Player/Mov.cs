@@ -25,7 +25,7 @@ public class Mov : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
         {
             m_CurrVelocityPlayer = 0;
             m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
