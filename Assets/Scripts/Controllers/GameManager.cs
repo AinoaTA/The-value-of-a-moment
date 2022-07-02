@@ -57,15 +57,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (m_GameManager == null)
-        {
-            m_GameManager = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (m_GameManager != this)
-        {
-            Destroy(gameObject);
-        }
+        //if (m_GameManager == null)
+        //{
+        //    m_GameManager = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else if (m_GameManager != this)
+        //{
+        //    Destroy(gameObject);
+        //}
         stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
     }
     private void Start()
