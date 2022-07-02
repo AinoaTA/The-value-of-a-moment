@@ -24,7 +24,7 @@ public class InterctableManager : MonoBehaviour
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
             return;
 
-        Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray l_Ray = GameManager.GetManager().cameraController.mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
         {

@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera MainCamera;
+    public Camera mainCamera;
     int defaultPriority = 0;
     int setPriority = 10;
+    
 
     public CamerasConfigVirtual[] virtualCameras;
     [System.Serializable]
@@ -19,7 +20,6 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().cameraController = this;
-     //   GameManager.GetManager().cam = MainCamera;
     }
     private void Start()
     {
