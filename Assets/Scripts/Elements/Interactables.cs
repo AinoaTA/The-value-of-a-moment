@@ -25,10 +25,14 @@ public class Interactables : MonoBehaviour
     public virtual bool GetDone() { return m_Done; }
     public virtual void Interaction(int optionNumber) 
     {
+        
         actionEnter = true;
         SetCanvasValue(false);
     }
-    public virtual void ExitInteraction() { }
+    public virtual void ExitInteraction() {
+        actionEnter = false;
+        SetCanvasValue(false);
+    }
     [HideInInspector]public bool showing = false;
     protected bool actionEnter;
 
@@ -46,11 +50,12 @@ public class Interactables : MonoBehaviour
     {
         m_Done = false;
         actionEnter = false;
+        SetCanvasValue(false);
     }
 
     private void OnMouseEnter()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !m_Done)
         {
             showing = true;
             anim.SetBool("Showing", showing);
@@ -60,7 +65,7 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing && !actionEnter)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing && !actionEnter && !m_Done)
         {
             showing = false;
             anim.SetBool("Showing", showing);

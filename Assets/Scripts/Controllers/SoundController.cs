@@ -137,7 +137,6 @@ public class SoundController : MonoBehaviour
                 StartCoroutine(StartSaddest());
             else
             {
-                print(index);
                 StartCoroutine(IcreaseAudioCo(index));
             }
         }

@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         print("EndMiniGameRoutine");
         cameraController.ExitInteractCam();
         CanvasManager.Lock();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.25f);
         gameStateController.ChangeGameState(1);
     }
     #endregion

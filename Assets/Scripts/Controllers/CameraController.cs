@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour
     public Camera mainCamera;
     int defaultPriority = 0;
     int setPriority = 10;
-    
 
     public CamerasConfigVirtual[] virtualCameras;
     [System.Serializable]

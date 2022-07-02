@@ -24,11 +24,12 @@ public class GameStateController : MonoBehaviour
     /// <param name="state"></param>
     public void ChangeGameState(int state)
     {
-        StartCoroutine(Delay((StateGame)state));
+        m_CurrentStateGame = (StateGame)state;
+        //StartCoroutine(Delay((StateGame)state));
     }
-    private IEnumerator Delay(StateGame state)
-    {
-        yield return new WaitForSecondsRealtime(1);
-        m_CurrentStateGame = state;
-    }
+    //private IEnumerator Delay(StateGame state)
+    //{
+    //    yield return new WaitForSecondsRealtime(1);
+    //    m_CurrentStateGame = state;
+    //}
 }

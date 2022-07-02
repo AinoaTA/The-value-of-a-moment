@@ -10,12 +10,6 @@ public class Book : Interactables
     public delegate void DelegateSFXBook();
     public static DelegateSFXBook m_DelegateSFXBook;
 
-    private void Start()
-    {
-        //GameManager.GetManager().Book = this;
-        //m_InteractPhrases = m_BookInteractPhrases;
-    }
-
     public override void Interaction(int options)
     {
         base.Interaction(options);
@@ -38,14 +32,4 @@ public class Book : Interactables
                 break;
         }
     }
-
-    //IEnumerator DelayDialogue()
-    //{
-    //    yield return new WaitForSeconds(1f);
-    //    //GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-    //    m_DelegateSFXBook?.Invoke();
-    //    m_Counter++;
-    //    yield return new WaitForSeconds(3f);
-    //    //GameManager.GetManager().Dialogue.StopDialogue();
-    //}
 }

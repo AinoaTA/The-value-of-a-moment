@@ -26,100 +26,22 @@ public class Window : Interactables
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
     }
-
-    private void Update()
-    {
-        if (gameInitialized)
-        {
-            if (!tutorialShowed)
-                InitTutorial();
-
-            if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-            {
-                minigameCanvas.SetActive(false);
-                gameInitialized = false;
-                GameManager.GetManager().StartThirdPersonCamera();
-            }
-        }
-
-    }
-
-    #region OnMouse Region
-    void OnMouseDown()
-    {
-        zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
-        // offset = World pos - Mouse World pos
-        mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
-    }
-
-    void OnMouseDrag()
-    {
-        if (gameInitialized && !isOpen)
-        {
-            if (tutorialShowed) m_Tutorial.SetActive(false);
-
-            float height = m_Glass.transform.position.y;
-            float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
-
-            if (displacement < minHeight)
-                height = minHeight;
-
-            else if (displacement < maxHeight)
-                height = displacement;
-
-            else if (displacement > maxHeight)
-            {
-                height = maxHeight;
-                m_Done = isOpen = true;
-            }
-            m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
-        }
-    }
-
-    private void OnMouseUp()
-    {
-        if (m_Done)
-            WindowDone();
-    }
-    #endregion
-    private void WindowDone()
-    {
-        CheckDoneTask();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
-        GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().OpenDoor();
-        minigameCanvas.SetActive(false);
-        isOpen = true;
-        m_Done = true;
-        GameManager.GetManager().dayNightCycle.TaskDone();
-        if (!temp)
-        {
-            temp = true;
-            //StartCoroutine(GoodInteraction());
-        }
-    }
-
-    private float GetMouseYaxisAsWorldPoint()
-    {
-        Vector3 mousePoint = Input.mousePosition;
-        mousePoint.z = zWorldCoord; // set z coord
-
-        return Camera.main.ScreenToWorldPoint(mousePoint).y;
-    }
-
     #region Inherit Interactable methods
 
-    public override void Interaction(int optionsSelected)
+    public override void Interaction(int options)
     {
-        switch (optionsSelected)
+        base.Interaction(options);
+        switch (options)
         {
             case 1:
-                if (!isOpen && !m_Done)
+                if (!isOpen)
+                {
                     gameInitialized = true;
-                // Inicia minijuego
-                GameManager.GetManager().cameraController.StartInteractCam(4);
-                GameManager.GetManager().CanvasManager.UnLock();
-                GameManager.GetManager().gameStateController.ChangeGameState(2);
+                    // Inicia minijuego
+                    GameManager.GetManager().cameraController.StartInteractCam(4);
+                    GameManager.GetManager().CanvasManager.UnLock();
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
+                }
                 break;
             case 2:
                 break;
@@ -162,6 +84,84 @@ public class Window : Interactables
     }
 
     #endregion
+
+    private void Update()
+    {
+        if (gameInitialized)
+        {
+            if (!tutorialShowed)
+                InitTutorial();
+
+            if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
+            {
+                minigameCanvas.SetActive(false);
+                gameInitialized = false;
+                GameManager.GetManager().StartThirdPersonCamera();
+            }
+        }
+    }
+
+    #region OnMouse Region
+    void OnMouseDown()
+    {
+        if (gameInitialized)
+        {
+            zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
+            // offset = World pos - Mouse World pos
+            mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
+        }
+    }
+
+    void OnMouseDrag()
+    {
+        if (gameInitialized && !isOpen)
+        {
+            if (tutorialShowed) m_Tutorial.SetActive(false);
+
+            float height = m_Glass.transform.position.y;
+            float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
+
+            if (displacement < minHeight)
+                height = minHeight;
+
+            else if (displacement < maxHeight)
+                height = displacement;
+
+            else if (displacement > maxHeight)
+            {
+                height = maxHeight;
+                m_Done = isOpen = true;
+            }
+            m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (m_Done && gameInitialized)
+            WindowDone();
+    }
+    #endregion
+    private void WindowDone()
+    {
+        ExitInteraction();
+        CheckDoneTask();
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().StartThirdPersonCamera();
+        minigameCanvas.SetActive(false);
+        isOpen = true;
+        m_Done = true;
+        GameManager.GetManager().dayNightCycle.TaskDone();
+    }
+
+    private float GetMouseYaxisAsWorldPoint()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+        mousePoint.z = zWorldCoord; // set z coord
+
+        return Camera.main.ScreenToWorldPoint(mousePoint).y;
+    }
+
 
     #region Dialogues Region
 

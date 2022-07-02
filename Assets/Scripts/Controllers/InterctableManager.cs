@@ -23,15 +23,15 @@ public class InterctableManager : MonoBehaviour
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
             return;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !currInteractable.GetDone())
         {
             currInteractable.Interaction(1);
-            //currInteractable = null;
+            currInteractable = null;
         }
         else if (Input.GetKeyDown(KeyCode.Q) && currInteractable.totalOptions > 1)
         {
             currInteractable.Interaction(2);
-            //currInteractable = null;
+            currInteractable = null;
         }
     }
 
