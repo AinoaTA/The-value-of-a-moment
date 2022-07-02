@@ -31,6 +31,7 @@ public class Plant : Interactables
 
     public override void Interaction(int options)
     {
+        base.Interaction(options);
         switch (options)
         {
             case 1:
@@ -63,6 +64,7 @@ public class Plant : Interactables
             started = false;
             waterCan.gameObject.SetActive(false);
             waterCan.ResetWaterCan();
+            actionEnter = false;
         }
     }
 
@@ -79,6 +81,7 @@ public class Plant : Interactables
         CheckDoneTask();
         GameManager.GetManager().dayNightCycle.TaskDone();
         waterCan.gameObject.SetActive(false);
+        actionEnter = false;
     }
 
     public override void ResetInteractable()
@@ -88,6 +91,7 @@ public class Plant : Interactables
         waterCan.ResetWaterCan();
         timer = 0;
         started = false;
+        actionEnter = false;
     }
 
     public void NextDay()

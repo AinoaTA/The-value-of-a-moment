@@ -43,21 +43,21 @@ public class TrashBucket : Interactables
         }
     }
 
-    public override void ShowCanvas()
-    {
-        //if (type == TypeBucket.CLOTHES && GameManager.GetManager().InventoryTrash.CurrentDirtyClothes() <= 0)
-        //    return;
-        //else if (type == TypeBucket.TRASH && GameManager.GetManager().InventoryTrash.CurrentTrash() <= 0)
-        //    return;
+    //public override void ShowCanvas()
+    //{
+    //    //if (type == TypeBucket.CLOTHES && GameManager.GetManager().InventoryTrash.CurrentDirtyClothes() <= 0)
+    //    //    return;
+    //    //else if (type == TypeBucket.TRASH && GameManager.GetManager().InventoryTrash.CurrentTrash() <= 0)
+    //    //    return;
 
-        base.ShowCanvas();
-    }
+    //    base.ShowCanvas();
+    //}
     public override void ResetInteractable()
     {
         numberTrash = 0;
     }
-    public override void HideCanvas()
-    {
-        base.HideCanvas();
-    }
+    //public override void HideCanvas()
+    //{
+    //    base.HideCanvas();
+    //}
 }

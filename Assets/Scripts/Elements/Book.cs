@@ -18,15 +18,17 @@ public class Book : Interactables
 
     public override void Interaction(int options)
     {
+        base.Interaction(options);
         switch (options)
         {
             case 1:
                 if(m_Grabbing != null)
                 {
                     m_Grabbing.SetAccessCamera(true);
-                    GameManager.GetManager().PlayerController.SetInteractable("Grab");
+                    GameManager.GetManager().cameraController.StartInteractCam(8);
+                    //GameManager.GetManager().PlayerController.SetInteractable("Grab");
                     //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
-                    HideCanvas();
+                    //HideCanvas();
 
                     //if (m_Counter >= m_InteractPhrases.Length)
                     //    m_Counter = 0;

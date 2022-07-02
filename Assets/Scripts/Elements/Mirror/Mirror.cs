@@ -15,6 +15,7 @@ public class Mirror : Interactables
 
     public override void Interaction(int options)
     {
+        base.Interaction(options);
         switch (options)
         {
             case 1:

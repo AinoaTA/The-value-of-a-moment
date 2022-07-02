@@ -33,28 +33,6 @@ public class InterctableManager : MonoBehaviour
             currInteractable.Interaction(2);
             currInteractable = null;
         }
-        //
-        //Ray l_Ray = GameManager.GetManager().cameraController.mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
-        //if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
-        //{
-        //    if (currInteractable == null)
-        //        currInteractable = l_Hit.collider.gameObject.GetComponent<Interactables>();
-
-        //    //if (currInteractable != null && currInteractable != lookingInteractable)
-        //    //{
-        //    //    if (currInteractable.totalOptions > 1 || !currInteractable.GetDone())
-        //    //    {
-        //    //        lookingInteractable = currInteractable;
-        //    //        currInteractable.ShowCanvas();
-        //    //    }
-        //    //}
-        //    //else if (currInteractable == null && lookingInteractable != null)
-        //    //{
-        //    //    lookingInteractable.HideCanvas();
-        //    //    lookingInteractable = null;
-        //    //}
-        //}
     }
 
     public void LookingAnInteractable(Interactables interactables)

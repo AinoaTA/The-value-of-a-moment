@@ -23,47 +23,29 @@ public class Interactables : MonoBehaviour
     private Material[] m_Material;
 
     public virtual bool GetDone() { return m_Done; }
-    public virtual void Interaction(int optionNumber) {  }
+    public virtual void Interaction(int optionNumber) 
+    {
+        actionEnter = true;
+        SetCanvasValue(false);
+    }
     public virtual void ExitInteraction() { }
     [HideInInspector]public bool showing = false;
     protected bool actionEnter;
 
     private void Update()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
-            HideCanvas();
+        SetCanvasValue(false);
     }
 
     private void Start()
     {
-        //if (gameObject.GetComponent<Renderer>() != null)
-        //{
-        //    m_Material = gameObject.GetComponent<Renderer>().materials;
-        //}
         cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
-    }
-
-    public virtual void ShowCanvas()
-    {
-        //if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && !showing)
-        //{
-        //    showing = true;
-        //    anim.SetBool("Showing", showing);
-        //}
-    }
-
-    public virtual void HideCanvas()
-    {
-        //if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && showing)
-        //{
-        //    showing = false;
-        //    anim.SetBool("Showing", showing);
-        //}
     }
 
     public virtual void ResetInteractable()
     {
         m_Done = false;
+        actionEnter = false;
     }
 
     private void OnMouseOver()
