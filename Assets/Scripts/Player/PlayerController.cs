@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         character.enabled = false;
         sleep = true;
         transform.SetPositionAndRotation(m_PlayerSleep.position, m_PlayerSleep.rotation);
-        mov.prop.transform.rotation = Quaternion.identity;
+       // mov.prop.transform.rotation = Quaternion.identity;
         mov.m_Anim.SetBool("Sleep", sleep);
         character.enabled = true;
     }
