@@ -12,23 +12,45 @@ public class InterctableManager : MonoBehaviour
     [SerializeField] private float m_Distance = 50f;
 
     public Interactables currInteractable;
+
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._FirstInteraction -= FirstInteract;
+        GameManager.GetManager().playerInputs._SecondInteraction -= SecondInteract;
+    }
+
     private void Awake()
     {
         GameManager.GetManager().interactableManager = this;
         allInteractables = FindObjectsOfType<Interactables>().ToList();
     }
-
-    private void Update()
+    private void Start()
     {
+        GameManager.GetManager().playerInputs._FirstInteraction += FirstInteract;
+        GameManager.GetManager().playerInputs._SecondInteraction += SecondInteract;
+    }
+
+    public void FirstInteract()
+    {
+        print("first interaction");
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
             return;
 
-        if (Input.GetKeyDown(KeyCode.E) && !currInteractable.GetDone())
+        if (!currInteractable.GetDone())
         {
             currInteractable.Interaction(1);
             currInteractable = null;
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && currInteractable.totalOptions > 1)
+
+    }
+
+    public void SecondInteract()
+    {
+        print("second interaction");
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
+            return;
+
+        if (currInteractable.totalOptions > 1)
         {
             currInteractable.Interaction(2);
             currInteractable = null;
@@ -39,5 +61,4 @@ public class InterctableManager : MonoBehaviour
     {
         currInteractable = interactables;
     }
-
 }

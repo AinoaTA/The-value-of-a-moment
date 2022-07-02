@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class InputSystemController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    PlayerInput playerInput;
+    private void Awake()
     {
-        
+        playerInput = FindObjectOfType<PlayerInput>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SwitchToMenuActionMap()
     {
-        
+        playerInput.SwitchCurrentActionMap("Menu");
+    }
+    //public void SwitchToActionMapPauseMenu()
+    //{
+    //    playerInput.SwitchCurrentActionMap("PauseMenu");
+    //}
+    public void SwitchToPlayerActionMap()
+    {
+        playerInput.SwitchCurrentActionMap("Player");
     }
 }

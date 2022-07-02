@@ -42,23 +42,24 @@ public class Mobile : Interactables
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
-        {
-            if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
-            {
-                GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().CanvasManager.UnLock();
-                CanvasMobile(true);
-            }
-            else
-            {
-                //  GameManager.GetManager().StartThirdPersonCamera();
-                GameManager.GetManager().gameStateController.ChangeGameState(1);
-                GameManager.GetManager().CanvasManager.Lock();
-                CanvasMobile(false);
-                CanvasMultiple(false);
-            }
-        }
+        Debug.Log("commented input");
+        //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
+        //{
+        //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
+        //    {
+        //        GameManager.GetManager().gameStateController.ChangeGameState(2);
+        //        GameManager.GetManager().CanvasManager.UnLock();
+        //        CanvasMobile(true);
+        //    }
+        //    else
+        //    {
+        //        //  GameManager.GetManager().StartThirdPersonCamera();
+        //        GameManager.GetManager().gameStateController.ChangeGameState(1);
+        //        GameManager.GetManager().CanvasManager.Lock();
+        //        CanvasMobile(false);
+        //        CanvasMultiple(false);
+        //    }
+        //}
     }
 
     public void CanvasMultiple(bool val)

@@ -1,12 +1,15 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
     public Camera mainCamera;
+    public bool invertY;
+    public float lookSpeed = 1f;
     int defaultPriority = 0;
     int setPriority = 10;
-
+    float yVal = 0, xVal = 0;
     public CamerasConfigVirtual[] virtualCameras;
     [System.Serializable]
     public struct CamerasConfigVirtual
@@ -24,6 +27,15 @@ public class CameraController : MonoBehaviour
     {
         for (int i = 0; i < virtualCameras.Length; i++)
             virtualCameras[i].ID = i;
+
+        GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
+        GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._CameraPitchDelta -= CameraPitchDelta;
+        GameManager.GetManager().playerInputs._CameraYawDelta -= CameraYawDelta;
     }
 
     private void SetPriorityCam(int id)
@@ -69,5 +81,14 @@ public class CameraController : MonoBehaviour
     public void StartInteractCam(int ID)
     {
         SetPriorityCam(ID);
+    }
+
+    private void CameraPitchDelta(float delta)
+    {
+        yVal = delta*Time.deltaTime;
+    }
+    private void CameraYawDelta(float delta)
+    {
+        xVal = delta * Time.deltaTime;
     }
 }

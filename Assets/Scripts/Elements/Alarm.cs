@@ -26,35 +26,66 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().cameraController.StartInteractCam(1);
         //GameManager.GetManager().Alarm = this;
         CanvasAlarm.SetActive(false);
-        StartCoroutine(StartDay());
+        StartCoroutine(StartDayDelay());
+
+        GameManager.GetManager().playerInputs._FirstInteraction += StartDay;
+        GameManager.GetManager().playerInputs._SecondInteraction += BackDay;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._FirstInteraction -= StartDay;
+        GameManager.GetManager().playerInputs._SecondInteraction -= BackDay;
     }
 
     private void Update()
     {
+        //Debug.Log("commented input");
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ResetTime();
-            StartCoroutine(NormalWakeUp());
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    ResetTime();
+        //    StartCoroutine(NormalWakeUp());
+        //}
 #endif
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
 
+        print((m_Timer > m_MaxTime));
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
 
+        //if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
+        //{
+        //    Debug.Log("commented input");
+        //    //if (Input.GetKeyDown(KeyCode.E))
+        //    //{
+        //    //   
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.Q))
+        //    //{
+        //    //    StillSleeping();
+        //    //}
+        //}
+    }
+
+    private void StartDay()
+    {
         if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ResetTime();
-                StartCoroutine(NormalWakeUp());
-            }
-            else if (Input.GetKeyDown(KeyCode.Q))
-            {
-                StillSleeping();
-            }
+            print("wakeup");
+            ResetTime();
+            StartCoroutine(NormalWakeUp());
+        }
+    }
+
+    private void BackDay()
+    {
+     
+        if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
+        {
+            print("alarm off");
+            StillSleeping();
         }
     }
 
@@ -83,7 +114,7 @@ public class Alarm : MonoBehaviour
         yield return new WaitForSeconds(3f);
         GameManager.GetManager().StartThirdPersonCamera();
 
-        if (!temp) 
+        if (!temp)
         {
             //if (controlPosponer == 0)
             //    StartCoroutine(WakeUpDialogue());
@@ -130,13 +161,14 @@ public class Alarm : MonoBehaviour
     }
 
     public void ResetTime()
-    {   
+    {
+        m_AlarmON = false;
         GameManager.GetManager().SoundController.StopSound();
         m_Timer = 0;
-        m_AlarmON = false;
+        
     }
 
-    private IEnumerator StartDay()
+    private IEnumerator StartDayDelay()
     {
         yield return new WaitForSeconds(4);
         int counter = 0;

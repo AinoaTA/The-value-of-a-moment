@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public CameraController cameraController { get; set; }
     public LevelData levelData { get; set; }
     public InterctableManager interactableManager { get; set; }
-    
+    public PlayerHandleInputs playerInputs { get; set; }
     private void OnEnable()
     {
         if (gameManager == null)

@@ -16,16 +16,16 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay
-            && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
-        {
-            PauseGame();
-        }
+        //if (!paused && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay
+        //    && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
+        //{
+        //    PauseGame();
+        //}
 
-        if(paused && Input.GetKeyDown(KeyCode.P))
-        {
-            ResumeGame();
-        }
+        //if(paused && Input.GetKeyDown(KeyCode.P))
+        //{
+        //    ResumeGame();
+        //}
     }
 
     public void PauseGame()
