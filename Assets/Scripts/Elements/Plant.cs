@@ -87,7 +87,7 @@ public class Plant : Interactables
     public override void ResetInteractable()
     {
         base.ResetInteractable();
-        regadera.ResetInteractable();
+        regadera.ResetObject();
         waterCan.ResetWaterCan();
         timer = 0;
         started = false;

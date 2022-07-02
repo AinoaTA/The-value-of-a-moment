@@ -114,7 +114,7 @@ public class Window : Interactables
         switch (optionsSelected)
         {
             case 1:
-                if (!isOpen)
+                if (!isOpen && !m_Done)
                     gameInitialized = true;
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(4);

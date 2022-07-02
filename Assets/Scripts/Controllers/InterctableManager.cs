@@ -39,4 +39,5 @@ public class InterctableManager : MonoBehaviour
     {
         currInteractable = interactables;
     }
+
 }

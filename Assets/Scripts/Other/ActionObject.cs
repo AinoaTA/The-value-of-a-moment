@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionObject : MonoBehaviour
@@ -8,7 +6,12 @@ public class ActionObject : MonoBehaviour
     public Animator anim;
     protected bool showing;
     protected bool done;
-    public virtual void Interaction() {}
+    public virtual void Interaction() { }
+    public virtual void ResetObject()
+    {
+        done = false;
+        showing = false;
+    }
 
     private void OnMouseEnter()
     {
@@ -16,7 +19,7 @@ public class ActionObject : MonoBehaviour
         {
             showing = true;
             anim.SetBool("Showing", showing);
-           // GameManager.GetManager().interactableManager.LookingAnInteractable(this);
+            // GameManager.GetManager().interactableManager.LookingAnInteractable(this);
         }
     }
 
@@ -26,7 +29,13 @@ public class ActionObject : MonoBehaviour
         {
             showing = false;
             anim.SetBool("Showing", showing);
-          //  GameManager.GetManager().interactableManager.LookingAnInteractable(null);
+            //  GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         }
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
+            Interaction();
     }
 }
