@@ -38,15 +38,15 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Awake()
-    {
-        stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
-    }
-    private void Start()
-    {
-       // cam = Camera.main;
-        //m_CurrentStateGame = StateGame.Init;
-    }
+    //private void Awake()
+    //{
+    //    stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
+    //}
+    //private void Start()
+    //{
+    //   // cam = Camera.main;
+    //    //m_CurrentStateGame = StateGame.Init;
+    //}
 
     //private void Update()
     //{
