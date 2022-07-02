@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
-    [Header("Interactable Options")]
-    public int options = 1;
+
+    [Header("Data")]
+    public string nameInteractable;
+    private int cameraID;
+
+    [Header("Options")]
+    public int totalOptions = 1;
     public bool m_Done;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
 
@@ -18,13 +23,10 @@ public class Interactables : MonoBehaviour
     private Material[] m_Material;
 
     public virtual bool GetDone() { return m_Done; }
-   // public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
     public virtual void Interaction(int optionNumber) {  }
     public virtual void ExitInteraction() { }
-    public bool showing = false;
-
-    private int cameraID;
-    public string nameInteractable;
+    [HideInInspector]public bool showing = false;
+    protected bool actionEnter;
 
     private void Update()
     {
@@ -34,12 +36,11 @@ public class Interactables : MonoBehaviour
 
     private void Start()
     {
-        if (gameObject.GetComponent<Renderer>() != null)
-        {
-            m_Material = gameObject.GetComponent<Renderer>().materials;
-        }
-
-       // cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
+        //if (gameObject.GetComponent<Renderer>() != null)
+        //{
+        //    m_Material = gameObject.GetComponent<Renderer>().materials;
+        //}
+        cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
     }
 
     public virtual void ShowCanvas()
@@ -67,37 +68,27 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //if(m_Material != null && m_Material.Length > 0)
-        //{
-        //    foreach (var material in this.gameObject.GetComponent<Renderer>().materials)
-        //    {
-        //        // material.color = Color.red;
-        //    }
-        //}
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter)
         {
             showing = true;
             anim.SetBool("Showing", showing);
+            GameManager.GetManager().interactableManager.LookingAnInteractable(this);
         }
-
     }
 
     private void OnMouseExit()
     {
-        if (m_Material != null && m_Material.Length > 0)
-        {
-            for (int i = 0; i < m_Material.Length; i++)
-            {
-                // TODO: need to recover the m_Material[i].color as such
-                // this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
-            }
-        }
-
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing && !actionEnter)
         {
             showing = false;
             anim.SetBool("Showing", showing);
+            GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         }
+    }
+
+    protected void SetCanvasValue(bool showing_)
+    {
+        anim.SetBool("Showing", showing_);
     }
 
     public void CheckDoneTask()

@@ -36,7 +36,7 @@ public class Bed : Interactables
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-        options = 2;
+        totalOptions = 2;
         //GameManager.GetManager().Bed = this;
         gameInitialized = false;
 

@@ -2148,7 +2148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1532177572}
   m_Layer: 0
-  m_Name: '[GlobalManagers]'
+  m_Name: '[GLOBAL_MANAGERS]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2173,6 +2173,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1594142548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7008169561145357523, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+  m_PrefabInstance: {fileID: 7891270562170728847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1594142549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594142548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8848e0d6911baf4d9ca289d7f6524eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1627638727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2180,6 +2197,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2139571034, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 818543094747398676, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4741038191994103153, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2227,6 +2252,22 @@ PrefabInstance:
     - target: {fileID: 4741038191994103159, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
       propertyPath: m_Name
       value: Lights
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741038191994103159, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200931068534762049, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
+      propertyPath: m_Name
+      value: Leds(ECHAR UN OJO)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200931068534762049, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542302453596827636, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
@@ -2656,7 +2697,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1961001295}
-  - component: {fileID: 1961001296}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -2681,18 +2721,6 @@ Transform:
   m_Father: {fileID: 1522505070}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1961001296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961001294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8848e0d6911baf4d9ca289d7f6524eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1980127678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +2949,7 @@ MonoBehaviour:
   - Name: Mirror
     ID: 6
     cameraType: {fileID: 1036306614}
-  - Name: Book(enriqueta)
+  - Name: Book_0
     ID: 7
     cameraType: {fileID: 459680842}
 --- !u!4 &313370442001497900
@@ -5134,6 +5162,14 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1957501245114628641, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameInteractable
+      value: Mirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199851689029861815, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameInteractable
+      value: Book_0
+      objectReference: {fileID: 0}
     - target: {fileID: 2289303063191839119, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.515
@@ -5141,6 +5177,14 @@ PrefabInstance:
     - target: {fileID: 2289303063191839119, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_LocalPosition.z
       value: 2.938
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401946278975761573, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Name
+      value: Book_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2533969517244537370, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameInteractable
+      value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 4205931709693093751, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: target
@@ -5178,6 +5222,10 @@ PrefabInstance:
       propertyPath: taskAssociated
       value: 
       objectReference: {fileID: 2067153016}
+    - target: {fileID: 4362865056370373836, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameInteractable
+      value: Plant_0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411134263658914387, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -5194,6 +5242,14 @@ PrefabInstance:
       propertyPath: taskAssociated
       value: 
       objectReference: {fileID: 965555175}
+    - target: {fileID: 5080076004713269274, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameInteractable
+      value: Window_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223241406653353544, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Name
+      value: Plant_0
+      objectReference: {fileID: 0}
     - target: {fileID: 5669261066363563703, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5214,6 +5270,10 @@ PrefabInstance:
       propertyPath: taskAssociated
       value: 
       objectReference: {fileID: 1741577685}
+    - target: {fileID: 6859219928544055574, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameInteractable
+      value: Bed
+      objectReference: {fileID: 0}
     - target: {fileID: 7008169561145357523, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_Name
       value: Interior
@@ -5306,6 +5366,10 @@ PrefabInstance:
       propertyPath: canvasFunctions.Array.data[3]
       value: 
       objectReference: {fileID: 417833477}
+    - target: {fileID: 9107286386132980313, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Name
+      value: Window_0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
 --- !u!114 &8650962586551999243

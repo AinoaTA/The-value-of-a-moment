@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Interruptor : Interactables
+public class Interruptor : ActionObject
 {
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
     private bool isLightOn = false;
     public int minLight=6000, maxLight=12000;
+
     private void Start()
     {
         // Reset values
@@ -20,7 +21,7 @@ public class Interruptor : Interactables
 
     }
 
-    public override void Interaction(int options)
+    public void Interaction(int options)
     {
         switch (options)
         {

@@ -41,6 +41,17 @@ public class Mirror : Interactables
         }
     }
 
+
+    //private void OnMouseDown()
+    //{
+    //    if (!actionEnter)
+    //    {
+    //        SetCanvasValue(false);
+    //        actionEnter = true;
+    //        Interaction(1);
+    //    }
+    //}
+
     private IEnumerator LookUp()
     {
         yield return new WaitForSeconds(1);

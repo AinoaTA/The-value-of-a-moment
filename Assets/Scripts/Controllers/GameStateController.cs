@@ -31,5 +31,4 @@ public class GameStateController : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         m_CurrentStateGame = state;
     }
-
 }
