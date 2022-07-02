@@ -26,12 +26,12 @@ public class InterctableManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             currInteractable.Interaction(1);
-            currInteractable = null;
+            //currInteractable = null;
         }
         else if (Input.GetKeyDown(KeyCode.Q) && currInteractable.totalOptions > 1)
         {
             currInteractable.Interaction(2);
-            currInteractable = null;
+            //currInteractable = null;
         }
     }
 

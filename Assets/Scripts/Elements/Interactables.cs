@@ -48,7 +48,7 @@ public class Interactables : MonoBehaviour
         actionEnter = false;
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter)
         {

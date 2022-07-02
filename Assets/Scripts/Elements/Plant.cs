@@ -91,7 +91,7 @@ public class Plant : Interactables
         waterCan.ResetWaterCan();
         timer = 0;
         started = false;
-        actionEnter = false;
+
     }
 
     public void NextDay()

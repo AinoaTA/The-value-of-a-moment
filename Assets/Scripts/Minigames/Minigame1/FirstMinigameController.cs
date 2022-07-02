@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-public class FirstMinigameController : Interactables
+public class FirstMinigameController : MonoBehaviour
 {
     public List<SolutionPiece> m_AllSolutions = new List<SolutionPiece>();
     public List<PieceMG> m_AllPieces = new List<PieceMG>();
@@ -22,7 +22,7 @@ public class FirstMinigameController : Interactables
     private IEnumerator GameFinished()
     {
         GameManager.GetManager().dayNightCycle.TaskDone();
-        CheckDoneTask();
+        //CheckDoneTask();
         GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
         m_Solved = true;
         m_started = false;
