@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Trash : ActionObject
+public class Trash : ActionObject, IPointerEnterHandler 
 {
     public enum TrashType { CLOTHES, TRASH }
     public TrashType type = TrashType.TRASH;
@@ -10,6 +11,11 @@ public class Trash : ActionObject
     private Vector3 initPos;
     private float grabbingSpeed = 10f;
     private bool grabbing = false;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Name: " + eventData.pointerCurrentRaycast.gameObject.name);
+    }
 
     private void Start()
     {

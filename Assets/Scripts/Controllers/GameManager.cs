@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
     /// <param name="state"></param>
     public void StartThirdPersonCamera()
     {
-        print("StartThirdPersonCamera");
         //PlayerController.ExitInteractable();
         CanvasManager.Lock();
         //ChangeGameState(StateGame.GamePlay);
@@ -115,7 +114,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndMiniGameRoutine()
     {
-        print("EndMiniGameRoutine");
         cameraController.ExitInteractCam();
         CanvasManager.Lock();
         yield return new WaitForSeconds(0.25f);

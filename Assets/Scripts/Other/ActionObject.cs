@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class ActionObject : MonoBehaviour
 {
     public GameObject OptionsCanvas;
@@ -7,6 +7,8 @@ public class ActionObject : MonoBehaviour
     protected bool showing;
     protected bool done;
     public virtual void Interaction() { }
+
+
     public virtual void ResetObject()
     {
         done = false;
@@ -14,7 +16,8 @@ public class ActionObject : MonoBehaviour
     }
 
     private void OnMouseEnter()
-    {
+    { 
+        print(GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing);
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)// && !actionEnter)
         {
             showing = true;
@@ -25,6 +28,7 @@ public class ActionObject : MonoBehaviour
 
     private void OnMouseExit()
     {
+        
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing)// && !actionEnter)
         {
             showing = false;

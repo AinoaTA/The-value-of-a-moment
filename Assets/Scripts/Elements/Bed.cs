@@ -74,7 +74,7 @@ public class Bed : Interactables
     }
     private void Update()
     {
-        Debug.Log("commented input");
+        //Debug.Log("commented input");
         //if (Input.GetKeyDown(KeyCode.Escape) && gameInitialized)
         //{
         //    Debug.Log("Exit");

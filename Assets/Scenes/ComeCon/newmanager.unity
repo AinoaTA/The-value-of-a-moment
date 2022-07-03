@@ -176,9 +176,9 @@ GameObject:
   m_Component:
   - component: {fileID: 50928776}
   - component: {fileID: 50928775}
-  - component: {fileID: 50928777}
   - component: {fileID: 50928774}
   - component: {fileID: 50928778}
+  - component: {fileID: 50928777}
   m_Layer: 0
   m_Name: InputSystemController
   m_TagString: Untagged
@@ -360,6 +360,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d503fe52-6cf6-457c-9752-626b98331291
     m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7f8509f4-aa6b-43ee-898f-ac0d6653a06a
+    m_ActionName: Player/MousePos[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2899,13 +2903,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allInteractables: []
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_WallMask:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Distance: 50
   currInteractable: {fileID: 0}
 --- !u!1 &2028213005
 GameObject:
@@ -2964,7 +2961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!1 &2095378159
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2981,7 +2978,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &2095378160
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2995,7 +2992,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2095378161
 MonoBehaviour:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -3060,6 +3057,13 @@ MonoBehaviour:
   mainCamera: {fileID: 5374907094123581616}
   invertY: 0
   lookSpeed: 1
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_WallMask:
+    serializedVersion: 2
+    m_Bits: 8
+  m_Distance: 10
   virtualCameras:
   - Name: Player
     ID: 0
@@ -3997,7 +4001,7 @@ MonoBehaviour:
     Value: 0
     m_SpeedMode: 1
     m_MaxSpeed: 2
-    m_AccelTime: 0.7
+    m_AccelTime: 0.6
     m_DecelTime: 0.4
     m_InputAxisName: 
     m_InputAxisValue: 0
@@ -4020,8 +4024,8 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 1
-    m_MaxSpeed: 3
-    m_AccelTime: 0.7
+    m_MaxSpeed: 2
+    m_AccelTime: 0.6
     m_DecelTime: 0.4
     m_InputAxisName: 
     m_InputAxisValue: 0
@@ -4743,7 +4747,7 @@ GameObject:
   - component: {fileID: 5374907094123581622}
   - component: {fileID: 5374907094123581623}
   - component: {fileID: 5374907094123581624}
-  - component: {fileID: 5374907094123581625}
+  - component: {fileID: 5374907094123581620}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4759,6 +4763,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
   m_Enabled: 1
+--- !u!114 &5374907094123581620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374907094123581618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_MaxRayIntersections: 0
 --- !u!114 &5374907094123581622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4939,51 +4959,6 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
---- !u!114 &5374907094123581625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5374907094123581618}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ExcludedPropertiesInInspector:
-  - m_Script
-  m_LockStageInInspector: 
-  m_StreamingVersion: 20170927
-  m_Priority: 0
-  m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
-  m_Lens:
-    FieldOfView: 40
-    OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
-    Dutch: 0
-    ModeOverride: 0
-    LensShift: {x: 0, y: 0}
-    GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
-    Iso: 200
-    ShutterSpeed: 0.005
-    Aperture: 16
-    BladeCount: 5
-    Curvature: {x: 2, y: 11}
-    BarrelClipping: 0.25
-    Anamorphism: 0
-  m_Transitions:
-    m_BlendHint: 0
-    m_InheritPosition: 0
-    m_OnCameraLive:
-      m_PersistentCalls:
-        m_Calls: []
-  m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 2095378160}
 --- !u!1 &5631815019194650464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5358,6 +5333,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4205931709222394514, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4205931709693093751, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: target
       value: 
@@ -5366,10 +5345,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1411271105}
+    - target: {fileID: 4205931710233030172, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4205931710262385737, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1411271105}
+    - target: {fileID: 4205931710262385738, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4205931710381288927, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: target
       value: 
@@ -5378,6 +5365,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1411271105}
+    - target: {fileID: 4205931710865727916, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4205931710985900090, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4272227451695697974, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00044

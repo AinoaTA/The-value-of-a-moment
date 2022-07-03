@@ -50,40 +50,34 @@ public class Mov : MonoBehaviour
 
     private void ResetMove()
     {
-        print("reset");
         m_MovementAxis = Vector2.zero;
     }
     private void MoveLeft()
     {
-        print("left");
         m_MovementAxis += new Vector2(-1, 0);
         moving = true;
     }
 
     private void MoveRight()
     {
-        print("right");
         m_MovementAxis += new Vector2(1, 0);
         moving = true;
     }
 
     private void MoveUp()
     {
-        print("up"); ;
         m_MovementAxis += new Vector2(0, 1);
         moving = true;
     }
 
     private void MoveDown()
     {
-        print("omodeonw");
         m_MovementAxis += new Vector2(0, -1);
         moving = true;
     }
 
     private void StopMoving()
     {
-        print("stop");
         m_MovementAxis = Vector2.zero;
         moving = false;
     }
@@ -99,7 +93,6 @@ public class Mov : MonoBehaviour
 
         if (m_MovementAxis != Vector2.zero)
         {
-            print("in mov");
             Vector3 forward = cam.transform.forward;
             Vector3 right = cam.transform.right;
             forward.y = 0.0f;

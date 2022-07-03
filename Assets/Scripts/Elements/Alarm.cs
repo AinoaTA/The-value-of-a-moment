@@ -50,8 +50,7 @@ public class Alarm : MonoBehaviour
 #endif
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
-
-        print((m_Timer > m_MaxTime));
+         
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
 
@@ -73,7 +72,6 @@ public class Alarm : MonoBehaviour
     {
         if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
         {
-            print("wakeup");
             ResetTime();
             StartCoroutine(NormalWakeUp());
         }
@@ -84,7 +82,6 @@ public class Alarm : MonoBehaviour
      
         if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
         {
-            print("alarm off");
             StillSleeping();
         }
     }

@@ -19,7 +19,6 @@ public class PlayerHandleInputs : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext context)
     {
         Vector2 l_MovementAxis = context.ReadValue<Vector2>();
-        print("on movement");
         if (l_MovementAxis == Vector2.zero)
         {
             _StopMoving?.Invoke();

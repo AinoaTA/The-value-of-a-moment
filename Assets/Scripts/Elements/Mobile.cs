@@ -42,7 +42,7 @@ public class Mobile : Interactables
 
     private void Update()
     {
-        Debug.Log("commented input");
+        //Debug.Log("commented input");
         //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
         //{
         //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)

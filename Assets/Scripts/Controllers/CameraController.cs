@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class CameraController : MonoBehaviour
     int defaultPriority = 0;
     int setPriority = 10;
     float yVal = 0, xVal = 0;
+
+    public LayerMask m_LayerMask;
+    public LayerMask m_WallMask;
+    public Camera cam { private get; set; }
+    [SerializeField] private float m_Distance = 10f;
+
     public CamerasConfigVirtual[] virtualCameras;
     [System.Serializable]
     public struct CamerasConfigVirtual
@@ -30,6 +37,18 @@ public class CameraController : MonoBehaviour
 
         GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
         GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
+
+    }
+
+    private void Update()
+    {
+        //Ray l_Ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+        //if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
+        //{
+        //    print(l_Hit.collider.name);
+          
+        //}
     }
 
     private void OnDisable()
@@ -57,7 +76,6 @@ public class CameraController : MonoBehaviour
         {
             if (name == virtualCameras[v].Name)
             {
-                Debug.Log("Camera ID " + name + " set");
                 return virtualCameras[v].ID;
             }
         }
@@ -91,4 +109,7 @@ public class CameraController : MonoBehaviour
     {
         xVal = delta * Time.deltaTime;
     }
+
+
+
 }

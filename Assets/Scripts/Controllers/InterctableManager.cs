@@ -6,11 +6,6 @@ public class InterctableManager : MonoBehaviour
 {
     public List<Interactables> allInteractables = new List<Interactables>();
 
-    public LayerMask m_LayerMask;
-    public LayerMask m_WallMask;
-    public Camera cam { private get; set; }
-    [SerializeField] private float m_Distance = 50f;
-
     public Interactables currInteractable;
 
     private void OnDisable()
@@ -32,7 +27,6 @@ public class InterctableManager : MonoBehaviour
 
     public void FirstInteract()
     {
-        print("first interaction");
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
             return;
 
@@ -46,7 +40,6 @@ public class InterctableManager : MonoBehaviour
 
     public void SecondInteract()
     {
-        print("second interaction");
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
             return;
 
