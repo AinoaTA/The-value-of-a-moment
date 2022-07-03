@@ -6,6 +6,8 @@ public class InterctableManager : MonoBehaviour
 {
     public List<Interactables> allInteractables = new List<Interactables>();
 
+  
+
     public Interactables currInteractable;
 
     private void OnDisable()
