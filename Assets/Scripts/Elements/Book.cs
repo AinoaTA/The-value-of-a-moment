@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Book : Interactables
@@ -30,13 +31,19 @@ public class Book : Interactables
                     if (m_Counter >= m_InteractPhrases.Length)
                         m_Counter = 0;
 
-                    GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-                    m_DelegateSFXBook?.Invoke();
-                    m_Counter++;
-
-                    // m_Done = true;
+                    StartCoroutine(DelayDialogue());
                 }
                 break;
         }
+    }
+
+    IEnumerator DelayDialogue()
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
+        m_DelegateSFXBook?.Invoke();
+        m_Counter++;
+        yield return new WaitForSeconds(3f);
+        GameManager.GetManager().Dialogue.StopDialogue();
     }
 }

@@ -8,13 +8,14 @@ public class Trash : Interactables
     // 5 prendas de ropa
     public int maxTras = 5;
     public Transform target;
-
+    private Vector3 initPos;
     private int numberTrash;
-    private float grabbingSpeed = 2f;
+    private float grabbingSpeed = 10f;
     private bool grabbing = false;
     
     private void Start()
     {
+        initPos = transform.position;
         GameManager.GetManager().trashes.Add(this);
     }
 
@@ -48,6 +49,8 @@ public class Trash : Interactables
 
     public override void ResetInteractable()
     {
+        transform.position = initPos;
+        grabbing = false;
         numberTrash = 0;
         m_Done = false;
     }

@@ -36,7 +36,7 @@ public class Mobile : Interactables
         realMobile.SetActive(false);
         m_Done = getMobile = true;
         col.enabled = false;
-        GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+        //GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
 
     }
 
@@ -52,7 +52,9 @@ public class Mobile : Interactables
             }
             else
             {
-                GameManager.GetManager().StartThirdPersonCamera();
+                //  GameManager.GetManager().StartThirdPersonCamera();
+                GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
+                GameManager.GetManager().CanvasManager.Lock();
                 CanvasMobile(false);
                 CanvasMultiple(false);
             }
