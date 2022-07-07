@@ -92,12 +92,12 @@ public class Window : Interactables
             if (!tutorialShowed)
                 InitTutorial();
 
-            if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-            {
-                minigameCanvas.SetActive(false);
-                gameInitialized = false;
-                GameManager.GetManager().StartThirdPersonCamera();
-            }
+            //if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    minigameCanvas.SetActive(false);
+            //    gameInitialized = false;
+            //    GameManager.GetManager().StartThirdPersonCamera();
+            //}
         }
     }
 
