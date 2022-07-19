@@ -6,8 +6,8 @@ public class Autocontrol : MonoBehaviour
 {
     private float maxValue = 100f;
     CanvasGroup canvasGroup;
-    public float m_currentValue { get; private set; }
-    public Slider m_Slider;
+    public float currentValue { get; private set; }
+    public Slider Slider;
 
     public Image stateImage;
     public Image backgroundBar;
@@ -25,13 +25,13 @@ public class Autocontrol : MonoBehaviour
     }
     private void Start()
     {
-        m_currentValue = 10;
+        currentValue = 10;
         GameManager.GetManager().Autocontrol = this;
         renderTextureResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
         renderTexture = new RenderTexture(renderTextureResolution.x, renderTextureResolution.y, 32);
         particlesCamera.targetTexture = renderTexture;
         rawImage.texture = renderTexture;
-        m_Slider.value = m_currentValue / maxValue;
+        Slider.value = currentValue / maxValue;
         UpdateAutcontrol();
 
     }
@@ -52,10 +52,10 @@ public class Autocontrol : MonoBehaviour
 
         for (int i = 0; i < value; i++)
         {
-            if (m_currentValue > 0)
-                m_currentValue -= 1;
+            if (currentValue > 0)
+                currentValue -= 1;
 
-            m_Slider.value = m_currentValue / maxValue;
+            Slider.value = currentValue / maxValue;
 
             UpdateAutcontrol();
 
@@ -73,10 +73,10 @@ public class Autocontrol : MonoBehaviour
         particles.Play();
         for (int i = 0; i < value; i++)
         {
-            if (m_currentValue < maxValue)
-                m_currentValue += 1;
+            if (currentValue < maxValue)
+                currentValue += 1;
 
-            m_Slider.value = m_currentValue / maxValue;
+            Slider.value = currentValue / maxValue;
             UpdateAutcontrol();
             yield return null;
         }
@@ -86,20 +86,20 @@ public class Autocontrol : MonoBehaviour
 
     public void UpdateAutcontrol()
     {
-        if (m_Slider.value <= 0.3f)
+        if (Slider.value <= 0.3f)
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
           
             GameManager.GetManager().SoundController.ChangeMusicMood(0);
         }
-        else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
+        else if (Slider.value > 0.3f && Slider.value <= 0.5f)
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
             GameManager.GetManager().SoundController.ChangeMusicMood(1);
         }
-        else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
+        else if (Slider.value > 0.5f && Slider.value <= 0.8f)
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
@@ -107,7 +107,7 @@ public class Autocontrol : MonoBehaviour
             GameManager.GetManager().SoundController.ChangeMusicMood(2);
 
         }
-        else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)
+        else if (Slider.value > 0.8f && Slider.value <= 1f)
         {
             stateImage.sprite = statesColor[3];
             backgroundBar.sprite = barBackGroundColor[3];
@@ -126,7 +126,7 @@ public class Autocontrol : MonoBehaviour
 
     public void AutocontrolSleep()
     {
-        StartCoroutine(RemoveC(m_currentValue * 0.4f));
+        StartCoroutine(RemoveC(currentValue * 0.4f));
     }
 
 }

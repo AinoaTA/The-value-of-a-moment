@@ -34,7 +34,7 @@ public class InterctableManager : MonoBehaviour
 
     public void FirstInteract()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
+        if (GameManager.GetManager().gameStateController.CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
             return;
 
         if (!currInteractable.GetDone())
@@ -47,7 +47,7 @@ public class InterctableManager : MonoBehaviour
 
     public void SecondInteract()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
+        if (GameManager.GetManager().gameStateController.CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
             return;
 
         if (currInteractable.totalOptions > 1)
@@ -65,7 +65,7 @@ public class InterctableManager : MonoBehaviour
 
     private void Update()
     {
-        //if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+        //if (GameManager.GetManager().gameStateController.CurrentStateGame != GameStateController.StateGame.GamePlay)
         //    return;
 
         //Ray l_Ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));

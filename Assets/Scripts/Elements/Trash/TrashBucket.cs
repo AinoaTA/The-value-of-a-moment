@@ -34,7 +34,7 @@ public class TrashBucket : Interactables
 
     public void SomethingCleaned()
     {
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().Autocontrol.AddAutoControl(MinAutoControl);
         numberTrash++;
         if (numberTrash >= maxTras)
         {

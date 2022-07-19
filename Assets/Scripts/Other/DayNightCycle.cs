@@ -4,27 +4,27 @@ public class DayNightCycle : MonoBehaviour
 {
     public enum DayState { Mañana, MedioDia, Tarde, Noche }
 
-    public DayState m_DayState;
+    public DayState DayState;
     private int counter;
 
-    private Animator m_Anims;
+    private Animator Anims;
     private int counterTaskDay=0;
 
     private void Awake()
     {
-        m_Anims = GetComponent<Animator>();
+        Anims = GetComponent<Animator>();
     } 
 
     private void Start()
     {
         GameManager.GetManager().dayNightCycle = this;
-        counter = (int)m_DayState;
-        ChangeDay(m_DayState);
+        counter = (int)DayState;
+        ChangeDay(DayState);
     }
     public void ChangeDay(DayState newState)
     {
-        m_Anims.SetInteger("time", (int)newState);
-        m_DayState = newState;
+        Anims.SetInteger("time", (int)newState);
+        DayState = newState;
     }
 
     public void NewDay()

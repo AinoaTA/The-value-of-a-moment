@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     //private void Start()
     //{
     //   // cam = Camera.main;
-    //    //m_CurrentStateGame = StateGame.Init;
+    //    //CurrentStateGame = StateGame.Init;
     //}
 
     //private void Update()
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     //    {
     //        print("is it here??");
     //        PlayerController.ExitInteractable();
-    //        m_CurrentStateGame = StateGame.GamePlay;
+    //        CurrentStateGame = StateGame.GamePlay;
     //        currInteractable = null;
     //    }
     //}

@@ -11,7 +11,7 @@ public class MenuController : MonoBehaviour
     public Slider loadingSlider;
     private IEnumerator routine;
     public Animator anim;
-    // public Animator m_Anim;
+    // public Animator Anim;
 
     private void Start()
     {

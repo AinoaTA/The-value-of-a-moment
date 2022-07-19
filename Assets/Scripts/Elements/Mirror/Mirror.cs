@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Mirror : Interactables
 {
-    private int m_Counter = 0;
+    private int Counter = 0;
 
     public string[] bad1, lessbad, normal, good;
     private int counterbad1, counterless, counternormal, countergood;
@@ -19,23 +19,23 @@ public class Mirror : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!Done)
                 {
-                    m_Done = true;
+                    Done = true;
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     GameManager.GetManager().cameraController.StartInteractCam(7);
 
                     StartCoroutine(LookUp());
-                    //if (m_MirrorInteractPhrases.Length > 0)
+                    //if (MirrorInteractPhrases.Length > 0)
                     //{
-                    //    if (m_Counter >= m_InteractPhrases.Length)
-                    //        m_Counter = 0;
+                    //    if (Counter >= InteractPhrases.Length)
+                    //        Counter = 0;
 
-                    //    GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
+                    //    GameManager.GetManager().Dialogue.SetDialogue(InteractPhrases[Counter]);
                     //    GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
-                    //    m_Counter++;
+                    //    Counter++;
 
-                    //    m_Done = true;
+                    //    Done = true;
                     //}
                 }
                 break;
@@ -56,7 +56,7 @@ public class Mirror : Interactables
     private IEnumerator LookUp()
     {
         yield return new WaitForSeconds(1);
-        if (GameManager.GetManager().Autocontrol.m_Slider.value <= 0.3f)
+        if (GameManager.GetManager().Autocontrol.Slider.value <= 0.3f)
         {
           //  GameManager.GetManager().Dialogue.SetDialogue(bad1[counterbad1]);
             counterbad1++;
@@ -65,7 +65,7 @@ public class Mirror : Interactables
             GameManager.GetManager().PlayerController.SadMoment();
             GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
         }
-        else if (GameManager.GetManager().Autocontrol.m_Slider.value > 0.3f && GameManager.GetManager().Autocontrol.m_Slider.value <= 0.5f)
+        else if (GameManager.GetManager().Autocontrol.Slider.value > 0.3f && GameManager.GetManager().Autocontrol.Slider.value <= 0.5f)
         {
          
             //GameManager.GetManager().Dialogue.SetDialogue(lessbad[counterless]);
@@ -75,7 +75,7 @@ public class Mirror : Interactables
             GameManager.GetManager().PlayerController.SadMoment();
             GameManager.GetManager().Autocontrol.RemoveAutoControl(2);
         }
-        else if (GameManager.GetManager().Autocontrol.m_Slider.value > 0.5f && GameManager.GetManager().Autocontrol.m_Slider.value <= 0.8f)
+        else if (GameManager.GetManager().Autocontrol.Slider.value > 0.5f && GameManager.GetManager().Autocontrol.Slider.value <= 0.8f)
         {
            // GameManager.GetManager().Dialogue.SetDialogue(normal[counternormal]);
             counternormal++;
@@ -84,7 +84,7 @@ public class Mirror : Interactables
             GameManager.GetManager().PlayerController.HappyMoment();
             GameManager.GetManager().Autocontrol.AddAutoControl(2);
         }
-        else if (GameManager.GetManager().Autocontrol.m_Slider.value > 0.8f)
+        else if (GameManager.GetManager().Autocontrol.Slider.value > 0.8f)
         {
            // GameManager.GetManager().Dialogue.SetDialogue(good[countergood]);
             countergood++;
@@ -102,6 +102,6 @@ public class Mirror : Interactables
 
     public override void ResetInteractable()
     {
-        m_Done = false;
+        Done = false;
     }
 }

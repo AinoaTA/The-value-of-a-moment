@@ -6,25 +6,25 @@ public class Mov : MonoBehaviour
 {
     //[Range(0,1)]
     //public float dotCutOff = 0.7f;
-    private Vector2 m_MovementAxis;
-    public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
-    private Vector3 m_Direction;
+    private Vector2 MovementAxis;
+    public Vector2 MovementAxis { get { return MovementAxis.normalized; } set { MovementAxis = value; } }
+    private Vector3 Direction;
     public Camera cam;
-    public float m_Speed, m_MaxSpeed = 2, m_StopSpeedOffset = 0.2f;
+    public float Speed, MaxSpeed = 2, StopSpeedOffset = 0.2f;
     public GameObject prop;
     bool moving;
-    Vector3 m_Forward, m_Right, m_Movement;
+    Vector3 Forward, Right, Movement;
 
-    [SerializeField] float m_LerpRotationPercentatge = 0.2f;
-    [SerializeField] float m_CurrVelocityPlayer;
-    CharacterController m_CharacterController;
+    [SerializeField] float LerpRotationPercentatge = 0.2f;
+    [SerializeField] float CurrVelocityPlayer;
+    CharacterController CharacterController;
 
-    public Animator m_Anim;
+    public Animator Anim;
     // bool cutOff;
     private void Start()
     {
-        m_Speed = m_MaxSpeed;
-        m_CharacterController = GetComponent<CharacterController>();
+        Speed = MaxSpeed;
+        CharacterController = GetComponent<CharacterController>();
 
          
         GameManager.GetManager().playerInputs._MoveUp += MoveUp;
@@ -50,48 +50,48 @@ public class Mov : MonoBehaviour
 
     private void ResetMove()
     {
-        m_MovementAxis = Vector2.zero;
+        MovementAxis = Vector2.zero;
     }
     private void MoveLeft()
     {
-        m_MovementAxis += new Vector2(-1, 0);
+        MovementAxis += new Vector2(-1, 0);
         moving = true;
     }
 
     private void MoveRight()
     {
-        m_MovementAxis += new Vector2(1, 0);
+        MovementAxis += new Vector2(1, 0);
         moving = true;
     }
 
     private void MoveUp()
     {
-        m_MovementAxis += new Vector2(0, 1);
+        MovementAxis += new Vector2(0, 1);
         moving = true;
     }
 
     private void MoveDown()
     {
-        m_MovementAxis += new Vector2(0, -1);
+        MovementAxis += new Vector2(0, -1);
         moving = true;
     }
 
     private void StopMoving()
     {
-        m_MovementAxis = Vector2.zero;
+        MovementAxis = Vector2.zero;
         moving = false;
     }
 
     void Update()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+        if (GameManager.GetManager().gameStateController.CurrentStateGame != GameStateController.StateGame.GamePlay)
         {
-            //m_CurrVelocityPlayer = 0;
-            //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
+            //CurrVelocityPlayer = 0;
+            //Anim.SetFloat("Speed", Mathf.Clamp(CurrVelocityPlayer, 0, 1));
             return;
         }
 
-        if (m_MovementAxis != Vector2.zero)
+        if (MovementAxis != Vector2.zero)
         {
             Vector3 forward = cam.transform.forward;
             Vector3 right = cam.transform.right;
@@ -100,89 +100,89 @@ public class Mov : MonoBehaviour
             forward.Normalize();
             right.Normalize();
 
-            Vector2 movementAxis = m_MovementAxis;
-            m_Direction += forward * movementAxis.y;
-            m_Direction += right * movementAxis.x;
-             m_Direction.Normalize();
+            Vector2 movementAxis = MovementAxis;
+            Direction += forward * movementAxis.y;
+            Direction += right * movementAxis.x;
+             Direction.Normalize();
 
-            Vector3 movement = m_Direction*Time.deltaTime* m_Speed;
+            Vector3 movement = Direction*Time.deltaTime* Speed;
 
-            CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);
+            CollisionFlags CollisionFlags = CharacterController.Move(movement);
         }
 
         
 
         //parametros de la camara
-        //m_Forward = cam.transform.forward;
-        //m_Right = cam.transform.right;
+        //Forward = cam.transform.forward;
+        //Right = cam.transform.right;
 
-        //m_Forward.y = 0;
-        //m_Right.y = 0;
+        //Forward.y = 0;
+        //Right.y = 0;
 
-        //m_Forward.Normalize();
-        //m_Right.Normalize();
+        //Forward.Normalize();
+        //Right.Normalize();
 
         //if (Input.GetKey(KeyCode.A))
         //{
-        //    m_Movement = -m_Right;
+        //    Movement = -Right;
         //}
         //if (Input.GetKey(KeyCode.D))
         //{
-        //    m_Movement = m_Right;
+        //    Movement = Right;
         //}
 
         //if (Input.GetKey(KeyCode.W))
         //{
-        //    m_Movement += m_Forward;
+        //    Movement += Forward;
         //}
         //if (Input.GetKey(KeyCode.S))
         //{
-        //    m_Movement -= m_Forward;
+        //    Movement -= Forward;
         //}
 
         //slow anim transition(walk to idle)
         //if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         //{
-        //    m_Speed -= 0.03f;
-        //    m_Speed = Mathf.Clamp(m_Speed, 0.0f, m_MaxSpeed);
-        //    m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
-        //    m_CurrVelocityPlayer -= 0.01f;
-        //    Mathf.Clamp(m_CurrVelocityPlayer, 0, 1);
+        //    Speed -= 0.03f;
+        //    Speed = Mathf.Clamp(Speed, 0.0f, MaxSpeed);
+        //    CurrVelocityPlayer = CharacterController.velocity.magnitude;
+        //    CurrVelocityPlayer -= 0.01f;
+        //    Mathf.Clamp(CurrVelocityPlayer, 0, 1);
         //}
         //else
         //{
-        //    m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
-        //    m_Speed = m_MaxSpeed;
+        //    CurrVelocityPlayer = CharacterController.velocity.magnitude;
+        //    Speed = MaxSpeed;
         //}
 
-        //print(CalculateWall(m_Forward));
-        //Debug.DrawLine(transform.position, transform.position + m_Forward * 10);
+        //print(CalculateWall(Forward));
+        //Debug.DrawLine(transform.position, transform.position + Forward * 10);
 
-        //if (cutOff)//(CalculateWall(m_Forward))
+        //if (cutOff)//(CalculateWall(Forward))
         //{
-        //    m_CurrVelocityPlayer = 0;
+        //    CurrVelocityPlayer = 0;
         //    StartCoroutine(DelayAnimation());
         //}
 
-        //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
+        //Anim.SetFloat("Speed", Mathf.Clamp(CurrVelocityPlayer, 0, 1));
 
-        //m_Movement.Normalize();
+        //Movement.Normalize();
 
-        //if (m_Movement != Vector3.zero)
-        //    prop.transform.rotation = Quaternion.Lerp(prop.transform.rotation, Quaternion.LookRotation(m_Movement), m_LerpRotationPercentatge);
+        //if (Movement != Vector3.zero)
+        //    prop.transform.rotation = Quaternion.Lerp(prop.transform.rotation, Quaternion.LookRotation(Movement), LerpRotationPercentatge);
 
-        //m_Movement *= m_Speed * Time.deltaTime;
+        //Movement *= Speed * Time.deltaTime;
 
-        //CollisionFlags m_CollisionFlags = m_CharacterController.Move(m_Movement);
+        //CollisionFlags CollisionFlags = CharacterController.Move(Movement);
 
         //SetAnimations();
     }
 
     private void SetAnimations()
     {
-        if (m_CharacterController.velocity.magnitude <= m_MaxSpeed - m_StopSpeedOffset)
+        if (CharacterController.velocity.magnitude <= MaxSpeed - StopSpeedOffset)
         {
-            m_Speed = 0.0f;
+            Speed = 0.0f;
         }
     }
 

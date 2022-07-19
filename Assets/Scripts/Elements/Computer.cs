@@ -10,7 +10,7 @@ public class Computer : Interactables
         switch (options)
         {
             case 1:
-                GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.MiniGame;
+                GameManager.GetManager().gameStateController.CurrentStateGame = GameStateController.StateGame.MiniGame;
                 GameManager.GetManager().CanvasManager.ComputerScreenIn();
                 break;
         }

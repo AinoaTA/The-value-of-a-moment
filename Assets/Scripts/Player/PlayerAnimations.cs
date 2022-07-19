@@ -23,7 +23,7 @@ public class PlayerAnimations : MonoBehaviour
     //public void ExitInteractable()
     //{
     //    anim.ResetTrigger("Exit");
-    //    if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+    //    if (GameManager.GetManager().CurrentStateGame != GameManager.StateGame.GamePlay)
     //    {
     //        anim.SetTrigger("Exit");
     //    }

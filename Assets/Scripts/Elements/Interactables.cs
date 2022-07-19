@@ -9,20 +9,20 @@ public class Interactables : MonoBehaviour
 
     [Header("Options")]
     public int totalOptions = 1;
-    public bool m_Done;
-    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
+    public bool Done;
+    public float MaxAutoControl, MiddleAutoControl, MinAutoControl;
 
     //[Header("Calendar extra")]
-    //public float m_ExtraAutoControlCalendar;
+    //public float ExtraAutoControlCalendar;
     //public TaskType taskAssociated;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
     public Animator anim;
 
-    private Material[] m_Material;
+    private Material[] Material;
 
-    public virtual bool GetDone() { return m_Done; }
+    public virtual bool GetDone() { return Done; }
     public virtual void Interaction(int optionNumber) 
     {
         
@@ -48,14 +48,14 @@ public class Interactables : MonoBehaviour
 
     public virtual void ResetInteractable()
     {
-        m_Done = false;
+        Done = false;
         actionEnter = false;
         SetCanvasValue(false);
     }
 
     private void OnMouseEnter()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !m_Done)
+        if (GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !Done)
         {
             showing = true;
             anim.SetBool("Showing", showing);
@@ -65,7 +65,7 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing && !actionEnter && !m_Done)
+        if (GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay && showing && !actionEnter && !Done)
         {
             showing = false;
             anim.SetBool("Showing", showing);
@@ -82,10 +82,10 @@ public class Interactables : MonoBehaviour
     {
         //if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
         //{
-        //    if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+        //    if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.DayState, taskAssociated.calendar.type))
         //    {
         //        taskAssociated.Done();
-        //        GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
+        //        GameManager.GetManager().Autocontrol.AddAutoControl(ExtraAutoControlCalendar);
         //    }
         //}
     }
