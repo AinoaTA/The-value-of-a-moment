@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
-    public AudioSource ExtraSFX1;
-    public AudioSource ExtraSFX;
+    public AudioSource m_ExtraSFX1;
+    public AudioSource m_ExtraSFX;
 
     public AudioSource introLoop, loop;
-    public AudioClip Message;
-    public AudioClip Alarm;
-    public AudioClip Book;
+    public AudioClip m_Message;
+    public AudioClip m_Alarm;
+    public AudioClip m_Book;
     public AudioClip dialogueBlip;
     private bool Active;
 
@@ -25,37 +25,37 @@ public class SoundController : MonoBehaviour
 
     private void OnEnable()
     {
-        NotificationController.MessageDelegate += StartMessage;
-        Alarm.DelegateSFX += StartAlarm;
-        Book.DelegateSFXBook += StartBook;
+        NotificationController.m_MessageDelegate += StartMessage;
+        Alarm.m_DelegateSFX += StartAlarm;
+        Book.m_DelegateSFXBook += StartBook;
         DialogueControl.soundSFX += DialogueSound;
     }
 
     private void OnDisable()
     {
-        NotificationController.MessageDelegate -= StartMessage;
-        Alarm.DelegateSFX -= StartAlarm;
-        Book.DelegateSFXBook -= StartBook;
+        NotificationController.m_MessageDelegate -= StartMessage;
+        Alarm.m_DelegateSFX -= StartAlarm;
+        Book.m_DelegateSFXBook -= StartBook;
         DialogueControl.soundSFX -= DialogueSound;
     }
 
     public void StartMessage()
     {
-        ExtraSFX1.PlayOneShot(Message);
+        m_ExtraSFX1.PlayOneShot(m_Message);
     }
 
     public void StartAlarm()
     {
-        ExtraSFX1.PlayOneShot(Alarm);
+        m_ExtraSFX1.PlayOneShot(m_Alarm);
     }
 
     public void StartBook()
     {
-        ExtraSFX1.PlayOneShot(Book);
+        m_ExtraSFX1.PlayOneShot(m_Book);
     }
     public void StopSound()
     {
-        ExtraSFX1.Stop();
+        m_ExtraSFX1.Stop();
     }
     public void SetMusic()
     {
@@ -89,7 +89,7 @@ public class SoundController : MonoBehaviour
 
     public void DialogueSound()
     {
-        ExtraSFX.PlayOneShot(dialogueBlip);
+        m_ExtraSFX.PlayOneShot(dialogueBlip);
     }
 
     private IEnumerator DecreaseAudioCo(AudioSource source)

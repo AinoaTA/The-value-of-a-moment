@@ -6,58 +6,58 @@ using Random = UnityEngine.Random;
 
 public class DialogueControl : MonoBehaviour
 {
-    private TMP_Text Text;
-    private string CurrText;
-    private float TimerShowDialogue =0;
-    private float MaxTimeShowDialogue=10; //dependiendo de la longitud de la frase.
-    private bool DialogueActive;
+    private TMP_Text m_Text;
+    private string m_CurrText;
+    private float m_TimerShowDialogue =0;
+    private float m_MaxTimeShowDialogue=10; //dependiendo de la longitud de la frase.
+    private bool m_DialogueActive;
 
-    private AudioSource AudioSource;
+    private AudioSource m_AudioSource;
 
     public delegate void SoundDelegate();
     public static SoundDelegate soundSFX;
 
-    [SerializeField]private List<Interactables> ListInteract = new List<Interactables>();
+    [SerializeField]private List<Interactables> m_ListInteract = new List<Interactables>();
     
-    private float Timer=-100;
+    private float m_Timer=-100;
 
     private void SetTimer()
     {
-        Timer = 0;
-        TimerShowDialogue = 0;
+        m_Timer = 0;
+        m_TimerShowDialogue = 0;
     }
 
     void Awake()
     {
-        Text = GetComponent<TMP_Text>();
-        AudioSource = GetComponentInChildren<AudioSource>();
+        m_Text = GetComponent<TMP_Text>();
+        m_AudioSource = GetComponentInChildren<AudioSource>();
     }
 
     void Start()
     {
         //GameManager.GetManager().Dialogue = this;
 
-        //ListInteract.Add(GameManager.GetManager().Bed);
-        //ListInteract.Add(GameManager.GetManager().Book);
-        //ListInteract.Add(GameManager.GetManager().VR);
-        //ListInteract.Add(GameManager.GetManager().Window);
+        //m_ListInteract.Add(GameManager.GetManager().Bed);
+        //m_ListInteract.Add(GameManager.GetManager().Book);
+        //m_ListInteract.Add(GameManager.GetManager().VR);
+        //m_ListInteract.Add(GameManager.GetManager().Window);
     }
 
     private void Update()
     {
-        if (DialogueActive)
+        if (m_DialogueActive)
         {
-            //TimerShowDialogue += Time.deltaTime;
-            if (!AudioSource.isPlaying && AudioSource.clip!=null)
+            //m_TimerShowDialogue += Time.deltaTime;
+            if (!m_AudioSource.isPlaying && m_AudioSource.clip!=null)
             {
-                DialogueActive = false;
-                Text.text = "";
-               // TimerShowDialogue = 0;
+                m_DialogueActive = false;
+                m_Text.text = "";
+               // m_TimerShowDialogue = 0;
             }else
-                Text.text = CurrText;
+                m_Text.text = m_CurrText;
         }
-        Timer += Time.deltaTime;
-        //if (Timer > 12 && !DialogueActive && GameManager.GetManager().CurrentStateGame==GameManager.StateGame.GamePlay)
+        m_Timer += Time.deltaTime;
+        //if (m_Timer > 12 && !m_DialogueActive && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
         //    HelpDialogue();
     }
 
@@ -71,14 +71,14 @@ public class DialogueControl : MonoBehaviour
     {
         StopDialogue();
         SetTimer();
-        DialogueActive = true;
-        CurrText = "(Elle) " + dialogue;
-        AudioSource.clip = voice;
+        m_DialogueActive = true;
+        m_CurrText = "(Elle) " + dialogue;
+        m_AudioSource.clip = voice;
 
         soundSFX?.Invoke();
 
-        if (AudioSource.clip != null)
-            AudioSource.Play();
+        if (m_AudioSource.clip != null)
+            m_AudioSource.Play();
     }
 
     /// <summary>
@@ -89,28 +89,28 @@ public class DialogueControl : MonoBehaviour
     {
         StopDialogue();
         SetTimer();
-        DialogueActive = true;
-        CurrText = voiceOff.text;
-        AudioSource.clip = voiceOff.voice;
+        m_DialogueActive = true;
+        m_CurrText = voiceOff.text;
+        m_AudioSource.clip = voiceOff.voice;
 
-        if (AudioSource.clip != null)
-            AudioSource.Play();
+        if (m_AudioSource.clip != null)
+            m_AudioSource.Play();
     }
 
     public void StopDialogue()
     {
         SetTimer();
         StopAllCoroutines();
-        DialogueActive = false;
-        Text.text = "";
-        AudioSource.clip = null;
+        m_DialogueActive = false;
+        m_Text.text = "";
+        m_AudioSource.clip = null;
     }
 
     private void HelpDialogue()
     {
-        for (int i = 0; i < ListInteract.Count; i++)
+        for (int i = 0; i < m_ListInteract.Count; i++)
         {
-            Interactables l_interactable = ListInteract[i].GetComponent<Interactables>();
+            Interactables l_interactable = m_ListInteract[i].GetComponent<Interactables>();
 
             //if (!l_interactable.GetDone() && l_interactable.GetPhrasesVoiceOff().Length != 0)
             //{
@@ -123,6 +123,6 @@ public class DialogueControl : MonoBehaviour
 
     public bool CheckDialogueIsPlaying()
     {
-        return AudioSource.isPlaying;
+        return m_AudioSource.isPlaying;
     }
 }

@@ -22,7 +22,7 @@ public class MobileCalendar : MonoBehaviour
     }
     public void OpenCalendar()
     {
-        bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayNightCycle.DayState];
+        bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayNightCycle.m_DayState];
         if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
         {
             noselected.SetActive(true);
@@ -37,15 +37,15 @@ public class MobileCalendar : MonoBehaviour
         {
             foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
             {
-                if (item.Value.type == SpaceCalendar.SpaceType.Manana && GameManager.GetManager().dayNightCycle.DayState == DayNightCycle.DayState.Maï¿½ana)
+                if (item.Value.type == SpaceCalendar.SpaceType.Manana && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Mañana)
                 {
-                    hora = DayNightCycle.DayState.Maï¿½ana;
+                    hora = DayNightCycle.DayState.Mañana;
                     GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
                     taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
                     taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
                     taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
                 }
-                else if (item.Value.type == SpaceCalendar.SpaceType.Tarde && GameManager.GetManager().dayNightCycle.DayState == DayNightCycle.DayState.Tarde)
+                else if (item.Value.type == SpaceCalendar.SpaceType.Tarde && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Tarde)
                 {
                     hora = DayNightCycle.DayState.Tarde;
                     GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
@@ -53,7 +53,7 @@ public class MobileCalendar : MonoBehaviour
                     taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
                     taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
                 }
-                else if (item.Value.type == SpaceCalendar.SpaceType.MedioDia && GameManager.GetManager().dayNightCycle.DayState == DayNightCycle.DayState.MedioDia)
+                else if (item.Value.type == SpaceCalendar.SpaceType.MedioDia && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.MedioDia)
                 {
                     hora = DayNightCycle.DayState.MedioDia;
                     GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
@@ -61,7 +61,7 @@ public class MobileCalendar : MonoBehaviour
                     taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
                     taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
                 }
-                else if (item.Value.type == SpaceCalendar.SpaceType.Noche && GameManager.GetManager().dayNightCycle.DayState == DayNightCycle.DayState.Noche)
+                else if (item.Value.type == SpaceCalendar.SpaceType.Noche && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Noche)
                 {
                     hora = DayNightCycle.DayState.Noche;
                     GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);

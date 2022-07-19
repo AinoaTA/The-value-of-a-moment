@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PieceMG : MonoBehaviour
 {
-    private bool Selected = false;
+    private bool m_Selected = false;
     private Vector3 initialPos;
 
     public bool dragging = false;
@@ -13,7 +13,7 @@ public class PieceMG : MonoBehaviour
     {
         initialPos = transform.position;
     }
-    //este script me deja loca, no se como funciona jaja no sï¿½ q hice en su momento. !!!
+    //este script me deja loca, no se como funciona jaja no sé q hice en su momento. !!!
 
     private void OnMouseDrag()
     {
@@ -24,7 +24,7 @@ public class PieceMG : MonoBehaviour
 
     private void Update()
     {
-        if (Selected)
+        if (m_Selected)
             Move();
     }
 
@@ -39,15 +39,15 @@ public class PieceMG : MonoBehaviour
 
     public void Select()
     {
-        Selected = !Selected;
+        m_Selected = !m_Selected;
 
-        if (!Selected)
+        if (!m_Selected)
             dragging = false;
     }
 
     public void ResetPiece()
     {
-        Selected = false;
+        m_Selected = false;
         transform.position = initialPos;
     }
 }

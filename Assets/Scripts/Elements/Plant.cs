@@ -4,7 +4,7 @@ using UnityEngine;
 public class Plant : Interactables
 {
     public bool water;
-    public GameObject Tutorial;
+    public GameObject m_Tutorial;
     private GameObject minigameCanvas = null;
 
     [SerializeField] private float distance;
@@ -14,19 +14,19 @@ public class Plant : Interactables
     [SerializeField] private float timer;
     [SerializeField] private float maxTimer = 3f;
     private int currProcess = 0;
-    public GameObject[] process;
+    public GameObject[] m_process;
     private bool started;
     public Regadera regadera;
     private bool tutorialShowed = false;
 
     private void Start()
     {
-        minigameCanvas = Tutorial.transform.parent.gameObject;
+        minigameCanvas = m_Tutorial.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
         //GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
-            process[currProcess].SetActive(true);
+            m_process[currProcess].SetActive(true);
     }
 
     public override void Interaction(int options)
@@ -35,7 +35,7 @@ public class Plant : Interactables
         switch (options)
         {
             case 1:
-                if (!Done && regadera.grabbed)
+                if (!m_Done && regadera.grabbed)
                 {
                     started = true;
                     timer = 0;
@@ -56,7 +56,7 @@ public class Plant : Interactables
         if (!tutorialShowed && started)
             InitTutorial();
 
-        if(tutorialShowed && waterCan.dragg) Tutorial.SetActive(false);
+        if(tutorialShowed && waterCan.dragg) m_Tutorial.SetActive(false);
 
         if (started && Input.GetKeyDown(KeyCode.Escape))
         {
@@ -74,8 +74,8 @@ public class Plant : Interactables
         waterCan.GrowUpParticle.Play();
         waterCan.gameObject.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().Autocontrol.AddAutoControl(MinAutoControl);
-        Done = true;
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        m_Done = true;
         started = false;
         waterCan.dragg = false;
         CheckDoneTask();
@@ -97,15 +97,15 @@ public class Plant : Interactables
     public void NextDay()
     {
         //grow
-        if (Done)
+        if (m_Done)
         {
             waterCan.GrowUpParticle.Stop();
-            if (currProcess < process.Length)
+            if (currProcess < m_process.Length)
             {
-                process[currProcess].SetActive(false);
+                m_process[currProcess].SetActive(false);
                 currProcess++;
                 waterCan.GrowUpParticle.Play();
-                process[currProcess].SetActive(true);
+                m_process[currProcess].SetActive(true);
             }
         }
     }
@@ -132,15 +132,15 @@ public class Plant : Interactables
     {
         StartCoroutine(ActivateMinigameCanvas());
         StartCoroutine(HideTutorial());
-        if(Tutorial.GetComponent<Animator>() != null)
-            Tutorial.GetComponent<Animator>().SetBool("show", true);
+        if(m_Tutorial.GetComponent<Animator>() != null)
+            m_Tutorial.GetComponent<Animator>().SetBool("show", true);
         tutorialShowed = true;
     }
 
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
-        Tutorial.SetActive(false);
+        m_Tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()

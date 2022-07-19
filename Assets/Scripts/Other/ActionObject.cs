@@ -17,8 +17,8 @@ public class ActionObject : MonoBehaviour
 
     private void OnMouseEnter()
     { 
-        print(GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay && !showing);
-        if (GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)// && !actionEnter)
+        print(GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing);
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)// && !actionEnter)
         {
             showing = true;
             anim.SetBool("Showing", showing);
@@ -29,7 +29,7 @@ public class ActionObject : MonoBehaviour
     private void OnMouseExit()
     {
         
-        if (GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay && showing)// && !actionEnter)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing)// && !actionEnter)
         {
             showing = false;
             anim.SetBool("Showing", showing);
@@ -39,7 +39,7 @@ public class ActionObject : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.E) && GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay)
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
             Interaction();
     }
 }

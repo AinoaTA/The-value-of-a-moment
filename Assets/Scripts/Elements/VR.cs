@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VR : Interactables
 {
-    private int Counter = 0;
+    private int m_Counter = 0;
 
     private void Start()
     {
@@ -15,16 +15,16 @@ public class VR : Interactables
         switch (options)
         {
             case 1:
-                if (!Done)
+                if (!m_Done)
                 {
-                    //if (Counter >= HelpPhrasesVoiceOff.Length - 1)
-                    //    Counter = 0;
+                    //if (m_Counter >= m_HelpPhrasesVoiceOff.Length - 1)
+                    //    m_Counter = 0;
 
-                    //GameManager.GetManager().Dialogue.SetDialogue(InteractPhrases[Counter]);
+                    //GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
                     GameManager.GetManager().Autocontrol.AddAutoControl(3);
-                    Counter++;
+                    m_Counter++;
 
-                    Done = true;
+                    m_Done = true;
                 }
 
                 break;
@@ -34,7 +34,7 @@ public class VR : Interactables
 
     public void ResetVRDay()
     {
-        Done = false;
+        m_Done = false;
     }
 
 }

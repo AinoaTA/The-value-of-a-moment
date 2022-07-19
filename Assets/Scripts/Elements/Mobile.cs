@@ -34,7 +34,7 @@ public class Mobile : Interactables
     private void GetMobile()
     {
         realMobile.SetActive(false);
-        Done = getMobile = true;
+        m_Done = getMobile = true;
         col.enabled = false;
         //GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
 
@@ -43,9 +43,9 @@ public class Mobile : Interactables
     private void Update()
     {
         //Debug.Log("commented input");
-        //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.activated)
+        //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
         //{
-        //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.CurrentStateGame == GameStateController.StateGame.GamePlay)
+        //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
         //    {
         //        GameManager.GetManager().gameStateController.ChangeGameState(2);
         //        GameManager.GetManager().CanvasManager.UnLock();

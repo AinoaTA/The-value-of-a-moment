@@ -7,8 +7,8 @@ public class EffectText : MonoBehaviour
     public Color Pointer;
     public Color Default = Color.white;
     private bool Poiting;
-    public bool Bubble = false;
-    public float Multiplayer = 1.7f;
+    public bool m_Bubble = false;
+    public float m_Multiplayer = 1.7f;
 
     public void PointerColor()
     {
@@ -39,7 +39,7 @@ public class EffectText : MonoBehaviour
 
             var vertexs = textInfo.meshInfo[charInfo.materialReferenceIndex].vertices;
             int idx = charInfo.vertexIndex;
-            if (Bubble)
+            if (m_Bubble)
             {
                 //vertexs[charInfo.vertexIndex + j] = ;
                 Vector3 change = Wobble(Time.time + i);
@@ -65,7 +65,7 @@ public class EffectText : MonoBehaviour
 
     Vector2 Move(float time)
     {
-        return new Vector2(Mathf.Sin(time * Multiplayer), Mathf.Cos(time * 0.9f));
+        return new Vector2(Mathf.Sin(time * m_Multiplayer), Mathf.Cos(time * 0.9f));
     }
 
     Vector3 Wobble(float time)

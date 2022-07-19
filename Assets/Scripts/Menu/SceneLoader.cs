@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private string[] LevelNames;
-    [SerializeField] private string[] IntroLevelsNames;
-    private string LoadingSceneName;
+    [SerializeField] private string[] m_LevelNames;
+    [SerializeField] private string[] m_IntroLevelsNames;
+    private string m_LoadingSceneName;
     private Slider sliderLoading;
     private bool sliderMoving;
     private void Awake()
@@ -27,8 +27,8 @@ public class SceneLoader : MonoBehaviour
         Time.timeScale = 1;
 
         GameManager.GetManager().sceneLoader = this;
-        LevelNames = GameManager.GetManager().levelData.sceneNames;
-        IntroLevelsNames = GameManager.GetManager().levelData.sceneIntroNames;
+        m_LevelNames = GameManager.GetManager().levelData.sceneNames;
+        m_IntroLevelsNames = GameManager.GetManager().levelData.sceneIntroNames;
     }
     /// <summary>
     /// Load desired scene with out loading scene.
@@ -37,13 +37,13 @@ public class SceneLoader : MonoBehaviour
     /// 
     public void LoadLevel(int level)
     {
-        if (LoadingSceneName != LevelNames[level] && LevelNames.Length > level)
+        if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
-            LoadingSceneName = LevelNames[level];
-            LoadSceneAsync(LoadingSceneName);
+            m_LoadingSceneName = m_LevelNames[level];
+            LoadSceneAsync(m_LoadingSceneName);
         }
         else
-            Debug.Log(LevelNames[level] + "scene doesn't exit. Cant be loaded.");
+            Debug.Log(m_LevelNames[level] + "scene doesn't exit. Cant be loaded.");
     }
 
     private void LoadSceneAsync(string name)
@@ -58,17 +58,17 @@ public class SceneLoader : MonoBehaviour
     /// <param name="scene"></param>
     public void LoadWithLoadingScene(int level, bool fromMenu = false)
     {
-        if (fromMenu && (LoadingSceneName != IntroLevelsNames[level] && IntroLevelsNames.Length > level))
+        if (fromMenu && (m_LoadingSceneName != m_IntroLevelsNames[level] && m_IntroLevelsNames.Length > level))
         {
-            LoadingSceneName = IntroLevelsNames[level];
+            m_LoadingSceneName = m_IntroLevelsNames[level];
 
-            StartCoroutine(LoadLoadingSceneFromMenu(LoadingSceneName));
+            StartCoroutine(LoadLoadingSceneFromMenu(m_LoadingSceneName));
             sliderLoading = FindObjectOfType<MenuController>().loadingSlider;
         }
-        else if (LoadingSceneName != LevelNames[level] && LevelNames.Length > level)
+        else if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
-            LoadingSceneName = LevelNames[level];
-            StartCoroutine(LoadLoadingScene(LoadingSceneName));
+            m_LoadingSceneName = m_LevelNames[level];
+            StartCoroutine(LoadLoadingScene(m_LoadingSceneName));
         }
     }
     IEnumerator LoadLoadingScene(string scene)
@@ -117,7 +117,7 @@ public class SceneLoader : MonoBehaviour
         //}
         //l_LoadLevel.completed += (asyncOperation) =>
         //{
-        //    GameManager.GetManager().GetLevelData().GameStarted = true;
+        //    GameManager.GetManager().GetLevelData().m_GameStarted = true;
         //    StartCoroutine(GameManager.GetManager().StartGame());
         //};
 

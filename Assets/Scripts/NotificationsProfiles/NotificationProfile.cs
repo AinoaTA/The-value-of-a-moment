@@ -6,9 +6,9 @@ using UnityEngine;
 public class NotificationProfile : ScriptableObject
 {
 
-    public Sprite[] ProfilePic;
-    public string[] NameProfile;
-    public string[] Phrases;
+    public Sprite[] m_ProfilePic;
+    public string[] m_NameProfile;
+    public string[] m_Phrases;
     public float minCofindent;
     public float maxConfident;
     public bool current;

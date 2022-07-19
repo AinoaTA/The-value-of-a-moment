@@ -9,7 +9,7 @@ public class GameStateController : MonoBehaviour
         GamePlay,   // Una vez despertado y moviendose por el nivel
         MiniGame    // Se ha iniciado un minigame
     }
-     public StateGame CurrentStateGame;
+     public StateGame m_CurrentStateGame;
 
     private void Awake()
     {
@@ -24,12 +24,12 @@ public class GameStateController : MonoBehaviour
     /// <param name="state"></param>
     public void ChangeGameState(int state)
     {
-        CurrentStateGame = (StateGame)state;
+        m_CurrentStateGame = (StateGame)state;
         //StartCoroutine(Delay((StateGame)state));
     }
     //private IEnumerator Delay(StateGame state)
     //{
     //    yield return new WaitForSecondsRealtime(1);
-    //    CurrentStateGame = state;
+    //    m_CurrentStateGame = state;
     //}
 }

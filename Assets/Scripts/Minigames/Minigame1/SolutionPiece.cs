@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SolutionPiece : MonoBehaviour
 {
-    public GameObject CorrectPiece;
+    public GameObject m_CorrectPiece;
 
-    public bool Correct;
+    public bool m_Correct;
     private PieceMG currPiece;
 
     private void OnTriggerEnter(Collider other)
@@ -14,10 +14,10 @@ public class SolutionPiece : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject == CorrectPiece && !currPiece.dragging && !currPiece.correct)
+        if (collision.gameObject == m_CorrectPiece && !currPiece.dragging && !currPiece.correct)
         {
-            Correct = true;
-            currPiece.correct = Correct;
+            m_Correct = true;
+            currPiece.correct = m_Correct;
         }
     }
 }

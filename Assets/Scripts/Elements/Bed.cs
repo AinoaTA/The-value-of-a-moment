@@ -5,10 +5,10 @@ using UnityEngine;
 public class Bed : Interactables
 {
     public Camera cam;
-    public GameObject Tutorial;
+    public GameObject m_Tutorial;
     private GameObject minigameCanvas = null;
-    public GameObject SheetBad;
-    public GameObject Sheet;  //sabana
+    public GameObject m_SheetBad;
+    public GameObject m_Sheet;  //sabana
     public GameObject interactTextBed;
     public GameObject sleepTextBed;
     private bool gameInitialized;
@@ -24,17 +24,17 @@ public class Bed : Interactables
 
     private void Start()
     {
-        if(Tutorial != null)
+        if(m_Tutorial != null)
         {
-            minigameCanvas = Tutorial.transform.parent.gameObject;
+            minigameCanvas = m_Tutorial.transform.parent.gameObject;
             minigameCanvas.SetActive(false);
         }
-        if(SheetBad != null)
+        if(m_SheetBad != null)
         {
-            badBed = SheetBad.transform.parent.gameObject;
-            SheetBad.SetActive(true);
-            initPosBadSheet = SheetBad.transform.position;
-            minDesplacement = SheetBad.transform.position.x;
+            badBed = m_SheetBad.transform.parent.gameObject;
+            m_SheetBad.SetActive(true);
+            initPosBadSheet = m_SheetBad.transform.position;
+            minDesplacement = m_SheetBad.transform.position.x;
         }
         totalOptions = 2;
         //GameManager.GetManager().Bed = this;
@@ -46,14 +46,14 @@ public class Bed : Interactables
 
     void OnMouseDrag()
     {
-        if (gameInitialized && !Done)
+        if (gameInitialized && !m_Done)
         {
             if(!tutorialShowed)
                 InitTutorial();
             else
-                Tutorial.SetActive(false);
+                m_Tutorial.SetActive(false);
 
-            float movement = SheetBad.transform.position.x;
+            float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
 
             if (displacement < minDesplacement)
@@ -67,9 +67,9 @@ public class Bed : Interactables
             else if (displacement > maxDesplacement)
             {
                 movement = maxDesplacement;
-                Done = true;
+                m_Done = true;
             }
-            SheetBad.transform.position = new Vector3(movement, SheetBad.transform.position.y, SheetBad.transform.position.z);
+            m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
     }
     private void Update()
@@ -92,7 +92,7 @@ public class Bed : Interactables
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
-        Animator animator = Tutorial.GetComponent<Animator>();
+        Animator animator = m_Tutorial.GetComponent<Animator>();
         if(animator != null) animator.SetBool("show", true);
         StartCoroutine(HideTutorial());
         tutorialShowed = true;
@@ -101,7 +101,7 @@ public class Bed : Interactables
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
-        Tutorial.SetActive(false);
+        m_Tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()
@@ -112,42 +112,42 @@ public class Bed : Interactables
 
     private void OnMouseUp()
     {
-        if (Done && gameInitialized)
+        if (m_Done && gameInitialized)
             BedDone();
     }
 
     void OnMouseDown()
     {
-        zWorldCoord = Camera.main.WorldToScreenPoint(SheetBad.transform.position).z;
+        zWorldCoord = Camera.main.WorldToScreenPoint(m_SheetBad.transform.position).z;
         // offset = World pos - Mouse World pos
-        mOffset = SheetBad.transform.position.y - GetMouseXaxisAsWorldPoint();
+        mOffset = m_SheetBad.transform.position.y - GetMouseXaxisAsWorldPoint();
     }
 
     public void BedDone()
     {
         gameInitialized = false;
         minigameCanvas.SetActive(false);
-        Done = true;
+        m_Done = true;
         cam.cullingMask = -1;
         //Cambiamos la sabana u objeto cama.
-        Sheet.SetActive(true);
+        m_Sheet.SetActive(true);
         badBed.SetActive(false);
         interactTextBed.SetActive(false);
         sleepTextBed.transform.localPosition = lastPosDormirText;
         GameManager.GetManager().dayNightCycle.TaskDone();
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().Autocontrol.AddAutoControl(MinAutoControl);
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
     }
 
     public void ResetBed()
     {
         //GameManager.GetManager().Alarm.SetAlarmActive();
         //GameManager.GetManager().Alarm.ResetTime();
-        Done = false;
-        Sheet.SetActive(false);
+        m_Done = false;
+        m_Sheet.SetActive(false);
         badBed.SetActive(true);
         sleepTextBed.transform.localPosition = initPosDormirText;
-        SheetBad.transform.position = initPosBadSheet;
+        m_SheetBad.transform.position = initPosBadSheet;
         interactTextBed.SetActive(true);
         gameInitialized = false;
     }
@@ -158,20 +158,20 @@ public class Bed : Interactables
         switch (options)
         {
             case 1:
-                if (!Done)
+                if (!m_Done)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(3);
                     //GameManager.GetManager().PlayerController.SetInteractable("Bed");
                     gameInitialized = true;
                     GameManager.GetManager().CanvasManager.UnLock();
-                    GameManager.GetManager().gameStateController.CurrentStateGame = GameStateController.StateGame.MiniGame;
+                    GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.MiniGame;
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
                 }
                 break;
             case 2:
                 GameManager.GetManager().CanvasManager.FadeIn();
-                GameManager.GetManager().gameStateController.CurrentStateGame = GameStateController.StateGame.Init;
+                GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.Init;
                 GameManager.GetManager().CanvasManager.Lock();
                 //GameManager.GetManager().Dialogue.StopDialogue();
                 
@@ -225,7 +225,7 @@ public class Bed : Interactables
         yield return new WaitForSeconds(2);
         GameManager.GetManager().Autocontrol.AutocontrolSleep();
         GameManager.GetManager().dayNightCycle.NewDay();
-        //GameManager.GetManager().CurrentStateGame = GameManager.StateGame.Init;
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
     }
 
     public override void ExitInteraction()

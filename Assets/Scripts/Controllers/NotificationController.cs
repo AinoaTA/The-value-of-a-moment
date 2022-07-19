@@ -5,17 +5,17 @@ using UnityEngine.UI;
 public class NotificationController : MonoBehaviour
 {
     private float timer;
-    private int RandomValue;
-    public bool CurrentNotRead;
+    private int m_RandomValue;
+    public bool m_CurrentNotRead;
 
-    public NotificationProfile troll, person;
-    public TMP_Text Desc;
-    public TMP_Text name;
-    public Image ProfilePic;
+    public NotificationProfile m_troll, m_person;
+    public TMP_Text m_Desc;
+    public TMP_Text m_name;
+    public Image m_ProfilePic;
 
 
     public delegate void SoundMessageDelegate();
-    public static SoundMessageDelegate MessageDelegate;
+    public static SoundMessageDelegate m_MessageDelegate;
     
     void Start()
     {
@@ -23,23 +23,23 @@ public class NotificationController : MonoBehaviour
     }
     //private void Update()
     //{
-    //    if (Input.GetKeyDown(KeyCode.A) && !CurrentNotRead)
+    //    if (Input.GetKeyDown(KeyCode.A) && !m_CurrentNotRead)
     //        SendNotification();
 
     //    timer += Time.deltaTime;
-    //    if (timer >= 15f && !CurrentNotRead && GameManager.GetManager().CurrentStateGame==GameManager.StateGame.GamePlay)
+    //    if (timer >= 15f && !m_CurrentNotRead && GameManager.GetManager().m_CurrentStateGame==GameManager.StateGame.GamePlay)
     //        SendNotification();
     //}
     private void SendNotification()
     {
-        CurrentNotRead = true;
-        if(GameManager.GetManager().CanvasManager.NotificationCanvas) GameManager.GetManager().CanvasManager.NotificationCanvas.SetActive(true);
-        RandomValue = Random.Range(0, 2); //frase random elegida.
+        m_CurrentNotRead = true;
+        if(GameManager.GetManager().CanvasManager.m_NotificationCanvas) GameManager.GetManager().CanvasManager.m_NotificationCanvas.SetActive(true);
+        m_RandomValue = Random.Range(0, 2); //frase random elegida.
 
-        MessageDelegate?.Invoke();
+        m_MessageDelegate?.Invoke();
 
 
-        if (RandomValue == 0)
+        if (m_RandomValue == 0)
             SetTroll();
         else
             SetPeople();
@@ -47,25 +47,25 @@ public class NotificationController : MonoBehaviour
 
     private void SetTroll()
     {
-        troll.current = true;
-        person.current = false;
-        name.text = troll.NameProfile[0];
-        RandomValue = Random.Range(0, troll.Phrases.Length); //frase random elegida.
-        Desc.text = troll.Phrases[RandomValue];
-        RandomValue = Random.Range(0, troll.ProfilePic.Length);
-        ProfilePic.sprite = troll.ProfilePic[RandomValue];
+        m_troll.current = true;
+        m_person.current = false;
+        m_name.text = m_troll.m_NameProfile[0];
+        m_RandomValue = Random.Range(0, m_troll.m_Phrases.Length); //frase random elegida.
+        m_Desc.text = m_troll.m_Phrases[m_RandomValue];
+        m_RandomValue = Random.Range(0, m_troll.m_ProfilePic.Length);
+        m_ProfilePic.sprite = m_troll.m_ProfilePic[m_RandomValue];
     }
 
     private void SetPeople()
     {
-        troll.current = false;
-        person.current = true;
-        RandomValue = Random.Range(0, person.NameProfile.Length);
-        name.text = person.NameProfile[RandomValue];
-        RandomValue = Random.Range(0, person.Phrases.Length); //frase random elegida.
-        Desc.text = person.Phrases[RandomValue];
-        RandomValue = Random.Range(0, person.ProfilePic.Length);
-        ProfilePic.sprite = person.ProfilePic[RandomValue];
+        m_troll.current = false;
+        m_person.current = true;
+        m_RandomValue = Random.Range(0, m_person.m_NameProfile.Length);
+        m_name.text = m_person.m_NameProfile[m_RandomValue];
+        m_RandomValue = Random.Range(0, m_person.m_Phrases.Length); //frase random elegida.
+        m_Desc.text = m_person.m_Phrases[m_RandomValue];
+        m_RandomValue = Random.Range(0, m_person.m_ProfilePic.Length);
+        m_ProfilePic.sprite = m_person.m_ProfilePic[m_RandomValue];
     }
 
 
@@ -73,17 +73,17 @@ public class NotificationController : MonoBehaviour
     {
         GameManager.GetManager().CanvasManager.NotificationMessage.SetActive(false);
         GameManager.GetManager().CanvasManager.MessageOpen.SetActive(true);
-        CurrentNotRead = false;
+        m_CurrentNotRead = false;
 
         float l_confident;
-        if (troll.current)
+        if (m_troll.current)
         {
-            l_confident = Random.Range(troll.minCofindent, troll.maxConfident);
+            l_confident = Random.Range(m_troll.minCofindent, m_troll.maxConfident);
             GameManager.GetManager().Autocontrol.RemoveAutoControl(l_confident);
         }
         else
         {
-            l_confident = Random.Range(person.minCofindent, person.maxConfident);
+            l_confident = Random.Range(m_person.minCofindent, m_person.maxConfident);
             GameManager.GetManager().Autocontrol.AddAutoControl(l_confident);
         }
             
@@ -96,6 +96,6 @@ public class NotificationController : MonoBehaviour
         GameManager.GetManager().CanvasManager.MessageOpen.SetActive(false);
         GameManager.GetManager().CanvasManager.NotificationMessage.SetActive(false);
 
-        CurrentNotRead = false;
+        m_CurrentNotRead = false;
     }
 }

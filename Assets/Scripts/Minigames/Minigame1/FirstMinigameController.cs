@@ -6,13 +6,13 @@ using System.Collections;
 
 public class FirstMinigameController : MonoBehaviour
 {
-    public List<SolutionPiece> AllSolutions = new List<SolutionPiece>();
-    public List<PieceMG> AllPieces = new List<PieceMG>();
-    private bool Solved = false;
+    public List<SolutionPiece> m_AllSolutions = new List<SolutionPiece>();
+    public List<PieceMG> m_AllPieces = new List<PieceMG>();
+    private bool m_Solved = false;
     private bool checking;
-    private bool AllCorrected;
-    public bool started;
-    public float Autocontrol=5;
+    private bool m_AllCorrected;
+    public bool m_started;
+    public float m_Autocontrol=5;
 
     void Start()
     {
@@ -23,9 +23,9 @@ public class FirstMinigameController : MonoBehaviour
     {
         GameManager.GetManager().dayNightCycle.TaskDone();
         //CheckDoneTask();
-        GameManager.GetManager().Autocontrol.AddAutoControl(Autocontrol);
-        Solved = true;
-        started = false;
+        GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
+        m_Solved = true;
+        m_started = false;
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().CanvasManager.FinishMiniGame();
     }
@@ -38,31 +38,31 @@ public class FirstMinigameController : MonoBehaviour
 
     public void CheckSolutions()
     {
-        if (Solved || checking)
+        if (m_Solved || checking)
             return;
 
         checking = true;
-        for (int i = 0; i < AllSolutions.Count; i++)
+        for (int i = 0; i < m_AllSolutions.Count; i++)
         {
-            if (!AllSolutions[i].Correct)
-                AllCorrected = false;
+            if (!m_AllSolutions[i].m_Correct)
+                m_AllCorrected = false;
             else
-                AllCorrected = true;
+                m_AllCorrected = true;
         }
         checking = false;
 
-        if (AllCorrected)
+        if (m_AllCorrected)
             StartCoroutine(GameFinished());
     }
 
     public void ResetAllGame()
     {
-        for (int i = 0; i < AllPieces.Count; i++)
+        for (int i = 0; i < m_AllPieces.Count; i++)
         {
-            AllPieces[i].ResetPiece();
+            m_AllPieces[i].ResetPiece();
         }
-        Solved = false;
-        started = false;
+        m_Solved = false;
+        m_started = false;
     } 
-    public bool GetSolved() { return Solved; }
+    public bool GetSolved() { return m_Solved; }
 }
