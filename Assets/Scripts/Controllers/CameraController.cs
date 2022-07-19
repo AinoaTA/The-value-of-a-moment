@@ -97,7 +97,4 @@ public class CameraController : MonoBehaviour
     {
         xVal = delta * Time.deltaTime;
     }
-
-
-
 }
