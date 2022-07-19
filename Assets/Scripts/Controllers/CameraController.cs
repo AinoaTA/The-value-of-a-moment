@@ -12,10 +12,9 @@ public class CameraController : MonoBehaviour
     int setPriority = 10;
     float yVal = 0, xVal = 0;
 
-    public LayerMask m_LayerMask;
-    public LayerMask m_WallMask;
+    public LayerMask layerMask;
+    public LayerMask wallMask;
     public Camera cam { private get; set; }
-    [SerializeField] private float m_Distance = 10f;
 
     public CamerasConfigVirtual[] virtualCameras;
     [System.Serializable]
@@ -38,17 +37,6 @@ public class CameraController : MonoBehaviour
         GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
         GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
 
-    }
-
-    private void Update()
-    {
-        //Ray l_Ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
-        //if (Physics.Raycast(l_Ray, out RaycastHit l_Hit, m_Distance, m_LayerMask))
-        //{
-        //    print(l_Hit.collider.name);
-          
-        //}
     }
 
     private void OnDisable()
