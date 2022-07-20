@@ -1,11 +1,7 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Mov : MonoBehaviour
 {
-    //[Range(0,1)]
-    //public float dotCutOff = 0.7f;
     private Vector2 m_MovementAxis;
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     private Vector3 m_Direction;
@@ -25,7 +21,6 @@ public class Mov : MonoBehaviour
     {
         m_Speed = m_MaxSpeed;
         m_CharacterController = GetComponent<CharacterController>();
-
          
         GameManager.GetManager().playerInputs._MoveUp += MoveUp;
         GameManager.GetManager().playerInputs._MoveDown += MoveDown;
@@ -37,17 +32,13 @@ public class Mov : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.GetManager().playerInputs. _MoveUp -= MoveUp;
+        GameManager.GetManager().playerInputs._MoveUp -= MoveUp;
         GameManager.GetManager().playerInputs._MoveDown -= MoveDown;
         GameManager.GetManager().playerInputs._MoveLeft -= MoveLeft;
         GameManager.GetManager().playerInputs._MoveRight -= MoveRight;
         GameManager.GetManager().playerInputs._ResetMove -= ResetMove;
         GameManager.GetManager().playerInputs._StopMoving -= StopMoving;
     }
-
-
-    
-
     private void ResetMove()
     {
         m_MovementAxis = Vector2.zero;

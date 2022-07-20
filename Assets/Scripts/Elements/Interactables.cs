@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
-
     [Header("Data")]
     public string nameInteractable;
     private int cameraID;
@@ -11,7 +10,7 @@ public class Interactables : MonoBehaviour
     public int totalOptions = 1;
     public bool m_Done;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
-
+    public bool hasDependencies, hasLeastOne;
     //[Header("Calendar extra")]
     //public float m_ExtraAutoControlCalendar;
     //public TaskType taskAssociated;
@@ -22,27 +21,38 @@ public class Interactables : MonoBehaviour
 
     private Material[] m_Material;
 
+    //#region enables
+    //private void OnDisable()
+    //{
+    //    GameManager.GetManager().playerInputs._ExitInteraction -= ExitInteraction;
+    //}
+    //#endregion
     public virtual bool GetDone() { return m_Done; }
-    public virtual void Interaction(int optionNumber) 
+
+    public virtual void Interaction(int optionNumber)
     {
-        
         actionEnter = true;
         SetCanvasValue(false);
     }
-    public virtual void ExitInteraction() {
+
+    public virtual void ExitInteraction()
+    {
         actionEnter = false;
         SetCanvasValue(false);
+        print("?");
+        GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
-    [HideInInspector]public bool showing = false;
+    [HideInInspector] public bool showing = false;
     protected bool actionEnter;
 
-    private void Update()
-    {
-        SetCanvasValue(false);
-    }
+    //private void Update()
+    //{
+    //    SetCanvasValue(false);
+    //}
 
     private void Start()
     {
+        //GameManager.GetManager().playerInputs._ExitInteraction += ExitInteraction;
         cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
     }
 
@@ -57,6 +67,10 @@ public class Interactables : MonoBehaviour
     {
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !m_Done)
         {
+            if (GetComponent<Plant>())
+                if (!GetComponent<Plant>().regadera.grabbed)
+                    return;
+           
             showing = true;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(this);
@@ -65,15 +79,16 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing && !actionEnter && !m_Done)
+        if (showing && !actionEnter && !m_Done)
         {
+            print("prr2");
             showing = false;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         }
     }
 
-    protected void SetCanvasValue(bool showing_)
+    public void SetCanvasValue(bool showing_)
     {
         anim.SetBool("Showing", showing_);
     }

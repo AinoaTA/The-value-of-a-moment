@@ -17,7 +17,7 @@ public class GameStateController : MonoBehaviour
     }
 
     /// <summary>
-    /// 0 - init;
+    /// 0 - Init;
     /// 1 - GamePlay;
     /// 2 - MiniGame
     /// </summary>

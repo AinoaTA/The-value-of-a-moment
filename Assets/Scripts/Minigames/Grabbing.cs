@@ -77,8 +77,8 @@ public class Grabbing : MonoBehaviour
 
     private void GrabObject()
     {
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(false);
         GameManager.GetManager().gameStateController.ChangeGameState(2);
+        GameManager.GetManager().CanvasManager.Pointer.SetActive(false);
         this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
         if (Vector3.Distance(this.transform.position, target.position) < 0.5f)

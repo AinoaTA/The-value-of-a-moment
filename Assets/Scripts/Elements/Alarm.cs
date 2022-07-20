@@ -40,13 +40,12 @@ public class Alarm : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("commented input");
+         
 #if UNITY_EDITOR
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    ResetTime();
-        //    StartCoroutine(NormalWakeUp());
-        //}
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            StartDay();
+        }
 #endif
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
@@ -79,7 +78,6 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-     
         if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
         {
             StillSleeping();

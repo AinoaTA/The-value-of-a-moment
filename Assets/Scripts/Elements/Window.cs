@@ -36,11 +36,12 @@ public class Window : Interactables
             case 1:
                 if (!isOpen)
                 {
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     gameInitialized = true;
                     // Inicia minijuego
                     GameManager.GetManager().cameraController.StartInteractCam(4);
                     GameManager.GetManager().CanvasManager.UnLock();
-                    GameManager.GetManager().gameStateController.ChangeGameState(2);
+                  
                 }
                 break;
             case 2:

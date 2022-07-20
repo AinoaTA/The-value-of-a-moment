@@ -7,7 +7,7 @@ using System;
 public class PlayerHandleInputs : MonoBehaviour
 {
     public event Action _FirstInteraction, _SecondInteraction, _StopMoving, _ResetMove,
-        _MoveUp, _MoveDown, _MoveRight, _MoveLeft, _StartDay, _BackDay;
+        _MoveUp, _MoveDown, _MoveRight, _MoveLeft, _ExitInteraction;
 
     public event Action<float> _CameraPitchDelta, _CameraYawDelta;
 
@@ -65,22 +65,12 @@ public class PlayerHandleInputs : MonoBehaviour
         }
     }
 
-    public void OnStartAlarmInteract(InputAction.CallbackContext context)
+    public void OnExitInteraction(InputAction.CallbackContext context)
     {
         switch (context)
         {
             case var value when context.started:
-                _StartDay?.Invoke();
-                break;
-        }
-    }
-
-    public void OnBackAlarmInteract(InputAction.CallbackContext context)
-    {
-        switch (context)
-        {
-            case var value when context.started:
-                _BackDay?.Invoke();
+                _ExitInteraction?.Invoke();
                 break;
         }
     }

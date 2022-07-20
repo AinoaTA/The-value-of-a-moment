@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public LevelData levelData { get; set; }
     public InterctableManager interactableManager { get; set; }
     public PlayerHandleInputs playerInputs { get; set; }
+    public ActionObjectManager actionObjectManager { get; set; }
+
     private void OnEnable()
     {
         if (gameManager == null)
@@ -38,45 +40,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    //private void Awake()
-    //{
-    //    stateDriven = FindObjectOfType<Cinemachine.CinemachineStateDrivenCamera>();
-    //}
-    //private void Start()
-    //{
-    //   // cam = Camera.main;
-    //    //m_CurrentStateGame = StateGame.Init;
-    //}
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        if (currInteractable != null && currInteractable.showing)
-    //        {
-    //            currInteractable.HideCanvas();
-    //            currInteractable.Interaction(1);
-    //            currInteractable = null;
-
-    //        }
-    //    }
-    //    else if (Input.GetKeyDown(KeyCode.Q) && currInteractable != null && currInteractable.options > 1)
-    //    {
-    //        if (currInteractable != null)
-    //        {
-    //            currInteractable.HideCanvas();
-    //            currInteractable.Interaction(2);
-    //            currInteractable = null;
-    //        }
-    //    }
-    //    else if (Input.GetKeyDown(KeyCode.Escape))
-    //    {
-    //        print("is it here??");
-    //        PlayerController.ExitInteractable();
-    //        m_CurrentStateGame = StateGame.GamePlay;
-    //        currInteractable = null;
-    //    }
-    //}
 
     //public void ResetTrash()
     //{ 

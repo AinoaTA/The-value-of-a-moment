@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 public class ActionObject : MonoBehaviour
 {
     public GameObject OptionsCanvas;
     public Animator anim;
     protected bool showing;
     protected bool done;
-    public virtual void Interaction() { }
-
 
     public virtual void ResetObject()
     {
@@ -16,30 +13,33 @@ public class ActionObject : MonoBehaviour
     }
 
     private void OnMouseEnter()
-    { 
-        print(GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing);
+    {
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)// && !actionEnter)
         {
             showing = true;
             anim.SetBool("Showing", showing);
-            // GameManager.GetManager().interactableManager.LookingAnInteractable(this);
+            GameManager.GetManager().actionObjectManager.LookingAnInteractable(this);
         }
     }
 
+    
     private void OnMouseExit()
     {
-        
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && showing)// && !actionEnter)
+        if (showing)// && !actionEnter)
         {
-            showing = false;
-            anim.SetBool("Showing", showing);
-            //  GameManager.GetManager().interactableManager.LookingAnInteractable(null);
+            ExitCanvas();
+            GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
         }
     }
-
-    private void OnMouseOver()
+    public virtual void Interaction()
     {
-        if (Input.GetKeyDown(KeyCode.E) && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
-            Interaction();
+        ExitCanvas();
     }
+
+    void ExitCanvas()
+    {
+        showing = false;
+        anim.SetBool("Showing", showing);
+    }
+
 }

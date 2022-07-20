@@ -1,7 +1,5 @@
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
@@ -36,7 +34,6 @@ public class CameraController : MonoBehaviour
 
         GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
         GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
-
     }
 
     private void OnDisable()
@@ -91,10 +88,14 @@ public class CameraController : MonoBehaviour
 
     private void CameraPitchDelta(float delta)
     {
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+            return;
         yVal = delta*Time.deltaTime;
     }
     private void CameraYawDelta(float delta)
     {
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+            return;
         xVal = delta * Time.deltaTime;
     }
 }

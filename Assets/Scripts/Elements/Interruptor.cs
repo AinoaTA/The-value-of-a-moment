@@ -17,6 +17,7 @@ public class Interruptor : ActionObject
 
     public override void Interaction()
     {
+        GameManager.GetManager().actionObjectManager.LookingAnInteractable(this);
         TurnLights();
         ChangeText();
     }

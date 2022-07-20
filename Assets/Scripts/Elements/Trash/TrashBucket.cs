@@ -60,4 +60,6 @@ public class TrashBucket : Interactables
     //{
     //    base.HideCanvas();
     //}
+
+    
 }

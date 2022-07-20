@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Regadera : ActionObject
@@ -22,6 +20,7 @@ public class Regadera : ActionObject
     public override void Interaction()
     {
         Grab();
+        GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
     }
 
     public override void ResetObject()

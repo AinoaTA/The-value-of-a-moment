@@ -83,11 +83,9 @@ public class Bed : Interactables
     }
     public void Exit()
     {
-        gameInitialized = false;
-        cam.cullingMask = -1;
-        minigameCanvas.SetActive(false);
-        GameManager.GetManager().StartThirdPersonCamera();
+       
     }
+ 
     
     private void InitTutorial()
     {
@@ -232,6 +230,9 @@ public class Bed : Interactables
     {
         cam.cullingMask = -1;
         base.ExitInteraction();
-
+        gameInitialized = false;
+        cam.cullingMask = -1;
+        minigameCanvas.SetActive(false);
+        GameManager.GetManager().StartThirdPersonCamera();
     }
 }

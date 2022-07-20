@@ -19,6 +19,7 @@ public class Plant : Interactables
     public Regadera regadera;
     private bool tutorialShowed = false;
 
+    IEnumerator routine;
     private void Start()
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
@@ -31,19 +32,22 @@ public class Plant : Interactables
 
     public override void Interaction(int options)
     {
+        if (!regadera.grabbed)
+            return;
         base.Interaction(options);
         switch (options)
         {
             case 1:
-                if (!m_Done && regadera.grabbed)
+                if (!m_Done)
                 {
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     started = true;
                     timer = 0;
+
                     GameManager.GetManager().cameraController.StartInteractCam(6);
-                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     GameManager.GetManager().CanvasManager.UnLock();
 
-                    StartCoroutine(ActivateWaterCan());
+                    StartCoroutine(routine=ActivateWaterCan());
                 }
                 break;
             default:
@@ -58,16 +62,25 @@ public class Plant : Interactables
 
         if(tutorialShowed && waterCan.dragg) m_Tutorial.SetActive(false);
 
-        if (started && Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameManager.GetManager().StartThirdPersonCamera();
-            started = false;
-            waterCan.gameObject.SetActive(false);
-            waterCan.ResetWaterCan();
-            actionEnter = false;
-        }
     }
 
+
+    public override void ExitInteraction()
+    {
+        if (!started)
+            return;
+        if (routine != null)
+            StopCoroutine(routine);
+
+        print("?Hola");
+        GameManager.GetManager().StartThirdPersonCamera();
+        started = false;
+        waterCan.gameObject.SetActive(false);
+        waterCan.ResetWaterCan();
+        actionEnter = false;
+
+        base.ExitInteraction();
+    }
     private void FinishInteraction()
     {
         minigameCanvas.SetActive(false);
