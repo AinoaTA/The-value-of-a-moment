@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class Mobile : Interactables
+public class Mobile : ActionObject
 {
     public bool getMobile;
     public GameObject realMobile;
@@ -16,33 +16,26 @@ public class Mobile : Interactables
     {
         col = GetComponent<BoxCollider>();
     }
-    public override void Interaction(int options)
+    public override void Interaction()
     {
-        switch (options)
+
+        if (!getMobile)
         {
-            case 1:
-                if (!getMobile)
-                {
-                    GetMobile();
-                }
-                break;
-            default:
-                break;
+            GetMobile();
+
         }
     }
 
     private void GetMobile()
     {
         realMobile.SetActive(false);
-        m_Done = getMobile = true;
+        getMobile = true;
         col.enabled = false;
-        //GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
 
     }
 
     private void Update()
     {
-        //Debug.Log("commented input");
         //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
         //{
         //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
@@ -65,9 +58,7 @@ public class Mobile : Interactables
     public void CanvasMultiple(bool val)
     {
         for (int i = 0; i < canvasFunctions.Length; i++)
-        {
             canvasFunctions[i].SetActive(val);
-        }
     }
 
     public void CanvasMobile(bool val)

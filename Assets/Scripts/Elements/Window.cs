@@ -40,7 +40,7 @@ public class Window : Interactables
                     gameInitialized = true;
                     // Inicia minijuego
                     GameManager.GetManager().cameraController.StartInteractCam(4);
-                    GameManager.GetManager().CanvasManager.UnLock();
+                    GameManager.GetManager().canvasController.UnLock();
                   
                 }
                 break;
@@ -52,6 +52,7 @@ public class Window : Interactables
     public override void ExitInteraction()
     {
         gameInitialized = false;
+        GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
 
@@ -147,7 +148,7 @@ public class Window : Interactables
     {
         ExitInteraction();
         CheckDoneTask();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
         GameManager.GetManager().StartThirdPersonCamera();
         minigameCanvas.SetActive(false);
         isOpen = true;

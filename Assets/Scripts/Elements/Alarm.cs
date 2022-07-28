@@ -87,7 +87,7 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         m_DelegateSFX?.Invoke();
-        GameManager.GetManager().SoundController.QuitAllMusic();
+        GameManager.GetManager().soundController.QuitAllMusic();
 
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
@@ -99,11 +99,11 @@ public class Alarm : MonoBehaviour
 
         // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
         GameManager.GetManager().cameraController.StartInteractCam(2);
-        GameManager.GetManager().SoundController.SetMusic();
+        GameManager.GetManager().soundController.SetMusic();
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
-        GameManager.GetManager().PlayerController.PlayerWakeUpPos();
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
+        GameManager.GetManager().playerController.PlayerWakeUpPos();
+        GameManager.GetManager().canvasController.Pointer.SetActive(true);
         m_Alarm = false;
         ResetTime();
         yield return new WaitForSeconds(3f);
@@ -140,7 +140,7 @@ public class Alarm : MonoBehaviour
         CanvasAlarm.SetActive(false);
 
         GameManager.GetManager().gameStateController.ChangeGameState(0);
-        GameManager.GetManager().Autocontrol.RemoveAutoControl(m_Autocontrol);
+        GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
         //GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[m_count], null);
         m_count++;
     }
@@ -158,7 +158,7 @@ public class Alarm : MonoBehaviour
     public void ResetTime()
     {
         m_AlarmON = false;
-        GameManager.GetManager().SoundController.StopSound();
+        GameManager.GetManager().soundController.StopSound();
         m_Timer = 0;
         
     }

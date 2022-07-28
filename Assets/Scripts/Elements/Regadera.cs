@@ -11,9 +11,8 @@ public class Regadera : ActionObject
         {
             this.gameObject.SetActive(false);
             waterCan.tengoRegadera = true;
-            GameManager.GetManager().WaterCanGrabbed = true;
+            GameManager.GetManager().waterCanGrabbed = true;
             grabbed = true;
-           // GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
         }
     }
 

@@ -21,12 +21,6 @@ public class Interactables : MonoBehaviour
 
     private Material[] m_Material;
 
-    //#region enables
-    //private void OnDisable()
-    //{
-    //    GameManager.GetManager().playerInputs._ExitInteraction -= ExitInteraction;
-    //}
-    //#endregion
     public virtual bool GetDone() { return m_Done; }
 
     public virtual void Interaction(int optionNumber)
@@ -39,7 +33,7 @@ public class Interactables : MonoBehaviour
     {
         actionEnter = false;
         SetCanvasValue(false);
-        print("?");
+        print("exit interaction");
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
     [HideInInspector] public bool showing = false;

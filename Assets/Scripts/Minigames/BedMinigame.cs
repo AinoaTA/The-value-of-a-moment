@@ -47,7 +47,7 @@ public class BedMinigame : MonoBehaviour
         yield return new WaitForSeconds(1f);
         //GameManager.GetManager().Bed.BedDone();
         // GameManager.GetManager().CanvasManager.DesctiveBedCanvas();
-        GameManager.GetManager().Autocontrol.AddAutoControl(ValueConfident);
+        GameManager.GetManager().autocontrol.AddAutoControl(ValueConfident);
         GameManager.GetManager().gameStateController.ChangeGameState(1);
         m_GameActive = false;
         ResetMinigame();

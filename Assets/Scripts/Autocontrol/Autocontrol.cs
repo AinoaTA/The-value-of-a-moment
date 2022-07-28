@@ -26,7 +26,7 @@ public class Autocontrol : MonoBehaviour
     private void Start()
     {
         m_currentValue = 10;
-        GameManager.GetManager().Autocontrol = this;
+        GameManager.GetManager().autocontrol = this;
         renderTextureResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
         renderTexture = new RenderTexture(renderTextureResolution.x, renderTextureResolution.y, 32);
         particlesCamera.targetTexture = renderTexture;
@@ -91,20 +91,20 @@ public class Autocontrol : MonoBehaviour
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
           
-            GameManager.GetManager().SoundController.ChangeMusicMood(0);
+            GameManager.GetManager().soundController.ChangeMusicMood(0);
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
-            GameManager.GetManager().SoundController.ChangeMusicMood(1);
+            GameManager.GetManager().soundController.ChangeMusicMood(1);
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
 
-            GameManager.GetManager().SoundController.ChangeMusicMood(2);
+            GameManager.GetManager().soundController.ChangeMusicMood(2);
 
         }
         else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)

@@ -19,7 +19,7 @@ public class VR : Interactables
                     //    m_Counter = 0;
 
                     //GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-                    GameManager.GetManager().Autocontrol.AddAutoControl(3);
+                    GameManager.GetManager().autocontrol.AddAutoControl(3);
                     m_Counter++;
 
                     m_Done = true;
@@ -34,5 +34,4 @@ public class VR : Interactables
     {
         m_Done = false;
     }
-
 }

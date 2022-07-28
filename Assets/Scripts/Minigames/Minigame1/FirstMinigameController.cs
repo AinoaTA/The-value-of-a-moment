@@ -16,23 +16,23 @@ public class FirstMinigameController : MonoBehaviour
 
     void Start()
     {
-        GameManager.GetManager().ProgramMinigame = this;
+        GameManager.GetManager().programMinigame = this;
     }
 
     private IEnumerator GameFinished()
     {
         GameManager.GetManager().dayNightCycle.TaskDone();
         //CheckDoneTask();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_Autocontrol);
+        GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
         m_Solved = true;
         m_started = false;
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().CanvasManager.FinishMiniGame();
+        GameManager.GetManager().canvasController.FinishMiniGame();
     }
 
     public void QuitMiniGame()
     {
-        GameManager.GetManager().CanvasManager.FinishMiniGame();
+        GameManager.GetManager().canvasController.FinishMiniGame();
     }
 
 

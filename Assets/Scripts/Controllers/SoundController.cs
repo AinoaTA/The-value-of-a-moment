@@ -19,7 +19,7 @@ public class SoundController : MonoBehaviour
 
     void Awake()
     {
-        GameManager.GetManager().SoundController = this;
+        GameManager.GetManager().soundController = this;
         introLoop.volume = 0;
     }
 
@@ -69,7 +69,7 @@ public class SoundController : MonoBehaviour
         if (currIndex > 0)
         {
             currIndex = 5;
-            GameManager.GetManager().Autocontrol.UpdateAutcontrol();
+            GameManager.GetManager().autocontrol.UpdateAutcontrol();
         }
         else
             StartCoroutine(StartSaddest());

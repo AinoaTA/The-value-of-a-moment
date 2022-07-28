@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class InventoryTrash : MonoBehaviour
+public class InventoryTrashUI : MonoBehaviour
 {
     public TMP_Text dirtyClothesCounter;
     public TMP_Text trashCounter;

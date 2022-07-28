@@ -45,7 +45,7 @@ public class Plant : Interactables
                     timer = 0;
 
                     GameManager.GetManager().cameraController.StartInteractCam(6);
-                    GameManager.GetManager().CanvasManager.UnLock();
+                    GameManager.GetManager().canvasController.UnLock();
 
                     StartCoroutine(routine=ActivateWaterCan());
                     print("enter");
@@ -88,7 +88,7 @@ public class Plant : Interactables
         waterCan.GrowUpParticle.Play();
         waterCan.gameObject.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
         waterCan.dragg = false;

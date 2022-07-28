@@ -2,16 +2,11 @@ using UnityEngine;
 
 public class TrashBucket : Interactables
 {
-    public enum TypeBucket { CLOTHES, TRASH }
-    public TypeBucket type = TypeBucket.TRASH;
+    [SerializeField] private enum TypeBucket { CLOTHES, TRASH }
+    [SerializeField] private TypeBucket type = TypeBucket.TRASH;
 
-    private int numberTrash;
-    public int maxTras = 5;
-
-    private void Start()
-    {
-        //GameManager.GetManager().bucket = this;
-    }
+    private int currCapacity;
+    [SerializeField]private int maxCapacity = 5;
 
     public override void Interaction(int optionNumber)
     {
@@ -20,11 +15,11 @@ public class TrashBucket : Interactables
             case 1:
                 if (type == TypeBucket.CLOTHES)
                 {
-                    //GameManager.GetManager().InventoryTrash.RemoveDirtyClothes(this);
+                    GameManager.GetManager().trashInventory.RemoveDirtyClothes(this);
                 }
                 else if (type == TypeBucket.TRASH)
                 {
-                    //GameManager.GetManager().InventoryTrash.RemoveTrash();
+                    GameManager.GetManager().trashInventory.RemoveTrash();
                 }
                 break;
             default:
@@ -34,32 +29,17 @@ public class TrashBucket : Interactables
 
     public void SomethingCleaned()
     {
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
-        numberTrash++;
-        if (numberTrash >= maxTras)
+        GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
+        currCapacity++;
+        if (currCapacity >= maxCapacity)
         {
             GameManager.GetManager().dayNightCycle.TaskDone();
             CheckDoneTask();
         }
     }
 
-    //public override void ShowCanvas()
-    //{
-    //    //if (type == TypeBucket.CLOTHES && GameManager.GetManager().InventoryTrash.CurrentDirtyClothes() <= 0)
-    //    //    return;
-    //    //else if (type == TypeBucket.TRASH && GameManager.GetManager().InventoryTrash.CurrentTrash() <= 0)
-    //    //    return;
-
-    //    base.ShowCanvas();
-    //}
     public override void ResetInteractable()
     {
-        numberTrash = 0;
+        currCapacity = 0;
     }
-    //public override void HideCanvas()
-    //{
-    //    base.HideCanvas();
-    //}
-
-    
 }

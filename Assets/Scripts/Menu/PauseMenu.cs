@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        GameManager.GetManager().CanvasManager.UnLock();
+        GameManager.GetManager().canvasController.UnLock();
         virtualCamera3D.enabled = false;
         Time.timeScale = 0;
         pauseCanvas.SetActive(true);
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         virtualCamera3D.enabled = true;
         Time.timeScale = 1;
-        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().canvasController.Lock();
         pauseCanvas.SetActive(false);
         paused = false;
     }
