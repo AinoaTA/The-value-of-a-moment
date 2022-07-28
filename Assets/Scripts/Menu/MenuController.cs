@@ -16,7 +16,6 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         Screen.fullScreen = true;
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         StartCoroutine(routine = IcreaseAudioCo());
     }
@@ -113,6 +112,5 @@ public class MenuController : MonoBehaviour
 
         canvas.interactable = false;
         canvas.blocksRaycasts = false;
-
     }
 }

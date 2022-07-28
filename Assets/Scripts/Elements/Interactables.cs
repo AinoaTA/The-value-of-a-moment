@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Interactables : MonoBehaviour
 {
-    [Header("Interactable Options")]
-    public int options = 1;
-    public bool m_Done;
-    public VoiceOff[] m_PhrasesVoiceOff;
-    public VoiceOff[] m_HelpPhrasesVoiceOff;
-    public string[] m_AnswersToVoiceOff;
-    public string[] m_InteractPhrases;
-    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
+    [Header("Data")]
+    public string nameInteractable;
+    private int cameraID;
 
-    [Header("Calendar extra")]
-    public float m_ExtraAutoControlCalendar;
-    public TaskType taskAssociated;
+    [Header("Options")]
+    public int totalOptions = 1;
+    public bool m_Done;
+    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
+    public bool hasDependencies, hasLeastOne;
+    //[Header("Calendar extra")]
+    //public float m_ExtraAutoControlCalendar;
+    //public TaskType taskAssociated;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
@@ -22,82 +22,80 @@ public class Interactables : MonoBehaviour
     private Material[] m_Material;
 
     public virtual bool GetDone() { return m_Done; }
-    public virtual VoiceOff[] GetPhrasesVoiceOff() { return m_HelpPhrasesVoiceOff; }
-    public virtual void Interaction(int optionNumber) {  }
-    public virtual void ExitInteraction() { }
-    public bool showing = false;
 
-    private void Update()
+    public virtual void Interaction(int optionNumber)
     {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.Init)
-            HideCanvas();
+        actionEnter = true;
+        SetCanvasValue(false);
     }
+
+    public virtual void ExitInteraction()
+    {
+        actionEnter = false;
+        SetCanvasValue(false);
+        print("exit interaction");
+        GameManager.GetManager().interactableManager.LookingAnInteractable(null);
+    }
+    [HideInInspector] public bool showing = false;
+    protected bool actionEnter;
+
+    //private void Update()
+    //{
+    //    SetCanvasValue(false);
+    //}
 
     private void Start()
     {
-        if (gameObject.GetComponent<Renderer>() != null)
-        {
-            m_Material = gameObject.GetComponent<Renderer>().materials;
-        }
-    }
-
-    public virtual void ShowCanvas()
-    {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && !showing)
-        {
-            showing = true;
-            anim.SetBool("Showing", showing);
-          //  anim.SetTrigger("Show");
-        }
-    }
-
-    public virtual void HideCanvas()
-    {
-        if (GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay && showing)
-        {
-            showing = false;
-            anim.SetBool("Showing", showing);
-            //  anim.SetTrigger("Hide");
-        }
+        //GameManager.GetManager().playerInputs._ExitInteraction += ExitInteraction;
+        cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
     }
 
     public virtual void ResetInteractable()
     {
         m_Done = false;
+        actionEnter = false;
+        SetCanvasValue(false);
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        //if(m_Material != null && m_Material.Length > 0)
-        //{
-        //    foreach (var material in this.gameObject.GetComponent<Renderer>().materials)
-        //    {
-        //        // material.color = Color.red;
-        //    }
-        //}
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !m_Done)
+        {
+            if (GetComponent<Plant>())
+                if (!GetComponent<Plant>().regadera.grabbed)
+                    return;
+           
+            showing = true;
+            anim.SetBool("Showing", showing);
+            GameManager.GetManager().interactableManager.LookingAnInteractable(this);
+        }
     }
 
     private void OnMouseExit()
     {
-        if (m_Material != null && m_Material.Length > 0)
+        if (showing && !actionEnter && !m_Done)
         {
-            for (int i = 0; i < m_Material.Length; i++)
-            {
-                // TODO: need to recover the m_Material[i].color as such
-                // this.gameObject.GetComponent<Renderer>().materials[i].color = Color.black;
-            }
+            print("prr2");
+            showing = false;
+            anim.SetBool("Showing", showing);
+            GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         }
+    }
+
+    public void SetCanvasValue(bool showing_)
+    {
+        anim.SetBool("Showing", showing_);
     }
 
     public void CheckDoneTask()
     {
-        if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
-        {
-            if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
-            {
-                taskAssociated.Done();
-                GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
-            }
-        }
+        //if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
+        //{
+        //    if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+        //    {
+        //        taskAssociated.Done();
+        //        GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
+        //    }
+        //}
     }
 }

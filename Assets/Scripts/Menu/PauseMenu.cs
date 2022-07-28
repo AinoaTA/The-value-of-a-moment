@@ -16,21 +16,21 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!paused && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay
-            && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
-        {
-            PauseGame();
-        }
+        //if (!paused && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay
+        //    && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
+        //{
+        //    PauseGame();
+        //}
 
-        if(paused && Input.GetKeyDown(KeyCode.P))
-        {
-            ResumeGame();
-        }
+        //if(paused && Input.GetKeyDown(KeyCode.P))
+        //{
+        //    ResumeGame();
+        //}
     }
 
     public void PauseGame()
     {
-        GameManager.GetManager().CanvasManager.UnLock();
+        GameManager.GetManager().canvasController.UnLock();
         virtualCamera3D.enabled = false;
         Time.timeScale = 0;
         pauseCanvas.SetActive(true);
@@ -41,14 +41,14 @@ public class PauseMenu : MonoBehaviour
     {
         virtualCamera3D.enabled = true;
         Time.timeScale = 1;
-        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().canvasController.Lock();
         pauseCanvas.SetActive(false);
         paused = false;
     }
 
     public void QuitGame()
     {
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+        GameManager.GetManager().gameStateController.ChangeGameState(0);
         Time.timeScale = 1;
         GameManager.GetManager().sceneLoader.LoadLevel(0);
         //Application.Quit();

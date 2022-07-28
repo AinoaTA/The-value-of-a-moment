@@ -13,13 +13,12 @@ public class CanvasController : MonoBehaviour
 
     public GameObject Pointer;
 
-    public bool m_activated;
+    [SerializeField]private bool m_activated=false;
     private void Start()
     {
-        GameManager.GetManager().CanvasManager = this;
+        GameManager.GetManager().canvasController = this;
         Lock();
         Debug.Log("there is a Lock() commented here");
-        m_activated = false;
         Pointer.SetActive(false);
     }
     public void FadeInComputer()
@@ -31,18 +30,15 @@ public class CanvasController : MonoBehaviour
     public void ComputerScreenOut()
     {
         FirstMinigameCanvas.SetActive(false);
-        // FirstMinigameCanvas.GetComponent<FirstMinigameController>().re
-        // GameManager.GetManager().ProgramMinigame.
         GameManager.GetManager().StartThirdPersonCamera();
-        m_activated = false;
         CloseWindow();
     }
     public void ComputerScreenIn()
     {
-        GameManager.GetManager().PlayerController.SetInteractable("Computer");
-        GameManager.GetManager().CanvasManager.UnLock();
+        GameManager.GetManager().cameraController.StartInteractCam(5);
+        GameManager.GetManager().canvasController.UnLock();
        // GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+       // GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
         StartCoroutine(DelayFadeComputer());
 
@@ -55,14 +51,14 @@ public class CanvasController : MonoBehaviour
 
         //si existe notificacion...
         yield return new WaitForSeconds(0.4f);
-        if (GameManager.GetManager().NotificationController.m_CurrentNotRead)
+        if (GameManager.GetManager().notificationController.m_CurrentNotRead)
             NotificationMessage.SetActive(true);
     }
 
     public void CloseWindow()
     {
         m_activated = false;
-        GameManager.GetManager().CanvasManager.Lock();
+        GameManager.GetManager().canvasController.Lock();
         StartCoroutine(DelayFadeClose());
     }
 
@@ -99,10 +95,10 @@ public class CanvasController : MonoBehaviour
 
     public void StartMinigame()
     {
-        if (!GameManager.GetManager().ProgramMinigame.GetSolved())
+        if (!GameManager.GetManager().programMinigame.GetSolved())
         {
-            GameManager.GetManager().ProgramMinigame.m_started = true;
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+            GameManager.GetManager().programMinigame.m_started = true;
+           // GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
             FirstMinigameCanvas.SetActive(true);
         }
     }

@@ -1,41 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Interruptor : Interactables
+public class Interruptor : ActionObject
 {
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
     private bool isLightOn = false;
-    public int minLight=6000, maxLight=12000;
+    public int minLight = 6000, maxLight = 12000;
+
     private void Start()
     {
-        // Reset values
         textDisplay.text = "E Encender";
         foreach (var light in lights.GetComponentsInChildren<Light>())
-        {
-             light.intensity = minLight;
-        }
-
+            light.intensity = minLight;
     }
 
-    public override void Interaction(int options)
+    public override void Interaction()
     {
-        switch (options)
-        {
-            case 1:
-                TurnLights();
-                ChangeText();
-                break;
-        }
+        GameManager.GetManager().actionObjectManager.LookingAnInteractable(this);
+        TurnLights();
+        ChangeText();
+    }
+
+    public override void ResetObject()
+    {
+        base.ResetObject();
     }
 
     private void TurnLights()
     {
         foreach (var light in lights.GetComponentsInChildren<Light>())
         {
-            if(isLightOn) light.intensity = minLight;
+            if (isLightOn) light.intensity = minLight;
             else light.intensity = maxLight;
         }
         isLightOn = !isLightOn;
@@ -43,7 +39,7 @@ public class Interruptor : Interactables
 
     private void ChangeText()
     {
-        if(isLightOn) 
+        if (isLightOn)
         {
             textDisplay.text = "E Apagar";
         }

@@ -23,45 +23,71 @@ public class Alarm : MonoBehaviour
 
     private void Start()
     {
-        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
-        GameManager.GetManager().Alarm = this;
+        GameManager.GetManager().cameraController.StartInteractCam(1);
+        //GameManager.GetManager().Alarm = this;
         CanvasAlarm.SetActive(false);
-        StartCoroutine(StartDay());
+        StartCoroutine(StartDayDelay());
+
+        GameManager.GetManager().playerInputs._FirstInteraction += StartDay;
+        GameManager.GetManager().playerInputs._SecondInteraction += BackDay;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._FirstInteraction -= StartDay;
+        GameManager.GetManager().playerInputs._SecondInteraction -= BackDay;
     }
 
     private void Update()
     {
+         
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
         {
-            ResetTime();
-            StartCoroutine(NormalWakeUp());
+            StartDay();
         }
 #endif
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
-
+         
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
 
-        if (m_AlarmON && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.Init)
+        //if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
+        //{
+        //    Debug.Log("commented input");
+        //    //if (Input.GetKeyDown(KeyCode.E))
+        //    //{
+        //    //   
+        //    //}
+        //    //else if (Input.GetKeyDown(KeyCode.Q))
+        //    //{
+        //    //    StillSleeping();
+        //    //}
+        //}
+    }
+
+    private void StartDay()
+    {
+        if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ResetTime();
-                StartCoroutine(NormalWakeUp());
-            }
-            else if (Input.GetKeyDown(KeyCode.Q))
-            {
-                StillSleeping();
-            }
+            ResetTime();
+            StartCoroutine(NormalWakeUp());
+        }
+    }
+
+    private void BackDay()
+    {
+        if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
+        {
+            StillSleeping();
         }
     }
 
     private void StartAlarm()
     {
         m_DelegateSFX?.Invoke();
-        GameManager.GetManager().SoundController.QuitAllMusic();
+        GameManager.GetManager().soundController.QuitAllMusic();
 
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
@@ -70,24 +96,25 @@ public class Alarm : MonoBehaviour
     }
     public IEnumerator NormalWakeUp()
     {
-        
-        GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
-        GameManager.GetManager().SoundController.SetMusic();
+
+        // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
+        GameManager.GetManager().cameraController.StartInteractCam(2);
+        GameManager.GetManager().soundController.SetMusic();
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
-        GameManager.GetManager().PlayerController.PlayerWakeUpPos();
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
+        GameManager.GetManager().playerController.PlayerWakeUpPos();
+        GameManager.GetManager().canvasController.Pointer.SetActive(true);
         m_Alarm = false;
         ResetTime();
         yield return new WaitForSeconds(3f);
         GameManager.GetManager().StartThirdPersonCamera();
 
-        if (!temp) 
+        if (!temp)
         {
-            if (controlPosponer == 0)
-                StartCoroutine(WakeUpDialogue());
-            else
-                StartCoroutine(SecondWakeUpDialogue());
+            //if (controlPosponer == 0)
+            //    StartCoroutine(WakeUpDialogue());
+            //else
+            //    StartCoroutine(SecondWakeUpDialogue());
         }
         yield return null;
     }
@@ -96,10 +123,10 @@ public class Alarm : MonoBehaviour
 
     public void StillSleeping()
     {
-        if (controlPosponer == 0)
-            StartCoroutine(PosponerDialogue());
-        else
-            StartCoroutine(SecondPosponerDialogue());
+        //if (controlPosponer == 0)
+        //    StartCoroutine(PosponerDialogue());
+        //else
+        //    StartCoroutine(SecondPosponerDialogue());
 
         controlPosponer++;
 
@@ -112,8 +139,8 @@ public class Alarm : MonoBehaviour
         ResetTime();
         CanvasAlarm.SetActive(false);
 
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
-        GameManager.GetManager().Autocontrol.RemoveAutoControl(m_Autocontrol);
+        GameManager.GetManager().gameStateController.ChangeGameState(0);
+        GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
         //GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[m_count], null);
         m_count++;
     }
@@ -129,73 +156,74 @@ public class Alarm : MonoBehaviour
     }
 
     public void ResetTime()
-    {   
-        GameManager.GetManager().SoundController.StopSound();
-        m_Timer = 0;
+    {
         m_AlarmON = false;
+        GameManager.GetManager().soundController.StopSound();
+        m_Timer = 0;
+        
     }
 
-    private IEnumerator StartDay()
+    private IEnumerator StartDayDelay()
     {
         yield return new WaitForSeconds(4);
         int counter = 0;
 
-        GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[counter]);
+        //GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[counter]);
 
         yield return new WaitForSeconds(3);
 
-        GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[counter]);
+        //GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[counter]);
         counter++;
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+        //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
 
-        GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[counter]);
+        //GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[counter]);
         yield return new WaitForSeconds(3f);
-        GameManager.GetManager().Dialogue.StopDialogue();
+        //GameManager.GetManager().Dialogue.StopDialogue();
     }
 
-    private IEnumerator WakeUpDialogue()
-    {
-        yield return new WaitForSeconds(1.5f);
-        GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-        GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[2]);
-        yield return new WaitForSeconds(1.5f);
-        GameManager.GetManager().Dialogue.StopDialogue();
-        temp = true;
+    //private IEnumerator WakeUpDialogue()
+    //{
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
+    //    yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[2]);
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameManager.GetManager().Dialogue.StopDialogue();
+    //    temp = true;
 
-        //temp hint
-        GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
-    }
-    private IEnumerator SecondWakeUpDialogue()
-    {
-        yield return new WaitForSeconds(1.5f);
-        GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-        GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[4]);
-        yield return new WaitForSeconds(1.5f);
-        GameManager.GetManager().Dialogue.StopDialogue();
-        //temp hint
-        GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
-        temp = true;
-    }
+    //    //temp hint
+    //    GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
+    //}
+    //private IEnumerator SecondWakeUpDialogue()
+    //{
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[1]);
+    //    yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[4]);
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameManager.GetManager().Dialogue.StopDialogue();
+    //    //temp hint
+    //    GameManager.GetManager().Window.StartVoiceOffDialogueWindow();
+    //    temp = true;
+    //}
 
-    private IEnumerator PosponerDialogue()
-    {
-        yield return new WaitForSeconds(1);
-        GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[2]);
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-        GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[3]);
-        yield return new WaitForSeconds(1.5f);
-        GameManager.GetManager().Dialogue.StopDialogue();
-    }
+    //private IEnumerator PosponerDialogue()
+    //{
+    //    yield return new WaitForSeconds(1);
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[2]);
+    //    yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[3]);
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameManager.GetManager().Dialogue.StopDialogue();
+    //}
 
-    private IEnumerator SecondPosponerDialogue()
-    {
-        yield return new WaitForSeconds(1);
-        GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[4]);
-        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-        GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[5]);
-        yield return new WaitForSeconds(1.5f);
-        GameManager.GetManager().Dialogue.StopDialogue();
-    }
+    //private IEnumerator SecondPosponerDialogue()
+    //{
+    //    yield return new WaitForSeconds(1);
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_WakeUpVoice[4]);
+    //    yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //    GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[5]);
+    //    yield return new WaitForSeconds(1.5f);
+    //    GameManager.GetManager().Dialogue.StopDialogue();
+    //}
 }

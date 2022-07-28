@@ -19,11 +19,12 @@ public class Plant : Interactables
     public Regadera regadera;
     private bool tutorialShowed = false;
 
+    IEnumerator routine;
     private void Start()
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
-        GameManager.GetManager().Plants.Add(this);
+        //GameManager.GetManager().Plants.Add(this);
 
         if(waterCan != null) waterCan.gameObject.SetActive(false);
             m_process[currProcess].SetActive(true);
@@ -31,18 +32,23 @@ public class Plant : Interactables
 
     public override void Interaction(int options)
     {
+        if (!regadera.grabbed)
+            return;
+        base.Interaction(options);
         switch (options)
         {
             case 1:
-                if (!m_Done && regadera.grabbed)
+                if (!m_Done)
                 {
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     started = true;
                     timer = 0;
-                    GameManager.GetManager().PlayerController.SetInteractable("Plant");
-                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                    GameManager.GetManager().CanvasManager.UnLock();
 
-                    StartCoroutine(ActivateWaterCan());
+                    GameManager.GetManager().cameraController.StartInteractCam(6);
+                    GameManager.GetManager().canvasController.UnLock();
+
+                    StartCoroutine(routine=ActivateWaterCan());
+                    print("enter");
                 }
                 break;
             default:
@@ -56,38 +62,50 @@ public class Plant : Interactables
             InitTutorial();
 
         if(tutorialShowed && waterCan.dragg) m_Tutorial.SetActive(false);
-
-        if (started && Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameManager.GetManager().StartThirdPersonCamera();
-            started = false;
-            waterCan.gameObject.SetActive(false);
-            waterCan.ResetWaterCan();
-        }
     }
 
+
+    public override void ExitInteraction()
+    {
+        print("exit " + started);
+        if (!started)
+            return;
+        if (routine != null)
+            StopCoroutine(routine);
+
+        print("?Hola");
+        GameManager.GetManager().StartThirdPersonCamera();
+        started = false;
+        waterCan.gameObject.SetActive(false);
+        waterCan.ResetWaterCan();
+        actionEnter = false;
+
+        base.ExitInteraction();
+    }
     private void FinishInteraction()
     {
         minigameCanvas.SetActive(false);
         waterCan.GrowUpParticle.Play();
         waterCan.gameObject.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
         m_Done = true;
         started = false;
         waterCan.dragg = false;
         CheckDoneTask();
         GameManager.GetManager().dayNightCycle.TaskDone();
         waterCan.gameObject.SetActive(false);
+        actionEnter = false;
     }
 
     public override void ResetInteractable()
     {
         base.ResetInteractable();
-        regadera.ResetInteractable();
+        regadera.ResetObject();
         waterCan.ResetWaterCan();
         timer = 0;
         started = false;
+
     }
 
     public void NextDay()

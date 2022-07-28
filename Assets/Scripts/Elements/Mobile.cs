@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class Mobile : Interactables
+public class Mobile : ActionObject
 {
     public bool getMobile;
     public GameObject realMobile;
@@ -16,57 +16,49 @@ public class Mobile : Interactables
     {
         col = GetComponent<BoxCollider>();
     }
-    public override void Interaction(int options)
+    public override void Interaction()
     {
-        switch (options)
+
+        if (!getMobile)
         {
-            case 1:
-                if (!getMobile)
-                {
-                    GetMobile();
-                }
-                break;
-            default:
-                break;
+            GetMobile();
+
         }
     }
 
     private void GetMobile()
     {
         realMobile.SetActive(false);
-        m_Done = getMobile = true;
+        getMobile = true;
         col.enabled = false;
-        //GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
 
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
-        {
-            if (mobileCanvas.alpha == 0 && GameManager.GetManager().m_CurrentStateGame == GameManager.StateGame.GamePlay)
-            {
-                GameManager.GetManager().ChangeGameState(GameManager.StateGame.MiniGame);
-                GameManager.GetManager().CanvasManager.UnLock();
-                CanvasMobile(true);
-            }
-            else
-            {
-                //  GameManager.GetManager().StartThirdPersonCamera();
-                GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
-                GameManager.GetManager().CanvasManager.Lock();
-                CanvasMobile(false);
-                CanvasMultiple(false);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
+        //{
+        //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
+        //    {
+        //        GameManager.GetManager().gameStateController.ChangeGameState(2);
+        //        GameManager.GetManager().CanvasManager.UnLock();
+        //        CanvasMobile(true);
+        //    }
+        //    else
+        //    {
+        //        //  GameManager.GetManager().StartThirdPersonCamera();
+        //        GameManager.GetManager().gameStateController.ChangeGameState(1);
+        //        GameManager.GetManager().CanvasManager.Lock();
+        //        CanvasMobile(false);
+        //        CanvasMultiple(false);
+        //    }
+        //}
     }
 
     public void CanvasMultiple(bool val)
     {
         for (int i = 0; i < canvasFunctions.Length; i++)
-        {
             canvasFunctions[i].SetActive(val);
-        }
     }
 
     public void CanvasMobile(bool val)

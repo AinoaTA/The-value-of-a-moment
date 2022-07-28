@@ -10,19 +10,20 @@ public class Mirror : Interactables
 
     private void Start()
     {
-        GameManager.GetManager().Mirror = this;
+       // GameManager.GetManager().Mirror = this;
     }
 
     public override void Interaction(int options)
     {
+        base.Interaction(options);
         switch (options)
         {
             case 1:
                 if (!m_Done)
                 {
                     m_Done = true;
-                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
-                    GameManager.GetManager().PlayerController.SetInteractable("Mirror");
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
+                    GameManager.GetManager().cameraController.StartInteractCam(7);
 
                     StartCoroutine(LookUp());
                     //if (m_MirrorInteractPhrases.Length > 0)
@@ -41,50 +42,61 @@ public class Mirror : Interactables
         }
     }
 
+
+    //private void OnMouseDown()
+    //{
+    //    if (!actionEnter)
+    //    {
+    //        SetCanvasValue(false);
+    //        actionEnter = true;
+    //        Interaction(1);
+    //    }
+    //}
+
     private IEnumerator LookUp()
     {
         yield return new WaitForSeconds(1);
-        if (GameManager.GetManager().Autocontrol.m_Slider.value <= 0.3f)
+        if (GameManager.GetManager().autocontrol.m_Slider.value <= 0.3f)
         {
-            GameManager.GetManager().Dialogue.SetDialogue(bad1[counterbad1]);
+          //  GameManager.GetManager().Dialogue.SetDialogue(bad1[counterbad1]);
             counterbad1++;
             if (counterbad1 >= bad1.Length)
                 counterbad1 = 0;
-            GameManager.GetManager().PlayerController.SadMoment();
-            GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
+            GameManager.GetManager().playerController.SadMoment();
+            GameManager.GetManager().autocontrol.RemoveAutoControl(5);
         }
-        else if (GameManager.GetManager().Autocontrol.m_Slider.value > 0.3f && GameManager.GetManager().Autocontrol.m_Slider.value <= 0.5f)
+        else if (GameManager.GetManager().autocontrol.m_Slider.value > 0.3f && GameManager.GetManager().autocontrol.m_Slider.value <= 0.5f)
         {
          
-            GameManager.GetManager().Dialogue.SetDialogue(lessbad[counterless]);
+            //GameManager.GetManager().Dialogue.SetDialogue(lessbad[counterless]);
             counterless++;
             if (counterless >= lessbad.Length)
                 counterless = 0;
-            GameManager.GetManager().PlayerController.SadMoment();
-            GameManager.GetManager().Autocontrol.RemoveAutoControl(2);
+            GameManager.GetManager().playerController.SadMoment();
+            GameManager.GetManager().autocontrol.RemoveAutoControl(2);
         }
-        else if (GameManager.GetManager().Autocontrol.m_Slider.value > 0.5f && GameManager.GetManager().Autocontrol.m_Slider.value <= 0.8f)
+        else if (GameManager.GetManager().autocontrol.m_Slider.value > 0.5f && GameManager.GetManager().autocontrol.m_Slider.value <= 0.8f)
         {
-            GameManager.GetManager().Dialogue.SetDialogue(normal[counternormal]);
+           // GameManager.GetManager().Dialogue.SetDialogue(normal[counternormal]);
             counternormal++;
             if (counternormal >= normal.Length)
                 counternormal = 0;
-            GameManager.GetManager().PlayerController.HappyMoment();
-            GameManager.GetManager().Autocontrol.AddAutoControl(2);
+            GameManager.GetManager().playerController.HappyMoment();
+            GameManager.GetManager().autocontrol.AddAutoControl(2);
         }
-        else if (GameManager.GetManager().Autocontrol.m_Slider.value > 0.8f)
+        else if (GameManager.GetManager().autocontrol.m_Slider.value > 0.8f)
         {
-            GameManager.GetManager().Dialogue.SetDialogue(good[countergood]);
+           // GameManager.GetManager().Dialogue.SetDialogue(good[countergood]);
             countergood++;
             if (countergood >= good.Length)
                 countergood = 0;
 
-            GameManager.GetManager().PlayerController.HappyMoment();
-            GameManager.GetManager().Autocontrol.AddAutoControl(2);
+            GameManager.GetManager().playerController.HappyMoment();
+            GameManager.GetManager().autocontrol.AddAutoControl(2);
         }
 
         yield return new WaitForSeconds(2);
-        GameManager.GetManager().Dialogue.StopDialogue();
+     //   GameManager.GetManager().Dialogue.StopDialogue();
         GameManager.GetManager().StartThirdPersonCamera();
     }
 

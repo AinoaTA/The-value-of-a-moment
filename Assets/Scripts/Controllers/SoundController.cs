@@ -17,9 +17,9 @@ public class SoundController : MonoBehaviour
     public AudioClip[] loopMusic;
     private int currIndex = 0;
 
-    void Start()
+    void Awake()
     {
-        GameManager.GetManager().SoundController = this;
+        GameManager.GetManager().soundController = this;
         introLoop.volume = 0;
     }
 
@@ -69,7 +69,7 @@ public class SoundController : MonoBehaviour
         if (currIndex > 0)
         {
             currIndex = 5;
-            GameManager.GetManager().Autocontrol.UpdateAutcontrol();
+            GameManager.GetManager().autocontrol.UpdateAutcontrol();
         }
         else
             StartCoroutine(StartSaddest());
@@ -137,7 +137,6 @@ public class SoundController : MonoBehaviour
                 StartCoroutine(StartSaddest());
             else
             {
-                print(index);
                 StartCoroutine(IcreaseAudioCo(index));
             }
         }

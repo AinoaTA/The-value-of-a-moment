@@ -22,104 +22,27 @@ public class Window : Interactables
     {
         minigameCanvas = m_Tutorial.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
-        GameManager.GetManager().Window = this;
+        //GameManager.GetManager().Window = this;
         minHeight = m_Glass.transform.position.y;
         initPos = m_Glass.transform.position;
     }
-
-    private void Update()
-    {
-        if (gameInitialized)
-        {
-            if (!tutorialShowed)
-                InitTutorial();
-
-            if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-            {
-                minigameCanvas.SetActive(false);
-                gameInitialized = false;
-                GameManager.GetManager().StartThirdPersonCamera();
-            }
-        }
-
-    }
-
-    #region OnMouse Region
-    void OnMouseDown()
-    {
-        zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
-        // offset = World pos - Mouse World pos
-        mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
-    }
-
-    void OnMouseDrag()
-    {
-        if (gameInitialized && !isOpen)
-        {
-            if (tutorialShowed) m_Tutorial.SetActive(false);
-
-            float height = m_Glass.transform.position.y;
-            float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
-
-            if (displacement < minHeight)
-                height = minHeight;
-
-            else if (displacement < maxHeight)
-                height = displacement;
-
-            else if (displacement > maxHeight)
-            {
-                height = maxHeight;
-                m_Done = isOpen = true;
-            }
-            m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
-        }
-    }
-
-    private void OnMouseUp()
-    {
-        if (m_Done)
-            WindowDone();
-    }
-    #endregion
-    private void WindowDone()
-    {
-        CheckDoneTask();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
-        GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().OpenDoor();
-        minigameCanvas.SetActive(false);
-        isOpen = true;
-        m_Done = true;
-        GameManager.GetManager().dayNightCycle.TaskDone();
-        if (!temp)
-        {
-            temp = true;
-            StartCoroutine(GoodInteraction());
-        }
-    }
-
-    private float GetMouseYaxisAsWorldPoint()
-    {
-        Vector3 mousePoint = Input.mousePosition;
-        mousePoint.z = zWorldCoord; // set z coord
-
-        return Camera.main.ScreenToWorldPoint(mousePoint).y;
-    }
-
     #region Inherit Interactable methods
 
-    public override void Interaction(int optionsSelected)
+    public override void Interaction(int options)
     {
-        switch (optionsSelected)
+        base.Interaction(options);
+        switch (options)
         {
             case 1:
                 if (!isOpen)
+                {
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     gameInitialized = true;
-                // Inicia minijuego
-                GameManager.GetManager().PlayerController.SetInteractable("Window");
-                GameManager.GetManager().CanvasManager.UnLock();
-                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                    // Inicia minijuego
+                    GameManager.GetManager().cameraController.StartInteractCam(4);
+                    GameManager.GetManager().canvasController.UnLock();
+                  
+                }
                 break;
             case 2:
                 break;
@@ -129,6 +52,7 @@ public class Window : Interactables
     public override void ExitInteraction()
     {
         gameInitialized = false;
+        GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
 
@@ -163,71 +87,149 @@ public class Window : Interactables
 
     #endregion
 
+    private void Update()
+    {
+        if (gameInitialized)
+        {
+            if (!tutorialShowed)
+                InitTutorial();
+
+            //if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    minigameCanvas.SetActive(false);
+            //    gameInitialized = false;
+            //    GameManager.GetManager().StartThirdPersonCamera();
+            //}
+        }
+    }
+
+    #region OnMouse Region
+    void OnMouseDown()
+    {
+        if (gameInitialized)
+        {
+            zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
+            // offset = World pos - Mouse World pos
+            mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
+        }
+    }
+
+    void OnMouseDrag()
+    {
+        if (gameInitialized && !isOpen)
+        {
+            if (tutorialShowed) m_Tutorial.SetActive(false);
+
+            float height = m_Glass.transform.position.y;
+            float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
+
+            if (displacement < minHeight)
+                height = minHeight;
+
+            else if (displacement < maxHeight)
+                height = displacement;
+
+            else if (displacement > maxHeight)
+            {
+                height = maxHeight;
+                m_Done = isOpen = true;
+            }
+            m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        if (m_Done && gameInitialized)
+            WindowDone();
+    }
+    #endregion
+    private void WindowDone()
+    {
+        ExitInteraction();
+        CheckDoneTask();
+        GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().StartThirdPersonCamera();
+        minigameCanvas.SetActive(false);
+        isOpen = true;
+        m_Done = true;
+        GameManager.GetManager().dayNightCycle.TaskDone();
+    }
+
+    private float GetMouseYaxisAsWorldPoint()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+        mousePoint.z = zWorldCoord; // set z coord
+
+        return Camera.main.ScreenToWorldPoint(mousePoint).y;
+    }
+
+
     #region Dialogues Region
 
-    public void StartVoiceOffDialogueWindow()
-    {
-        StartCoroutine(StartWindows());
-    }
+    //public void StartVoiceOffDialogueWindow()
+    //{
+    //    StartCoroutine(StartWindows());
+    //}
 
-    private IEnumerator StartWindows()
-    {
-        if (m_PhrasesVoiceOff.Length >= 2)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
-            yield return new WaitForSeconds(3);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.StopDialogue();
-        }
-    }
+    //private IEnumerator StartWindows()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 2)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
+    //        yield return new WaitForSeconds(3);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.StopDialogue();
+    //    }
+    //}
 
-    private IEnumerator GoodInteraction()
-    {
-        if (m_PhrasesVoiceOff.Length >= 2)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
-            yield return new WaitForSeconds(1.25f);
-            GameManager.GetManager().Dialogue.StopDialogue();
+    //private IEnumerator GoodInteraction()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 2)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
+    //        yield return new WaitForSeconds(1.25f);
+    //        GameManager.GetManager().Dialogue.StopDialogue();
 
-            StartCoroutine(NextAction());
-        }
-    }
+    //        StartCoroutine(NextAction());
+    //    }
+    //}
 
-    private IEnumerator BadInteraction()
-    {
-        if (m_PhrasesVoiceOff.Length >= 4)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.StopDialogue();
+    //private IEnumerator BadInteraction()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 4)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.StopDialogue();
 
-            StartCoroutine(NextAction());
-        }
-    }
+    //        StartCoroutine(NextAction());
+    //    }
+    //}
 
-    private IEnumerator NextAction()
-    {
-        if (m_PhrasesVoiceOff.Length >= 6)
-        {
-            yield return new WaitForSeconds(2);
-            GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
-            yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            //GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
-            //yield return new WaitForSeconds(2);
-            //GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
-            //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-            GameManager.GetManager().Dialogue.StopDialogue();
-        }
-    }
+    //private IEnumerator NextAction()
+    //{
+    //    if (m_PhrasesVoiceOff.Length >= 6)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
+    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        //GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
+    //        //yield return new WaitForSeconds(2);
+    //        //GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
+    //        //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
+    //        GameManager.GetManager().Dialogue.StopDialogue();
+    //    }
+    //}
     #endregion
 }

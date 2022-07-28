@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public class Trash : Interactables
+public class Trash : ActionObject 
 {
     public enum TrashType { CLOTHES, TRASH }
     public TrashType type = TrashType.TRASH;
@@ -9,49 +8,42 @@ public class Trash : Interactables
     public int maxTras = 5;
     public Transform target;
     private Vector3 initPos;
-    private int numberTrash;
     private float grabbingSpeed = 10f;
     private bool grabbing = false;
-    
+
     private void Start()
     {
         initPos = transform.position;
-        GameManager.GetManager().trashes.Add(this);
     }
 
-    public override void Interaction(int optionNumber)
+    public override void Interaction()
     {
-        switch (optionNumber)
-        {
-            case 1:
-                grabbing = true;
-                break;
-        }
+        grabbing = true;
+        GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
     }
 
     private void Update()
     {
-        if(grabbing)
+        if (grabbing)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
-            if(Vector3.Distance(this.transform.position, target.position) < 0.1f)
+            if (Vector3.Distance(this.transform.position, target.position) < 0.1f)
             {
                 if (type == TrashType.TRASH)
-                    GameManager.GetManager().InventoryTrash.AddTrash(this);
+                    GameManager.GetManager().trashInventory.AddTrash(this);
                 else
-                    GameManager.GetManager().InventoryTrash.AddDirtyClothes(this);
+                    GameManager.GetManager().trashInventory.AddDirtyClothes(this);
 
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }
 
-    public override void ResetInteractable()
+    public void ResetInteractable()
     {
         transform.position = initPos;
         grabbing = false;
-        numberTrash = 0;
-        m_Done = false;
+        done = false;
     }
 }

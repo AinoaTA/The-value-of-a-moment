@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.GetManager().PlayerController = this;
+        GameManager.GetManager().playerController = this;
         anim = this.GetComponent<PlayerAnimations>();
         mov = GetComponent<Mov>();
         character = GetComponent<CharacterController>();
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         //if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
         //{
-            anim.ExitInteractable();
+            //anim.ExitInteractable();
         //}
     }
 

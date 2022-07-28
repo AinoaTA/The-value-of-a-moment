@@ -20,12 +20,12 @@ public class PlayerAnimations : MonoBehaviour
         anim.SetTrigger(interactable);
     }
 
-    public void ExitInteractable()
-    {
-        anim.ResetTrigger("Exit");
-        if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
-        {
-            anim.SetTrigger("Exit");
-        }
-    }
+    //public void ExitInteractable()
+    //{
+    //    anim.ResetTrigger("Exit");
+    //    if (GameManager.GetManager().m_CurrentStateGame != GameManager.StateGame.GamePlay)
+    //    {
+    //        anim.SetTrigger("Exit");
+    //    }
+    //}
 }

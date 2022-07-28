@@ -1,42 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Regadera : Interactables
+public class Regadera : ActionObject
 {
     public WaterCan waterCan;
-    [HideInInspector]public bool grabbed = false;
-
-    private void Start()
-    {
-        GameManager.GetManager().WaterCan = this;
-    }
+    [HideInInspector] public bool grabbed = false;
 
     public void Grab()
     {
-        if(!grabbed)
+        if (!grabbed)
         {
             this.gameObject.SetActive(false);
             waterCan.tengoRegadera = true;
-            GameManager.GetManager().WaterCanGrabbed = true;
+            GameManager.GetManager().waterCanGrabbed = true;
             grabbed = true;
-           // GameManager.GetManager().ChangeGameState(GameManager.StateGame.GamePlay);
         }
     }
 
-    public override void Interaction(int optionsSelected)
+    public override void Interaction()
     {
-        switch (optionsSelected)
-        {
-            case 1:
-                Grab();
-                break;
-            case 2:
-                break;
-        } 
+        Grab();
+        GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
     }
 
-    public override void ResetInteractable()
+    public override void ResetObject()
     {
         grabbed = false;
         waterCan.tengoRegadera = false;

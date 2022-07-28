@@ -41,8 +41,8 @@ public class Grabbing : MonoBehaviour
         {
             leaving = true;
             isObjectGrabbed = false;
-            GameManager.GetManager().PlayerController.ExitInteractable();
-            GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.GamePlay;
+            GameManager.GetManager().playerController.ExitInteractable();
+            GameManager.GetManager().gameStateController.ChangeGameState(1);
         }
 
         if (leaving)
@@ -76,8 +76,8 @@ public class Grabbing : MonoBehaviour
 
     private void GrabObject()
     {
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(false);
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+        GameManager.GetManager().gameStateController.ChangeGameState(2);
+        GameManager.GetManager().canvasController.Pointer.SetActive(false);
         this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
         if (Vector3.Distance(this.transform.position, target.position) < 0.5f)
@@ -90,7 +90,7 @@ public class Grabbing : MonoBehaviour
 
     private void LeaveObject()
     {
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(true);
+        GameManager.GetManager().canvasController.Pointer.SetActive(true);
         this.transform.position = Vector3.MoveTowards(this.transform.position, previousPos, grabbingSpeed * Time.deltaTime);
         this.transform.rotation = previousQuat;
         if (Vector3.Distance(this.transform.position, previousPos) < 0.1f)

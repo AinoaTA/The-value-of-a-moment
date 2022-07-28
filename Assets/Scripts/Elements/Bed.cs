@@ -36,8 +36,8 @@ public class Bed : Interactables
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-        options = 2;
-        GameManager.GetManager().Bed = this;
+        totalOptions = 2;
+        //GameManager.GetManager().Bed = this;
         gameInitialized = false;
 
         initPosDormirText = sleepTextBed.transform.localPosition;
@@ -71,23 +71,7 @@ public class Bed : Interactables
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && gameInitialized)
-        {
-            Debug.Log("Exit");
-            Exit();
-        }
-    }
-    public void Exit()
-    {
-        gameInitialized = false;
-        cam.cullingMask = -1;
-        minigameCanvas.SetActive(false);
-        GameManager.GetManager().StartThirdPersonCamera();
-    }
-    
+    } 
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
@@ -135,13 +119,13 @@ public class Bed : Interactables
         sleepTextBed.transform.localPosition = lastPosDormirText;
         GameManager.GetManager().dayNightCycle.TaskDone();
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().Autocontrol.AddAutoControl(m_MinAutoControl);
+        GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
     }
 
     public void ResetBed()
     {
-        GameManager.GetManager().Alarm.SetAlarmActive();
-        GameManager.GetManager().Alarm.ResetTime();
+        //GameManager.GetManager().Alarm.SetAlarmActive();
+        //GameManager.GetManager().Alarm.ResetTime();
         m_Done = false;
         m_Sheet.SetActive(false);
         badBed.SetActive(true);
@@ -153,24 +137,24 @@ public class Bed : Interactables
 
     public override void Interaction(int options)
     {
+        base.Interaction(options);
         switch (options)
         {
             case 1:
                 if (!m_Done)
                 {
-                    GameManager.GetManager().PlayerController.SetInteractable("Bed");
+                    GameManager.GetManager().cameraController.StartInteractCam(3);
                     gameInitialized = true;
-                    GameManager.GetManager().CanvasManager.UnLock();
-                    GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
+                    GameManager.GetManager().canvasController.UnLock();
+                    GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.MiniGame;
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
                 }
                 break;
             case 2:
-                GameManager.GetManager().CanvasManager.FadeIn();
-                GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
-                GameManager.GetManager().CanvasManager.Lock();
-                GameManager.GetManager().Dialogue.StopDialogue();
+                GameManager.GetManager().canvasController.FadeIn();
+                GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.Init;
+                GameManager.GetManager().canvasController.Lock();
                 
                 StartCoroutine(DelayReset());
                 break;
@@ -189,46 +173,49 @@ public class Bed : Interactables
 
     private IEnumerator DelayReset()
     {
-        GameManager.GetManager().SoundController.QuitAllMusic();
-        GameManager.GetManager().CanvasManager.Pointer.SetActive(false);
+        GameManager.GetManager().soundController.QuitAllMusic();
+        GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
 
-        GameManager.GetManager().PlayerController.SetInteractable("Alarm");
-        GameManager.GetManager().PlayerController.PlayerSleepPos();
-        GameManager.GetManager().Dialogue.StopDialogue();
-        GameManager.GetManager().Window.ResetWindow();
+        GameManager.GetManager().cameraController.StartInteractCam(1);
+        GameManager.GetManager().playerController.PlayerSleepPos();
+        //GameManager.GetManager().Dialogue.StopDialogue();
+        //GameManager.GetManager().Window.ResetWindow();
         GameManager.GetManager().calendarController.GlobalReset();
-        GameManager.GetManager().ProgramMinigame.ResetAllGame();
-        GameManager.GetManager().bucket.ResetInteractable();
-        GameManager.GetManager().Mirror.ResetInteractable();
-        GameManager.GetManager().ResetTrash();
+        GameManager.GetManager().programMinigame.ResetAllGame();
+        //GameManager.GetManager().bucket.ResetInteractable();
+        //GameManager.GetManager().Mirror.ResetInteractable();
+        //GameManager.GetManager().ResetTrash();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
 
-        for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
-        {
-            GameManager.GetManager().trashes[i].gameObject.SetActive(true);
-            GameManager.GetManager().trashes[i].ResetInteractable();
-        }
+        //for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
+        //{
+        //    GameManager.GetManager().trashes[i].gameObject.SetActive(true);
+        //    GameManager.GetManager().trashes[i].ResetInteractable();
+        //}
 
-        for (int i = 0; i < GameManager.GetManager().Plants.Count; i++)
-        {
-            GameManager.GetManager().Plants[i].NextDay();
-            GameManager.GetManager().Plants[i].ResetInteractable();
-        }
+        //for (int i = 0; i < GameManager.GetManager().Plants.Count; i++)
+        //{
+        //    GameManager.GetManager().Plants[i].NextDay();
+        //    GameManager.GetManager().Plants[i].ResetInteractable();
+        //}
         //no borrar hasta que estan tooooooodas las animaciones colocadas aqui.
         Debug.Log("NO FORGET: actions to reset.");
         ResetBed();
         yield return new WaitForSeconds(2);
-        GameManager.GetManager().Autocontrol.AutocontrolSleep();
+        GameManager.GetManager().autocontrol.AutocontrolSleep();
         GameManager.GetManager().dayNightCycle.NewDay();
-        GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
     }
 
     public override void ExitInteraction()
     {
         cam.cullingMask = -1;
         base.ExitInteraction();
-
+        gameInitialized = false;
+        cam.cullingMask = -1;
+        minigameCanvas.SetActive(false);
+        GameManager.GetManager().StartThirdPersonCamera();
     }
 }
