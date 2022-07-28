@@ -48,6 +48,7 @@ public class Plant : Interactables
                     GameManager.GetManager().CanvasManager.UnLock();
 
                     StartCoroutine(routine=ActivateWaterCan());
+                    print("enter");
                 }
                 break;
             default:
@@ -61,12 +62,12 @@ public class Plant : Interactables
             InitTutorial();
 
         if(tutorialShowed && waterCan.dragg) m_Tutorial.SetActive(false);
-
     }
 
 
     public override void ExitInteraction()
     {
+        print("exit " + started);
         if (!started)
             return;
         if (routine != null)
