@@ -5,7 +5,7 @@ public class Computer : Interactables
 {
     [SerializeField]
     private GameObject computerScreen, programScreen,
-        calendarScreen;
+        calendarScreen, calendarMaterialScreen;
 
     public override void Interaction(int options)
     {
@@ -13,7 +13,6 @@ public class Computer : Interactables
         switch (options)
         {
             case 1:
-                print("iu");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
@@ -48,12 +47,14 @@ public class Computer : Interactables
     {
         programScreen.SetActive(false);
         calendarScreen.SetActive(true);
+        calendarMaterialScreen.SetActive(true);
     }
 
     public void ComputerProgram()
     {
         programScreen.SetActive(true);
-        calendarScreen.SetActive(false);
+        calendarScreen.SetActive(false); 
+        calendarMaterialScreen.SetActive(false);
     }
     #endregion
 }
