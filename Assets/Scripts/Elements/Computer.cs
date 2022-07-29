@@ -1,16 +1,21 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Computer : Interactables
 {
+    [SerializeField]
+    private GameObject computerScreen, programScreen,
+        calendarScreen;
+
     public override void Interaction(int options)
     {
-        print("hola");
         base.Interaction(options);
         switch (options)
         {
             case 1:
                 print("iu");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
+                ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
                 break;
         }
@@ -22,4 +27,33 @@ public class Computer : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
+
+    #region (des)-active gameObects
+    public void ComputerON()
+    {
+        computerScreen.SetActive(true);
+        programScreen.SetActive(false);
+        calendarScreen.SetActive(false);
+    }
+
+    public void ComputerOFF()
+    {
+        computerScreen.SetActive(false);
+        programScreen.SetActive(false);
+        calendarScreen.SetActive(false);
+
+    }
+
+    public void ComputerCalendar()
+    {
+        programScreen.SetActive(false);
+        calendarScreen.SetActive(true);
+    }
+
+    public void ComputerProgram()
+    {
+        programScreen.SetActive(true);
+        calendarScreen.SetActive(false);
+    }
+    #endregion
 }

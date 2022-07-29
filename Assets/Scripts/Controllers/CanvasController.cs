@@ -37,11 +37,8 @@ public class CanvasController : MonoBehaviour
     {
         GameManager.GetManager().cameraController.StartInteractCam(5);
         GameManager.GetManager().canvasController.UnLock();
-       // GameManager.GetManager().Autocontrol.ShowAutocontroler(0);
-       // GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.MiniGame;
         m_activated = true;
-        StartCoroutine(DelayFadeComputer());
-
+      //  StartCoroutine(DelayFadeComputer());
     }
     private IEnumerator DelayFadeComputer()
     {
