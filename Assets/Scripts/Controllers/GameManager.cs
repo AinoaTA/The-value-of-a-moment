@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public NotificationController notificationController { get; set; }
     public Autocontrol autocontrol { get; set; }
     public SoundController soundController { get; set; }
-    public FirstMinigameController programMinigame { get; set; }
+    public ProgramMinigameController programMinigame { get; set; }
     public PlayerController playerController { get; set; }
     public MobileController mobile { get; set; }
     public CalendarController calendarController { get; set; }
@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     public InterctableManager interactableManager { get; set; }
     public PlayerHandleInputs playerInputs { get; set; }
     public ActionObjectManager actionObjectManager { get; set; }
+
+    //special references, maybe temproal
+    public Computer computer { get; set; }
 
     private void OnEnable()
     {

@@ -13,7 +13,8 @@ public class CanvasController : MonoBehaviour
 
     public GameObject Pointer;
 
-    [SerializeField]private bool m_activated=false;
+    [SerializeField]public bool activated=false;
+    
     private void Start()
     {
         GameManager.GetManager().canvasController = this;
@@ -37,7 +38,7 @@ public class CanvasController : MonoBehaviour
     {
         GameManager.GetManager().cameraController.StartInteractCam(5);
         GameManager.GetManager().canvasController.UnLock();
-        m_activated = true;
+        activated = true;
       //  StartCoroutine(DelayFadeComputer());
     }
     private IEnumerator DelayFadeComputer()
@@ -54,7 +55,7 @@ public class CanvasController : MonoBehaviour
 
     public void CloseWindow()
     {
-        m_activated = false;
+        activated = false;
         GameManager.GetManager().canvasController.Lock();
         StartCoroutine(DelayFadeClose());
     }
@@ -87,7 +88,7 @@ public class CanvasController : MonoBehaviour
     }
     public bool ScreenActivated()
     {
-        return m_activated;
+        return activated;
     }
 
     public void StartMinigame()

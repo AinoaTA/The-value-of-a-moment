@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-public class FirstMinigameController : MonoBehaviour
+public class ProgramMinigameController : MonoBehaviour
 {
     public List<SolutionPiece> m_AllSolutions = new List<SolutionPiece>();
     public List<PieceMG> m_AllPieces = new List<PieceMG>();

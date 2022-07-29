@@ -24,6 +24,7 @@ public class CalendarController : MonoBehaviour
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
+        GameManager.GetManager().computer.ComputerON();
     }
     public void SaveCalendar()
     {
@@ -67,7 +68,6 @@ public class CalendarController : MonoBehaviour
     {
         return (int)type == (int)time;
     }
-
 
     public void GlobalReset()
     {
