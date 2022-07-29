@@ -75,7 +75,6 @@ public class Interactables : MonoBehaviour
     {
         if (showing && !actionEnter && !m_Done)
         {
-            print("prr2");
             showing = false;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(null);

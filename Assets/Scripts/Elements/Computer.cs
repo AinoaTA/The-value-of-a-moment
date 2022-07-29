@@ -1,16 +1,26 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Computer : Interactables
 {
+    [SerializeField]
+    private GameObject computerScreen, programScreen,
+        /*calendarScreen*/ calendarMaterialScreen;
+
+    private bool anyButtonScreenActive;
+
+    private void Start()
+    {
+        GameManager.GetManager().computer = this;
+    }
     public override void Interaction(int options)
     {
-        print("hola");
         base.Interaction(options);
         switch (options)
         {
             case 1:
-                print("iu");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
+                ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
                 break;
         }
@@ -20,6 +30,52 @@ public class Computer : Interactables
     {
         GameManager.GetManager().canvasController.ComputerScreenOut();
         GameManager.GetManager().StartThirdPersonCamera();
+        calendarMaterialScreen.SetActive(false);
+        computerScreen.SetActive(false);
+        if (anyButtonScreenActive)
+        {
+            GameManager.GetManager().programMinigame.QuitMiniGame();
+            GameManager.GetManager().calendarController.BackCalendar();
+        }
         base.ExitInteraction();
     }
+
+    #region (des)-active gameObects
+    public void ComputerON()
+    {
+        computerScreen.SetActive(true);
+        programScreen.SetActive(false);
+        anyButtonScreenActive = false;
+        // calendarScreen.SetActive(false);
+    }
+
+    public void ComputerOFF()
+    {
+        computerScreen.SetActive(false);
+        programScreen.SetActive(false);
+        // calendarScreen.SetActive(false);
+
+    }
+
+    public void ComputerCalendar()
+    {
+        if (anyButtonScreenActive)
+            return;
+        GameManager.GetManager().calendarController.ShowCalendar();
+        anyButtonScreenActive = true;
+        programScreen.SetActive(false);
+        //  calendarScreen.SetActive(true);
+        calendarMaterialScreen.SetActive(true);
+    }
+
+    public void ComputerProgram()
+    {
+        if (anyButtonScreenActive)
+            return;
+        anyButtonScreenActive = true;
+        programScreen.SetActive(true);
+        //   calendarScreen.SetActive(false); 
+        calendarMaterialScreen.SetActive(false);
+    }
+    #endregion
 }

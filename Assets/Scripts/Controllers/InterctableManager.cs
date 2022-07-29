@@ -47,7 +47,6 @@ public class InterctableManager : MonoBehaviour
     {
         if (currInteractable != null && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.MiniGame)
         {
-            print("entrando");
             currInteractable.ExitInteraction();
         }
     }

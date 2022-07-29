@@ -1,4 +1,5 @@
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -15,6 +16,7 @@ public class CameraController : MonoBehaviour
     public Camera cam { private get; set; }
 
     public CamerasConfigVirtual[] virtualCameras;
+    private bool inTransition;
     [System.Serializable]
     public struct CamerasConfigVirtual
     {
@@ -64,7 +66,7 @@ public class CameraController : MonoBehaviour
                 return virtualCameras[v].ID;
             }
         }
-        Debug.Log("There is not a " + name + " Camera set in CamerasController");
+        Debug.LogWarning("There is not a " + name + " Camera set in CamerasController");
         return 0;
     }
 
@@ -90,12 +92,19 @@ public class CameraController : MonoBehaviour
     {
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
             return;
-        yVal = delta*Time.deltaTime;
+        yVal = delta * Time.deltaTime;
     }
     private void CameraYawDelta(float delta)
     {
         if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
             return;
+
         xVal = delta * Time.deltaTime;
+    }
+    IEnumerator CameraSwitchDelay()
+    {
+        inTransition = true;
+        yield return new WaitForSeconds(1);
+        inTransition = false;
     }
 }
