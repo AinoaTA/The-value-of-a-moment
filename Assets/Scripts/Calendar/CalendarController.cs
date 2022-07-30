@@ -9,10 +9,9 @@ namespace Calendar
         public Dictionary<TaskType, SpaceCalendar> calendarInformation;
         [SerializeField] private List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
         //public List<TaskType> allTask = new List<TaskType>();
-        [SerializeField] private GameObject calendar;
-        [SerializeField] private CanvasGroup modifiedBlock;
+        [SerializeField] private GameObject calendar, warning;
         [SerializeField] private MobileCalendar mobileCalendar;
-        [SerializeField] private bool modified;
+        [HideInInspector] public bool modified;
 
         private void Start()
         {
@@ -21,8 +20,9 @@ namespace Calendar
         }
         public void BackCalendar()
         {
+            if (warning.activeSelf)
+                return;
             calendar.SetActive(false);
-            modifiedBlock.gameObject.SetActive(false);
             GameManager.GetManager().computer.ComputerON();
         }
         public void SaveCalendar()
@@ -30,7 +30,7 @@ namespace Calendar
             if (!modified)
             {
                 modified = true;
-                RevisionCalendar();
+                warning.SetActive(false);
                 for (int a = 0; a < allTimeTable.Count; a++)
                 {
                     for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
@@ -41,20 +41,16 @@ namespace Calendar
                 }
             }
         }
-        public void RevisionCalendar()
-        {
-            modifiedBlock.gameObject.SetActive(true);
-        }
 
         public void ShowCalendar()
         {
             calendar.SetActive(true);
+        }
+
+        public void ShowWarning(bool v)
+        {
             if (!modified)
-            {
-                modifiedBlock.gameObject.SetActive(false);
-            }
-            else
-                RevisionCalendar();
+                warning.SetActive(v);
         }
 
         public bool CheckTimeTaskDone(DayNightCycle.DayState type, SpaceCalendar.SpaceType time)

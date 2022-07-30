@@ -61,8 +61,8 @@ public class Computer : Interactables
     {
         if (anyButtonScreenActive)
             return;
-        GameManager.GetManager().calendarController.ShowCalendar();
         anyButtonScreenActive = true;
+        GameManager.GetManager().calendarController.ShowCalendar();
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(true);
     }

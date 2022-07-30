@@ -5,24 +5,29 @@ namespace Calendar
 {
     public class TaskType : MonoBehaviour
     {
-        [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
-        public Sprite[] colors;
-        public Color enterColor;
-        [HideInInspector] public Image sprite;
-        public Sprite completed;
         public enum Task { Work, Ocio, Basic }
         public Task task;
+
+        [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
+        [SerializeField] private Sprite[] colors;
+        [SerializeField] private Sprite completed;
+        [SerializeField] private Transform content;
+        [SerializeField] private Color enterColor;
+        public Image sprite;
         public string nameTask;
-        private TMP_Text text;
-        public Transform content;
-        Transform parentTransform;
-        bool done;
+
+        [HideInInspector] public bool InAnySpaceCalendar;
+        [HideInInspector] public SpaceCalendar calendar;
 
         public delegate void TaskTypeDelegate(TaskType type);
         public static TaskTypeDelegate taskDelegate;
-        [HideInInspector] public bool InAnySpaceCalendar;
-        [HideInInspector] public SpaceCalendar calendar;
+
+        private TMP_Text text;
+        private Transform parentTransform;
         private Transform oldParent;
+        private bool done;
+        private bool modifiedCalendar => GameManager.GetManager().calendarController.modified;
+
         private void Awake()
         {
             parentTransform = gameObject.transform.parent;
@@ -43,22 +48,29 @@ namespace Calendar
         public void ClicExit()
         {
             if (!done)
-                sprite.color = Color.white;//colors[(int)task];
+                sprite.color = Color.white;
         }
 
         public void SelectTask()
         {
+            if (modifiedCalendar)
+                return;
             oldParent = transform.parent;
             transform.SetParent(GameManager.GetManager().calendarController.TaskMovement);
         }
 
         public void DragTask()
         {
+            if (modifiedCalendar)
+                return;
             transform.position = Input.mousePosition;
         }
 
         public void DropTask()
         {
+            if (modifiedCalendar)
+                return;
+
             if (!InAnySpaceCalendar)
             {
                 transform.SetParent(parentTransform);
@@ -76,7 +88,6 @@ namespace Calendar
 
         public void Done()
         {
-            print("uy");
             sprite.sprite = completed;
         }
         public void ResetTask()

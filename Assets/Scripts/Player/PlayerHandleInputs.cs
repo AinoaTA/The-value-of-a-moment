@@ -50,7 +50,6 @@ public class PlayerHandleInputs : MonoBehaviour
         switch (context)
         {
             case var value when context.started:
-                print("===");
                 _FirstInteraction?.Invoke();
                 break;
         }
