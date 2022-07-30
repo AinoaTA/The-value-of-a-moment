@@ -45,16 +45,16 @@ public class Computer : Interactables
     {
         computerScreen.SetActive(true);
         programScreen.SetActive(false);
+        calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
-        // calendarScreen.SetActive(false);
     }
 
     public void ComputerOFF()
     {
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
-        // calendarScreen.SetActive(false);
-
+        calendarMaterialScreen.SetActive(false);
+        anyButtonScreenActive = false;
     }
 
     public void ComputerCalendar()
@@ -64,7 +64,6 @@ public class Computer : Interactables
         GameManager.GetManager().calendarController.ShowCalendar();
         anyButtonScreenActive = true;
         programScreen.SetActive(false);
-        //  calendarScreen.SetActive(true);
         calendarMaterialScreen.SetActive(true);
     }
 
@@ -74,7 +73,6 @@ public class Computer : Interactables
             return;
         anyButtonScreenActive = true;
         programScreen.SetActive(true);
-        //   calendarScreen.SetActive(false); 
         calendarMaterialScreen.SetActive(false);
     }
     #endregion

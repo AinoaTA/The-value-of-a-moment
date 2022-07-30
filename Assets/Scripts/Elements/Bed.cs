@@ -152,7 +152,6 @@ public class Bed : Interactables
                 }
                 break;
             case 2:
-                GameManager.GetManager().canvasController.FadeIn();
                 GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.Init;
                 GameManager.GetManager().canvasController.Lock();
                 
