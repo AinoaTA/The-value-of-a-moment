@@ -56,7 +56,7 @@ namespace Calendar
             if (modifiedCalendar)
                 return;
             oldParent = transform.parent;
-            transform.SetParent(GameManager.GetManager().calendarController.TaskMovement);
+            transform.SetParent(GameManager.GetManager().calendarController.taskMovement);
         }
 
         public void DragTask()

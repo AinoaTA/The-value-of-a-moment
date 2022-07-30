@@ -11,9 +11,6 @@ public class Interactables : MonoBehaviour
     public bool m_Done;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
     public bool hasDependencies, hasLeastOne;
-    //[Header("Calendar extra")]
-    //public float m_ExtraAutoControlCalendar;
-    //public TaskType taskAssociated;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
@@ -38,11 +35,6 @@ public class Interactables : MonoBehaviour
     }
     [HideInInspector] public bool showing = false;
     protected bool actionEnter;
-
-    //private void Update()
-    //{
-    //    SetCanvasValue(false);
-    //}
 
     private void Start()
     {

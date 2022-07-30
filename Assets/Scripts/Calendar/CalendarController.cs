@@ -5,18 +5,39 @@ namespace Calendar
 {
     public class CalendarController : MonoBehaviour
     {
-        public Transform TaskMovement;
-        public Dictionary<TaskType, SpaceCalendar> calendarInformation;
+        [SerializeField] private Tasks[] getAllTasks;
+        //[SerializeField] private List<TaskType> interactablesTask = new List<TaskType>();
         [SerializeField] private List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
-        //public List<TaskType> allTask = new List<TaskType>();
+
+        public GameObject prefabTask;
+        public Transform taskMovement, contentTask;
+        public Dictionary<TaskType, SpaceCalendar> calendarInformation;
+        public List<TaskType> allTask = new List<TaskType>();
+
         [SerializeField] private GameObject calendar, warning;
         [SerializeField] private MobileCalendar mobileCalendar;
         [HideInInspector] public bool modified;
 
+        private void Awake()
+        {
+            calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
+
+            getAllTasks = FindObjectsOfType<Tasks>();
+
+            CreateTasksInCalendar();
+        }
+        private void CreateTasksInCalendar()
+        {
+            for (int i = 0; i < getAllTasks.Length; i++)
+            {
+                TaskType _task = Instantiate(prefabTask, contentTask.position, Quaternion.identity, contentTask).GetComponent<TaskType>();
+                _task.task = getAllTasks[i].task;
+                _task.nameTask = getAllTasks[i].nameTask;
+            }
+        }
         private void Start()
         {
             GameManager.GetManager().calendarController = this;
-            calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
         }
         public void BackCalendar()
         {
@@ -34,10 +55,7 @@ namespace Calendar
                 for (int a = 0; a < allTimeTable.Count; a++)
                 {
                     for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
-                    {
                         calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
-                        //allTask.Add(allTimeTable[a].taskSave[i]);
-                    }
                 }
             }
         }
