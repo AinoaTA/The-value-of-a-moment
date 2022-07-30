@@ -1820,7 +1820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2765050755151411992
 Transform:
   m_ObjectHideFlags: 0
@@ -6775,7 +6775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6427546483422279317
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10264,7 +10264,6 @@ MonoBehaviour:
   - {fileID: 6828494669197765313}
   - {fileID: 6828494669696705898}
   - {fileID: 6828494669432983052}
-  m_started: 0
   m_Autocontrol: 5
 --- !u!1 &6828494669818967474
 GameObject:
@@ -11505,7 +11504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6828494670503348297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12185,7 +12184,7 @@ GameObject:
   - component: {fileID: 6828494670811259201}
   - component: {fileID: 6828494670811259200}
   m_Layer: 5
-  m_Name: BACK
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13224,15 +13223,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a5d40c87f00de4ea049318dbbcf07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeInScreen: {fileID: 0}
   ComputerScreen: {fileID: 6828494670503348296}
   m_NotificationCanvas: {fileID: 6828494669763351331}
   NotificationMessage: {fileID: 6828494670746136902}
   MessageOpen: {fileID: 6828494669373835133}
   WindowCanvas: {fileID: 4307259663520839186}
-  FirstMinigameCanvas: {fileID: 6828494669538775826}
+  programMinigame: {fileID: 0}
   Pointer: {fileID: 5080443821380347100}
-  activated: 0
 --- !u!1 &6828494671232559005
 GameObject:
   m_ObjectHideFlags: 0
@@ -13548,8 +13545,6 @@ MonoBehaviour:
   - {fileID: -174219477187176728, guid: 29b8eb2150a53af41b63f62936b62c95, type: 3}
   particles: {fileID: 2693295529408113471}
   rawImage: {fileID: 0}
-  renderTexture: {fileID: 8400000, guid: 8a8e1a6435a97cb4aa6ab26206e1777e, type: 2}
-  renderTextureResolution: {x: 0, y: 0}
   particlesCamera: {fileID: 0}
 --- !u!1 &8875368935868574400
 GameObject:
@@ -13837,7 +13832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &83880549865253767
 RectTransform:
   m_ObjectHideFlags: 0

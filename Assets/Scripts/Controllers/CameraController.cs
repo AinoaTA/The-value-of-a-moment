@@ -45,7 +45,6 @@ public class CameraController : MonoBehaviour
         GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
         GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
     }
-
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._CameraPitchDelta -= CameraPitchDelta;
@@ -117,4 +116,6 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(waitingBleendingTime);
         cameraProvider.enabled = true;
     }
+
+    public void Block3DMovement(bool v)  {  cameraProvider.enabled = v; }
 }
