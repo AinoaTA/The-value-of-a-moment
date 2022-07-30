@@ -16,8 +16,8 @@ public class Autocontrol : MonoBehaviour
 
     public ParticleSystem particles;
     public RawImage rawImage;
-    public RenderTexture renderTexture;
-    [SerializeField] private Vector2Int renderTextureResolution;
+    private RenderTexture renderTexture;
+    private Vector2Int renderTextureResolution;
     public Camera particlesCamera;
     private void Awake()
     {
