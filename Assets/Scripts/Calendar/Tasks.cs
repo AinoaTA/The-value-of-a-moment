@@ -19,11 +19,12 @@ namespace Calendar
         public void TaskCompleted()
         {
             taskCompleted = true;
-            GameManager.GetManager().calendarController.CheckTask(this);
+            GameManager.GetManager().calendarController.GetTaskReward(this);
         }
 
         public void RewardedTask()
         {
+          
             Debug.Log("Rewarded Task");
             GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
         }

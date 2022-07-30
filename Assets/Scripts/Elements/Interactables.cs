@@ -61,7 +61,7 @@ public class Interactables : MonoBehaviour
             if (GetComponent<Plant>())
                 if (!GetComponent<Plant>().regadera.grabbed)
                     return;
-           
+
             showing = true;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(this);
@@ -90,9 +90,13 @@ public class Interactables : MonoBehaviour
 
         if (GetDone())
         {
-            if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
+            CalendarController cal = GameManager.GetManager().calendarController;
+            if (cal.CheckReward(task.taskAssociated))
             {
-                task.TaskCompleted();
+                if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
+                {
+                    task.TaskCompleted();
+                }
             }
         }
     }

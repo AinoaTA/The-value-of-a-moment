@@ -63,7 +63,11 @@ namespace Calendar
             }
         }
 
-        public void CheckTask(Tasks t)
+        public bool CheckReward(TaskType t)
+        {
+            return calendarInformation.ContainsKey(t);
+        }
+        public void GetTaskReward(Tasks t)
         {
             if (calendarInformation.ContainsKey(t.taskAssociated) && t.taskCompleted)
                 t.RewardedTask();
