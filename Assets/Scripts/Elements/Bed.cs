@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class Bed : Interactables
 {
     public Camera cam;
@@ -108,11 +107,12 @@ public class Bed : Interactables
 
     public void BedDone()
     {
+        
         gameInitialized = false;
         minigameCanvas.SetActive(false);
         m_Done = true;
         cam.cullingMask = -1;
-        //Cambiamos la sabana u objeto cama.
+        base.CheckDoneTask();
         m_Sheet.SetActive(true);
         badBed.SetActive(false);
         interactTextBed.SetActive(false);

@@ -8,6 +8,7 @@ namespace Calendar
         [SerializeField] private float extraAutocontrolByCalendar;
         public string nameTask;
         public TaskType.Task task;
+        public TaskType taskAssociated;
         public bool taskCompleted;
 
         public void TaskReset()
@@ -18,13 +19,13 @@ namespace Calendar
         public void TaskCompleted()
         {
             taskCompleted = true;
-            GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+            GameManager.GetManager().calendarController.CheckTask(this);
         }
 
-        public void CreateTask()
-        { 
-        
-        
+        public void RewardedTask()
+        {
+            Debug.Log("Rewarded Task");
+            GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
         }
     }
 }

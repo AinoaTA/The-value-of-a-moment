@@ -31,8 +31,11 @@ namespace Calendar
             for (int i = 0; i < getAllTasks.Length; i++)
             {
                 TaskType _task = Instantiate(prefabTask, contentTask.position, Quaternion.identity, contentTask).GetComponent<TaskType>();
+                getAllTasks[i].taskAssociated = _task;
                 _task.task = getAllTasks[i].task;
                 _task.nameTask = getAllTasks[i].nameTask;
+                allTask.Add(_task);
+                Debug.Log(allTask.Count + " total");
             }
         }
         private void Start()
@@ -58,6 +61,12 @@ namespace Calendar
                         calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
                 }
             }
+        }
+
+        public void CheckTask(Tasks t)
+        {
+            if (calendarInformation.ContainsKey(t.taskAssociated) && t.taskCompleted)
+                t.RewardedTask();
         }
 
         public void ShowCalendar()

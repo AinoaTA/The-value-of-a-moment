@@ -5,16 +5,18 @@ namespace Calendar
 {
     public class TaskType : MonoBehaviour
     {
+        //var que se modifican al crear un TASK
         public enum Task { Work, Ocio, Basic }
-        public Task task;
-
+        [HideInInspector] public Task task;
+        [HideInInspector] public string nameTask;
+        //--
         [Tooltip("1 - Work, 2 - Ocio, 3 - Clean, 4- AutoCuidado")]
         [SerializeField] private Sprite[] colors;
         [SerializeField] private Sprite completed;
         [SerializeField] private Transform content;
         [SerializeField] private Color enterColor;
-        public Image sprite;
-        public string nameTask;
+        [HideInInspector] public Image sprite;
+       
 
         [HideInInspector] public bool InAnySpaceCalendar;
         [HideInInspector] public SpaceCalendar calendar;
