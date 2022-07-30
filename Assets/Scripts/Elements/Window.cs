@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Window : Interactables
 {
-    public GameObject glass;
-    public GameObject tutorial;
+    [SerializeField]private GameObject glass;
+    [SerializeField] private GameObject tutorial;
     private GameObject minigameCanvas = null;
     private Vector3 initPos;
     private float mOffset;
@@ -15,7 +15,7 @@ public class Window : Interactables
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
-    public float distance;
+    [SerializeField]private float distance;
     bool temp = false;
 
     private void Start()
@@ -41,7 +41,6 @@ public class Window : Interactables
                     // Inicia minijuego
                     GameManager.GetManager().cameraController.StartInteractCam(4);
                     GameManager.GetManager().canvasController.UnLock();
-                  
                 }
                 break;
             case 2:

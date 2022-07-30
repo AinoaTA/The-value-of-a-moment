@@ -9,7 +9,7 @@ namespace Calendar
         public Dictionary<TaskType, SpaceCalendar> calendarInformation;
         [SerializeField] private List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
         //public List<TaskType> allTask = new List<TaskType>();
-        [SerializeField] private CanvasGroup canvasGroup;
+        [SerializeField] private GameObject calendar;
         [SerializeField] private CanvasGroup modifiedBlock;
         [SerializeField] private MobileCalendar mobileCalendar;
         [SerializeField] private bool modified;
@@ -21,11 +21,8 @@ namespace Calendar
         }
         public void BackCalendar()
         {
+            calendar.SetActive(false);
             modifiedBlock.gameObject.SetActive(false);
-            canvasGroup.gameObject.SetActive(false);
-            canvasGroup.alpha = 0;
-            canvasGroup.blocksRaycasts = false;
-            canvasGroup.interactable = false;
             GameManager.GetManager().computer.ComputerON();
         }
         public void SaveCalendar()
@@ -47,20 +44,14 @@ namespace Calendar
         public void RevisionCalendar()
         {
             modifiedBlock.gameObject.SetActive(true);
-            canvasGroup.alpha = 1;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
         }
 
         public void ShowCalendar()
         {
-            canvasGroup.gameObject.SetActive(true);
+            calendar.SetActive(true);
             if (!modified)
             {
                 modifiedBlock.gameObject.SetActive(false);
-                canvasGroup.alpha = 1;
-                canvasGroup.blocksRaycasts = true;
-                canvasGroup.interactable = true;
             }
             else
                 RevisionCalendar();
