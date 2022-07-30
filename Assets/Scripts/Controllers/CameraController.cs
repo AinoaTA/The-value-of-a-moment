@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera mainCamera;
-    public bool invertY;
-    public float lookSpeed = 1f;
-    int defaultPriority = 0;
-    int setPriority = 10;
-    float yVal = 0, xVal = 0;
+    [Header("Cinemachine")]
+    [Tooltip("3D Camera Input")]
+    [SerializeField] private CinemachineInputProvider cameraProvider;
+    [SerializeField] private CinemachineBrain brain;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private bool invertY;
+    [SerializeField] private float lookSpeed = 1f;
+    [SerializeField] private float waitingBleendingTime = 1.75f;
+    private int defaultPriority = 0;
+    private int setPriority = 10;
+    private float yVal = 0, xVal = 0;
 
-    public LayerMask layerMask;
-    public LayerMask wallMask;
+    [Header("Others")]
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask wallMask;
     public Camera cam { private get; set; }
 
-    public CamerasConfigVirtual[] virtualCameras;
-    private bool inTransition;
+    [Space(10)]
+    [Header("Cameras Registered")]
+    [SerializeField] private CamerasConfigVirtual[] virtualCameras;
     [System.Serializable]
     public struct CamerasConfigVirtual
     {
@@ -28,6 +35,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().cameraController = this;
+        brain = mainCamera.GetComponent<CinemachineBrain>();
     }
     private void Start()
     {
@@ -37,7 +45,6 @@ public class CameraController : MonoBehaviour
         GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
         GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
     }
-
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._CameraPitchDelta -= CameraPitchDelta;
@@ -55,6 +62,8 @@ public class CameraController : MonoBehaviour
             else
                 virtualCameras[v].cameraType.Priority = defaultPriority;
         }
+
+        StartCoroutine(CameraSwitchDelay());
     }
 
     public int GetID(string name)
@@ -103,8 +112,10 @@ public class CameraController : MonoBehaviour
     }
     IEnumerator CameraSwitchDelay()
     {
-        inTransition = true;
-        yield return new WaitForSeconds(1);
-        inTransition = false;
+        cameraProvider.enabled = false;
+        yield return new WaitForSeconds(waitingBleendingTime);
+        cameraProvider.enabled = true;
     }
+
+    public void Block3DMovement(bool v)  { cameraProvider.enabled = v; }
 }

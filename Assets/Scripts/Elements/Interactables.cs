@@ -1,4 +1,5 @@
 using UnityEngine;
+using Calendar;
 
 public class Interactables : MonoBehaviour
 {
@@ -11,13 +12,11 @@ public class Interactables : MonoBehaviour
     public bool m_Done;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
     public bool hasDependencies, hasLeastOne;
-    //[Header("Calendar extra")]
-    //public float m_ExtraAutoControlCalendar;
-    //public TaskType taskAssociated;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
     public Animator anim;
+    [SerializeField]private Tasks task;
 
     private Material[] m_Material;
 
@@ -39,14 +38,12 @@ public class Interactables : MonoBehaviour
     [HideInInspector] public bool showing = false;
     protected bool actionEnter;
 
-    //private void Update()
-    //{
-    //    SetCanvasValue(false);
-    //}
-
+    private void Awake()
+    {
+        task = GetComponent<Tasks>();
+    }
     private void Start()
     {
-        //GameManager.GetManager().playerInputs._ExitInteraction += ExitInteraction;
         cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
     }
 
@@ -88,13 +85,15 @@ public class Interactables : MonoBehaviour
 
     public void CheckDoneTask()
     {
-        //if (taskAssociated != null && GetDone() && taskAssociated.calendar!=null)
-        //{
-        //    if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
-        //    {
-        //        taskAssociated.Done();
-        //        GameManager.GetManager().Autocontrol.AddAutoControl(m_ExtraAutoControlCalendar);
-        //    }
-        //}
+        if (task == null)
+            return;
+
+        if (GetDone())
+        {
+            if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
+            {
+                task.TaskCompleted();
+            }
+        }
     }
 }

@@ -1,63 +1,53 @@
 using UnityEngine;
 using System.Collections;
 using Cinemachine;
-
-public class PauseMenu : MonoBehaviour
+namespace Menu
 {
-    public GameObject pauseCanvas;
-    public CinemachineVirtualCamera virtualCamera3D;
-
-    private bool paused = false;
-
-    private void Start()
+    public class PauseMenu : MonoBehaviour
     {
-        pauseCanvas.SetActive(false);
-    }
+        public CanvasGroup pause;
+        private bool paused = false;
 
-    private void Update()
-    {
-        //if (!paused && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay
-        //    && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
-        //{
-        //    PauseGame();
-        //}
+        private void OnDisable()
+        {
+            GameManager.GetManager().playerInputs._PauseGame -= PauseGame;
+        }
 
-        //if(paused && Input.GetKeyDown(KeyCode.P))
-        //{
-        //    ResumeGame();
-        //}
-    }
+        private void Start()
+        {
+            GameManager.GetManager().playerInputs._PauseGame += PauseGame;
+            GameManager.GetManager().canvasController.HideCanvas(pause);
+        }
 
-    public void PauseGame()
-    {
-        GameManager.GetManager().canvasController.UnLock();
-        virtualCamera3D.enabled = false;
-        Time.timeScale = 0;
-        pauseCanvas.SetActive(true);
-        StartCoroutine(WaitToPauseGame());
-    }
+        public void PauseGame()
+        {
+            if (!paused)
+            {
+                paused = true;
+                GameManager.GetManager().canvasController.UnLock();
+                GameManager.GetManager().cameraController.Block3DMovement(!paused);
+                GameManager.GetManager().canvasController.ShowCanvas(pause);
+              
+                Time.timeScale = 0;
+            }
+            else
+                ResumeGame();
+        }
 
-    public void ResumeGame()
-    {
-        virtualCamera3D.enabled = true;
-        Time.timeScale = 1;
-        GameManager.GetManager().canvasController.Lock();
-        pauseCanvas.SetActive(false);
-        paused = false;
-    }
+        public void ResumeGame()
+        {
+            Time.timeScale = 1;
+            paused = false;
+            GameManager.GetManager().canvasController.Lock();
+            GameManager.GetManager().canvasController.HideCanvas(pause);
+            GameManager.GetManager().cameraController.Block3DMovement(!paused);
+        }
 
-    public void QuitGame()
-    {
-        GameManager.GetManager().gameStateController.ChangeGameState(0);
-        Time.timeScale = 1;
-        GameManager.GetManager().sceneLoader.LoadLevel(0);
-        //Application.Quit();
+        public void QuitGame()
+        {
+            Time.timeScale = 1;
+            GameManager.GetManager().gameStateController.ChangeGameState(0);
+            GameManager.GetManager().sceneLoader.LoadLevel(0);
+        }
     }
-    
-    private IEnumerator WaitToPauseGame()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-        paused = true;
-    }
-
 }

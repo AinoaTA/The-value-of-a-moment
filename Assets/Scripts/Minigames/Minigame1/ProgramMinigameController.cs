@@ -8,37 +8,39 @@ public class ProgramMinigameController : MonoBehaviour
 {
     public List<SolutionPiece> m_AllSolutions = new List<SolutionPiece>();
     public List<PieceMG> m_AllPieces = new List<PieceMG>();
-    private bool m_Solved = false;
+    private bool solved = false;
     private bool checking;
     private bool m_AllCorrected;
-    public bool m_started;
+    private bool gameInitialized;
     public float m_Autocontrol=5;
 
-    void Start()
+    private void Start()
     {
         GameManager.GetManager().programMinigame = this;
     }
-
     private IEnumerator GameFinished()
     {
         GameManager.GetManager().dayNightCycle.TaskDone();
         //CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
-        m_Solved = true;
-        m_started = false;
+        gameInitialized = false;
+        solved = true;
+       
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().canvasController.FinishMiniGame();
+        GameManager.GetManager().computer.ComputerON();
     }
 
     public void QuitMiniGame()
     {
-        GameManager.GetManager().canvasController.FinishMiniGame();
+        solved = false;
+        gameInitialized = false;
+        GameManager.GetManager().computer.ComputerON();
     }
 
 
     public void CheckSolutions()
     {
-        if (m_Solved || checking)
+        if (solved || checking)
             return;
 
         checking = true;
@@ -61,8 +63,8 @@ public class ProgramMinigameController : MonoBehaviour
         {
             m_AllPieces[i].ResetPiece();
         }
-        m_Solved = false;
-        m_started = false;
+        solved = false;
+        gameInitialized = false;
     } 
-    public bool GetSolved() { return m_Solved; }
+    public bool GetSolved() { return solved; }
 }

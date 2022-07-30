@@ -1,92 +1,109 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CalendarController : MonoBehaviour
+namespace Calendar
 {
-    public Transform TaskMovement;
-    public List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
-    //public List<TaskType> allTask = new List<TaskType>();
-    public Dictionary<TaskType, SpaceCalendar> calendarInformation;
-    public CanvasGroup canvasGroup;
-    public CanvasGroup modifiedBlock;
-    public MobileCalendar mobileCalendar;
-    [SerializeField]private bool modified;
+    public class CalendarController : MonoBehaviour
+    {
+        [SerializeField] private Tasks[] getAllTasks;
+        //[SerializeField] private List<TaskType> interactablesTask = new List<TaskType>();
+        [SerializeField] private List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
 
-    private void Start()
-    {
-        GameManager.GetManager().calendarController = this;
-        calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
-    }
-    public void BackCalendar()
-    {
-        modifiedBlock.gameObject.SetActive(false);
-        canvasGroup.gameObject.SetActive(false);
-        canvasGroup.alpha = 0;
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.interactable = false;
-        GameManager.GetManager().computer.ComputerON();
-    }
-    public void SaveCalendar()
-    {
-        if (!modified)
+        public GameObject prefabTask;
+        public Transform taskMovement, contentTask;
+        public Dictionary<TaskType, SpaceCalendar> calendarInformation;
+        public List<TaskType> allTask = new List<TaskType>();
+
+        [SerializeField] private GameObject calendar, warning;
+        [SerializeField] private MobileCalendar mobileCalendar;
+        [HideInInspector] public bool modified;
+
+        private void Awake()
         {
-            modified = true;
-            RevisionCalendar();
-            for (int a = 0; a <allTimeTable.Count ; a++)
+            calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
+
+            getAllTasks = FindObjectsOfType<Tasks>();
+
+            CreateTasksInCalendar();
+        }
+        private void CreateTasksInCalendar()
+        {
+            for (int i = 0; i < getAllTasks.Length; i++)
             {
-                for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
+                TaskType _task = Instantiate(prefabTask, contentTask.position, Quaternion.identity, contentTask).GetComponent<TaskType>();
+                getAllTasks[i].taskAssociated = _task;
+                _task.task = getAllTasks[i].task;
+                _task.nameTask = getAllTasks[i].nameTask;
+                allTask.Add(_task);
+                Debug.Log(allTask.Count + " total");
+            }
+        }
+        private void Start()
+        {
+            GameManager.GetManager().calendarController = this;
+        }
+        public void BackCalendar()
+        {
+            if (warning.activeSelf)
+                return;
+            calendar.SetActive(false);
+            GameManager.GetManager().computer.ComputerON();
+        }
+        public void SaveCalendar()
+        {
+            if (!modified)
+            {
+                modified = true;
+                warning.SetActive(false);
+                for (int a = 0; a < allTimeTable.Count; a++)
                 {
-                    calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
-                    //allTask.Add(allTimeTable[a].taskSave[i]);
+                    for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
+                        calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
                 }
             }
         }
-    }
-    public void RevisionCalendar()
-    {
-        modifiedBlock.gameObject.SetActive(true);
-        canvasGroup.alpha = 1;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
-    }
 
-    public void ShowCalendar()
-    {
-        canvasGroup.gameObject.SetActive(true);
-        if (!modified)
+        public void CheckTask(Tasks t)
         {
-            modifiedBlock.gameObject.SetActive(false);
-            canvasGroup.alpha = 1;
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.interactable = true;
+            if (calendarInformation.ContainsKey(t.taskAssociated) && t.taskCompleted)
+                t.RewardedTask();
         }
-        else
-            RevisionCalendar();
-    }
 
-    public bool CheckTimeTaskDone(DayNightCycle.DayState type, SpaceCalendar.SpaceType time)
-    {
-        return (int)type == (int)time;
-    }
-
-    public void GlobalReset()
-    {
-        mobileCalendar.ResetCalendar();
-        for (int i = 0; i < allTimeTable.Count; i++)
+        public void ShowCalendar()
         {
-            for (int n = 0; n < allTimeTable[i].taskSave.Count; n++)
+            calendar.SetActive(true);
+        }
+
+        public void ShowWarning(bool v)
+        {
+            if (!modified)
+                warning.SetActive(v);
+        }
+
+        public bool CheckTimeTaskDone(DayNightCycle.DayState type, SpaceCalendar.SpaceType time)
+        {
+            return (int)type == (int)time;
+        }
+
+        public void GlobalReset()
+        {
+            mobileCalendar.ResetCalendar();
+            for (int i = 0; i < allTimeTable.Count; i++)
             {
-                allTimeTable[i].taskSave[n].ResetTask();
+                for (int n = 0; n < allTimeTable[i].taskSave.Count; n++)
+                {
+                    allTimeTable[i].taskSave[n].ResetTask();
+                }
+                allTimeTable[i].taskSave.Clear();
             }
-            allTimeTable[i].taskSave.Clear();
-        }
 
-        calendarInformation.Clear();
+            calendarInformation.Clear();
 
-        for (int i = 0; i < allTimeTable.Count; i++)
-        {
-            allTimeTable[i].taskSave.Clear();
+            for (int i = 0; i < allTimeTable.Count; i++)
+            {
+                allTimeTable[i].taskSave.Clear();
+            }
+            modified = false;
         }
-        modified = false;
     }
 }

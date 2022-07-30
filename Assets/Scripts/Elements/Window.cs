@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Window : Interactables
 {
-    public GameObject m_Glass;
-    public GameObject m_Tutorial;
+    [SerializeField]private GameObject glass;
+    [SerializeField] private GameObject tutorial;
     private GameObject minigameCanvas = null;
     private Vector3 initPos;
     private float mOffset;
@@ -15,16 +15,16 @@ public class Window : Interactables
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
-    public float distance;
+    [SerializeField]private float distance;
     bool temp = false;
 
     private void Start()
     {
-        minigameCanvas = m_Tutorial.transform.parent.gameObject;
+        minigameCanvas = tutorial.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
         //GameManager.GetManager().Window = this;
-        minHeight = m_Glass.transform.position.y;
-        initPos = m_Glass.transform.position;
+        minHeight = glass.transform.position.y;
+        initPos = glass.transform.position;
     }
     #region Inherit Interactable methods
 
@@ -41,7 +41,6 @@ public class Window : Interactables
                     // Inicia minijuego
                     GameManager.GetManager().cameraController.StartInteractCam(4);
                     GameManager.GetManager().canvasController.UnLock();
-                  
                 }
                 break;
             case 2:
@@ -61,14 +60,14 @@ public class Window : Interactables
         m_Done = false;
         isOpen = m_Done;
         gameInitialized = false;
-        m_Glass.transform.position = initPos;
+        glass.transform.position = initPos;
     }
 
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
         StartCoroutine(HideTutorial());
-        Animator animator = m_Tutorial.GetComponent<Animator>();
+        Animator animator = tutorial.GetComponent<Animator>();
         if (animator != null) animator.SetBool("show", true);
         tutorialShowed = true;
     }
@@ -76,7 +75,7 @@ public class Window : Interactables
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
-        m_Tutorial.SetActive(false);
+        tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()
@@ -108,9 +107,9 @@ public class Window : Interactables
     {
         if (gameInitialized)
         {
-            zWorldCoord = Camera.main.WorldToScreenPoint(m_Glass.transform.position).z;
+            zWorldCoord = Camera.main.WorldToScreenPoint(glass.transform.position).z;
             // offset = World pos - Mouse World pos
-            mOffset = m_Glass.transform.position.y - GetMouseYaxisAsWorldPoint();
+            mOffset = glass.transform.position.y - GetMouseYaxisAsWorldPoint();
         }
     }
 
@@ -118,9 +117,9 @@ public class Window : Interactables
     {
         if (gameInitialized && !isOpen)
         {
-            if (tutorialShowed) m_Tutorial.SetActive(false);
+            if (tutorialShowed) tutorial.SetActive(false);
 
-            float height = m_Glass.transform.position.y;
+            float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
 
             if (displacement < minHeight)
@@ -134,7 +133,7 @@ public class Window : Interactables
                 height = maxHeight;
                 m_Done = isOpen = true;
             }
-            m_Glass.transform.position = new Vector3(m_Glass.transform.position.x, height, m_Glass.transform.position.z);
+            glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
     }
 

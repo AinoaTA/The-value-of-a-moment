@@ -5,24 +5,28 @@ using UnityEngine;
 
 public class Mobile : ActionObject
 {
-    public bool getMobile;
-    public GameObject realMobile;
-    public CanvasGroup mobileCanvas;
-    public GameObject[] canvasFunctions;
+    [SerializeField] private bool getMobile;
+    [SerializeField] private GameObject realMobile;
+    [SerializeField] private CanvasGroup mobileCanvas;
+    [SerializeField] private GameObject[] canvasFunctions;
     private BoxCollider col;
-    public CinemachineStateDrivenCamera stateDriven;
 
+    bool active=false;
     private void Start()
     {
         col = GetComponent<BoxCollider>();
+        GameManager.GetManager().playerInputs._Mobile += OpenMobile;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
     }
     public override void Interaction()
     {
-
         if (!getMobile)
         {
             GetMobile();
-
         }
     }
 
@@ -33,26 +37,29 @@ public class Mobile : ActionObject
         col.enabled = false;
 
     }
-
-    private void Update()
+    private void OpenMobile()
     {
-        //if (Input.GetKeyDown(KeyCode.LeftAlt) && getMobile && !GameManager.GetManager().CanvasManager.m_activated)
-        //{
-        //    if (mobileCanvas.alpha == 0 && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay)
-        //    {
-        //        GameManager.GetManager().gameStateController.ChangeGameState(2);
-        //        GameManager.GetManager().CanvasManager.UnLock();
-        //        CanvasMobile(true);
-        //    }
-        //    else
-        //    {
-        //        //  GameManager.GetManager().StartThirdPersonCamera();
-        //        GameManager.GetManager().gameStateController.ChangeGameState(1);
-        //        GameManager.GetManager().CanvasManager.Lock();
-        //        CanvasMobile(false);
-        //        CanvasMultiple(false);
-        //    }
-        //}
+        if (!getMobile)
+            return;
+
+        if (!active)
+        {
+            active = true;
+            GameManager.GetManager().gameStateController.ChangeGameState(2);
+            GameManager.GetManager().canvasController.UnLock();
+            GameManager.GetManager().cameraController.Block3DMovement(false);
+            CanvasMobile(true);
+        }
+        else 
+        {
+            active = false;
+            GameManager.GetManager().StartThirdPersonCamera();
+            GameManager.GetManager().gameStateController.ChangeGameState(1);
+            GameManager.GetManager().canvasController.Lock();
+            GameManager.GetManager().cameraController.Block3DMovement(true);
+            CanvasMobile(false);
+            CanvasMultiple(false);
+        }
     }
 
     public void CanvasMultiple(bool val)
@@ -66,6 +73,5 @@ public class Mobile : ActionObject
         mobileCanvas.alpha = val ? 1 : 0;
         mobileCanvas.blocksRaycasts = val ? true : false;
         mobileCanvas.interactable = val ? true : false;
-        stateDriven.enabled = val ? false : true;
     }
 }

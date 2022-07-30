@@ -7,18 +7,19 @@ public class Autocontrol : MonoBehaviour
     private float maxValue = 100f;
     CanvasGroup canvasGroup;
     public float m_currentValue { get; private set; }
-    public Slider m_Slider;
+    [SerializeField] private Slider m_Slider;
 
-    public Image stateImage;
-    public Image backgroundBar;
-    public Sprite[] statesColor;
-    public Sprite[] barBackGroundColor;
+    [SerializeField] private Image stateImage;
+    [SerializeField] private Image backgroundBar;
+    [SerializeField] private Sprite[] statesColor;
+    [SerializeField] private Sprite[] barBackGroundColor;
 
-    public ParticleSystem particles;
-    public RawImage rawImage;
-    public RenderTexture renderTexture;
-    [SerializeField] private Vector2Int renderTextureResolution;
-    public Camera particlesCamera;
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private RawImage rawImage;
+    [SerializeField] private Camera particlesCamera;
+    private RenderTexture renderTexture;
+    private Vector2Int renderTextureResolution;
+    
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -129,4 +130,8 @@ public class Autocontrol : MonoBehaviour
         StartCoroutine(RemoveC(m_currentValue * 0.4f));
     }
 
+    public float GetAutcontrolValue()
+    {
+        return m_Slider.value;
+    }
 }
