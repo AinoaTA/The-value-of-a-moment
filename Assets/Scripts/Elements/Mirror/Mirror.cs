@@ -56,7 +56,7 @@ public class Mirror : Interactables
     private IEnumerator LookUp()
     {
         yield return new WaitForSeconds(1);
-        if (GameManager.GetManager().autocontrol.m_Slider.value <= 0.3f)
+        if (GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.3f)
         {
           //  GameManager.GetManager().Dialogue.SetDialogue(bad1[counterbad1]);
             counterbad1++;
@@ -65,7 +65,7 @@ public class Mirror : Interactables
             GameManager.GetManager().playerController.SadMoment();
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
         }
-        else if (GameManager.GetManager().autocontrol.m_Slider.value > 0.3f && GameManager.GetManager().autocontrol.m_Slider.value <= 0.5f)
+        else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.3f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.5f)
         {
          
             //GameManager.GetManager().Dialogue.SetDialogue(lessbad[counterless]);
@@ -75,7 +75,7 @@ public class Mirror : Interactables
             GameManager.GetManager().playerController.SadMoment();
             GameManager.GetManager().autocontrol.RemoveAutoControl(2);
         }
-        else if (GameManager.GetManager().autocontrol.m_Slider.value > 0.5f && GameManager.GetManager().autocontrol.m_Slider.value <= 0.8f)
+        else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.5f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.8f)
         {
            // GameManager.GetManager().Dialogue.SetDialogue(normal[counternormal]);
             counternormal++;
@@ -84,7 +84,7 @@ public class Mirror : Interactables
             GameManager.GetManager().playerController.HappyMoment();
             GameManager.GetManager().autocontrol.AddAutoControl(2);
         }
-        else if (GameManager.GetManager().autocontrol.m_Slider.value > 0.8f)
+        else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.8f)
         {
            // GameManager.GetManager().Dialogue.SetDialogue(good[countergood]);
             countergood++;

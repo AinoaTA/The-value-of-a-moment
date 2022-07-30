@@ -45,10 +45,7 @@ public class CameraController : MonoBehaviour
         GameManager.GetManager().playerInputs._CameraPitchDelta += CameraPitchDelta;
         GameManager.GetManager().playerInputs._CameraYawDelta += CameraYawDelta;
     }
-    private void Update()
-    {
-        print(brain.IsBlending);
-    }
+
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._CameraPitchDelta -= CameraPitchDelta;

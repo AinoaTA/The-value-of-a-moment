@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+//namespaces project
+using Calendar;
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager gameManager;
@@ -51,12 +54,6 @@ public class GameManager : MonoBehaviour
     //    bucket.ResetInteractable();
     //    InventoryTrash.ResetInventory();
     //}
-
-
-    public void TurnOnComputer()
-    {
-        cameraController.StartInteractCam(6);
-    }
 
     public void OpenDoor()
     {

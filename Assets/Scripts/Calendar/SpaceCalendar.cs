@@ -1,39 +1,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(BoxCollider))]
-public class SpaceCalendar : MonoBehaviour
+namespace Calendar
 {
-    public enum SpaceType { Manana, MedioDia, Tarde, Noche }
-    public SpaceType type;
-
-    public List<TaskType> taskSave = new List<TaskType>();
-    public int maxTaskSaved=4;
-    private void OnTriggerEnter(Collider other)
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(BoxCollider))]
+    public class SpaceCalendar : MonoBehaviour
     {
-        if (gameObject.transform.childCount>=maxTaskSaved)
-            return;
-        TaskType task = other.GetComponent<TaskType>();
+        public enum SpaceType { Manana, MedioDia, Tarde, Noche }
+        public SpaceType type;
 
-        if (!taskSave.Contains(task))
+        public List<TaskType> taskSave = new List<TaskType>();
+        [SerializeField] private int maxTaskSaved = 4;
+        private void OnTriggerEnter(Collider other)
         {
-            task.InAnySpaceCalendar = true;
-            task.calendar = this;
-            taskSave.Add(task);
+            if (gameObject.transform.childCount >= maxTaskSaved)
+                return;
+            TaskType task = other.GetComponent<TaskType>();
+
+            if (!taskSave.Contains(task))
+            {
+                task.InAnySpaceCalendar = true;
+                task.calendar = this;
+                taskSave.Add(task);
+            }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!ThereIsSpace())
+                return;
+
+            TaskType task = other.GetComponent<TaskType>();
+            task.InAnySpaceCalendar = false;
+            task.calendar = null;
+            taskSave.Remove(task);
+        }
+
+        public bool ThereIsSpace() { return gameObject.transform.childCount < maxTaskSaved; }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!ThereIsSpace())
-            return;
-
-        TaskType task = other.GetComponent<TaskType>();
-        task.InAnySpaceCalendar = false;
-        task.calendar = null;
-        taskSave.Remove(task);
-    }
-
-    public bool ThereIsSpace(){  return gameObject.transform.childCount < maxTaskSaved;} 
 }
