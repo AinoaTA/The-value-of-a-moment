@@ -50,6 +50,7 @@ public class PlayerHandleInputs : MonoBehaviour
         switch (context)
         {
             case var value when context.started:
+                print("===");
                 _FirstInteraction?.Invoke();
                 break;
         }
@@ -82,11 +83,11 @@ public class PlayerHandleInputs : MonoBehaviour
         _CameraYawDelta?.Invoke(l_CameraDelta.y);
     }
 
-    public void OnPauseGame(InputAction.CallbackContext ctx)
+    public void OnPauseGame(InputAction.CallbackContext context)
     {
-        switch (ctx)
+        switch (context)
         {
-            case var value when ctx.started:
+            case var value when context.started:
                 _PauseGame?.Invoke();
                 break;
         }

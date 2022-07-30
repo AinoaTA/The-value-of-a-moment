@@ -5,48 +5,37 @@ namespace Menu
 {
     public class PauseMenu : MonoBehaviour
     {
-        [SerializeField] private GameObject pauseCanvas;
-        [SerializeField] private CinemachineVirtualCamera virtualCamera3D;
-
+        public CanvasGroup pause;
+        // [SerializeField] private CinemachineVirtualCamera virtualCamera3D;
         private bool paused = false;
 
-        private void OnEnable()
+        private void OnDisable()
         {
-            GameManager.GetManager().playerInputs._PauseGame += PauseGame;
+            GameManager.GetManager().playerInputs._PauseGame -= PauseGame;
         }
 
         private void Start()
         {
-            pauseCanvas.SetActive(false);
-        }
-
-        private void Update()
-        {
-            //if (!paused && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay
-            //    && Input.GetKeyDown(KeyCode.P) && !GameManager.GetManager().CanvasManager.m_activated)
-            //{
-            //    PauseGame();
-            //}
-
-            //if(paused && Input.GetKeyDown(KeyCode.P))
-            //{
-            //    ResumeGame();
-            //}
+            GameManager.GetManager().playerInputs._PauseGame += PauseGame;
+            GameManager.GetManager().canvasController.HideCanvas(pause);
         }
 
         public void PauseGame()
         {
+            print("Hola");
             if (!paused)
             {
+                print("paused");
                 GameManager.GetManager().canvasController.UnLock();
-                virtualCamera3D.enabled = false;
-                Time.timeScale = 0;
-                pauseCanvas.SetActive(true);
+                // virtualCamera3D.enabled = false;
+                GameManager.GetManager().canvasController.ShowCanvas(pause);
                 paused = true;
                 //StartCoroutine(WaitToPauseGame());
+                Time.timeScale = 0;
             }
-            else 
+            else
             {
+                print("resume");
                 ResumeGame();
             }
 
@@ -54,10 +43,10 @@ namespace Menu
 
         public void ResumeGame()
         {
-            virtualCamera3D.enabled = true;
+            // virtualCamera3D.enabled = true;
             Time.timeScale = 1;
             GameManager.GetManager().canvasController.Lock();
-            pauseCanvas.SetActive(false);
+            GameManager.GetManager().canvasController.HideCanvas(pause);
             paused = false;
         }
 
