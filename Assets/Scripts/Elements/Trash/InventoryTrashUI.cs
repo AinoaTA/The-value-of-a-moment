@@ -9,10 +9,10 @@ public class InventoryTrashUI : MonoBehaviour
     private string dirtyClothesPhrase = "";
     private string trashPhrase = "";
 
-    private int trashCollected;
-    private int dirtyClothes;
+    [HideInInspector] public int trashCollected;
+    [HideInInspector] public int dirtyClothesCollected;
     Trash current;
-    TrashBucket currentbucket;
+    BucketController currentbucket;
 
     private void Start()
     {
@@ -26,9 +26,9 @@ public class InventoryTrashUI : MonoBehaviour
     public void AddDirtyClothes(Trash t)
     {
         dirtyClothesCounter.gameObject.SetActive(true);
-        dirtyClothes++;
+        dirtyClothesCollected++;
         current = t;
-        dirtyClothesCounter.text = dirtyClothes.ToString() + dirtyClothesPhrase;
+        dirtyClothesCounter.text = dirtyClothesCollected.ToString() + dirtyClothesPhrase;
         GameManager.GetManager().gameStateController.ChangeGameState(1);
     }
 
@@ -43,7 +43,7 @@ public class InventoryTrashUI : MonoBehaviour
 
     public void RemoveTrash()
     {
-        StartCoroutine(RemoveTrashDelay(current,trashCollected, trashCounter, trashPhrase));
+        StartCoroutine(RemoveTrashDelay(current, trashCollected, trashCounter, trashPhrase));
         trashCollected = 0;
     }
 
@@ -53,14 +53,14 @@ public class InventoryTrashUI : MonoBehaviour
         // dirtyClothes = 0;
     }
 
-    public void RemoveDirtyClothes(TrashBucket bucket)
+    public void RemoveDirtyClothes(BucketController bucket)
     {
         currentbucket = bucket;
-        StartCoroutine(RemoveTrashDelay(current,dirtyClothes, dirtyClothesCounter, dirtyClothesPhrase));
-        dirtyClothes = 0;
+        StartCoroutine(RemoveTrashDelay(current, dirtyClothesCollected, dirtyClothesCounter, dirtyClothesPhrase));
+        dirtyClothesCollected = 0;
     }
 
-    public int CurrentDirtyClothes() { return dirtyClothes; }
+    public int CurrentDirtyClothes() { return dirtyClothesCollected; }
     public int CurrentTrash() { return trashCollected; }
 
     IEnumerator RemoveTrashDelay(Trash type, int trash, TMP_Text text, string finalText)

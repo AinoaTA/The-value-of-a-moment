@@ -11,12 +11,12 @@ public class Interactables : MonoBehaviour
     public int totalOptions = 1;
     public bool m_Done;
     public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
-    public bool hasDependencies, hasLeastOne;
+    public bool hasDependencies, hasNecessary;
 
     [Header("Others")]
     public GameObject OptionsCanvas;
     public Animator anim;
-    [SerializeField]private Tasks task;
+    [SerializeField] private Tasks task;
 
     private Material[] m_Material;
 
@@ -62,6 +62,15 @@ public class Interactables : MonoBehaviour
                 if (!GetComponent<Plant>().regadera.grabbed)
                     return;
 
+            //if (hasDependencies)
+            //{
+            //    if (!hasNecessary)
+            //    {
+            //        print("(llego=");  
+            //    } else
+            //        print("coño si llego");
+            //}
+            print(showing + " showingggggg");
             showing = true;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(this);
