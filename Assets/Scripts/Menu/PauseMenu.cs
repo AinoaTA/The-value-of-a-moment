@@ -10,6 +10,11 @@ namespace Menu
 
         private bool paused = false;
 
+        private void OnEnable()
+        {
+            GameManager.GetManager().playerInputs._PauseGame += PauseGame;
+        }
+
         private void Start()
         {
             pauseCanvas.SetActive(false);
@@ -31,11 +36,20 @@ namespace Menu
 
         public void PauseGame()
         {
-            GameManager.GetManager().canvasController.UnLock();
-            virtualCamera3D.enabled = false;
-            Time.timeScale = 0;
-            pauseCanvas.SetActive(true);
-            StartCoroutine(WaitToPauseGame());
+            if (!paused)
+            {
+                GameManager.GetManager().canvasController.UnLock();
+                virtualCamera3D.enabled = false;
+                Time.timeScale = 0;
+                pauseCanvas.SetActive(true);
+                paused = true;
+                //StartCoroutine(WaitToPauseGame());
+            }
+            else 
+            {
+                ResumeGame();
+            }
+
         }
 
         public void ResumeGame()
