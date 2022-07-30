@@ -7,7 +7,7 @@ using System;
 public class PlayerHandleInputs : MonoBehaviour
 {
     public event Action _FirstInteraction, _SecondInteraction, _StopMoving, _ResetMove,
-        _MoveUp, _MoveDown, _MoveRight, _MoveLeft, _ExitInteraction;
+        _MoveUp, _MoveDown, _MoveRight, _MoveLeft, _ExitInteraction, _PauseGame;
 
     public event Action<float> _CameraPitchDelta, _CameraYawDelta;
 
@@ -80,5 +80,15 @@ public class PlayerHandleInputs : MonoBehaviour
         Vector2 l_CameraDelta = context.ReadValue<Vector2>();
         _CameraPitchDelta?.Invoke(l_CameraDelta.x);
         _CameraYawDelta?.Invoke(l_CameraDelta.y);
+    }
+
+    public void OnPauseGame(InputAction.CallbackContext ctx)
+    {
+        switch (ctx)
+        {
+            case var value when ctx.started:
+                _PauseGame?.Invoke();
+                break;
+        }
     }
 }
