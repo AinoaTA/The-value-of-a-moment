@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Plant : Interactables, ITask
+public class Plant : Interactables, ITask, IDependencies
 {
     public GameObject tutorial;
     private GameObject minigameCanvas = null;
@@ -19,13 +19,19 @@ public class Plant : Interactables, ITask
 
     private bool tutorialShowed = false;
 
+    #region DEPENDENCIES
+    private bool hasNecessary_;
+    public bool hasNecessary { get => regadera.grabbed; set => hasNecessary_ = value; }
+
+    #endregion
+
     #region TASK
     [Space(20)]
     [Header("TASK")]
     [SerializeField] private string nameTask_;
     [SerializeField] private Calendar.TaskType.Task task_;
     [SerializeField] private int extraAutocontrol = 5;
-    private Calendar.TaskType taskType_;
+    [SerializeField] private Calendar.TaskType taskType_;
     private bool taskCompleted_;
 
     public int extraAutocontrolByCalendar { get => extraAutocontrol; }
@@ -33,6 +39,55 @@ public class Plant : Interactables, ITask
     public string nameTask { get => nameTask_; }
     public Calendar.TaskType.Task task { get => task_; }
     public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
+    #region OnMouse
+    private void OnMouseEnter()
+    {
+        hasNecessary = regadera.grabbed;
+        if (!hasNecessary)
+            return;
+
+        base.Show();
+    }
+    private void OnMouseExit()
+    {
+        base.Hide();
+    }
     #endregion
 
     IEnumerator routine;
@@ -45,22 +100,6 @@ public class Plant : Interactables, ITask
         if (waterCan != null) waterCan.gameObject.SetActive(false);
         plantProcess[currPlantPhase].SetActive(true);
     }
-    #region OnMouse
-    private void OnMouseEnter()
-    {
-        hasNecessary = regadera.grabbed;
-
-        if (!hasNecessary)
-            return;
-
-        base.Show();
-    }
-    private void OnMouseExit()
-    {
-        base.Hide();
-    }
-    #endregion
-
     public override void Interaction(int options)
     {
         if (!hasNecessary)
@@ -190,33 +229,5 @@ public class Plant : Interactables, ITask
         yield return new WaitForSecondsRealtime(1.5f);
         minigameCanvas.SetActive(true);
     }
-
-    #region TASK
-    public void TaskReset()
-    {
-        taskCompleted = false;
-    }
-
-    public void TaskCompleted()
-    {
-        taskCompleted = true;
-    }
-
-    public void RewardedTask()
-    {
-        Debug.Log("Rewarded Task");
-        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
-    }
-
-    public void SetTask()
-    {
-        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
-    }
-
-    public void CheckDoneTask()
-    {
-        throw new System.NotImplementedException();
-    }
-    #endregion
 }
 

@@ -60,10 +60,10 @@ namespace Calendar
         {
             return calendarInformation.ContainsKey(t);
         }
-        public void GetTaskReward(Tasks t)
+        public void GetTaskReward(ITask t)
         {
-            //if (calendarInformation.ContainsKey(t.taskAssociated) && t.taskCompleted)
-            //    t.RewardedTask();
+            if (CheckReward(t.taskAssociated) && t.taskCompleted)
+                t.RewardedTask();
         }
 
         public void ShowCalendar() { calendar.SetActive(true); }

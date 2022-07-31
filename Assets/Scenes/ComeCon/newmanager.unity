@@ -4871,28 +4871,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134264170}
   m_CullTransparentMesh: 1
---- !u!1 &1198984993 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6834247452603576431, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
-  m_PrefabInstance: {fileID: 7891270562170728847}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1198984997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198984993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b745a3e4b553e1a4cb215e4c77fc04f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  extraAutocontrolByCalendar: 3
-  nameTask: Recoger la ropa
-  task: 2
-  taskAssociated: {fileID: 0}
-  taskCompleted: 0
 --- !u!1 &1243805411
 GameObject:
   m_ObjectHideFlags: 0
@@ -7040,6 +7018,7 @@ MonoBehaviour:
   nameTask_: Programar
   task_: 0
   extraAutocontrol: 5
+  taskType_: {fileID: 0}
 --- !u!1 &1874080408
 GameObject:
   m_ObjectHideFlags: 0
@@ -14976,8 +14955,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
-  m_LocalRotation: {x: 0.24701595, y: -0.000006475644, z: 0.00002540311, w: 0.9690114}
-  m_LocalPosition: {x: 1.496, y: 1.964, z: -0.48799992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.068568, y: 1.3033011, z: -0.8799999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
@@ -15348,12 +15327,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1411271105}
     - target: {fileID: 4362865056370373836, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: task_
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362865056370373836, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameTask_
+      value: Regar la planta
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362865056370373836, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: hasDependencies
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362865056370373836, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: extraAutocontrol
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5080076004713269274, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: task
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080076004713269274, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: task_
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080076004713269274, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameTask_
+      value: Airear el cuarto
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080076004713269274, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: extraAutocontrol
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5669261066363563703, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_Camera
@@ -15364,8 +15367,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 910650468}
     - target: {fileID: 6834247452603576402, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: task_
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834247452603576402, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameTask_
+      value: Recoger la ropa
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834247452603576402, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: hasDependencies
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834247452603576402, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: extraAutocontrol
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6859219928544055574, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: cam
@@ -15374,6 +15389,14 @@ PrefabInstance:
     - target: {fileID: 6859219928544055574, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: task
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6859219928544055574, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: task_
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6859219928544055574, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameTask_
+      value: Hacer la cama
       objectReference: {fileID: 0}
     - target: {fileID: 7008169561145357523, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_Name
@@ -15415,5 +15438,7 @@ PrefabInstance:
       propertyPath: canvasFunctions.Array.data[3]
       value: 
       objectReference: {fileID: 417833477}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7244993254925932398, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+    - {fileID: 5085952171516077505, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d16712be9b1a5ea42916db917657bb51, type: 3}

@@ -26,7 +26,7 @@ public class Bed : Interactables,ITask
     [SerializeField] private string nameTask_;
     [SerializeField] private Calendar.TaskType.Task task_;
     [SerializeField] private int extraAutocontrol = 5;
-    private Calendar.TaskType taskType_;
+    [SerializeField] private Calendar.TaskType taskType_;
     private bool taskCompleted_;
 
     public int extraAutocontrolByCalendar { get => extraAutocontrol; }
@@ -34,8 +34,42 @@ public class Bed : Interactables,ITask
     public string nameTask { get => nameTask_; }
     public Calendar.TaskType.Task task { get => task_; }
     public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
-    #endregion
 
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
 
     private void Awake()
     {
@@ -133,7 +167,7 @@ public class Bed : Interactables,ITask
         minigameCanvas.SetActive(false);
         interactDone = true;
         cam.cullingMask = -1;
-        //base.CheckDoneTask();
+        CheckDoneTask();
         m_Sheet.SetActive(true);
         badBed.SetActive(false);
         interactTextBed.SetActive(false);
@@ -240,32 +274,4 @@ public class Bed : Interactables,ITask
         minigameCanvas.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
     }
-
-    #region TASK
-    public void TaskReset()
-    {
-        taskCompleted = false;
-    }
-
-    public void TaskCompleted()
-    {
-        taskCompleted = true;
-    }
-
-    public void RewardedTask()
-    {
-        Debug.Log("Rewarded Task");
-        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
-    }
-
-    public void SetTask()
-    {
-        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
-    }
-
-    public void CheckDoneTask()
-    {
-        throw new System.NotImplementedException();
-    }
-    #endregion
 }

@@ -11,7 +11,7 @@ public class Interactables : MonoBehaviour
     public int totalOptions = 1;
     [SerializeField] protected bool interactDone;
     [SerializeField] protected float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
-    [SerializeField] protected bool hasDependencies, hasNecessary;
+    //[SerializeField] protected bool hasDependencies, hasNecessary;
 
     [Header("Others")]
     [SerializeField] private GameObject OptionsCanvas;
@@ -49,9 +49,6 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (hasDependencies)
-            return;
-
         Show();
     }
     private void OnMouseExit()

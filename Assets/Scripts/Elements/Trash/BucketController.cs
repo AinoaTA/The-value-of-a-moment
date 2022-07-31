@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BucketController : Interactables, ITask
+public class BucketController : Interactables, ITask,IDependencies
 {
     [SerializeField] private enum TypeBucket { CLOTHES, TRASH }
     [SerializeField] private TypeBucket type = TypeBucket.TRASH;
@@ -9,13 +9,19 @@ public class BucketController : Interactables, ITask
     [SerializeField] private int maxCapacity = 5;
     [SerializeField] private int trashGot;
 
+    #region DEPENDENCIES
+    private bool hasNecessary_;
+    public bool hasNecessary { get => hasNecessary_; set => hasNecessary_ = value; }
+
+    #endregion
+
     #region TASK
     [Space(20)]
     [Header("TASK")]
     [SerializeField] private string nameTask_;
     [SerializeField] private Calendar.TaskType.Task task_;
     [SerializeField] private int extraAutocontrol = 5;
-    private Calendar.TaskType taskType_;
+    [SerializeField] private Calendar.TaskType taskType_;
     private bool taskCompleted_;
 
     public int extraAutocontrolByCalendar { get => extraAutocontrol; }
@@ -23,6 +29,41 @@ public class BucketController : Interactables, ITask
     public string nameTask { get => nameTask_; }
     public Calendar.TaskType.Task task { get => task_; }
     public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
     #endregion
     #region OnMouse
     private void OnMouseEnter()
@@ -91,31 +132,4 @@ public class BucketController : Interactables, ITask
         currCapacity = 0;
         trashGot = 0;
     }
-    #region TASK
-    public void TaskReset()
-    {
-        taskCompleted = false;
-    }
-
-    public void TaskCompleted()
-    {
-        taskCompleted = true;
-    }
-
-    public void RewardedTask()
-    {
-        Debug.Log("Rewarded Task");
-        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
-    }
-
-    public void SetTask()
-    {
-        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
-    }
-
-    public void CheckDoneTask()
-    {
-        throw new System.NotImplementedException();
-    }
-    #endregion
 }

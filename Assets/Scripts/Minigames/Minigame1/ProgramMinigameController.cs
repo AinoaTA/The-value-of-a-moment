@@ -1,9 +1,6 @@
-
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using System.Collections;
-using Calendar;
 
 public class ProgramMinigameController : MonoBehaviour, ITask
 {
@@ -19,21 +16,52 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     [Space(20)]
     [Header("TASK")]
     [SerializeField] private string nameTask_;
-    [SerializeField] private TaskType.Task task_;
+    [SerializeField] private Calendar.TaskType.Task task_;
     [SerializeField] private int extraAutocontrol = 5;
-    private TaskType taskType_;
+    [SerializeField] private Calendar.TaskType taskType_;
     private bool taskCompleted_;
 
     public int extraAutocontrolByCalendar { get => extraAutocontrol; }
     public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
     public string nameTask { get => nameTask_; }
-    public TaskType.Task task { get => task_; }
-    public TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
-    #endregion
-    private void Update()
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
     {
-        print(taskAssociated);
+        taskCompleted = false;
     }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
 
     private void Start()
     {
@@ -45,7 +73,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         gameInitialized = false;
         solved = true;
         GameManager.GetManager().dayNightCycle.TaskDone();
-        // CheckDoneTask();
+        CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
 
 
@@ -92,31 +120,4 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     public bool GetSolved() { return solved; }
 
 
-    #region TASK
-    public void TaskReset()
-    {
-        taskCompleted = false;
-    }
-
-    public void TaskCompleted()
-    {
-        taskCompleted = true;
-    }
-
-    public void RewardedTask()
-    {
-        Debug.Log("Rewarded Task");
-        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
-    }
-
-    public void SetTask()
-    {
-        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
-    }
-
-    public void CheckDoneTask()
-    {
-        throw new System.NotImplementedException();
-    }
-    #endregion
 }
