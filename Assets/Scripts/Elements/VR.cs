@@ -13,7 +13,7 @@ public class VR : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!interactDone)
                 {
                     //if (m_Counter >= m_HelpPhrasesVoiceOff.Length - 1)
                     //    m_Counter = 0;
@@ -22,7 +22,7 @@ public class VR : Interactables
                     GameManager.GetManager().autocontrol.AddAutoControl(3);
                     m_Counter++;
 
-                    m_Done = true;
+                    interactDone = true;
                 }
 
                 break;
@@ -32,6 +32,6 @@ public class VR : Interactables
 
     public void ResetVRDay()
     {
-        m_Done = false;
+        interactDone = false;
     }
 }

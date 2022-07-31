@@ -75,7 +75,7 @@ public class CameraController : MonoBehaviour
                 return virtualCameras[v].ID;
             }
         }
-        Debug.LogWarning("There is not a " + name + " Camera set in CamerasController");
+        Debug.LogWarning("There is not a " + name + " Camera set in CamerasController. Maybe it doesn't need one");
         return 0;
     }
 

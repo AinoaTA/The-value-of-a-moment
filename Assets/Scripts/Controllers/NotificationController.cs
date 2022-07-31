@@ -33,8 +33,8 @@ public class NotificationController : MonoBehaviour
     private void SendNotification()
     {
         m_CurrentNotRead = true;
-        if(GameManager.GetManager().canvasController.m_NotificationCanvas) GameManager.GetManager().canvasController.m_NotificationCanvas.SetActive(true);
-        m_RandomValue = Random.Range(0, 2); //frase random elegida.
+        //if(GameManager.GetManager().canvasController.m_NotificationCanvas) GameManager.GetManager().canvasController.m_NotificationCanvas.SetActive(true);
+        //m_RandomValue = Random.Range(0, 2); //frase random elegida.
 
         m_MessageDelegate?.Invoke();
 
@@ -71,8 +71,8 @@ public class NotificationController : MonoBehaviour
 
     public void ReadOption()
     {
-        GameManager.GetManager().canvasController.NotificationMessage.SetActive(false);
-        GameManager.GetManager().canvasController.MessageOpen.SetActive(true);
+        //GameManager.GetManager().canvasController.NotificationMessage.SetActive(false);
+        //GameManager.GetManager().canvasController.MessageOpen.SetActive(true);
         m_CurrentNotRead = false;
 
         float l_confident;
@@ -93,8 +93,8 @@ public class NotificationController : MonoBehaviour
     public void DeleteOption()
     {
         timer /= 2;
-        GameManager.GetManager().canvasController.MessageOpen.SetActive(false);
-        GameManager.GetManager().canvasController.NotificationMessage.SetActive(false);
+        //GameManager.GetManager().canvasController.MessageOpen.SetActive(false);
+        //GameManager.GetManager().canvasController.NotificationMessage.SetActive(false);
 
         m_CurrentNotRead = false;
     }

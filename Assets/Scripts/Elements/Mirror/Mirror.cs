@@ -19,9 +19,9 @@ public class Mirror : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!interactDone)
                 {
-                    m_Done = true;
+                    interactDone = true;
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     GameManager.GetManager().cameraController.StartInteractCam(7);
 
@@ -102,6 +102,6 @@ public class Mirror : Interactables
 
     public override void ResetInteractable()
     {
-        m_Done = false;
+        interactDone = false;
     }
 }

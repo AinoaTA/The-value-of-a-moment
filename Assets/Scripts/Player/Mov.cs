@@ -5,8 +5,8 @@ public class Mov : MonoBehaviour
     private Vector2 m_MovementAxis;
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     private Vector3 m_Direction;
-    public Camera cam;
-    public float m_Speed, m_MaxSpeed = 2, m_StopSpeedOffset = 0.2f;
+    [SerializeField]private Camera cam;
+    [SerializeField] private float speed, maxSpeed = 1.4f, stopSpeedOffset = 0.2f;
     public GameObject prop;
     bool moving;
     Vector3 m_Forward, m_Right, m_Movement;
@@ -15,11 +15,11 @@ public class Mov : MonoBehaviour
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
 
-    public Animator m_Anim;
+    [SerializeField] private Animator animator;
     // bool cutOff;
     private void Start()
     {
-        m_Speed = m_MaxSpeed;
+        speed = maxSpeed;
         m_CharacterController = GetComponent<CharacterController>();
          
         GameManager.GetManager().playerInputs._MoveUp += MoveUp;
@@ -96,7 +96,7 @@ public class Mov : MonoBehaviour
             m_Direction += right * movementAxis.x;
              m_Direction.Normalize();
 
-            Vector3 movement = m_Direction*Time.deltaTime* m_Speed;
+            Vector3 movement = m_Direction*Time.deltaTime* speed;
 
             CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);
         }
@@ -171,9 +171,9 @@ public class Mov : MonoBehaviour
 
     private void SetAnimations()
     {
-        if (m_CharacterController.velocity.magnitude <= m_MaxSpeed - m_StopSpeedOffset)
+        if (m_CharacterController.velocity.magnitude <= maxSpeed - stopSpeedOffset)
         {
-            m_Speed = 0.0f;
+            speed = 0.0f;
         }
     }
 

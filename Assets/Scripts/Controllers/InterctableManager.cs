@@ -55,4 +55,13 @@ public class InterctableManager : MonoBehaviour
     {
         currInteractable = interactables;
     }
+
+    public void ResetAll()
+    {
+        for (int i = 0; i < allInteractables.Count; i++)
+        {
+            allInteractables[i].ResetInteractable();
+        }
+    
+    }
 }

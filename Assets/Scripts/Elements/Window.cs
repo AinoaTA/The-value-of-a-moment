@@ -57,8 +57,8 @@ public class Window : Interactables
 
     public void ResetWindow()
     {
-        m_Done = false;
-        isOpen = m_Done;
+        interactDone = false;
+        isOpen = interactDone;
         gameInitialized = false;
         glass.transform.position = initPos;
     }
@@ -131,7 +131,7 @@ public class Window : Interactables
             else if (displacement > maxHeight)
             {
                 height = maxHeight;
-                m_Done = isOpen = true;
+                interactDone = isOpen = true;
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -139,7 +139,7 @@ public class Window : Interactables
 
     private void OnMouseUp()
     {
-        if (m_Done && gameInitialized)
+        if (interactDone && gameInitialized)
             WindowDone();
     }
     #endregion
@@ -151,7 +151,7 @@ public class Window : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         minigameCanvas.SetActive(false);
         isOpen = true;
-        m_Done = true;
+        interactDone = true;
         GameManager.GetManager().dayNightCycle.TaskDone();
     }
 

@@ -21,6 +21,14 @@ public class Bed : Interactables
     private Vector3 lastPosDormirText;
     private GameObject badBed;
 
+    private void Awake()
+    {
+        totalOptions = 2;
+        gameInitialized = false;
+
+        initPosDormirText = sleepTextBed.transform.localPosition;
+        lastPosDormirText = new Vector3(-0.03f, lastPosDormirText.y, lastPosDormirText.z);
+    }
     private void Start()
     {
         if(m_Tutorial != null)
@@ -35,17 +43,12 @@ public class Bed : Interactables
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-        totalOptions = 2;
-        //GameManager.GetManager().Bed = this;
-        gameInitialized = false;
-
-        initPosDormirText = sleepTextBed.transform.localPosition;
-        lastPosDormirText = new Vector3(-0.03f, lastPosDormirText.y, lastPosDormirText.z);
+        GameManager.GetManager().canvasController.Lock(false);
     }
 
     void OnMouseDrag()
     {
-        if (gameInitialized && !m_Done)
+        if (gameInitialized && !interactDone)
         {
             if(!tutorialShowed)
                 InitTutorial();
@@ -57,7 +60,7 @@ public class Bed : Interactables
 
             if (displacement < minDesplacement)
             {
-                print("not enough");
+                print("Not enough");
                 movement = minDesplacement;
             }
             else if (displacement < maxDesplacement)
@@ -66,7 +69,7 @@ public class Bed : Interactables
             else if (displacement > maxDesplacement)
             {
                 movement = maxDesplacement;
-                m_Done = true;
+                interactDone = true;
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
@@ -94,7 +97,7 @@ public class Bed : Interactables
 
     private void OnMouseUp()
     {
-        if (m_Done && gameInitialized)
+        if (interactDone && gameInitialized)
             BedDone();
     }
 
@@ -110,7 +113,7 @@ public class Bed : Interactables
         
         gameInitialized = false;
         minigameCanvas.SetActive(false);
-        m_Done = true;
+        interactDone = true;
         cam.cullingMask = -1;
         base.CheckDoneTask();
         m_Sheet.SetActive(true);
@@ -126,7 +129,7 @@ public class Bed : Interactables
     {
         //GameManager.GetManager().Alarm.SetAlarmActive();
         //GameManager.GetManager().Alarm.ResetTime();
-        m_Done = false;
+        interactDone = false;
         m_Sheet.SetActive(false);
         badBed.SetActive(true);
         sleepTextBed.transform.localPosition = initPosDormirText;
@@ -141,7 +144,7 @@ public class Bed : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!interactDone)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(3);
                     gameInitialized = true;
@@ -187,6 +190,8 @@ public class Bed : Interactables
         //GameManager.GetManager().ResetTrash();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
+
+        GameManager.GetManager().interactableManager.ResetAll();
 
         //for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
         //{

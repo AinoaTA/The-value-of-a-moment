@@ -4,8 +4,8 @@ using System.Linq;
 
 public class ActionObjectManager : MonoBehaviour
 {
-    public List<ActionObject> allInteractables = new List<ActionObject>();
-    public ActionObject currActionObj;
+    public List<ActionObject> allObjects = new List<ActionObject>();
+    public ActionObject currObject;
 
     private void OnDisable()
     {
@@ -15,7 +15,7 @@ public class ActionObjectManager : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().actionObjectManager = this;
-        allInteractables = FindObjectsOfType<ActionObject>().ToList();
+        allObjects = FindObjectsOfType<ActionObject>().ToList();
     }
     private void Start()
     {
@@ -24,15 +24,21 @@ public class ActionObjectManager : MonoBehaviour
 
     public void InteractionManager()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currActionObj == null)
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currObject == null)
             return;
 
-        currActionObj.Interaction();
-        //currActionObj = null;
+        currObject.Interaction();
     }
 
     public void LookingAnInteractable(ActionObject interactables)
     {
-        currActionObj = interactables;
+        currObject = interactables;
+    }
+
+
+    public void ResetAll()
+    {
+        for (int i = 0; i < allObjects.Count; i++)
+            allObjects[i].ResetObject();
     }
 }

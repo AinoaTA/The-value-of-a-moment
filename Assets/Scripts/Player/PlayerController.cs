@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public PlayerAnimations anim;
-    public Transform m_PlayerWakeUp;
-    public Transform m_PlayerSleep;
+    public Transform playerWakeUp;
+    public Transform playerSleep;
 
     private Mov mov;
     private bool sleep;
@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
     {
         character.enabled = false;
         sleep = false;
-        mov.m_Anim.SetBool("Sleep", sleep);
+        mov.animator.SetBool("Sleep", sleep);
 
-        transform.SetPositionAndRotation(m_PlayerWakeUp.position, m_PlayerWakeUp.rotation);
+        transform.SetPositionAndRotation(playerWakeUp.position, playerWakeUp.rotation);
         character.enabled = true;
     }
 
@@ -37,9 +37,9 @@ public class PlayerController : MonoBehaviour
     {
         character.enabled = false;
         sleep = true;
-        transform.SetPositionAndRotation(m_PlayerSleep.position, m_PlayerSleep.rotation);
+        transform.SetPositionAndRotation(playerSleep.position, playerSleep.rotation);
        // mov.prop.transform.rotation = Quaternion.identity;
-        mov.m_Anim.SetBool("Sleep", sleep);
+        mov.animator.SetBool("Sleep", sleep);
         character.enabled = true;
     }
 
@@ -59,11 +59,11 @@ public class PlayerController : MonoBehaviour
 
     public void SadMoment()
     {
-        mov.m_Anim.Play("Sad");
+        mov.animator.Play("Sad");
     }
 
     public void HappyMoment()
     {
-        mov.m_Anim.Play("Happy");
+        mov.animator.Play("Happy");
     }
 }
