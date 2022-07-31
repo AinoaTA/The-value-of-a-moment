@@ -4,8 +4,8 @@ using System.Linq;
 
 public class ActionObjectManager : MonoBehaviour
 {
-    public List<ActionObject> allObjects = new List<ActionObject>();
-    public ActionObject currObject;
+    [SerializeField] private List<ActionObject> allObjects = new List<ActionObject>();
+    [SerializeField]private ActionObject currObject;
 
     private void OnDisable()
     {

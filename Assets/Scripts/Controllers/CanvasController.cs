@@ -3,21 +3,13 @@ using UnityEngine;
 
 public class CanvasController : MonoBehaviour
 {
-    public GameObject ComputerScreen;
-    //public GameObject m_NotificationCanvas;
-    //public GameObject NotificationMessage;
-    //public GameObject MessageOpen;
-    public GameObject WindowCanvas;
-    public GameObject programMinigame;
-
     public GameObject Pointer;
-    
-    private void Start()
+
+    private void Awake()
     {
         GameManager.GetManager().canvasController = this;
         Lock();
-       //Debug.Log("there is a Lock() commented here");
-        
+        //Debug.Log("there is a Lock() commented here"); 
     }
 
     public void ComputerScreenOut()

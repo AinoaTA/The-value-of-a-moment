@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
-
-public class Bed : Interactables
+public class Bed : Interactables,ITask
 {
     public Camera cam;
     public GameObject m_Tutorial;
     private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
-    public GameObject m_Sheet;  //sabana
+    public GameObject m_Sheet; //sabana
     public GameObject interactTextBed;
     public GameObject sleepTextBed;
     private bool gameInitialized;
@@ -21,6 +20,23 @@ public class Bed : Interactables
     private Vector3 lastPosDormirText;
     private GameObject badBed;
 
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+    #endregion
+
+
     private void Awake()
     {
         totalOptions = 2;
@@ -31,26 +47,28 @@ public class Bed : Interactables
     }
     private void Start()
     {
-        if(m_Tutorial != null)
+        SetTask();
+
+        if (m_Tutorial != null)
         {
-            minigameCanvas = m_Tutorial.transform.parent.gameObject;
+            minigameCanvas = m_Tutorial;//.transform.parent.gameObject;
             minigameCanvas.SetActive(false);
         }
-        if(m_SheetBad != null)
+        if (m_SheetBad != null)
         {
             badBed = m_SheetBad.transform.parent.gameObject;
             m_SheetBad.SetActive(true);
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-        GameManager.GetManager().canvasController.Lock(false);
+
     }
 
     void OnMouseDrag()
     {
         if (gameInitialized && !interactDone)
         {
-            if(!tutorialShowed)
+            if (!tutorialShowed)
                 InitTutorial();
             else
                 m_Tutorial.SetActive(false);
@@ -73,16 +91,16 @@ public class Bed : Interactables
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
-    } 
+    }
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
         Animator animator = m_Tutorial.GetComponent<Animator>();
-        if(animator != null) animator.SetBool("show", true);
+        if (animator != null) animator.SetBool("show", true);
         StartCoroutine(HideTutorial());
         tutorialShowed = true;
     }
-    
+
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
@@ -110,12 +128,12 @@ public class Bed : Interactables
 
     public void BedDone()
     {
-        
+
         gameInitialized = false;
         minigameCanvas.SetActive(false);
         interactDone = true;
         cam.cullingMask = -1;
-        base.CheckDoneTask();
+        //base.CheckDoneTask();
         m_Sheet.SetActive(true);
         badBed.SetActive(false);
         interactTextBed.SetActive(false);
@@ -157,7 +175,7 @@ public class Bed : Interactables
             case 2:
                 GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.Init;
                 GameManager.GetManager().canvasController.Lock();
-                
+
                 StartCoroutine(DelayReset());
                 break;
             default:
@@ -222,4 +240,32 @@ public class Bed : Interactables
         minigameCanvas.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
     }
+
+    #region TASK
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 }

@@ -16,7 +16,6 @@ public class Interactables : MonoBehaviour
     [Header("Others")]
     [SerializeField] private GameObject OptionsCanvas;
     [SerializeField] private Animator anim;
-    [SerializeField] private Tasks task;
 
     public virtual bool GetDone() { return interactDone; }
 
@@ -30,16 +29,11 @@ public class Interactables : MonoBehaviour
     {
         actionEnter = false;
         SetCanvasValue(false);
-        print("exit interaction");
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
     [HideInInspector] public bool showing = false;
     protected bool actionEnter;
 
-    private void Awake()
-    {
-        task = GetComponent<Tasks>();
-    }
     private void Start()
     {
         cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
@@ -57,7 +51,7 @@ public class Interactables : MonoBehaviour
     {
         if (hasDependencies)
             return;
-       
+
         Show();
     }
     private void OnMouseExit()
@@ -85,28 +79,27 @@ public class Interactables : MonoBehaviour
         }
     }
 
-    
     public void SetCanvasValue(bool showing_)
     {
         showing = showing_;
         anim.SetBool("Showing", showing_);
     }
 
-    public void CheckDoneTask()
-    {
-        if (task == null)
-            return;
+    //public void CheckDoneTask()
+    //{
+    //    if (task == null)
+    //        return;
 
-        if (GetDone())
-        {
-            CalendarController cal = GameManager.GetManager().calendarController;
-            if (cal.CheckReward(task.taskAssociated))
-            {
-                if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
-                {
-                    task.TaskCompleted();
-                }
-            }
-        }
-    }
+    //    if (GetDone())
+    //    {
+    //        CalendarController cal = GameManager.GetManager().calendarController;
+    //        if (cal.CheckReward(task.taskAssociated))
+    //        {
+    //            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
+    //            {
+    //                task.TaskCompleted();
+    //            }
+    //        }
+    //    }
+    //}
 }

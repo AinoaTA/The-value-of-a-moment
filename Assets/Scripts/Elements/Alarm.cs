@@ -24,7 +24,6 @@ public class Alarm : MonoBehaviour
     private void Start()
     {
         GameManager.GetManager().cameraController.StartInteractCam(1);
-        //GameManager.GetManager().Alarm = this;
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
 
@@ -165,6 +164,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator StartDayDelay()
     {
+        GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
         int counter = 0;
 

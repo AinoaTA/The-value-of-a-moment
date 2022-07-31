@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public Transform playerWakeUp;
     public Transform playerSleep;
 
-    private Mov mov;
+    private PlayerMovement mov;
     private bool sleep;
 
     private CharacterController character;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.GetManager().playerController = this;
         anim = this.GetComponent<PlayerAnimations>();
-        mov = GetComponent<Mov>();
+        mov = GetComponent<PlayerMovement>();
         character = GetComponent<CharacterController>();
     }
     private void Start()

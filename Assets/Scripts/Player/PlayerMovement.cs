@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Mov : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Vector2 m_MovementAxis;
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     private Vector3 m_Direction;
-    [SerializeField]private Camera cam;
+    [SerializeField] private Camera cam;
     [SerializeField] private float speed, maxSpeed = 1.4f, stopSpeedOffset = 0.2f;
     public GameObject prop;
     bool moving;
@@ -15,13 +15,13 @@ public class Mov : MonoBehaviour
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
 
-    [SerializeField] private Animator animator;
+    public Animator animator;
     // bool cutOff;
     private void Start()
     {
         speed = maxSpeed;
         m_CharacterController = GetComponent<CharacterController>();
-         
+
         GameManager.GetManager().playerInputs._MoveUp += MoveUp;
         GameManager.GetManager().playerInputs._MoveDown += MoveDown;
         GameManager.GetManager().playerInputs._MoveLeft += MoveLeft;
@@ -94,14 +94,14 @@ public class Mov : MonoBehaviour
             Vector2 movementAxis = m_MovementAxis;
             m_Direction += forward * movementAxis.y;
             m_Direction += right * movementAxis.x;
-             m_Direction.Normalize();
+            m_Direction.Normalize();
 
-            Vector3 movement = m_Direction*Time.deltaTime* speed;
+            Vector3 movement = m_Direction * Time.deltaTime * speed;
 
             CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);
         }
 
-        
+
 
         //parametros de la camara
         //m_Forward = cam.transform.forward;

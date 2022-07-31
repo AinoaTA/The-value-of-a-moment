@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Plant : Interactables
+public class Plant : Interactables, ITask
 {
     public GameObject tutorial;
     private GameObject minigameCanvas = null;
@@ -19,9 +19,26 @@ public class Plant : Interactables
 
     private bool tutorialShowed = false;
 
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+    #endregion
+
     IEnumerator routine;
     private void Start()
     {
+        SetTask();
         minigameCanvas = tutorial;//.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
 
@@ -173,5 +190,33 @@ public class Plant : Interactables
         yield return new WaitForSecondsRealtime(1.5f);
         minigameCanvas.SetActive(true);
     }
+
+    #region TASK
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 }
 

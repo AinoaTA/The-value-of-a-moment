@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class Window : Interactables
+public class Window : Interactables, ITask
 {
-    [SerializeField]private GameObject glass;
+    [SerializeField] private GameObject glass;
     [SerializeField] private GameObject tutorial;
     private GameObject minigameCanvas = null;
     private Vector3 initPos;
@@ -15,12 +15,29 @@ public class Window : Interactables
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
-    [SerializeField]private float distance;
+    [SerializeField] private float distance;
     bool temp = false;
+
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+    #endregion
 
     private void Start()
     {
-        minigameCanvas = tutorial.transform.parent.gameObject;
+        SetTask();
+        minigameCanvas = tutorial;//.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
         //GameManager.GetManager().Window = this;
         minHeight = glass.transform.position.y;
@@ -163,7 +180,33 @@ public class Window : Interactables
         return Camera.main.ScreenToWorldPoint(mousePoint).y;
     }
 
+    #region TASK
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
 
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
     #region Dialogues Region
 
     //public void StartVoiceOffDialogueWindow()
