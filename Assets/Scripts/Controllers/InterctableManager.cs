@@ -4,8 +4,8 @@ using System.Linq;
 
 public class InterctableManager : MonoBehaviour
 {
-    public List<Interactables> allInteractables = new List<Interactables>();
-    public Interactables currInteractable;
+    [SerializeField] private List<Interactables> allInteractables = new List<Interactables>();
+    [SerializeField] private Interactables currInteractable;
 
     private void OnDisable()
     {
@@ -54,5 +54,13 @@ public class InterctableManager : MonoBehaviour
     public void LookingAnInteractable(Interactables interactables)
     {
         currInteractable = interactables;
+    }
+
+    public void ResetAll()
+    {
+        for (int i = 0; i < allInteractables.Count; i++)
+        {
+            allInteractables[i].ResetInteractable();
+        }
     }
 }

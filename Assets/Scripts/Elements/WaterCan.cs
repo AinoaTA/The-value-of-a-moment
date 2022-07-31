@@ -7,7 +7,7 @@ public class WaterCan : MonoBehaviour
     private Vector3 offSetExit = new Vector3(0.5f, 0f, 0.5f);
     public Vector3 clamp;
     public ParticleSystem particles;
-    public bool tengoRegadera;
+    //public bool grabbed;
 
     public ParticleSystem GrowUpParticle;
 
@@ -16,7 +16,6 @@ public class WaterCan : MonoBehaviour
     private void Start()
     {
         dragg = false;
-        tengoRegadera = false;
         startPos = transform.position;
     }
 

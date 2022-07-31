@@ -5,8 +5,6 @@ namespace Calendar
 {
     public class CalendarController : MonoBehaviour
     {
-        [SerializeField] private Tasks[] getAllTasks;
-        //[SerializeField] private List<TaskType> interactablesTask = new List<TaskType>();
         [SerializeField] private List<SpaceCalendar> allTimeTable = new List<SpaceCalendar>();
 
         public GameObject prefabTask;
@@ -17,26 +15,21 @@ namespace Calendar
         [SerializeField] private GameObject calendar, warning;
         [SerializeField] private MobileCalendar mobileCalendar;
         [HideInInspector] public bool modified;
-
         private void Awake()
         {
             calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
-
-            getAllTasks = FindObjectsOfType<Tasks>();
-
-            CreateTasksInCalendar();
+            GameManager.GetManager().calendarController = this;
         }
-        private void CreateTasksInCalendar()
+
+        public void CreateTasksInCalendar(ITask task)
         {
-            for (int i = 0; i < getAllTasks.Length; i++)
-            {
-                TaskType _task = Instantiate(prefabTask, contentTask.position, Quaternion.identity, contentTask).GetComponent<TaskType>();
-                getAllTasks[i].taskAssociated = _task;
-                _task.task = getAllTasks[i].task;
-                _task.nameTask = getAllTasks[i].nameTask;
-                allTask.Add(_task);
-                Debug.Log(allTask.Count + " total");
-            }
+            TaskType _task = Instantiate(prefabTask, contentTask.position, Quaternion.identity, contentTask).GetComponent<TaskType>();
+
+            _task.task = task.task;
+            _task.nameTask = task.nameTask;
+            task.taskAssociated = _task;
+            allTask.Add(_task);
+
         }
         private void Start()
         {
@@ -63,16 +56,17 @@ namespace Calendar
             }
         }
 
-        public void CheckTask(Tasks t)
+        public bool CheckReward(TaskType t)
         {
-            if (calendarInformation.ContainsKey(t.taskAssociated) && t.taskCompleted)
+            return calendarInformation.ContainsKey(t);
+        }
+        public void GetTaskReward(ITask t)
+        {
+            if (CheckReward(t.taskAssociated) && t.taskCompleted)
                 t.RewardedTask();
         }
 
-        public void ShowCalendar()
-        {
-            calendar.SetActive(true);
-        }
+        public void ShowCalendar() { calendar.SetActive(true); }
 
         public void ShowWarning(bool v)
         {

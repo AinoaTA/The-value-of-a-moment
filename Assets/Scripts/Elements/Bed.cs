@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
-
-public class Bed : Interactables
+public class Bed : Interactables,ITask
 {
     public Camera cam;
     public GameObject m_Tutorial;
     private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
-    public GameObject m_Sheet;  //sabana
+    public GameObject m_Sheet; //sabana
     public GameObject interactTextBed;
     public GameObject sleepTextBed;
     private bool gameInitialized;
@@ -21,33 +20,89 @@ public class Bed : Interactables
     private Vector3 lastPosDormirText;
     private GameObject badBed;
 
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    [SerializeField] private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
+
+    private void Awake()
+    {
+        totalOptions = 2;
+        gameInitialized = false;
+
+        initPosDormirText = sleepTextBed.transform.localPosition;
+        lastPosDormirText = new Vector3(-0.03f, lastPosDormirText.y, lastPosDormirText.z);
+    }
     private void Start()
     {
-        if(m_Tutorial != null)
+        SetTask();
+
+        if (m_Tutorial != null)
         {
-            minigameCanvas = m_Tutorial.transform.parent.gameObject;
+            minigameCanvas = m_Tutorial;//.transform.parent.gameObject;
             minigameCanvas.SetActive(false);
         }
-        if(m_SheetBad != null)
+        if (m_SheetBad != null)
         {
             badBed = m_SheetBad.transform.parent.gameObject;
             m_SheetBad.SetActive(true);
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-        totalOptions = 2;
-        //GameManager.GetManager().Bed = this;
-        gameInitialized = false;
 
-        initPosDormirText = sleepTextBed.transform.localPosition;
-        lastPosDormirText = new Vector3(-0.03f, lastPosDormirText.y, lastPosDormirText.z);
     }
 
     void OnMouseDrag()
     {
-        if (gameInitialized && !m_Done)
+        if (gameInitialized && !interactDone)
         {
-            if(!tutorialShowed)
+            if (!tutorialShowed)
                 InitTutorial();
             else
                 m_Tutorial.SetActive(false);
@@ -57,7 +112,7 @@ public class Bed : Interactables
 
             if (displacement < minDesplacement)
             {
-                print("not enough");
+                print("Not enough");
                 movement = minDesplacement;
             }
             else if (displacement < maxDesplacement)
@@ -66,20 +121,20 @@ public class Bed : Interactables
             else if (displacement > maxDesplacement)
             {
                 movement = maxDesplacement;
-                m_Done = true;
+                interactDone = true;
             }
             m_SheetBad.transform.position = new Vector3(movement, m_SheetBad.transform.position.y, m_SheetBad.transform.position.z);
         }
-    } 
+    }
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
         Animator animator = m_Tutorial.GetComponent<Animator>();
-        if(animator != null) animator.SetBool("show", true);
+        if (animator != null) animator.SetBool("show", true);
         StartCoroutine(HideTutorial());
         tutorialShowed = true;
     }
-    
+
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
@@ -94,7 +149,7 @@ public class Bed : Interactables
 
     private void OnMouseUp()
     {
-        if (m_Done && gameInitialized)
+        if (interactDone && gameInitialized)
             BedDone();
     }
 
@@ -107,12 +162,12 @@ public class Bed : Interactables
 
     public void BedDone()
     {
-        
+
         gameInitialized = false;
         minigameCanvas.SetActive(false);
-        m_Done = true;
+        interactDone = true;
         cam.cullingMask = -1;
-        base.CheckDoneTask();
+        CheckDoneTask();
         m_Sheet.SetActive(true);
         badBed.SetActive(false);
         interactTextBed.SetActive(false);
@@ -126,7 +181,7 @@ public class Bed : Interactables
     {
         //GameManager.GetManager().Alarm.SetAlarmActive();
         //GameManager.GetManager().Alarm.ResetTime();
-        m_Done = false;
+        interactDone = false;
         m_Sheet.SetActive(false);
         badBed.SetActive(true);
         sleepTextBed.transform.localPosition = initPosDormirText;
@@ -141,7 +196,7 @@ public class Bed : Interactables
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!interactDone)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(3);
                     gameInitialized = true;
@@ -154,7 +209,7 @@ public class Bed : Interactables
             case 2:
                 GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.Init;
                 GameManager.GetManager().canvasController.Lock();
-                
+
                 StartCoroutine(DelayReset());
                 break;
             default:
@@ -187,6 +242,8 @@ public class Bed : Interactables
         //GameManager.GetManager().ResetTrash();
         //GameManager.GetManager().Book.ResetInteractable();
         //GameManager.GetManager().VR.ResetVRDay();
+
+        GameManager.GetManager().interactableManager.ResetAll();
 
         //for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
         //{

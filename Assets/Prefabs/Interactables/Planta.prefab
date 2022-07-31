@@ -5120,7 +5120,6 @@ MonoBehaviour:
   offSet: {x: 0.7, y: 0, z: 0.7}
   clamp: {x: 0, y: 0, z: 0}
   particles: {fileID: 2178972665391119270}
-  tengoRegadera: 0
   GrowUpParticle: {fileID: 0}
   dragg: 0
 --- !u!1 &7454196536279731908
@@ -5236,28 +5235,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameInteractable: 
   totalOptions: 1
-  m_Done: 0
+  interactDone: 0
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
   hasDependencies: 0
-  hasLeastOne: 0
+  hasNecessary: 0
   OptionsCanvas: {fileID: 0}
   anim: {fileID: 0}
-  task: {fileID: 0}
+  task: {fileID: 189503810449109020}
   showing: 0
-  water: 0
-  m_Tutorial: {fileID: 8289667739252686655}
+  tutorial: {fileID: 6425308352446235773}
   distance: 0
   waterCan: {fileID: 3272687340711968721}
+  regadera: {fileID: 0}
   timer: 0
   maxTimer: 3
-  m_process:
+  plantProcess:
   - {fileID: 3552090987569699218}
   - {fileID: 8942830460512426061}
   - {fileID: 6459519154559794892}
   - {fileID: 8856839873657723086}
-  regadera: {fileID: 0}
 --- !u!114 &189503810449109020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10490,13 +10488,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfea616c58ffd784285b55ffea22acdf, type: 3}
---- !u!1 &8289667739252686655 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1782458020306793882, guid: bfea616c58ffd784285b55ffea22acdf, type: 3}
-  m_PrefabInstance: {fileID: 7761462215412370085}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3817924677672812888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6867354495192894461, guid: bfea616c58ffd784285b55ffea22acdf, type: 3}
+  m_PrefabInstance: {fileID: 7761462215412370085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6425308352446235773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3647079124720013016, guid: bfea616c58ffd784285b55ffea22acdf, type: 3}
   m_PrefabInstance: {fileID: 7761462215412370085}
   m_PrefabAsset: {fileID: 0}

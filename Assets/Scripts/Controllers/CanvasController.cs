@@ -3,57 +3,43 @@ using UnityEngine;
 
 public class CanvasController : MonoBehaviour
 {
-    public GameObject ComputerScreen;
-    public GameObject m_NotificationCanvas;
-    public GameObject NotificationMessage;
-    public GameObject MessageOpen;
-    public GameObject WindowCanvas;
-    public GameObject programMinigame;
-
     public GameObject Pointer;
-    
-    private void Start()
+
+    private void Awake()
     {
         GameManager.GetManager().canvasController = this;
         Lock();
-       //Debug.Log("there is a Lock() commented here");
-        Pointer.SetActive(false);
+        //Debug.Log("there is a Lock() commented here"); 
     }
 
     public void ComputerScreenOut()
     {
         GameManager.GetManager().StartThirdPersonCamera();
-       
         GameManager.GetManager().canvasController.Lock();
-        StartCoroutine(DelayFadeClose());
     }
     public void ComputerScreenIn()
     {
         GameManager.GetManager().cameraController.StartInteractCam(5);
         GameManager.GetManager().canvasController.UnLock();
     }
-    private IEnumerator DelayFadeClose()
-    {
-        GameManager.GetManager().StartThirdPersonCamera();
-        yield return new WaitForSeconds(0.5f);
-        ComputerScreen.SetActive(false);
-    }
+
     #region mouse pointer state
-    public void Lock()
+    public void Lock(bool showPointer = true)
     {
-        Pointer.SetActive(true);
+        Pointer.SetActive(showPointer);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     public void UnLock()
     {
+        Pointer.SetActive(false);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        Pointer.SetActive(false);
     }
     #endregion
 
+    #region ModifyCanvasGroup
     public void ShowCanvas(CanvasGroup can) 
     {
         can.alpha = 1;
@@ -67,4 +53,5 @@ public class CanvasController : MonoBehaviour
         can.interactable = false;
 
     }
+    #endregion
 }

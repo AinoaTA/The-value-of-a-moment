@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
+    public AudioSource prefab;
     public AudioSource m_ExtraSFX1;
     public AudioSource m_ExtraSFX;
 
@@ -16,13 +17,13 @@ public class SoundController : MonoBehaviour
     public AudioClip[] introMusic;
     public AudioClip[] loopMusic;
     private int currIndex = 0;
+    public bool debugger;
 
     void Awake()
     {
         GameManager.GetManager().soundController = this;
         introLoop.volume = 0;
     }
-
     private void OnEnable()
     {
         NotificationController.m_MessageDelegate += StartMessage;
@@ -30,7 +31,6 @@ public class SoundController : MonoBehaviour
         Book.m_DelegateSFXBook += StartBook;
         DialogueControl.soundSFX += DialogueSound;
     }
-
     private void OnDisable()
     {
         NotificationController.m_MessageDelegate -= StartMessage;
@@ -39,29 +39,12 @@ public class SoundController : MonoBehaviour
         DialogueControl.soundSFX -= DialogueSound;
     }
 
-    public void StartMessage()
-    {
-        m_ExtraSFX1.PlayOneShot(m_Message);
-    }
-
-    public void StartAlarm()
-    {
-        m_ExtraSFX1.PlayOneShot(m_Alarm);
-    }
-
-    public void StartBook()
-    {
-        m_ExtraSFX1.PlayOneShot(m_Book);
-    }
-    public void StopSound()
-    {
-        m_ExtraSFX1.Stop();
-    }
-    public void SetMusic()
-    {
-        StartCoroutine(SetMusicDelay());
-        
-    }
+    public void StartMessage() { m_ExtraSFX1.PlayOneShot(m_Message); }
+    public void StartAlarm() { m_ExtraSFX1.PlayOneShot(m_Alarm); }
+    public void StartBook() { m_ExtraSFX1.PlayOneShot(m_Book); }
+    public void StopSound() { m_ExtraSFX1.Stop(); }
+    public void SetMusic() { StartCoroutine(SetMusicDelay()); }
+    public void DialogueSound() { m_ExtraSFX.PlayOneShot(dialogueBlip); }
 
     IEnumerator SetMusicDelay()
     {
@@ -75,21 +58,13 @@ public class SoundController : MonoBehaviour
             StartCoroutine(StartSaddest());
     }
 
-    public void QuitMusic(AudioSource source)
-    {
-        StartCoroutine(DecreaseAudioCo(source));
-    }
+    public void QuitMusic(AudioSource source) { StartCoroutine(DecreaseAudioCo(source)); }
     public void QuitAllMusic()
     {
         StopAllCoroutines();
-        
+
         StartCoroutine(DecreaseAudioCo(introLoop));
         StartCoroutine(DecreaseAudioCo(loop));
-    }
-
-    public void DialogueSound()
-    {
-        m_ExtraSFX.PlayOneShot(dialogueBlip);
     }
 
     private IEnumerator DecreaseAudioCo(AudioSource source)
@@ -104,8 +79,7 @@ public class SoundController : MonoBehaviour
         source.Stop();
     }
     private IEnumerator IcreaseAudioCo(int index)
-    { 
-        // introLoop.gameObject.SetActive(true);
+    {
         float counter = 0f;
         introLoop.clip = introMusic[index];
         loop.clip = loopMusic[index];
@@ -136,9 +110,7 @@ public class SoundController : MonoBehaviour
             if (index == 0)
                 StartCoroutine(StartSaddest());
             else
-            {
                 StartCoroutine(IcreaseAudioCo(index));
-            }
         }
     }
 

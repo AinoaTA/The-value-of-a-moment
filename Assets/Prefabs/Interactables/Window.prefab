@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 303026898362475768}
   - component: {fileID: 5619743137410825095}
   - component: {fileID: 2228822005793076674}
+  - component: {fileID: 8513100547907739555}
   m_Layer: 6
   m_Name: Window
   m_TagString: Window
@@ -124,23 +125,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9390576b1dd7684c903c8eb8642c433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  options: 1
-  m_Done: 0
-  m_PhrasesVoiceOff: []
-  m_HelpPhrasesVoiceOff: []
-  m_AnswersToVoiceOff: []
-  m_InteractPhrases: []
+  nameInteractable: 
+  totalOptions: 1
+  interactDone: 0
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
-  m_ExtraAutoControlCalendar: 0
-  taskAssociated: {fileID: 0}
+  hasDependencies: 0
+  hasNecessary: 0
   OptionsCanvas: {fileID: 562088181169849974}
   anim: {fileID: 7845237933690392552}
+  task: {fileID: 0}
   showing: 0
-  m_Glass: {fileID: 5230696101673908790}
-  m_Tutorial: {fileID: 0}
+  glass: {fileID: 0}
+  tutorial: {fileID: 0}
   distance: 0
+--- !u!114 &8513100547907739555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742066881513926529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b745a3e4b553e1a4cb215e4c77fc04f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extraAutocontrolByCalendar: 5
+  nameTask: Airear el cuarto
+  task: 2
+  taskAssociated: {fileID: 0}
+  taskCompleted: 0
 --- !u!65 &8513867641149201660
 BoxCollider:
   m_ObjectHideFlags: 0

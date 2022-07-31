@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class Window : Interactables
+public class Window : Interactables, ITask
 {
-    [SerializeField]private GameObject glass;
+    [SerializeField] private GameObject glass;
     [SerializeField] private GameObject tutorial;
     private GameObject minigameCanvas = null;
     private Vector3 initPos;
@@ -15,17 +15,60 @@ public class Window : Interactables
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
 
-    [SerializeField]private float distance;
+    [SerializeField] private float distance;
     bool temp = false;
 
-    private void Start()
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    [SerializeField] private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
     {
-        minigameCanvas = tutorial.transform.parent.gameObject;
-        minigameCanvas.SetActive(false);
-        //GameManager.GetManager().Window = this;
-        minHeight = glass.transform.position.y;
-        initPos = glass.transform.position;
+        taskCompleted = false;
     }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
+
     #region Inherit Interactable methods
 
     public override void Interaction(int options)
@@ -57,8 +100,8 @@ public class Window : Interactables
 
     public void ResetWindow()
     {
-        m_Done = false;
-        isOpen = m_Done;
+        interactDone = false;
+        isOpen = interactDone;
         gameInitialized = false;
         glass.transform.position = initPos;
     }
@@ -86,6 +129,15 @@ public class Window : Interactables
 
     #endregion
 
+    private void Start()
+    {
+        SetTask();
+        minigameCanvas = tutorial;//.transform.parent.gameObject;
+        minigameCanvas.SetActive(false);
+        //GameManager.GetManager().Window = this;
+        minHeight = glass.transform.position.y;
+        initPos = glass.transform.position;
+    }
     private void Update()
     {
         if (gameInitialized)
@@ -131,7 +183,7 @@ public class Window : Interactables
             else if (displacement > maxHeight)
             {
                 height = maxHeight;
-                m_Done = isOpen = true;
+                interactDone = isOpen = true;
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -139,7 +191,7 @@ public class Window : Interactables
 
     private void OnMouseUp()
     {
-        if (m_Done && gameInitialized)
+        if (interactDone && gameInitialized)
             WindowDone();
     }
     #endregion
@@ -151,7 +203,7 @@ public class Window : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         minigameCanvas.SetActive(false);
         isOpen = true;
-        m_Done = true;
+        interactDone = true;
         GameManager.GetManager().dayNightCycle.TaskDone();
     }
 
@@ -162,8 +214,6 @@ public class Window : Interactables
 
         return Camera.main.ScreenToWorldPoint(mousePoint).y;
     }
-
-
     #region Dialogues Region
 
     //public void StartVoiceOffDialogueWindow()

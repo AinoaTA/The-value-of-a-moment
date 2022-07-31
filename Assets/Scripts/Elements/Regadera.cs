@@ -9,8 +9,7 @@ public class Regadera : ActionObject
     {
         if (!grabbed)
         {
-            this.gameObject.SetActive(false);
-            waterCan.tengoRegadera = true;
+            gameObject.SetActive(false);
             GameManager.GetManager().waterCanGrabbed = true;
             grabbed = true;
         }
@@ -25,6 +24,5 @@ public class Regadera : ActionObject
     public override void ResetObject()
     {
         grabbed = false;
-        waterCan.tengoRegadera = false;
     }
 }

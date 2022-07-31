@@ -9,18 +9,15 @@ public class Interactables : MonoBehaviour
 
     [Header("Options")]
     public int totalOptions = 1;
-    public bool m_Done;
-    public float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
-    public bool hasDependencies, hasLeastOne;
+    [SerializeField] protected bool interactDone;
+    [SerializeField] protected float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
+    //[SerializeField] protected bool hasDependencies, hasNecessary;
 
     [Header("Others")]
-    public GameObject OptionsCanvas;
-    public Animator anim;
-    [SerializeField]private Tasks task;
+    [SerializeField] private GameObject OptionsCanvas;
+    [SerializeField] private Animator anim;
 
-    private Material[] m_Material;
-
-    public virtual bool GetDone() { return m_Done; }
+    public virtual bool GetDone() { return interactDone; }
 
     public virtual void Interaction(int optionNumber)
     {
@@ -32,45 +29,46 @@ public class Interactables : MonoBehaviour
     {
         actionEnter = false;
         SetCanvasValue(false);
-        print("exit interaction");
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
     [HideInInspector] public bool showing = false;
     protected bool actionEnter;
 
-    private void Awake()
-    {
-        task = GetComponent<Tasks>();
-    }
     private void Start()
     {
         cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
+        SetCanvasValue(false);
     }
 
     public virtual void ResetInteractable()
     {
-        m_Done = false;
+        interactDone = false;
         actionEnter = false;
         SetCanvasValue(false);
     }
 
     private void OnMouseEnter()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !m_Done)
+        Show();
+    }
+    private void OnMouseExit()
+    {
+        Hide();
+    }
+
+    protected void Show()
+    {
+        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing && !actionEnter && !interactDone)
         {
-            if (GetComponent<Plant>())
-                if (!GetComponent<Plant>().regadera.grabbed)
-                    return;
-           
             showing = true;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(this);
         }
     }
 
-    private void OnMouseExit()
+    protected void Hide()
     {
-        if (showing && !actionEnter && !m_Done)
+        if (showing && !actionEnter && !interactDone)
         {
             showing = false;
             anim.SetBool("Showing", showing);
@@ -80,20 +78,25 @@ public class Interactables : MonoBehaviour
 
     public void SetCanvasValue(bool showing_)
     {
+        showing = showing_;
         anim.SetBool("Showing", showing_);
     }
 
-    public void CheckDoneTask()
-    {
-        if (task == null)
-            return;
+    //public void CheckDoneTask()
+    //{
+    //    if (task == null)
+    //        return;
 
-        if (GetDone())
-        {
-            if (GameManager.GetManager().calendarController.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
-            {
-                task.TaskCompleted();
-            }
-        }
-    }
+    //    if (GetDone())
+    //    {
+    //        CalendarController cal = GameManager.GetManager().calendarController;
+    //        if (cal.CheckReward(task.taskAssociated))
+    //        {
+    //            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
+    //            {
+    //                task.TaskCompleted();
+    //            }
+    //        }
+    //    }
+    //}
 }

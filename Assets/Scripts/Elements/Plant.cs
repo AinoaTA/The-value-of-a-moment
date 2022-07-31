@@ -1,54 +1,124 @@
 using System.Collections;
 using UnityEngine;
 
-public class Plant : Interactables
+public class Plant : Interactables, ITask, IDependencies
 {
-    public bool water;
-    public GameObject m_Tutorial;
+    public GameObject tutorial;
     private GameObject minigameCanvas = null;
 
     [SerializeField] private float distance;
-    public WaterCan waterCan;
+    [SerializeField] private WaterCan waterCan; //objecto que movemos interactuando
+    [SerializeField] private Regadera regadera; //Objeto que cogemos del suelo
     Vector3 wateringInitialPos;
 
     [SerializeField] private float timer;
     [SerializeField] private float maxTimer = 3f;
-    private int currProcess = 0;
-    public GameObject[] m_process;
-    private bool started;
-    public Regadera regadera;
+    [SerializeField] private GameObject[] plantProcess;
+    private int currPlantPhase = 0;
+    private bool gameInitialized;
+
     private bool tutorialShowed = false;
+
+    #region DEPENDENCIES
+    private bool hasNecessary_;
+    public bool hasNecessary { get => regadera.grabbed; set => hasNecessary_ = value; }
+
+    #endregion
+
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    [SerializeField] private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
+    #region OnMouse
+    private void OnMouseEnter()
+    {
+        hasNecessary = regadera.grabbed;
+        if (!hasNecessary)
+            return;
+
+        base.Show();
+    }
+    private void OnMouseExit()
+    {
+        base.Hide();
+    }
+    #endregion
 
     IEnumerator routine;
     private void Start()
     {
-        minigameCanvas = m_Tutorial.transform.parent.gameObject;
+        SetTask();
+        minigameCanvas = tutorial;//.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
-        //GameManager.GetManager().Plants.Add(this);
 
-        if(waterCan != null) waterCan.gameObject.SetActive(false);
-            m_process[currProcess].SetActive(true);
+        if (waterCan != null) waterCan.gameObject.SetActive(false);
+        plantProcess[currPlantPhase].SetActive(true);
     }
-
     public override void Interaction(int options)
     {
-        if (!regadera.grabbed)
+        if (!hasNecessary)
             return;
+
         base.Interaction(options);
         switch (options)
         {
             case 1:
-                if (!m_Done)
+                if (!interactDone)
                 {
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
-                    started = true;
+                    gameInitialized = true;
                     timer = 0;
 
                     GameManager.GetManager().cameraController.StartInteractCam(6);
                     GameManager.GetManager().canvasController.UnLock();
 
-                    StartCoroutine(routine=ActivateWaterCan());
-                    print("enter");
+                    StartCoroutine(routine = ActivateWaterCan());
                 }
                 break;
             default:
@@ -58,24 +128,22 @@ public class Plant : Interactables
 
     private void Update()
     {
-        if (!tutorialShowed && started)
+        if (!tutorialShowed && gameInitialized)
             InitTutorial();
 
-        if(tutorialShowed && waterCan.dragg) m_Tutorial.SetActive(false);
+        if (tutorialShowed && waterCan.dragg) tutorial.SetActive(false);
     }
 
 
     public override void ExitInteraction()
     {
-        print("exit " + started);
-        if (!started)
+        if (!gameInitialized)
             return;
         if (routine != null)
             StopCoroutine(routine);
 
-        print("?Hola");
         GameManager.GetManager().StartThirdPersonCamera();
-        started = false;
+        gameInitialized = false;
         waterCan.gameObject.SetActive(false);
         waterCan.ResetWaterCan();
         actionEnter = false;
@@ -89,8 +157,8 @@ public class Plant : Interactables
         waterCan.gameObject.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
-        m_Done = true;
-        started = false;
+        interactDone = true;
+        gameInitialized = false;
         waterCan.dragg = false;
         CheckDoneTask();
         GameManager.GetManager().dayNightCycle.TaskDone();
@@ -104,22 +172,21 @@ public class Plant : Interactables
         regadera.ResetObject();
         waterCan.ResetWaterCan();
         timer = 0;
-        started = false;
-
+        gameInitialized = false;
     }
 
     public void NextDay()
     {
         //grow
-        if (m_Done)
+        if (interactDone)
         {
             waterCan.GrowUpParticle.Stop();
-            if (currProcess < m_process.Length)
+            if (currPlantPhase < plantProcess.Length)
             {
-                m_process[currProcess].SetActive(false);
-                currProcess++;
+                plantProcess[currPlantPhase].SetActive(false);
+                currPlantPhase++;
                 waterCan.GrowUpParticle.Play();
-                m_process[currProcess].SetActive(true);
+                plantProcess[currPlantPhase].SetActive(true);
             }
         }
     }
@@ -146,15 +213,15 @@ public class Plant : Interactables
     {
         StartCoroutine(ActivateMinigameCanvas());
         StartCoroutine(HideTutorial());
-        if(m_Tutorial.GetComponent<Animator>() != null)
-            m_Tutorial.GetComponent<Animator>().SetBool("show", true);
+        if (tutorial.GetComponent<Animator>() != null)
+            tutorial.GetComponent<Animator>().SetBool("show", true);
         tutorialShowed = true;
     }
 
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
-        m_Tutorial.SetActive(false);
+        tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()
