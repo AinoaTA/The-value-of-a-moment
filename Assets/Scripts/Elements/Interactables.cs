@@ -81,22 +81,4 @@ public class Interactables : MonoBehaviour
         showing = showing_;
         anim.SetBool("Showing", showing_);
     }
-
-    //public void CheckDoneTask()
-    //{
-    //    if (task == null)
-    //        return;
-
-    //    if (GetDone())
-    //    {
-    //        CalendarController cal = GameManager.GetManager().calendarController;
-    //        if (cal.CheckReward(task.taskAssociated))
-    //        {
-    //            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, task.taskAssociated.calendar.type))
-    //            {
-    //                task.TaskCompleted();
-    //            }
-    //        }
-    //    }
-    //}
 }
