@@ -6,6 +6,7 @@ public class TriggerAnswerChat : MonoBehaviour
     [HideInInspector]public int value;
     //TEMPORAL
     public TMP_Text text;
+    public MobileAnswers nextConver;
 
     private void Awake()
     {//TEMPORAL
@@ -15,8 +16,13 @@ public class TriggerAnswerChat : MonoBehaviour
     {
        // text.text = value.ToString();
     }
+    //public void Select()
+    //{
+    //    GameManager.GetManager().mobile.SelectedAnswer(value);
+    //}
+
     public void Select()
     {
-        GameManager.GetManager().mobile.SelectedAnswer(value);
+        GameManager.GetManager().mobile.SelectAnswer(nextConver);
     }
 }

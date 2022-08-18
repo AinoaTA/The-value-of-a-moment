@@ -121,7 +121,6 @@ public class MobileController : MonoBehaviour
                 currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
                 break;
             case Chats.second:
-                
                 currAnswersShowing[numberSelected].GetComponent<Button>().enabled = false;
                 currAnswersShowing[numberSelected].transform.SetParent(visualChats[openedChat].transform);
 
@@ -175,5 +174,10 @@ public class MobileController : MonoBehaviour
     {
         ClearAnswers(true);
         openGeneralChats[(int)currChat].SetActive(false);
+    }
+
+    public void SelectAnswer(MobileAnswers selected)
+    {
+        selected.EEEE();
     }
 }
