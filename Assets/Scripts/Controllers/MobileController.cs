@@ -11,20 +11,16 @@ public class MobileController : MonoBehaviour
 
     public void OpenChat(int number)
     {
-        print("HOLA"); 
         currChat = chats[number];
         currChat.gameObject.SetActive(true);
-
-        if (currChat.interactiveChat && !currChat.chatStarted)
+        if (currChat.interactiveChat && currChat.CanStartNewChat())
         {
-            print("Hola");
-            currChat.chatStarted = true;
+            currChat.StartNewChat();
             for (int i = 0; i < currChat.conversations[currChat.indexStardChat].allAnswers.Length; i++)
             {
-                print("Hola"+ i);
-                if (currChat.conversations[currChat.indexStardChat].allAnswers[i].previusRepply!=null)
+                if (currChat.conversations[currChat.indexStardChat].allAnswers[i].previusRepply != null)
                     StartCoroutine(SelectAnsewerIE(currChat.conversations[currChat.indexStardChat].allAnswers[i].previusRepply, true));
-                
+
                 Messages m = Instantiate(standardAnswer, transform.position, Quaternion.identity, currChat.answerContent.transform);
                 m.content.text = currChat.conversations[currChat.indexStardChat].allAnswers[i].content;
                 m.characterName.text = "";
@@ -40,7 +36,6 @@ public class MobileController : MonoBehaviour
 
     IEnumerator SelectAnsewerIE(MobileRepplies selected, bool startConver = false)
     {
-
         if (currChat.answerContent.transform.childCount >= 1)
             for (int i = 0; i < currChat.answerContent.transform.childCount; i++)
                 Destroy(currChat.answerContent.transform.GetChild(i).transform.gameObject);
@@ -61,6 +56,11 @@ public class MobileController : MonoBehaviour
         if (startConver)
             yield break;
 
+        if (selected.nextText.Length == 0)
+        {
+            currChat.ChatFinish();
+        }
+
         for (int i = 0; i < selected.nextText.Length; i++)
         {
             Messages m = Instantiate(standardAnswer, transform.position, Quaternion.identity, currChat.answerContent.transform);
@@ -69,6 +69,12 @@ public class MobileController : MonoBehaviour
             m.characterName.text = "";
         }
     }
+    public void CloseChat() 
+    {
+        currChat.gameObject.SetActive(false);
+        currChat = null;
+    }
+
     private void Awake()
     {
         GameManager.GetManager().mobile = this;

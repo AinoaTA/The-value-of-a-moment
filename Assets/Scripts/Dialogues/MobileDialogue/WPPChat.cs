@@ -10,8 +10,9 @@ public class WPPChat : MonoBehaviour
     public GameObject answerContent;
     public bool interactiveChat;
     public int indexStardChat;
-    public bool chatFinish;
-    public bool chatStarted;
+    [HideInInspector] public bool chatFinish;
+    [HideInInspector] public bool chatStarted;
+    bool nextChat=true;
     public ConverDay[] conversations;
     [System.Serializable]
     public struct ConverDay
@@ -20,6 +21,18 @@ public class WPPChat : MonoBehaviour
         public MobileAnswers[] allAnswers;
     }
 
+    public bool CanStartNewChat() 
+    {
+        return nextChat;
+    }
+
+    public void StartNewChat() 
+    {
+        nextChat = false;
+        chatStarted = true;
+    }
+
+
     public void ChatFinish()
     {
         chatStarted = false;
@@ -27,6 +40,7 @@ public class WPPChat : MonoBehaviour
     }
     public void NewDayNewChat()
     {
+        nextChat = true;
         chatStarted = false;
         chatFinish = false;
         indexStardChat++;
