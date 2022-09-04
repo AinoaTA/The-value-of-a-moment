@@ -10,19 +10,25 @@ public class WPPChat : MonoBehaviour
     public GameObject answerContent;
     public bool interactiveChat;
     public int indexStardChat;
-    public MobileAnswers[] allAnswers;
-
-    public bool ChatStarted()
+    public bool chatFinish;
+    public bool chatStarted;
+    public ConverDay[] conversations;
+    [System.Serializable]
+    public struct ConverDay
     {
-        return allAnswers[indexStardChat].started;
+        public string name;
+        public MobileAnswers[] allAnswers;
     }
 
     public void ChatFinish()
     {
-        allAnswers[indexStardChat].finished= true;
+        chatStarted = false;
+        chatFinish = true;
+    }
+    public void NewDayNewChat()
+    {
+        chatStarted = false;
+        chatFinish = false;
         indexStardChat++;
     }
-
-
-
 }

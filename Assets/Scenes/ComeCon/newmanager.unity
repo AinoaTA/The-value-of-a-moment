@@ -1735,6 +1735,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1569.983
       objectReference: {fileID: 0}
+    - target: {fileID: 6399993067142352379, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6551743951114411453, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1787,6 +1791,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1459.983
       objectReference: {fileID: 0}
+    - target: {fileID: 7954520378207116129, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8012735632995839361, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1812,6 +1820,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: converDay.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
       propertyPath: allAnswers.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1820,13 +1832,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: eb1002bf3351e1149aa1c4c51d78612d, type: 2}
     - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: conversations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
       propertyPath: allStartConvers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: converDay.Array.data[0].name
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
       propertyPath: allStartConvers.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: eb1002bf3351e1149aa1c4c51d78612d, type: 2}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: conversations.Array.data[0].name
+      value: First
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: converDay.Array.data[0].allAnswers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: converDay.Array.data[0].allAnswers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: eb1002bf3351e1149aa1c4c51d78612d, type: 2}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: converDay.Array.data[0].allAnswers.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: bcc9f609f8751a84fa0fad1e30de1caa, type: 2}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: conversations.Array.data[0].allAnswers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: conversations.Array.data[0].allAnswers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: eb1002bf3351e1149aa1c4c51d78612d, type: 2}
+    - target: {fileID: 8884799976186479847, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
+      propertyPath: conversations.Array.data[0].allAnswers.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8194cd0b1a531a34aa4dd42b37acb75c, type: 2}
     - target: {fileID: 9087126193092362813, guid: 078e4dded075d704d8740b5d8a24b7a3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2179,7 +2227,7 @@ MonoBehaviour:
   answerContent: {fileID: 0}
   interactiveChat: 0
   indexStardChat: 0
-  allAnswers: []
+  conversations: []
 --- !u!114 &417833488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,7 +2244,7 @@ MonoBehaviour:
   answerContent: {fileID: 0}
   interactiveChat: 0
   indexStardChat: 0
-  allAnswers: []
+  conversations: []
 --- !u!1 &429596625
 GameObject:
   m_ObjectHideFlags: 0
@@ -14115,7 +14163,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661694170622930091}
-  m_LocalRotation: {x: -0.451155, y: 0.76630867, z: 0.42992353, w: -0.15619247}
+  m_LocalRotation: {x: -0.45115498, y: 0.76630867, z: 0.42992353, w: -0.15619245}
   m_LocalPosition: {x: -3.3304462, y: -0.2268028, z: -0.7134527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15207,8 +15255,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
-  m_LocalRotation: {x: -0.06907449, y: -0.38544276, z: 0.029078076, w: -0.91968316}
-  m_LocalPosition: {x: 1.5393896, y: 1.1528275, z: -0.47817993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.068568, y: 1.3033011, z: -0.8799999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
