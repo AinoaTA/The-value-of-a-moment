@@ -25,6 +25,10 @@ public class SoundController : MonoBehaviour
         GameManager.GetManager().soundController = this;
         introLoop.volume = 0;
     }
+    private void Start()
+    {
+        ChangeMusicMood(0);
+    }
     private void OnEnable()
     {
         NotificationController.m_MessageDelegate += StartMessage;
@@ -101,8 +105,12 @@ public class SoundController : MonoBehaviour
     {
         StartCoroutine(ChangeMusic(index));
     }
+
     private IEnumerator ChangeMusic(int index)
     {
+         FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start();
+     print(FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start());
+
         //if (currIndex != index)
         //{
         //    currIndex = index;
@@ -113,7 +121,7 @@ public class SoundController : MonoBehaviour
         //    else
         //        StartCoroutine(IcreaseAudioCo(index));
         //}
-         
+
         yield return null;
     }
 
