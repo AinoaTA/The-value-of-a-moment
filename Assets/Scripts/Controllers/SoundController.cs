@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMOD;
 
 public class SoundController : MonoBehaviour
 {
@@ -102,16 +103,18 @@ public class SoundController : MonoBehaviour
     }
     private IEnumerator ChangeMusic(int index)
     {
-        if (currIndex != index)
-        {
-            currIndex = index;
-            StartCoroutine(DecreaseAudioCo(loop));
-            yield return new WaitUntil(() => !loop.isPlaying);
-            if (index == 0)
-                StartCoroutine(StartSaddest());
-            else
-                StartCoroutine(IcreaseAudioCo(index));
-        }
+        //if (currIndex != index)
+        //{
+        //    currIndex = index;
+        //    StartCoroutine(DecreaseAudioCo(loop));
+        //    yield return new WaitUntil(() => !loop.isPlaying);
+        //    if (index == 0)
+        //        StartCoroutine(StartSaddest());
+        //    else
+        //        StartCoroutine(IcreaseAudioCo(index));
+        //}
+         
+        yield return null;
     }
 
     IEnumerator StartSaddest()
