@@ -39,7 +39,6 @@ public class Grabbing : MonoBehaviour
     {
         if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
         {
-            print("es aquí");
             leaving = true;
             isObjectGrabbed = false;
             GameManager.GetManager().playerController.ExitInteractable();
