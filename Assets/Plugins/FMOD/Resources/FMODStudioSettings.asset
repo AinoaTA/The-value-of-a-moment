@@ -429,7 +429,7 @@ MonoBehaviour:
   sourceProjectPath: Assets/FMOD_bank/tvoam2022_project/tvoam2022_project.fspro
   sourceBankPath: Assets/FMOD_bank/Desktop
   SourceBankPathUnformatted: 
-  BankRefreshCooldown: 5
+  BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -451,7 +451,12 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
-  Banks: []
+  Banks:
+  - Ambience
+  - Environment
+  - Music
+  - Player
+  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
