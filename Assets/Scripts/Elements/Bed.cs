@@ -179,7 +179,7 @@ public class Bed : Interactables,ITask
 
     public void ResetBed()
     {
-        //GameManager.GetManager().Alarm.SetAlarmActive();
+        GameManager.GetManager().alarm.SetAlarmActive();
         //GameManager.GetManager().Alarm.ResetTime();
         interactDone = false;
         m_Sheet.SetActive(false);

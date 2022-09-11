@@ -24,7 +24,7 @@ public class Window : Interactables, ITask
     [SerializeField] private string nameTask_;
     [SerializeField] private Calendar.TaskType.Task task_;
     [SerializeField] private int extraAutocontrol = 5;
-    [SerializeField] private Calendar.TaskType taskType_;
+    private Calendar.TaskType taskType_;
     private bool taskCompleted_;
 
     public int extraAutocontrolByCalendar { get => extraAutocontrol; }

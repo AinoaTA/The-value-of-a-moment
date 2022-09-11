@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public InterctableManager interactableManager { get; set; }
     public PlayerHandleInputs playerInputs { get; set; }
     public ActionObjectManager actionObjectManager { get; set; }
+    public Alarm alarm { get; set; }
 
     //special references, maybe temproal
     public Computer computer { get; set; }
