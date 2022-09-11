@@ -69,7 +69,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637985050155892851
+  lastModified: 637985078160009769
   FileSizes: []
   Exists: 1
 --- !u!114 &-7088868674889601721
@@ -114,7 +114,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 637985050155492999
+  lastModified: 637985078159669968
   FileSizes: []
   Exists: 1
 --- !u!114 &-6346319095593356042
@@ -225,6 +225,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
+--- !u!114 &-4806336461020622195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogue/New Event
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogue/New Event
+  Guid:
+    Data1: -1991818159
+    Data2: 1306478537
+    Data3: 1642448515
+    Data4: -1592289054
+  Banks:
+  - {fileID: 5134142748231016405}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4651560398942978178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +294,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Environment.bank
   Name: Environment
   StudioPath: bank:/Environment
-  lastModified: 637985050155822797
+  lastModified: 637985078159949800
   FileSizes: []
   Exists: 1
 --- !u!114 &-3961131217374843893
@@ -339,7 +366,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/Player
-  lastModified: 637985050155982756
+  lastModified: 637985078160099718
   FileSizes: []
   Exists: 1
 --- !u!114 &-1877298266101559073
@@ -384,10 +411,10 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637985050155912765
+  lastModified: 637985078160029758
   FileSizes:
   - Name: 
-    Value: 2784
+    Value: 2872
   Exists: 1
 --- !u!114 &-1004559735501538224
 MonoBehaviour:
@@ -463,6 +490,7 @@ MonoBehaviour:
   - {fileID: 3556174017147294999}
   - {fileID: -3058100209610691419}
   - {fileID: 4178684313898064607}
+  - {fileID: 5134142748231016405}
   EditorEvents:
   - {fileID: 4888060170384781058}
   - {fileID: 7641727134524360491}
@@ -497,12 +525,13 @@ MonoBehaviour:
   - {fileID: 3942486701686635115}
   - {fileID: 4895712609640097729}
   - {fileID: -5255713288012547442}
+  - {fileID: -4806336461020622195}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7855159516461141480}
   StringsBanks:
   - {fileID: -1453216928855558764}
-  cacheTime: 637985050156202575
+  cacheTime: 637985078160559453
   cacheVersion: 131591
 --- !u!114 &1273358530235120578
 MonoBehaviour:
@@ -654,7 +683,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637985050155942739
+  lastModified: 637985078160059745
   FileSizes: []
   Exists: 1
 --- !u!114 &3752611162019329772
@@ -710,7 +739,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 1000
 --- !u!114 &4178684313898064607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +755,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 637985050156202575
+  lastModified: 637985078160529477
   FileSizes: []
   Exists: 1
 --- !u!114 &4201123354865259556
@@ -864,6 +893,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5134142748231016405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD_bank/Desktop/Dialogue.bank
+  Name: Dialogue
+  StudioPath: bank:/Dialogue
+  lastModified: 637985078160559453
+  FileSizes: []
+  Exists: 1
 --- !u!114 &5553659713932082715
 MonoBehaviour:
   m_ObjectHideFlags: 0
