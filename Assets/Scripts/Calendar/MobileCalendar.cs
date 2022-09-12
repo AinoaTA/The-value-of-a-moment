@@ -83,13 +83,13 @@ namespace Calendar
             }
         }
 
-        public void TaskDone(TaskType tipe)
+        public void TaskDone(TaskType type)
         {
             int index = 0;
             foreach (TaskType item in GameManager.GetManager().calendarController.calendarInformation.Keys)
             {
                 index++;
-                if (item == tipe)
+                if (item == type)
                 {
                     content.GetChild(index).GetComponent<Image>().color = Color.green;
                     return;
