@@ -2,10 +2,7 @@
 
 public class MichiController : MonoBehaviour
 {
-    // public Pathfinding pathfinding;
     private Animator animator;
-    private string path;
-    private int i;
     public Vector3 newPos;
     private float turningRate = 3f;
     private Quaternion targetRotation;
@@ -13,16 +10,13 @@ public class MichiController : MonoBehaviour
 
     [Range(0.1f, 2f)] public float walkSpeed;
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = this.GetComponent<Animator>();
-        i = 0;
         reset = true;
         animator.SetBool("walking", true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
