@@ -55,12 +55,12 @@ namespace Calendar
                     {
                         hora = DayNightCycle.DayState.Noche;
                     }
-                    HandleTaskView();
+                    HandleTaskView(item);
                 }
             }
         }
 
-        private void HandleTaskView()
+        private void HandleTaskView(KeyValuePair<TaskType, SpaceCalendar> item)
         {
             GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
             taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
