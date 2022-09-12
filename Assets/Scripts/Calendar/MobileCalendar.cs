@@ -39,40 +39,33 @@ namespace Calendar
             {
                 foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
                 {
-                    if (item.Value.type == SpaceCalendar.SpaceType.Manana && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Mañana)
+                    if (item.Value.type == SpaceCalendar.SpaceType.Manana && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Manana)
                     {
-                        hora = DayNightCycle.DayState.Mañana;
-                        GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
-                        taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
-                        taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
-                        taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
+                        hora = DayNightCycle.DayState.Manana;
                     }
                     else if (item.Value.type == SpaceCalendar.SpaceType.Tarde && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Tarde)
                     {
                         hora = DayNightCycle.DayState.Tarde;
-                        GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
-                        taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
-                        taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
-                        taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
                     }
                     else if (item.Value.type == SpaceCalendar.SpaceType.MedioDia && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.MedioDia)
                     {
                         hora = DayNightCycle.DayState.MedioDia;
-                        GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
-                        taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
-                        taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
-                        taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
                     }
                     else if (item.Value.type == SpaceCalendar.SpaceType.Noche && GameManager.GetManager().dayNightCycle.m_DayState == DayNightCycle.DayState.Noche)
                     {
                         hora = DayNightCycle.DayState.Noche;
-                        GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
-                        taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
-                        taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
-                        taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
                     }
+                    HandleTaskView();
                 }
             }
+        }
+
+        private void HandleTaskView()
+        {
+            GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);
+            taskView.GetComponent<Image>().sprite = item.Key.sprite.sprite;
+            taskView.transform.GetChild(0).GetComponent<TMP_Text>().text = item.Value.type.ToString();
+            taskView.transform.GetChild(1).GetComponent<TMP_Text>().text = item.Key.nameTask.ToString();
         }
 
         public void CloseCalendar()
