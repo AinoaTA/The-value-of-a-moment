@@ -42,7 +42,7 @@ public class Alarm : MonoBehaviour
     {
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
-         
+
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
 
@@ -142,6 +142,6 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
-        
+
     }
 }

@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System;
-using Random = UnityEngine.Random;
 
 public class DialogueControl : MonoBehaviour
 {
     private TMP_Text m_Text;
     private string m_CurrText;
-    private float m_TimerShowDialogue =0;
-    private float m_MaxTimeShowDialogue=10; //dependiendo de la longitud de la frase.
+    private float m_TimerShowDialogue = 0;
+    private float m_MaxTimeShowDialogue = 10; //dependiendo de la longitud de la frase.
     private bool m_DialogueActive;
 
     private AudioSource m_AudioSource;
@@ -17,9 +15,9 @@ public class DialogueControl : MonoBehaviour
     public delegate void SoundDelegate();
     public static SoundDelegate soundSFX;
 
-    [SerializeField]private List<Interactables> m_ListInteract = new List<Interactables>();
-    
-    private float m_Timer=-100;
+    [SerializeField] private List<Interactables> m_ListInteract = new List<Interactables>();
+
+    private float m_Timer = -100;
 
     private void SetTimer()
     {
@@ -48,12 +46,13 @@ public class DialogueControl : MonoBehaviour
         if (m_DialogueActive)
         {
             //m_TimerShowDialogue += Time.deltaTime;
-            if (!m_AudioSource.isPlaying && m_AudioSource.clip!=null)
+            if (!m_AudioSource.isPlaying && m_AudioSource.clip != null)
             {
                 m_DialogueActive = false;
                 m_Text.text = "";
-               // m_TimerShowDialogue = 0;
-            }else
+                // m_TimerShowDialogue = 0;
+            }
+            else
                 m_Text.text = m_CurrText;
         }
         m_Timer += Time.deltaTime;
@@ -67,7 +66,7 @@ public class DialogueControl : MonoBehaviour
     /// </summary>
     /// <param name="dialogue"></param>
     /// <param name="voice"></param>
-    public void SetDialogue(string dialogue, AudioClip voice=null)
+    public void SetDialogue(string dialogue, AudioClip voice = null)
     {
         StopDialogue();
         SetTimer();

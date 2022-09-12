@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class Bed : Interactables,ITask
+public class Bed : Interactables, ITask
 {
     public Camera cam;
     public GameObject m_Tutorial;

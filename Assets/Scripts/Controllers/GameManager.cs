@@ -1,8 +1,7 @@
-using UnityEngine;
-using System.Collections;
-
 //namespaces project
 using Calendar;
+using System.Collections;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {

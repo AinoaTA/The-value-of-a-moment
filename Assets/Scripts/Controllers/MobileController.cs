@@ -69,7 +69,7 @@ public class MobileController : MonoBehaviour
             m.characterName.text = "";
         }
     }
-    public void CloseChat() 
+    public void CloseChat()
     {
         currChat.gameObject.SetActive(false);
         currChat = null;

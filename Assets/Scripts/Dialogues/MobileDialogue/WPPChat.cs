@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WPPChat : MonoBehaviour
@@ -12,7 +10,7 @@ public class WPPChat : MonoBehaviour
     public int indexStardChat;
     [HideInInspector] public bool chatFinish;
     [HideInInspector] public bool chatStarted;
-    bool nextChat=true;
+    bool nextChat = true;
     public ConverDay[] conversations;
     [System.Serializable]
     public struct ConverDay
@@ -21,12 +19,12 @@ public class WPPChat : MonoBehaviour
         public MobileAnswers[] allAnswers;
     }
 
-    public bool CanStartNewChat() 
+    public bool CanStartNewChat()
     {
         return nextChat;
     }
 
-    public void StartNewChat() 
+    public void StartNewChat()
     {
         nextChat = false;
         chatStarted = true;

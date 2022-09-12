@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-
 public class Book : Interactables
 {
     private int m_Counter = 0;
@@ -16,7 +13,7 @@ public class Book : Interactables
         switch (options)
         {
             case 1:
-                if(m_Grabbing != null)
+                if (m_Grabbing != null)
                 {
                     m_Grabbing.SetAccessCamera(true);
                     GameManager.GetManager().cameraController.StartInteractCam(8);

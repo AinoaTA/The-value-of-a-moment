@@ -7,7 +7,7 @@ public class MobileRepplies : ScriptableObject
     [Header("REPPLY TYPE")]
     public Conversation[] conver;
     [System.Serializable]
-    public struct Conversation 
+    public struct Conversation
     {
         public Names names;
         public string answer;
