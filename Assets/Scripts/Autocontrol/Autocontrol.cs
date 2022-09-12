@@ -1,6 +1,6 @@
-using UnityEngine.UI;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Autocontrol : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class Autocontrol : MonoBehaviour
     [SerializeField] private Camera particlesCamera;
     private RenderTexture renderTexture;
     private Vector2Int renderTextureResolution;
-    
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -91,7 +91,7 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
-          
+
             GameManager.GetManager().soundController.ChangeMusicMood(0);
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)

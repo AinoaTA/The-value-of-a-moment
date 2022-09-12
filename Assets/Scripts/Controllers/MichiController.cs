@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MichiController : MonoBehaviour
 {
@@ -27,7 +25,7 @@ public class MichiController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
         if (reset)
         {
             // Calculate new random position
@@ -40,9 +38,9 @@ public class MichiController : MonoBehaviour
         }
         else
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 reset = true;
-            
+
             this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
             this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
 
@@ -56,7 +54,7 @@ public class MichiController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.layer != 2)
+        if (other.gameObject.layer != 2)
         {
             Miau();
         }

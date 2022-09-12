@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class VR : Interactables
 {
     private int m_Counter = 0;
@@ -26,8 +24,8 @@ public class VR : Interactables
                 }
 
                 break;
-        } 
-      
+        }
+
     }
 
     public void ResetVRDay()

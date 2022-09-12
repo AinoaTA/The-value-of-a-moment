@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class Bed : Interactables,ITask
+public class Bed : Interactables, ITask
 {
     public Camera cam;
     public GameObject m_Tutorial;
@@ -179,7 +179,7 @@ public class Bed : Interactables,ITask
 
     public void ResetBed()
     {
-        //GameManager.GetManager().Alarm.SetAlarmActive();
+        GameManager.GetManager().alarm.SetAlarmActive();
         //GameManager.GetManager().Alarm.ResetTime();
         interactDone = false;
         m_Sheet.SetActive(false);

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class GameStateController : MonoBehaviour
@@ -9,7 +8,7 @@ public class GameStateController : MonoBehaviour
         GamePlay,   // Una vez despertado y moviendose por el nivel
         MiniGame    // Se ha iniciado un minigame
     }
-     public StateGame m_CurrentStateGame;
+    public StateGame m_CurrentStateGame;
 
     private void Awake()
     {

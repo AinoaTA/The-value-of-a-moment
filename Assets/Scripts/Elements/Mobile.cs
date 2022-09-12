@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
 using UnityEngine;
 
 public class Mobile : ActionObject
@@ -11,7 +8,7 @@ public class Mobile : ActionObject
     [SerializeField] private GameObject[] canvasFunctions;
     private BoxCollider col;
 
-    bool active=false;
+    bool active = false;
     private void Start()
     {
         col = GetComponent<BoxCollider>();
@@ -50,7 +47,7 @@ public class Mobile : ActionObject
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
         }
-        else 
+        else
         {
             active = false;
             GameManager.GetManager().StartThirdPersonCamera();

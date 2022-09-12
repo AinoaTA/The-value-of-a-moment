@@ -117,5 +117,5 @@ public class CameraController : MonoBehaviour
         cameraProvider.enabled = true;
     }
 
-    public void Block3DMovement(bool v)  { cameraProvider.enabled = v; }
+    public void Block3DMovement(bool v) { cameraProvider.enabled = v; }
 }

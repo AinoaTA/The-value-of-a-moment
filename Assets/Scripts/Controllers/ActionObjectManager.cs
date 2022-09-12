@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class ActionObjectManager : MonoBehaviour
 {
     [SerializeField] private List<ActionObject> allObjects = new List<ActionObject>();
-    [SerializeField]private ActionObject currObject;
+    [SerializeField] private ActionObject currObject;
 
     private void OnDisable()
     {

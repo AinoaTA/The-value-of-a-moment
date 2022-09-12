@@ -23,6 +23,7 @@ public class Alarm : MonoBehaviour
 
     private void Start()
     {
+        GameManager.GetManager().alarm = this;
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
@@ -39,16 +40,9 @@ public class Alarm : MonoBehaviour
 
     private void Update()
     {
-         
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StartDay();
-        }
-#endif
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
-         
+
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
 
@@ -110,11 +104,6 @@ public class Alarm : MonoBehaviour
 
     public void StillSleeping()
     {
-        //if (controlPosponer == 0)
-        //    StartCoroutine(PosponerDialogue());
-        //else
-        //    StartCoroutine(SecondPosponerDialogue());
-
         controlPosponer++;
 
         m_AlarmON = false;
@@ -153,6 +142,6 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
-        
+
     }
 }

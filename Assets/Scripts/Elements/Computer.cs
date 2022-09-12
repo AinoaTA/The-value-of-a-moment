@@ -1,11 +1,10 @@
-using UnityEngine.UI;
 using UnityEngine;
 
 public class Computer : Interactables
 {
     [SerializeField]
     private GameObject computerScreen, programScreen,
-        /*calendarScreen*/ calendarMaterialScreen;
+        /*calendarScreen*/ calendarMaterialScreen, emailScreenMaterial;
 
     private bool anyButtonScreenActive;
 
@@ -65,6 +64,7 @@ public class Computer : Interactables
         GameManager.GetManager().calendarController.ShowCalendar();
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(true);
+        emailScreenMaterial.SetActive(false);
     }
 
     public void ComputerProgram()
@@ -74,6 +74,17 @@ public class Computer : Interactables
         anyButtonScreenActive = true;
         programScreen.SetActive(true);
         calendarMaterialScreen.SetActive(false);
+        emailScreenMaterial.SetActive(false);
+    }
+
+    public void ComputerEmail()
+    {
+        if (anyButtonScreenActive)
+            return;
+        anyButtonScreenActive = true;
+        programScreen.SetActive(false);
+        calendarMaterialScreen.SetActive(false);
+        emailScreenMaterial.SetActive(true);
     }
     #endregion
 }
