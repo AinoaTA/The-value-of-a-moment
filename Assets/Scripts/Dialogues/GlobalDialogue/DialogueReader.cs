@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueReader : MonoBehaviour
@@ -16,7 +15,9 @@ public class DialogueReader : MonoBehaviour
     [System.Serializable]
     public class DialogueList 
     {
-        public Dialogue[] dialogue;
+        public Dialogue[] wake;
+        public Dialogue[] bed;
+        public Dialogue[] windows;
     }
 
     public DialogueList dialogueList = new DialogueList();
@@ -24,6 +25,5 @@ public class DialogueReader : MonoBehaviour
     private void Start()
     {
         dialogueList = JsonUtility.FromJson<DialogueList>(firstDay.text);
-        print(dialogueList);
     }
 }
