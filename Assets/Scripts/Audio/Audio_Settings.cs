@@ -5,6 +5,7 @@ using UnityEngine;
 public class Audio_Settings : MonoBehaviour
 {
     FMOD.Studio.EventInstance SFXVolumeTestEvent;
+    FMOD.Studio.EventInstance DialogueVolumeTestEvent;
 
     FMOD.Studio.Bus Music;
     FMOD.Studio.Bus SFX;
@@ -22,6 +23,7 @@ public class Audio_Settings : MonoBehaviour
         SFX = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
         Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
         SFXVolumeTestEvent = FMODUnity.RuntimeManager.CreateInstance("event:/SFX_LevelTest");
+        DialogueVolumeTestEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Dialogue_LevelTest");
     }
 
     public void Update()
@@ -45,6 +47,13 @@ public class Audio_Settings : MonoBehaviour
     public void DialogueVolumeLevel(float newDialogueVolume)
     {
         DialogueVolume = newDialogueVolume;
+
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        DialogueVolumeTestEvent.getPlaybackState(out PbState);
+        if (PbState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            DialogueVolumeTestEvent.start();
+        }
     }
 
     public void SFXVolumeLevel(float newSFXVolume)
