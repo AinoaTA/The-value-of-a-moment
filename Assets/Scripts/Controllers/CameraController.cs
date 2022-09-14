@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] private CinemachineBrain brain;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private bool invertY;
-    [SerializeField] private float lookSpeed = 1f;
     [SerializeField] private float waitingBleendingTime = 1.75f;
     private int defaultPriority = 0;
     private int setPriority = 10;
