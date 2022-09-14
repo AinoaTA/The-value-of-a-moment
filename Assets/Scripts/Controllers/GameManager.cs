@@ -44,17 +44,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-
-    //public void ResetTrash()
-    //{
-    //    foreach (var trash in trashes)
-    //    {
-    //        trash.ResetInteractable();
-    //    }
-    //    bucket.ResetInteractable();
-    //    InventoryTrash.ResetInventory();
-    //}
-
     public void OpenDoor()
     {
         // door.SetTrigger("Open");
