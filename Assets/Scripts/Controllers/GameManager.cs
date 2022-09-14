@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController { get; set; }
     public MobileController mobile { get; set; }
     public CalendarController calendarController { get; set; }
+    public EmailController emailController { get; set; }
     public InventoryTrashUI trashInventory { get; set; }
     public bool waterCanGrabbed { get; set; }
     public DayNightCycle dayNightCycle { get; set; }

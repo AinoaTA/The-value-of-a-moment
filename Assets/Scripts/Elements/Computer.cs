@@ -35,6 +35,7 @@ public class Computer : Interactables
         {
             GameManager.GetManager().programMinigame.QuitMiniGame();
             GameManager.GetManager().calendarController.BackCalendar();
+            GameManager.GetManager().emailController.ShowEmail(false);
         }
         base.ExitInteraction();
     }
@@ -53,6 +54,7 @@ public class Computer : Interactables
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(false);
+        emailScreenMaterial.SetActive(false);
         anyButtonScreenActive = false;
     }
 
@@ -82,6 +84,7 @@ public class Computer : Interactables
         if (anyButtonScreenActive)
             return;
         anyButtonScreenActive = true;
+        GameManager.GetManager().emailController.ShowEmail(true);
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(true);
