@@ -10,6 +10,12 @@ public class Email : MonoBehaviour
 
     public TMP_Text companyN, emailD, titleText;
 
+    public EmailAnswer currentAnswerOpen;
+
+    private void Start()
+    {
+        GameManager.GetManager().email = this;
+    }
     public void OpenEmail()
     {
         emailContent.SetActive(true);

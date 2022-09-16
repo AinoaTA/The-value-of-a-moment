@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public PlayerHandleInputs playerInputs { get; set; }
     public ActionObjectManager actionObjectManager { get; set; }
     public Alarm alarm { get; set; }
+    public Email email { get; set; }
 
     //special references, maybe temproal
     public Computer computer { get; set; }
