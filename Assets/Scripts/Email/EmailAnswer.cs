@@ -18,6 +18,7 @@ public class EmailAnswer : MonoBehaviour
 
     public void ShowAllAnswers()
     {
+        if (GameManager.GetManager().email.blockWarning) return;
         GameManager.GetManager().email.currentAnswerOpen = this;
         contentPossibleAnswers.gameObject.SetActive(true);
 
@@ -38,7 +39,7 @@ public class EmailAnswer : MonoBehaviour
         CloseAllAnswers();
     }
 
-    void CloseAllAnswers() 
+    void CloseAllAnswers()
     {
         GameManager.GetManager().email.currentAnswerOpen = null;
         contentPossibleAnswers.gameObject.SetActive(false);
