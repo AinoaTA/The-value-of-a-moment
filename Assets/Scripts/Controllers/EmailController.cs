@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EmailController : MonoBehaviour
 {
-    public GameObject emailCanvas;
+    [SerializeField] GameObject emailCanvas;
+    [HideInInspector] public Email mail;
     public void Start()
     {
         GameManager.GetManager().emailController = this;
@@ -10,6 +11,6 @@ public class EmailController : MonoBehaviour
 
     public void ShowEmail(bool v)
     {
-        emailCanvas.SetActive(v);   
+        emailCanvas.SetActive(v);
     }
 }

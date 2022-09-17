@@ -14,6 +14,6 @@ public class EmailPossibleAnswer : MonoBehaviour
 
     public void SelectedAnswer() 
     {
-        GameManager.GetManager().email.currentAnswerOpen.Selected(id);
+        GameManager.GetManager().emailController.mail.currentAnswerOpen.Selected(id);
     }
 }

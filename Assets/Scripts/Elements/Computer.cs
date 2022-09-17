@@ -31,6 +31,7 @@ public class Computer : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         calendarMaterialScreen.SetActive(false);
         computerScreen.SetActive(false);
+        emailScreenMaterial.SetActive(false);
         if (anyButtonScreenActive)
         {
             GameManager.GetManager().programMinigame.QuitMiniGame();

@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class EmailAnswer : MonoBehaviour
 {
-    public TMP_Text t;
-    public float autocontrolSave;
+    [SerializeField] Email mail;
+    [SerializeField] int idPragraph;
+    [HideInInspector] public float autocontrolSave;
     public EmailPossibleAnswer prefabAnswer;
     public Transform contentPossibleAnswers;
+
 
     public PossibleAnswer[] possibleAnswers;
     [System.Serializable]
@@ -16,10 +18,28 @@ public class EmailAnswer : MonoBehaviour
         public float autocontrol;
     }
 
+    bool open;
+    public void Open()
+    {
+        if (mail.currentAnswerOpen == null)
+            mail.currentAnswerOpen = this;
+
+        else if (mail.currentAnswerOpen != this)
+        {
+            mail.currentAnswerOpen.CloseAllAnswers();
+            mail.currentAnswerOpen = this;
+        }
+
+        open = !open;
+        if (open)
+            ShowAllAnswers();
+        else
+            CloseAllAnswers();
+    }
     public void ShowAllAnswers()
     {
-        if (GameManager.GetManager().email.blockWarning) return;
-        GameManager.GetManager().email.currentAnswerOpen = this;
+        if (mail.blockWarning) return;
+        mail.currentAnswerOpen = this;
         contentPossibleAnswers.gameObject.SetActive(true);
 
         if (contentPossibleAnswers.childCount <= 0)
@@ -34,14 +54,14 @@ public class EmailAnswer : MonoBehaviour
 
     public void Selected(int id)
     {
-        t.text = possibleAnswers[id].answer;
+        mail.SetTextParagraph(idPragraph, possibleAnswers[id].answer);
         autocontrolSave = possibleAnswers[id].autocontrol;
         CloseAllAnswers();
     }
 
     void CloseAllAnswers()
     {
-        GameManager.GetManager().email.currentAnswerOpen = null;
+        mail.currentAnswerOpen = null;
         contentPossibleAnswers.gameObject.SetActive(false);
     }
 }

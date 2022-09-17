@@ -1,28 +1,38 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Email : MonoBehaviour
 {
-    public GameObject emailContent;
-    public string companyName;
-    public string emailDir;
-    public string title;
-
-    public TMP_Text companyN, emailD, titleText;
-
+    [HideInInspector] public bool blockWarning;
     [HideInInspector] public EmailAnswer currentAnswerOpen;
-    public GameObject warining;
-    public bool blockWarning;
-    bool sent;
+    public GameObject emailContent, plusContent, enviar;
+    [SerializeField] string companyName;
+    [SerializeField] string emailDir;
+    [SerializeField] string title;
+    [SerializeField] TMP_Text[] paragraphs;
+    [SerializeField] List<string> stringsParagraphs = new List<string>();
+    [SerializeField] TMP_Text companyN, emailD, titleText;
+
+    
+    public GameObject warning;
+    float autocontrolEarned;
+    bool sent=false;
+
+    [SerializeField] EmailAnswer[] autocontrolAnswer;
     private void Start()
     {
-        GameManager.GetManager().email = this;
+        for (int i = 0; i < paragraphs.Length; i++)
+            stringsParagraphs.Add(paragraphs[i].text.ToString());
+
     }
     public void OpenEmail()
     {
         if (blockWarning) return;
+        GameManager.GetManager().emailController.mail = this;
         emailContent.SetActive(true);
 
+        if (sent) return;
         companyN.text = companyName;
         emailD.text = emailDir;
         titleText.text = title;
@@ -30,19 +40,30 @@ public class Email : MonoBehaviour
 
     public void Warning()
     {
-        warining.gameObject.SetActive(true);
+        warning.gameObject.SetActive(true);
         blockWarning = true;
     }
 
     public void CloseWarning()
     {
-        warining.gameObject.SetActive(false);
+        warning.gameObject.SetActive(false);
         blockWarning = false;
 
     }
     public void SendEmail()
     {
+        warning.SetActive(false);
+        sent = true;
+        enviar.SetActive(false);
+        plusContent.SetActive(false);
+        for (int i = 0; i < autocontrolAnswer.Length; i++)
+            autocontrolEarned += autocontrolAnswer[i].autocontrolSave;
 
+        GameManager.GetManager().autocontrol.AddAutoControl(autocontrolEarned);
+    }
 
+    public void SetTextParagraph(int id, string answer)
+    {
+        paragraphs[id].text = stringsParagraphs[id] + " " + answer;
     }
 }
