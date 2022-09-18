@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager gameManager;
     public static GameManager GetManager() => gameManager;
-
+    #region gets sets
     public GameStateController gameStateController { get; set; }
     public CanvasController canvasController { get; set; }
     public NotificationController notificationController { get; set; }
@@ -30,10 +30,11 @@ public class GameManager : MonoBehaviour
     public PlayerHandleInputs playerInputs { get; set; }
     public ActionObjectManager actionObjectManager { get; set; }
     public Alarm alarm { get; set; }
+    public PlayerAnimationController playerAnimationController { get; set; }
 
-    //special references, maybe temproal
+    //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }
-
+    #endregion
     private void OnEnable()
     {
         if (gameManager == null)

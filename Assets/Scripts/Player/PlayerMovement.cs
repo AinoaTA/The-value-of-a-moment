@@ -5,18 +5,20 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 m_MovementAxis;
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     private Vector3 m_Direction;
-    [SerializeField] private Camera cam;
+    private Camera cam;
     [SerializeField] private float speed, maxSpeed = 1.4f, stopSpeedOffset = 0.2f;
     public GameObject prop;
     bool moving;
-    Vector3 m_Forward, m_Right, m_Movement;
-
+     
     [SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
 
-    public Animator animator;
-    // bool cutOff;
+   // public Animator animator;
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
     private void Start()
     {
         speed = maxSpeed;
@@ -69,13 +71,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopMoving()
     {
-        m_MovementAxis = Vector2.zero;
+        m_MovementAxis = Vector2.zero;             
         moving = false;
     }
 
     void Update()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+        if (!GameManager.GetManager().gameStateController.CheckGameState(1))
         {
             //m_CurrVelocityPlayer = 0;
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
@@ -100,92 +102,5 @@ public class PlayerMovement : MonoBehaviour
 
             CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);
         }
-
-
-
-        //parametros de la camara
-        //m_Forward = cam.transform.forward;
-        //m_Right = cam.transform.right;
-
-        //m_Forward.y = 0;
-        //m_Right.y = 0;
-
-        //m_Forward.Normalize();
-        //m_Right.Normalize();
-
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    m_Movement = -m_Right;
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    m_Movement = m_Right;
-        //}
-
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    m_Movement += m_Forward;
-        //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    m_Movement -= m_Forward;
-        //}
-
-        //slow anim transition(walk to idle)
-        //if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-        //{
-        //    m_Speed -= 0.03f;
-        //    m_Speed = Mathf.Clamp(m_Speed, 0.0f, m_MaxSpeed);
-        //    m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
-        //    m_CurrVelocityPlayer -= 0.01f;
-        //    Mathf.Clamp(m_CurrVelocityPlayer, 0, 1);
-        //}
-        //else
-        //{
-        //    m_CurrVelocityPlayer = m_CharacterController.velocity.magnitude;
-        //    m_Speed = m_MaxSpeed;
-        //}
-
-        //print(CalculateWall(m_Forward));
-        //Debug.DrawLine(transform.position, transform.position + m_Forward * 10);
-
-        //if (cutOff)//(CalculateWall(m_Forward))
-        //{
-        //    m_CurrVelocityPlayer = 0;
-        //    StartCoroutine(DelayAnimation());
-        //}
-
-        //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
-
-        //m_Movement.Normalize();
-
-        //if (m_Movement != Vector3.zero)
-        //    prop.transform.rotation = Quaternion.Lerp(prop.transform.rotation, Quaternion.LookRotation(m_Movement), m_LerpRotationPercentatge);
-
-        //m_Movement *= m_Speed * Time.deltaTime;
-
-        //CollisionFlags m_CollisionFlags = m_CharacterController.Move(m_Movement);
-
-        //SetAnimations();
     }
-
-    private void SetAnimations()
-    {
-        if (m_CharacterController.velocity.magnitude <= maxSpeed - stopSpeedOffset)
-        {
-            speed = 0.0f;
-        }
-    }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.layer == 3 << 3)
-    //    {
-    //        Vector3 otherPos = collision.transform.position - transform.position;
-    //        float dot = Vector3.Dot(transform.forward, otherPos);
-
-    //        cutOff = dot < dotCutOff;
-    //        print(cutOff + collision.collider.name);
-    //    }
-    //}
 }

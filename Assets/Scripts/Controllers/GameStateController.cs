@@ -26,9 +26,17 @@ public class GameStateController : MonoBehaviour
         m_CurrentStateGame = (StateGame)state;
         //StartCoroutine(Delay((StateGame)state));
     }
-    //private IEnumerator Delay(StateGame state)
-    //{
-    //    yield return new WaitForSecondsRealtime(1);
-    //    m_CurrentStateGame = state;
-    //}
+    /// <summary>
+    /// Check current state mode. If it matches, return true.
+    /// 
+    /// 0 - Init;
+    /// 1 - GamePlay;
+    /// 2 - MiniGame
+    /// </summary>
+    /// <param name="stateID"></param>
+    /// <returns></returns>
+    public bool CheckGameState(int stateID) 
+    {
+        return m_CurrentStateGame == (StateGame)stateID;
+    }
 }

@@ -41,7 +41,6 @@ public class Grabbing : MonoBehaviour
         {
             leaving = true;
             isObjectGrabbed = false;
-            GameManager.GetManager().playerController.ExitInteractable();
             GameManager.GetManager().gameStateController.ChangeGameState(1);
         }
 
