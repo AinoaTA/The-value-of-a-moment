@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class WaterCan : MonoBehaviour
 {
@@ -13,14 +14,18 @@ public class WaterCan : MonoBehaviour
 
     [HideInInspector] public bool dragg;
 
+    private FMOD.Studio.EventInstance waterplantEvent;
+
     private void Start()
     {
+        waterplantEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Water Plant");
         dragg = false;
         startPos = transform.position;
     }
 
     private void OnMouseDown()
     {
+        waterplantEvent.start();
         particles.Play();
         GrowUpParticle.Stop();
     }
@@ -51,6 +56,7 @@ public class WaterCan : MonoBehaviour
 
     public void ResetWaterCan()
     {
+        waterplantEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         dragg = false;
         particles.Stop();
         transform.position = startPos;
