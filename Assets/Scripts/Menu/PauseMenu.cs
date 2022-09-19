@@ -15,6 +15,7 @@ namespace Menu
 
         private void Start()
         {
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause", transform.position); -- Poner dentro de getkey; sonido UI de abrir/cerrar pausa
             GameManager.GetManager().playerInputs._PauseGame += PauseGame;
             GameManager.GetManager().canvasController.HideCanvas(pause);
         }
