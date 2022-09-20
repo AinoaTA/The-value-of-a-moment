@@ -80,7 +80,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 120
 --- !u!114 &-8356622209492302481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637992954338435702
+  lastModified: 637992962715760802
   FileSizes: []
   Exists: 1
 --- !u!114 &-6997990628527690096
@@ -141,7 +141,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 637992954337889844
+  lastModified: 637992962704617087
   FileSizes: []
   Exists: 1
 --- !u!114 &-6921375798502457073
@@ -306,33 +306,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1353
---- !u!114 &-5047306563120771345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Click
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Click
-  Guid:
-    Data1: 1320907522
-    Data2: 1078837495
-    Data3: -2139483754
-    Data4: -1782130968
-  Banks:
-  - {fileID: 4178684313898064607}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 120
 --- !u!114 &-4651560398942978178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +348,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Elle.bank
   Name: Elle
   StudioPath: bank:/Elle
-  lastModified: 637992954337959808
+  lastModified: 637992962704677070
   FileSizes: []
   Exists: 1
 --- !u!114 &-4034532053685085170
@@ -393,7 +366,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Environment.bank
   Name: Environment
   StudioPath: bank:/Environment
-  lastModified: 637992954338385706
+  lastModified: 637992962715680757
   FileSizes: []
   Exists: 1
 --- !u!114 &-3971013973765365983
@@ -441,6 +414,33 @@ MonoBehaviour:
     Data2: 1111540206
     Data3: 1410528389
     Data4: -1919593779
+  Banks:
+  - {fileID: -4034532053685085170}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3125853822161593163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Env/Cat/Feed
+  m_EditorClassIdentifier: 
+  Path: event:/Env/Cat/Feed
+  Guid:
+    Data1: -1136845264
+    Data2: 1313180156
+    Data3: 466718365
+    Data4: 1329136257
   Banks:
   - {fileID: -4034532053685085170}
   IsStream: 0
@@ -573,10 +573,10 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637992954338455670
+  lastModified: 637992962715770712
   FileSizes:
   - Name: 
-    Value: 3432
+    Value: 3500
   Exists: 1
 --- !u!114 &-1004559735501538224
 MonoBehaviour:
@@ -672,7 +672,6 @@ MonoBehaviour:
   - {fileID: 2885765506933754254}
   - {fileID: -5549056166354005628}
   - {fileID: -8913752221017065634}
-  - {fileID: -5047306563120771345}
   - {fileID: 4380432947189921131}
   - {fileID: -4651560398942978178}
   - {fileID: 3942486701686635115}
@@ -697,12 +696,15 @@ MonoBehaviour:
   - {fileID: 3305617188336506744}
   - {fileID: 953006222315817114}
   - {fileID: -3971013973765365983}
+  - {fileID: -3125853822161593163}
+  - {fileID: 4694079515419674520}
+  - {fileID: 7872490754498033953}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7855159516461141480}
   StringsBanks:
   - {fileID: -1453216928855558764}
-  cacheTime: 637992954338815460
+  cacheTime: 637992962716129427
   cacheVersion: 131591
 --- !u!114 &189072970682336140
 MonoBehaviour:
@@ -959,7 +961,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637992954338495819
+  lastModified: 637992962715800682
   FileSizes: []
   Exists: 1
 --- !u!114 &3752611162019329772
@@ -1058,7 +1060,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 637992954338815460
+  lastModified: 637992962716129427
   FileSizes: []
   Exists: 1
 --- !u!114 &4201123354865259556
@@ -1142,6 +1144,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 670
+--- !u!114 &4694079515419674520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Env/Cat/Drink
+  m_EditorClassIdentifier: 
+  Path: event:/Env/Cat/Drink
+  Guid:
+    Data1: 141068141
+    Data2: 1160352136
+    Data3: 443729076
+    Data4: -1026214247
+  Banks:
+  - {fileID: -4034532053685085170}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 27989
 --- !u!114 &4888060170384781058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1267,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 637992954337919827
+  lastModified: 637992962704637079
   FileSizes: []
   Exists: 1
 --- !u!114 &5553659713932082715
@@ -1404,3 +1433,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 0
+--- !u!114 &7872490754498033953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Env/Cat/Eat
+  m_EditorClassIdentifier: 
+  Path: event:/Env/Cat/Eat
+  Guid:
+    Data1: -1688854323
+    Data2: 1242861860
+    Data3: -155924569
+    Data4: -1351022813
+  Banks:
+  - {fileID: -4034532053685085170}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 44373

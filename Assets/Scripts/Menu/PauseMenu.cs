@@ -15,7 +15,6 @@ namespace Menu
 
         private void Start()
         {
-
             GameManager.GetManager().playerInputs._PauseGame += PauseGame;
             GameManager.GetManager().canvasController.HideCanvas(pause);
         }
