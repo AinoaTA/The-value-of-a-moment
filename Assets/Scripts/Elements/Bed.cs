@@ -227,7 +227,7 @@ public class Bed : Interactables,ITask
 
     private IEnumerator DelayReset()
     {
-        GameManager.GetManager().soundController.QuitAllMusic();
+        //GameManager.GetManager().soundController.QuitAllMusic();
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
 

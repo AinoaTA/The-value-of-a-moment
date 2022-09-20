@@ -22,7 +22,7 @@ public class SoundController : MonoBehaviour
 
     void Awake()
     {
-        GameManager.GetManager().soundController = this;
+        //GameManager.GetManager().soundController = this;
         introLoop.volume = 0;
     }
     private void Start()

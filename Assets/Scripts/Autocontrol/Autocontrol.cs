@@ -91,27 +91,27 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
-            playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1");
-            playerState.start();
+            //playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1");
+            //playerState.start();
             //GameManager.GetManager().soundController.ChangeMusicMood(0);
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
-            playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song2");
-            playerState.start();
+            //playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song2");
+            //playerState.start();
             // GameManager.GetManager().soundController.ChangeMusicMood(1);
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
-            playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song3");
-            playerState.start();
+            //playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            //playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song3");
+            //playerState.start();
            // GameManager.GetManager().soundController.ChangeMusicMood(2);
 
         }

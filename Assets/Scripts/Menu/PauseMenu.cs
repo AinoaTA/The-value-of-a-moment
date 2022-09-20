@@ -15,20 +15,21 @@ namespace Menu
 
         private void Start()
         {
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause", transform.position); -- Poner dentro de getkey; sonido UI de abrir/cerrar pausa
+
             GameManager.GetManager().playerInputs._PauseGame += PauseGame;
             GameManager.GetManager().canvasController.HideCanvas(pause);
         }
 
         public void PauseGame()
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause", transform.position);
             if (!paused)
             {
                 paused = true;
                 GameManager.GetManager().canvasController.UnLock();
                 GameManager.GetManager().cameraController.Block3DMovement(!paused);
                 GameManager.GetManager().canvasController.ShowCanvas(pause);
-              
+
                 Time.timeScale = 0;
             }
             else
