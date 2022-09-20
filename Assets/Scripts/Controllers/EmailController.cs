@@ -15,12 +15,13 @@ public class EmailController : MonoBehaviour
         emailCanvas.SetActive(v);
     }
 
+    //provisional
     public void Recieve() { StartCoroutine(RecieveMail()); }
 
     IEnumerator RecieveMail() 
     {
         yield return new WaitForSeconds(4f);
-        print("waitiring");
+        
         mail.MailRecieved();
     }
 }
