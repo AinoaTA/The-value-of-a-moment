@@ -21,8 +21,12 @@ public class Alarm : MonoBehaviour
     public delegate void DelegateSFX();
     public static DelegateSFX m_DelegateSFX;
 
+    private FMOD.Studio.EventInstance alarmEvent;
+
     private void Start()
     {
+        alarmEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
+
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
@@ -43,6 +47,7 @@ public class Alarm : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.T))
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Alarm Off", transform.position);
             StartDay();
         }
 #endif
@@ -73,6 +78,8 @@ public class Alarm : MonoBehaviour
 
     private void StartAlarm()
     {
+        alarmEvent.start();
+
         m_DelegateSFX?.Invoke();
         GameManager.GetManager().soundController.QuitAllMusic();
 
@@ -144,6 +151,8 @@ public class Alarm : MonoBehaviour
 
     public void ResetTime()
     {
+        alarmEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         m_AlarmON = false;
         GameManager.GetManager().soundController.StopSound();
         m_Timer = 0;

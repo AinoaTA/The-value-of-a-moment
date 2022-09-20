@@ -19,6 +19,7 @@ public class Computer : Interactables
         switch (options)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
@@ -28,6 +29,7 @@ public class Computer : Interactables
 
     public override void ExitInteraction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         GameManager.GetManager().canvasController.ComputerScreenOut();
         GameManager.GetManager().StartThirdPersonCamera();
         calendarMaterialScreen.SetActive(false);

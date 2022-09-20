@@ -64,6 +64,7 @@ public class MichiController : MonoBehaviour
 
     private void Miau()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Cat Meow", transform.position);
         animator.SetBool("walking", false);
         animator.ResetTrigger("hasArrived");
         animator.SetTrigger("hasArrived");
