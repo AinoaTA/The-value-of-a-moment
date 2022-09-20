@@ -21,6 +21,7 @@ public class Computer : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
+                //GameManager.GetManager().playerController.playerAnimation.SetAnimation("Computer");
                 break;
         }
     }

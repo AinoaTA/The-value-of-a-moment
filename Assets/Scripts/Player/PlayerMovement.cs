@@ -9,12 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed, maxSpeed = 1.4f, stopSpeedOffset = 0.2f;
     public GameObject prop;
     bool moving;
-     
+
     [SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
 
-   // public Animator animator;
+    // public Animator animator;
     private void Awake()
     {
         cam = Camera.main;
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopMoving()
     {
-        m_MovementAxis = Vector2.zero;             
+        m_MovementAxis = Vector2.zero;
         moving = false;
     }
 
@@ -83,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
             return;
         }
-
         if (m_MovementAxis != Vector2.zero)
         {
             Vector3 forward = cam.transform.forward;
@@ -97,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
             m_Direction += forward * movementAxis.y;
             m_Direction += right * movementAxis.x;
             m_Direction.Normalize();
-
             Vector3 movement = m_Direction * Time.deltaTime * speed;
 
             CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);

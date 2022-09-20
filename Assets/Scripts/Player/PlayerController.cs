@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private bool sleep;
 
     private CharacterController character;
-
+    public PlayerAnimationController playerAnimation;
     private void Awake()
     {
         GameManager.GetManager().playerController = this;
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         character.enabled = false;
         sleep = false;
-        GameManager.GetManager().playerAnimationController.SetAnimation("WakeUp");
+        GameManager.GetManager().playerController.playerAnimation.SetAnimation("WakeUp");
         //mov.animator.SetBool("Sleep", sleep);
 
         transform.SetPositionAndRotation(playerWakeUp.position, playerWakeUp.rotation);
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         character.enabled = false;
         sleep = true;
         transform.SetPositionAndRotation(playerSleep.position, playerSleep.rotation);
-        GameManager.GetManager().playerAnimationController.SetAnimation("Sleep");
+        GameManager.GetManager().playerController.playerAnimation.SetAnimation("Sleep");
         // mov.prop.transform.rotation = Quaternion.identity;
         //player.animator.SetBool("Sleep", sleep);
         character.enabled = true;

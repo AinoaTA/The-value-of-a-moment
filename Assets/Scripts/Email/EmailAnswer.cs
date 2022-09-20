@@ -9,7 +9,6 @@ public class EmailAnswer : MonoBehaviour
     public EmailPossibleAnswer prefabAnswer;
     public Transform contentPossibleAnswers;
 
-
     public PossibleAnswer[] possibleAnswers;
     [System.Serializable]
     public struct PossibleAnswer

@@ -3,13 +3,9 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     public Animator anim;
-
-    private void Awake()
-    {
-        GameManager.GetManager().playerAnimationController = this;
-    }
     public void SetAnimation(string animationName) 
     {
+        Debug.LogWarning(animationName + " played");
         anim.Play(animationName);
     }
 
@@ -17,5 +13,4 @@ public class PlayerAnimationController : MonoBehaviour
     {
         anim.SetFloat(varName, value);
     }
-
 }
