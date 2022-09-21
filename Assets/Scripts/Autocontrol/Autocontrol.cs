@@ -62,6 +62,7 @@ public class Autocontrol : MonoBehaviour
 
 
             yield return null;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Bar Down", transform.position);
         }
         yield return new WaitForSeconds(1);
         particles.Stop();
@@ -80,6 +81,8 @@ public class Autocontrol : MonoBehaviour
             m_Slider.value = m_currentValue / maxValue;
             UpdateAutcontrol();
             yield return null;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Bar Up", transform.position);
+
         }
         yield return new WaitForSeconds(1);
         particles.Stop();
