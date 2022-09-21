@@ -197,6 +197,7 @@ public class Window : Interactables, ITask
     #endregion
     private void WindowDone()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         ExitInteraction();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);

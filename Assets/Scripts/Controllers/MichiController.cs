@@ -18,6 +18,8 @@ public class MichiController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Cat/Idles", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Cat/Purr", transform.position);
         animator = this.GetComponent<Animator>();
         i = 0;
         reset = true;
@@ -64,7 +66,6 @@ public class MichiController : MonoBehaviour
 
     private void Miau()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Cat Meow", transform.position);
         animator.SetBool("walking", false);
         animator.ResetTrigger("hasArrived");
         animator.SetTrigger("hasArrived");
