@@ -170,9 +170,10 @@ public class Window : Interactables, ITask
         if (gameInitialized && !isOpen)
         {
             if (tutorialShowed) tutorial.SetActive(false);
-
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
+            
 
             if (displacement < minHeight)
                 height = minHeight;
@@ -197,6 +198,7 @@ public class Window : Interactables, ITask
     #endregion
     private void WindowDone()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         ExitInteraction();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);

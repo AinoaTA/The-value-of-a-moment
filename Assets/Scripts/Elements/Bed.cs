@@ -196,6 +196,7 @@ public class Bed : Interactables, ITask
         switch (options)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                 if (!interactDone)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(3);
@@ -227,7 +228,7 @@ public class Bed : Interactables, ITask
 
     private IEnumerator DelayReset()
     {
-        GameManager.GetManager().soundController.QuitAllMusic();
+        //GameManager.GetManager().soundController.QuitAllMusic();
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
 
@@ -267,6 +268,7 @@ public class Bed : Interactables, ITask
 
     public override void ExitInteraction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         cam.cullingMask = -1;
         base.ExitInteraction();
         gameInitialized = false;

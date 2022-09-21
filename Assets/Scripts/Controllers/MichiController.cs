@@ -12,6 +12,8 @@ public class MichiController : MonoBehaviour
 
     void Start()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Cat/Idles", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Cat/Purr", transform.position);
         animator = this.GetComponent<Animator>();
         reset = true;
         animator.SetBool("walking", true);

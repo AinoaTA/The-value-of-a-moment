@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMOD;
 
 public class SoundController : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class SoundController : MonoBehaviour
 
     void Awake()
     {
-        GameManager.GetManager().soundController = this;
+        //GameManager.GetManager().soundController = this;
         introLoop.volume = 0;
+    }
+    private void Start()
+    {
+        ChangeMusicMood(0);
     }
     private void OnEnable()
     {
@@ -100,18 +105,24 @@ public class SoundController : MonoBehaviour
     {
         StartCoroutine(ChangeMusic(index));
     }
+
     private IEnumerator ChangeMusic(int index)
     {
-        if (currIndex != index)
-        {
-            currIndex = index;
-            StartCoroutine(DecreaseAudioCo(loop));
-            yield return new WaitUntil(() => !loop.isPlaying);
-            if (index == 0)
-                StartCoroutine(StartSaddest());
-            else
-                StartCoroutine(IcreaseAudioCo(index));
-        }
+         FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start();
+     print(FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start());
+
+        //if (currIndex != index)
+        //{
+        //    currIndex = index;
+        //    StartCoroutine(DecreaseAudioCo(loop));
+        //    yield return new WaitUntil(() => !loop.isPlaying);
+        //    if (index == 0)
+        //        StartCoroutine(StartSaddest());
+        //    else
+        //        StartCoroutine(IcreaseAudioCo(index));
+        //}
+
+        yield return null;
     }
 
     IEnumerator StartSaddest()

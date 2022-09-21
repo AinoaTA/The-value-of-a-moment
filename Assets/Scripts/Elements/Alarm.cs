@@ -21,9 +21,13 @@ public class Alarm : MonoBehaviour
     public delegate void DelegateSFX();
     public static DelegateSFX m_DelegateSFX;
 
+    private FMOD.Studio.EventInstance alarmEvent;
+
     private void Start()
     {
         GameManager.GetManager().alarm = this;
+        alarmEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
+
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
@@ -67,8 +71,11 @@ public class Alarm : MonoBehaviour
 
     private void StartAlarm()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/WakeUp", transform.position); //despertarse una vez por día sólo
+        alarmEvent.start(); 
+
         m_DelegateSFX?.Invoke();
-        GameManager.GetManager().soundController.QuitAllMusic();
+        //GameManager.GetManager().soundController.QuitAllMusic();
 
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
@@ -77,10 +84,10 @@ public class Alarm : MonoBehaviour
     }
     public IEnumerator NormalWakeUp()
     {
-
         // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Alarm Off", transform.position);
         GameManager.GetManager().cameraController.StartInteractCam(2);
-        GameManager.GetManager().soundController.SetMusic();
+        //GameManager.GetManager().soundController.SetMusic();
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
         GameManager.GetManager().playerController.PlayerWakeUpPos();
@@ -133,8 +140,10 @@ public class Alarm : MonoBehaviour
 
     public void ResetTime()
     {
+        alarmEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         m_AlarmON = false;
-        GameManager.GetManager().soundController.StopSound();
+        //GameManager.GetManager().soundController.StopSound();
         m_Timer = 0;
     }
 
