@@ -196,6 +196,7 @@ public class Bed : Interactables,ITask
         switch (options)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                 if (!interactDone)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(3);
@@ -267,6 +268,7 @@ public class Bed : Interactables,ITask
 
     public override void ExitInteraction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         cam.cullingMask = -1;
         base.ExitInteraction();
         gameInitialized = false;
