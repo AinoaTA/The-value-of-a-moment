@@ -108,8 +108,8 @@ public class SoundController : MonoBehaviour
 
     private IEnumerator ChangeMusic(int index)
     {
-         FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start();
-     print(FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start());
+        //FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start();
+        //FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song1").start();
 
         //if (currIndex != index)
         //{
