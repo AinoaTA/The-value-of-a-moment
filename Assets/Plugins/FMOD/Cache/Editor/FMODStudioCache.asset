@@ -47,14 +47,15 @@ MonoBehaviour:
     Data4: -521952357
   Banks:
   - {fileID: 3556174017147294999}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: 6844383942127829424}
+  - {fileID: -6027415141736939730}
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 324864
 --- !u!114 &-8356622209492302481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637994442593866466
+  lastModified: 637994610958850828
   FileSizes: []
   Exists: 1
 --- !u!114 &-7182386238838137821
@@ -169,7 +170,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 637994442592966990
+  lastModified: 637994610957895312
   FileSizes: []
   Exists: 1
 --- !u!114 &-6921375798502457073
@@ -226,6 +227,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6027415141736939730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Gameplay/Mood
+  m_EditorClassIdentifier: 
+  Name: Mood
+  StudioPath: 
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 365306611
+    data2: 75784573
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-5833491733508619854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,13 +325,13 @@ MonoBehaviour:
     Data4: 988489864
   Banks:
   - {fileID: 3556174017147294999}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 30967
 --- !u!114 &-5434418325751447681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +455,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Elle.bank
   Name: Elle
   StudioPath: bank:/Elle
-  lastModified: 637994442593016965
+  lastModified: 637994610957955298
   FileSizes: []
   Exists: 1
 --- !u!114 &-4034532053685085170
@@ -448,7 +473,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Environment.bank
   Name: Environment
   StudioPath: bank:/Environment
-  lastModified: 637994442593776520
+  lastModified: 637994610958770874
   FileSizes: []
   Exists: 1
 --- !u!114 &-3971013973765365983
@@ -682,10 +707,10 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637994442593886460
+  lastModified: 637994610958870820
   FileSizes:
   - Name: 
-    Value: 3682
+    Value: 3718
   Exists: 1
 --- !u!114 &-1004559735501538224
 MonoBehaviour:
@@ -816,7 +841,7 @@ MonoBehaviour:
   - {fileID: -7855159516461141480}
   StringsBanks:
   - {fileID: -1453216928855558764}
-  cacheTime: 637994442594326204
+  cacheTime: 637994610959841641
   cacheVersion: 131591
 --- !u!114 &195402841186861384
 MonoBehaviour:
@@ -965,7 +990,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637994442593946424
+  lastModified: 637994610959500460
   FileSizes: []
   Exists: 1
 --- !u!114 &3752611162019329772
@@ -1010,7 +1035,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 637994442594326204
+  lastModified: 637994610959841641
   FileSizes: []
   Exists: 1
 --- !u!114 &4201123354865259556
@@ -1244,7 +1269,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 637994442592988001
+  lastModified: 637994610957925295
   FileSizes: []
   Exists: 1
 --- !u!114 &5375577864490396286
