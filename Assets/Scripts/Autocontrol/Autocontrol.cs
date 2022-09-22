@@ -19,8 +19,12 @@ public class Autocontrol : MonoBehaviour
     [SerializeField] private Camera particlesCamera;
     private RenderTexture renderTexture;
     private Vector2Int renderTextureResolution;
+    //FMOD.Studio.EventInstance playerState;
 
-    FMOD.Studio.EventInstance playerState;
+    //Manu
+    FMODMusic MoodParameter;
+    //
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
