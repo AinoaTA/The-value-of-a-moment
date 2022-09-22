@@ -102,6 +102,7 @@ public class Bed : Interactables, ITask
     {
         if (gameInitialized && !interactDone)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/Bedsheets", transform.position);
             if (!tutorialShowed)
                 InitTutorial();
             else
@@ -162,7 +163,7 @@ public class Bed : Interactables, ITask
 
     public void BedDone()
     {
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/Make", transform.position);
         gameInitialized = false;
         minigameCanvas.SetActive(false);
         interactDone = true;

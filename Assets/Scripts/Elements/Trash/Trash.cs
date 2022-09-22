@@ -18,6 +18,7 @@ public class Trash : ActionObject
 
     public override void Interaction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes/PickUp", transform.position);
         grabbing = true;
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
     }

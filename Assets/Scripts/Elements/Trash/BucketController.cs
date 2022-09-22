@@ -118,6 +118,7 @@ public class BucketController : Interactables, ITask,IDependencies
 
     public void SomethingCleaned()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes/Drop", transform.position);
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
         currCapacity++;
         if (currCapacity >= maxCapacity)
