@@ -65,6 +65,21 @@ public class CameraController : MonoBehaviour
         StartCoroutine(CameraSwitchDelay());
     }
 
+    private void SetPriorityCam(string id)
+    {
+        for (int v = 0; v < virtualCameras.Length; v++)
+        {
+            if (id == virtualCameras[v].Name)
+            {
+                virtualCameras[v].cameraType.Priority = setPriority;
+            }
+            else
+                virtualCameras[v].cameraType.Priority = defaultPriority;
+        }
+
+        StartCoroutine(CameraSwitchDelay());
+    }
+
     public int GetID(string name)
     {
         for (int v = 0; v < virtualCameras.Length; v++)
@@ -94,6 +109,10 @@ public class CameraController : MonoBehaviour
     public void StartInteractCam(int ID)
     {
         SetPriorityCam(ID);
+    }
+    public void StartInteractCam(string name)
+    {
+        SetPriorityCam(name);
     }
 
     private void CameraPitchDelta(float delta)
