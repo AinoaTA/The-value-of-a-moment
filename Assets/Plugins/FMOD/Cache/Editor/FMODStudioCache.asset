@@ -98,7 +98,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637995307570403948
+  lastModified: 637995490522041412
   FileSizes: []
   Exists: 1
 --- !u!114 &-7182386238838137821
@@ -170,7 +170,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 637995307569674384
+  lastModified: 637995490521281858
   FileSizes: []
   Exists: 1
 --- !u!114 &-6921375798502457073
@@ -455,7 +455,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Elle.bank
   Name: Elle
   StudioPath: bank:/Elle
-  lastModified: 637995307569734332
+  lastModified: 637995490521331808
   FileSizes: []
   Exists: 1
 --- !u!114 &-4034532053685085170
@@ -473,7 +473,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Environment.bank
   Name: Environment
   StudioPath: bank:/Environment
-  lastModified: 637995307570343982
+  lastModified: 637995490521981445
   FileSizes: []
   Exists: 1
 --- !u!114 &-3971013973765365983
@@ -707,7 +707,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637995307570413954
+  lastModified: 637995490522061564
   FileSizes:
   - Name: 
     Value: 3718
@@ -798,7 +798,6 @@ MonoBehaviour:
   - {fileID: 5553659713932082715}
   - {fileID: 7123655897546839828}
   - {fileID: 4201123354865259556}
-  - {fileID: 2885765506933754254}
   - {fileID: -5549056166354005628}
   - {fileID: -8913752221017065634}
   - {fileID: 4380432947189921131}
@@ -836,12 +835,13 @@ MonoBehaviour:
   - {fileID: 7263972526930850306}
   - {fileID: 7881868160200234300}
   - {fileID: -7019972333772354014}
+  - {fileID: 8664784190016248493}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7855159516461141480}
   StringsBanks:
   - {fileID: -1453216928855558764}
-  cacheTime: 637995307571103593
+  cacheTime: 637995490522731009
   cacheVersion: 131591
 --- !u!114 &195402841186861384
 MonoBehaviour:
@@ -921,33 +921,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &2885765506933754254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Comic
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Comic
-  Guid:
-    Data1: 1407283201
-    Data2: 1244348792
-    Data3: -986589540
-    Data4: 682304088
-  Banks:
-  - {fileID: 3556174017147294999}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &3365001395124554613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,7 +963,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637995307570823710
+  lastModified: 637995490522461157
   FileSizes: []
   Exists: 1
 --- !u!114 &3752611162019329772
@@ -1035,7 +1008,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 637995307571103593
+  lastModified: 637995490522731009
   FileSizes: []
   Exists: 1
 --- !u!114 &4201123354865259556
@@ -1145,7 +1118,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 670
+  Length: 1104
 --- !u!114 &4694079515419674520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,7 +1242,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 637995307569694401
+  lastModified: 637995490521301950
   FileSizes: []
   Exists: 1
 --- !u!114 &5375577864490396286
@@ -1594,3 +1567,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5500
+--- !u!114 &8664784190016248493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Intro
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Intro
+  Guid:
+    Data1: 1407283201
+    Data2: 1244348792
+    Data3: -986589540
+    Data4: 682304088
+  Banks:
+  - {fileID: 3556174017147294999}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
