@@ -21,8 +21,8 @@ public class Autocontrol : MonoBehaviour
     private Vector2Int renderTextureResolution;
     //FMOD.Studio.EventInstance playerState;
 
-    //Manu
-    FMODMusic MoodParameter;
+    //Music
+    private static FMOD.Studio.EventInstance Music;
     //
 
     private void Awake()
@@ -40,6 +40,11 @@ public class Autocontrol : MonoBehaviour
         m_Slider.value = m_currentValue / maxValue;
         UpdateAutcontrol();
 
+        //Music
+        Music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Gameplay");
+        Music.start();
+        Music.release();
+        //
     }
 
     public void AddAutoControl(float value)
@@ -105,6 +110,9 @@ public class Autocontrol : MonoBehaviour
             //playerState.start();
             //GameManager.GetManager().soundController.ChangeMusicMood(0);
 
+            //Music
+            Music.setParameterByName("Mood", 1f);
+            //
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
         {
@@ -114,6 +122,10 @@ public class Autocontrol : MonoBehaviour
             //playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song2");
             //playerState.start();
             // GameManager.GetManager().soundController.ChangeMusicMood(1);
+
+            //Music
+            Music.setParameterByName("Mood", 2f);
+            //
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
         {
@@ -122,7 +134,11 @@ public class Autocontrol : MonoBehaviour
             //playerState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             //playerState = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Song3");
             //playerState.start();
-           // GameManager.GetManager().soundController.ChangeMusicMood(2);
+            // GameManager.GetManager().soundController.ChangeMusicMood(2);
+
+            //Music
+            Music.setParameterByName("Mood", 3f);
+            //
 
         }
         else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)
@@ -130,6 +146,9 @@ public class Autocontrol : MonoBehaviour
             stateImage.sprite = statesColor[3];
             backgroundBar.sprite = barBackGroundColor[3];
 
+            //Music
+            Music.setParameterByName("Mood", 3f);
+            //
         }
 
     }
@@ -151,4 +170,21 @@ public class Autocontrol : MonoBehaviour
     {
         return m_Slider.value;
     }
+
+    //Music
+    public void Mood(float MoodLevel)
+    {
+        Music.setParameterByName("Mood", MoodLevel);
+    }
+
+    public void Headphones(float HeadphoneMode)
+    {
+        Music.setParameterByName("Headphones", HeadphoneMode);
+    }
+
+    private void OnDestroy()
+    {
+        Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+    //
 }
