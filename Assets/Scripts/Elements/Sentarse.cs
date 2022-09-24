@@ -12,7 +12,6 @@ public class Sentarse : GeneralActions
 
     public override void ExitAction()
     {
-        print("Alo2");
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitAction();
     }

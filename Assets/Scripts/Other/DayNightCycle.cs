@@ -7,12 +7,12 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] public DayState dayState;
     private int counter;
 
-    private Animator m_Anims;
+    private Animator anims;
     private int counterTaskDay = 0;
 
     private void Awake()
     {
-        m_Anims = GetComponent<Animator>();
+        anims = GetComponent<Animator>();
     }
 
     private void Start()
@@ -23,13 +23,12 @@ public class DayNightCycle : MonoBehaviour
     }
     public void ChangeDay(DayState newState)
     {
-        m_Anims.SetInteger("time", (int)newState);
+        anims.SetInteger("time", (int)newState);
         dayState = newState;
     }
 
     public void NewDay()
     {
-
         counter = 0;
         counterTaskDay = 0;
         ChangeDay((DayState)counter);

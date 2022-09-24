@@ -37,7 +37,6 @@ public class GeneralActionsManager : MonoBehaviour
         currObject = interactables;
     }
 
-
     public void ResetAll()
     {
         for (int i = 0; i < allObjects.Count; i++)
@@ -48,6 +47,5 @@ public class GeneralActionsManager : MonoBehaviour
     {
         if (currObject != null && GameManager.GetManager().gameStateController.CheckGameState(3))
             currObject.ExitAction();
-
     }
 }
