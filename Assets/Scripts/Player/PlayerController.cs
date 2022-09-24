@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerSleepPos()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/Roll", transform.position);
         character.enabled = false;
         sleep = true;
         transform.SetPositionAndRotation(playerSleep.position, playerSleep.rotation);
