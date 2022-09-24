@@ -66,7 +66,7 @@ public class Plant : Interactables, ITask, IDependencies
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.dayState, taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);

@@ -6,9 +6,10 @@ public class GameStateController : MonoBehaviour
     {
         Init = 0,   // Momento despertar-posponer
         GamePlay,   // Una vez despertado y moviendose por el nivel
-        MiniGame    // Se ha iniciado un minigame
+        MiniGame,    // Se ha iniciado un minigame
+        Action
     }
-    private StateGame currentStateGame;
+    [SerializeField] private StateGame currentStateGame;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class GameStateController : MonoBehaviour
     /// 0 - Init;
     /// 1 - GamePlay;
     /// 2 - MiniGame
+    /// 3 - Action
     /// </summary>
     /// <param name="state"></param>
     public void ChangeGameState(int state)
@@ -32,10 +34,11 @@ public class GameStateController : MonoBehaviour
     /// 0 - Init;
     /// 1 - GamePlay;
     /// 2 - MiniGame
+    /// 3 - Action
     /// </summary>
     /// <param name="stateID"></param>
     /// <returns></returns>
-    public bool CheckGameState(int stateID) 
+    public bool CheckGameState(int stateID)
     {
         return currentStateGame == (StateGame)stateID;
     }

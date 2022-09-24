@@ -10,7 +10,6 @@ public class GeneralActionsManager : MonoBehaviour
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._FirstInteraction -= InteractionManager;
-
         GameManager.GetManager().playerInputs._ExitInteraction -= ExitActionManager;
     }
 
@@ -22,7 +21,7 @@ public class GeneralActionsManager : MonoBehaviour
     private void Start()
     {
         GameManager.GetManager().playerInputs._FirstInteraction += InteractionManager;
-        GameManager.GetManager().playerInputs._ExitInteraction -= ExitActionManager;
+        GameManager.GetManager().playerInputs._ExitInteraction += ExitActionManager;
     }
 
     public void InteractionManager()
@@ -47,7 +46,8 @@ public class GeneralActionsManager : MonoBehaviour
 
     public void ExitActionManager()
     {
-        if (currObject != null && !GameManager.GetManager().gameStateController.CheckGameState(2))
+        if (currObject != null && GameManager.GetManager().gameStateController.CheckGameState(3))
             currObject.ExitAction();
+
     }
 }
