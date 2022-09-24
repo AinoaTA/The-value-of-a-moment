@@ -4,7 +4,7 @@ public class DayNightCycle : MonoBehaviour
 {
     public enum DayState { Manana, MedioDia, Tarde, Noche }
 
-    [SerializeField] public DayState dayState;
+    [SerializeField] DayState dayState;
     private int counter;
 
     private Animator anims;
@@ -42,5 +42,10 @@ public class DayNightCycle : MonoBehaviour
             counter = counter < 4 ? counter + 1 : 0;
             ChangeDay((DayState)counter);
         }
+    }
+
+    public DayState GetTimeDay() 
+    {
+        return dayState;
     }
 }

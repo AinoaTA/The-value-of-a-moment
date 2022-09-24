@@ -6,11 +6,11 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     private Vector3 m_Direction;
     private Camera cam;
-    [SerializeField] private float speed, maxSpeed = 1.4f, stopSpeedOffset = 0.2f;
+    [SerializeField] private float speed, maxSpeed = 1.4f;/*, stopSpeedOffset = 0.2f;*/
     public GameObject prop;
-    bool moving;
+    //bool moving;
 
-    [SerializeField] float m_LerpRotationPercentatge = 0.2f;
+    //[SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
 
@@ -48,31 +48,31 @@ public class PlayerMovement : MonoBehaviour
     private void MoveLeft()
     {
         m_MovementAxis += new Vector2(-1, 0);
-        moving = true;
+        //moving = true;
     }
 
     private void MoveRight()
     {
         m_MovementAxis += new Vector2(1, 0);
-        moving = true;
+        //moving = true;
     }
 
     private void MoveUp()
     {
         m_MovementAxis += new Vector2(0, 1);
-        moving = true;
+        //moving = true;
     }
 
     private void MoveDown()
     {
         m_MovementAxis += new Vector2(0, -1);
-        moving = true;
+        //moving = true;
     }
 
     private void StopMoving()
     {
         m_MovementAxis = Vector2.zero;
-        moving = false;
+        //moving = false;
     }
 
     void Update()

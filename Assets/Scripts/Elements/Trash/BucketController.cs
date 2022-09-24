@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BucketController : Interactables, ITask,IDependencies
+public class BucketController : Interactables, ITask, IDependencies
 {
     [SerializeField] private enum TypeBucket { CLOTHES, TRASH }
     [SerializeField] private TypeBucket type = TypeBucket.TRASH;
@@ -56,7 +56,7 @@ public class BucketController : Interactables, ITask,IDependencies
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.dayState, taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);

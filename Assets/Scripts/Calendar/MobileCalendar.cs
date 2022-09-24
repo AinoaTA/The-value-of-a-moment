@@ -23,7 +23,7 @@ namespace Calendar
         }
         public void OpenCalendar()
         {
-            bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayNightCycle.dayState];
+            bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayNightCycle.GetTimeDay()];
             if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
             {
                 noselected.SetActive(true);
@@ -35,7 +35,7 @@ namespace Calendar
             if (content.childCount == 0)
             {
                 foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
-                    if (item.Value.timeDate == GameManager.GetManager().dayNightCycle.dayState)
+                    if (item.Value.timeDate == GameManager.GetManager().dayNightCycle.GetTimeDay())
                         HandleTaskView(item);
             }
         }

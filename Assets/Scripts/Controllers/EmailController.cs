@@ -20,6 +20,7 @@ public class EmailController : MonoBehaviour
 
     IEnumerator RecieveMail() 
     {
+        Debug.LogAssertion("Provisional Method");
         yield return new WaitForSeconds(4f);
         
         mail.MailRecieved();

@@ -6,7 +6,7 @@ public class Bed : Interactables, ITask
     public GameObject m_Tutorial;
     private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
-    public GameObject m_Sheet; //sabana
+    public GameObject m_Sheet;
     public GameObject interactTextBed;
     public GameObject sleepTextBed;
     private bool gameInitialized;
@@ -61,7 +61,7 @@ public class Bed : Interactables, ITask
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.dayState, taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -85,7 +85,7 @@ public class Bed : Interactables, ITask
 
         if (m_Tutorial != null)
         {
-            minigameCanvas = m_Tutorial;//.transform.parent.gameObject;
+            minigameCanvas = m_Tutorial;
             minigameCanvas.SetActive(false);
         }
         if (m_SheetBad != null)
