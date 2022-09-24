@@ -75,6 +75,7 @@ public class Alarm : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/WakeUp", transform.position); //despertarse una vez por día sólo
         alarmsfx.start();
+        alarmsfx.release();
         inbed.start();
 
         m_DelegateSFX?.Invoke();
