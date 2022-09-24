@@ -1,10 +1,11 @@
 using UnityEngine;
-public class ActionObject : MonoBehaviour
+public class GeneralActions : MonoBehaviour
 {
     public GameObject OptionsCanvas;
     public Animator anim;
     protected bool showing;
     protected bool done;
+   [SerializeField]protected string nameAction;
 
     public virtual void ResetObject()
     {
@@ -14,7 +15,7 @@ public class ActionObject : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.GamePlay && !showing)// && !actionEnter)
+        if (GameManager.GetManager().gameStateController.CheckGameState(1) && !showing)// && !actionEnter)
         {
             showing = true;
             anim.SetBool("Showing", showing);
@@ -31,15 +32,19 @@ public class ActionObject : MonoBehaviour
             GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
         }
     }
-    public virtual void Interaction()
-    {
-        ExitCanvas();
-    }
-
     void ExitCanvas()
     {
         showing = false;
         anim.SetBool("Showing", showing);
     }
 
+    public virtual void EnterAction()
+    {
+        ExitCanvas();
+    }
+
+    public virtual void ExitAction()
+    {
+        ExitCanvas();
+    }
 }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Interruptor : ActionObject
+public class Interruptor : GeneralActions
 {
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
@@ -15,7 +15,7 @@ public class Interruptor : ActionObject
             light.intensity = minLight;
     }
 
-    public override void Interaction()
+    public override void EnterAction()
     {
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(this);
         TurnLights();

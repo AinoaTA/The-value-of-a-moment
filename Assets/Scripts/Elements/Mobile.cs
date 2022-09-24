@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Mobile : ActionObject
+public class Mobile : GeneralActions
 {
     [SerializeField] private bool getMobile;
     [SerializeField] private GameObject realMobile;
@@ -19,7 +19,7 @@ public class Mobile : ActionObject
     {
         GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
     }
-    public override void Interaction()
+    public override void EnterAction()
     {
         if (!getMobile)
         {

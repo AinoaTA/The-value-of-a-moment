@@ -117,13 +117,13 @@ public class CameraController : MonoBehaviour
 
     private void CameraPitchDelta(float delta)
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+        if (!GameManager.GetManager().gameStateController.CheckGameState(1))
             return;
         yVal = delta * Time.deltaTime;
     }
     private void CameraYawDelta(float delta)
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay)
+        if (!GameManager.GetManager().gameStateController.CheckGameState(1))
             return;
 
         xVal = delta * Time.deltaTime;

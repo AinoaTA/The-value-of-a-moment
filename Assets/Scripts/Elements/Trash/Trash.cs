@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Trash : ActionObject 
+public class Trash : GeneralActions 
 {
     public enum TrashType { CLOTHES, TRASH }
     public TrashType type = TrashType.TRASH;
@@ -16,7 +16,7 @@ public class Trash : ActionObject
         initPos = transform.position;
     }
 
-    public override void Interaction()
+    public override void EnterAction()
     {
         grabbing = true;
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);

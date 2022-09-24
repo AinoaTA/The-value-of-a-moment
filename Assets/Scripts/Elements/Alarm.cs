@@ -54,7 +54,7 @@ public class Alarm : MonoBehaviour
 
     private void StartDay()
     {
-        if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
+        if (m_AlarmON && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             ResetTime();
             StartCoroutine(NormalWakeUp());
@@ -63,7 +63,7 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-        if (m_AlarmON && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.Init)
+        if (m_AlarmON && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             StillSleeping();
         }

@@ -202,13 +202,13 @@ public class Bed : Interactables, ITask
                     GameManager.GetManager().cameraController.StartInteractCam(3);
                     gameInitialized = true;
                     GameManager.GetManager().canvasController.UnLock();
-                    GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.MiniGame;
+                    GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
                 }
                 break;
             case 2:
-                GameManager.GetManager().gameStateController.m_CurrentStateGame = GameStateController.StateGame.Init;
+                GameManager.GetManager().gameStateController.ChangeGameState(0);
                 GameManager.GetManager().canvasController.Lock();
 
                 StartCoroutine(DelayReset());

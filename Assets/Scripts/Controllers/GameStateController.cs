@@ -8,7 +8,7 @@ public class GameStateController : MonoBehaviour
         GamePlay,   // Una vez despertado y moviendose por el nivel
         MiniGame    // Se ha iniciado un minigame
     }
-    public StateGame m_CurrentStateGame;
+    private StateGame currentStateGame;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class GameStateController : MonoBehaviour
     /// <param name="state"></param>
     public void ChangeGameState(int state)
     {
-        m_CurrentStateGame = (StateGame)state;
+        currentStateGame = (StateGame)state;
         //StartCoroutine(Delay((StateGame)state));
     }
     /// <summary>
@@ -37,6 +37,6 @@ public class GameStateController : MonoBehaviour
     /// <returns></returns>
     public bool CheckGameState(int stateID) 
     {
-        return m_CurrentStateGame == (StateGame)stateID;
+        return currentStateGame == (StateGame)stateID;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Regadera : ActionObject
+public class Regadera : GeneralActions
 {
     public WaterCan waterCan;
     [HideInInspector] public bool grabbed = false;
@@ -15,7 +15,7 @@ public class Regadera : ActionObject
         }
     }
 
-    public override void Interaction()
+    public override void EnterAction()
     {
         Grab();
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);

@@ -27,7 +27,7 @@ public class InterctableManager : MonoBehaviour
 
     public void FirstInteract()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
+        if (!GameManager.GetManager().gameStateController.CheckGameState(1) || currInteractable == null)
             return;
 
         if (!currInteractable.GetDone())
@@ -36,7 +36,7 @@ public class InterctableManager : MonoBehaviour
 
     public void SecondInteract()
     {
-        if (GameManager.GetManager().gameStateController.m_CurrentStateGame != GameStateController.StateGame.GamePlay || currInteractable == null)
+        if (!GameManager.GetManager().gameStateController.CheckGameState(1) || currInteractable == null)
             return;
 
         if (currInteractable.totalOptions > 1)
@@ -45,10 +45,9 @@ public class InterctableManager : MonoBehaviour
 
     public void ExitInteract()
     {
-        if (currInteractable != null && GameManager.GetManager().gameStateController.m_CurrentStateGame == GameStateController.StateGame.MiniGame)
-        {
+        if (currInteractable != null && GameManager.GetManager().gameStateController.CheckGameState(2))
             currInteractable.ExitInteraction();
-        }
+
     }
 
     public void LookingAnInteractable(Interactables interactables)
