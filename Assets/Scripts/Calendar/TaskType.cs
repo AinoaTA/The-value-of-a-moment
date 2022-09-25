@@ -68,7 +68,6 @@ namespace Calendar
         {
             if (modifiedCalendar)
                 return;
-            //FMOD
             transform.position = Input.mousePosition;
         }
 
@@ -76,7 +75,7 @@ namespace Calendar
         {
             if (modifiedCalendar)
                 return;
-            //FMOD
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/PC/Soltar");
 
             if (!InAnySpaceCalendar)
             {

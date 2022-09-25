@@ -46,6 +46,7 @@ public class Mobile : ActionObject
             GameManager.GetManager().canvasController.UnLock();
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Out");
         }
         else
         {
@@ -56,6 +57,7 @@ public class Mobile : ActionObject
             GameManager.GetManager().cameraController.Block3DMovement(true);
             CanvasMobile(false);
             CanvasMultiple(false);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Out");
         }
     }
 
