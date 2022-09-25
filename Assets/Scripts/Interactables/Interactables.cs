@@ -58,7 +58,6 @@ public class Interactables : MonoBehaviour
     {
         if (GameManager.GetManager().gameStateController.CheckGameState(1) && !showing && !actionEnter && !interactDone)
         {
-            Debug.Log("show");
             showing = true;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(this);

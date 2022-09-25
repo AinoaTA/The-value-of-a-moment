@@ -74,6 +74,7 @@ public class Window : Interactables, ITask
     public override void Interaction(int options)
     {
         base.Interaction(options);
+        Debug.Log(options);
         switch (options)
         {
             case 1:
@@ -87,6 +88,9 @@ public class Window : Interactables, ITask
                 }
                 break;
             case 2:
+                Debug.Log(2);
+                GameManager.GetManager().gameStateController.ChangeGameState(2);
+                GameManager.GetManager().cameraController.StartInteractCam(10);
                 break;
         }
     }
