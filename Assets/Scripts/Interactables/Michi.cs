@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Corcho : Interactables
+[RequireComponent(typeof(MichiController))]
+public class Michi : Interactables
 {
+    private MichiController controller;
+
+    private void Start()
+    {
+        controller = this.GetComponent<MichiController>();
+    }
+
     public override void Interaction(int options)
     {
         base.Interaction(options);
@@ -11,7 +19,8 @@ public class Corcho : Interactables
         {
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(9);
+                GameManager.GetManager().cameraController.StartInteractCam(11);
+                controller.PetMichi();
                 break;
             case 2:
                 break;

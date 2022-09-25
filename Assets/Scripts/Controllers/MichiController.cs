@@ -6,7 +6,7 @@ public class MichiController : MonoBehaviour
     public Vector3 newPos;
     private float turningRate = 3f;
     private Quaternion targetRotation;
-    private bool reset;
+    private bool reset, petting;
 
     [Range(0.1f, 2f)] public float walkSpeed;
 
@@ -21,7 +21,7 @@ public class MichiController : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("sitting") || petting) return;
         if (reset)
         {
             // Calculate new random position
@@ -61,5 +61,12 @@ public class MichiController : MonoBehaviour
         animator.SetBool("walking", false);
         animator.ResetTrigger("hasArrived");
         animator.SetTrigger("hasArrived");
+    }
+
+    public void PetMichi()
+    {
+        Debug.Log("petting");
+        Miau();
+        petting = true;
     }
 }
