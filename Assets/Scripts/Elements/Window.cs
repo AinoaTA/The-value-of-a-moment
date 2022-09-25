@@ -81,6 +81,7 @@ public class Window : Interactables, ITask
             case 1:
                 if (!isOpen)
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     gameInitialized = true;
                     // Inicia minijuego
@@ -95,6 +96,7 @@ public class Window : Interactables, ITask
 
     public override void ExitInteraction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         gameInitialized = false;
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
@@ -205,7 +207,7 @@ public class Window : Interactables, ITask
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
-        //streetAmb.release();
+        streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
