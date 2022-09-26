@@ -10,7 +10,7 @@ public class GameStateController : MonoBehaviour
         Action
     }
     [SerializeField] private StateGame currentStateGame;
-
+    public StateGame previousStateGame { get; private set; }
     private void Awake()
     {
         GameManager.GetManager().gameStateController = this;
@@ -25,6 +25,7 @@ public class GameStateController : MonoBehaviour
     /// <param name="state"></param>
     public void ChangeGameState(int state)
     {
+        previousStateGame = currentStateGame;
         currentStateGame = (StateGame)state;
         //StartCoroutine(Delay((StateGame)state));
     }
@@ -41,5 +42,15 @@ public class GameStateController : MonoBehaviour
     public bool CheckGameState(int stateID)
     {
         return currentStateGame == (StateGame)stateID;
+    }
+
+
+    /// <summary>
+    /// Useful for interactions started after actions
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckPreviousGameStateWasAnAction() 
+    {
+        return previousStateGame == StateGame.Action;
     }
 }

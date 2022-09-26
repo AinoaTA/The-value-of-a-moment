@@ -9,7 +9,11 @@ public class Book : Interactables
         switch (options)
         {
             case 1:
-                if (grabbing != null)
+                if(canDoInAction)
+                {
+                    print("Book in Action example");
+                }
+                else if (grabbing != null)
                 {
                     grabbing.SetAccessCamera(true);
                     GameManager.GetManager().cameraController.StartInteractCam(8);

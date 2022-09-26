@@ -45,11 +45,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void OpenDoor()
-    {
-        // door.SetTrigger("Open");
-    }
-
     #region SetStateGames
     /// <summary>
     /// Lock(), ExitInteractable and ChangeState
