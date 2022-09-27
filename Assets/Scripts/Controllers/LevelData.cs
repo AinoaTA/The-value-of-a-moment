@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LevelData : MonoBehaviour
 {
-    public enum Characters { Elle, Zoe, Ari}
+    public enum Characters { Elle, Zoe, Ari }
     public Characters character;
     public string[] sceneNames;
     public string[] sceneIntroNames;
@@ -18,5 +18,10 @@ public class LevelData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetLanguage(int id)
+    {
+        LanguageGame.SetLanguage(id);
     }
 }
