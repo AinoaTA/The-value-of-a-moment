@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FMODMusic : MonoBehaviour
 {
-    //remains consitent amongst all copies of themselves
     private static FMOD.Studio.EventInstance Music;
     void Start()
     {
