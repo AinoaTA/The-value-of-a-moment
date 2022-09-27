@@ -9,16 +9,17 @@ public class Book : Interactables
         switch (options)
         {
             case 1:
-                if(canDoInAction)
-                {
-                    print("Book in Action example");
-                }
-                else if (grabbing != null)
+                if (grabbing != null)
                 {
                     grabbing.SetAccessCamera(true);
                     GameManager.GetManager().cameraController.StartInteractCam(8);
                 }
                 break;
         }
+    }
+
+    public override void ExtraInteraction()
+    {
+        print("Book in Action example");
     }
 }

@@ -10,6 +10,7 @@ public class GeneralActionsManager : MonoBehaviour
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._FirstInteraction -= InteractionManager;
+        GameManager.GetManager().playerInputs._SecondInteraction -= SecondExtraInteraction;
         GameManager.GetManager().playerInputs._ExitInteraction -= ExitActionManager;
     }
 
@@ -22,15 +23,8 @@ public class GeneralActionsManager : MonoBehaviour
     {
         GameManager.GetManager().playerInputs._FirstInteraction += InteractionManager;
         GameManager.GetManager().playerInputs._ExitInteraction += ExitActionManager;
-    }
-
-    public void InteractionManager()
-    {
-        if (!GameManager.GetManager().gameStateController.CheckGameState(1) || currObject == null)
-            return;
-
-        currObject.EnterAction();
-    }
+        GameManager.GetManager().playerInputs._SecondInteraction += SecondExtraInteraction;
+    }    
 
     public void LookingAnInteractable(GeneralActions interactables)
     {
@@ -48,4 +42,26 @@ public class GeneralActionsManager : MonoBehaviour
         if (currObject != null && GameManager.GetManager().gameStateController.CheckGameState(3))
             currObject.ExitAction();
     }
+
+    #region Interactions/Actions
+    /// <summary>
+    /// First place for Actions. 
+    /// If Action has extra interactions, this is the first interaction option.
+    /// </summary>
+    private void InteractionManager()
+    {
+        if (GameManager.GetManager().gameStateController.CheckGameState(1) && currObject != null)
+            currObject.EnterAction();
+        else if (GameManager.GetManager().gameStateController.CheckGameState(3) && currObject != null)
+            currObject.DoInteraction(0);
+    }
+    /// <summary>
+    /// Second interaction option. Not used for Actions
+    /// </summary>
+    private void SecondExtraInteraction()
+    {
+        if (GameManager.GetManager().gameStateController.CheckGameState(3) && currObject != null)
+            currObject.DoInteraction(1);
+    }
+    #endregion
 }

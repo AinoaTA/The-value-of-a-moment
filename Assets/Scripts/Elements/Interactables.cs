@@ -10,9 +10,6 @@ public class Interactables : MonoBehaviour
     [SerializeField] protected bool interactDone;
     [SerializeField] protected float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
 
-    [Header("Activated Action")]
-    public bool canDoInAction=false;
-
     [Header("Canvas")]
     [SerializeField] private GameObject OptionsCanvas;
     [SerializeField] private Animator anim;
@@ -79,5 +76,13 @@ public class Interactables : MonoBehaviour
     {
         showing = showing_;
         anim.SetBool("Showing", showing_);
+    }
+
+    public virtual void ExtraInteraction() { }
+
+    public virtual void EndExtraInteraction() 
+    {
+        print("=");
+        GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
 }

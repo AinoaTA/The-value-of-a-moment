@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InterctableManager : MonoBehaviour
+public class InteractableManager : MonoBehaviour
 {
     [SerializeField] private List<Interactables> allInteractables = new List<Interactables>();
-    [SerializeField] private Interactables currInteractable;
+    public Interactables currInteractable;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class InterctableManager : MonoBehaviour
 
     public void FirstInteract()
     {
-        if (!GameManager.GetManager().gameStateController.CheckGameState(1) || 
+        if (!GameManager.GetManager().gameStateController.CheckGameState(1) ||
             GameManager.GetManager().gameStateController.CheckGameState(3) || currInteractable == null)
             return;
 
@@ -46,11 +46,8 @@ public class InterctableManager : MonoBehaviour
 
     public void ExitInteract()
     {
-        //if(GameManager.GetManager().gameStateController.CheckPreviousGameStateWasAnAction
-
         if (currInteractable != null && GameManager.GetManager().gameStateController.CheckGameState(2))
             currInteractable.ExitInteraction();
-
     }
 
     public void LookingAnInteractable(Interactables interactables)
