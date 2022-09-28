@@ -40,7 +40,8 @@ public class Sit : GeneralActions
 
     public override void ExitAction()
     {
-        GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
+        if (GameManager.GetManager().interactableManager.currInteractable != null)
+            GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
