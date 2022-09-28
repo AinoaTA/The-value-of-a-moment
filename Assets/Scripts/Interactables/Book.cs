@@ -17,4 +17,9 @@ public class Book : Interactables
                 break;
         }
     }
+
+    public override void ExtraInteraction()
+    {
+        print("Book in Action example");
+    }
 }

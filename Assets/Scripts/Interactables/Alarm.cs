@@ -91,7 +91,7 @@ public class Alarm : MonoBehaviour
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
         GameManager.GetManager().playerController.PlayerWakeUpPos();
-        GameManager.GetManager().canvasController.Pointer.SetActive(true);
+        GameManager.GetManager().canvasController.Lock(true);//Pointer.SetActive(true);
         m_Alarm = false;
         ResetTime();
         yield return new WaitForSeconds(3f);
