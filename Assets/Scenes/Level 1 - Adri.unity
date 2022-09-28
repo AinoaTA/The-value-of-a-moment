@@ -874,13 +874,37 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 5374907094123581616}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.data[11].ID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.data[12].ID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.data[11].Name
+      value: Michi
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.data[12].Name
+      value: Cuenco
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.data[11].cameraType
+      value: 
+      objectReference: {fileID: 153471017}
+    - target: {fileID: 7463947681611832845, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: virtualCameras.Array.data[12].cameraType
+      value: 
+      objectReference: {fileID: 2144724599}
     - target: {fileID: 7463947681611832847, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Name
       value: CamerasController
-      objectReference: {fileID: 0}
-    - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.52627605
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787885, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Follow
@@ -897,6 +921,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7463947681611832844, guid: e11670496f27726418738713e038c4ea, type: 3}
   m_PrefabInstance: {fileID: 153471015}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &153471017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 722534136, guid: e11670496f27726418738713e038c4ea, type: 3}
+  m_PrefabInstance: {fileID: 153471015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &169446081
 GameObject:
   m_ObjectHideFlags: 0
@@ -10451,7 +10486,7 @@ GameObject:
   - component: {fileID: 1913579590}
   - component: {fileID: 1913579591}
   m_Layer: 0
-  m_Name: cuenco
+  m_Name: Cuenco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16956,6 +16991,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2144724599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2144724599, guid: e11670496f27726418738713e038c4ea, type: 3}
+  m_PrefabInstance: {fileID: 153471015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &543450653315866598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7640873234890911337, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
@@ -17184,7 +17230,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 41.344837
+  field of view: 35.72803
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -17209,8 +17255,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
-  m_LocalRotation: {x: -0.045578424, y: 0.0044441954, z: -0.00024629146, w: -0.9989509}
-  m_LocalPosition: {x: 1.555, y: 1.96, z: 2.563}
+  m_LocalRotation: {x: 0, y: 0.9659258, z: -0.2588191, w: 0}
+  m_LocalPosition: {x: -1, y: 1.698, z: 1.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
