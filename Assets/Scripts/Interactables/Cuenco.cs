@@ -7,7 +7,7 @@ public class Cuenco : Interactables
         {
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(8);
+                GameManager.GetManager().cameraController.StartInteractCam(12);
                 break;
         }
     }
