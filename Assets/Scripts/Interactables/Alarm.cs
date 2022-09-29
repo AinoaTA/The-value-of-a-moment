@@ -71,9 +71,11 @@ public class Alarm : MonoBehaviour
 
     private void StartAlarm()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/WakeUp", transform.position); //despertarse una vez por día sólo
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/WakeUp", transform.position); //despertarse una vez por dia solo
         alarmEvent.start(); 
 
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>(); // <-- Added by Aryadna to test
+        if (null!=dialogueManager) dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
         m_DelegateSFX?.Invoke();
         //GameManager.GetManager().soundController.QuitAllMusic();
 
