@@ -73,6 +73,8 @@ public class Alarm : MonoBehaviour
 
     private void StartAlarm()
     {
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        if (null!=dialogueManager) dialogueManager.StartDialogue("Alarm");
         m_DelegateSFX?.Invoke();
         GameManager.GetManager().soundController.QuitAllMusic();
 
