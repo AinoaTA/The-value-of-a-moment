@@ -42,6 +42,7 @@ public class Grabbing : MonoBehaviour
             leaving = true;
             isObjectGrabbed = false;
             GameManager.GetManager().gameStateController.ChangeGameState(1);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book/Drop", transform.position);
         }
 
         if (leaving)
@@ -56,6 +57,7 @@ public class Grabbing : MonoBehaviour
             if (yAxisInverted)
             {
                 MouseRot = new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y")) * Time.deltaTime * Time.timeScale;
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book/Look", transform.position);
             }
             else
             {

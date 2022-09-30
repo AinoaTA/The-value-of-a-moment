@@ -18,6 +18,8 @@ public class Window : Interactables, ITask
     [SerializeField] private float distance;
     bool temp = false;
 
+    private static FMOD.Studio.EventInstance streetAmb;
+
     #region TASK
     [Space(20)]
     [Header("TASK")]
@@ -80,6 +82,7 @@ public class Window : Interactables, ITask
             case 1:
                 if (!isOpen)
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     gameInitialized = true;
                     // Inicia minijuego
@@ -97,6 +100,7 @@ public class Window : Interactables, ITask
 
     public override void ExitInteraction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         gameInitialized = false;
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
@@ -135,12 +139,15 @@ public class Window : Interactables, ITask
 
     private void Start()
     {
+        streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Amb/Street");
+        //streetAmb.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SetTask();
         minigameCanvas = tutorial;//.transform.parent.gameObject;
         minigameCanvas.SetActive(false);
         //GameManager.GetManager().Window = this;
         minHeight = glass.transform.position.y;
         initPos = glass.transform.position;
+
     }
     private void Update()
     {
@@ -203,6 +210,8 @@ public class Window : Interactables, ITask
     private void WindowDone()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
+        streetAmb.start();
+        streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
