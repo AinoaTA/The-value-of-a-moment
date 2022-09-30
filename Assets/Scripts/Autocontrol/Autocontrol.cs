@@ -20,9 +20,8 @@ public class Autocontrol : MonoBehaviour
     private RenderTexture renderTexture;
     private Vector2Int renderTextureResolution;
 
-    //MusicGameplay
+    //Music
     public FMODMusic MusicGameplay;
-
     //
 
     private void Awake()
