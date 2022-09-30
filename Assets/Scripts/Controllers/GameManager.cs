@@ -26,9 +26,9 @@ public class GameManager : MonoBehaviour
     public SceneLoader sceneLoader { get; set; }
     public CameraController cameraController { get; set; }
     public LevelData levelData { get; set; }
-    public InterctableManager interactableManager { get; set; }
+    public InteractableManager interactableManager { get; set; }
     public PlayerHandleInputs playerInputs { get; set; }
-    public ActionObjectManager actionObjectManager { get; set; }
+    public GeneralActionsManager actionObjectManager { get; set; }
     public Alarm alarm { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
@@ -43,11 +43,6 @@ public class GameManager : MonoBehaviour
         }
         else if (gameManager != this)
             Destroy(gameObject);
-    }
-
-    public void OpenDoor()
-    {
-        // door.SetTrigger("Open");
     }
 
     #region SetStateGames

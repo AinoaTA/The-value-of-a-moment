@@ -6,10 +6,11 @@ public class GameStateController : MonoBehaviour
     {
         Init = 0,   // Momento despertar-posponer
         GamePlay,   // Una vez despertado y moviendose por el nivel
-        MiniGame    // Se ha iniciado un minigame
+        MiniGame,    // Se ha iniciado un minigame
+        Action
     }
-    public StateGame m_CurrentStateGame;
-
+    [SerializeField] private StateGame currentStateGame;
+    public StateGame previousStateGame { get; private set; }
     private void Awake()
     {
         GameManager.GetManager().gameStateController = this;
@@ -19,11 +20,13 @@ public class GameStateController : MonoBehaviour
     /// 0 - Init;
     /// 1 - GamePlay;
     /// 2 - MiniGame
+    /// 3 - Action
     /// </summary>
     /// <param name="state"></param>
     public void ChangeGameState(int state)
     {
-        m_CurrentStateGame = (StateGame)state;
+        previousStateGame = currentStateGame;
+        currentStateGame = (StateGame)state;
         //StartCoroutine(Delay((StateGame)state));
     }
     /// <summary>
@@ -32,11 +35,22 @@ public class GameStateController : MonoBehaviour
     /// 0 - Init;
     /// 1 - GamePlay;
     /// 2 - MiniGame
+    /// 3 - Action
     /// </summary>
     /// <param name="stateID"></param>
     /// <returns></returns>
-    public bool CheckGameState(int stateID) 
+    public bool CheckGameState(int stateID)
     {
-        return m_CurrentStateGame == (StateGame)stateID;
+        return currentStateGame == (StateGame)stateID;
+    }
+
+
+    /// <summary>
+    /// Useful for interactions started after actions
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckPreviousGameStateWasAnAction() 
+    {
+        return previousStateGame == StateGame.Action;
     }
 }
