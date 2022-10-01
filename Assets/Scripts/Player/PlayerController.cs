@@ -4,7 +4,8 @@ public class PlayerController : MonoBehaviour
 {
     public Transform playerWakeUp;
     public Transform playerSleep;
-
+    public float rotationSleep = 90;
+    public float rotationWakeup = 90;
     private bool sleep;
 
     private CharacterController character;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        character.enabled = false;
         PlayerSleepPos();
     }
     public void PlayerWakeUpPos()
@@ -24,22 +26,16 @@ public class PlayerController : MonoBehaviour
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/GetUp", transform.position);
         character.enabled = false;
         sleep = false;
-        GameManager.GetManager().playerController.playerAnimation.SetAnimation("WakeUp");
-        //mov.animator.SetBool("Sleep", sleep);
-
-        transform.SetPositionAndRotation(playerWakeUp.position, playerWakeUp.rotation);
+        playerAnimation.SetAnimation("WakeUp");
+        Sleep(true);
         character.enabled = true;
     }
 
     public void PlayerSleepPos()
     {
-        character.enabled = false;
         sleep = true;
-        transform.SetPositionAndRotation(playerSleep.position, playerSleep.rotation);
-        GameManager.GetManager().playerController.playerAnimation.SetAnimation("Sleep");
-        // mov.prop.transform.rotation = Quaternion.identity;
-        //player.animator.SetBool("Sleep", sleep);
-        character.enabled = true;
+        Sleep(false);
+        playerAnimation.SetAnimation("Sleep");
     }
 
     public void SadMoment()
@@ -50,5 +46,14 @@ public class PlayerController : MonoBehaviour
     public void HappyMoment()
     {
     //    player.animator.Play("Happy");
+    }
+
+    void Sleep(bool wakeup)
+    {
+        transform.rotation = Quaternion.identity;
+        if (wakeup)
+            transform.SetPositionAndRotation(playerWakeUp.position, Quaternion.Euler(0, rotationWakeup, 0));
+        else
+            transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }
 }

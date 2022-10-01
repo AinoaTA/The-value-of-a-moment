@@ -51,7 +51,6 @@ public class Alarm : MonoBehaviour
 
         if ((m_Timer > m_MaxTime) && !m_AlarmON)
             StartAlarm();
-
     }
 
     private void StartDay()
