@@ -14,8 +14,6 @@ public class Alarm : MonoBehaviour
     private int m_count;
     [SerializeField] private float m_Timer;
     private bool m_AlarmON;
-    private int controlPosponer;
-    private bool temp;
 
 
     //public delegate void DelegateSFX();
@@ -79,36 +77,24 @@ public class Alarm : MonoBehaviour
 
         // <-- Added by Aryadna to test
         if (null!= GameManager.GetManager().dialogueManager) GameManager.GetManager().dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
-       // m_DelegateSFX?.Invoke();
-        //GameManager.GetManager().soundController.QuitAllMusic();
 
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
         m_AlarmON = true;
-        //sonid
     }
     public IEnumerator NormalWakeUp()
     {
         // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Alarm Off", transform.position);
         GameManager.GetManager().cameraController.StartInteractCam(2);
-        //GameManager.GetManager().soundController.SetMusic();
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
         GameManager.GetManager().playerController.PlayerWakeUpPos();
-        GameManager.GetManager().canvasController.Lock(true);//Pointer.SetActive(true);
+        GameManager.GetManager().canvasController.Lock(true);
         m_Alarm = false;
         ResetTime();
         yield return new WaitForSeconds(3f);
         GameManager.GetManager().StartThirdPersonCamera();
-
-        if (!temp)
-        {
-            //if (controlPosponer == 0)
-            //    StartCoroutine(WakeUpDialogue());
-            //else
-            //    StartCoroutine(SecondWakeUpDialogue());
-        }
         yield return null;
     }
 
@@ -116,8 +102,6 @@ public class Alarm : MonoBehaviour
 
     public void StillSleeping()
     {
-        controlPosponer++;
-
         m_AlarmON = false;
 
         if (m_count >= m_EllePhrases.Length)
@@ -129,7 +113,6 @@ public class Alarm : MonoBehaviour
 
         GameManager.GetManager().gameStateController.ChangeGameState(0);
         GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
-        //GameManager.GetManager().Dialogue.SetDialogue(m_EllePhrases[m_count], null);
         m_count++;
     }
 
@@ -149,7 +132,6 @@ public class Alarm : MonoBehaviour
         inbed.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         m_AlarmON = false;
-        //GameManager.GetManager().soundController.StopSound();
         m_Timer = 0;
     }
 
@@ -157,6 +139,5 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
-
     }
 }

@@ -7,7 +7,7 @@ public class Plant : Interactables, ITask, IDependencies
     private GameObject minigameCanvas = null;
 
     [SerializeField] private float distance;
-    [SerializeField] private WaterCan waterCan; //objecto que movemos interactuando
+    [SerializeField] private WaterCan waterCan; //objeto que movemos interactuando
     [SerializeField] private Regadera regadera; //Objeto que cogemos del suelo
     Vector3 wateringInitialPos;
 
