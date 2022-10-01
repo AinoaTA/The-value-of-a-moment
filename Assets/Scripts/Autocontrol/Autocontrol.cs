@@ -101,7 +101,8 @@ public class Autocontrol : MonoBehaviour
             backgroundBar.sprite = barBackGroundColor[0];
             //gameObject.GetComponent<FMODMusic>().Mood();
             //MusicGameplay
-            MusicGameplay.Mood(1f);
+            Debug.Log("Temporal Line commented");
+           // MusicGameplay.Mood(1f);
             //
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)

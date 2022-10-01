@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public PlayerHandleInputs playerInputs { get; set; }
     public GeneralActionsManager actionObjectManager { get; set; }
     public Alarm alarm { get; set; }
+    public DialogueManager dialogueManager { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }

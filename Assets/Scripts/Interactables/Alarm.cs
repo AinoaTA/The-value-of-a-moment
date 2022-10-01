@@ -18,8 +18,8 @@ public class Alarm : MonoBehaviour
     private bool temp;
 
 
-    public delegate void DelegateSFX();
-    public static DelegateSFX m_DelegateSFX;
+    //public delegate void DelegateSFX();
+    //public static DelegateSFX m_DelegateSFX;
 
     private static FMOD.Studio.EventInstance alarmsfx;
     private static FMOD.Studio.EventInstance inbed;
@@ -78,9 +78,9 @@ public class Alarm : MonoBehaviour
         alarmsfx.release();
         inbed.start();
 
-        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>(); // <-- Added by Aryadna to test
-        if (null!=dialogueManager) dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
-        m_DelegateSFX?.Invoke();
+        // <-- Added by Aryadna to test
+        if (null!= GameManager.GetManager().dialogueManager) GameManager.GetManager().dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
+       // m_DelegateSFX?.Invoke();
         //GameManager.GetManager().soundController.QuitAllMusic();
 
         CanvasAlarm.SetActive(true);

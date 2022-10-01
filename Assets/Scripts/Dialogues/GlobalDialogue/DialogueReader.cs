@@ -15,8 +15,8 @@ public class DialogueReader : MonoBehaviour
     [System.Serializable]
     public class DialogueList 
     {
-        public Dialogue[] wake;
-        public Dialogue[] bed;
+        public Dialogue[] Alarm;
+        public Dialogue[] Alarm1;
         public Dialogue[] windows;
     }
 

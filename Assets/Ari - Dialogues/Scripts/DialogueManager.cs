@@ -16,7 +16,11 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator nextLineCoroutine;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        GameManager.GetManager().dialogueManager = this;
+    }
+
     public void StartDialogue(string dialogue)
     {
         if(nextLineCoroutine!=null) StopCoroutine(nextLineCoroutine);
@@ -37,7 +41,9 @@ public class DialogueManager : MonoBehaviour
 
         float waitTime = defaultvoiceTime;
         AudioClip voice = langESP ? line.voice_es : line.voice_en;
-        if (voice != null) {
+        print(voice);
+        if (voice != null)
+        {
             audioSource.PlayOneShot(voice);
             waitTime = voice.length + aditionalVoiceTime;
         }
