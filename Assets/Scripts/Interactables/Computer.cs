@@ -6,6 +6,7 @@ public class Computer : Interactables
     private GameObject computerScreen, programScreen,
         /*calendarScreen*/ calendarMaterialScreen, emailScreenMaterial;
 
+    [SerializeField] GameObject programMinigame;
     private bool anyButtonScreenActive;
 
     private void Start()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform playerWakeUp;
+    public Transform playerGetUp;
     public Transform playerSleep;
     public float rotationSleep = 90;
     public float rotationWakeup = 90;
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
         if (wakeup)
-            transform.SetPositionAndRotation(playerWakeUp.position, Quaternion.Euler(0, rotationWakeup, 0));
+            transform.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
         else
             transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }
