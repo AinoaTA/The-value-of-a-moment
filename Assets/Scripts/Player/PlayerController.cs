@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerWakeUpPos()
     {
-
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/GetUp", transform.position);
         character.enabled = false;
         sleep = false;
@@ -51,6 +50,30 @@ public class PlayerController : MonoBehaviour
         //    player.animator.Play("Happy");
     }
 
+    public void SetAnimation(string name)
+    {
+        playerAnimation.SetAnimation(name);
+    }
+
+    public void SetAnimation(string name, Transform pos)
+    {
+        playerAnimation.Active(false);
+        if (pos != null)
+        {
+            print("???");
+            root.position = pos.position;
+            root.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+        playerAnimation.SetAnimation(name);
+    }
+
+    public void TemporalExit() 
+    {
+        Debug.Log("TEMPORAL");
+        root.localPosition = new Vector3(0, -1.2f, 0);
+        SetAnimation("Movement");
+        root.localRotation = Quaternion.Euler(0, 180, 0);
+    }
     void Sleep(bool wakeup)
     {
         root.rotation = Quaternion.identity;
@@ -68,14 +91,14 @@ public class PlayerController : MonoBehaviour
     IEnumerator StartDay()
     {
         //QUE ASCO LE ESTOY COGIENDO A LAS ANIMACIONES HELP ME
-       
+
         Vector3 prevPos = root.localPosition;
         float provY = root.localPosition.y;
         float time = 3.5f;
         while (t < time)
         {
             t += Time.deltaTime;
-            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, provY,-1.0f), t/ time);
+            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, provY, -1.0f), t / time);
             yield return null;
         }
         yield return new WaitForSeconds(1.5f);
@@ -85,7 +108,7 @@ public class PlayerController : MonoBehaviour
         while (t < time)
         {
             t += Time.deltaTime;
-            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, -1.2f,0), t/time);
+            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, -1.2f, 0), t / time);
             yield return null;
         }
 

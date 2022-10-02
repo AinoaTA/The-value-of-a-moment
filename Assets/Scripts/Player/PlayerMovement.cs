@@ -83,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
             return;
         }
-        print(m_MovementAxis);
         if (m_MovementAxis != Vector2.zero)
         {
             Vector3 forward = cam.transform.forward;

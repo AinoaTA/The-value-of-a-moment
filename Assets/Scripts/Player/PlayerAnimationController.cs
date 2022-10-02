@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
@@ -18,9 +19,31 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void Active(bool v) { anim.enabled = v; }
 
-    public void StartDay() 
+    public void StartDay()
     {
-       //anim.applyRootMotion = true;
+        //anim.applyRootMotion = true;
         anim.SetTrigger("GetUp");
+    }
+
+    IEnumerator routine;
+    public void InterctAnim()
+    {
+        if (routine == null)
+            StartCoroutine(routine = AnimationSpeedAffect());
+    }
+
+    IEnumerator AnimationSpeedAffect()
+    {
+        print("?");
+        float t = 0;
+        anim.speed = 1;
+        while (t < 2) 
+        {
+            t += Time.deltaTime;
+            anim.speed = Mathf.Lerp(1, 0, t /2);
+            yield return null;
+        }
+      
+        routine = null;
     }
 }
