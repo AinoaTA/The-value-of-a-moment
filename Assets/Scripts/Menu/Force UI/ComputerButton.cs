@@ -28,6 +28,7 @@ public class ComputerButton : MonoBehaviour
 
     private void OnMouseOver()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/PC/Hover");
         sprite.transform.localScale = new Vector3(scale+ defaultScale.x, scale+ defaultScale.y);
     }
 

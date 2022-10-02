@@ -21,10 +21,7 @@ public class Mobile : GeneralActions
     }
     public override void EnterAction()
     {
-        if (!getMobile)
-        {
-            GetMobile();
-        }
+        if (!getMobile) GetMobile();
     }
 
     private void GetMobile()
@@ -46,6 +43,7 @@ public class Mobile : GeneralActions
             GameManager.GetManager().canvasController.UnLock();
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Out");
         }
         else
         {
@@ -56,6 +54,7 @@ public class Mobile : GeneralActions
             GameManager.GetManager().cameraController.Block3DMovement(true);
             CanvasMobile(false);
             CanvasMultiple(false);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Out");
         }
     }
 
@@ -68,7 +67,7 @@ public class Mobile : GeneralActions
     public void CanvasMobile(bool val)
     {
         mobileCanvas.alpha = val ? 1 : 0;
-        mobileCanvas.blocksRaycasts = val ? true : false;
-        mobileCanvas.interactable = val ? true : false;
+        mobileCanvas.blocksRaycasts = val;
+        mobileCanvas.interactable = val;
     }
 }

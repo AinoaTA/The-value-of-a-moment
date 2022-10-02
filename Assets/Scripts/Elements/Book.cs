@@ -1,7 +1,10 @@
 public class Book : Interactables
 {
     public string[] m_BookInteractPhrases;
-    public Grabbing grabbing;
+    public Grabbing m_Grabbing;
+
+    public delegate void DelegateSFXBook();
+    public static DelegateSFXBook m_DelegateSFXBook;
 
     public override void Interaction(int options)
     {
@@ -9,9 +12,10 @@ public class Book : Interactables
         switch (options)
         {
             case 1:
-                if (grabbing != null)
+                if (m_Grabbing != null)
                 {
-                    grabbing.SetAccessCamera(true);
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book/PickUp", transform.position);
+                    m_Grabbing.SetAccessCamera(true);
                     GameManager.GetManager().cameraController.StartInteractCam(8);
                 }
                 break;

@@ -4,14 +4,13 @@ public class Interactables : MonoBehaviour
 {
     [Header("Data")]
     public string nameInteractable;
-    private int cameraID;
 
     [Header("Options")]
     public int totalOptions = 1;
     [SerializeField] protected bool interactDone;
     [SerializeField] protected float m_MaxAutoControl, m_MiddleAutoControl, m_MinAutoControl;
 
-    [Header("Others")]
+    [Header("Canvas")]
     [SerializeField] private GameObject OptionsCanvas;
     [SerializeField] private Animator anim;
 
@@ -34,7 +33,6 @@ public class Interactables : MonoBehaviour
 
     private void Start()
     {
-        cameraID = GameManager.GetManager().cameraController.GetID(nameInteractable);
         SetCanvasValue(false);
     }
 
@@ -78,5 +76,13 @@ public class Interactables : MonoBehaviour
     {
         showing = showing_;
         anim.SetBool("Showing", showing_);
+    }
+
+    public virtual void ExtraInteraction() { }
+
+    public virtual void EndExtraInteraction() 
+    {
+        print("=");
+        GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
 }

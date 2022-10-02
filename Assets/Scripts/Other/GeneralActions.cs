@@ -13,7 +13,7 @@ public class GeneralActions : MonoBehaviour
         showing = false;
     }
 
-    private void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         if (GameManager.GetManager().gameStateController.CheckGameState(1) && !showing)// && !actionEnter)
         {
@@ -23,10 +23,10 @@ public class GeneralActions : MonoBehaviour
         }
     }
 
-    
-    private void OnMouseExit()
+
+    protected virtual void OnMouseExit()
     {
-        if (showing)// && !actionEnter)
+        if (showing)
         {
             ExitCanvas();
             GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
@@ -46,5 +46,9 @@ public class GeneralActions : MonoBehaviour
     public virtual void ExitAction()
     {
         ExitCanvas();
+        GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
     }
+
+
+    public virtual void DoInteraction(int id)  { }
 }

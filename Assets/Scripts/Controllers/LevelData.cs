@@ -19,4 +19,9 @@ public class LevelData : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetLanguage(int id)
+    {
+        LanguageGame.SetLanguage(id);
+    }
 }

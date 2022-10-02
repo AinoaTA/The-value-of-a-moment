@@ -2,6 +2,8 @@
 
 public class MichiController : MonoBehaviour
 {
+    private bool theresFood = false;
+    public Transform cuenco;
     private Animator animator;
     public Vector3 newPos;
     private float turningRate = 3f;
@@ -32,7 +34,7 @@ public class MichiController : MonoBehaviour
             reset = false;
             animator.SetBool("walking", true);
         }
-        else
+        else if(!theresFood)
         {
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 reset = true;
@@ -45,7 +47,17 @@ public class MichiController : MonoBehaviour
                 Miau();
             }
         }
-        Debug.DrawLine(this.transform.position, newPos, Color.white);
+
+        if(theresFood)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, cuenco.position, walkSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, cuenco.position) < .2f)
+            {
+                Miau();
+                // TODO: comer
+                theresFood = false;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -68,5 +80,12 @@ public class MichiController : MonoBehaviour
         Debug.Log("petting");
         Miau();
         petting = true;
+    }
+
+    public void FeedMichi()
+    {
+        Debug.Log("feeding");
+        theresFood = true;
+        reset = false;
     }
 }

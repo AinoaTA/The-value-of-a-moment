@@ -19,6 +19,7 @@ public class Mirror : Interactables
         switch (options)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                 if (!interactDone)
                 {
                     interactDone = true;

@@ -43,14 +43,12 @@ namespace Calendar
         }
         public void ClicEnter()
         {
-            //FMOD
             if (!done)
                 sprite.color = enterColor;
         }
 
         public void ClicExit()
         {
-            //FMOD
             if (!done)
                 sprite.color = Color.white;
         }
@@ -59,7 +57,6 @@ namespace Calendar
         {
             if (modifiedCalendar)
                 return;
-            //FMOD
             oldParent = transform.parent;
             transform.SetParent(GameManager.GetManager().calendarController.taskMovement);
         }
@@ -68,7 +65,6 @@ namespace Calendar
         {
             if (modifiedCalendar)
                 return;
-            //FMOD
             transform.position = Input.mousePosition;
         }
 
@@ -76,7 +72,7 @@ namespace Calendar
         {
             if (modifiedCalendar)
                 return;
-            //FMOD
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/PC/Soltar");
 
             if (!InAnySpaceCalendar)
             {

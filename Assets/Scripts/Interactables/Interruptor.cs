@@ -31,8 +31,18 @@ public class Interruptor : GeneralActions
     {
         foreach (var light in lights.GetComponentsInChildren<Light>())
         {
-            if (isLightOn) light.intensity = minLight;
-            else light.intensity = maxLight;
+
+            if (isLightOn)
+            {
+                light.intensity = minLight;
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/LightOff", transform.position);
+            }
+
+            else
+            {
+                light.intensity = maxLight;
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/LightOn", transform.position);
+            }
         }
         isLightOn = !isLightOn;
     }
