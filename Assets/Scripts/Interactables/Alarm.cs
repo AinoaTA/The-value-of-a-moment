@@ -93,9 +93,6 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(true);
         m_Alarm = false;
         ResetTime();
-        yield return new WaitForSeconds(3f);
-        GameManager.GetManager().StartThirdPersonCamera();
-        yield return null;
     }
 
 

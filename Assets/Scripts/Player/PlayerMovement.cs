@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Direction;
     private Camera cam;
     [SerializeField] private float speed, maxSpeed = 1.4f;/*, stopSpeedOffset = 0.2f;*/
-    public GameObject prop;
+    //public GameObject prop;
     //bool moving;
 
     //[SerializeField] float m_LerpRotationPercentatge = 0.2f;
@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
             return;
         }
+        print(m_MovementAxis);
         if (m_MovementAxis != Vector2.zero)
         {
             Vector3 forward = cam.transform.forward;
