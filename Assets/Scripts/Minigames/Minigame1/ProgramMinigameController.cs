@@ -9,7 +9,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     private bool solved = false;
     private bool checking;
     private bool m_AllCorrected;
-    private bool gameInitialized;
+    //private bool gameInitialized;
     public float m_Autocontrol = 5;
 
     #region TASK
@@ -70,7 +70,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     }
     private IEnumerator GameFinished()
     {
-        gameInitialized = false;
+        //gameInitialized = false;
         solved = true;
         GameManager.GetManager().dayNightCycle.TaskDone();
         CheckDoneTask();
@@ -84,7 +84,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     public void QuitMiniGame()
     {
         solved = false;
-        gameInitialized = false;
+        //gameInitialized = false;
         GameManager.GetManager().computer.ComputerON();
     }
 
@@ -115,7 +115,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
             m_AllPieces[i].ResetPiece();
         }
         solved = false;
-        gameInitialized = false;
+        //gameInitialized = false;
     }
     public bool GetSolved() { return solved; }
 

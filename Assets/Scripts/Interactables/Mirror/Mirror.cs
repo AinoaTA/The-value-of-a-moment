@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Mirror : Interactables
 {
-    private int m_Counter = 0;
+    //private int m_Counter = 0;
 
     public string[] bad1, lessbad, normal, good;
     private int counterbad1, counterless, counternormal, countergood;

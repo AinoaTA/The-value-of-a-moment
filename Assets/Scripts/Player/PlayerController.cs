@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public Transform playerSleep;
     public float rotationSleep = 90;
     public float rotationWakeup = 90;
-    private bool sleep;
+    //private bool sleep;
     public Transform root;
 
     private CharacterController character;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/GetUp", transform.position);
         character.enabled = false;
-        sleep = false;
+        //sleep = false;
         playerAnimation.SetAnimation("GetUp");
         //Sleep(true);
         StartCoroutine(StartDay());
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerSleepPos()
     {
-        sleep = true;
+        //sleep = true;
         Sleep(false);
         playerAnimation.SetAnimation("Sleep");//, true);
     }

@@ -16,7 +16,7 @@ public class Window : Interactables, ITask
     private bool tutorialShowed = false;
 
     [SerializeField] private float distance;
-    bool temp = false;
+    //bool temp = false;
 
     private static FMOD.Studio.EventInstance streetAmb;
 
