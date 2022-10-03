@@ -3,10 +3,16 @@ using UnityEngine;
 
 public class BitterControl : MonoBehaviour
 {
-    public GameObject content;
-    public Bitter bitterPrefab;
-    public TextAsset bitterProfiles;
-    public List<string> profileBitterNames;
+    [Header("Bitter")]
+    [SerializeField] GameObject content;
+    [SerializeField] Bitter bitterPrefab;
+    [SerializeField] TextAsset bitterProfiles;
+    [SerializeField] List<string> profileBitterNames;
+
+    [SerializeField] GameObject readBitters;
+    [SerializeField] GameObject writeBitter;
+    [Header("Values")]
+    [SerializeField] Vector2 randomBitterTimes;
 
     private void Awake()
     {
@@ -16,10 +22,32 @@ public class BitterControl : MonoBehaviour
         profileBitterNames = new List<string>(AllWords);
     }
 
-    public void CreateBit() 
+
+
+
+    public void CreateBit()
     {
-    
-    
+
+
     }
+
+
+    #region buttons
+    public void ReadBitter() 
+    {
+        readBitters.SetActive(true);
+        writeBitter.SetActive(false);
+    }
+
+    public void WriteBitter() 
+    {
+        readBitters.SetActive(false);
+        writeBitter.SetActive(true);
+    }
+
+    #endregion
+
+    public void ClearDay()
+    { }
 }
 
