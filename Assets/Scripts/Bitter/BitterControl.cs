@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class BitterControl : MonoBehaviour
@@ -8,7 +7,8 @@ public class BitterControl : MonoBehaviour
     [SerializeField] GameObject content;
     [SerializeField] Bitter bitterPrefab;
     [SerializeField] TextAsset bitterProfiles;
-    [SerializeField] List<string> profileBitterNames;
+    [SerializeField] List<string> profileBitterNamesGood;
+    [SerializeField] List<string> profileBitterNamesBad;
 
     [SerializeField] GameObject readBitters;
     [SerializeField] GameObject writeBitter;
@@ -17,34 +17,40 @@ public class BitterControl : MonoBehaviour
     int random;
     private void Awake()
     {
-        var file = Resources.Load<TextAsset>("ProfileBitterNames");
+        #region read TXT
+        //read the .txts names to get a lot of nicknames. this will we a scriptable object in a futureeeeee ejej 3oct2022.
+        var file = Resources.Load<TextAsset>("ProfileBitterNamesGood");
+        var file2 = Resources.Load<TextAsset>("ProfileBitterNamesBad");
         var content = file.text;
+        var content2 = file2.text;
         var AllWords = content.Split('\n');
-        profileBitterNames = new List<string>(AllWords);
-
+        var AllWords2 = content2.Split('\n');
+        profileBitterNamesGood = new List<string>(AllWords);
+        profileBitterNamesBad = new List<string>(AllWords2);
         random = (int)Random.Range(randomBitterTimes.x, randomBitterTimes.y);
+        #endregion
 
         CreateBit();
     }
 
-
-
-
+    /// <summary>
+    /// Create bitters
+    /// </summary>
     public void CreateBit()
     {
+        //create a bit depends on autocontrol's player.
         for (int i = 0; i < random; i++)
         {
             Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
-            bit.arroba.text = GetNickname(); ;
+            bit.arroba.text = GetNickname();
             bit.arroba.text.Replace("\r", "");
             bit.message.text = GetText();
-
+            //pic etc
         }
-
     }
 
     #region gets
-    string GetNickname() => profileBitterNames[Random.Range(0, profileBitterNames.Count)];
+    string GetNickname() => profileBitterNamesGood[Random.Range(0, profileBitterNamesGood.Count)];
 
 
     string GetText()
@@ -67,8 +73,8 @@ public class BitterControl : MonoBehaviour
     }
 
     #endregion
-
-    public void ClearDay()
-    { }
+    /// <summary>
+    /// Remove all bitters created
+    /// </summary>
+    public void ClearDay() { }
 }
-
