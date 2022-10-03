@@ -21,10 +21,7 @@ public class Mobile : GeneralActions
     }
     public override void EnterAction()
     {
-        if (!getMobile)
-        {
-            GetMobile();
-        }
+        if (!getMobile) GetMobile();
     }
 
     private void GetMobile()
@@ -70,7 +67,7 @@ public class Mobile : GeneralActions
     public void CanvasMobile(bool val)
     {
         mobileCanvas.alpha = val ? 1 : 0;
-        mobileCanvas.blocksRaycasts = val ? true : false;
-        mobileCanvas.interactable = val ? true : false;
+        mobileCanvas.blocksRaycasts = val;
+        mobileCanvas.interactable = val;
     }
 }

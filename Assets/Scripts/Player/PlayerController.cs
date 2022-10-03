@@ -1,11 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform playerWakeUp;
+    public Transform playerGetUp;
     public Transform playerSleep;
-
-    private bool sleep;
+    public float rotationSleep = 90;
+    public float rotationWakeup = 90;
+    //private bool sleep;
+    public Transform root;
 
     private CharacterController character;
     public PlayerAnimationController playerAnimation;
@@ -16,30 +19,25 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        character.enabled = false;
         PlayerSleepPos();
     }
     public void PlayerWakeUpPos()
     {
-        
         //FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/GetUp", transform.position);
         character.enabled = false;
-        sleep = false;
-        GameManager.GetManager().playerController.playerAnimation.SetAnimation("WakeUp");
-        //mov.animator.SetBool("Sleep", sleep);
-
-        transform.SetPositionAndRotation(playerWakeUp.position, playerWakeUp.rotation);
+        //sleep = false;
+        playerAnimation.SetAnimation("GetUp");
+        //Sleep(true);
+        StartCoroutine(StartDay());
         character.enabled = true;
     }
 
     public void PlayerSleepPos()
     {
-        character.enabled = false;
-        sleep = true;
-        transform.SetPositionAndRotation(playerSleep.position, playerSleep.rotation);
-        GameManager.GetManager().playerController.playerAnimation.SetAnimation("Sleep");
-        // mov.prop.transform.rotation = Quaternion.identity;
-        //player.animator.SetBool("Sleep", sleep);
-        character.enabled = true;
+        //sleep = true;
+        Sleep(false);
+        playerAnimation.SetAnimation("Sleep");//, true);
     }
 
     public void SadMoment()
@@ -49,6 +47,72 @@ public class PlayerController : MonoBehaviour
 
     public void HappyMoment()
     {
-    //    player.animator.Play("Happy");
+        //    player.animator.Play("Happy");
+    }
+
+    public void SetAnimation(string name)
+    {
+        playerAnimation.SetAnimation(name);
+    }
+
+    public void SetAnimation(string name, Transform pos)
+    {
+        playerAnimation.Active(false);
+        if (pos != null)
+        {
+            print("???");
+            root.position = pos.position;
+            root.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+        playerAnimation.SetAnimation(name);
+    }
+
+    public void TemporalExit() 
+    {
+        Debug.Log("TEMPORAL");
+        root.localPosition = new Vector3(0, -1.2f, 0);
+        SetAnimation("Movement");
+        root.localRotation = Quaternion.Euler(0, 180, 0);
+    }
+    void Sleep(bool wakeup)
+    {
+        root.rotation = Quaternion.identity;
+        //if (wakeup)
+        //    root.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
+        //else
+        if (!wakeup)
+            root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationWakeup, 0));
+
+
+
+        //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
+    }
+    [SerializeField] float t = 0;
+    IEnumerator StartDay()
+    {
+        //QUE ASCO LE ESTOY COGIENDO A LAS ANIMACIONES HELP ME
+
+        Vector3 prevPos = root.localPosition;
+        float provY = root.localPosition.y;
+        float time = 3.5f;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, provY, -1.0f), t / time);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1.5f);
+        t = 0;
+        prevPos = root.localPosition;
+        time = 1;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, -1.2f, 0), t / time);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(4f);
+        GameManager.GetManager().StartThirdPersonCamera();
     }
 }
