@@ -19,7 +19,6 @@ public class Cafetera : Interactables
         }
     }
 
-
     public override void ExitInteraction()
     {
        // gameInitialized = false;

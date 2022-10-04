@@ -68,7 +68,6 @@ public class Mirror : Interactables
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.3f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.5f)
         {
-         
             //GameManager.GetManager().Dialogue.SetDialogue(lessbad[counterless]);
             counterless++;
             if (counterless >= lessbad.Length)
@@ -104,5 +103,11 @@ public class Mirror : Interactables
     public override void ResetInteractable()
     {
         interactDone = false;
+    }
+    
+    public override void ExitInteraction()
+    {
+        GameManager.GetManager().StartThirdPersonCamera();
+        base.ExitInteraction();
     }
 }

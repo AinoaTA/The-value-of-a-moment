@@ -13,4 +13,10 @@ public class Cuenco : Interactables
                 break;
         }
     }
+    
+    public override void ExitInteraction()
+    {
+        GameManager.GetManager().StartThirdPersonCamera();
+        base.ExitInteraction();
+    }
 }
