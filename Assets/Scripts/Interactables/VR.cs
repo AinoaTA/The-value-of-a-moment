@@ -17,7 +17,7 @@ public class VR : Interactables
                     //    m_Counter = 0;
 
                     //GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-                    GameManager.GetManager().autocontrol.AddAutoControl(nameInteractable);
+                    GameManager.GetManager().autocontrol.AddAutoControl(3);
                     m_Counter++;
 
                     interactDone = true;
