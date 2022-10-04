@@ -19,7 +19,7 @@ public class Michi : Interactables
         {
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(11);
+                GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 controller.PetMichi();
                 break;
             case 2:

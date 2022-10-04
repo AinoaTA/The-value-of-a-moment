@@ -1,6 +1,7 @@
 public class Cuenco : Interactables
 {
     public MichiController michiController;
+
     public override void Interaction(int options)
     {
         base.Interaction(options);
@@ -9,7 +10,7 @@ public class Cuenco : Interactables
             case 1:
                 michiController.FeedMichi();
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(12);
+                GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 break;
         }
     }

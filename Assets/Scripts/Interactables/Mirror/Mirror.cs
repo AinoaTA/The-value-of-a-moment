@@ -24,7 +24,7 @@ public class Mirror : Interactables
                 {
                     interactDone = true;
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
-                    GameManager.GetManager().cameraController.StartInteractCam(7);
+                    GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
 
                     StartCoroutine(LookUp());
                     //if (m_MirrorInteractPhrases.Length > 0)
