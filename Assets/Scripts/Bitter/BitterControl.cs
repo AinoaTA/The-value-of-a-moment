@@ -1,14 +1,25 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BitterControl : MonoBehaviour
 {
+    [Header("Profiles")]
+    [SerializeField] Sprite elleProfile;
+    [SerializeField] Sprite[] profileAnonymous;
+    [SerializeField] Sprite[] normalPeople;
+
+
     [Header("Bitter")]
     [SerializeField] GameObject content;
+    [SerializeField] GameObject warning;
     [SerializeField] Bitter bitterPrefab;
     [SerializeField] TextAsset bitterProfiles;
-    [SerializeField] List<string> profileBitterNamesGood;
-    [SerializeField] List<string> profileBitterNamesBad;
+    [SerializeField] BitterData bitterData;
+    List<string> profileBitterNamesGood;
+    List<string> profileBitterNamesBad;
+    List<string> BitterMessagesBad;
+    List<string> BitterMessagesGood;
 
     [SerializeField] GameObject readBitters;
     [SerializeField] GameObject writeBitter;
@@ -17,51 +28,35 @@ public class BitterControl : MonoBehaviour
     int random;
     private void Awake()
     {
-        #region read TXT
-        //read the .txts names to get a lot of nicknames. this will we a scriptable object in a futureeeeee ejej 3oct2022.
-        var file = Resources.Load<TextAsset>("ProfileBitterNamesGood");
-        var file2 = Resources.Load<TextAsset>("ProfileBitterNamesBad");
-        var content = file.text;
-        var content2 = file2.text;
-        var AllWords = content.Split('\n');
-        var AllWords2 = content2.Split('\n');
-        profileBitterNamesGood = new List<string>(AllWords);
-        profileBitterNamesBad = new List<string>(AllWords2);
+        profileBitterNamesGood = new List<string>(bitterData.profileBitterNamesGood);
+        profileBitterNamesBad = new List<string>(bitterData.profileBitterNamesBad);
+        BitterMessagesBad = new List<string>(bitterData.BitterMessagesBad);
+        BitterMessagesGood = new List<string>(bitterData.BitterMessagesGood);
+
         random = (int)Random.Range(randomBitterTimes.x, randomBitterTimes.y);
-        #endregion
-
-        CreateBit();
-    }
-
-    /// <summary>
-    /// Create bitters
-    /// </summary>
-    public void CreateBit()
-    {
-        //create a bit depends on autocontrol's player.
-        for (int i = 0; i < random; i++)
-        {
-            Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
-            bit.arroba.text = GetNickname();
-            bit.arroba.text.Replace("\r", "");
-            bit.message.text = GetText();
-            //pic etc
-        }
+        WriteBitter();
     }
 
     #region gets
-    string GetNickname() => profileBitterNamesGood[Random.Range(0, profileBitterNamesGood.Count)];
+    string GetNickname(List<string> list) => list[Random.Range(0, list.Count)];
 
-
-    string GetText()
+    string GetText(List<string> list)
     {
-        return "aaaaaa";
+        int r = Random.Range(0, list.Count);
+        string save = list[r];
+        list.RemoveAt(r);
 
+        return save;
     }
+
+    Sprite GetPic(Sprite[] list) => list[Random.Range(0, list.Length)];
+
     #endregion
+
     #region buttons
     public void ReadBitter()
     {
+        warning.SetActive(content.transform.childCount == 0);
         readBitters.SetActive(true);
         writeBitter.SetActive(false);
     }
@@ -72,7 +67,37 @@ public class BitterControl : MonoBehaviour
         writeBitter.SetActive(true);
     }
 
+    public void SendBitter(string text)
+    {
+        ReadBitter();
+        warning.SetActive(false);
+        Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
+        bit.arroba.text = "Elle_DevRoomer";
+        bit.message.text = text;
+        bit.profilePic.sprite = elleProfile;
+
+        StartCoroutine(CreateBitRoutine());
+    }
+
+    IEnumerator CreateBitRoutine()
+    {
+        int rnd;
+        //create a bit depends on autocontrol's player.
+        for (int i = 0; i < random; i++)
+        {
+            rnd = Random.Range(0, 2);
+
+            Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
+            bit.arroba.text = rnd == 0 ? GetNickname(profileBitterNamesGood) : GetNickname(profileBitterNamesBad);
+            bit.message.text = rnd == 0 ? GetText(BitterMessagesGood) : GetText(BitterMessagesBad);
+            bit.profilePic.sprite = rnd == 0 ? GetPic(normalPeople) : GetPic(profileAnonymous);
+
+            yield return new WaitForSeconds(1f);
+            //Debug.Log("Manu posible sonido? sonido como de escribir del facebookmessener que hace trurur tururu la burbuja");
+        }
+    }
     #endregion
+
     /// <summary>
     /// Remove all bitters created
     /// </summary>
