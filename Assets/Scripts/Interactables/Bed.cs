@@ -200,7 +200,7 @@ public class Bed : Interactables, ITask
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                 if (!interactDone)
                 {
-                    GameManager.GetManager().cameraController.StartInteractCam(3);
+                    GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                     gameInitialized = true;
                     GameManager.GetManager().canvasController.UnLock();
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
