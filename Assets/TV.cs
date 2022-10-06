@@ -2,8 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cafetera : Interactables
+public class TV : Interactables
 {
+    public GameObject screen;
+    // handle de canales
+    private int[] channels;
+    private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
+
+    private void Start()
+    {
+        screen.SetActive(false);
+        currChannel = 0;
+    }
+
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -11,18 +22,23 @@ public class Cafetera : Interactables
         {
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                // gameInitialized = true;
-                // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
-                // GameManager.GetManager().canvasController.UnLock();
+                screen.SetActive(true);
                 break;
         }
     }
 
     public override void ExitInteraction()
     {
-       // gameInitialized = false;
+        screen.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
+    }
+
+    public void ChangeChannel()
+    {
+        // 1 función para subir o bajar canal o 2 funciones
+        currChannel++;
+        // Set screen to channels[currChannel]
     }
 }

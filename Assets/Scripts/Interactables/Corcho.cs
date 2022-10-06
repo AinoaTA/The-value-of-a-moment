@@ -11,10 +11,16 @@ public class Corcho : Interactables
         {
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(9);
+                GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 break;
             case 2:
                 break;
         }
+    }
+
+    public override void ExitInteraction()
+    {
+        GameManager.GetManager().StartThirdPersonCamera();
+        base.ExitInteraction();
     }
 }

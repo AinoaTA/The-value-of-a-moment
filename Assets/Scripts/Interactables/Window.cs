@@ -93,7 +93,7 @@ public class Window : Interactables, ITask
             case 2:
                 Debug.Log(2);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(10);
+                GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 break;
         }
     }
