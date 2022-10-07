@@ -9,15 +9,16 @@ public class Bitter : MonoBehaviour
     public TMP_Text message;
     public TMP_Text favs;
     public TMP_Text no_favs;
+    public bool isBad;
+    public ParticleSystem good, bad;
 
-
-    public void Fav() 
+    public void Fav()
     {
-    
+        good.Play();
     }
 
-    public void NoFav() 
+    public void NoFav()
     {
-    
+        bad.Play();
     }
 }
