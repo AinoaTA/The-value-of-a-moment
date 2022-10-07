@@ -12,7 +12,7 @@ namespace Calendar
         public enum SpaceType { Manana, MedioDia, Tarde, Noche }
         public SpaceType type;
 
-        public DayNightCycle.DayState timeDate;
+        public DayController.DayTime timeDate;
 
         public List<TaskType> taskSave = new List<TaskType>();
         [SerializeField] private int maxTaskSaved = 4;

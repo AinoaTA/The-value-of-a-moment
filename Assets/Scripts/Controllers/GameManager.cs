@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public EmailController emailController { get; set; }
     public InventoryTrashUI trashInventory { get; set; }
     public bool waterCanGrabbed { get; set; }
-    public DayNightCycle dayNightCycle { get; set; }
+    public DayController dayNightCycle { get; set; }
     public Mobile mobileReal { get; set; }
     public Cinemachine.CinemachineStateDrivenCamera stateDriven { get; set; }
     public SceneLoader sceneLoader { get; set; }

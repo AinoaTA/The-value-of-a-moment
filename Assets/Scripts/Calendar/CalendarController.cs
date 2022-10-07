@@ -74,7 +74,7 @@ namespace Calendar
                 warning.SetActive(v);
         }
 
-        public bool CheckTimeTaskDone(DayNightCycle.DayState type, SpaceCalendar.SpaceType time)
+        public bool CheckTimeTaskDone(DayController.DayTime type, SpaceCalendar.SpaceType time)
         {
             return (int)type == (int)time;
         }

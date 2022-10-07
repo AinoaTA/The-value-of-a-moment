@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class DayNightCycle : MonoBehaviour
+public class DayController : MonoBehaviour
 {
-    public enum DayState { Manana, MedioDia, Tarde, Noche }
-
-    [SerializeField] DayState dayState;
+    public enum DayTime { Manana, MedioDia, Tarde, Noche }
+    public enum Day { one, two , three }
+    [SerializeField] DayTime dayState;
+    [SerializeField] Day currentDay;
     private int counter;
 
     private Animator anims;
@@ -21,7 +22,7 @@ public class DayNightCycle : MonoBehaviour
         counter = (int)dayState;
         ChangeDay(dayState);
     }
-    public void ChangeDay(DayState newState)
+    public void ChangeDay(DayTime newState)
     {
         anims.SetInteger("time", (int)newState);
         dayState = newState;
@@ -31,7 +32,20 @@ public class DayNightCycle : MonoBehaviour
     {
         counter = 0;
         counterTaskDay = 0;
-        ChangeDay((DayState)counter);
+        ChangeDay((DayTime)counter);
+        //next day
+        currentDay++;
+        switch (currentDay)
+        {
+            case Day.one:
+                break;
+            case Day.two:
+                break;
+            case Day.three:
+                break;
+            default:
+                break;
+        }
     }
 
     public void TaskDone()
@@ -40,11 +54,11 @@ public class DayNightCycle : MonoBehaviour
         if (counterTaskDay % 2 == 0)
         {
             counter = counter < 4 ? counter + 1 : 0;
-            ChangeDay((DayState)counter);
+            ChangeDay((DayTime)counter);
         }
     }
 
-    public DayState GetTimeDay() 
+    public DayTime GetTimeDay() 
     {
         return dayState;
     }
