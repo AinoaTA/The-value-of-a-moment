@@ -23,10 +23,13 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(string dialogue)
     {
-        if(nextLineCoroutine!=null) StopCoroutine(nextLineCoroutine);
+        if (nextLineCoroutine!=null) StopCoroutine(nextLineCoroutine);
         audioSource.Stop();
 
         currentDialogue = dialogues.GetDialogue(dialogue);
+        //this conver was played.
+        if (currentDialogue.lines[0].played)
+            return;
         currentLine = 0;
         ShowLine();
     }
@@ -47,7 +50,7 @@ public class DialogueManager : MonoBehaviour
             audioSource.PlayOneShot(voice);
             waitTime = voice.length + aditionalVoiceTime;
         }
-
+        line.played = true;
         nextLineCoroutine = NextLine(waitTime);
         StartCoroutine(nextLineCoroutine);
     }

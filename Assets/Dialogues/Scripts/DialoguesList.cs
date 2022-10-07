@@ -43,4 +43,5 @@ public class DialogueLineJSON
     public AudioClip voice_en;
     public string es;
     public string en;
+    public bool played;
 }
