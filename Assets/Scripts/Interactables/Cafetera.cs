@@ -11,14 +11,13 @@ public class Cafetera : Interactables
         {
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-              //  gameInitialized = true;
+                // gameInitialized = true;
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
-               //GameManager.GetManager().canvasController.UnLock();
+                // GameManager.GetManager().canvasController.UnLock();
                 break;
         }
     }
-
 
     public override void ExitInteraction()
     {

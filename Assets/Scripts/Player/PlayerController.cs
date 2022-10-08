@@ -87,32 +87,31 @@ public class PlayerController : MonoBehaviour
 
         //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }
-    [SerializeField] float t = 0;
     IEnumerator StartDay()
     {
-        //QUE ASCO LE ESTOY COGIENDO A LAS ANIMACIONES HELP ME
+        ////QUE ASCO LE ESTOY COGIENDO A LAS ANIMACIONES HELP ME
 
-        Vector3 prevPos = root.localPosition;
-        float provY = root.localPosition.y;
-        float time = 3.5f;
-        while (t < time)
-        {
-            t += Time.deltaTime;
-            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, provY, -1.0f), t / time);
-            yield return null;
-        }
-        yield return new WaitForSeconds(1.5f);
-        t = 0;
-        prevPos = root.localPosition;
-        time = 1;
-        while (t < time)
-        {
-            t += Time.deltaTime;
-            root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, -1.2f, 0), t / time);
-            yield return null;
-        }
+        //Vector3 prevPos = root.localPosition;
+        //float provY = root.localPosition.y;
+        //float time = 3.5f;
+        //while (t < time)
+        //{
+        //    t += Time.deltaTime;
+        //    root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, provY, -1.0f), t / time);
+        //    yield return null;
+        //}
+        //yield return new WaitForSeconds(1.5f);
+        //t = 0;
+        //prevPos = root.localPosition;
+        //time = 1;
+        //while (t < time)
+        //{
+        //    t += Time.deltaTime;
+        //    root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, -1.2f, 0), t / time);
+        //    yield return null;
+        //}
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         GameManager.GetManager().StartThirdPersonCamera();
     }
 }

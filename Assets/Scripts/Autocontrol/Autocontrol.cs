@@ -110,7 +110,7 @@ public class Autocontrol : MonoBehaviour
             backgroundBar.sprite = barBackGroundColor[1];
             
             //MusicGameplay
-            MusicGameplay.Mood(2f);
+           // MusicGameplay.Mood(2f);
             //
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)

@@ -61,7 +61,7 @@ public class Bed : Interactables, ITask
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -173,7 +173,7 @@ public class Bed : Interactables, ITask
         badBed.SetActive(false);
         interactTextBed.SetActive(false);
         sleepTextBed.transform.localPosition = lastPosDormirText;
-        GameManager.GetManager().dayNightCycle.TaskDone();
+        GameManager.GetManager().dayController.TaskDone();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
     }
@@ -199,7 +199,7 @@ public class Bed : Interactables, ITask
             case 1:
                 if (!interactDone)
                 {
-                    GameManager.GetManager().cameraController.StartInteractCam(3);
+                    GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                     gameInitialized = true;
                     GameManager.GetManager().canvasController.UnLock();
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
@@ -262,7 +262,7 @@ public class Bed : Interactables, ITask
         ResetBed();
         yield return new WaitForSeconds(2);
         GameManager.GetManager().autocontrol.AutocontrolSleep();
-        GameManager.GetManager().dayNightCycle.NewDay();
+        GameManager.GetManager().dayController.NewDay();
         //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
     }
 
