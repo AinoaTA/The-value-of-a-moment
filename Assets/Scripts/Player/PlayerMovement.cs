@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_Direction;
     private Camera cam;
     [SerializeField] private float speed, maxSpeed = 1.4f;/*, stopSpeedOffset = 0.2f;*/
-    public GameObject prop;
+    //public GameObject prop;
     //bool moving;
 
     //[SerializeField] float m_LerpRotationPercentatge = 0.2f;

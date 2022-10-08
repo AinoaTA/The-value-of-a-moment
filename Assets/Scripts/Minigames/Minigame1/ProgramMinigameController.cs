@@ -9,7 +9,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     private bool solved = false;
     private bool checking;
     private bool m_AllCorrected;
-    private bool gameInitialized;
+    //private bool gameInitialized;
     public float m_Autocontrol = 5;
 
     #region TASK
@@ -53,7 +53,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -70,9 +70,9 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     }
     private IEnumerator GameFinished()
     {
-        gameInitialized = false;
+        //gameInitialized = false;
         solved = true;
-        GameManager.GetManager().dayNightCycle.TaskDone();
+        GameManager.GetManager().dayController.TaskDone();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
 
@@ -84,7 +84,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     public void QuitMiniGame()
     {
         solved = false;
-        gameInitialized = false;
+        //gameInitialized = false;
         GameManager.GetManager().computer.ComputerON();
     }
 
@@ -115,7 +115,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
             m_AllPieces[i].ResetPiece();
         }
         solved = false;
-        gameInitialized = false;
+        //gameInitialized = false;
     }
     public bool GetSolved() { return solved; }
 

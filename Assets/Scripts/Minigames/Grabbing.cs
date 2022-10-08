@@ -42,7 +42,7 @@ public class Grabbing : MonoBehaviour
             leaving = true;
             isObjectGrabbed = false;
             GameManager.GetManager().gameStateController.ChangeGameState(1);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book/Drop", transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Drop", transform.position);
         }
 
         if (leaving)

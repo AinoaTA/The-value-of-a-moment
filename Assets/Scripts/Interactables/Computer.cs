@@ -3,11 +3,14 @@ using UnityEngine;
 public class Computer : Interactables
 {
     [SerializeField]
-    private GameObject computerScreen, programScreen,
-        /*calendarScreen*/ calendarMaterialScreen, emailScreenMaterial;
+    GameObject computerScreen, programScreen,
+        calendarMaterialScreen, emailScreenMaterial;
+
+
+    [SerializeField] Transform computerPos;
 
     [SerializeField] GameObject programMinigame;
-    private bool anyButtonScreenActive;
+    bool anyButtonScreenActive;
 
     private void Start()
     {
@@ -24,7 +27,6 @@ public class Computer : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
-                //GameManager.GetManager().playerController.playerAnimation.SetAnimation("Computer");
                 break;
         }
     }
@@ -35,29 +37,32 @@ public class Computer : Interactables
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/PC/Off", transform.position);
         GameManager.GetManager().canvasController.ComputerScreenOut();
         GameManager.GetManager().StartThirdPersonCamera();
-        calendarMaterialScreen.SetActive(false);
-        computerScreen.SetActive(false);
-        emailScreenMaterial.SetActive(false);
         if (anyButtonScreenActive)
         {
             GameManager.GetManager().programMinigame.QuitMiniGame();
             GameManager.GetManager().calendarController.BackCalendar();
             GameManager.GetManager().emailController.ShowEmail(false);
         }
+
+        ComputerOFF();
         base.ExitInteraction();
     }
 
     #region (des)-active gameObects
     public void ComputerON()
     {
+        GameManager.GetManager().playerController.SetAnimation("Computer",computerPos);
         computerScreen.SetActive(true);
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
+        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
     public void ComputerOFF()
     {
+        GameManager.GetManager().playerController.TemporalExit();
+        //GameManager.GetManager().playerController.SetAnimation("Walk");
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(false);
@@ -74,6 +79,7 @@ public class Computer : Interactables
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(true);
         emailScreenMaterial.SetActive(false);
+        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
     public void ComputerProgram()
@@ -84,6 +90,7 @@ public class Computer : Interactables
         programScreen.SetActive(true);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
+        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
     public void ComputerEmail()
@@ -95,6 +102,7 @@ public class Computer : Interactables
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(true);
+        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
     #endregion
 }

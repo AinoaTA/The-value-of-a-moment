@@ -22,6 +22,21 @@ public class FMODMusic : MonoBehaviour
         Music.setParameterByName("Mood", MoodLevel);
     }
 
+    public void Location (float Loc)
+    {
+        Music.setParameterByName("Location", Loc);
+    }
+
+    public void Yoga (float YogaValue)
+    {
+        Music.setParameterByName("Yoga", YogaValue);
+    }
+
+    public void Drums (float DrumsValue)
+    {
+        Music.setParameterByName("Drums", DrumsValue);
+    }
+
     public void Headphones(float HeadphoneMode)
     {
         Music.setParameterByName("Headphones", HeadphoneMode);
