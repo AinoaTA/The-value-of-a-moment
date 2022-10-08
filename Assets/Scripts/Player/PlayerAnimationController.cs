@@ -34,7 +34,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     IEnumerator AnimationSpeedAffect()
     {
-        print("?");
         float t = 0;
         anim.speed = 1;
         while (t < 2) 

@@ -96,6 +96,7 @@ public class Email : MonoBehaviour
     bool recieved;
     public void MailRecieved()
     {
+        if (!sent) return;
         writtingContent.SetActive(false);
         notification.SetActive(true);
         recieved = true;

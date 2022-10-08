@@ -16,13 +16,13 @@ public class EmailController : MonoBehaviour
     }
 
     //provisional
-    public void Recieve() { StartCoroutine(RecieveMail()); }
+    public void Recieve() { mail.MailRecieved(); }//StartCoroutine(RecieveMail()); }
 
     IEnumerator RecieveMail() 
     {
         Debug.LogWarning("Provisional Method");
         yield return new WaitForSeconds(4f);
         
-        mail.MailRecieved();
+       
     }
 }
