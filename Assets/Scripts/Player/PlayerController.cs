@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
 
         //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }
-    [SerializeField] float t = 0;
     IEnumerator StartDay()
     {
         ////QUE ASCO LE ESTOY COGIENDO A LAS ANIMACIONES HELP ME

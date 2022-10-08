@@ -5,25 +5,28 @@ using System.Linq;
 
 public class WriteBitter : MonoBehaviour
 {
-    [SerializeField]BitterControl bitterControler;
+    [SerializeField] BitterControl bitterControler;
     public TMP_Text[] texts;
     public TMP_Text genericText;
 
     public BitDay[] BitDays;
     [System.Serializable]
-    public struct BitDay 
+    public struct BitDay
     {
         public string name;
         public int numDay;
         public Bitters[] bits;
     }
     private List<Bitters> currList;
-    [SerializeField]private GameObject acceptButton;
+    [SerializeField] private GameObject acceptButton;
 
     int index;
     bool select;
+    DayController.DayTime previus;
     private void Start()
     {        //temp
+        previus = GameManager.GetManager().dayController.GetTimeDay();
+
         Debug.LogWarning("change for number day (another script will be manage this)");
         genericText.text = "";
     }
@@ -31,6 +34,7 @@ public class WriteBitter : MonoBehaviour
     bool wrote;
     public void WriteBit()
     {
+        if (previus != GameManager.GetManager().dayController.GetTimeDay()) NewStateDay();
         if (wrote) return;
         wrote = true;
         UpdateList();
@@ -38,11 +42,11 @@ public class WriteBitter : MonoBehaviour
         index = CheckCondition(currList);
         for (int i = 0; i < 3; i++)
         {
-            if (i>=currList[index].possibleBitters.Length) return;
+            if (i >= currList[index].possibleBitters.Length) return;
             texts[i].transform.parent.gameObject.SetActive(true);
             texts[i].text = currList[index].possibleBitters[i].resumeName;
         }
-        currList.RemoveAt(index);
+        //currList.RemoveAt(index);
     }
 
     private int CheckCondition(List<Bitters> list)
@@ -52,13 +56,13 @@ public class WriteBitter : MonoBehaviour
             if (list[i].conditionComplete)
                 return i;
         }
-        return 0;
+        return (int)GameManager.GetManager().dayController.GetTimeDay();
     }
 
     public void SelectPossibleAnswer(int i)
     {
         select = true;
-        genericText.text = currList[i].possibleBitters[i].bitter;
+        genericText.text = currList[index].possibleBitters[i].bitter;
         acceptButton.SetActive(true);
     }
 
@@ -84,12 +88,18 @@ public class WriteBitter : MonoBehaviour
 
     public void NewDay()
     {
-        select = false;
-        wrote = false;
+        NewStateDay();
         ClearBitter();
     }
 
-    void UpdateList() 
+    public void NewStateDay()
+    {
+        select = false;
+        wrote = false;
+        genericText.text = "";
+    }
+
+    void UpdateList()
     {
         int val = (int)GameManager.GetManager().dayController.currentDay;
         currList = BitDays[val].bits.ToList();

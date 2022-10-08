@@ -28,6 +28,8 @@ public class BitterControl : MonoBehaviour
     [Header("Values")]
     [SerializeField] Vector2 randomBitterTimes;
     int random;
+    Bitter playerBit;
+
     private void Awake()
     {
         profileBitterNamesGood = new List<string>(bitterData.profileBitterNamesGood);
@@ -67,6 +69,7 @@ public class BitterControl : MonoBehaviour
     {
         readBitters.SetActive(false);
         writeBitter.gameObject.SetActive(true);
+        
         writeBitter.WriteBit();
     }
 
@@ -76,9 +79,10 @@ public class BitterControl : MonoBehaviour
         warning.SetActive(false);
         Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
         bit.arroba.text = "Elle_DevRoomer";
+        bit.UpdateFavsPlayer();
         bit.message.text = text;
         bit.profilePic.sprite = elleProfile;
-
+        playerBit = bit;
         StartCoroutine(CreateBitRoutine());
     }
 
@@ -109,11 +113,10 @@ public class BitterControl : MonoBehaviour
 
     public void ExitBitter()
     {
+        ReadBitter();
         gameObject.SetActive(false);
     }
     #endregion
-
-
 
     /// <summary>
     /// Remove all bitters created
