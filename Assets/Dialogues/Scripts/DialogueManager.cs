@@ -7,7 +7,6 @@ public class DialogueManager : MonoBehaviour
 {
     public DialoguesList dialogues;
     public TMP_Text subtitle;
-    public AudioSource audioSource;
     public float defaultvoiceTime = 2;
     public float aditionalVoiceTime = 0.2f;
 
@@ -24,8 +23,9 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(string dialogue)
     {
         if (nextLineCoroutine!=null) StopCoroutine(nextLineCoroutine);
-        audioSource.Stop();
+        //audioSource.Stop();
 
+       
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
         if (currentDialogue.lines[0].played)
@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
         print(voice);
         if (voice != null)
         {
-            audioSource.PlayOneShot(voice);
+            FMODUnity.RuntimeManager.CreateInstance("event:/Dialogue/"+LanguageGame.lang+"/"+line.ID);
             waitTime = voice.length + aditionalVoiceTime;
         }
         line.played = true;
