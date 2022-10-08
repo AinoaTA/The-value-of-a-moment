@@ -84,7 +84,6 @@ public class Email : MonoBehaviour
             autocontrolEarned += autocontrolAnswer[i].autocontrolSave;
 
         GameManager.GetManager().autocontrol.AddAutoControl(autocontrolEarned);
-        GameManager.GetManager().emailController.Recieve();
     }
 
     public void SetTextParagraph(int id, string answer)
