@@ -26,7 +26,7 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
-        inbed = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Bed/Roll");
+        inbed = FMODUnity.RuntimeManager.CreateInstance("event:/Elle/GetInBed");
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
@@ -70,7 +70,6 @@ public class Alarm : MonoBehaviour
 
     private void StartAlarm()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/WakeUp", transform.position); //despertarse una vez por d�a s�lo
         alarmsfx.start();
         alarmsfx.release();
         inbed.start();
@@ -85,7 +84,7 @@ public class Alarm : MonoBehaviour
     public IEnumerator NormalWakeUp()
     {
         // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Alarm Off", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
         GameManager.GetManager().cameraController.StartInteractCam(2);
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);

@@ -102,7 +102,7 @@ public class Bed : Interactables, ITask
     {
         if (gameInitialized && !interactDone)
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/Bedsheets", transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed Make", transform.position);
             if (!tutorialShowed)
                 InitTutorial();
             else
@@ -163,7 +163,7 @@ public class Bed : Interactables, ITask
 
     public void BedDone()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed/Make", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed Made", transform.position);
         gameInitialized = false;
         minigameCanvas.SetActive(false);
         interactDone = true;
@@ -197,7 +197,6 @@ public class Bed : Interactables, ITask
         switch (options)
         {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
                 if (!interactDone)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
@@ -269,7 +268,6 @@ public class Bed : Interactables, ITask
 
     public override void ExitInteraction()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         cam.cullingMask = -1;
         base.ExitInteraction();
         gameInitialized = false;
