@@ -139,7 +139,9 @@ public class Window : Interactables, ITask
 
     private void Start()
     {
-        // streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Amb/Street");
+
+        streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Amb/Street");
+
         //streetAmb.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SetTask();
         minigameCanvas = tutorial;//.transform.parent.gameObject;

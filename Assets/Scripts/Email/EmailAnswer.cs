@@ -13,6 +13,7 @@ public class EmailAnswer : MonoBehaviour
     [System.Serializable]
     public struct PossibleAnswer
     {
+        public string resume;
         public string answer;
         public float autocontrol;
     }
@@ -46,7 +47,7 @@ public class EmailAnswer : MonoBehaviour
             for (int id = 0; id < possibleAnswers.Length; id++)
             {
                 EmailPossibleAnswer a = Instantiate(prefabAnswer, transform.position, Quaternion.identity, contentPossibleAnswers);
-                a.SetAnswer(possibleAnswers[id].answer, id);
+                a.SetAnswer(possibleAnswers[id].resume, id, possibleAnswers[id].answer);
             }
         }
     }

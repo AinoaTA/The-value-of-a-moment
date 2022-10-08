@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator nextLineCoroutine;
     private static FMOD.Studio.EventInstance eventAudio;
+
     private void Awake()
     {
         GameManager.GetManager().dialogueManager = this;
@@ -27,10 +28,10 @@ public class DialogueManager : MonoBehaviour
 
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
-        print(currentDialogue.lines[0].played);
+
         if (currentDialogue.lines[0].played)
             return;
-        print("?");
+
         currentLine = 0;
         ShowLine();
     }
@@ -45,18 +46,18 @@ public class DialogueManager : MonoBehaviour
         subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
-        int lenght=0;
+        int lenght;
         string path = "event:/Dialogue/" + LanguageGame.lang + "/" + line.ID;
-
-        print(path);
 
         try
         {
             eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);
             FMODUnity.RuntimeManager.GetEventDescription(FMODUnity.EventReference.Find(path)).getLength(out lenght);
             eventAudio.start();
-            print("patat"+ lenght/3600);
-            waitTime = lenght + aditionalVoiceTime;
+
+            float time = (float)lenght / 1000;
+            print("AUDIO LENGHT Mili: " + (float)lenght + "in seconds: " + time);
+            waitTime = time + aditionalVoiceTime;
         }
         catch (System.Exception e)
         {
@@ -64,8 +65,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         line.played = true;
-        nextLineCoroutine = NextLine(waitTime);
-        StartCoroutine(nextLineCoroutine);
+        StartCoroutine(nextLineCoroutine = NextLine(waitTime));
     }
 
     IEnumerator NextLine(float waitTime)
@@ -78,6 +78,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialog()
     {
+        subtitle.text = "";
         subtitle.enabled = false;
     }
 }

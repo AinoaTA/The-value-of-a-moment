@@ -16,13 +16,5 @@ public class EmailController : MonoBehaviour
     }
 
     //provisional
-    public void Recieve() { StartCoroutine(RecieveMail()); }
-
-    IEnumerator RecieveMail() 
-    {
-        Debug.LogAssertion("Provisional Method");
-        yield return new WaitForSeconds(4f);
-        
-        mail.MailRecieved();
-    }
+    public void Recieve() { mail.MailRecieved(); }//StartCoroutine(RecieveMail()); }
 }
