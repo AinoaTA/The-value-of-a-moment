@@ -21,7 +21,7 @@ namespace Menu
 
         public void PauseGame()
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause", transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause");
             if (!paused)
             {
                 paused = true;
@@ -52,4 +52,3 @@ namespace Menu
         }
     }
 }
-//FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause", transform.position);

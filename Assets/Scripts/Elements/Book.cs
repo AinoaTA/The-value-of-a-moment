@@ -14,7 +14,7 @@ public class Book : Interactables
             case 1:
                 if (m_Grabbing != null)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book/PickUp", transform.position);
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Pickup", transform.position);
                     m_Grabbing.SetAccessCamera(true);
                     GameManager.GetManager().cameraController.StartInteractCam(8);
                 }

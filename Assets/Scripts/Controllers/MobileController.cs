@@ -71,7 +71,7 @@ public class MobileController : MonoBehaviour
     }
     public void CloseChat()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Back");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Click");
         currChat.gameObject.SetActive(false);
         currChat = null;
     }
