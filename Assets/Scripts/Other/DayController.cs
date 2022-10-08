@@ -63,4 +63,9 @@ public class DayController : MonoBehaviour
     {
         return dayState;
     }
+
+    public Day GetDayNumber()
+    {
+        return currentDay;
+    }
 }
