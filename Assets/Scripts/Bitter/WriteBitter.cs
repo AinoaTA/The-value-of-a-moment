@@ -49,6 +49,11 @@ public class WriteBitter : MonoBehaviour
         //currList.RemoveAt(index);
     }
 
+    /// <summary>
+    /// return Priority bitter if exist.
+    /// </summary>
+    /// <param name="list"></param>
+    /// <returns></returns>
     private int CheckCondition(List<Bitters> list)
     {
         for (int i = 0; i < list.Count; i++)
