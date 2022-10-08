@@ -58,6 +58,7 @@ public class Computer : Interactables
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
+        emailScreenMaterial.SetActive(false);
         GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
@@ -70,6 +71,7 @@ public class Computer : Interactables
         programMinigame.SetActive(false);
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
+        emailScreenMaterial.SetActive(false);
         anyButtonScreenActive = false; ;
     }
 
