@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000234BD1733E8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001C42DD02268 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -25,3 +25,94 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 5414336
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 121088
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000090F88EF0B8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA8E8B33A0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA8E8B3360
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA8E8B3480
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA8E8B3540
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001C2210DDB98
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Alarm_V1', format=5, channels=2, frequency=48000, lengthbytes=44512, lengthpcm=235728, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.575226.
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001C44382D618
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001C44382D618
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 1638336
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 71040
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000090F88EF0B8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA8E8B33A0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA8E8B3360
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA8E8B3480
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA8E8B3540
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001C30271D598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Alarm Off', format=5, channels=2, frequency=48000, lengthbytes=2784, lengthpcm=24000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
+[LOG] SoundI::release                          :  (000001C2160009F8)
+[LOG] SoundI::release                          :     Cat Purr_2 (000001C24BEF07B8)
+[LOG] SoundI::release                          :  (000001C422A82828)
+[LOG] SoundI::release                          :     Cat Purr_3 (000001C2206F6218)
+[LOG] SoundI::release                          :  (000001C21CABF188)
+[LOG] SoundI::release                          :     Cat Meow_1 (000001C24BEEFF98)
+[LOG] SoundI::release                          :  (000001C422A82C78)
+[LOG] SoundI::release                          :     Cat Meow_2 (000001C2206F63B8)
+[LOG] SoundI::release                          :  (000001C21CABEA58)
+[LOG] SoundI::release                          :     Cat Meow_3 (000001C24BEF0478)
+[LOG] SoundI::release                          :  (000001C422A82B08)
+[LOG] SoundI::release                          :     Cat Meow_4 (000001C2206F6D78)
+[LOG] SoundI::release                          :  (000001C21CABF748)
+[LOG] SoundI::release                          :     Cat Meow_5 (000001C24BEF0618)
+[LOG] SoundI::release                          :  (000001C422A82998)
+[LOG] SoundI::release                          :     Alarm V1 (000001C2206F6078)
+[LOG] SoundI::release                          :  (000001C42E0055B8)
+[LOG] SoundI::release                          :     Alarm Off (000001C42046BBC8)
+[LOG] SoundI::release                          :  (000001C445E0D118)
+[LOG] SoundI::release                          :     Alarm_V1 (000001C22E75DFA8)
+[LOG] SoundI::release                          :  (000001C21CABF018)
+[LOG] SoundI::release                          :     Hover (000001C3021DCA08)
+[LOG] SoundI::release                          :  (000001C422A82DE8)
+[LOG] SoundI::release                          :     Get In Bed_1 (000001C2FB656758)
+[LOG] SoundI::release                          :  (000001C422A82F58)
+[LOG] SoundI::release                          :     Get In Bed_2 (000001C2FB6572B8)
+[LOG] SoundI::release                          :  (000001C445E0DC98)
+[LOG] SoundI::release                          :     R_Bowl Hit (000001C22E75D928)
+[LOG] SoundI::release                          :  (000001C445E0DB28)
+[LOG] SoundI::release                          :     R_Chimes (000001C302142D88)
+[LOG] SoundI::release                          :  (000001C445E0DE08)
+[LOG] SoundI::release                          :     R_Gamelan Hit (000001C3021428A8)
+[LOG] SoundI::release                          : Intro (000001C42DBC13B8)
+[LOG] SoundI::release                          :     Intro (000001C302D0FFF8)
+[LOG] SoundI::release                          :     Intro (000001C44382D618)
+[LOG] SoundI::release                          :  (000001C422A830C8)
+[LOG] SoundI::release                          :     Bike (000001C2FB656F78)
+[LOG] SoundI::release                          :  (000001C422A82548)
+[LOG] SoundI::release                          :     Pidgeon_1 (000001C2FB656DD8)
+[LOG] SoundI::release                          :  (000001C445E0D848)
+[LOG] SoundI::release                          :     Pidgeon_2 (000001C302142BE8)
+[LOG] SoundI::release                          :  (000001C422A826B8)
+[LOG] SoundI::release                          :     Pidgeon_3 (000001C3021430C8)
+[LOG] SoundI::release                          :  (000001C422A83238)
+[LOG] SoundI::release                          :     Pidgeon_4 (000001C2FB656A98)
+[LOG] SoundI::release                          :  (000001C445E0D568)
+[LOG] SoundI::release                          :     R_Triangle Hit (000001C22E75DE08)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
