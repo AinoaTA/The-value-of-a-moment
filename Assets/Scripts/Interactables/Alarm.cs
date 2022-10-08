@@ -80,7 +80,7 @@ public class Alarm : MonoBehaviour
     }
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(10);
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
         m_AlarmON = true;

@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
         playerAnimation.Active(false);
         if (pos != null)
         {
-            print("???");
             root.position = pos.position;
             root.localRotation = Quaternion.Euler(0, 180, 0);
         }
