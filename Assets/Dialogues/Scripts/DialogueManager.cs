@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     int currentLine;
 
     IEnumerator nextLineCoroutine;
+    private static FMOD.Studio.EventInstance eventAudio;
 
     private void Awake()
     {
@@ -22,37 +23,49 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(string dialogue)
     {
-        if (nextLineCoroutine!=null) StopCoroutine(nextLineCoroutine);
-        //audioSource.Stop();
+        if (nextLineCoroutine != null) StopCoroutine(nextLineCoroutine);
+        eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-       
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
+
         if (currentDialogue.lines[0].played)
             return;
+
         currentLine = 0;
         ShowLine();
     }
 
-    void ShowLine() {
+    void ShowLine()
+    {
         DialogueLineJSON line = currentDialogue.lines[currentLine];
         subtitle.enabled = true;
 
         bool langESP = LanguageGame.lang == LanguageGame.Languages.ESP;
 
-        subtitle.text = langESP?line.es:line.en;
+        subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
-        AudioClip voice = langESP ? line.voice_es : line.voice_en;
-        print(voice);
-        if (voice != null)
+        int lenght;
+        string path = "event:/Dialogue/" + LanguageGame.lang + "/" + line.ID;
+
+        try
         {
-            FMODUnity.RuntimeManager.CreateInstance("event:/Dialogue/"+LanguageGame.lang+"/"+line.ID);
-            waitTime = voice.length + aditionalVoiceTime;
+            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);
+            FMODUnity.RuntimeManager.GetEventDescription(FMODUnity.EventReference.Find(path)).getLength(out lenght);
+            eventAudio.start();
+
+            float time = (float)lenght / 1000;
+            print("AUDIO LENGHT Mili: " + (float)lenght + "in seconds: " + time);
+            waitTime = time + aditionalVoiceTime;
         }
+        catch (System.Exception e)
+        {
+            print(e);
+        }
+
         line.played = true;
-        nextLineCoroutine = NextLine(waitTime);
-        StartCoroutine(nextLineCoroutine);
+        StartCoroutine(nextLineCoroutine = NextLine(waitTime));
     }
 
     IEnumerator NextLine(float waitTime)
@@ -63,7 +76,9 @@ public class DialogueManager : MonoBehaviour
         else EndDialog();
     }
 
-    void EndDialog() {
+    void EndDialog()
+    {
+        subtitle.text = "";
         subtitle.enabled = false;
     }
 }

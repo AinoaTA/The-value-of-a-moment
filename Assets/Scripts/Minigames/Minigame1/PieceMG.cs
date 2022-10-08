@@ -1,53 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PieceMG : MonoBehaviour
 {
-    private bool m_Selected = false;
     private Vector3 initialPos;
 
-    public bool dragging = false;
-    public bool correct;
+    public bool correctWhole;
+    public int id;
+    public Image image;
     private void Start()
     {
         initialPos = transform.position;
     }
-    //este script me deja loca, no se como funciona jaja no sé q hice en su momento. !!!
-
-    private void OnMouseDrag()
+    public void ClickDown()
     {
-        Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        newPos.z =0;
-        transform.position = newPos;
+        image.raycastTarget = false;
     }
-
-    private void Update()
+    public void Drag()
     {
-        if (m_Selected)
-            Move();
-    }
-
-    
-    private void Move()
-    {
-        Vector3 newPos =Input.mousePosition;
-        dragging = true;
+        Vector3 newPos = Input.mousePosition;
         newPos.z = 0;
         transform.position = newPos;
     }
-
-    public void Select()
+    public void MouseUp()
     {
-        m_Selected = !m_Selected;
-
-        if (!m_Selected)
-            dragging = false;
+        if (GameManager.GetManager().programMinigame.currSolution != null
+            && GameManager.GetManager().programMinigame.currSolution.id == id)
+        {
+            correctWhole = true;
+            transform.position = GameManager.GetManager().programMinigame.currSolution.transform.position;
+        }
+        else
+        {
+            correctWhole = false;
+            transform.position = initialPos;
+        }
+        image.raycastTarget = true;
     }
 
     public void ResetPiece()
     {
-        m_Selected = false;
         transform.position = initialPos;
     }
 }

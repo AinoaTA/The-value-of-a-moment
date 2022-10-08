@@ -4,11 +4,13 @@ using UnityEngine;
 public class EmailPossibleAnswer : MonoBehaviour
 {
     int id;
-    public TMP_Text answer;
+    public string answer;
+    public TMP_Text resume;
 
-    public void SetAnswer(string t, int id)
+    public void SetAnswer(string t, int id, string ans)
     {
-        answer.text = t;
+        resume.text = t;
+        answer = ans;
         this.id = id;
     }
 
