@@ -84,19 +84,19 @@ public class BitterControl : MonoBehaviour
     IEnumerator CreateBitRoutine()
     {
         int rnd;
-        //create a bit depends on autocontrol's player.
+        //create a bit. Is random but affects to autocontrol's player 
         for (int i = 0; i < random; i++)
         {
             rnd = Random.Range(0, 2);
            
             Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
-            bit.isBad = rnd == 0 ? false : true;
+            bit.isBad = rnd != 0;
 
             bit.arroba.text = rnd == 0 ? GetNickname(profileBitterNamesGood) : GetNickname(profileBitterNamesBad);
             bit.message.text = rnd == 0 ? GetText(BitterMessagesGood) : GetText(BitterMessagesBad);
             bit.profilePic.sprite = rnd == 0 ? GetPic(normalPeople) : GetPic(profileAnonymous);
 
-            if (rnd == 0)//is good answer
+            if (rnd == 0)//is a good answer // new check
                 GameManager.GetManager().autocontrol.AddAutoControl(addAutocontrol);
             else
                 GameManager.GetManager().autocontrol.RemoveAutoControl(Random.Range(removeAutocontrol.x,removeAutocontrol.y));
@@ -105,7 +105,14 @@ public class BitterControl : MonoBehaviour
             //Debug.Log("Manu posible sonido? sonido como de escribir del facebookmessener que hace trurur tururu la burbuja");
         }
     }
+
+    public void ExitBitter()
+    {
+        gameObject.SetActive(false);
+    }
     #endregion
+
+
 
     /// <summary>
     /// Remove all bitters created

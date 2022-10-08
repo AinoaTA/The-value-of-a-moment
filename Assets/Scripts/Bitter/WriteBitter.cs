@@ -30,7 +30,7 @@ public class WriteBitter : MonoBehaviour
         {
             if (i>=currList[index].possibleBitters.Length) return;
             texts[i].transform.parent.gameObject.SetActive(true);
-            texts[i].text = currList[index].possibleBitters[i];
+            texts[i].text = currList[index].possibleBitters[i].resumeName;
         }
         currList.RemoveAt(index);
     }
@@ -48,7 +48,7 @@ public class WriteBitter : MonoBehaviour
     public void SelectPossibleAnswer(int i)
     {
         select = true;
-        genericText.text = texts[i].text;
+        genericText.text = currList[i].possibleBitters[i].bitter;
         acceptButton.SetActive(true);
     }
 
