@@ -21,6 +21,7 @@ public class TV : Interactables
         switch (optionNumber)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TVOn");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 screen.SetActive(true);
@@ -30,6 +31,7 @@ public class TV : Interactables
 
     public override void ExitInteraction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TVOff");
         screen.SetActive(false);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
@@ -37,6 +39,7 @@ public class TV : Interactables
 
     public void ChangeChannel()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh");
         // 1 función para subir o bajar canal o 2 funciones
         currChannel++;
         // Set screen to channels[currChannel]
