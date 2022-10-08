@@ -47,7 +47,7 @@ public class Alarm : MonoBehaviour
         if (m_Alarm && !m_AlarmON)
             m_Timer += Time.deltaTime;
 
-        if ((m_Timer > m_MaxTime) && !m_AlarmON)
+        if ((m_Timer > m_MaxTime) && !m_AlarmON &&!started)
             StartAlarm();
     }
 
@@ -67,19 +67,20 @@ public class Alarm : MonoBehaviour
             StillSleeping();
         }
     }
-
+    bool started;
     private void StartAlarm()
     {
+        started = true;
         alarmsfx.start();
         alarmsfx.release();
         inbed.start();
+        GameManager.GetManager().dialogueManager.StartDialogue("Alarm");
 
-        // <-- Added by Aryadna to test
-        if (null != GameManager.GetManager().dialogueManager)
-        {
-            print("no soy nulooo");
-            GameManager.GetManager().dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
-        }
+        StartCoroutine(Delay());
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(15);
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
         m_AlarmON = true;
@@ -96,8 +97,6 @@ public class Alarm : MonoBehaviour
         m_Alarm = false;
         ResetTime();
     }
-
-
 
     public void StillSleeping()
     {
