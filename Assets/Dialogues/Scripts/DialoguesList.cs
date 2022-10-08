@@ -21,7 +21,6 @@ public class DialoguesList : ScriptableObject
 
     public DialogueJSON GetDialogue(string dialogue) 
     {
-        Debug.Log(dialoguesDictionary);
         if (dialoguesDictionary == null) Init();
         return dialoguesDictionary[dialogue];
     }

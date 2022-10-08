@@ -75,8 +75,11 @@ public class Alarm : MonoBehaviour
         inbed.start();
 
         // <-- Added by Aryadna to test
-        if (null!= GameManager.GetManager().dialogueManager) GameManager.GetManager().dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
-
+        if (null != GameManager.GetManager().dialogueManager)
+        {
+            print("no soy nulooo");
+            GameManager.GetManager().dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
+        }
         CanvasAlarm.SetActive(true);
         m_Timer = 0;
         m_AlarmON = true;
