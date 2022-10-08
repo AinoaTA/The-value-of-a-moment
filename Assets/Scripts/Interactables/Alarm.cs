@@ -20,13 +20,11 @@ public class Alarm : MonoBehaviour
     //public static DelegateSFX m_DelegateSFX;
 
     private static FMOD.Studio.EventInstance alarmsfx;
-    private static FMOD.Studio.EventInstance inbed;
 
     private void Start()
     {
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
-        inbed = FMODUnity.RuntimeManager.CreateInstance("event:/Elle/GetInBed");
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
@@ -71,8 +69,6 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         alarmsfx.start();
-        alarmsfx.release();
-        inbed.start();
 
         // <-- Added by Aryadna to test
         if (null!= GameManager.GetManager().dialogueManager) GameManager.GetManager().dialogueManager.StartDialogue("Alarm"); // <-- Added by Aryadna to test
@@ -125,7 +121,6 @@ public class Alarm : MonoBehaviour
     public void ResetTime()
     {
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        inbed.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         m_AlarmON = false;
         m_Timer = 0;

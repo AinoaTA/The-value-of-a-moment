@@ -19,10 +19,7 @@ public class Autocontrol : MonoBehaviour
     [SerializeField] private Camera particlesCamera;
     private RenderTexture renderTexture;
     private Vector2Int renderTextureResolution;
-
-    //Music
     public FMODMusic MusicGameplay;
-    //
 
     private void Awake()
     {
@@ -125,9 +122,8 @@ public class Autocontrol : MonoBehaviour
             stateImage.sprite = statesColor[3];
             backgroundBar.sprite = barBackGroundColor[3];
 
-            //MusicGameplay
             MusicGameplay.Mood(3f);
-            //
+
         }
 
     }
