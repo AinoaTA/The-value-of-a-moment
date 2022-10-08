@@ -16,9 +16,15 @@ public class Book : Interactables
                 {
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Pickup", transform.position);
                     m_Grabbing.SetAccessCamera(true);
-                    GameManager.GetManager().cameraController.StartInteractCam(8);
+                    GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 }
                 break;
         }
+    }
+
+    public override void ExitInteraction()
+    {
+        GameManager.GetManager().StartThirdPersonCamera();
+        base.ExitInteraction();
     }
 }

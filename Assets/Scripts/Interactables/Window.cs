@@ -93,7 +93,7 @@ public class Window : Interactables, ITask
             case 2:
                 Debug.Log(2);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(10);
+                GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 break;
         }
     }
@@ -139,7 +139,11 @@ public class Window : Interactables, ITask
 
     private void Start()
     {
+<<<<<<< HEAD
        // streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Amb/Street");
+=======
+        streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Amb/Street");
+>>>>>>> feature/import-models
         //streetAmb.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SetTask();
         minigameCanvas = tutorial;//.transform.parent.gameObject;
