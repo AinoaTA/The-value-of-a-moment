@@ -1,13 +1,22 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class WriteBitter : MonoBehaviour
 {
     [SerializeField]BitterControl bitterControler;
     public TMP_Text[] texts;
     public TMP_Text genericText;
-    public Bitters[] dayZero, dayOne, dayTwo, dayThree;
+
+    public BitDay[] BitDays;
+    [System.Serializable]
+    public struct BitDay 
+    {
+        public string name;
+        public int numDay;
+        public Bitters[] bits;
+    }
     private List<Bitters> currList;
     [SerializeField]private GameObject acceptButton;
 
@@ -16,7 +25,7 @@ public class WriteBitter : MonoBehaviour
     private void Start()
     {        //temp
         Debug.LogWarning("change for number day (another script will be manage this)");
-        currList = new List<Bitters>(dayZero);
+        genericText.text = "";
     }
 
     bool wrote;
@@ -24,6 +33,7 @@ public class WriteBitter : MonoBehaviour
     {
         if (wrote) return;
         wrote = true;
+        UpdateList();
 
         index = CheckCondition(currList);
         for (int i = 0; i < 3; i++)
@@ -77,5 +87,11 @@ public class WriteBitter : MonoBehaviour
         select = false;
         wrote = false;
         ClearBitter();
+    }
+
+    void UpdateList() 
+    {
+        int val = (int)GameManager.GetManager().dayController.currentDay;
+        currList = BitDays[val].bits.ToList();
     }
 }

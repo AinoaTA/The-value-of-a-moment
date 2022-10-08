@@ -24,7 +24,7 @@ public class BitterControl : MonoBehaviour
     List<string> BitterMessagesGood;
 
     [SerializeField] GameObject readBitters;
-    [SerializeField] GameObject writeBitter;
+    [SerializeField] WriteBitter writeBitter;
     [Header("Values")]
     [SerializeField] Vector2 randomBitterTimes;
     int random;
@@ -60,13 +60,14 @@ public class BitterControl : MonoBehaviour
     {
         warning.SetActive(content.transform.childCount == 0);
         readBitters.SetActive(true);
-        writeBitter.SetActive(false);
+        writeBitter.gameObject.SetActive(false);
     }
 
     public void WriteBitter()
     {
         readBitters.SetActive(false);
-        writeBitter.SetActive(true);
+        writeBitter.gameObject.SetActive(true);
+        writeBitter.WriteBit();
     }
 
     public void SendBitter(string text)
@@ -91,7 +92,7 @@ public class BitterControl : MonoBehaviour
            
             Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
             bit.isBad = rnd != 0;
-
+            bit.UpdateFavs();
             bit.arroba.text = rnd == 0 ? GetNickname(profileBitterNamesGood) : GetNickname(profileBitterNamesBad);
             bit.message.text = rnd == 0 ? GetText(BitterMessagesGood) : GetText(BitterMessagesBad);
             bit.profilePic.sprite = rnd == 0 ? GetPic(normalPeople) : GetPic(profileAnonymous);

@@ -5,7 +5,7 @@ public class DayController : MonoBehaviour
     public enum DayTime { Manana, MedioDia, Tarde, Noche }
     public enum Day { one, two , three }
     [SerializeField] DayTime dayState;
-    [SerializeField] Day currentDay;
+    [SerializeField] public Day currentDay;
     private int counter;
 
     private Animator anims;
@@ -13,12 +13,12 @@ public class DayController : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.GetManager().dayController = this;
         anims = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        GameManager.GetManager().dayNightCycle = this;
         counter = (int)dayState;
         ChangeDay(dayState);
     }

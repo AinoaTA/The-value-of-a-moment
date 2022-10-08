@@ -53,7 +53,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -72,7 +72,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     {
         //gameInitialized = false;
         solved = true;
-        GameManager.GetManager().dayNightCycle.TaskDone();
+        GameManager.GetManager().dayController.TaskDone();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
 
