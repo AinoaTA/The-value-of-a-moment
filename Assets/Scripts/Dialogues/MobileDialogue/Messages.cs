@@ -10,7 +10,7 @@ public class Messages : MonoBehaviour
 
     public void Select()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Send");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Enter");
         GameManager.GetManager().mobile.SelectAnswer(mobileAnswer);
     }
 }

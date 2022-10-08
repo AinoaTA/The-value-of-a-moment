@@ -20,9 +20,8 @@ public class Autocontrol : MonoBehaviour
     private RenderTexture renderTexture;
     private Vector2Int renderTextureResolution;
 
-    //MusicGameplay
+    //Music
     public FMODMusic MusicGameplay;
-
     //
 
     private void Awake()
@@ -67,7 +66,7 @@ public class Autocontrol : MonoBehaviour
 
 
             yield return null;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Bar Down", transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MoodBarDown");
         }
         yield return new WaitForSeconds(1);
         particles.Stop();
@@ -86,7 +85,7 @@ public class Autocontrol : MonoBehaviour
             m_Slider.value = m_currentValue / maxValue;
             UpdateAutcontrol();
             yield return null;
-            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Bar Up", transform.position);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MoodBarUp");
 
         }
         yield return new WaitForSeconds(1);
@@ -111,7 +110,7 @@ public class Autocontrol : MonoBehaviour
             backgroundBar.sprite = barBackGroundColor[1];
             
             //MusicGameplay
-            MusicGameplay.Mood(2f);
+           // MusicGameplay.Mood(2f);
             //
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)

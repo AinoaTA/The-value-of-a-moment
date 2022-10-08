@@ -66,7 +66,7 @@ public class Plant : Interactables, ITask, IDependencies
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -161,7 +161,7 @@ public class Plant : Interactables, ITask, IDependencies
         gameInitialized = false;
         waterCan.dragg = false;
         CheckDoneTask();
-        GameManager.GetManager().dayNightCycle.TaskDone();
+        GameManager.GetManager().dayController.TaskDone();
         waterCan.gameObject.SetActive(false);
         actionEnter = false;
     }

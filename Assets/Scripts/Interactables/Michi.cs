@@ -18,6 +18,7 @@ public class Michi : Interactables
         switch (options)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 controller.PetMichi();

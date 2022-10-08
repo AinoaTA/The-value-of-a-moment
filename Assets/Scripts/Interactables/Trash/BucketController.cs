@@ -56,7 +56,7 @@ public class BucketController : Interactables, ITask, IDependencies
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -118,12 +118,12 @@ public class BucketController : Interactables, ITask, IDependencies
 
     public void SomethingCleaned()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes/Drop", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes Drop", transform.position);
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
         currCapacity++;
         if (currCapacity >= maxCapacity)
         {
-            GameManager.GetManager().dayNightCycle.TaskDone();
+            GameManager.GetManager().dayController.TaskDone();
             CheckDoneTask();
         }
     }

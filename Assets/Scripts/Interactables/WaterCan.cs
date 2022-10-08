@@ -14,19 +14,19 @@ public class WaterCan : MonoBehaviour
 
     [HideInInspector] public bool dragg;
 
-    private static FMOD.Studio.EventInstance waterplant;
+    private static FMOD.Studio.EventInstance water;
 
     private void Start()
     {
-        waterplant = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Water Plant");
+        water = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Water Plant");
         dragg = false;
         startPos = transform.position;
     }
 
     private void OnMouseDown()
     {
-        waterplant.start();
-        waterplant.release();
+        water.start();
+        water.release();
         particles.Play();
         GrowUpParticle.Stop();
     }
@@ -54,10 +54,14 @@ public class WaterCan : MonoBehaviour
         particles.Stop();
     }
 
-
+    public void WaterPlant (float waterLevel)
+    {
+        water.setParameterByName("WaterPlant", waterLevel);
+    }
     public void ResetWaterCan()
     {
-        waterplant.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //water.WaterPlant(1f);
+        water.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         dragg = false;
         particles.Stop();
         transform.position = startPos;

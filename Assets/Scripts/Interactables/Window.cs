@@ -16,7 +16,7 @@ public class Window : Interactables, ITask
     private bool tutorialShowed = false;
 
     [SerializeField] private float distance;
-    bool temp = false;
+    //bool temp = false;
 
     private static FMOD.Studio.EventInstance streetAmb;
 
@@ -61,7 +61,7 @@ public class Window : Interactables, ITask
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.GetTimeDay(), taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -139,7 +139,7 @@ public class Window : Interactables, ITask
 
     private void Start()
     {
-        streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Amb/Street");
+        streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Amb/Street");
         //streetAmb.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SetTask();
         minigameCanvas = tutorial;//.transform.parent.gameObject;
@@ -219,7 +219,7 @@ public class Window : Interactables, ITask
         minigameCanvas.SetActive(false);
         isOpen = true;
         interactDone = true;
-        GameManager.GetManager().dayNightCycle.TaskDone();
+        GameManager.GetManager().dayController.TaskDone();
     }
 
     private float GetMouseYaxisAsWorldPoint()
