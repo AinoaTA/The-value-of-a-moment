@@ -101,26 +101,23 @@ public class Autocontrol : MonoBehaviour
             //gameObject.GetComponent<FMODMusic>().Mood();
             //MusicGameplay
             Debug.Log("Temporal Line commented");
-           // MusicGameplay.Mood(1f);
-            //
+            MusicGameplay.Mood(1f);
+
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
             
-            //MusicGameplay
-           // MusicGameplay.Mood(2f);
-            //
+            MusicGameplay.Mood(2f);
+
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
             
-            //MusicGameplay
             MusicGameplay.Mood(3f);
-            //
 
         }
         else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)
