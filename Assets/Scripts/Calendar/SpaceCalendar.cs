@@ -7,8 +7,12 @@ namespace Calendar
     [RequireComponent(typeof(BoxCollider))]
     public class SpaceCalendar : MonoBehaviour
     {
+        [HideInInspector] public string[] timeName = { "Mañana", "Medio día", "Tarde", "Noche" };
+
         public enum SpaceType { Manana, MedioDia, Tarde, Noche }
         public SpaceType type;
+
+        public DayController.DayTime timeDate;
 
         public List<TaskType> taskSave = new List<TaskType>();
         [SerializeField] private int maxTaskSaved = 4;

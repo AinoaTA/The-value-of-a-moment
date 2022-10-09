@@ -21,13 +21,14 @@ namespace Menu
 
         public void PauseGame()
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Pause");
             if (!paused)
             {
                 paused = true;
                 GameManager.GetManager().canvasController.UnLock();
                 GameManager.GetManager().cameraController.Block3DMovement(!paused);
                 GameManager.GetManager().canvasController.ShowCanvas(pause);
-              
+
                 Time.timeScale = 0;
             }
             else

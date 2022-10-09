@@ -72,6 +72,7 @@ namespace Calendar
         {
             if (modifiedCalendar)
                 return;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/PC Enter");
 
             if (!InAnySpaceCalendar)
             {

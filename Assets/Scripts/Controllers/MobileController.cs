@@ -69,8 +69,9 @@ public class MobileController : MonoBehaviour
             m.characterName.text = "";
         }
     }
-    public void CloseChat() 
+    public void CloseChat()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Click");
         currChat.gameObject.SetActive(false);
         currChat = null;
     }

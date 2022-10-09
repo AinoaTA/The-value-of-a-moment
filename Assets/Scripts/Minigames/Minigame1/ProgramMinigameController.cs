@@ -4,13 +4,11 @@ using System.Collections;
 
 public class ProgramMinigameController : MonoBehaviour, ITask
 {
-    public List<SolutionPiece> m_AllSolutions = new List<SolutionPiece>();
-    public List<PieceMG> m_AllPieces = new List<PieceMG>();
-    private bool solved = false;
+    public List<PieceMG> allPieces = new List<PieceMG>();
     private bool checking;
-    private bool m_AllCorrected;
-    private bool gameInitialized;
+    private bool allCorrect;
     public float m_Autocontrol = 5;
+    public SolutionPiece currSolution;
 
     #region TASK
     [Space(20)]
@@ -53,7 +51,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         Calendar.CalendarController cal = GameManager.GetManager().calendarController;
         if (cal.CheckReward(taskAssociated))
         {
-            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayNightCycle.m_DayState, taskAssociated.calendar.type))
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
             {
                 TaskCompleted();
                 cal.GetTaskReward(this);
@@ -70,12 +68,9 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     }
     private IEnumerator GameFinished()
     {
-        gameInitialized = false;
-        solved = true;
-        GameManager.GetManager().dayNightCycle.TaskDone();
+        GameManager.GetManager().dayController.TaskDone();
         CheckDoneTask();
         GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
-
 
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().computer.ComputerON();
@@ -83,41 +78,38 @@ public class ProgramMinigameController : MonoBehaviour, ITask
 
     public void QuitMiniGame()
     {
-        solved = false;
-        gameInitialized = false;
-        GameManager.GetManager().computer.ComputerON();
+        allCorrect = false;
+        GameManager.GetManager().computer.ComputerON(); //back to menu pc screen
     }
 
 
     public void CheckSolutions()
     {
-        if (solved || checking)
+        if (allCorrect || checking)
             return;
 
         checking = true;
-        for (int i = 0; i < m_AllSolutions.Count; i++)
+        for (int i = 0; i < allPieces.Count; i++)
         {
-            if (!m_AllSolutions[i].m_Correct)
-                m_AllCorrected = false;
-            else
-                m_AllCorrected = true;
+            if (!allPieces[i].correctWhole)
+                return;
+
+            allCorrect = true;
         }
         checking = false;
 
-        if (m_AllCorrected)
-            StartCoroutine(GameFinished());
+        if (allCorrect) StartCoroutine(GameFinished());
     }
 
     public void ResetAllGame()
     {
-        for (int i = 0; i < m_AllPieces.Count; i++)
+        for (int i = 0; i < allPieces.Count; i++)
         {
-            m_AllPieces[i].ResetPiece();
+            allPieces[i].ResetPiece();
         }
-        solved = false;
-        gameInitialized = false;
+        //gameInitialized = false;
     }
-    public bool GetSolved() { return solved; }
+    public bool GetSolved() { return allCorrect; }
 
-
+    public void SetCurrSolution(SolutionPiece  e) { currSolution = e; }
 }

@@ -2,22 +2,17 @@ using UnityEngine;
 
 public class SolutionPiece : MonoBehaviour
 {
-    public GameObject m_CorrectPiece;
+    public int id;
 
-    public bool m_Correct;
-    private PieceMG currPiece;
-
-    private void OnTriggerEnter(Collider other)
+    public void Set() 
     {
-        currPiece = other.GetComponent<PieceMG>();
+        print("in");
+        GameManager.GetManager().programMinigame.SetCurrSolution(this);
     }
 
-    private void OnTriggerStay(Collider collision)
+    public void UnSet()
     {
-        if (collision.gameObject == m_CorrectPiece && !currPiece.dragging && !currPiece.correct)
-        {
-            m_Correct = true;
-            currPiece.correct = m_Correct;
-        }
+        print("out");
+        GameManager.GetManager().programMinigame.SetCurrSolution(null);
     }
 }

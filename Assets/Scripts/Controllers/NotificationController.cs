@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class NotificationController : MonoBehaviour
@@ -16,7 +16,7 @@ public class NotificationController : MonoBehaviour
 
     public delegate void SoundMessageDelegate();
     public static SoundMessageDelegate m_MessageDelegate;
-    
+
     void Start()
     {
         GameManager.GetManager().notificationController = this;
@@ -86,7 +86,7 @@ public class NotificationController : MonoBehaviour
             l_confident = Random.Range(m_person.minCofindent, m_person.maxConfident);
             GameManager.GetManager().autocontrol.AddAutoControl(l_confident);
         }
-            
+
         timer = 0;
     }
 

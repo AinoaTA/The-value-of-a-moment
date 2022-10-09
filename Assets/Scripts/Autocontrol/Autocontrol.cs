@@ -1,6 +1,6 @@
-using UnityEngine.UI;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Autocontrol : MonoBehaviour
 {
@@ -19,7 +19,11 @@ public class Autocontrol : MonoBehaviour
     [SerializeField] private Camera particlesCamera;
     private RenderTexture renderTexture;
     private Vector2Int renderTextureResolution;
-    
+
+    //Music
+    public FMODMusic MusicGameplay;
+    //
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -62,6 +66,7 @@ public class Autocontrol : MonoBehaviour
 
 
             yield return null;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MoodBarDown");
         }
         yield return new WaitForSeconds(1);
         particles.Stop();
@@ -80,32 +85,42 @@ public class Autocontrol : MonoBehaviour
             m_Slider.value = m_currentValue / maxValue;
             UpdateAutcontrol();
             yield return null;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MoodBarUp");
+
         }
         yield return new WaitForSeconds(1);
         particles.Stop();
     }
-
+    
     public void UpdateAutcontrol()
     {
         if (m_Slider.value <= 0.3f)
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
-          
-            GameManager.GetManager().soundController.ChangeMusicMood(0);
+            //gameObject.GetComponent<FMODMusic>().Mood();
+            //MusicGameplay
+            Debug.Log("Temporal Line commented");
+           // MusicGameplay.Mood(1f);
+            //
         }
         else if (m_Slider.value > 0.3f && m_Slider.value <= 0.5f)
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
-            GameManager.GetManager().soundController.ChangeMusicMood(1);
+            
+            //MusicGameplay
+           // MusicGameplay.Mood(2f);
+            //
         }
         else if (m_Slider.value > 0.5f && m_Slider.value <= 0.8f)
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
-
-            GameManager.GetManager().soundController.ChangeMusicMood(2);
+            
+            //MusicGameplay
+            MusicGameplay.Mood(3f);
+            //
 
         }
         else if (m_Slider.value > 0.8f && m_Slider.value <= 1f)
@@ -113,6 +128,9 @@ public class Autocontrol : MonoBehaviour
             stateImage.sprite = statesColor[3];
             backgroundBar.sprite = barBackGroundColor[3];
 
+            //MusicGameplay
+            MusicGameplay.Mood(3f);
+            //
         }
 
     }
@@ -134,4 +152,5 @@ public class Autocontrol : MonoBehaviour
     {
         return m_Slider.value;
     }
+
 }

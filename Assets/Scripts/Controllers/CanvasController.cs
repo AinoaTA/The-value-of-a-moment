@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class CanvasController : MonoBehaviour
@@ -8,8 +7,8 @@ public class CanvasController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().canvasController = this;
-        Lock();
-        //Debug.Log("there is a Lock() commented here"); 
+        //Lock();
+        Debug.Log("there is a Lock() commented here"); 
     }
 
     public void ComputerScreenOut()
@@ -40,13 +39,13 @@ public class CanvasController : MonoBehaviour
     #endregion
 
     #region ModifyCanvasGroup
-    public void ShowCanvas(CanvasGroup can) 
+    public void ShowCanvas(CanvasGroup can)
     {
         can.alpha = 1;
         can.blocksRaycasts = true;
         can.interactable = true;
     }
-    public void HideCanvas(CanvasGroup can) 
+    public void HideCanvas(CanvasGroup can)
     {
         can.alpha = 0;
         can.blocksRaycasts = false;

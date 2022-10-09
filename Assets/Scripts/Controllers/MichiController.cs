@@ -1,33 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MichiController : MonoBehaviour
 {
-    // public Pathfinding pathfinding;
+    private bool theresFood = false;
+    public Transform cuenco;
     private Animator animator;
-    private string path;
-    private int i;
     public Vector3 newPos;
     private float turningRate = 3f;
     private Quaternion targetRotation;
-    private bool reset;
+    private bool reset, petting;
 
     [Range(0.1f, 2f)] public float walkSpeed;
 
-    // Start is called before the first frame update
     void Start()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Idles", transform.position);
         animator = this.GetComponent<Animator>();
-        i = 0;
         reset = true;
         animator.SetBool("walking", true);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("sitting")) return;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("sitting") || petting) return;
         if (reset)
         {
             // Calculate new random position
@@ -38,11 +33,11 @@ public class MichiController : MonoBehaviour
             reset = false;
             animator.SetBool("walking", true);
         }
-        else
+        else if(!theresFood)
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 reset = true;
-            
+
             this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
             this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
 
@@ -51,12 +46,22 @@ public class MichiController : MonoBehaviour
                 Miau();
             }
         }
-        Debug.DrawLine(this.transform.position, newPos, Color.white);
+
+        if(theresFood)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, cuenco.position, walkSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, cuenco.position) < .2f)
+            {
+                Miau();
+                // TODO: comer
+                theresFood = false;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.layer != 2)
+        if (other.gameObject.layer != 2)
         {
             Miau();
         }
@@ -67,5 +72,19 @@ public class MichiController : MonoBehaviour
         animator.SetBool("walking", false);
         animator.ResetTrigger("hasArrived");
         animator.SetTrigger("hasArrived");
+    }
+
+    public void PetMichi()
+    {
+        Debug.Log("petting");
+        Miau();
+        petting = true;
+    }
+
+    public void FeedMichi()
+    {
+        Debug.Log("feeding");
+        theresFood = true;
+        reset = false;
     }
 }
