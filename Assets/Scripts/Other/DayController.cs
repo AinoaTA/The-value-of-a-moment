@@ -42,6 +42,7 @@ public class DayController : MonoBehaviour
             case Day.two:
                 break;
             case Day.three:
+                GameManager.GetManager().emailController.Recieve();
                 break;
             default:
                 break;
@@ -61,5 +62,10 @@ public class DayController : MonoBehaviour
     public DayTime GetTimeDay() 
     {
         return dayState;
+    }
+
+    public Day GetDayNumber()
+    {
+        return currentDay;
     }
 }

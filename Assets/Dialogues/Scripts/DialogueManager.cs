@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -14,45 +14,68 @@ public class DialogueManager : MonoBehaviour
     int currentLine;
 
     IEnumerator nextLineCoroutine;
+    private static FMOD.Studio.EventInstance eventAudio;
 
     private void Awake()
     {
         GameManager.GetManager().dialogueManager = this;
     }
 
-    public void StartDialogue(string dialogue)
+    Action saveAct;
+    bool canRepeat;
+    public void StartDialogue(string dialogue, Action act=null, bool forceInvoke=false, bool canRepeat=false)
     {
-        if (nextLineCoroutine!=null) StopCoroutine(nextLineCoroutine);
-        //audioSource.Stop();
+        
+        if (nextLineCoroutine != null) StopCoroutine(nextLineCoroutine);
+        eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-       
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
+        saveAct = act;
+
         if (currentDialogue.lines[0].played)
+        {
+            if (forceInvoke)
+                saveAct?.Invoke();
+
+            saveAct = null;
             return;
+        }
+        this.canRepeat = canRepeat;
         currentLine = 0;
         ShowLine();
     }
 
-    void ShowLine() {
+    void ShowLine()
+    {
         DialogueLineJSON line = currentDialogue.lines[currentLine];
         subtitle.enabled = true;
 
         bool langESP = LanguageGame.lang == LanguageGame.Languages.ESP;
 
-        subtitle.text = langESP?line.es:line.en;
+        subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
-        AudioClip voice = langESP ? line.voice_es : line.voice_en;
-        print(voice);
-        if (voice != null)
+        int lenght;
+        string path = "event:/Dialogue/" + LanguageGame.lang + "/" + line.ID;
+
+        try
         {
-            FMODUnity.RuntimeManager.CreateInstance("event:/Dialogue/"+LanguageGame.lang+"/"+line.ID);
-            waitTime = voice.length + aditionalVoiceTime;
+            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);
+            FMODUnity.RuntimeManager.GetEventDescription(FMODUnity.EventReference.Find(path)).getLength(out lenght);
+            eventAudio.start();
+
+            float time = (float)lenght / 1000;
+            print("AUDIO LENGHT Mili: " + (float)lenght + "in seconds: " + time);
+            waitTime = time + aditionalVoiceTime;
         }
+        catch (System.Exception e)
+        {
+            print(e);
+        }
+
         line.played = true;
-        nextLineCoroutine = NextLine(waitTime);
-        StartCoroutine(nextLineCoroutine);
+        StartCoroutine(nextLineCoroutine = NextLine(waitTime));
     }
 
     IEnumerator NextLine(float waitTime)
@@ -63,7 +86,17 @@ public class DialogueManager : MonoBehaviour
         else EndDialog();
     }
 
-    void EndDialog() {
+    void EndDialog()
+    {
+        if (canRepeat)
+        {
+            for (int i = 0; i < currentDialogue.lines.Count; i++)
+                currentDialogue.lines[i].played = false;
+        }
+
+        if (saveAct != null)
+            saveAct?.Invoke();
+        subtitle.text = "";
         subtitle.enabled = false;
     }
 }

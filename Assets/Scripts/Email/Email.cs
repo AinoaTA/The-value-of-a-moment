@@ -84,7 +84,6 @@ public class Email : MonoBehaviour
             autocontrolEarned += autocontrolAnswer[i].autocontrolSave;
 
         GameManager.GetManager().autocontrol.AddAutoControl(autocontrolEarned);
-        GameManager.GetManager().emailController.Recieve();
     }
 
     public void SetTextParagraph(int id, string answer)
@@ -96,6 +95,7 @@ public class Email : MonoBehaviour
     bool recieved;
     public void MailRecieved()
     {
+        if (!sent) return;
         writtingContent.SetActive(false);
         notification.SetActive(true);
         recieved = true;

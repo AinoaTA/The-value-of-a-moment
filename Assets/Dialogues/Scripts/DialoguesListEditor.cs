@@ -21,20 +21,24 @@ public class DialoguesListEditor : Editor
             Dictionary<string, DialogueJSON>  dialogues = new Dictionary<string, DialogueJSON>();
             foreach (DialogueLineJSON line in dialogueList.lines) {
                 if (line.dialogue==null) line.dialogue = "";
+                line.played = false;
                 if (!dialogues.ContainsKey(line.dialogue)) {
                     dialogues.Add(line.dialogue, new DialogueJSON());
                     dialogues[line.dialogue].id = line.dialogue;
                 }
                 dialogues[line.dialogue].lines.Add(line);
 
-                line.voice_es = LoadVoice(dialoguesList.voicesPath + line.ID + ".mp3");
-                line.voice_en = LoadVoice(dialoguesList.voicesPathEn + line.ID + ".mp3");
+              //  line.voice_es = LoadVoice(dialoguesList.voicesPath + line.ID + ".mp3");
+              //  line.voice_en = LoadVoice(dialoguesList.voicesPathEn + line.ID + ".mp3");
             }
 
             dialoguesList.dialogues = new List<DialogueJSON>();
             foreach (DialogueJSON dialogue in dialogues.Values) {
                 dialoguesList.dialogues.Add(dialogue);
+                
             }
+
+            
 
             EditorUtility.SetDirty(dialoguesList);
             AssetDatabase.SaveAssets();
