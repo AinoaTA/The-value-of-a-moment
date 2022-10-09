@@ -202,7 +202,7 @@ public class Window : Interactables, ITask
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
-        streetAmb.release();
+        //streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
         OptionComplete();

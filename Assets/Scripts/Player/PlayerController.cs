@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerWakeUpPos()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/GetInBed");
         character.enabled = false;
         //sleep = false;
         playerAnimation.SetAnimation("GetUp");

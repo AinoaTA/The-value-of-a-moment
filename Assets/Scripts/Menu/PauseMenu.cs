@@ -7,6 +7,7 @@ namespace Menu
     {
         public CanvasGroup pause;
         private bool paused = false;
+        public FMODMusic MusicGameplay;
 
         private void OnDisable()
         {
@@ -28,6 +29,7 @@ namespace Menu
                 GameManager.GetManager().canvasController.UnLock();
                 GameManager.GetManager().cameraController.Block3DMovement(!paused);
                 GameManager.GetManager().canvasController.ShowCanvas(pause);
+                MusicGameplay.Pause(1f);
 
                 Time.timeScale = 0;
             }
@@ -42,6 +44,7 @@ namespace Menu
             GameManager.GetManager().canvasController.Lock();
             GameManager.GetManager().canvasController.HideCanvas(pause);
             GameManager.GetManager().cameraController.Block3DMovement(!paused);
+            MusicGameplay.Pause(0f);
         }
 
         public void QuitGame()

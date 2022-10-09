@@ -41,6 +41,10 @@ public class FMODMusic : MonoBehaviour
     {
         Music.setParameterByName("Headphones", HeadphoneMode);
     }
+    public void Pause(float PauseMode)
+    {
+        Music.setParameterByName("Pause", PauseMode);
+    }
 
     private void OnDestroy()
     {

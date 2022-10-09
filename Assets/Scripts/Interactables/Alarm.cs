@@ -13,18 +13,18 @@ public class Alarm : MonoBehaviour
     [SerializeField] private float timer;
     private bool alarmRinging;
 
+    public FMODMusic MusicGameplay;
 
     //public delegate void DelegateSFX();
     //public static DelegateSFX m_DelegateSFX;
 
     private static FMOD.Studio.EventInstance alarmsfx;
-    private static FMOD.Studio.EventInstance inbed;
 
     private void Start()
     {
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
-        inbed = FMODUnity.RuntimeManager.CreateInstance("event:/Elle/GetInBed");
+        
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
@@ -68,8 +68,7 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         alarmsfx.start();
-        alarmsfx.release();
-        inbed.start();
+        MusicGameplay.Mood(0f);
 
         Show();
         //NO ME BORRÉIS ESTE IF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -94,6 +93,7 @@ public class Alarm : MonoBehaviour
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
+        MusicGameplay.Mood(1f);
         GameManager.GetManager().cameraController.StartInteractCam(2);
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
@@ -151,7 +151,6 @@ public class Alarm : MonoBehaviour
     public void ResetTime()
     {
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        inbed.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         alarmRinging = false;
         timer = 0;
