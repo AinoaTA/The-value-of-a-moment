@@ -46,7 +46,9 @@ public class Email : MonoBehaviour
     {
         if (blockWarning) return;
         
-        GameManager.GetManager().emailController.mail = this;
+        //GameManager.GetManager().emailController.mail = this;
+
+        GameManager.GetManager().emailController.CloseOthers(this);
         emailContent.SetActive(true);
         if (isWrote)
         {
@@ -109,5 +111,11 @@ public class Email : MonoBehaviour
         mail = autocontrolEarned < 10 ? mail = mailsRecieve[0] : mail = mailsRecieve[1];
         for (int i = 0; i < mail.messagesParagraph.Length; i++)
             paragraphsRecieve[i].text = mail.messagesParagraph[i];
+    }
+
+    public void Close() 
+    {
+        writtingContent.SetActive(false);
+        emailContent.SetActive(false);
     }
 }

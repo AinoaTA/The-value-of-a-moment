@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Corcho : Interactables
 {
-    [HideInInspector] public bool playing = true;
     [SerializeField] CorchoImage[] images;
     [SerializeField] BoxCollider ownCollider;
     public override void Interaction(int options)
@@ -24,16 +23,15 @@ public class Corcho : Interactables
 
     public override void ExitInteraction()
     {
-        if (!playing)
-        {
-            BlockAll(false);
-            ownCollider.enabled = true;
-            GameManager.GetManager().StartThirdPersonCamera();
-            base.ExitInteraction();
-        }
+
+        BlockAll(false);
+        ownCollider.enabled = true;
+        GameManager.GetManager().StartThirdPersonCamera();
+        base.ExitInteraction();
+
     }
 
-    public void BlockAll(bool t) 
+    public void BlockAll(bool t)
     {
         for (int i = 0; i < images.Length; i++)
             images[i].Ready(t);

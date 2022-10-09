@@ -23,9 +23,9 @@ public class DialogueManager : MonoBehaviour
 
     Action saveAct;
     bool canRepeat;
-    public void StartDialogue(string dialogue, Action act=null, bool forceInvoke=false, bool canRepeat=false)
+    public void StartDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
     {
-        
+
         if (nextLineCoroutine != null) StopCoroutine(nextLineCoroutine);
         eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
@@ -74,7 +74,8 @@ public class DialogueManager : MonoBehaviour
             print(e);
         }
 
-        line.played = true;
+        if (!canRepeat)
+            line.played = true;
         StartCoroutine(nextLineCoroutine = NextLine(waitTime));
     }
 
