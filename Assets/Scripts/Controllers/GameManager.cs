@@ -10,9 +10,7 @@ public class GameManager : MonoBehaviour
     #region gets sets
     public GameStateController gameStateController { get; set; }
     public CanvasController canvasController { get; set; }
-    public NotificationController notificationController { get; set; }
     public Autocontrol autocontrol { get; set; }
-    //public SoundController soundController { get; set; }
     public ProgramMinigameController programMinigame { get; set; }
     public PlayerController playerController { get; set; }
     public MobileController mobile { get; set; }
