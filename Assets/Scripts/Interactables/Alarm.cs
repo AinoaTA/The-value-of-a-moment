@@ -73,13 +73,14 @@ public class Alarm : MonoBehaviour
         alarmsfx.release();
         inbed.start();
 
-        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
-        {
-            if(counter>0)
-                Show();
-            else
-                GameManager.GetManager().dialogueManager.StartDialogue("Alarm", delegate { Show(); });
-        }
+        Show();
+        //if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
+        //{
+        //    if(counter>0)
+        //        Show();
+        //    else
+        //        GameManager.GetManager().dialogueManager.StartDialogue("Alarm", delegate { Show(); });
+        //}
     }
     public IEnumerator NormalWakeUp()
     {
