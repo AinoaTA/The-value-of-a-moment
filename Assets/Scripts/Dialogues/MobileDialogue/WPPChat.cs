@@ -11,6 +11,8 @@ public class WPPChat : MonoBehaviour
     [HideInInspector] public bool chatFinish;
     [HideInInspector] public bool chatStarted;
     bool nextChat = true;
+
+    [SerializeField] DayController.Day dayActive=DayController.Day.two;
     public ConverDay[] conversations;
     [System.Serializable]
     public struct ConverDay
@@ -42,5 +44,17 @@ public class WPPChat : MonoBehaviour
         chatStarted = false;
         chatFinish = false;
         indexStardChat++;
+    }
+
+    public bool CheckDay() 
+    {
+        if (GameManager.GetManager().dayController.GetDayNumber() == dayActive) 
+        {
+            answerContent.SetActive(true);
+
+            return true;
+        }
+        answerContent.SetActive(false);
+        return false;
     }
 }
