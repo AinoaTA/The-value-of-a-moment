@@ -51,7 +51,6 @@ public class Alarm : MonoBehaviour
 
     private void StartDay()
     {
-        print("MIS MUERTOS");
         if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             ResetTime();
@@ -61,7 +60,6 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-        print("ALOO");
         if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             StillSleeping();
@@ -74,6 +72,8 @@ public class Alarm : MonoBehaviour
         inbed.start();
 
         Show();
+        //NO ME BORRÉIS ESTE IF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
         //{
         //    if(counter>0)

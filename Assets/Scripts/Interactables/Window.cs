@@ -75,7 +75,6 @@ public class Window : Interactables, ITask
     public override void Interaction(int options)
     {
         base.Interaction(options);
-        Debug.Log(options);
         switch (options)
         {
             case 1:
