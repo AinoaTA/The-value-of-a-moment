@@ -54,8 +54,11 @@ public class Computer : Interactables
         GameManager.GetManager().playerController.SetAnimation("Computer",computerPos);
         computerScreen.SetActive(true);
         programScreen.SetActive(false);
+        programMinigame.SetActive(false);
+        programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
+        emailScreenMaterial.SetActive(false);
         GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
@@ -65,9 +68,11 @@ public class Computer : Interactables
         //GameManager.GetManager().playerController.SetAnimation("Walk");
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
+        programMinigame.SetActive(false);
+        programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
-        anyButtonScreenActive = false;
+        anyButtonScreenActive = false; ;
     }
 
     public void ComputerCalendar()
@@ -86,6 +91,7 @@ public class Computer : Interactables
     {
         if (anyButtonScreenActive)
             return;
+        programMinigame.SetActive(true);
         anyButtonScreenActive = true;
         programScreen.SetActive(true);
         calendarMaterialScreen.SetActive(false);

@@ -46,21 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b6ba7970f23d540bee7c20a3407482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  options: 1
-  m_Done: 0
-  m_PhrasesVoiceOff: []
-  m_HelpPhrasesVoiceOff: []
-  m_AnswersToVoiceOff: []
-  m_InteractPhrases: []
-  m_MaxAutoControl: 0
-  m_MiddleAutoControl: 0
-  m_MinAutoControl: 0
-  m_ExtraAutoControlCalendar: 0
-  taskAssociated: {fileID: 0}
   OptionsCanvas: {fileID: 5039960133673685981}
   anim: {fileID: 3378433529965320771}
-  showing: 0
+  nameAction: 
   type: 0
+  maxTras: 5
+  target: {fileID: 0}
 --- !u!65 &6331239050663086494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -269,7 +260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_text
-      value: E  Recoger
+      value: '[E] Recoger'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}

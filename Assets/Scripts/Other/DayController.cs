@@ -3,7 +3,7 @@ using UnityEngine;
 public class DayController : MonoBehaviour
 {
     public enum DayTime { Manana, MedioDia, Tarde, Noche }
-    public enum Day { one, two , three }
+    public enum Day { one, two , three, fourth }
     [SerializeField] DayTime dayState;
     [SerializeField] public Day currentDay;
     private int counter;
@@ -43,6 +43,9 @@ public class DayController : MonoBehaviour
                 break;
             case Day.three:
                 break;
+            case Day.fourth:
+                //GameManager.GetManager().emailController.Recieve();
+                break;
             default:
                 break;
         }
@@ -61,5 +64,10 @@ public class DayController : MonoBehaviour
     public DayTime GetTimeDay() 
     {
         return dayState;
+    }
+
+    public Day GetDayNumber()
+    {
+        return currentDay;
     }
 }

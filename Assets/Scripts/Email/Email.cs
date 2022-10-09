@@ -6,7 +6,7 @@ public class Email : MonoBehaviour
 {
     [HideInInspector] public bool blockWarning;
     [HideInInspector] public EmailAnswer currentAnswerOpen;
-
+    [SerializeField] bool isWrote;
     [Header("Contact Details")]
     [SerializeField] string companyName;
     [SerializeField] string emailDir;
@@ -45,19 +45,26 @@ public class Email : MonoBehaviour
     public void OpenEmail()
     {
         if (blockWarning) return;
+        
         GameManager.GetManager().emailController.mail = this;
-
         emailContent.SetActive(true);
+        if (isWrote)
+        {
+            mailRecieve.SetActive(true);
+            writtingContent.SetActive(false);
+        }
+        else
+        {
+            if (recieved) mailRecieve.SetActive(true);
+            else writtingContent.SetActive(true);
 
-        if (recieved) mailRecieve.SetActive(true);
-        else writtingContent.SetActive(true);
+            notification.SetActive(false);
 
-        notification.SetActive(false);
-
-        if (sent) return;
-        companyN.text = companyName;
-        emailD.text = emailDir;
-        titleText.text = title;
+            if (sent) return;
+            companyN.text = companyName;
+            emailD.text = emailDir;
+            titleText.text = title;
+        }
     }
 
     public void Warning()
@@ -84,7 +91,6 @@ public class Email : MonoBehaviour
             autocontrolEarned += autocontrolAnswer[i].autocontrolSave;
 
         GameManager.GetManager().autocontrol.AddAutoControl(autocontrolEarned);
-        GameManager.GetManager().emailController.Recieve();
     }
 
     public void SetTextParagraph(int id, string answer)
@@ -96,6 +102,7 @@ public class Email : MonoBehaviour
     bool recieved;
     public void MailRecieved()
     {
+        if (!sent) return;
         writtingContent.SetActive(false);
         notification.SetActive(true);
         recieved = true;
