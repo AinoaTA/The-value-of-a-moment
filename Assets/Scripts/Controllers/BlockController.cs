@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System.Collections;
 
 public class BlockController : MonoBehaviour
 {
@@ -6,6 +9,9 @@ public class BlockController : MonoBehaviour
     public BlockInteractables[] dayOneInteractable;
     public BlockInteractables[] dayTwoInteractable;
     public BlockInteractables[] dayThreeInteractable;
+
+    [SerializeField]
+    private List<ILock> locks = new List<ILock>();
 
     [System.Serializable]
     public struct BlockInteractables
@@ -16,9 +22,28 @@ public class BlockController : MonoBehaviour
         public DayController.DayTime dayTimeCanUnlock;
         public bool hasConditionToUnlock;
     }
+    bool stop;
     private void Awake()
     {
+        stop = true;
+        //super guarro I know.
+        List<MonoBehaviour> a = FindObjectsOfType<MonoBehaviour>().ToList();
+        for (int i = 0; i < a.Count; i++)
+        {
+            if (a[i].GetComponent<ILock>() != null)
+                locks.Add(a[i].GetComponent<ILock>());
+        }
+        for (int i = 0; i < locks.Count; i++)
+            locks[i].InteractableBlocked = true;
+
+        print(locks.Count);
+        stop = false;
+    }
+    IEnumerator Start()
+    {
+        yield return new WaitWhile(() => stop);
         CheckUnlockInteractable(dayOneInteractable);
+        
     }
 
     public void CheckUnlockInteractable(BlockInteractables[] list) 

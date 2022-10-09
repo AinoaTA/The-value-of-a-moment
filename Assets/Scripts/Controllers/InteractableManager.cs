@@ -67,7 +67,7 @@ public class InteractableManager : MonoBehaviour
     {
         for (int i = 0; i < allInteractables.Count; i++)
         {
-            allInteractables[i].interactableBlocked = true;
+            allInteractables[i].InteractableBlocked = true;
         }
     }
 }
