@@ -24,7 +24,7 @@ public class Drum : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
-                GameManager.GetManager().canvasController.UnLock();
+                GameManager.GetManager().canvasController.Lock();
 
                 playingDrum = false;
                 StartCoroutine(StartActivity());
