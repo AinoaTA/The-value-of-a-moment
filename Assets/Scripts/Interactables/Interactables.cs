@@ -13,23 +13,24 @@ public class Interactables : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private GameObject OptionsCanvas;
     [SerializeField] private Animator anim;
+    [SerializeField] private GameObject[] texts;
+    private Vector3[] textsInitPos;
 
+    [HideInInspector] public bool showing = false;
+    [HideInInspector] public bool actionEnter;
     public virtual bool GetDone() { return interactDone; }
 
     public virtual void Interaction(int optionNumber)
     {
-        actionEnter = true;
         SetCanvasValue(false);
     }
 
     public virtual void ExitInteraction()
     {
-        actionEnter = false;
         SetCanvasValue(false);
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
-    [HideInInspector] public bool showing = false;
-    protected bool actionEnter;
+
 
     private void Start()
     {
@@ -38,8 +39,10 @@ public class Interactables : MonoBehaviour
 
     public virtual void ResetInteractable()
     {
+        if(interactDone && totalOptions>1)
+            ResetOptionsPos();
+
         interactDone = false;
-        actionEnter = false;
         SetCanvasValue(false);
     }
 
@@ -54,8 +57,10 @@ public class Interactables : MonoBehaviour
 
     protected void Show()
     {
-        if (GameManager.GetManager().gameStateController.CheckGameState(1) && !showing && !actionEnter && !interactDone)
+        if (GameManager.GetManager().gameStateController.CheckGameState(1) && !showing && !actionEnter)
         {
+            if (interactDone && totalOptions <= 1) return;
+
             showing = true;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(this);
@@ -64,8 +69,10 @@ public class Interactables : MonoBehaviour
 
     protected void Hide()
     {
-        if (showing && !actionEnter && !interactDone)
+        if (showing && !actionEnter)
         {
+            if (interactDone && totalOptions <= 1) return;
+
             showing = false;
             anim.SetBool("Showing", showing);
             GameManager.GetManager().interactableManager.LookingAnInteractable(null);
@@ -80,8 +87,24 @@ public class Interactables : MonoBehaviour
 
     public virtual void ExtraInteraction() { }
 
-    public virtual void EndExtraInteraction() 
+    public virtual void EndExtraInteraction()
     {
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
+    }
+
+    protected void OptionComplete()
+    {
+        textsInitPos = new Vector3[texts.Length];
+        for (int i = 0; i < texts.Length; i++)
+            textsInitPos[i] = texts[i].transform.position;
+
+        texts[0].SetActive(false);
+        texts[1].transform.localPosition = Vector3.zero;
+    }
+
+    void ResetOptionsPos()
+    {
+        texts[0].SetActive(true);
+        texts[1].transform.localPosition = textsInitPos[1];
     }
 }

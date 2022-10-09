@@ -45,12 +45,13 @@ public class Alarm : MonoBehaviour
         if (alarm && !alarmRinging)
             timer += Time.deltaTime;
 
-        if ((timer > maxTime) && !alarmRinging && !started)
+        if ((timer > maxTime) && !alarmRinging)
             StartAlarm();
     }
 
     private void StartDay()
     {
+        print("MIS MUERTOS");
         if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             ResetTime();
@@ -60,15 +61,14 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
+        print("ALOO");
         if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             StillSleeping();
         }
     }
-    bool started;
     private void StartAlarm()
     {
-        started = true;
         alarmsfx.start();
         alarmsfx.release();
         inbed.start();
@@ -101,13 +101,13 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(true);
         alarm = false;
         ResetTime();
+
     }
     void Show()
     {
         CanvasAlarm.SetActive(true);
         timer = 0;
         alarmRinging = true;
-
     }
     public void StillSleeping()
     {
