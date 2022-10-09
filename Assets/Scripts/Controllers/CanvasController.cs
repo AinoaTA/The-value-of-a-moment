@@ -7,8 +7,8 @@ public class CanvasController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().canvasController = this;
-       UnLock();
-        Debug.Log("there is a Lock() commented here"); 
+        Lock();
+        // Debug.Log("there is a Lock() commented here"); 
     }
 
     public void ComputerScreenOut()

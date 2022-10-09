@@ -31,6 +31,7 @@ public class Sit : GeneralActions
     #endregion
     public override void EnterAction()
     {
+        canvas.gameObject.SetActive(true);
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);

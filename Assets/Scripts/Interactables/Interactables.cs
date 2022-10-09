@@ -82,7 +82,6 @@ public class Interactables : MonoBehaviour
 
     public virtual void EndExtraInteraction() 
     {
-        print("=");
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
     }
 }
