@@ -13,6 +13,7 @@ public class Alarm : MonoBehaviour
     [SerializeField] private float timer;
     private bool alarmRinging;
 
+    public FMODMusic MusicGameplay;
 
     //public delegate void DelegateSFX();
     //public static DelegateSFX m_DelegateSFX;
@@ -23,6 +24,7 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
+        
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
@@ -68,6 +70,7 @@ public class Alarm : MonoBehaviour
     {
         started = true;
         alarmsfx.start();
+        MusicGameplay.Mood(0f);
 
         if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
         {
@@ -89,6 +92,7 @@ public class Alarm : MonoBehaviour
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
+        MusicGameplay.Mood(1f);
         GameManager.GetManager().cameraController.StartInteractCam(2);
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
