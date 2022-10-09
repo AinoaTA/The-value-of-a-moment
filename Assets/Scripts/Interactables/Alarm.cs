@@ -3,17 +3,15 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    public string[] m_EllePhrases;
-    public VoiceOff[] m_WakeUpVoice;
     public GameObject CanvasAlarm;
 
     public float m_Autocontrol;
 
-    [SerializeField] private float m_MaxTime;
-    private bool m_Alarm = true;
-    private int m_count;
-    [SerializeField] private float m_Timer;
-    private bool m_AlarmON;
+    [SerializeField] private float maxTime;
+    private bool alarm = true;
+    private int counter;
+    [SerializeField] private float timer;
+    private bool alarmRinging;
 
 
     //public delegate void DelegateSFX();
@@ -44,16 +42,16 @@ public class Alarm : MonoBehaviour
 
     private void Update()
     {
-        if (m_Alarm && !m_AlarmON)
-            m_Timer += Time.deltaTime;
+        if (alarm && !alarmRinging)
+            timer += Time.deltaTime;
 
-        if ((m_Timer > m_MaxTime) && !m_AlarmON &&!started)
+        if ((timer > maxTime) && !alarmRinging && !started)
             StartAlarm();
     }
 
     private void StartDay()
     {
-        if (m_AlarmON && GameManager.GetManager().gameStateController.CheckGameState(0))
+        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             ResetTime();
             StartCoroutine(NormalWakeUp());
@@ -62,7 +60,7 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-        if (m_AlarmON && GameManager.GetManager().gameStateController.CheckGameState(0))
+        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
         {
             StillSleeping();
         }
@@ -74,54 +72,80 @@ public class Alarm : MonoBehaviour
         alarmsfx.start();
         alarmsfx.release();
         inbed.start();
-        GameManager.GetManager().dialogueManager.StartDialogue("Alarm");
 
-        StartCoroutine(Delay());
-    }
-    IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(10);
-        CanvasAlarm.SetActive(true);
-        m_Timer = 0;
-        m_AlarmON = true;
+        Show();
+        //if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
+        //{
+        //    if(counter>0)
+        //        Show();
+        //    else
+        //        GameManager.GetManager().dialogueManager.StartDialogue("Alarm", delegate { Show(); });
+        //}
     }
     public IEnumerator NormalWakeUp()
     {
-        // GameManager.GetManager().PlayerController.SetInteractable("WakeUp");
+        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
+        {
+            string name;
+            if (counter == 0) name = "GetUp1";
+            else name = "GetUp2";
+
+            GameManager.GetManager().dialogueManager.StartDialogue(name);
+        }
+
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
         GameManager.GetManager().cameraController.StartInteractCam(2);
         CanvasAlarm.SetActive(false);
         yield return new WaitForSeconds(1.25f);
         GameManager.GetManager().playerController.PlayerWakeUpPos();
         GameManager.GetManager().canvasController.Lock(true);
-        m_Alarm = false;
+        alarm = false;
         ResetTime();
     }
+    void Show()
+    {
+        CanvasAlarm.SetActive(true);
+        timer = 0;
+        alarmRinging = true;
 
+    }
     public void StillSleeping()
     {
-        m_AlarmON = false;
+        alarmRinging = false;
 
-        if (m_count >= m_EllePhrases.Length)
-            m_count = 0;
+        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
+        {
+            string name = "alarm";
+            if (counter == 0) name = "Alarm2";
+            else name = "Alarm3";
 
-        m_Alarm = true;
+            GameManager.GetManager().dialogueManager.StartDialogue(name, delegate
+            {
+                StartAlarm();
+            });
+
+            if (counter >= 2)
+                StartAlarm();
+        }
+        counter++;
+
+        alarm = true;
         ResetTime();
         CanvasAlarm.SetActive(false);
 
         GameManager.GetManager().gameStateController.ChangeGameState(0);
         GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
-        m_count++;
+      
     }
 
     public bool GetIsActive()
     {
-        return m_Alarm;
+        return alarm;
     }
 
     public void SetAlarmActive()
     {
-        m_Alarm = true;
+        alarm = true;
     }
 
     public void ResetTime()
@@ -129,8 +153,8 @@ public class Alarm : MonoBehaviour
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         inbed.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-        m_AlarmON = false;
-        m_Timer = 0;
+        alarmRinging = false;
+        timer = 0;
     }
 
     private IEnumerator StartDayDelay()
