@@ -10,7 +10,7 @@ public class Cafetera : Interactables
         switch (optionNumber)
         {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Coffee Brew");
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Coffee Brew", transform.position);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 // gameInitialized = true;
                 // Inicia minijuego
