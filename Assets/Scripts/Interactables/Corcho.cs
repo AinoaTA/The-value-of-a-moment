@@ -13,7 +13,7 @@ public class Corcho : Interactables
             case 1:
                 BlockAll(true);
                 ownCollider.enabled = false;
-                GameManager.GetManager().canvasController.UnLock();
+                GameManager.GetManager().canvasController.Lock();
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 break;

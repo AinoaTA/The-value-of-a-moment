@@ -13,7 +13,7 @@ public class DialoguesListEditor : Editor
         if (GUILayout.Button("Load Data"))
         {
             DialoguesList dialoguesList = (DialoguesList)target;
-            if (dialoguesList.voicesPath == "") dialoguesList.voicesPath = Path.GetDirectoryName(AssetDatabase.GetAssetPath(dialoguesList)) + "\\voices\\";
+           // if (dialoguesList.voicesPath == "") dialoguesList.voicesPath = Path.GetDirectoryName(AssetDatabase.GetAssetPath(dialoguesList)) + "\\voices\\";
 
             DialogueJSON dialogueList = JsonUtility.FromJson<DialogueJSON>(dialoguesList.dialoguesFile.text);
 

@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class LoveUp : Interactables
 {
+    int counter;
     public override void ExtraInteraction()
     {
+        GameManager.GetManager().dialogueManager.StartDialogue("ISmartphoneTinder");
+        counter++;
         print("LevelUp");
     }
 

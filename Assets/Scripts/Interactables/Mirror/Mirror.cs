@@ -27,32 +27,10 @@ public class Mirror : Interactables
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
 
                     StartCoroutine(LookUp());
-                    //if (m_MirrorInteractPhrases.Length > 0)
-                    //{
-                    //    if (m_Counter >= m_InteractPhrases.Length)
-                    //        m_Counter = 0;
-
-                    //    GameManager.GetManager().Dialogue.SetDialogue(m_InteractPhrases[m_Counter]);
-                    //    GameManager.GetManager().Autocontrol.RemoveAutoControl(5);
-                    //    m_Counter++;
-
-                    //    m_Done = true;
-                    //}
                 }
                 break;
         }
     }
-
-
-    //private void OnMouseDown()
-    //{
-    //    if (!actionEnter)
-    //    {
-    //        SetCanvasValue(false);
-    //        actionEnter = true;
-    //        Interaction(1);
-    //    }
-    //}
 
     private IEnumerator LookUp()
     {
@@ -63,8 +41,12 @@ public class Mirror : Interactables
             counterbad1++;
             if (counterbad1 >= bad1.Length)
                 counterbad1 = 0;
+
+            GameManager.GetManager().dialogueManager.StartDialogue("IEspejo", canRepeat: true);
+
             GameManager.GetManager().playerController.SadMoment();
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
+
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.3f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.5f)
         {
