@@ -43,22 +43,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1002535093822647955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0b6288a45f27e40b2268ca7e9e9be1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6597df0e0f61b114d882d6984f5682b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  options: 1
-  m_Done: 0
-  m_PhrasesVoiceOff: []
-  m_HelpPhrasesVoiceOff: []
-  m_AnswersToVoiceOff: []
-  m_InteractPhrases: []
+  nameInteractable: 
+  totalOptions: 1
+  interactDone: 0
   m_MaxAutoControl: 0
   m_MiddleAutoControl: 0
   m_MinAutoControl: 0
-  m_ExtraAutoControlCalendar: 0
-  taskAssociated: {fileID: 0}
-  OptionsCanvas: {fileID: 0}
-  anim: {fileID: 0}
+  OptionsCanvas: {fileID: 2259959313878674165}
+  anim: {fileID: 8381180666171679595}
   showing: 0
   m_BookInteractPhrases: []
   m_Grabbing: {fileID: 0}
@@ -148,17 +143,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_text
-      value: '[E] Leer'
+      value: '[E]  Leer'
       objectReference: {fileID: 0}
     - target: {fileID: 8877056741370716140, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_text
       value: '[Q] Dejar'
       objectReference: {fileID: 0}
+    - target: {fileID: 8877056741370716140, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+--- !u!1 &2259959313878674165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309594586995454779, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 968379830342097358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3198033624897362517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 968379830342097358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8381180666171679595 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8736859282042616485, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 968379830342097358}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5574638673398014653
@@ -186,11 +195,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 26e15ee30d7b7bd498ab88d65ccf9865, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.0006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 26e15ee30d7b7bd498ab88d65ccf9865, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.00112
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 26e15ee30d7b7bd498ab88d65ccf9865, type: 3}
       propertyPath: m_LocalPosition.z

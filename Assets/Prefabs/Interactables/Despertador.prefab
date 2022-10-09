@@ -232,23 +232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725676c2c79cf5a4d81bd94638e7c5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EllePhrases:
-  - "Otro d\xEDa m\xE1s... No merece la pena levantarse de la cama..."
-  - "D\xE9jame en paz... A nadie le importa si me levanto, o no. Zzzzz..."
-  - "Tengo sue\xF1o..."
-  - "S\xF3lo un ratito m\xE1s... Zzzzz..."
-  - "\xA1Qu\xE9 pereza!"
-  - "\xA1Te odio!"
-  m_WakeUpVoice:
-  - {fileID: 11400000, guid: 613778c7a09c2ae498e091aa87232fa8, type: 2}
-  - {fileID: 11400000, guid: 715160cf4ed01464fafa38aa5ccae697, type: 2}
-  - {fileID: 11400000, guid: cb882f4b82f1b274f9c089100a8a82cf, type: 2}
-  - {fileID: 11400000, guid: d333f8b41a949664ea3b18822b3d6081, type: 2}
-  - {fileID: 11400000, guid: b8e4f600cd2665241b66c543615e0766, type: 2}
   CanvasAlarm: {fileID: 4888793346954212896}
   m_Autocontrol: 0
-  m_MaxTime: 13
-  m_Timer: 0
+  maxTime: 0
+  timer: 0
 --- !u!65 &8095120568245752509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -429,10 +416,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Q Posponer
+  m_text: '[Q] Posponer'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
-  m_sharedMaterial: {fileID: 8405298845142461501, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
+  m_sharedMaterial: {fileID: -2067520440824604490, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -564,10 +551,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E Levantarse
+  m_text: '[E] Levantarse'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
-  m_sharedMaterial: {fileID: 8405298845142461501, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
+  m_sharedMaterial: {fileID: -2067520440824604490, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -698,7 +685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[ ]'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
   m_sharedMaterial: {fileID: -2067520440824604490, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
@@ -764,6 +751,6 @@ MonoBehaviour:
   m_margin: {x: -4.2458496, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
