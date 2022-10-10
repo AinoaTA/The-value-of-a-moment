@@ -18,7 +18,10 @@ public class BlockController : MonoBehaviour
     {
         public string name;
         public int id;
-        public ILock interactable;
+        //public Interactables[] interactable;
+        //public GeneralActions[] actions;
+
+        public MonoBehaviour[] locks;
         public DayController.DayTime dayTimeCanUnlock;
         public bool hasConditionToUnlock;
     }
@@ -43,16 +46,19 @@ public class BlockController : MonoBehaviour
     {
         yield return new WaitWhile(() => stop);
         CheckUnlockInteractable(dayOneInteractable);
-        
+
     }
 
-    public void CheckUnlockInteractable(BlockInteractables[] list) 
+    public void CheckUnlockInteractable(BlockInteractables[] list)
     {
         for (int i = 0; i < list.Length; i++)
         {
             if (!list[i].hasConditionToUnlock)
             {
-                list[i].interactable.InteractableBlocked = false;
+                for (int e = 0; e < list[i].locks.Length; e++)
+                {
+                    list[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+                }
                 list[i].id = i;
             }
         }

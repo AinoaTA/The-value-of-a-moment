@@ -3,7 +3,7 @@ using UnityEngine;
 public class Interactables : MonoBehaviour, ILock
 {
     public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
-    private bool _blocked;
+    [SerializeField] private bool _blocked;
 
     [Header("Data")]
     public string nameInteractable;
@@ -42,7 +42,7 @@ public class Interactables : MonoBehaviour, ILock
 
     public virtual void ResetInteractable()
     {
-        if(interactDone && totalOptions>1)
+        if (interactDone && totalOptions > 1)
             ResetOptionsPos();
 
         interactDone = false;
