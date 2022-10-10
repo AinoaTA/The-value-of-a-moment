@@ -23,11 +23,11 @@ public class CanvasController : MonoBehaviour
     }
 
     #region mouse pointer state
-    public void Lock(bool showPointer = true)
+    public void Lock(bool showPointer = true, bool showMouse = false)
     {
         Pointer.SetActive(showPointer);
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = showMouse;
     }
 
     public void UnLock()

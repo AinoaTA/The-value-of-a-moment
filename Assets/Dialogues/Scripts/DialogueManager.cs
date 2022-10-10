@@ -23,10 +23,10 @@ public class DialogueManager : MonoBehaviour
 
     Action saveAct;
     bool canRepeat;
-    public void StartDialogue(string dialogue, Action act=null, bool forceInvoke=false, bool canRepeat=false)
+    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
     {
-        
-        if (nextLineCoroutine != null) StopCoroutine(nextLineCoroutine);
+
+        if (nextLineCoroutine != null) StopDialogue();
         eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         currentDialogue = dialogues.GetDialogue(dialogue);
@@ -66,7 +66,7 @@ public class DialogueManager : MonoBehaviour
             eventAudio.start();
 
             float time = (float)lenght / 1000;
-            print("AUDIO LENGHT Mili: " + (float)lenght + "in seconds: " + time);
+            print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
         catch (System.Exception e)
@@ -74,7 +74,8 @@ public class DialogueManager : MonoBehaviour
             print(e);
         }
 
-        line.played = true;
+        if (!canRepeat)
+            line.played = true;
         StartCoroutine(nextLineCoroutine = NextLine(waitTime));
     }
 
@@ -96,6 +97,13 @@ public class DialogueManager : MonoBehaviour
 
         if (saveAct != null)
             saveAct?.Invoke();
+        subtitle.text = "";
+        subtitle.enabled = false;
+    }
+
+    void StopDialogue() 
+    {
+        StopCoroutine(nextLineCoroutine);
         subtitle.text = "";
         subtitle.enabled = false;
     }

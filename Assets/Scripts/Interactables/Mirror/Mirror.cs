@@ -42,7 +42,7 @@ public class Mirror : Interactables
             if (counterbad1 >= bad1.Length)
                 counterbad1 = 0;
 
-            GameManager.GetManager().dialogueManager.StartDialogue("IEspejo", canRepeat: true);
+            GameManager.GetManager().dialogueManager.SetDialogue("IEspejo", canRepeat: true);
 
             GameManager.GetManager().playerController.SadMoment();
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);

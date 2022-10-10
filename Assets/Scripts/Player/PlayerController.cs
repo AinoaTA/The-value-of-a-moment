@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         character.enabled = false;
         //sleep = false;
         playerAnimation.SetAnimation("GetUp");
-        //Sleep(true);
+        GetUp(true);
         StartCoroutine(StartDay());
         character.enabled = true;
     }
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public void PlayerSleepPos()
     {
         //sleep = true;
-        Sleep(false);
+        GetUp(false);
         playerAnimation.SetAnimation("Sleep");//, true);
     }
 
@@ -65,23 +65,21 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetAnimation(name);
     }
 
-    public void TemporalExit() 
+    public void TemporalExit()
     {
         Debug.Log("TEMPORAL");
         root.localPosition = new Vector3(0, -1.2f, 0);
         SetAnimation("Movement");
         root.localRotation = Quaternion.Euler(0, 180, 0);
     }
-    void Sleep(bool wakeup)
+    void GetUp(bool getUp)
     {
         root.rotation = Quaternion.identity;
-        //if (wakeup)
-        //    root.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
-        //else
-        if (!wakeup)
+        if (getUp)
+            root.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
+        else
+
             root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationWakeup, 0));
-
-
 
         //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }

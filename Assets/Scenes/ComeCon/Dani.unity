@@ -1410,11 +1410,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2048293502, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6004505
+      value: -0.46409428
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048293502, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 2048293502, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.709998
+      value: -1.9206448
       objectReference: {fileID: 0}
     - target: {fileID: 2048293503, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Follow
@@ -1494,6 +1498,7 @@ PrefabInstance:
       objectReference: {fileID: 1411271105}
     m_RemovedComponents:
     - {fileID: 63764963, guid: e11670496f27726418738713e038c4ea, type: 3}
+    - {fileID: 6192093435954180263, guid: e11670496f27726418738713e038c4ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e11670496f27726418738713e038c4ea, type: 3}
 --- !u!4 &153471016 stripped
 Transform:
@@ -9933,6 +9938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailCanvas: {fileID: 1675416344}
   mail: {fileID: 0}
+  mails: []
 --- !u!4 &1151735456
 Transform:
   m_ObjectHideFlags: 0
@@ -23937,6 +23943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383286a86ddf86e479e60cd8fd22915b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   nameInteractable: Cafetera
   totalOptions: 1
   interactDone: 0
@@ -23945,7 +23952,9 @@ MonoBehaviour:
   m_MinAutoControl: 0
   OptionsCanvas: {fileID: 1544066746}
   anim: {fileID: 1544066749}
+  texts: []
   showing: 0
+  actionEnter: 0
 --- !u!4 &8127076434417042074
 Transform:
   m_ObjectHideFlags: 0

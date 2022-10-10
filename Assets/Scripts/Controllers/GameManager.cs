@@ -10,9 +10,7 @@ public class GameManager : MonoBehaviour
     #region gets sets
     public GameStateController gameStateController { get; set; }
     public CanvasController canvasController { get; set; }
-    public NotificationController notificationController { get; set; }
     public Autocontrol autocontrol { get; set; }
-    //public SoundController soundController { get; set; }
     public ProgramMinigameController programMinigame { get; set; }
     public PlayerController playerController { get; set; }
     public MobileController mobile { get; set; }
@@ -31,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GeneralActionsManager actionObjectManager { get; set; }
     public Alarm alarm { get; set; }
     public DialogueManager dialogueManager { get; set; }
+    public BlockController blockController { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }

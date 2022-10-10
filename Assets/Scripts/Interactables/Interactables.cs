@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class Interactables : MonoBehaviour
+public class Interactables : MonoBehaviour, ILock
 {
+    public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
+    [SerializeField] private bool _blocked;
+
     [Header("Data")]
     public string nameInteractable;
 
@@ -39,7 +42,7 @@ public class Interactables : MonoBehaviour
 
     public virtual void ResetInteractable()
     {
-        if(interactDone && totalOptions>1)
+        if (interactDone && totalOptions > 1)
             ResetOptionsPos();
 
         interactDone = false;
@@ -48,10 +51,12 @@ public class Interactables : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (InteractableBlocked) return;
         Show();
     }
     private void OnMouseExit()
     {
+        if (InteractableBlocked) return;
         Hide();
     }
 
