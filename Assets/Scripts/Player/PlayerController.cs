@@ -82,8 +82,6 @@ public class PlayerController : MonoBehaviour
 
             root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationWakeup, 0));
 
-
-
         //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }
     IEnumerator StartDay()
