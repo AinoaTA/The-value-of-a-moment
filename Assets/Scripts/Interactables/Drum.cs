@@ -14,6 +14,7 @@ public class Drum : Interactables
     int rhythmPosition = 0;
     bool playingDrum = false;
     DrumInstrument pointedInstrument;
+    public BoxCollider col;
 
     public override void Interaction(int optionNumber)
     {
@@ -25,7 +26,7 @@ public class Drum : Interactables
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 GameManager.GetManager().canvasController.Lock();
-
+                col.enabled = false;
                 playingDrum = false;
                 StartCoroutine(StartActivity());
                 break;
@@ -34,6 +35,7 @@ public class Drum : Interactables
 
     public override void ExitInteraction()
     {
+        col.enabled = true;
         StopPlayingDrum();
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
