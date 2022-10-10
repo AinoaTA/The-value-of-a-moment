@@ -8,7 +8,7 @@ public class CorchoImage : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GameManager.GetManager().dialogueManager.StartDialogue(dialogue, canRepeat:true, act: delegate 
+        GameManager.GetManager().dialogueManager.SetDialogue(dialogue, canRepeat:true, act: delegate 
         {
             corcho.BlockAll(true);
         });

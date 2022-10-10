@@ -28,6 +28,8 @@ public class BlockController : MonoBehaviour
     bool stop;
     private void Awake()
     {
+        GameManager.GetManager().blockController = this;
+
         stop = true;
         //super guarro I know.
         List<MonoBehaviour> a = FindObjectsOfType<MonoBehaviour>().ToList();
@@ -62,5 +64,40 @@ public class BlockController : MonoBehaviour
                 list[i].id = i;
             }
         }
+    }
+
+    public void Unlock(string name) 
+    {
+        
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                for (int i = 0; i < dayOneInteractable.Length; i++)
+                {
+                    if (dayOneInteractable[i].name == name)
+                    {
+                        for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+                        {
+                            dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+                        }
+                        return;
+                    }
+                }
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+
+        for (int i = 0; i < dayOneInteractable.Length; i++)
+        {
+
+        }
+
     }
 }

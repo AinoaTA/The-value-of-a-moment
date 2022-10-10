@@ -90,7 +90,10 @@ public class Alarm : MonoBehaviour
             if (counter == 0) name = "GetUp1";
             else name = "GetUp2";
 
-            GameManager.GetManager().dialogueManager.StartDialogue(name);
+            GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
+            {
+                StartCoroutine(Delay());
+            });
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
@@ -103,6 +106,16 @@ public class Alarm : MonoBehaviour
         ResetTime();
 
     }
+    #region dialogues helps
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate 
+        {
+            GameManager.GetManager().blockController.Unlock("Ventanas");
+        });
+    }
+    #endregion
     void Show()
     {
         CanvasAlarm.SetActive(true);
@@ -119,7 +132,7 @@ public class Alarm : MonoBehaviour
             if (counter == 0) name = "Alarm2";
             else name = "Alarm3";
 
-            GameManager.GetManager().dialogueManager.StartDialogue(name, delegate
+            GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
             {
                 StartAlarm();
             });
@@ -135,7 +148,7 @@ public class Alarm : MonoBehaviour
 
         GameManager.GetManager().gameStateController.ChangeGameState(0);
         GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
-      
+
     }
 
     public bool GetIsActive()

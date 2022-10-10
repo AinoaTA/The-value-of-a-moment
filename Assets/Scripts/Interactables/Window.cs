@@ -174,7 +174,7 @@ public class Window : Interactables, ITask
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
-            
+
 
             if (displacement < minHeight)
                 height = minHeight;
@@ -195,6 +195,8 @@ public class Window : Interactables, ITask
     {
         if (interactDone && gameInitialized)
             WindowDone();
+        else if (!interactDone)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
     }
     #endregion
     private void WindowDone()
@@ -211,6 +213,17 @@ public class Window : Interactables, ITask
         isOpen = true;
         interactDone = true;
         GameManager.GetManager().dayController.TaskDone();
+        GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().blockController.Unlock("Nevera");
+        GameManager.GetManager().blockController.Unlock("Cama");
+        GameManager.GetManager().blockController.Unlock("Ropas");
+        GameManager.GetManager().blockController.Unlock("Cesto Ropa");
     }
 
     private float GetMouseYaxisAsWorldPoint()
