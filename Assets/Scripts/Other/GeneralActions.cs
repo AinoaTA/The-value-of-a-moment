@@ -2,7 +2,7 @@ using UnityEngine;
 public class GeneralActions : MonoBehaviour,ILock
 {
     public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
-    private bool _blocked;
+    [SerializeField]private bool _blocked;
     public GameObject OptionsCanvas;
     public Animator anim;
     protected bool showing;

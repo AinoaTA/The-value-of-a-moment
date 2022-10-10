@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Mobile : GeneralActions
 {
     [SerializeField] private bool getMobile;
@@ -7,7 +7,7 @@ public class Mobile : GeneralActions
     [SerializeField] private CanvasGroup mobileCanvas;
     [SerializeField] private GameObject[] canvasFunctions;
     private BoxCollider col;
-
+    public GameObject cursor;
     bool active = false;
     private void Start()
     {
@@ -38,15 +38,17 @@ public class Mobile : GeneralActions
 
         if (!active)
         {
+            cursor.gameObject.SetActive(true);
             active = true;
             GameManager.GetManager().gameStateController.ChangeGameState(2);
-            GameManager.GetManager().canvasController.UnLock();
+            GameManager.GetManager().canvasController.UnLock(false);
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Unlock");
         }
         else
         {
+            cursor.gameObject.SetActive(false);
             active = false;
             GameManager.GetManager().StartThirdPersonCamera();
             GameManager.GetManager().gameStateController.ChangeGameState(1);
@@ -69,5 +71,11 @@ public class Mobile : GeneralActions
         mobileCanvas.alpha = val ? 1 : 0;
         mobileCanvas.blocksRaycasts = val;
         mobileCanvas.interactable = val;
+    }
+
+    private void Update()
+    {
+        if (active)
+            cursor.transform.position = Input.mousePosition;
     }
 }

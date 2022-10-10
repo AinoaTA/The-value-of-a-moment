@@ -30,11 +30,11 @@ public class CanvasController : MonoBehaviour
         Cursor.visible = showMouse;
     }
 
-    public void UnLock()
+    public void UnLock(bool showPointer = true, bool showMouse = false)
     {
-        Pointer.SetActive(false);
+        Pointer.SetActive(showPointer);
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        Cursor.visible = showMouse;
     }
     #endregion
 
