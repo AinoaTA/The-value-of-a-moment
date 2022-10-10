@@ -95,7 +95,6 @@ public class Bed : Interactables, ITask
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-
     }
 
     void OnMouseDrag()
@@ -203,7 +202,7 @@ public class Bed : Interactables, ITask
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                     SetCanvasValue(false);
                     gameInitialized = true;
-                    GameManager.GetManager().canvasController.UnLock();
+                    GameManager.GetManager().canvasController.Lock();
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());

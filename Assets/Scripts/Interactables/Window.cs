@@ -85,7 +85,7 @@ public class Window : Interactables, ITask
                     gameInitialized = true;
                     // Inicia minijuego
                     GameManager.GetManager().cameraController.StartInteractCam(4);
-                    GameManager.GetManager().canvasController.UnLock();
+                    GameManager.GetManager().canvasController.Lock();
                 }
                 break;
             case 2:
@@ -144,7 +144,6 @@ public class Window : Interactables, ITask
         minigameCanvas.SetActive(false);
         minHeight = glass.transform.position.y;
         initPos = glass.transform.position;
-
     }
     private void Update()
     {

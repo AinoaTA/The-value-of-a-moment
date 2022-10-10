@@ -59,7 +59,10 @@ public class BlockController : MonoBehaviour
             {
                 for (int e = 0; e < list[i].locks.Length; e++)
                 {
-                    list[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+                    ILock ilock;
+                    var check = list[i].locks[e].TryGetComponent<ILock>(out ilock);
+                    if (check)
+                        ilock.InteractableBlocked = false;
                 }
                 list[i].id = i;
             }
