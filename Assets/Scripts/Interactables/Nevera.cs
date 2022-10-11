@@ -18,7 +18,11 @@ public class Nevera : GeneralActions
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().dialogueManager.SetDialogue("Ducha");
+        GameManager.GetManager().dialogueManager.SetDialogue("Ducha", delegate 
+        {
+            GameManager.GetManager().blockController.Unlock("Ducha");
+
+        });
     }
 
     public override void ExitAction()

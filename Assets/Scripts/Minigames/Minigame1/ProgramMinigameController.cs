@@ -74,6 +74,8 @@ public class ProgramMinigameController : MonoBehaviour, ITask
 
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().computer.ComputerON();
+
+        GameManager.GetManager().programmed = true;
     }
 
     public void QuitMiniGame()

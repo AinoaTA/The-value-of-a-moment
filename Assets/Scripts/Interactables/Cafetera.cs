@@ -16,6 +16,8 @@ public class Cafetera : Interactables
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 // GameManager.GetManager().canvasController.UnLock();
+                GameManager.GetManager().dialogueManager.SetDialogue("ITomarCafe");
+                
                 break;
         }
     }

@@ -21,6 +21,8 @@ public class Trash : GeneralActions
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes PickUp", transform.position);
         grabbing = true;
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
+        GameManager.GetManager().dialogueManager.SetDialogue("IRecogerHabitacion");
+    
     }
 
     private void Update()

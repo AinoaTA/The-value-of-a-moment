@@ -107,6 +107,7 @@ public class BucketController : Interactables, ITask, IDependencies
                 {
                     GameManager.GetManager().trashInventory.RemoveTrash();
                 }
+                GameManager.GetManager().dialogueManager.SetDialogue("IRopaSucia");
                 GameManager.GetManager().interactableManager.LookingAnInteractable(null);
                 break;
             default:

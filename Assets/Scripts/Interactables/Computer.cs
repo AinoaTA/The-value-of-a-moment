@@ -12,6 +12,7 @@ public class Computer : Interactables
     [SerializeField] GameObject programMinigame;
     bool anyButtonScreenActive;
 
+
     private void Start()
     {
         GameManager.GetManager().computer = this;
@@ -27,6 +28,8 @@ public class Computer : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
+                GameManager.GetManager().dialogueManager.SetDialogue("IOrdenador");
+               
                 break;
         }
     }
@@ -91,6 +94,8 @@ public class Computer : Interactables
     {
         if (anyButtonScreenActive)
             return;
+        GameManager.GetManager().dialogueManager.SetDialogue("PCProgramar");
+        
         programMinigame.SetActive(true);
         anyButtonScreenActive = true;
         programScreen.SetActive(true);
@@ -103,6 +108,7 @@ public class Computer : Interactables
     {
         if (anyButtonScreenActive)
             return;
+        GameManager.GetManager().dialogueManager.SetDialogue("PCMirarMail");
         anyButtonScreenActive = true;
         GameManager.GetManager().emailController.ShowEmail(true);
         programScreen.SetActive(false);

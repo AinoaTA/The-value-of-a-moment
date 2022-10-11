@@ -70,9 +70,9 @@ public class BlockController : MonoBehaviour
         }
     }
 
-    public void Unlock(string name) 
+    public void Unlock(string name)
     {
-        
+
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -97,11 +97,16 @@ public class BlockController : MonoBehaviour
             default:
                 break;
         }
+    }
 
+    public void UnlockAll()
+    {
         for (int i = 0; i < dayOneInteractable.Length; i++)
         {
-
+            for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+            {
+                dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+            }
         }
-
     }
 }

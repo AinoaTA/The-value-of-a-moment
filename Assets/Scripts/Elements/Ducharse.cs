@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Crying : Interactables
+public class Ducharse : Interactables
 {
     public override void ExtraInteraction()
     {
-        print("Crying");
+        print("Uff ducha");
     }
 
     public override void EndExtraInteraction()
     {
-        print("Exit Crying");
+        print("ya no mas ducha");
     }
 }

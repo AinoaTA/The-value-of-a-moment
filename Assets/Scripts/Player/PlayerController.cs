@@ -110,4 +110,15 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GameManager.GetManager().StartThirdPersonCamera();
     }
+
+    public void SetPlayerPos(Vector3 pos)
+    {
+        playerAnimation.transform.position = pos;
+    }
+
+    public void ResetPlayerPos()
+    {
+        playerAnimation.transform.position = character.transform.position;
+
+    }
 }
