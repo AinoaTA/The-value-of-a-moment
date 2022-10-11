@@ -195,6 +195,8 @@ public class Window : Interactables, ITask
             WindowDone();
         else if (!interactDone)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
+        else if (interactDone && isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
     #endregion
     private void WindowDone()
@@ -207,11 +209,17 @@ public class Window : Interactables, ITask
         gameInitialized = false;
         //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
+        if (isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+        else
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
+
         isOpen = !isOpen;
         interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
+
         interactDone = true;
         GameManager.GetManager().dayController.TaskDone();
-        GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+
     }
     IEnumerator Delay()
     {
@@ -220,8 +228,7 @@ public class Window : Interactables, ITask
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().blockController.Unlock("Nevera");
 
-        GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
-        GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
+        //GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
 
     private float GetMouseYaxisAsWorldPoint()
