@@ -13,6 +13,7 @@ public class BlockController : MonoBehaviour
     [SerializeField]
     private List<ILock> locks = new List<ILock>();
 
+    [SerializeField] bool unlockAll;
     [System.Serializable]
     public struct BlockInteractables
     {
@@ -29,7 +30,7 @@ public class BlockController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().blockController = this;
-
+        if (unlockAll) return;
         stop = true;
         //super guarro I know.
         List<MonoBehaviour> a = FindObjectsOfType<MonoBehaviour>().ToList();
