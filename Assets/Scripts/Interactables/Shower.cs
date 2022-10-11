@@ -16,6 +16,8 @@ public class Shower : GeneralActions
         //dialogues xdxd
     }
 
+    bool duchado;
+
     public Animator canvas;
     public TMP_Text[] texts;
     public GameObject showerPos;
@@ -51,8 +53,22 @@ public class Shower : GeneralActions
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().playerController.ResetPlayerPos();
         base.ExitAction();
-    }
 
+        string ducha;
+        if (!duchado) ducha = "DuchaNo";
+        else ducha = "DuchaSi";
+        GameManager.GetManager().dialogueManager.SetDialogue(ducha, delegate
+        {
+            StartCoroutine(Delay());
+        });
+    }
+    IEnumerator Delay() 
+    {
+        GameManager.GetManager().dayController.NextStateDay();
+        GameManager.GetManager().blockController.UnlockAll();
+        yield return new WaitForSeconds(1);
+        GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda");
+    }
     private void Start()
     {
         canvas.SetBool("Showing", true);
@@ -70,6 +86,7 @@ public class Shower : GeneralActions
 
     public override void DoInteraction(int id)
     {
+        if (id == 0) duchado = true;
         StartExtraInteraction(id);
     }
 }

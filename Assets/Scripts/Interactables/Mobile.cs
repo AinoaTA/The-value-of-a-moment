@@ -13,11 +13,14 @@ public class Mobile : GeneralActions
     {
         col = GetComponent<BoxCollider>();
         GameManager.GetManager().playerInputs._Mobile += OpenMobile;
+
+        GameManager.GetManager().playerInputs._Clics += Click;
     }
 
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
+        GameManager.GetManager().playerInputs._Clics -= Click;
     }
     public override void EnterAction()
     {
@@ -72,10 +75,23 @@ public class Mobile : GeneralActions
         mobileCanvas.blocksRaycasts = val;
         mobileCanvas.interactable = val;
     }
-
+    int clics;
     private void Update()
     {
-        if (active)
+        if (active && !GameManager.GetManager().programmed)
+        {
             cursor.transform.position = Input.mousePosition;
+        }
+    }
+
+    public void Click()
+    {
+        if (active)
+        {
+            clics++;
+            print(clics);
+            if (clics >= 5)
+                GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar");
+        }
     }
 }

@@ -40,6 +40,8 @@ public class Drum : Interactables
         col.enabled = true;
         StopPlayingDrum();
         GameManager.GetManager().StartThirdPersonCamera();
+        GameManager.GetManager().dialogueManager.SetDialogue("IBateria");
+        
         base.ExitInteraction();
     }
 

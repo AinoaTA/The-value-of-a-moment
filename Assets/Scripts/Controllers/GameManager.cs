@@ -34,6 +34,10 @@ public class GameManager : MonoBehaviour
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }
     #endregion
+
+    public bool programmed;
+
+
     private void OnEnable()
     {
         if (gameManager == null)

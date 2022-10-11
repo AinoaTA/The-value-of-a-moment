@@ -14,7 +14,7 @@ public class CanvasController : MonoBehaviour
     public void ComputerScreenOut()
     {
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().canvasController.Lock();
+        GameManager.GetManager().canvasController.Lock(false, true);
     }
     public void ComputerScreenIn()
     {

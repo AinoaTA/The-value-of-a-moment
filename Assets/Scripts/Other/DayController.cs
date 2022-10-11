@@ -70,4 +70,10 @@ public class DayController : MonoBehaviour
     {
         return currentDay;
     }
+
+    public void NextStateDay()
+    {
+        dayState++;
+        anims.SetInteger("time", (int)dayState);
+    }
 }

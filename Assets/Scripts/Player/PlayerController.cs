@@ -111,12 +111,12 @@ public class PlayerController : MonoBehaviour
         GameManager.GetManager().StartThirdPersonCamera();
     }
 
-    public void SetPlayerPos(Vector3 pos) 
+    public void SetPlayerPos(Vector3 pos)
     {
         playerAnimation.transform.position = pos;
     }
 
-    public void ResetPlayerPos() 
+    public void ResetPlayerPos()
     {
         playerAnimation.transform.position = character.transform.position;
 
