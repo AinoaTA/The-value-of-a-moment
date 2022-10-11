@@ -23,8 +23,6 @@ public class DrumInstrument : MonoBehaviour
         normalMaterial = mesh.material;
     }
 
-
-
     public void Enable(bool enabled)
     {
         instrumentCollider.enabled = enabled;

@@ -132,6 +132,7 @@ public class Drum : Interactables
             foreach (DrumInstrument instrument in instruments)
                 instrument.Restore();
             pointedInstrument.SetWrong();
+            GameManager.GetManager().dialogueManager.SetDialogue("InstrumentoFalla", canRepeat: true);
             StartCoroutine(FailPerformance());
             return;
         }
@@ -140,6 +141,7 @@ public class Drum : Interactables
         if (rhythmPosition >= rhythm[day].instrumentsOrder.Length)
         {
             StopPlayingDrum();
+            GameManager.GetManager().dialogueManager.SetDialogue("InstrumentoAcierta", canRepeat: true);
             StartCoroutine(PerformedSuccessfully());
         }
 

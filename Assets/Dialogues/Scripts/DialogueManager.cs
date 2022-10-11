@@ -23,9 +23,11 @@ public class DialogueManager : MonoBehaviour
 
     Action saveAct;
     bool canRepeat;
+    string previusDialogue;
     public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
     {
-
+        if (dialogue == previusDialogue) return;
+        previusDialogue = dialogue;
         if (nextLineCoroutine != null) StopDialogue();
         eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
@@ -99,6 +101,7 @@ public class DialogueManager : MonoBehaviour
             saveAct?.Invoke();
         subtitle.text = "";
         subtitle.enabled = false;
+        previusDialogue = "";
     }
 
     void StopDialogue() 
@@ -106,5 +109,6 @@ public class DialogueManager : MonoBehaviour
         StopCoroutine(nextLineCoroutine);
         subtitle.text = "";
         subtitle.enabled = false;
+        previusDialogue = "";
     }
 }
