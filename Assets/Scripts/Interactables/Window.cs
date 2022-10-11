@@ -203,7 +203,6 @@ public class Window : Interactables, ITask
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
-        ////streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
         gameInitialized = false;
@@ -227,8 +226,6 @@ public class Window : Interactables, ITask
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().blockController.Unlock("Nevera");
-
-        //GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
 
     private float GetMouseYaxisAsWorldPoint()
