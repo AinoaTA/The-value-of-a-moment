@@ -12,11 +12,6 @@ public class FMODMusic : MonoBehaviour
         Music.release();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void Mood (float MoodLevel)
     {
         Music.setParameterByName("Mood", MoodLevel);

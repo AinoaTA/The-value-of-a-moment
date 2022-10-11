@@ -15,9 +15,6 @@ public class Alarm : MonoBehaviour
 
     public FMODMusic MusicGameplay;
 
-    //public delegate void DelegateSFX();
-    //public static DelegateSFX m_DelegateSFX;
-
     private static FMOD.Studio.EventInstance alarmsfx;
 
     private void Start()
@@ -148,7 +145,6 @@ public class Alarm : MonoBehaviour
 
         GameManager.GetManager().gameStateController.ChangeGameState(0);
         GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
-
     }
 
     public bool GetIsActive()
