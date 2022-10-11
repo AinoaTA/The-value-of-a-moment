@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Drum : Interactables
 {
-    public DrumRhythm rhythm;
+    public DrumRhythm[] rhythm;
     public List<DrumInstrument> instruments;
     public float delayStart = 1f;
     public float delayNextInstrument = 0.5f;
@@ -16,6 +16,8 @@ public class Drum : Interactables
     DrumInstrument pointedInstrument;
     public BoxCollider col;
 
+    private int day;
+    
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -48,6 +50,8 @@ public class Drum : Interactables
 
     IEnumerator StartActivity()
     {
+        day = (int) GameManager.GetManager().dayController.GetDayNumber();
+        
         yield return new WaitForSeconds(delayStart);
         rhythmPosition = 0;
         ShowNextInstrument();
@@ -55,19 +59,19 @@ public class Drum : Interactables
 
     void ShowNextInstrument()
     {
-        if (rhythmPosition >= rhythm.instrumentsOrder.Length) {
+        if (rhythmPosition >= rhythm[day].instrumentsOrder.Length) {
             StartPlayerPractice();
             return;
         }
 
-        instruments[rhythm.instrumentsOrder[rhythmPosition]].SetRight();
+        instruments[rhythm[day].instrumentsOrder[rhythmPosition]].SetRight();
         StartCoroutine(WaitNextInstrument());
     }
     
     IEnumerator WaitNextInstrument()
     {
         yield return new WaitForSeconds(delayNextInstrument);
-        instruments[rhythm.instrumentsOrder[rhythmPosition]].Restore();
+        instruments[rhythm[day].instrumentsOrder[rhythmPosition]].Restore();
         rhythmPosition++;
         ShowNextInstrument();
     }
@@ -120,7 +124,7 @@ public class Drum : Interactables
 
     void PlayInstrument()
     {
-        if (pointedInstrument != instruments[rhythm.instrumentsOrder[rhythmPosition]])
+        if (pointedInstrument != instruments[rhythm[day].instrumentsOrder[rhythmPosition]])
         {
             StopPlayingDrum();
             foreach (DrumInstrument instrument in instruments)
@@ -131,7 +135,7 @@ public class Drum : Interactables
         }
 
         rhythmPosition++;
-        if (rhythmPosition >= rhythm.instrumentsOrder.Length)
+        if (rhythmPosition >= rhythm[day].instrumentsOrder.Length)
         {
             StopPlayingDrum();
             StartCoroutine(PerformedSuccessfully());
