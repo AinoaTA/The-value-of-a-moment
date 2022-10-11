@@ -13,10 +13,10 @@ public class Window : Interactables, ITask
     private float zWorldCoord;
     private float minHeight;
     private readonly float maxHeight = 3.5f;
-    private bool isOpen = false;
+    private bool isOpen = false, isClosed = false;
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
-    private readonly string[] stateOptions = { "[E] Abrir", "[E] Cerrar" };
+    private readonly string[] stateOptions = { "[E] Cerrar", "[E] Abrir" };
 
     [SerializeField] private float distance;
 
@@ -175,7 +175,10 @@ public class Window : Interactables, ITask
 
 
             if (displacement < minHeight)
+            {
                 height = minHeight;
+                isClosed = true;
+            }
 
             else if (displacement < maxHeight)
                 height = displacement;
@@ -183,7 +186,7 @@ public class Window : Interactables, ITask
             else if (displacement > maxHeight)
             {
                 height = maxHeight;
-                interactDone = isOpen = true;
+                isOpen = true;
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -191,9 +194,9 @@ public class Window : Interactables, ITask
 
     private void OnMouseUp()
     {
-        if (interactDone && gameInitialized)
+        if ((isOpen || isClosed) && gameInitialized)
             WindowDone();
-        else if (!interactDone)
+        else if (!isOpen)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
     }
     #endregion
@@ -207,9 +210,9 @@ public class Window : Interactables, ITask
         gameInitialized = false;
         //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
-        isOpen = !isOpen;
         interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
-        interactDone = true;
+        isOpen = false;
+        isClosed = false;
         GameManager.GetManager().dayController.TaskDone();
         GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
     }
