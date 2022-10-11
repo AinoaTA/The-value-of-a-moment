@@ -3190,6 +3190,7 @@ GameObject:
   - component: {fileID: 208406933}
   - component: {fileID: 208406932}
   - component: {fileID: 208406931}
+  - component: {fileID: 208406934}
   m_Layer: 0
   m_Name: Limpiar
   m_TagString: Untagged
@@ -3208,8 +3209,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.9212646, y: 1.028276, z: 0.8784206}
-  m_Center: {x: -1.8696804, y: 0.014138043, z: -0.060789943}
+  m_Size: {x: 1.3890276, y: 1.028276, z: 0.8784206}
+  m_Center: {x: -1.1035619, y: 0.014138043, z: -0.060789943}
 --- !u!65 &208406932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3221,8 +3222,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.86141586, y: 1.028276, z: 2.016203}
-  m_Center: {x: 0.06929207, y: 0.014138043, z: 0.50810134}
+  m_Size: {x: 0.86141586, y: 1.028276, z: 2.079411}
+  m_Center: {x: 0.06929207, y: 0.014138043, z: 0.5397047}
 --- !u!4 &208406933
 Transform:
   m_ObjectHideFlags: 0
@@ -3238,6 +3239,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &208406934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208406930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c604f14bff1c45e4eb44f4247a058fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blocked: 0
+  OptionsCanvas: {fileID: 1405766713}
+  anim: {fileID: 1405766712}
+  nameAction: Limpiar
 --- !u!1 &210434595
 GameObject:
   m_ObjectHideFlags: 0
@@ -17613,6 +17630,16 @@ PrefabInstance:
 --- !u!4 &1405766711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 1405766710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1405766712 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8736859282042616485, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 1405766710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1405766713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309594586995454779, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 1405766710}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1406765717
@@ -34201,6 +34228,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.96
       objectReference: {fileID: 0}
+    - target: {fileID: 1087488820918442651, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Name
+      value: Door - Aida
+      objectReference: {fileID: 0}
     - target: {fileID: 1257596517960552589, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -34948,6 +34979,10 @@ PrefabInstance:
     - target: {fileID: 8425874093733289217, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_text
       value: '[E]  Encender'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449230323233553218, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: nameHabDialogue
+      value: IPuertaAida
       objectReference: {fileID: 0}
     - target: {fileID: 8466241550182255695, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_IsActive
