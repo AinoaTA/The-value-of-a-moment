@@ -1,19 +1,22 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Window : Interactables, ITask
 {
     [SerializeField] private GameObject glass;
     [SerializeField] private GameObject tutorial;
+    [SerializeField] private TextMeshProUGUI interactableText;
     private GameObject minigameCanvas = null;
     private Vector3 initPos;
     private float mOffset;
     private float zWorldCoord;
     private float minHeight;
-    private float maxHeight = 3.5f;
+    private readonly float maxHeight = 3.5f;
     private bool isOpen = false;
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
+    private readonly string[] stateOptions = { "[E] Abrir", "[E] Cerrar" };
 
     [SerializeField] private float distance;
 
@@ -78,15 +81,12 @@ public class Window : Interactables, ITask
         switch (options)
         {
             case 1:
-                if (!isOpen)
-                {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
-                    GameManager.GetManager().gameStateController.ChangeGameState(2);
-                    gameInitialized = true;
-                    // Inicia minijuego
-                    GameManager.GetManager().cameraController.StartInteractCam(4);
-                    GameManager.GetManager().canvasController.Lock();
-                }
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
+                GameManager.GetManager().gameStateController.ChangeGameState(2);
+                gameInitialized = true;
+                // Inicia minijuego
+                GameManager.GetManager().cameraController.StartInteractCam(4);
+                GameManager.GetManager().canvasController.Lock();
                 break;
             case 2:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
@@ -137,7 +137,6 @@ public class Window : Interactables, ITask
     private void Start()
     {
         streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Amb/Street");
-
         //streetAmb.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SetTask();
         minigameCanvas = tutorial;
@@ -167,7 +166,7 @@ public class Window : Interactables, ITask
 
     void OnMouseDrag()
     {
-        if (gameInitialized && !isOpen)
+        if (gameInitialized)
         {
             if (tutorialShowed) tutorial.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
@@ -202,14 +201,14 @@ public class Window : Interactables, ITask
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
-        //streetAmb.release();
+        ////streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
-        OptionComplete();
+        gameInitialized = false;
+        //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
-        GameManager.GetManager().StartThirdPersonCamera();
-        minigameCanvas.SetActive(false);
-        isOpen = true;
+        isOpen = !isOpen;
+        interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
         interactDone = true;
         GameManager.GetManager().dayController.TaskDone();
         GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
