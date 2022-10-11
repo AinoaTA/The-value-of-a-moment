@@ -18,6 +18,7 @@ public class Shower : GeneralActions
 
     public Animator canvas;
     public TMP_Text[] texts;
+    public GameObject showerPos;
 
     void StartExtraInteraction(int id)
     {
@@ -34,6 +35,8 @@ public class Shower : GeneralActions
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
+        GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
+
 
         StartCoroutine(ShowOtherOptions());
     }
@@ -46,6 +49,7 @@ public class Shower : GeneralActions
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
+        GameManager.GetManager().playerController.ResetPlayerPos();
         base.ExitAction();
     }
 
@@ -66,7 +70,6 @@ public class Shower : GeneralActions
 
     public override void DoInteraction(int id)
     {
-        Debug.Log("Parece funcionar....");
         StartExtraInteraction(id);
     }
 }

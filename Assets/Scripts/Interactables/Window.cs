@@ -220,9 +220,6 @@ public class Window : Interactables, ITask
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().blockController.Unlock("Nevera");
-        GameManager.GetManager().blockController.Unlock("Bed");
-        GameManager.GetManager().blockController.Unlock("Ropas");
-        GameManager.GetManager().blockController.Unlock("Cesto Ropa");
     }
 
     private float GetMouseYaxisAsWorldPoint()

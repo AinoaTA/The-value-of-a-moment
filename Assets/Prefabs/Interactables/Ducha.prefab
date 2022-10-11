@@ -234,6 +234,36 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &1430134891388657901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795012359753751345}
+  m_Layer: 6
+  m_Name: showerPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &795012359753751345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430134891388657901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.23, y: -0.042, z: -0.093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8452776917424477059}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2118709142672494072
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +373,7 @@ Transform:
   - {fileID: 6051666926265061530}
   - {fileID: 6577791766851938335}
   - {fileID: 6806889739587165197}
+  - {fileID: 795012359753751345}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -371,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc7ed09d55d0a74bbd4cb454bf92441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   OptionsCanvas: {fileID: 6973428918176161850}
   anim: {fileID: 852740312249510308}
   nameAction: Ducha
@@ -382,6 +414,7 @@ MonoBehaviour:
   canvas: {fileID: 8867355820640364693}
   texts:
   - {fileID: 3232459172215128087}
+  showerPos: {fileID: 1430134891388657901}
 --- !u!1 &8398950685504523787
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_text
-      value: E  Sentarse
+      value: '[E]  Entrar'
       objectReference: {fileID: 0}
     - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -744,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877056741370716140, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
@@ -753,13 +786,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1309594586995454779, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 8280437401343546113}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6051666926265061530 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
-  m_PrefabInstance: {fileID: 8280437401343546113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &852740312249510308 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8736859282042616485, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+  m_PrefabInstance: {fileID: 8280437401343546113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6051666926265061530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2382917608185955227, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
   m_PrefabInstance: {fileID: 8280437401343546113}
   m_PrefabAsset: {fileID: 0}
