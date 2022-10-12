@@ -37,4 +37,5 @@ public class Michi : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
+    
 }
