@@ -18,6 +18,7 @@ public class Michi : Interactables
         switch (options)
         {
             case 1:
+                GameManager.GetManager().dialogueManager.SetDialogue("IMino");
                 FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
