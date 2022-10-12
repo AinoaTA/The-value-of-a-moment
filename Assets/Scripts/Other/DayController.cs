@@ -10,7 +10,7 @@ public class DayController : MonoBehaviour
     [SerializeField] private int counter;
     [SerializeField] int maxTasks = 5;
     private Animator anims;
-    [SerializeField]private int counterTaskDay;
+    [SerializeField] private int counterTaskDay;
 
     private void Awake()
     {
