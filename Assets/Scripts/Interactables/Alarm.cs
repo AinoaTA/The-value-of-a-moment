@@ -108,9 +108,7 @@ public class Alarm : MonoBehaviour
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                string name;
-                if (counter == 0) name = "GetUp1";
-                else name = "GetUp2";
+                string name = counter == 0 ? "GetUp1" : "GetUp2";
 
                 GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
                 {
@@ -134,6 +132,11 @@ public class Alarm : MonoBehaviour
                 });
 
                 break;
+
+            case DayController.Day.fourth:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
@@ -199,11 +202,6 @@ public class Alarm : MonoBehaviour
 
                 });
                 break;
-
-        }
-
-        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
-        {
 
         }
         counter++;
