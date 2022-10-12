@@ -178,7 +178,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104927512301773747}
-  m_LocalRotation: {x: 0.5596145, y: 0.041161373, z: 0.08464828, w: 0.82339066}
+  m_LocalRotation: {x: 0.5596145, y: 0.04116137, z: 0.08464828, w: 0.82339054}
   m_LocalPosition: {x: 8.1490726e-12, y: 0.00017101377, z: -1.1874363e-10}
   m_LocalScale: {x: 0.99999964, y: 0.9999999, z: 0.9999998}
   m_Children:
@@ -290,8 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a75d674dd25d2f44a6a347e1b7f29a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cuenco: {fileID: 0}
   newPos: {x: 0, y: 0, z: 0}
-  walkSpeed: 0.5
+  walkSpeed: 0.17
 --- !u!65 &844207746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -303,8 +304,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1483722, y: 0.48364806, z: 0.34478062}
-  m_Center: {x: 0.0015107878, y: 0.256738, z: -0.022480382}
+  m_Size: {x: 0.18885396, y: 0.48364806, z: 0.3957986}
+  m_Center: {x: 0.0017221385, y: 0.256738, z: 0.003028657}
 --- !u!195 &5501048835907688473
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -355,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99a054bee719cc4b93c34f37f2c0e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   nameInteractable: Michi
   totalOptions: 1
   interactDone: 0
@@ -363,7 +365,9 @@ MonoBehaviour:
   m_MinAutoControl: 0
   OptionsCanvas: {fileID: 2357410919779952289}
   anim: {fileID: 5450524130061741887}
+  texts: []
   showing: 0
+  actionEnter: 0
 --- !u!1 &1921977085086819228
 GameObject:
   m_ObjectHideFlags: 0
