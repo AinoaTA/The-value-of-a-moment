@@ -25,8 +25,6 @@ public class Cuenco : Interactables
                     hasPienso = false;
                     InteractableBlocked = true;
                     michiController.FeedMichi();
-                    GameManager.GetManager().gameStateController.ChangeGameState(2);
-                    GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 }
                 break;
         }
