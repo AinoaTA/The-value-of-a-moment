@@ -77,7 +77,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         GameManager.GetManager().computer.ComputerON();
         GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
         {
-            GameManager.GetManager().dayController.NextStateDay();
+            GameManager.GetManager().dayController.ChangeDay(3);
         });
     }
 

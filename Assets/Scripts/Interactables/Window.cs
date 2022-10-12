@@ -224,10 +224,11 @@ public class Window : Interactables, ITask
     }
     IEnumerator Delay()
     {
+        GameManager.GetManager().blockController.LockSpecific("Ventanas");
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().blockController.LockSpecific("Ventanas");
+
         GameManager.GetManager().blockController.Unlock("Nevera");
     }
 

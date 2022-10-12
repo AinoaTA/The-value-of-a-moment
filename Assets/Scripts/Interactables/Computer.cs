@@ -78,7 +78,7 @@ public class Computer : Interactables
 
         if (!GameManager.GetManager().programmed && (int)GameManager.GetManager().dayController.dayState > 1)
         {
-            GameManager.GetManager().dialogueManager.SetDialogue("Atardecer", delegate
+            GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
             {
                 GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.Noche);
                 GameManager.GetManager().blockController.Unlock("Bed");

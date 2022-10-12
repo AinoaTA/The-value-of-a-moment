@@ -249,9 +249,10 @@ public class Bed : Interactables, ITask
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
+                print("Hola");
                 GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
                 {
-                    wait = true;
+                    wait = false;
                 });
 
                 break;
@@ -265,7 +266,6 @@ public class Bed : Interactables, ITask
                 break;
         }
         yield return new WaitWhile(() => wait);
-
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();
         GameManager.GetManager().calendarController.GlobalReset();
