@@ -39,6 +39,8 @@ public class Shower : GeneralActions
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
 
+
+
         StartCoroutine(ShowOtherOptions());
     }
 
@@ -56,6 +58,7 @@ public class Shower : GeneralActions
         string ducha;
         if (!duchado) ducha = "DuchaNo";
         else ducha = "DuchaSi";
+
         GameManager.GetManager().dialogueManager.SetDialogue(ducha, delegate
         {
             StartCoroutine(Delay());
@@ -63,10 +66,28 @@ public class Shower : GeneralActions
     }
     IEnumerator Delay() 
     {
-        GameManager.GetManager().dayController.NextStateDay();
-        GameManager.GetManager().blockController.UnlockAll();
-        yield return new WaitForSeconds(1);
-        GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda");
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                yield return new WaitForSeconds(1);
+                GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", delegate
+                {
+                    GameManager.GetManager().dayController.NextStateDay();
+                    GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
+                });
+
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+        
+       
     }
     private void Start()
     {

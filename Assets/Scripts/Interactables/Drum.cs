@@ -160,6 +160,8 @@ public class Drum : Interactables
 
     IEnumerator PerformedSuccessfully()
     {
+        interactDone = true;
+        GameManager.GetManager().dayController.TaskDone();
         yield return new WaitForSeconds(delayFinish);
         RestoreAllInstruments();
         GameManager.GetManager().cameraController.StartInteractCam(finalPlayCameraName);

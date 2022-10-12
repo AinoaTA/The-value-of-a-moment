@@ -23,6 +23,7 @@ public class Limpiar : GeneralActions
                 break;
         }
         InteractableBlocked = true;
+        GameManager.GetManager().dayController.TaskDone();
         base.EnterAction();
     }
 

@@ -12,16 +12,22 @@ public class Cascos : GeneralActions
     {
         textDisplay.text = "[E] Encender";
     }
-
+    int one;
     public override void EnterAction()
     {
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(this);
+        if (one == 0)
+        {
+            one++;
+            GameManager.GetManager().dayController.TaskDone();
+        }
         TurnMusic();
         ChangeText();
     }
 
     public override void ResetObject()
     {
+        one = 0;
         base.ResetObject();
     }
 

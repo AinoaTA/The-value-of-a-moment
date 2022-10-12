@@ -43,10 +43,11 @@ public class Email : MonoBehaviour
             stringsParagraphs.Add(paragraphs[i].text.ToString());
 
     }
+    public int one;
     public void OpenEmail()
     {
         if (blockWarning || day != GameManager.GetManager().dayController.GetDayNumber()) return;
-        
+
         //GameManager.GetManager().emailController.mail = this;
 
         GameManager.GetManager().emailController.CloseOthers(this);

@@ -7,7 +7,7 @@ public class DayController : MonoBehaviour
     [SerializeField] DayTime dayState;
     [SerializeField] public Day currentDay;
     private int counter;
-
+    [SerializeField] int maxTasks = 5;
     private Animator anims;
     private int counterTaskDay = 0;
 
@@ -20,19 +20,40 @@ public class DayController : MonoBehaviour
     private void Start()
     {
         counter = (int)dayState;
-        ChangeDay(dayState);
+        ChangeDay(0);
     }
-    public void ChangeDay(DayTime newState)
+    public void ChangeDay(int newState)
     {
+        print("ME ESTAS JODIENDO");
         anims.SetInteger("time", (int)newState);
-        dayState = newState;
+        dayState = (DayTime)newState;
+
+        switch (dayState)
+        {
+            case DayTime.Manana:
+                break;
+            case DayTime.MedioDia:
+                break;
+            case DayTime.Tarde:
+                GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar", 
+                    delegate 
+                    {
+                        GameManager.GetManager().blockController.UnlockAll(DayTime.Tarde);
+                    });
+                break;
+            case DayTime.Noche:
+                GameManager.GetManager().dialogueManager.SetDialogue("Anochece");
+                break;
+            default:
+                break;
+        }
     }
 
     public void NewDay()
     {
         counter = 0;
         counterTaskDay = 0;
-        ChangeDay((DayTime)counter);
+        ChangeDay(counter);
         //next day
         currentDay++;
         switch (currentDay)
@@ -54,10 +75,14 @@ public class DayController : MonoBehaviour
     public void TaskDone()
     {
         counterTaskDay++;
-        if (counterTaskDay % 5 == 0)
+        print(counterTaskDay + " nuevo stado"  + (counterTaskDay % 5 == 0));
+        if (counterTaskDay >= maxTasks)
         {
-            counter = counter < 4 ? counter + 1 : 0;
-            ChangeDay((DayTime)counter);
+            if (counter < 4) counter++;
+            else counter = 0;
+
+            ChangeDay(counter);
+
         }
     }
 
@@ -73,7 +98,7 @@ public class DayController : MonoBehaviour
 
     public void NextStateDay()
     {
-        dayState++;
-        anims.SetInteger("time", (int)dayState);
+        currentDay++;
+        ChangeDay((int)currentDay);
     }
 }

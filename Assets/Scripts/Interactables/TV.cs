@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TV : Interactables
@@ -43,7 +41,7 @@ public class TV : Interactables
                     default:
                         break;
                 }
-
+                InteractableBlocked = true;
                 GameManager.GetManager().dayController.TaskDone();
                 break;
         }

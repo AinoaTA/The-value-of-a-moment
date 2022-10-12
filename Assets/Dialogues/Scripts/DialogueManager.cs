@@ -68,12 +68,12 @@ public class DialogueManager : MonoBehaviour
             eventAudio.start();
 
             float time = (float)lenght / 1000;
-            print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
+        //    print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
         catch (System.Exception e)
         {
-            print(e);
+           //print(e);
         }
 
         if (!canRepeat)

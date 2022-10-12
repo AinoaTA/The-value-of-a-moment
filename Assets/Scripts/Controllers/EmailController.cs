@@ -9,9 +9,14 @@ public class EmailController : MonoBehaviour
     {
         GameManager.GetManager().emailController = this;
     }
-
+    int one;
     public void ShowEmail(bool v)
     {
+        if (one == 0)
+        {
+            one++;
+            GameManager.GetManager().dayController.TaskDone();
+        }
         emailCanvas.SetActive(v);
         GameManager.GetManager().computer.ComputerON();
     }
@@ -25,6 +30,11 @@ public class EmailController : MonoBehaviour
             if (mail != mails[i])
                 mails[i].Close();
         }
+    }
+
+    public void ResetDay()
+    {
+        one = 0;
     }
 
     public void Recieve() { mail.MailRecieved(); }

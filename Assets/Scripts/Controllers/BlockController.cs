@@ -46,6 +46,8 @@ public class BlockController : MonoBehaviour
     {
         yield return new WaitWhile(() => stop);
         CheckUnlockInteractable(dayOneInteractable);
+
+        //UnlockAll();
     }
 
     public void CheckUnlockInteractable(BlockInteractables[] list)
@@ -102,6 +104,7 @@ public class BlockController : MonoBehaviour
         {
             for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
             {
+                print("name: "+ dayOneInteractable[i]+" name obj: "+dayOneInteractable[i].locks[e]);
                 dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
             }
         }
