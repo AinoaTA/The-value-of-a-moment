@@ -21,6 +21,16 @@ public class DialogueManager : MonoBehaviour
         GameManager.GetManager().dialogueManager = this;
     }
 
+    public void Start()
+    {
+        for (int i = 0; i < dialogues.dialogues.Count; i++)
+        {
+            for (int e = 0; e < dialogues.dialogues[i].lines.Count; e++)
+            {
+                dialogues.dialogues[i].lines[e].played=false;
+            }
+        }
+    }
     Action saveAct;
     bool canRepeat;
     string previusDialogue;

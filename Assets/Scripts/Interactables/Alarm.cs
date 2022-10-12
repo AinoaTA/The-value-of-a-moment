@@ -22,7 +22,7 @@ public class Alarm : MonoBehaviour
     {
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
-        
+
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
@@ -69,7 +69,7 @@ public class Alarm : MonoBehaviour
         {
             case DayController.Day.one:
                 AlarmAndMood();
-                if(counter>0)
+                if (counter > 0)
                     Show();
                 else
                     GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
@@ -82,13 +82,19 @@ public class Alarm : MonoBehaviour
                 });
                 break;
             case DayController.Day.three:
+
+                GameManager.GetManager().dialogueManager.SetDialogue("D3Start", delegate
+                {
+                    AlarmAndMood();
+                    Show();
+                });
                 break;
             case DayController.Day.fourth:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
+
     }
 
     private void AlarmAndMood()
@@ -117,7 +123,17 @@ public class Alarm : MonoBehaviour
                     StartCoroutine(Delay());
                 });
                 break;
-                
+
+            case DayController.Day.three:
+                string names;
+                if (counter == 0) names = "D3Start_Op1";
+                else names = "D3Start_Op2a";
+                GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
+                {
+                    StartCoroutine(Delay());
+                });
+
+                break;
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
@@ -135,7 +151,7 @@ public class Alarm : MonoBehaviour
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate 
+        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
             GameManager.GetManager().blockController.Unlock("Ventanas");
         });
@@ -167,14 +183,28 @@ public class Alarm : MonoBehaviour
                     StartAlarm();
                 break;
             case DayController.Day.two:
-                
+
                 break;
-                
+            case DayController.Day.three:
+                string names = "D3Start_Op2";
+                if (counter == 0) names = "D3Start_Op2b";
+                else names = "Alarm3";
+
+                GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
+                {
+                    if (names != "Alarm3")
+                        StartAlarm();
+                    else
+                        print("BAD EEEEEEEEEEEEEND");
+
+                });
+                break;
+
         }
-        
+
         if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
         {
-            
+
         }
         counter++;
 
