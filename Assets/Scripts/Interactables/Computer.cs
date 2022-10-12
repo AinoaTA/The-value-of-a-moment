@@ -4,7 +4,7 @@ public class Computer : Interactables
 {
     [SerializeField]
     GameObject computerScreen, programScreen,
-        calendarMaterialScreen, emailScreenMaterial;
+        calendarMaterialScreen, emailScreenMaterial, email;
 
 
     [SerializeField] Transform computerPos;
@@ -61,6 +61,7 @@ public class Computer : Interactables
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
+        email.SetActive(true);
         emailScreenMaterial.SetActive(false);
         GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
@@ -75,7 +76,7 @@ public class Computer : Interactables
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
         anyButtonScreenActive = false;
-
+        email.SetActive(false);
         if (!GameManager.GetManager().programmed && (int)GameManager.GetManager().dayController.dayState > 1)
         {
             GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate

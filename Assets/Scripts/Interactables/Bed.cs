@@ -165,7 +165,8 @@ public class Bed : Interactables, ITask
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                GameManager.GetManager().blockController.LockSpecific("Bed");
+                if ((int)GameManager.GetManager().dayController.dayState == 1)
+                    GameManager.GetManager().blockController.LockSpecific("Bed");
                 break;
             case DayController.Day.two:
                 break;
@@ -245,7 +246,7 @@ public class Bed : Interactables, ITask
     {
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        bool wait=true;
+        bool wait = true;
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
