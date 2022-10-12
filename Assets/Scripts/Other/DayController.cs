@@ -7,10 +7,10 @@ public class DayController : MonoBehaviour
     public enum Day { one, two, three, fourth }
     public DayTime dayState;
     public Day currentDay;
-    private int counter;
+    [SerializeField] private int counter;
     [SerializeField] int maxTasks = 5;
     private Animator anims;
-    private int counterTaskDay = 0;
+    [SerializeField]private int counterTaskDay;
 
     private void Awake()
     {
@@ -20,15 +20,16 @@ public class DayController : MonoBehaviour
 
     private void Start()
     {
-        counter = (int)dayState;
+        counter = 0;
+        counterTaskDay = 0;
         ChangeDay(0);
     }
     public void ChangeDay(int newState)
     {
         print("ME ESTAS JODIENDO");
         anims.SetInteger("time", (int)newState);
-        dayState = (DayTime)newState;
-        counter = 0;
+        dayState= (DayTime)newState;
+        counterTaskDay = 0;
         switch (dayState)
         {
             case DayTime.Manana:
@@ -60,6 +61,7 @@ public class DayController : MonoBehaviour
         counter = 0;
         counterTaskDay = 0;
         ChangeDay(counter);
+        dayState = DayTime.Manana;
         //next day
         currentDay++;
         switch (currentDay)
@@ -91,7 +93,6 @@ public class DayController : MonoBehaviour
             else counter = 0;
 
             ChangeDay(counter);
-
         }
     }
 
@@ -103,11 +104,5 @@ public class DayController : MonoBehaviour
     public Day GetDayNumber()
     {
         return currentDay;
-    }
-
-    public void NextStateDay()
-    {
-        currentDay++;
-        ChangeDay((int)currentDay);
     }
 }

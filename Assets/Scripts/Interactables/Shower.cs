@@ -73,7 +73,7 @@ public class Shower : GeneralActions
                 GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", delegate
                 {
                    
-                    GameManager.GetManager().dayController.NextStateDay();
+                    GameManager.GetManager().dayController.ChangeDay(1);
                     GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
                 });
 
