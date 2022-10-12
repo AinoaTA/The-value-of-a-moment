@@ -34,6 +34,7 @@ public class Email : MonoBehaviour
     [SerializeField] TMP_Text[] paragraphsRecieve;
     [SerializeField] MailRecieve[] mailsRecieve;
     [SerializeField] GameObject notification;
+    [SerializeField] DayController.Day day;
     private void Start()
     {
         notification.SetActive(false);
@@ -44,7 +45,7 @@ public class Email : MonoBehaviour
     }
     public void OpenEmail()
     {
-        if (blockWarning) return;
+        if (blockWarning || day != GameManager.GetManager().dayController.GetDayNumber()) return;
         
         //GameManager.GetManager().emailController.mail = this;
 

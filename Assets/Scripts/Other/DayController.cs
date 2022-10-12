@@ -54,7 +54,7 @@ public class DayController : MonoBehaviour
     public void TaskDone()
     {
         counterTaskDay++;
-        if (counterTaskDay % 2 == 0)
+        if (counterTaskDay % 5 == 0)
         {
             counter = counter < 4 ? counter + 1 : 0;
             ChangeDay((DayTime)counter);

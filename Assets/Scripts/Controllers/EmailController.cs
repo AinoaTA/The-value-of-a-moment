@@ -13,6 +13,7 @@ public class EmailController : MonoBehaviour
     public void ShowEmail(bool v)
     {
         emailCanvas.SetActive(v);
+        GameManager.GetManager().computer.ComputerON();
     }
 
     public void CloseOthers(Email e)

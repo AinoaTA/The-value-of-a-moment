@@ -39,7 +39,6 @@ public class Shower : GeneralActions
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
 
-
         StartCoroutine(ShowOtherOptions());
     }
 
@@ -80,7 +79,7 @@ public class Shower : GeneralActions
             texts[i].text = moreOptions[i].canvasText;
 
         yield return new WaitForSeconds(1f);
-
+        canvas.gameObject.SetActive(true);
         canvas.SetBool("Showing", true);
     }
 

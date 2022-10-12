@@ -25,6 +25,26 @@ public class TV : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 screen.SetActive(true);
+
+
+                switch (GameManager.GetManager().dayController.GetTimeDay())
+                {
+                    case DayController.DayTime.Manana:
+                        break;
+                    case DayController.DayTime.MedioDia:
+                        GameManager.GetManager().dialogueManager.SetDialogue("ICocina", canRepeat: true);
+                        break;
+                    case DayController.DayTime.Tarde:
+                        GameManager.GetManager().dialogueManager.SetDialogue("ICocina", canRepeat: true);
+                        break;
+                    case DayController.DayTime.Noche:
+                        GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat: true);
+                        break;
+                    default:
+                        break;
+                }
+
+                GameManager.GetManager().dayController.TaskDone();
                 break;
         }
     }

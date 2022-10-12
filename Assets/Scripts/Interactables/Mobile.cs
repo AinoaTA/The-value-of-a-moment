@@ -14,13 +14,13 @@ public class Mobile : GeneralActions
         col = GetComponent<BoxCollider>();
         GameManager.GetManager().playerInputs._Mobile += OpenMobile;
 
-        GameManager.GetManager().playerInputs._Clics += Click;
+        //GameManager.GetManager().playerInputs._Clics += Click;
     }
 
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
-        GameManager.GetManager().playerInputs._Clics -= Click;
+        //GameManager.GetManager().playerInputs._Clics -= Click;
     }
     public override void EnterAction()
     {
@@ -84,14 +84,14 @@ public class Mobile : GeneralActions
         }
     }
 
-    public void Click()
-    {
-        if (active)
-        {
-            clics++;
-            print(clics);
-            if (clics >= 5)
-                GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar");
-        }
-    }
+    //public void Click()
+    //{
+    //    if (active)
+    //    {
+    //        clics++;
+    //        print(clics);
+    //        if (clics >= 5)
+    //            GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar");
+    //    }
+    //}
 }
