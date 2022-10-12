@@ -39,13 +39,12 @@ public class Shower : GeneralActions
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
 
-
-
         StartCoroutine(ShowOtherOptions());
     }
 
     public override void ExitAction()
     {
+        InteractableBlocked = true;
         Debug.Log("IF pendiente de revisar......");
         if (GameManager.GetManager().interactableManager.currInteractable != null)
             GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
@@ -69,9 +68,11 @@ public class Shower : GeneralActions
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
+                canvas.gameObject.SetActive(false);
                 yield return new WaitForSeconds(1);
                 GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", delegate
                 {
+                   
                     GameManager.GetManager().dayController.NextStateDay();
                     GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
                 });
