@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public bool programmed;
-
+    public bool alexVisited;
 
     private void OnEnable()
     {
