@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pienso : Interactables
 {
     private bool grabbed;
+    [SerializeField] private Cuenco cuenco;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class Pienso : Interactables
             case 1:
                 // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
                 grabbed = true;
+                cuenco.hasPienso(true);
                 this.gameObject.SetActive(false);
                 break;
         }
