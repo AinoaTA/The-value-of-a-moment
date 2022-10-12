@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using Cinemachine;
 namespace Menu
 {
     public class PauseMenu : MonoBehaviour
@@ -8,7 +6,6 @@ namespace Menu
         public CanvasGroup pause;
         private bool paused = false;
         public FMODMusic MusicGameplay;
-
         private void OnDisable()
         {
             GameManager.GetManager().playerInputs._PauseGame -= PauseGame;
@@ -26,7 +23,7 @@ namespace Menu
             if (!paused)
             {
                 paused = true;
-                GameManager.GetManager().canvasController.UnLock();
+                GameManager.GetManager().canvasController.UnLock(false, false);
                 GameManager.GetManager().cameraController.Block3DMovement(!paused);
                 GameManager.GetManager().canvasController.ShowCanvas(pause);
                 MusicGameplay.Pause(1f);
@@ -41,7 +38,7 @@ namespace Menu
         {
             Time.timeScale = 1;
             paused = false;
-            GameManager.GetManager().canvasController.Lock();
+            GameManager.GetManager().canvasController.Lock(true, false);
             GameManager.GetManager().canvasController.HideCanvas(pause);
             GameManager.GetManager().cameraController.Block3DMovement(!paused);
             MusicGameplay.Pause(0f);
@@ -53,5 +50,6 @@ namespace Menu
             GameManager.GetManager().gameStateController.ChangeGameState(0);
             GameManager.GetManager().sceneLoader.LoadLevel(0);
         }
+
     }
 }

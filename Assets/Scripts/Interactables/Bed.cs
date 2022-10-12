@@ -162,6 +162,20 @@ public class Bed : Interactables, ITask
 
     public void BedDone()
     {
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                GameManager.GetManager().blockController.LockSpecific("Bed");
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed Made", transform.position);
         gameInitialized = false;
         minigameCanvas.SetActive(false);
@@ -231,6 +245,26 @@ public class Bed : Interactables, ITask
     {
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
+        bool wait=true;
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
+                {
+                    wait = true;
+                });
+
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+        yield return new WaitWhile(() => wait);
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();

@@ -19,9 +19,6 @@ public class BlockController : MonoBehaviour
     {
         public string name;
         public int id;
-        //public Interactables[] interactable;
-        //public GeneralActions[] actions;
-
         public MonoBehaviour[] locks;
         public DayController.DayTime dayTimeCanUnlock;
         public bool hasConditionToUnlock;
@@ -49,7 +46,6 @@ public class BlockController : MonoBehaviour
     {
         yield return new WaitWhile(() => stop);
         CheckUnlockInteractable(dayOneInteractable);
-
     }
 
     public void CheckUnlockInteractable(BlockInteractables[] list)
@@ -81,9 +77,8 @@ public class BlockController : MonoBehaviour
                     if (dayOneInteractable[i].name == name)
                     {
                         for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
-                        {
                             dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
-                        }
+
                         return;
                     }
                 }
@@ -99,6 +94,8 @@ public class BlockController : MonoBehaviour
         }
     }
 
+    #region unlockall & also by daytime
+
     public void UnlockAll()
     {
         for (int i = 0; i < dayOneInteractable.Length; i++)
@@ -106,6 +103,33 @@ public class BlockController : MonoBehaviour
             for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
             {
                 dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+            }
+        }
+    }
+
+
+    public void UnlockAll(DayController.DayTime time)
+    {
+        for (int i = 0; i < dayOneInteractable.Length; i++)
+        {
+            for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+            {
+                if (dayOneInteractable[i].dayTimeCanUnlock == time)
+                    dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+            }
+        }
+    }
+    #endregion
+
+    public void LockSpecific(string name)
+    {
+        for (int i = 0; i < dayOneInteractable.Length; i++)
+        {
+            if (dayOneInteractable[i].name == name)
+            {
+                for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+                    dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = true;
+                return;
             }
         }
     }

@@ -14,12 +14,12 @@ public class CanvasController : MonoBehaviour
     public void ComputerScreenOut()
     {
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().canvasController.Lock(false, true);
+        GameManager.GetManager().canvasController.Lock(true,false);
     }
     public void ComputerScreenIn()
     {
         GameManager.GetManager().cameraController.StartInteractCam(5);
-        GameManager.GetManager().canvasController.UnLock();
+        GameManager.GetManager().canvasController.UnLock(false, true);
     }
 
     #region mouse pointer state
