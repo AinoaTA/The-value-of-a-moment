@@ -1,22 +1,24 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Window : Interactables, ITask
 {
     [SerializeField] private GameObject glass;
     [SerializeField] private GameObject tutorial;
+    [SerializeField] private TextMeshProUGUI interactableText;
     private GameObject minigameCanvas = null;
     private Vector3 initPos;
     private float mOffset;
     private float zWorldCoord;
     private float minHeight;
-    private float maxHeight = 3.5f;
-    private bool isOpen = false;
+    private readonly float maxHeight = 3.5f;
+    private bool isOpen = false, isClosed = false;
     private bool gameInitialized = false;
     private bool tutorialShowed = false;
+    private readonly string[] stateOptions = { "[E] Cerrar", "[E] Abrir" };
 
     [SerializeField] private float distance;
-    //bool temp = false;
 
     private static FMOD.Studio.EventInstance streetAmb;
 
@@ -76,22 +78,17 @@ public class Window : Interactables, ITask
     public override void Interaction(int options)
     {
         base.Interaction(options);
-        Debug.Log(options);
         switch (options)
         {
             case 1:
-                if (!isOpen)
-                {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
-                    GameManager.GetManager().gameStateController.ChangeGameState(2);
-                    gameInitialized = true;
-                    // Inicia minijuego
-                    GameManager.GetManager().cameraController.StartInteractCam(4);
-                    GameManager.GetManager().canvasController.UnLock();
-                }
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom In", transform.position);
+                GameManager.GetManager().gameStateController.ChangeGameState(2);
+                gameInitialized = true;
+                // Inicia minijuego
+                GameManager.GetManager().cameraController.StartInteractCam(4);
+                GameManager.GetManager().canvasController.Lock();
                 break;
             case 2:
-                Debug.Log(2);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 break;
@@ -139,17 +136,13 @@ public class Window : Interactables, ITask
 
     private void Start()
     {
-
         streetAmb = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Amb/Street");
-
         //streetAmb.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         SetTask();
-        minigameCanvas = tutorial;//.transform.parent.gameObject;
+        minigameCanvas = tutorial;
         minigameCanvas.SetActive(false);
-        //GameManager.GetManager().Window = this;
         minHeight = glass.transform.position.y;
         initPos = glass.transform.position;
-
     }
     private void Update()
     {
@@ -157,13 +150,6 @@ public class Window : Interactables, ITask
         {
             if (!tutorialShowed)
                 InitTutorial();
-
-            //if (gameInitialized && Input.GetKeyDown(KeyCode.Escape))
-            //{
-            //    minigameCanvas.SetActive(false);
-            //    gameInitialized = false;
-            //    GameManager.GetManager().StartThirdPersonCamera();
-            //}
         }
     }
 
@@ -180,16 +166,19 @@ public class Window : Interactables, ITask
 
     void OnMouseDrag()
     {
-        if (gameInitialized && !isOpen)
+        if (gameInitialized)
         {
             if (tutorialShowed) tutorial.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
-            
+
 
             if (displacement < minHeight)
+            {
                 height = minHeight;
+                isClosed = true;
+            }
 
             else if (displacement < maxHeight)
                 height = displacement;
@@ -197,7 +186,7 @@ public class Window : Interactables, ITask
             else if (displacement > maxHeight)
             {
                 height = maxHeight;
-                interactDone = isOpen = true;
+                isOpen = true;
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -205,23 +194,42 @@ public class Window : Interactables, ITask
 
     private void OnMouseUp()
     {
-        if (interactDone && gameInitialized)
+        if ((isOpen || isClosed) && gameInitialized)
             WindowDone();
+        else if (!isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
+        else if (interactDone && isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
     #endregion
     private void WindowDone()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
-        streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
+        gameInitialized = false;
+        //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
-        GameManager.GetManager().StartThirdPersonCamera();
-        minigameCanvas.SetActive(false);
-        isOpen = true;
-        interactDone = true;
+        if (isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+        else
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
+
+        interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
+        isOpen = false;
+        isClosed = false;
         GameManager.GetManager().dayController.TaskDone();
+
+    }
+    IEnumerator Delay()
+    {
+        GameManager.GetManager().blockController.LockSpecific("Ventanas");
+        yield return new WaitForSeconds(0.5f);
+        GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
+        yield return new WaitForSeconds(0.5f);
+
+        GameManager.GetManager().blockController.Unlock("Nevera");
     }
 
     private float GetMouseYaxisAsWorldPoint()
@@ -231,72 +239,4 @@ public class Window : Interactables, ITask
 
         return Camera.main.ScreenToWorldPoint(mousePoint).y;
     }
-
-    #region Dialogues Region
-
-    //public void StartVoiceOffDialogueWindow()
-    //{
-    //    StartCoroutine(StartWindows());
-    //}
-
-    //private IEnumerator StartWindows()
-    //{
-    //    if (m_PhrasesVoiceOff.Length >= 2)
-    //    {
-    //        yield return new WaitForSeconds(2);
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[0]);
-    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[0]);
-    //        yield return new WaitForSeconds(3);
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[1]);
-    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-    //        GameManager.GetManager().Dialogue.StopDialogue();
-    //    }
-    //}
-
-    //private IEnumerator GoodInteraction()
-    //{
-    //    if (m_PhrasesVoiceOff.Length >= 2)
-    //    {
-    //        yield return new WaitForSeconds(2);
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[2]);
-    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[1]);
-    //        yield return new WaitForSeconds(1.25f);
-    //        GameManager.GetManager().Dialogue.StopDialogue();
-
-    //        StartCoroutine(NextAction());
-    //    }
-    //}
-
-    //private IEnumerator BadInteraction()
-    //{
-    //    if (m_PhrasesVoiceOff.Length >= 4)
-    //    {
-    //        yield return new WaitForSeconds(2);
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[3]);
-    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[2]);
-    //        yield return new WaitForSeconds(2);
-    //        GameManager.GetManager().Dialogue.StopDialogue();
-
-    //        StartCoroutine(NextAction());
-    //    }
-    //}
-
-    //private IEnumerator NextAction()
-    //{
-    //    if (m_PhrasesVoiceOff.Length >= 6)
-    //    {
-    //        yield return new WaitForSeconds(2);
-    //        GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[4]);
-    //        yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-    //        //GameManager.GetManager().Dialogue.SetDialogue(m_AnswersToVoiceOff[3]);
-    //        //yield return new WaitForSeconds(2);
-    //        //GameManager.GetManager().Dialogue.SetDialogue(m_PhrasesVoiceOff[5]);
-    //        //yield return new WaitWhile(() => GameManager.GetManager().Dialogue.CheckDialogueIsPlaying());
-    //        GameManager.GetManager().Dialogue.StopDialogue();
-    //    }
-    //}
-    #endregion
 }

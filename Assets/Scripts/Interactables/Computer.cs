@@ -4,13 +4,14 @@ public class Computer : Interactables
 {
     [SerializeField]
     GameObject computerScreen, programScreen,
-        calendarMaterialScreen, emailScreenMaterial;
+        calendarMaterialScreen, emailScreenMaterial, email;
 
 
     [SerializeField] Transform computerPos;
 
     [SerializeField] GameObject programMinigame;
     bool anyButtonScreenActive;
+
 
     private void Start()
     {
@@ -27,6 +28,8 @@ public class Computer : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 ComputerON();
                 GameManager.GetManager().canvasController.ComputerScreenIn();
+                GameManager.GetManager().dialogueManager.SetDialogue("IOrdenador");
+               
                 break;
         }
     }
@@ -58,6 +61,7 @@ public class Computer : Interactables
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
+        email.SetActive(true);
         emailScreenMaterial.SetActive(false);
         GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
@@ -65,14 +69,24 @@ public class Computer : Interactables
     public void ComputerOFF()
     {
         GameManager.GetManager().playerController.TemporalExit();
-        //GameManager.GetManager().playerController.SetAnimation("Walk");
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
         programMinigame.SetActive(false);
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
-        anyButtonScreenActive = false; ;
+        anyButtonScreenActive = false;
+        email.SetActive(false);
+        if (!GameManager.GetManager().programmed && (int)GameManager.GetManager().dayController.dayState > 1)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
+            {
+                GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.Noche);
+                GameManager.GetManager().blockController.Unlock("Bed");
+                GameManager.GetManager().blockController.Unlock("Window");
+            });
+        
+        }
     }
 
     public void ComputerCalendar()
@@ -91,6 +105,8 @@ public class Computer : Interactables
     {
         if (anyButtonScreenActive)
             return;
+        GameManager.GetManager().dialogueManager.SetDialogue("PCProgramar");
+        
         programMinigame.SetActive(true);
         anyButtonScreenActive = true;
         programScreen.SetActive(true);
@@ -103,6 +119,7 @@ public class Computer : Interactables
     {
         if (anyButtonScreenActive)
             return;
+        GameManager.GetManager().dialogueManager.SetDialogue("PCMirarMail");
         anyButtonScreenActive = true;
         GameManager.GetManager().emailController.ShowEmail(true);
         programScreen.SetActive(false);

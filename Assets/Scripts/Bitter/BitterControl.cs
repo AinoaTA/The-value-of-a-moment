@@ -8,8 +8,8 @@ public class BitterControl : MonoBehaviour
     [SerializeField] Sprite elleProfile;
     [SerializeField] Sprite[] profileAnonymous;
     [SerializeField] Sprite[] normalPeople;
-    [SerializeField] int addAutocontrol=5;
-    [SerializeField] Vector2 removeAutocontrol=new Vector2(2,5);
+    [SerializeField] int addAutocontrol = 5;
+    [SerializeField] Vector2 removeAutocontrol = new Vector2(2, 5);
 
 
     [Header("Bitter")]
@@ -57,6 +57,12 @@ public class BitterControl : MonoBehaviour
 
     #endregion
 
+    public void Open()
+    {
+        gameObject.SetActive(true);
+        GameManager.GetManager().dialogueManager.SetDialogue("PCRedesSociales");
+    }
+
     #region buttons
     public void ReadBitter()
     {
@@ -69,7 +75,7 @@ public class BitterControl : MonoBehaviour
     {
         readBitters.SetActive(false);
         writeBitter.gameObject.SetActive(true);
-        
+
         writeBitter.WriteBit();
     }
 
@@ -93,7 +99,7 @@ public class BitterControl : MonoBehaviour
         for (int i = 0; i < random; i++)
         {
             rnd = Random.Range(0, 2);
-           
+
             Bitter bit = Instantiate(bitterPrefab, transform.position, Quaternion.identity, content.transform);
             bit.isBad = rnd != 0;
             bit.UpdateFavs();
@@ -104,7 +110,7 @@ public class BitterControl : MonoBehaviour
             if (rnd == 0)//is a good answer // new check
                 GameManager.GetManager().autocontrol.AddAutoControl(addAutocontrol);
             else
-                GameManager.GetManager().autocontrol.RemoveAutoControl(Random.Range(removeAutocontrol.x,removeAutocontrol.y));
+                GameManager.GetManager().autocontrol.RemoveAutoControl(Random.Range(removeAutocontrol.x, removeAutocontrol.y));
 
             yield return new WaitForSeconds(1f);
             //Debug.Log("Manu posible sonido? sonido como de escribir del facebookmessener que hace trurur tururu la burbuja");

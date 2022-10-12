@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Dialogues
   m_EditorClassIdentifier: 
   dialoguesFile: {fileID: 4900000, guid: cda30248ceda42c42b7e3b04ddf03350, type: 3}
-  voicesPath: Assets\Dialogues\voices\
-  voicesPathEn: 
   dialogues:
   - id: Alarm
     lines:
@@ -1083,39 +1081,47 @@ MonoBehaviour:
         t\xFA quien decide."
       en: 
       played: 0
-  - id: D2AccDescRelax
+  - id: D2AccDescRelax_Dorm
     lines:
     - ID: D2AccDescRelax_Dorm_E1
-      dialogue: D2AccDescRelax
+      dialogue: D2AccDescRelax_Dorm
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: No pasa nada si me echo otro ratito.
       en: 
       played: 0
+  - id: D2AccDescRelax_Dorm1
+    lines:
     - ID: D2AccDescRelax_Dorm_E2
-      dialogue: D2AccDescRelax
+      dialogue: D2AccDescRelax_Dorm1
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "\xBFQu\xE9 hora es? \xBFCu\xE1nto tiempo he dormido?"
       en: 
       played: 0
+  - id: D2AccDescRelax_Musica
+    lines:
     - ID: D2AccDescRelax_Musica_E1
-      dialogue: D2AccDescRelax
+      dialogue: D2AccDescRelax_Musica
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "Adoro esta canci\xF3n. \xBFC\xF3mo puede haber gente a la que no le guste
         la m\xFAsica?"
       en: 
       played: 0
+  - id: D2AccDescRelax_TV
+    lines:
     - ID: D2AccDescRelax_TV_E1
-      dialogue: D2AccDescRelax
+      dialogue: D2AccDescRelax_TV
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "S\xF3lo un cap\xEDtulo, nada m\xE1s."
       en: 
       played: 0
+  - id: D2AccDescRelax_Sofa
+    lines:
     - ID: D2AccDescRelax_Sofa_E1
-      dialogue: D2AccDescRelax
+      dialogue: D2AccDescRelax_Sofa
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: Da gusto esta tranquilidad.
@@ -1293,7 +1299,7 @@ MonoBehaviour:
       dialogue: D2AccEnt_CorFotTVOAM
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
-      es: "No s\xE9 qu\xE9 har\xEDa sin Zo\xEB y Ari..."
+      es: "No s\xE9 qu\xE9 har\xEDa sin Zoe y Ari..."
       en: 
       played: 0
   - id: D2AccEnt_CorFotSFeliu
@@ -1490,15 +1496,33 @@ MonoBehaviour:
       voice_en: {fileID: 0}
       es: "\xA1Es igual! \xA1No te imaginas lo que me ha pasado hoy! Estaba con mis
         amigas en una terraza tomando algo y haci\xE9ndonos fotos, cuando ha venido
-        un t\xEDo buen\xEDsimo y me ha dicho \u201CYo te conozco\u201D, y yo en plan,
-        que sab\xEDa a lo que ven\xEDa, \u201C\xBFah s\xED, de qu\xE9?, y cre\xED
-        que me iba a soltar algo en plan que aparec\xEDa por las noches en sus sue\xF1os;
-        pero va y me dice \u201Ct\xFA eres Aida_Flawless, en TokTok\u201D. \xA1Y
-        yo alucinada! Y mis amigas muertas de la envidia, porque estaba s\xFAper
-        bueno. Y nos hemos pasado el rato all\xED, grabando TokToks, y haci\xE9ndonos
-        fotos. Me ense\xF1\xF3 su Photogram y tiene 5k followers, que no son tantos
-        como los que tengo yo, pero a\xFAn as\xED... Y hemos quedado ma\xF1ana para
-        salir."
+        un t\xEDo buen\xEDsimo y me ha dicho \u201CYo te conozco\u201D."
+      en: 
+      played: 0
+    - ID: D2MundoAida_AI2_Extra
+      dialogue: D2MundoAida
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "Y yo en plan, que sab\xEDa a lo que ven\xEDa, \u201C\xBFah s\xED, de qu\xE9?,
+        y cre\xED que me iba a soltar algo en plan que aparec\xEDa por las noches
+        en sus sue\xF1os; pero va y me dice \u201Ct\xFA eres Aida_Flawless, en TokTok\u201D."
+      en: 
+      played: 0
+    - ID: D2MundoAida_AI2_Extra1
+      dialogue: D2MundoAida
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "\xA1Y yo alucinada! Y mis amigas muertas de la envidia, porque estaba
+        s\xFAper bueno. Y nos hemos pasado el rato all\xED, grabando TokToks, y haci\xE9ndonos
+        fotos."
+      en: 
+      played: 0
+    - ID: D2MundoAida_AI2_Extra2
+      dialogue: D2MundoAida
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "Me ense\xF1\xF3 su Photogram y tiene 5k followers, que no son tantos como
+        los que tengo yo, pero a\xFAn as\xED... Y hemos quedado ma\xF1ana para salir."
       en: 
       played: 0
     - ID: D2MundoAida_V1
@@ -1999,9 +2023,8 @@ MonoBehaviour:
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "Ya sabes que yo soy t\xFA. Y no, no me definir\xEDa como un encanto. De
-        hecho, no s\xE9 c\xF3mo Zo\xEB y Ari nos aguantan\u2026 \xBFNos aguantan?
-        \xBFTe aguantan? \xBFC\xF3mo deber\xEDa decirlo? Esto est\xE1 empezando a
-        ser confuso\u2026"
+        hecho, no s\xE9 c\xF3mo Zoe y Ari nos aguantan\u2026 \xBFNos aguantan? \xBFTe
+        aguantan? \xBFC\xF3mo deber\xEDa decirlo? Esto est\xE1 empezando a ser confuso\u2026"
       en: 
       played: 0
   - id: D3Start_Op1
@@ -2013,15 +2036,45 @@ MonoBehaviour:
       es: Creo que me voy a levantar.
       en: 
       played: 0
-  - id: D3Start_Op2
-    lines:
     - ID: D3Start_Op1_V1
-      dialogue: D3Start_Op2
+      dialogue: D3Start_Op1
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "\xA1Menos mal! Supongo que querr\xE1s ver a Mino\u2026"
       en: 
       played: 0
+    - ID: D3Start_Op1_E2
+      dialogue: D3Start_Op1
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "\xA1Mino! \xA1Aida se lo llev\xF3!"
+      en: 
+      played: 0
+    - ID: D3Start_Op1_V2
+      dialogue: D3Start_Op1
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "\xBFYa no te acordabas? Ya te vale\u2026"
+      en: 
+      played: 0
+    - ID: D3Start_Op1_E3
+      dialogue: D3Start_Op1
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "Pero est\xE1 bien, Aida no le har\xEDa da\xF1o, \xBFverdad? \xA1Mino se
+        defender\xEDa!"
+      en: 
+      played: 0
+    - ID: D3Start_Op1_V3
+      dialogue: D3Start_Op1
+      voice_es: {fileID: 0}
+      voice_en: {fileID: 0}
+      es: "No s\xE9 qui\xE9n ara\xF1ar\xEDa a qui\xE9n, \xBFte has fijado en las
+        u\xF1as de ella?"
+      en: 
+      played: 0
+  - id: D3Start_Op2
+    lines:
     - ID: D3Start_Op2_V1
       dialogue: D3Start_Op2
       voice_es: {fileID: 0}
@@ -2029,58 +2082,20 @@ MonoBehaviour:
       es: "\xBFPero no te vas a levantar? Cre\xEDa que hoy iba a ser diferente\u2026"
       en: 
       played: 0
-  - id: D3Start_Op3
-    lines:
-    - ID: D3Start_Op1_E2
-      dialogue: D3Start_Op3
-      voice_es: {fileID: 0}
-      voice_en: {fileID: 0}
-      es: "\xA1Mino! \xA1Aida se lo llev\xF3!"
-      en: 
-      played: 0
     - ID: D3Start_Op2_E1
-      dialogue: D3Start_Op3
+      dialogue: D3Start_Op2
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "Un poquito m\xE1s..."
       en: 
       played: 0
-  - id: D3Start_Op4
-    lines:
-    - ID: D3Start_Op1_V2
-      dialogue: D3Start_Op4
-      voice_es: {fileID: 0}
-      voice_en: {fileID: 0}
-      es: "\xBFYa no te acordabas? Ya te vale\u2026"
-      en: 
-      played: 0
     - ID: D3Start_Op2_V2
-      dialogue: D3Start_Op4
+      dialogue: D3Start_Op2
       voice_es: {fileID: 0}
       voice_en: {fileID: 0}
       es: "Claro, tu sigue en la cama tranquilamente, como si ayer tu compa\xF1era
         de piso no se hubiera llevado a Mino con ella, y lo hubiera encerrado en
         su habitaci\xF3n."
-      en: 
-      played: 0
-  - id: D3Start_Op5
-    lines:
-    - ID: D3Start_Op1_E3
-      dialogue: D3Start_Op5
-      voice_es: {fileID: 0}
-      voice_en: {fileID: 0}
-      es: "Pero est\xE1 bien, Aida no le har\xEDa da\xF1o, \xBFverdad? \xA1Mino se
-        defender\xEDa!"
-      en: 
-      played: 0
-  - id: D3Start_Op6
-    lines:
-    - ID: D3Start_Op1_V3
-      dialogue: D3Start_Op6
-      voice_es: {fileID: 0}
-      voice_en: {fileID: 0}
-      es: "No s\xE9 qui\xE9n ara\xF1ar\xEDa a qui\xE9n, \xBFte has fijado en las
-        u\xF1as de ella?"
       en: 
       played: 0
   - id: D3Start_Op2a

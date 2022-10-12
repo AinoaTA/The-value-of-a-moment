@@ -1,11 +1,16 @@
 using UnityEngine;
-public class GeneralActions : MonoBehaviour
+public class GeneralActions : MonoBehaviour,ILock
 {
+    public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
+    [SerializeField]private bool _blocked;
     public GameObject OptionsCanvas;
     public Animator anim;
     protected bool showing;
     protected bool done;
+
    [SerializeField]protected string nameAction;
+
+   
 
     public virtual void ResetObject()
     {
@@ -15,6 +20,7 @@ public class GeneralActions : MonoBehaviour
 
     protected virtual void OnMouseEnter()
     {
+        if (InteractableBlocked) return;
         if (GameManager.GetManager().gameStateController.CheckGameState(1) && !showing)// && !actionEnter)
         {
             showing = true;
@@ -26,6 +32,7 @@ public class GeneralActions : MonoBehaviour
 
     protected virtual void OnMouseExit()
     {
+        if (InteractableBlocked) return;
         if (showing)
         {
             ExitCanvas();

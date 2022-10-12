@@ -7,7 +7,7 @@ using System;
 public class PlayerHandleInputs : MonoBehaviour
 {
     public event Action _FirstInteraction, _SecondInteraction, _StopMoving, _ResetMove,
-        _MoveUp, _MoveDown, _MoveRight, _MoveLeft, _ExitInteraction, _PauseGame, _Mobile;
+        _MoveUp, _MoveDown, _MoveRight, _MoveLeft, _ExitInteraction, _PauseGame, _Mobile, _Clics;
 
     public event Action<float> _CameraPitchDelta, _CameraYawDelta;
 
@@ -98,6 +98,16 @@ public class PlayerHandleInputs : MonoBehaviour
         {
             case var value when context.started:
                 _Mobile?.Invoke();
+                break;
+        }
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                _Clics?.Invoke();
                 break;
         }
     }

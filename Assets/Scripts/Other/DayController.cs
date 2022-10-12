@@ -1,15 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class DayController : MonoBehaviour
 {
     public enum DayTime { Manana, MedioDia, Tarde, Noche }
-    public enum Day { one, two , three, fourth }
-    [SerializeField] DayTime dayState;
-    [SerializeField] public Day currentDay;
-    private int counter;
-
+    public enum Day { one, two, three, fourth }
+    public DayTime dayState;
+    public Day currentDay;
+    [SerializeField] private int counter;
+    [SerializeField] int maxTasks = 5;
     private Animator anims;
-    private int counterTaskDay = 0;
+    [SerializeField] private int counterTaskDay;
 
     private void Awake()
     {
@@ -19,20 +20,50 @@ public class DayController : MonoBehaviour
 
     private void Start()
     {
-        counter = (int)dayState;
-        ChangeDay(dayState);
+        counter = 0;
+        counterTaskDay = 0;
+        ChangeDay(0);
     }
-    public void ChangeDay(DayTime newState)
+    public void ChangeDay(int newState)
     {
+        print("ME ESTAS JODIENDO");
         anims.SetInteger("time", (int)newState);
-        dayState = newState;
+        dayState= (DayTime)newState;
+        counterTaskDay = 0;
+        counter = newState;
+        switch (dayState)
+        {
+            case DayTime.Manana:
+                break;
+            case DayTime.MedioDia:
+                break;
+            case DayTime.Tarde:
+                StartCoroutine(Delay());
+                break;
+            case DayTime.Noche:
+                GameManager.GetManager().blockController.Unlock("Bed");
+                break;
+            default:
+                break;
+        }
     }
 
+    IEnumerator Delay() 
+    {
+        yield return new WaitWhile(()=>GameManager.GetManager().dialogueManager.waitDialogue);
+        GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar",
+                      delegate
+                      {
+                          GameManager.GetManager().blockController.UnlockAll(DayTime.Tarde);
+                          GameManager.GetManager().blockController.Unlock("Window");
+                      });
+    }
     public void NewDay()
     {
         counter = 0;
         counterTaskDay = 0;
-        ChangeDay((DayTime)counter);
+        ChangeDay(counter);
+        dayState = DayTime.Manana;
         //next day
         currentDay++;
         switch (currentDay)
@@ -54,14 +85,20 @@ public class DayController : MonoBehaviour
     public void TaskDone()
     {
         counterTaskDay++;
-        if (counterTaskDay % 2 == 0)
+        if (dayState == DayTime.Noche)
+            GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat:true);
+
+        print(counterTaskDay + " nuevo stado" + (counterTaskDay % 5 == 0));
+        if (counterTaskDay >= maxTasks)
         {
-            counter = counter < 4 ? counter + 1 : 0;
-            ChangeDay((DayTime)counter);
+            if (counter < 4) counter++;
+            else counter = 0;
+
+            ChangeDay(counter);
         }
     }
 
-    public DayTime GetTimeDay() 
+    public DayTime GetTimeDay()
     {
         return dayState;
     }

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Mobile : GeneralActions
 {
     [SerializeField] private bool getMobile;
@@ -7,17 +7,20 @@ public class Mobile : GeneralActions
     [SerializeField] private CanvasGroup mobileCanvas;
     [SerializeField] private GameObject[] canvasFunctions;
     private BoxCollider col;
-
+    public GameObject cursor;
     bool active = false;
     private void Start()
     {
         col = GetComponent<BoxCollider>();
         GameManager.GetManager().playerInputs._Mobile += OpenMobile;
+
+        //GameManager.GetManager().playerInputs._Clics += Click;
     }
 
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
+        //GameManager.GetManager().playerInputs._Clics -= Click;
     }
     public override void EnterAction()
     {
@@ -38,15 +41,17 @@ public class Mobile : GeneralActions
 
         if (!active)
         {
+            cursor.gameObject.SetActive(true);
             active = true;
             GameManager.GetManager().gameStateController.ChangeGameState(2);
-            GameManager.GetManager().canvasController.UnLock();
+            GameManager.GetManager().canvasController.UnLock(false);
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Out");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Unlock");
         }
         else
         {
+            cursor.gameObject.SetActive(false);
             active = false;
             GameManager.GetManager().StartThirdPersonCamera();
             GameManager.GetManager().gameStateController.ChangeGameState(1);
@@ -54,7 +59,7 @@ public class Mobile : GeneralActions
             GameManager.GetManager().cameraController.Block3DMovement(true);
             CanvasMobile(false);
             CanvasMultiple(false);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Movil/Out");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Lock");
         }
     }
 
@@ -70,4 +75,23 @@ public class Mobile : GeneralActions
         mobileCanvas.blocksRaycasts = val;
         mobileCanvas.interactable = val;
     }
+    int clics;
+    private void Update()
+    {
+        if (active && !GameManager.GetManager().programmed)
+        {
+            cursor.transform.position = Input.mousePosition;
+        }
+    }
+
+    //public void Click()
+    //{
+    //    if (active)
+    //    {
+    //        clics++;
+    //        print(clics);
+    //        if (clics >= 5)
+    //            GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar");
+    //    }
+    //}
 }

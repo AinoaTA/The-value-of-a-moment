@@ -12,11 +12,6 @@ public class FMODMusic : MonoBehaviour
         Music.release();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void Mood (float MoodLevel)
     {
         Music.setParameterByName("Mood", MoodLevel);
@@ -40,6 +35,10 @@ public class FMODMusic : MonoBehaviour
     public void Headphones(float HeadphoneMode)
     {
         Music.setParameterByName("Headphones", HeadphoneMode);
+    }
+    public void Pause(float PauseMode)
+    {
+        Music.setParameterByName("Pause", PauseMode);
     }
 
     private void OnDestroy()

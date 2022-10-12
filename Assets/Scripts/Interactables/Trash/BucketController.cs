@@ -107,6 +107,8 @@ public class BucketController : Interactables, ITask, IDependencies
                 {
                     GameManager.GetManager().trashInventory.RemoveTrash();
                 }
+                GameManager.GetManager().dayController.TaskDone();
+                GameManager.GetManager().dialogueManager.SetDialogue("IRopaSucia");
                 GameManager.GetManager().interactableManager.LookingAnInteractable(null);
                 break;
             default:
@@ -123,7 +125,6 @@ public class BucketController : Interactables, ITask, IDependencies
         currCapacity++;
         if (currCapacity >= maxCapacity)
         {
-            GameManager.GetManager().dayController.TaskDone();
             CheckDoneTask();
         }
     }

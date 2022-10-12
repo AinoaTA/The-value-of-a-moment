@@ -46,6 +46,9 @@ namespace Calendar
         {
             if (!modified)
             {
+
+                GameManager.GetManager().dayController.TaskDone();
+
                 modified = true;
                 warning.SetActive(false);
                 for (int a = 0; a < allTimeTable.Count; a++)
