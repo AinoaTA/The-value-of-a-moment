@@ -30,6 +30,7 @@ public class DayController : MonoBehaviour
         anims.SetInteger("time", (int)newState);
         dayState= (DayTime)newState;
         counterTaskDay = 0;
+        counter = newState;
         switch (dayState)
         {
             case DayTime.Manana:
@@ -40,6 +41,7 @@ public class DayController : MonoBehaviour
                 StartCoroutine(Delay());
                 break;
             case DayTime.Noche:
+                GameManager.GetManager().blockController.Unlock("Bed");
                 break;
             default:
                 break;
