@@ -198,23 +198,29 @@ public class Window : Interactables, ITask
             WindowDone();
         else if (!isOpen)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
+        else if (interactDone && isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
     #endregion
     private void WindowDone()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
-        ////streetAmb.release();
         ExitInteraction();
         CheckDoneTask();
         gameInitialized = false;
         //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
+        if (isOpen)
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+        else
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
+
         interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
         isOpen = false;
         isClosed = false;
         GameManager.GetManager().dayController.TaskDone();
-        GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+
     }
     IEnumerator Delay()
     {

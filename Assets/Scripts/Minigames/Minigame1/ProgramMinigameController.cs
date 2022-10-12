@@ -76,6 +76,11 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         GameManager.GetManager().computer.ComputerON();
 
         GameManager.GetManager().programmed = true;
+
+        GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
+        {
+            GameManager.GetManager().dayController.NextStateDay();
+        });
     }
 
     public void QuitMiniGame()
@@ -83,7 +88,6 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         allCorrect = false;
         GameManager.GetManager().computer.ComputerON(); //back to menu pc screen
     }
-
 
     public void CheckSolutions()
     {
