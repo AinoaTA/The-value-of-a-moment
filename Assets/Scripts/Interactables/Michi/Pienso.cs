@@ -20,7 +20,7 @@ public class Pienso : Interactables
             case 1:
                 // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
                 grabbed = true;
-                cuenco.hasPienso(true);
+                cuenco.GrabbedPienso();
                 this.gameObject.SetActive(false);
                 break;
         }

@@ -10,9 +10,7 @@ public class Cuenco : Interactables
 
     void Start()
     {
-        comida.SetActive(false);
-        hasPienso = false;
-        InteractableBlocked = true;
+        ResetCuenco();
     }
 
     public override void Interaction(int options)
@@ -24,6 +22,8 @@ public class Cuenco : Interactables
                 if (hasPienso)
                 {
                     comida.SetActive(true);
+                    hasPienso = false;
+                    InteractableBlocked = true;
                     michiController.FeedMichi();
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
@@ -38,11 +38,17 @@ public class Cuenco : Interactables
         base.ExitInteraction();
     }
 
-    public void hasPienso()
+    public void GrabbedPienso()
     {
         hasPienso = true;
         // Activate canvas options
         InteractableBlocked = false;
     }
 
+    public void ResetCuenco()
+    {
+        InteractableBlocked = true;
+        hasPienso = false;
+        comida.SetActive(false);
+    }
 }
