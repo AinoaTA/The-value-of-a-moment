@@ -3,7 +3,8 @@
 public class MichiController : MonoBehaviour
 {
     private bool theresFood = false;
-    public Transform cuenco;
+    [SerializeField] private Cuenco cuenco;
+    private Vector3 cuencoPosition;
     private Animator animator;
     public Vector3 newPos;
     private float turningRate = 3f;
@@ -17,6 +18,7 @@ public class MichiController : MonoBehaviour
         animator = this.GetComponent<Animator>();
         reset = true;
         animator.SetBool("walking", true);
+        if(cuenco) cuencoPosition = cuenco.gameObject.transform.position;
     }
 
     void Update()
@@ -48,23 +50,25 @@ public class MichiController : MonoBehaviour
 
         if(theresFood)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, cuenco.position, walkSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, cuenco.position) < .2f)
+            Debug.Log("Food");
+            this.transform.position = Vector3.MoveTowards(this.transform.position, cuencoPosition, walkSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, cuencoPosition) < .1f)
             {
                 Miau();
                 // TODO: comer
+                cuenco.ResetCuenco(); // Desaparecer la comida
                 theresFood = false;
             }
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.layer != 2)
-        {
-            Miau();
-        }
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.gameObject.layer != 2)
+    //     {
+    //         Miau();
+    //     }
+    // }
 
     private void Miau()
     {
