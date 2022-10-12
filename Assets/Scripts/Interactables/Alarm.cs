@@ -191,21 +191,25 @@ public class Alarm : MonoBehaviour
                     StartAlarm();
                 break;
             case DayController.Day.two:
-                name = counter == 0 ? "D2Alarm_Op2" : "D2Alarm_Op3";
+
+                if (counter == 0) name = "D2Alarm_Op2";
+                else if (counter == 1) name = "D2Alarm_Op3";
+                else name = "D2Alarm_Op3";
+
                 GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-                { 
+                {
                     StartAlarm();
                 });
 
                 break;
             case DayController.Day.three:
-                string names = "D3Start_Op2";
-                if (counter == 0) names = "D3Start_Op2b";
-                else names = "Alarm3";
+                name = "D3Start_Op2";
+                if (counter == 0) name = "D3Start_Op2b";
+                else name = "Alarm3";
 
-                GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
+                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
                 {
-                    if (names != "Alarm3")
+                    if (name != "Alarm3")
                         StartAlarm();
                     else
                         print("BAD EEEEEEEEEEEEEND");
