@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public bool programmed;
     public bool alexVisited;
 
+    public GameObject diaDos;
     private void OnEnable()
     {
         if (gameManager == null)
@@ -65,6 +66,26 @@ public class GameManager : MonoBehaviour
         canvasController.Lock();
         yield return new WaitForSeconds(0.25f);
         gameStateController.ChangeGameState(1);
+    }
+
+    public void ToActive()
+    {
+        diaDos.SetActive(false);
+        switch (dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                break;
+            case DayController.Day.two:
+                diaDos.SetActive(true);
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+
     }
     #endregion
 }

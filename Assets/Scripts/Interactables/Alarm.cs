@@ -290,10 +290,8 @@ public class Alarm : MonoBehaviour
         if (!eventAlex.activeSelf && !unique) return;
         unique = false;
         eventAlex.SetActive(false);
-        print("PRINT");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
         {
-            print("??");
             GameManager.GetManager().alexVisited = true;
 
             StartCoroutine(NormalWakeUp());
@@ -305,7 +303,6 @@ public class Alarm : MonoBehaviour
         if (!eventAlex.activeSelf && !unique) return;
         unique = false;
         eventAlex.SetActive(false);
-        print("PRINT");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op2", delegate
         {
             negated = true;
@@ -313,6 +310,5 @@ public class Alarm : MonoBehaviour
             StillSleeping();
         });
     }
-
     #endregion
 }
