@@ -21,6 +21,8 @@ public class Michi : Interactables
                 FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 controller.PetMichi();
                 break;
             case 2:
@@ -30,7 +32,10 @@ public class Michi : Interactables
     
     public override void ExitInteraction()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
+    
 }
