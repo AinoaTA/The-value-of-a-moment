@@ -68,14 +68,24 @@ public class Computer : Interactables
     public void ComputerOFF()
     {
         GameManager.GetManager().playerController.TemporalExit();
-        //GameManager.GetManager().playerController.SetAnimation("Walk");
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
         programMinigame.SetActive(false);
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
-        anyButtonScreenActive = false; ;
+        anyButtonScreenActive = false;
+
+        if (!GameManager.GetManager().programmed && (int)GameManager.GetManager().dayController.dayState > 1)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("Atardecer", delegate
+            {
+                GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.Noche);
+                GameManager.GetManager().blockController.Unlock("Bed");
+                GameManager.GetManager().blockController.Unlock("Window");
+            });
+        
+        }
     }
 
     public void ComputerCalendar()

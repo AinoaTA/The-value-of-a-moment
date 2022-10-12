@@ -3,9 +3,9 @@ using UnityEngine;
 public class DayController : MonoBehaviour
 {
     public enum DayTime { Manana, MedioDia, Tarde, Noche }
-    public enum Day { one, two , three, fourth }
-    [SerializeField] DayTime dayState;
-    [SerializeField] public Day currentDay;
+    public enum Day { one, two, three, fourth }
+    public DayTime dayState;
+    public Day currentDay;
     private int counter;
     [SerializeField] int maxTasks = 5;
     private Animator anims;
@@ -35,14 +35,14 @@ public class DayController : MonoBehaviour
             case DayTime.MedioDia:
                 break;
             case DayTime.Tarde:
-                GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar", 
-                    delegate 
+                GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar",
+                    delegate
                     {
                         GameManager.GetManager().blockController.UnlockAll(DayTime.Tarde);
+                        GameManager.GetManager().blockController.Unlock("Window");
                     });
                 break;
             case DayTime.Noche:
-                GameManager.GetManager().dialogueManager.SetDialogue("Anochece");
                 break;
             default:
                 break;
@@ -75,7 +75,9 @@ public class DayController : MonoBehaviour
     public void TaskDone()
     {
         counterTaskDay++;
-        print(counterTaskDay + " nuevo stado"  + (counterTaskDay % 5 == 0));
+        if (dayState == DayTime.Noche)
+            GameManager.GetManager().dialogueManager.SetDialogue("Anochece");
+        print(counterTaskDay + " nuevo stado" + (counterTaskDay % 5 == 0));
         if (counterTaskDay >= maxTasks)
         {
             if (counter < 4) counter++;
@@ -86,7 +88,7 @@ public class DayController : MonoBehaviour
         }
     }
 
-    public DayTime GetTimeDay() 
+    public DayTime GetTimeDay()
     {
         return dayState;
     }
