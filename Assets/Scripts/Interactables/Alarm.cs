@@ -75,11 +75,17 @@ public class Alarm : MonoBehaviour
                     GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
                 break;
             case DayController.Day.two:
-                GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
+                if (counter > 0)
                 {
                     AlarmAndMood();
                     Show();
-                });
+                }
+                else
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
+                    {
+                        AlarmAndMood();
+                        Show();
+                    });
                 break;
             case DayController.Day.three:
                 break;
@@ -154,13 +160,12 @@ public class Alarm : MonoBehaviour
     public void StillSleeping()
     {
         alarmRinging = false;
-
+        string name;
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                string name = "alarm";
-                if (counter == 0) name = "Alarm2";
-                else name = "Alarm3";
+                //string name = "alarm";
+                name = counter == 0 ? "Alarm2" : "Alarm3";
 
                 GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
                 {
@@ -171,8 +176,9 @@ public class Alarm : MonoBehaviour
                     StartAlarm();
                 break;
             case DayController.Day.two:
-                GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op2", delegate
-                {
+                name = counter == 0 ? "D2Alarm_Op2" : "D2Alarm_Op3";
+                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
+                { 
                     StartAlarm();
                 });
                 break;
