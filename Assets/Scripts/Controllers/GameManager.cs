@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                     GameManager.GetManager().dialogueManager.SetDialogue("D2Procrast");
                 }
                 StartCoroutine(Timbre("D2Timbre"));
-                StartCoroutine(Timbre("D2TimbreOp2"));
+                StartCoroutine(Timbre("D2TimbreOp1"));
                 StartCoroutine(Llaves());
             }
             else // Cambio de hora
