@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
 
     public bool programmed;
     public bool alexVisited;
-
     public GameObject diaDos;
+
     private void OnEnable()
     {
         if (gameManager == null)
