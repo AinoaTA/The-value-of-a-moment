@@ -13,7 +13,21 @@ public class Cafetera : Interactables
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Coffee Brew", transform.position);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
-                GameManager.GetManager().dialogueManager.SetDialogue("ITomarCafe");
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        GameManager.GetManager().dialogueManager.SetDialogue("ITomarCafe");
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccComBeb_Cafetera");
+                        break;
+                    case DayController.Day.three:
+                        break;
+                    case DayController.Day.fourth:
+                        break;
+                    default:
+                        break;
+                }
                 break;
         }
     }
