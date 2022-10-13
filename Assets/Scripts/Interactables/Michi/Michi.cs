@@ -16,7 +16,16 @@ public class Michi : Interactables
         switch (options)
         {
             case 1:
-                GameManager.GetManager().dialogueManager.SetDialogue("IMino");
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        GameManager.GetManager().dialogueManager.SetDialogue("IMino");
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccMino_Acariciar");
+                        break;
+                    default: break;
+                }
                 FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);

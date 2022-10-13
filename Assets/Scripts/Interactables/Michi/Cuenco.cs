@@ -21,6 +21,10 @@ public class Cuenco : Interactables
             case 1:
                 if (hasPienso)
                 {
+                    if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccMino_Alimentar");
+                    }
                     comida.SetActive(true);
                     hasPienso = false;
                     InteractableBlocked = true;
