@@ -70,17 +70,16 @@ public class BlockController : MonoBehaviour
 
     public void Unlock(string name)
     {
-
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                UnlockingInteractables(dayOneInteractable);
+                UnlockingInteractables(dayOneInteractable, name);
                 break;
             case DayController.Day.two:
-                UnlockingInteractables(dayTwoInteractable);
+                UnlockingInteractables(dayTwoInteractable, name);
                 break;
             case DayController.Day.three:
-                UnlockingInteractables(dayThreeInteractable);
+                UnlockingInteractables(dayThreeInteractable, name);
                 break;
             case DayController.Day.fourth:
                 break;
@@ -89,7 +88,7 @@ public class BlockController : MonoBehaviour
         }
     }
 
-    private void UnlockingInteractables(BlockInteractables[] dayInteractables)
+    private void UnlockingInteractables(BlockInteractables[] dayInteractables, string name)
     {
         for (int i = 0; i < dayInteractables.Length; i++)
         {
@@ -105,16 +104,36 @@ public class BlockController : MonoBehaviour
 
     #region unlockall & also by daytime
 
-    public void UnlockAll()
+    public void BlockAll(bool block)
     {
-        for (int i = 0; i < dayOneInteractable.Length; i++)
+        switch (GameManager.GetManager().dayController.GetDayNumber())
         {
-            for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
-            {
-                print("name: "+ dayOneInteractable[i]+" name obj: "+dayOneInteractable[i].locks[e]);
-                dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
-            }
+            case DayController.Day.one:
+                for (int i = 0; i < dayOneInteractable.Length; i++)
+                {
+                    for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+                    {
+                        print("name: " + dayOneInteractable[i] + " name obj: " + dayOneInteractable[i].locks[e]);
+                        dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = block;
+                    }
+                }
+                break;
+            case DayController.Day.two:
+                for (int i = 0; i < dayTwoInteractable.Length; i++)
+                {
+                    for (int e = 0; e < dayTwoInteractable[i].locks.Length; e++)
+                    {
+                        print("name: " + dayTwoInteractable[i] + " name obj: " + dayTwoInteractable[i].locks[e]);
+                        dayTwoInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = block;
+                    }
+                }
+                break;
+            case DayController.Day.three:
+                break;
+            default:
+                break;
         }
+        
     }
 
 

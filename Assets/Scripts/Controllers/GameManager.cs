@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public Computer computer { get; set; }
     #endregion
 
+    public int realizedInteractables;
     public bool programmed;
     public bool alexVisited;
     public GameObject diaDos;
@@ -86,6 +87,25 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void AddInteractable()
+    {
+        realizedInteractables++;
+        if(realizedInteractables >= 5)
+        {
+            int currentTime = (int)dayController.GetTimeDay();
+            if (currentTime >= 3) // Es de noche
+            {
+                blockController.BlockAll(true);
+                blockController.Unlock("");
+            }
+            else
+            {
+                dayController.ChangeDay(++currentTime);
+                realizedInteractables = 0;
+            }
+        }
     }
     #endregion
 }
