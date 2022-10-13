@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public Computer computer { get; set; }
     #endregion
 
+    public bool programmedInteractableDone = false;
     public int realizedInteractables;
     public bool programmed;
     public bool alexVisited;
@@ -100,6 +101,10 @@ public class GameManager : MonoBehaviour
                 blockController.BlockAll(true);
                 blockController.Unlock("Ventanas");
                 blockController.Unlock("Bed");
+                if (programmedInteractableDone)
+                {
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Procrast");
+                }
             }
             else // Cambio de hora
             {

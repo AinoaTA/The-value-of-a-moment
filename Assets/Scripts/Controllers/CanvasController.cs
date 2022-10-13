@@ -8,7 +8,6 @@ public class CanvasController : MonoBehaviour
     {
         GameManager.GetManager().canvasController = this;
         Lock();
-        // Debug.Log("there is a Lock() commented here"); 
     }
 
     public void ComputerScreenOut()

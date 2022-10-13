@@ -136,7 +136,6 @@ public class BlockController : MonoBehaviour
         
     }
 
-
     public void UnlockAll(DayController.DayTime time)
     {
         for (int i = 0; i < dayOneInteractable.Length; i++)

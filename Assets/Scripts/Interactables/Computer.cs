@@ -135,6 +135,7 @@ public class Computer : Interactables
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTrab_PCProgram");
                 GameManager.GetManager().IncrementInteractableCount();
+                GameManager.GetManager().programmedInteractableDone = true;
                 break;
             default: break;
         }
