@@ -36,22 +36,25 @@ public class Mobile : GeneralActions
     }
     private void OpenMobile()
     {
-        if (!getMobile)
-            return;
+        if (!getMobile) return;
 
         if (!active)
         {
-            cursor.gameObject.SetActive(true);
+            cursor.SetActive(true);
             active = true;
             GameManager.GetManager().gameStateController.ChangeGameState(2);
             GameManager.GetManager().canvasController.UnLock(false);
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Unlock");
+            if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+            {
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Chat");
+            }
         }
         else
         {
-            cursor.gameObject.SetActive(false);
+            cursor.SetActive(false);
             active = false;
             GameManager.GetManager().StartThirdPersonCamera();
             GameManager.GetManager().gameStateController.ChangeGameState(1);
@@ -75,7 +78,7 @@ public class Mobile : GeneralActions
         mobileCanvas.blocksRaycasts = val;
         mobileCanvas.interactable = val;
     }
-    int clics;
+
     private void Update()
     {
         if (active && !GameManager.GetManager().programmed)
@@ -84,6 +87,7 @@ public class Mobile : GeneralActions
         }
     }
 
+    //int clics;
     //public void Click()
     //{
     //    if (active)

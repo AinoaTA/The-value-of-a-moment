@@ -60,7 +60,16 @@ public class BitterControl : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
-        GameManager.GetManager().dialogueManager.SetDialogue("PCRedesSociales");
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                GameManager.GetManager().dialogueManager.SetDialogue("PCRedesSociales");
+                break;
+            case DayController.Day.two:
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Bitter");
+                break;
+            default: break;
+        }
     }
 
     #region buttons
