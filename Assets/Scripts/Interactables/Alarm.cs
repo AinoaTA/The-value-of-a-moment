@@ -187,7 +187,7 @@ public class Alarm : MonoBehaviour
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
         GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
-            // casa, ir al ba�o, saludar al gato...
+            // TODO: unlock de los interactables
             GameManager.GetManager().blockController.Unlock("Ventanas");
             GameManager.GetManager().blockController.Unlock("Michi");
             GameManager.GetManager().blockController.Unlock("Ducha");
