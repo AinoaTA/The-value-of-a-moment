@@ -18,6 +18,8 @@ public class Shower : GeneralActions
 
     bool duchado;
 
+    private Vector3 positionOnEnter;
+
     public Animator canvas;
     public TMP_Text[] texts;
     public GameObject showerPos;
@@ -37,6 +39,7 @@ public class Shower : GeneralActions
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
+        positionOnEnter = GameManager.GetManager().playerController.GetPlayerPos();
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
 
         StartCoroutine(ShowOtherOptions());
@@ -51,7 +54,7 @@ public class Shower : GeneralActions
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().playerController.ResetPlayerPos();
+        GameManager.GetManager().playerController.ResetPlayerPos(positionOnEnter);
         base.ExitAction();
 
         string ducha;
