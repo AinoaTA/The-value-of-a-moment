@@ -185,9 +185,16 @@ public class Alarm : MonoBehaviour
     IEnumerator Delay2()
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
+        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
+        {
+            // casa, ir al baño, saludar al gato...
+            GameManager.GetManager().blockController.Unlock("Ventanas");
+        });
         StartAlarm();
     }
+
     #endregion
+
     void Show()
     {
         CanvasAlarm.SetActive(true);
@@ -282,6 +289,7 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
     }
+
     #region Alex Event
     bool unique;
     public void AfirmativoAlex()
@@ -295,6 +303,7 @@ public class Alarm : MonoBehaviour
             StartCoroutine(NormalWakeUp());
         });
     }
+
     bool negated;
     public void NegativeAlex()
     {

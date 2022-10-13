@@ -74,25 +74,32 @@ public class BlockController : MonoBehaviour
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                for (int i = 0; i < dayOneInteractable.Length; i++)
-                {
-                    if (dayOneInteractable[i].name == name)
-                    {
-                        for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
-                            dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
-
-                        return;
-                    }
-                }
+                UnlockingInteractables(dayOneInteractable);
                 break;
             case DayController.Day.two:
+                UnlockingInteractables(dayTwoInteractable);
                 break;
             case DayController.Day.three:
+                UnlockingInteractables(dayThreeInteractable);
                 break;
             case DayController.Day.fourth:
                 break;
             default:
                 break;
+        }
+    }
+
+    private void UnlockingInteractables(BlockInteractables[] dayInteractables)
+    {
+        for (int i = 0; i < dayInteractables.Length; i++)
+        {
+            if (dayInteractables[i].name == name)
+            {
+                for (int e = 0; e < dayInteractables[i].locks.Length; e++)
+                    dayInteractables[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+                
+                return;
+            }
         }
     }
 
