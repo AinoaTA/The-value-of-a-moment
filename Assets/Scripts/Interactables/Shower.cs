@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shower : GeneralActions
 {
+    private float lowAutoConfidenceLimit = 50f;
     #region Extra Actions
     public DoSomething[] moreOptions;
     [System.Serializable]
@@ -38,8 +39,14 @@ public class Shower : GeneralActions
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
-
-        StartCoroutine(ShowOtherOptions());
+        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ducha");
+        }
+        if(GameManager.GetManager().autocontrol.m_currentValue < lowAutoConfidenceLimit)
+        {
+            StartCoroutine(ShowOtherOptions());
+        }
     }
 
     public override void ExitAction()
