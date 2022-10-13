@@ -1,19 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AlexController : MonoBehaviour
+public class AlexController : Interactables
 {
-    private NavMeshAgent navMeshAgent;
     public Transform exitTransform;
 
-    private bool isGone = false, meVes = false, yaVisto = false;
+    private NavMeshAgent navMeshAgent;
+    private bool isGone = false, yaVisto = false;
 
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
+        InteractableBlocked = true;
     }
 
     void Update()
@@ -27,14 +27,34 @@ public class AlexController : MonoBehaviour
         }
     }
 
+    public override void Interaction(int options)
+    {
+        base.Interaction(options);
+        switch (options)
+        {
+            case 1:
+                GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
+                {
+                    yaVisto = true;
+                });
+                break;
+        }
+    }
+
+    public override void ExitInteraction()
+    {
+        base.ExitInteraction();
+    }
+
     private void OnMouseEnter()
     {
+        if (yaVisto) return;
         Debug.Log("Me estas mirando o k puta");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
         {
             yaVisto = true;
+            InteractableBlocked = false;
         });
-        meVes = true;
         StartCoroutine(MePiroDeCasa());
     }
 

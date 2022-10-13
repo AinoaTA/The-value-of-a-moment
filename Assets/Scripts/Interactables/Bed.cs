@@ -224,10 +224,26 @@ public class Bed : Interactables, ITask
                 }
                 break;
             case 2:
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
+                        {
+                            // cambiar de hora
+                            GameManager.GetManager().dayController.ChangeDay(1);
+                            Debug.Log("Al dormir hay cambio de hora. Pasa a ser: " + GameManager.GetManager().dayController.GetTimeDay());
+                        });
+                        break;
+                    case DayController.Day.three:
+                        break;
+
+                }
                 GameManager.GetManager().gameStateController.ChangeGameState(0);
                 GameManager.GetManager().canvasController.Lock();
-
                 StartCoroutine(DelayReset());
+
                 break;
             default:
                 break;
@@ -258,6 +274,11 @@ public class Bed : Interactables, ITask
 
                 break;
             case DayController.Day.two:
+                Debug.Log("Post dormir");
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm1", delegate
+                {
+                    // TODO: en realidad nadá más
+                });
                 break;
             case DayController.Day.three:
                 break;

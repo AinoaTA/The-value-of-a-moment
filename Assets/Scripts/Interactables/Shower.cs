@@ -72,7 +72,6 @@ public class Shower : GeneralActions
                 yield return new WaitForSeconds(1);
                 GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", delegate
                 {
-                   
                     GameManager.GetManager().dayController.ChangeDay(1);
                     GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
                 });
@@ -87,9 +86,8 @@ public class Shower : GeneralActions
             default:
                 break;
         }
-        
-       
     }
+    
     private void Start()
     {
         canvas.SetBool("Showing", true);
