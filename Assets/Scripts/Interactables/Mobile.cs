@@ -36,9 +36,8 @@ public class Mobile : MonoBehaviour //GeneralActions
     //}
     private void OpenMobile()
     {
-        if (!GameManager.GetManager().gameStateController.CheckGameState(2)) return;
-
-        if (!active)
+        //if (!getMobile) return;
+        if (GameManager.GetManager().gameStateController.CheckGameState(1) && !active)
         {
             cursor.SetActive(true);
             active = true;
@@ -51,8 +50,9 @@ public class Mobile : MonoBehaviour //GeneralActions
             {
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Chat");
             }
+
         }
-        else
+        else if (GameManager.GetManager().gameStateController.CheckGameState(2) && active)
         {
             cursor.SetActive(false);
             active = false;
