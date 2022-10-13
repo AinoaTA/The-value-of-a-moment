@@ -8,18 +8,17 @@ public class CanvasController : MonoBehaviour
     {
         GameManager.GetManager().canvasController = this;
         Lock();
-        // Debug.Log("there is a Lock() commented here"); 
     }
 
     public void ComputerScreenOut()
     {
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().canvasController.Lock();
+        GameManager.GetManager().canvasController.Lock(true,false);
     }
     public void ComputerScreenIn()
     {
         GameManager.GetManager().cameraController.StartInteractCam(5);
-        GameManager.GetManager().canvasController.UnLock();
+        GameManager.GetManager().canvasController.UnLock(false, true);
     }
 
     #region mouse pointer state

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,37 +13,44 @@ public class Alarm : MonoBehaviour
     private int counter;
     [SerializeField] private float timer;
     private bool alarmRinging;
-
+    [SerializeField] private bool talking;
     public FMODMusic MusicGameplay;
-
-    //public delegate void DelegateSFX();
-    //public static DelegateSFX m_DelegateSFX;
-
+    public GameObject eventAlex;
     private static FMOD.Studio.EventInstance alarmsfx;
 
     private void Start()
     {
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
-        
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
 
+        if (GameManager.GetManager().dayController.currentDay == DayController.Day.two)
+        {
+            GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
+            GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
+        }
         GameManager.GetManager().playerInputs._FirstInteraction += StartDay;
         GameManager.GetManager().playerInputs._SecondInteraction += BackDay;
     }
 
     private void OnDisable()
     {
+        if (GameManager.GetManager().dayController.currentDay == DayController.Day.two)
+        {
+            GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
+            GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
+        }
+
         GameManager.GetManager().playerInputs._FirstInteraction -= StartDay;
         GameManager.GetManager().playerInputs._SecondInteraction -= BackDay;
     }
 
     private void Update()
     {
-        if (alarm && !alarmRinging)
+        if (alarm && !alarmRinging && !talking)
             timer += Time.deltaTime;
 
         if ((timer > maxTime) && !alarmRinging)
@@ -51,7 +59,7 @@ public class Alarm : MonoBehaviour
 
     private void StartDay()
     {
-        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
+        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
         {
             ResetTime();
             StartCoroutine(NormalWakeUp());
@@ -60,39 +68,94 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0))
+        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
         {
             StillSleeping();
         }
     }
     private void StartAlarm()
     {
+        talking = false;
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                AlarmAndMood();
+                if (counter > 0)
+                    Show();
+                else
+                    GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
+                break;
+            case DayController.Day.two:
+                if (counter > 0)
+                {
+                    AlarmAndMood();
+                    Show();
+                }
+                else
+                GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
+                {
+                    AlarmAndMood();
+                    Show();
+                },forceInvoke:true);
+                break;
+            case DayController.Day.three:
+
+                GameManager.GetManager().dialogueManager.SetDialogue("D3Start", delegate
+                {
+                    AlarmAndMood();
+                    Show();
+                });
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void AlarmAndMood()
+    {
+        talking = false;
         alarmsfx.start();
         MusicGameplay.Mood(0f);
-
-        Show();
-        //NO ME BORRÉIS ESTE IF !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
-        //{
-        //    if(counter>0)
-        //        Show();
-        //    else
-        //        GameManager.GetManager().dialogueManager.StartDialogue("Alarm", delegate { Show(); });
-        //}
     }
+
     public IEnumerator NormalWakeUp()
     {
-        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
+        switch (GameManager.GetManager().dayController.GetDayNumber())
         {
-            string name;
-            if (counter == 0) name = "GetUp1";
-            else name = "GetUp2";
+            case DayController.Day.one:
+                string name = counter == 0 ? "GetUp1" : "GetUp2";
 
-            GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-            {
-                StartCoroutine(Delay());
-            });
+                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
+                {
+                    StartCoroutine(Delay());
+                });
+                break;
+            case DayController.Day.two:
+                if (GameManager.GetManager().alexVisited) yield break;
+                GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
+                {
+                    GameManager.GetManager().alexVisited = true;
+                    StartCoroutine(Delay2());
+                });
+                break;
+
+            case DayController.Day.three:
+                string names;
+                if (counter == 0) names = "D3Start_Op1";
+                else names = "D3Start_Op2a";
+                GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
+                {
+                    StartCoroutine(Delay());
+                });
+
+                break;
+
+            case DayController.Day.fourth:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
@@ -104,18 +167,32 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(true);
         alarm = false;
         ResetTime();
-
     }
     #region dialogues helps
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate 
+        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
             GameManager.GetManager().blockController.Unlock("Ventanas");
         });
     }
+
+    IEnumerator Delay2()
+    {
+        yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
+        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
+        {
+            // TODO: unlock de los interactables
+            GameManager.GetManager().blockController.Unlock("Ventanas");
+            GameManager.GetManager().blockController.Unlock("Michi");
+            GameManager.GetManager().blockController.Unlock("Ducha");
+        });
+        StartAlarm();
+    }
+
     #endregion
+
     void Show()
     {
         CanvasAlarm.SetActive(true);
@@ -125,20 +202,57 @@ public class Alarm : MonoBehaviour
     public void StillSleeping()
     {
         alarmRinging = false;
-
-        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.one)
+        talking = true;
+        string name;
+        switch (GameManager.GetManager().dayController.GetDayNumber())
         {
-            string name = "alarm";
-            if (counter == 0) name = "Alarm2";
-            else name = "Alarm3";
+            case DayController.Day.one:
+                //string name = "alarm";
+                name = counter == 0 ? "Alarm2" : "Alarm3";
 
-            GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-            {
-                StartAlarm();
-            });
+                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
+                {
+                    StartAlarm();
+                });
 
-            if (counter >= 2)
-                StartAlarm();
+                if (counter >= 2)
+                    StartAlarm();
+                break;
+            case DayController.Day.two:
+
+                if (counter == 0) name = "D2Alarm_Op2";
+                else if (counter == 1) name = "D2Alarm_Op3";
+                else name = "D2Alarm_Op3";
+
+                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
+                {
+                    if (name == "D2Alarm_Op3" && !negated)
+                    {
+                        eventAlex.gameObject.SetActive(true);
+                        unique = true;
+                    }
+                    else
+                    {
+                        StartAlarm();
+                    }
+                },forceInvoke:true);
+
+                break;
+            case DayController.Day.three:
+                name = "D3Start_Op2";
+                if (counter == 0) name = "D3Start_Op2b";
+                else name = "Alarm3";
+
+                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
+                {
+                    if (name != "Alarm3")
+                        StartAlarm();
+                    else
+                        print("BAD EEEEEEEEEEEEEND");
+
+                });
+                break;
+
         }
         counter++;
 
@@ -148,7 +262,6 @@ public class Alarm : MonoBehaviour
 
         GameManager.GetManager().gameStateController.ChangeGameState(0);
         GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
-
     }
 
     public bool GetIsActive()
@@ -174,4 +287,33 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
     }
+
+    #region Alex Event
+    bool unique;
+    public void AfirmativoAlex()
+    {
+        if (!eventAlex.activeSelf && !unique) return;
+        unique = false;
+        eventAlex.SetActive(false);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
+        {
+            GameManager.GetManager().alexVisited = true;
+            StartCoroutine(NormalWakeUp());
+        });
+    }
+
+    bool negated;
+    public void NegativeAlex()
+    {
+        if (!eventAlex.activeSelf && !unique) return;
+        unique = false;
+        eventAlex.SetActive(false);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op2", delegate
+        {
+            negated = true;
+            GameManager.GetManager().autocontrol.RemoveAutoControl(5);
+            StillSleeping();
+        });
+    }
+    #endregion
 }

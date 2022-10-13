@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class Mobile : GeneralActions
+public class Mobile : MonoBehaviour //GeneralActions
 {
     [SerializeField] private bool getMobile;
     [SerializeField] private GameObject realMobile;
@@ -11,44 +11,51 @@ public class Mobile : GeneralActions
     bool active = false;
     private void Start()
     {
-        col = GetComponent<BoxCollider>();
+        // col = GetComponent<BoxCollider>();
         GameManager.GetManager().playerInputs._Mobile += OpenMobile;
+
+        //GameManager.GetManager().playerInputs._Clics += Click;
     }
 
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
+        //GameManager.GetManager().playerInputs._Clics -= Click;
     }
-    public override void EnterAction()
-    {
-        if (!getMobile) GetMobile();
-    }
+    //public /*override*/ void EnterAction()
+    //{
+    //    if (!getMobile) GetMobile();
+    //}
 
-    private void GetMobile()
-    {
-        realMobile.SetActive(false);
-        getMobile = true;
-        col.enabled = false;
+    //private void GetMobile()
+    //{
+    //    realMobile.SetActive(false);
+    //    getMobile = true;
+    //    col.enabled = false;
 
-    }
+    //}
     private void OpenMobile()
     {
-        if (!getMobile)
-            return;
-
-        if (!active)
+        //if (!getMobile) return;
+        if (GameManager.GetManager().gameStateController.CheckGameState(1) && !active)
         {
-            cursor.gameObject.SetActive(true);
+            cursor.SetActive(true);
             active = true;
             GameManager.GetManager().gameStateController.ChangeGameState(2);
             GameManager.GetManager().canvasController.UnLock(false);
             GameManager.GetManager().cameraController.Block3DMovement(false);
             CanvasMobile(true);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Unlock");
+            if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+            {
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Chat");
+                GameManager.GetManager().IncrementInteractableCount();
+            }
+
         }
-        else
+        else if (GameManager.GetManager().gameStateController.CheckGameState(2) && active)
         {
-            cursor.gameObject.SetActive(false);
+            cursor.SetActive(false);
             active = false;
             GameManager.GetManager().StartThirdPersonCamera();
             GameManager.GetManager().gameStateController.ChangeGameState(1);
@@ -75,7 +82,7 @@ public class Mobile : GeneralActions
 
     private void Update()
     {
-        if (active)
+        if (active)/* && !GameManager.GetManager().programmed)*/
             cursor.transform.position = Input.mousePosition;
     }
 }

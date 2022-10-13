@@ -15,7 +15,7 @@ public class MobileController : MonoBehaviour
         currChat.gameObject.SetActive(true);
 
         if (!currChat.CheckDay()) return;
-            
+
         if (currChat.interactiveChat && currChat.CanStartNewChat())
         {
             currChat.StartNewChat();

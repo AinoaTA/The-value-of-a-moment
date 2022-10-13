@@ -9,11 +9,14 @@ public class Trash : GeneralActions
     public Transform target;
     private Vector3 initPos;
     private float grabbingSpeed = 10f;
-    private bool grabbing = false;
+    private bool grabbing;
+    private bool onlySpeakOnce;
 
     private void Start()
     {
         initPos = transform.position;
+        grabbing = false;
+        onlySpeakOnce = true;
     }
 
     public override void EnterAction()
@@ -21,6 +24,12 @@ public class Trash : GeneralActions
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes PickUp", transform.position);
         grabbing = true;
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
+        GameManager.GetManager().dialogueManager.SetDialogue("IRecogerHabitacion");
+        if (onlySpeakOnce && GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Basura");
+            onlySpeakOnce = false;
+        }
     }
 
     private void Update()

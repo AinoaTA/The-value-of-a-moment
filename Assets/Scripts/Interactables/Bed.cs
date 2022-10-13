@@ -162,6 +162,21 @@ public class Bed : Interactables, ITask
 
     public void BedDone()
     {
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                if ((int)GameManager.GetManager().dayController.dayState == 1)
+                    GameManager.GetManager().blockController.LockSpecific("Bed");
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed Made", transform.position);
         gameInitialized = false;
         minigameCanvas.SetActive(false);
@@ -206,13 +221,34 @@ public class Bed : Interactables, ITask
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
+                    if(GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_HacerCam");
+                    }
                 }
                 break;
             case 2:
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
+                        {
+                            // cambiar de hora
+                            GameManager.GetManager().dayController.ChangeDay(1);
+                            Debug.Log("Al dormir hay cambio de hora. Pasa a ser: " + GameManager.GetManager().dayController.GetTimeDay());
+                            GameManager.GetManager().ResetInteractable();
+                        });
+                        break;
+                    case DayController.Day.three:
+                        break;
+
+                }
                 GameManager.GetManager().gameStateController.ChangeGameState(0);
                 GameManager.GetManager().canvasController.Lock();
-
                 StartCoroutine(DelayReset());
+
                 break;
             default:
                 break;
@@ -231,7 +267,29 @@ public class Bed : Interactables, ITask
     {
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
+        bool wait = true;
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                print("Hola");
+                GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
+                {
+                    wait = false;
+                });
 
+                break;
+            case DayController.Day.two:
+                Debug.Log("Post dormir");
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm1");
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+        yield return new WaitWhile(() => wait);
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();
         GameManager.GetManager().calendarController.GlobalReset();
@@ -245,6 +303,7 @@ public class Bed : Interactables, ITask
         GameManager.GetManager().autocontrol.AutocontrolSleep();
         GameManager.GetManager().dayController.NewDay();
         GameManager.GetManager().alarm.SetAlarmActive();
+        GameManager.GetManager().ToActive();
     }
 
     public override void ExitInteraction()
