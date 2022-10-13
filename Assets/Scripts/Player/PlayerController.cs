@@ -130,4 +130,28 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.transform.position = position;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("PuertaAida")) return;
+
+        if (!GameManager.GetManager().checkAida)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("D2PuertAida_RescMino", delegate
+            {
+                StartCoroutine(ChangeCheckAida());
+            });
+        }
+        else GameManager.GetManager().dialogueManager.SetDialogue("D2EsTarde_PuertAida");
+    }
+
+    IEnumerator ChangeCheckAida()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+        GameManager.GetManager().checkAida = true;
+
+        yield return new WaitForSecondsRealtime(10f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2EsTarde");
+    }
+
 }

@@ -37,8 +37,7 @@ public class GameManager : MonoBehaviour
 
     public bool programmedInteractableDone = false;
     public int realizedInteractables;
-    public bool programmed;
-    public bool alexVisited;
+    public bool programmed, alexVisited, checkAida;
     public GameObject diaDos;
 
     private void OnEnable()
@@ -125,19 +124,26 @@ public class GameManager : MonoBehaviour
     IEnumerator Timbre(string dialogue)
     {
         yield return new WaitForSecondsRealtime(4f);
-        // Hacer sonar el timbre
+        // TODO: Hacer sonar el timbre
+
+        yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue(dialogue);
     }
 
     IEnumerator Llaves()
     {
         yield return new WaitForSecondsRealtime(4f);
-        // Que suenen las llaves
+        // TODO: Que suenen las llaves
+
         yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue("D2MundoAida");
+
         yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue("D2Epilogod2");
+
         yield return new WaitForSecondsRealtime(4f);
+        // TODO: Sonido de cerrar la puerta
+
     }
     #endregion
 }
