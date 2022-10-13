@@ -221,6 +221,10 @@ public class Bed : Interactables, ITask
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
+                    if(GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_HacerCam");
+                    }
                 }
                 break;
             case 2:
@@ -275,10 +279,7 @@ public class Bed : Interactables, ITask
                 break;
             case DayController.Day.two:
                 Debug.Log("Post dormir");
-                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm1", delegate
-                {
-                    // TODO: en realidad nadá más
-                });
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm1");
                 break;
             case DayController.Day.three:
                 break;

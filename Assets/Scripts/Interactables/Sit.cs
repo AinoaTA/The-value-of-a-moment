@@ -35,7 +35,18 @@ public class Sit : GeneralActions
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
-
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                break;
+            case DayController.Day.two:
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Sofa");
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+        }
         StartCoroutine(ShowOtherOptions());
     }
 

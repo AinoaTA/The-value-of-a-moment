@@ -24,23 +24,36 @@ public class TV : Interactables
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 screen.SetActive(true);
 
-
-                switch (GameManager.GetManager().dayController.GetTimeDay())
+                switch (GameManager.GetManager().dayController.GetDayNumber())
                 {
-                    case DayController.DayTime.Manana:
+                    case DayController.Day.one:
+                        switch (GameManager.GetManager().dayController.GetTimeDay())
+                        {
+                            case DayController.DayTime.Manana:
+                                break;
+                            case DayController.DayTime.MedioDia:
+                                GameManager.GetManager().dialogueManager.SetDialogue("ICocina", canRepeat: true);
+                                break;
+                            case DayController.DayTime.Tarde:
+                                GameManager.GetManager().dialogueManager.SetDialogue("ICocina", canRepeat: true);
+                                break;
+                            case DayController.DayTime.Noche:
+                                GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat: true);
+                                break;
+                            default:
+                                break;
+                        }
                         break;
-                    case DayController.DayTime.MedioDia:
-                        GameManager.GetManager().dialogueManager.SetDialogue("ICocina", canRepeat: true);
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_TV");
                         break;
-                    case DayController.DayTime.Tarde:
-                        GameManager.GetManager().dialogueManager.SetDialogue("ICocina", canRepeat: true);
+                    case DayController.Day.three:
                         break;
-                    case DayController.DayTime.Noche:
-                        GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat: true);
-                        break;
-                    default:
+                    case DayController.Day.fourth:
                         break;
                 }
+
+                
                 InteractableBlocked = true;
                 GameManager.GetManager().dayController.TaskDone();
                 break;
@@ -58,7 +71,7 @@ public class TV : Interactables
     public void ChangeChannel()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh", transform.position);
-        // 1 función para subir o bajar canal o 2 funciones
+        // 1 funciï¿½n para subir o bajar canal o 2 funciones
         currChannel++;
         // Set screen to channels[currChannel]
     }
