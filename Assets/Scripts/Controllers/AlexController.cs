@@ -9,13 +9,11 @@ public class AlexController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public Transform exitTransform;
 
-    private bool isGone;
+    private bool isGone = false, meVes = false, yaVisto = false;
 
     void Start()
     {
-        isGone = false;
         navMeshAgent = this.GetComponent<NavMeshAgent>();
-        ATuCasa();
     }
 
     void Update()
@@ -29,8 +27,21 @@ public class AlexController : MonoBehaviour
         }
     }
 
-    private void ATuCasa()
+    private void OnMouseEnter()
     {
+        Debug.Log("Me estas mirando o k puta");
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
+        {
+            yaVisto = true;
+        });
+        meVes = true;
+        StartCoroutine(MePiroDeCasa());
+    }
+
+    private IEnumerator MePiroDeCasa()
+    {
+        yield return new WaitForSecondsRealtime(4);
+        Debug.Log("Me voy");
         navMeshAgent.SetDestination(exitTransform.position);
     }
 }
