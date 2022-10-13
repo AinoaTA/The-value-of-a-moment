@@ -133,6 +133,11 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(4f);
         // Que suenen las llaves
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2MundoAida");
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Epilogod2");
+        yield return new WaitForSecondsRealtime(4f);
     }
     #endregion
 }
