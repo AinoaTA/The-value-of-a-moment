@@ -138,7 +138,7 @@ public class Alarm : MonoBehaviour
                 GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
                 {
                     GameManager.GetManager().alexVisited = true;
-                    StartCoroutine(Delay());
+                    StartCoroutine(Delay2());
                 });
                 break;
 
@@ -187,8 +187,10 @@ public class Alarm : MonoBehaviour
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
         GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
-            // casa, ir al baño, saludar al gato...
+            // casa, ir al baï¿½o, saludar al gato...
             GameManager.GetManager().blockController.Unlock("Ventanas");
+            GameManager.GetManager().blockController.Unlock("Michi");
+            GameManager.GetManager().blockController.Unlock("Ducha");
         });
         StartAlarm();
     }
