@@ -4,12 +4,12 @@ public class Ducharse : Interactables
 {
     public override void ExtraInteraction()
     {
-        InteractableBlocked = true;
-        GameManager.GetManager().dayController.TaskDone();
+        //InteractableBlocked = true;
+        //GameManager.GetManager().dayController.TaskDone();
     }
 
     public override void EndExtraInteraction()
     {
-        print("ya no mas ducha");
+        //print("ya no mas ducha");
     }
 }

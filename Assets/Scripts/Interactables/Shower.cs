@@ -42,24 +42,27 @@ public class Shower : GeneralActions
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         positionOnEnter = GameManager.GetManager().playerController.GetPlayerPos();
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
+        duchado = true;
         if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
         {
             GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ducha");
+
         }
-        if(GameManager.GetManager().autocontrol.m_currentValue < lowAutoConfidenceLimit)
+        if (GameManager.GetManager().autocontrol.m_currentValue < lowAutoConfidenceLimit)
         {
-            StartCoroutine(ShowOtherOptions());
+            //StartCoroutine(ShowOtherOptions());
         }
     }
 
     public override void ExitAction()
     {
         InteractableBlocked = true;
+        GameManager.GetManager().dayController.TaskDone();
         Debug.Log("IF pendiente de revisar......");
-        if (GameManager.GetManager().interactableManager.currInteractable != null)
-            GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
+        //if (GameManager.GetManager().interactableManager.currInteractable != null)
+        //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-        canvas.SetBool("Showing", false);
+       // canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().playerController.ResetPlayerPos(positionOnEnter);
         base.ExitAction();
@@ -73,7 +76,7 @@ public class Shower : GeneralActions
             StartCoroutine(Delay());
         });
     }
-    IEnumerator Delay() 
+    IEnumerator Delay()
     {
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
@@ -97,25 +100,31 @@ public class Shower : GeneralActions
                 break;
         }
     }
-    
+
     private void Start()
     {
-        canvas.SetBool("Showing", true);
+       // canvas.SetBool("Showing", true);
     }
 
     IEnumerator ShowOtherOptions()
     {
-        for (int i = 0; i < texts.Length; i++)
-            texts[i].text = moreOptions[i].canvasText;
+        yield return null;
+        //for (int i = 0; i < texts.Length; i++)
+        //    texts[i].text = moreOptions[i].canvasText;
 
-        yield return new WaitForSeconds(1f);
-        canvas.gameObject.SetActive(true);
-        canvas.SetBool("Showing", true);
+        //yield return new WaitForSeconds(1f);
+        //canvas.gameObject.SetActive(true);
+        //canvas.SetBool("Showing", true);
     }
 
     public override void DoInteraction(int id)
     {
-        if (id == 0) duchado = true;
-        StartExtraInteraction(id);
+        //if (id == 0) duchado = true;
+        //StartExtraInteraction(id);
+    }
+    public override void ResetObject()
+    {
+        duchado = false;
+        base.ResetObject();
     }
 }

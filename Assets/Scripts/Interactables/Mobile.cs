@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class Mobile : GeneralActions
+public class Mobile : MonoBehaviour //GeneralActions
 {
     [SerializeField] private bool getMobile;
     [SerializeField] private GameObject realMobile;
@@ -11,7 +11,7 @@ public class Mobile : GeneralActions
     bool active = false;
     private void Start()
     {
-        col = GetComponent<BoxCollider>();
+        // col = GetComponent<BoxCollider>();
         GameManager.GetManager().playerInputs._Mobile += OpenMobile;
 
         //GameManager.GetManager().playerInputs._Clics += Click;
@@ -22,21 +22,21 @@ public class Mobile : GeneralActions
         GameManager.GetManager().playerInputs._Mobile -= OpenMobile;
         //GameManager.GetManager().playerInputs._Clics -= Click;
     }
-    public override void EnterAction()
-    {
-        if (!getMobile) GetMobile();
-    }
+    //public /*override*/ void EnterAction()
+    //{
+    //    if (!getMobile) GetMobile();
+    //}
 
-    private void GetMobile()
-    {
-        realMobile.SetActive(false);
-        getMobile = true;
-        col.enabled = false;
+    //private void GetMobile()
+    //{
+    //    realMobile.SetActive(false);
+    //    getMobile = true;
+    //    col.enabled = false;
 
-    }
+    //}
     private void OpenMobile()
     {
-        if (!getMobile) return;
+        if (!GameManager.GetManager().gameStateController.CheckGameState(2)) return;
 
         if (!active)
         {
@@ -81,21 +81,7 @@ public class Mobile : GeneralActions
 
     private void Update()
     {
-        if (active && !GameManager.GetManager().programmed)
-        {
+        if (active)/* && !GameManager.GetManager().programmed)*/
             cursor.transform.position = Input.mousePosition;
-        }
     }
-
-    //int clics;
-    //public void Click()
-    //{
-    //    if (active)
-    //    {
-    //        clics++;
-    //        print(clics);
-    //        if (clics >= 5)
-    //            GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar");
-    //    }
-    //}
 }

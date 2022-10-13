@@ -22,12 +22,11 @@ public class DayController : MonoBehaviour
     {
         counter = 0;
         counterTaskDay = 0;
-        ChangeDay(1);
+        ChangeDay(0);
     }
 
     public void ChangeDay(int newState)
     {
-        print("ME ESTAS JODIENDO");
         anims.SetInteger("time", (int)newState);
         dayState= (DayTime)newState;
         counterTaskDay = 0;
