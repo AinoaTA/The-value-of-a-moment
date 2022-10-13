@@ -34,6 +34,7 @@ public class Email : MonoBehaviour
     [SerializeField] TMP_Text[] paragraphsRecieve;
     [SerializeField] MailRecieve[] mailsRecieve;
     [SerializeField] GameObject notification;
+    [SerializeField] DayController.Day day;
     private void Start()
     {
         notification.SetActive(false);
@@ -42,11 +43,14 @@ public class Email : MonoBehaviour
             stringsParagraphs.Add(paragraphs[i].text.ToString());
 
     }
+    public int one;
     public void OpenEmail()
     {
-        if (blockWarning) return;
-        
-        GameManager.GetManager().emailController.mail = this;
+        if (blockWarning || day != GameManager.GetManager().dayController.GetDayNumber()) return;
+
+        //GameManager.GetManager().emailController.mail = this;
+
+        GameManager.GetManager().emailController.CloseOthers(this);
         emailContent.SetActive(true);
         if (isWrote)
         {
@@ -109,5 +113,11 @@ public class Email : MonoBehaviour
         mail = autocontrolEarned < 10 ? mail = mailsRecieve[0] : mail = mailsRecieve[1];
         for (int i = 0; i < mail.messagesParagraph.Length; i++)
             paragraphsRecieve[i].text = mail.messagesParagraph[i];
+    }
+
+    public void Close() 
+    {
+        writtingContent.SetActive(false);
+        emailContent.SetActive(false);
     }
 }

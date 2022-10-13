@@ -68,12 +68,17 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     }
     private IEnumerator GameFinished()
     {
-        GameManager.GetManager().dayController.TaskDone();
+        GameManager.GetManager().programmed = true;
         CheckDoneTask();
+        GameManager.GetManager().dayController.TaskDone();
         GameManager.GetManager().autocontrol.AddAutoControl(m_Autocontrol);
 
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().computer.ComputerON();
+        GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
+        {
+            GameManager.GetManager().dayController.ChangeDay(3);
+        });
     }
 
     public void QuitMiniGame()
@@ -81,7 +86,6 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         allCorrect = false;
         GameManager.GetManager().computer.ComputerON(); //back to menu pc screen
     }
-
 
     public void CheckSolutions()
     {
@@ -107,7 +111,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
         {
             allPieces[i].ResetPiece();
         }
-        //gameInitialized = false;
+        GameManager.GetManager().programmed = false;
     }
     public bool GetSolved() { return allCorrect; }
 

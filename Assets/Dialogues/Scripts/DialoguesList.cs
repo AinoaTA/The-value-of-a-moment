@@ -5,12 +5,12 @@ using UnityEngine;
 public class DialoguesList : ScriptableObject
 {
     public TextAsset dialoguesFile;
-    public string voicesPath = "";
-    public string voicesPathEn = "";
+    //public string voicesPath = "";
+    //public string voicesPathEn = "";
     public List<DialogueJSON> dialogues;
 
     private Dictionary<string, DialogueJSON> dialoguesDictionary;
-
+    
     void Init()
     {
         dialoguesDictionary = new Dictionary<string, DialogueJSON>();
@@ -18,7 +18,7 @@ public class DialoguesList : ScriptableObject
             dialoguesDictionary[dialogue.id] = dialogue;
     }
 
-    public DialogueJSON GetDialogue(string dialogue) 
+    public DialogueJSON GetDialogue(string dialogue)
     {
         if (dialoguesDictionary == null) Init();
         return dialoguesDictionary[dialogue];

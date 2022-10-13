@@ -26,7 +26,7 @@ public class WaterCan : MonoBehaviour
     private void OnMouseDown()
     {
         water.start();
-        water.release();
+        //water.release();
         particles.Play();
         GrowUpParticle.Stop();
     }

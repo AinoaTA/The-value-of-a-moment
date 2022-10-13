@@ -10,7 +10,7 @@ public class Interruptor : GeneralActions
 
     private void Start()
     {
-        textDisplay.text = "E Encender";
+        textDisplay.text = "[E] Encender";
         foreach (var light in lights.GetComponentsInChildren<Light>())
             light.intensity = minLight;
     }
@@ -51,11 +51,11 @@ public class Interruptor : GeneralActions
     {
         if (isLightOn)
         {
-            textDisplay.text = "E Apagar";
+            textDisplay.text = "[E] Apagar";
         }
         else
         {
-            textDisplay.text = "E Encender";
+            textDisplay.text = "[E] Encender";
         }
     }
 }

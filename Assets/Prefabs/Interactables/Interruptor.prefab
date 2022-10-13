@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5604794179397853830}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.768, y: 1.043, z: -3.967}
   m_LocalScale: {x: 0.52546, y: 0.52546, z: 0.52546}
   m_Children:
@@ -98,22 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668e5fcd018f5b146868cb0e44004fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  options: 1
-  m_Done: 0
-  m_PhrasesVoiceOff: []
-  m_HelpPhrasesVoiceOff: []
-  m_AnswersToVoiceOff: []
-  m_InteractPhrases: []
-  m_MaxAutoControl: 0
-  m_MiddleAutoControl: 0
-  m_MinAutoControl: 0
-  m_ExtraAutoControlCalendar: 0
-  taskAssociated: {fileID: 0}
+  _blocked: 0
   OptionsCanvas: {fileID: 7501171438221004990}
   anim: {fileID: 219147797065242912}
-  showing: 0
+  nameAction: 
   lights: {fileID: 0}
   textDisplay: {fileID: 1039108592022149281}
+  minLight: 11000
+  maxLight: 30000
 --- !u!65 &8248532050120286010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -184,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2840836740476678654, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.019
+      value: 0.086
       objectReference: {fileID: 0}
     - target: {fileID: 2840836740476678654, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -206,9 +198,17 @@ PrefabInstance:
       propertyPath: m_text
       value: E  Encender
       objectReference: {fileID: 0}
+    - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8385343218414402340, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8877056741370716140, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}
       propertyPath: m_text
-      value: '[Q] Apagar'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 333a08d98257dfc46880b5f45e05b06b, type: 3}

@@ -7,34 +7,33 @@ public class CanvasController : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().canvasController = this;
-        //Lock();
-        Debug.Log("there is a Lock() commented here"); 
+        Lock();
     }
 
     public void ComputerScreenOut()
     {
         GameManager.GetManager().StartThirdPersonCamera();
-        GameManager.GetManager().canvasController.Lock();
+        GameManager.GetManager().canvasController.Lock(true,false);
     }
     public void ComputerScreenIn()
     {
         GameManager.GetManager().cameraController.StartInteractCam(5);
-        GameManager.GetManager().canvasController.UnLock();
+        GameManager.GetManager().canvasController.UnLock(false, true);
     }
 
     #region mouse pointer state
-    public void Lock(bool showPointer = true)
+    public void Lock(bool showPointer = true, bool showMouse = false)
     {
         Pointer.SetActive(showPointer);
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = showMouse;
     }
 
-    public void UnLock()
+    public void UnLock(bool showPointer = true, bool showMouse = false)
     {
-        Pointer.SetActive(false);
+        Pointer.SetActive(showPointer);
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        Cursor.visible = showMouse;
     }
     #endregion
 

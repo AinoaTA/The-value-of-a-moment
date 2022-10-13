@@ -9,7 +9,7 @@ public class DrumInstrument : MonoBehaviour
     public Material wrongMaterial;
     public float mantainStateTime = 1;
 
-    MeshRenderer mesh;
+    public MeshRenderer mesh;
     Material normalMaterial;
     Collider instrumentCollider;
     bool specialState = false;
@@ -19,12 +19,9 @@ public class DrumInstrument : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mesh = GetComponent<MeshRenderer>();
         instrumentCollider = GetComponent<Collider>();
         normalMaterial = mesh.material;
     }
-
-
 
     public void Enable(bool enabled)
     {

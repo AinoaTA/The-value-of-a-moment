@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shower : GeneralActions
 {
+    private float lowAutoConfidenceLimit = 50f;
     #region Extra Actions
     public DoSomething[] moreOptions;
     [System.Serializable]
@@ -16,8 +17,13 @@ public class Shower : GeneralActions
         //dialogues xdxd
     }
 
+    bool duchado;
+
+    private Vector3 positionOnEnter;
+
     public Animator canvas;
     public TMP_Text[] texts;
+    public GameObject showerPos;
 
     void StartExtraInteraction(int id)
     {
@@ -34,39 +40,91 @@ public class Shower : GeneralActions
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
-
-        StartCoroutine(ShowOtherOptions());
+        positionOnEnter = GameManager.GetManager().playerController.GetPlayerPos();
+        GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
+        duchado = true;
+        if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ducha");
+            GameManager.GetManager().IncrementInteractableCount();
+        }
+        if (GameManager.GetManager().autocontrol.m_currentValue < lowAutoConfidenceLimit)
+        {
+            //StartCoroutine(ShowOtherOptions());
+        }
     }
 
     public override void ExitAction()
     {
+        InteractableBlocked = true;
+        GameManager.GetManager().dayController.TaskDone();
         Debug.Log("IF pendiente de revisar......");
-        if (GameManager.GetManager().interactableManager.currInteractable != null)
-            GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
+        //if (GameManager.GetManager().interactableManager.currInteractable != null)
+        //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-        canvas.SetBool("Showing", false);
+       // canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
+        GameManager.GetManager().playerController.ResetPlayerPos(positionOnEnter);
         base.ExitAction();
+
+        string ducha;
+        if (!duchado) ducha = "DuchaNo";
+        else ducha = "DuchaSi";
+
+        GameManager.GetManager().dialogueManager.SetDialogue(ducha, delegate
+        {
+            StartCoroutine(Delay());
+        });
+    }
+    IEnumerator Delay()
+    {
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                canvas.gameObject.SetActive(false);
+                yield return new WaitForSeconds(1);
+                GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", delegate
+                {
+                    GameManager.GetManager().dayController.ChangeDay(1);
+                    GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
+                });
+
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
     }
 
     private void Start()
     {
-        canvas.SetBool("Showing", true);
+       // canvas.SetBool("Showing", true);
     }
 
     IEnumerator ShowOtherOptions()
     {
-        for (int i = 0; i < texts.Length; i++)
-            texts[i].text = moreOptions[i].canvasText;
+        yield return null;
+        //for (int i = 0; i < texts.Length; i++)
+        //    texts[i].text = moreOptions[i].canvasText;
 
-        yield return new WaitForSeconds(1f);
-
-        canvas.SetBool("Showing", true);
+        //yield return new WaitForSeconds(1f);
+        //canvas.gameObject.SetActive(true);
+        //canvas.SetBool("Showing", true);
     }
 
     public override void DoInteraction(int id)
     {
-        Debug.Log("Parece funcionar....");
-        StartExtraInteraction(id);
+        //if (id == 0) duchado = true;
+        //StartExtraInteraction(id);
+    }
+    public override void ResetObject()
+    {
+        duchado = false;
+        base.ResetObject();
     }
 }

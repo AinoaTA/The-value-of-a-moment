@@ -15,6 +15,7 @@ namespace Calendar
         [SerializeField] private GameObject calendar, warning;
         [SerializeField] private MobileCalendar mobileCalendar;
         [HideInInspector] public bool modified;
+
         private void Awake()
         {
             calendarInformation = new Dictionary<TaskType, SpaceCalendar>();
@@ -31,10 +32,12 @@ namespace Calendar
             allTask.Add(_task);
 
         }
+
         private void Start()
         {
             GameManager.GetManager().calendarController = this;
         }
+
         public void BackCalendar()
         {
             if (warning.activeSelf)
@@ -42,10 +45,14 @@ namespace Calendar
             calendar.SetActive(false);
             GameManager.GetManager().computer.ComputerON();
         }
+        
         public void SaveCalendar()
         {
             if (!modified)
             {
+
+                GameManager.GetManager().dayController.TaskDone();
+
                 modified = true;
                 warning.SetActive(false);
                 for (int a = 0; a < allTimeTable.Count; a++)
@@ -60,13 +67,17 @@ namespace Calendar
         {
             return calendarInformation.ContainsKey(t);
         }
+
         public void GetTaskReward(ITask t)
         {
             if (CheckReward(t.taskAssociated) && t.taskCompleted)
                 t.RewardedTask();
         }
 
-        public void ShowCalendar() { calendar.SetActive(true); }
+        public void ShowCalendar()
+        {
+            calendar.SetActive(true);
+        }
 
         public void ShowWarning(bool v)
         {

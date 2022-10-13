@@ -95,7 +95,6 @@ public class Bed : Interactables, ITask
             initPosBadSheet = m_SheetBad.transform.position;
             minDesplacement = m_SheetBad.transform.position.x;
         }
-
     }
 
     void OnMouseDrag()
@@ -163,15 +162,31 @@ public class Bed : Interactables, ITask
 
     public void BedDone()
     {
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                if ((int)GameManager.GetManager().dayController.dayState == 1)
+                    GameManager.GetManager().blockController.LockSpecific("Bed");
+                break;
+            case DayController.Day.two:
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Bed Made", transform.position);
         gameInitialized = false;
         minigameCanvas.SetActive(false);
         interactDone = true;
         cam.cullingMask = -1;
         CheckDoneTask();
+        OptionComplete();
         m_Sheet.SetActive(true);
         badBed.SetActive(false);
-        interactTextBed.SetActive(false);
+        //interactTextBed.SetActive(false);
         sleepTextBed.transform.localPosition = lastPosDormirText;
         GameManager.GetManager().dayController.TaskDone();
         GameManager.GetManager().StartThirdPersonCamera();
@@ -200,18 +215,40 @@ public class Bed : Interactables, ITask
                 if (!interactDone)
                 {
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
+                    SetCanvasValue(false);
                     gameInitialized = true;
-                    GameManager.GetManager().canvasController.UnLock();
+                    GameManager.GetManager().canvasController.Lock();
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
+                    if(GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_HacerCam");
+                    }
                 }
                 break;
             case 2:
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
+                        {
+                            // cambiar de hora
+                            GameManager.GetManager().dayController.ChangeDay(1);
+                            Debug.Log("Al dormir hay cambio de hora. Pasa a ser: " + GameManager.GetManager().dayController.GetTimeDay());
+                            GameManager.GetManager().ResetInteractable();
+                        });
+                        break;
+                    case DayController.Day.three:
+                        break;
+
+                }
                 GameManager.GetManager().gameStateController.ChangeGameState(0);
                 GameManager.GetManager().canvasController.Lock();
-
                 StartCoroutine(DelayReset());
+
                 break;
             default:
                 break;
@@ -228,42 +265,45 @@ public class Bed : Interactables, ITask
 
     private IEnumerator DelayReset()
     {
-        //GameManager.GetManager().soundController.QuitAllMusic();
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
         yield return new WaitForSeconds(0.5f);
+        bool wait = true;
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                print("Hola");
+                GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
+                {
+                    wait = false;
+                });
 
+                break;
+            case DayController.Day.two:
+                Debug.Log("Post dormir");
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm1");
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+        yield return new WaitWhile(() => wait);
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();
-        //GameManager.GetManager().Dialogue.StopDialogue();
-        //GameManager.GetManager().Window.ResetWindow();
         GameManager.GetManager().calendarController.GlobalReset();
         GameManager.GetManager().programMinigame.ResetAllGame();
-        //GameManager.GetManager().bucket.ResetInteractable();
-        //GameManager.GetManager().Mirror.ResetInteractable();
-        //GameManager.GetManager().ResetTrash();
-        //GameManager.GetManager().Book.ResetInteractable();
-        //GameManager.GetManager().VR.ResetVRDay();
 
         GameManager.GetManager().interactableManager.ResetAll();
+        GameManager.GetManager().actionObjectManager.ResetAll();
 
-        //for (int i = 0; i < GameManager.GetManager().trashes.Count; i++)
-        //{
-        //    GameManager.GetManager().trashes[i].gameObject.SetActive(true);
-        //    GameManager.GetManager().trashes[i].ResetInteractable();
-        //}
-
-        //for (int i = 0; i < GameManager.GetManager().Plants.Count; i++)
-        //{
-        //    GameManager.GetManager().Plants[i].NextDay();
-        //    GameManager.GetManager().Plants[i].ResetInteractable();
-        //}
-        //no borrar hasta que estan tooooooodas las animaciones colocadas aqui.
-        Debug.Log("NO FORGET: actions to reset.");
         ResetBed();
         yield return new WaitForSeconds(2);
         GameManager.GetManager().autocontrol.AutocontrolSleep();
         GameManager.GetManager().dayController.NewDay();
-        //GameManager.GetManager().m_CurrentStateGame = GameManager.StateGame.Init;
+        GameManager.GetManager().alarm.SetAlarmActive();
+        GameManager.GetManager().ToActive();
     }
 
     public override void ExitInteraction()

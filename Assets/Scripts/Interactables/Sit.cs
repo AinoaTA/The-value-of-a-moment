@@ -21,51 +21,65 @@ public class Sit : GeneralActions
 
     void StartExtraInteraction(int id)
     {
-        if (GameManager.GetManager().interactableManager.currInteractable == null)
-        {
-            GameManager.GetManager().interactableManager.LookingAnInteractable(moreOptions[id].interaction);
-            moreOptions[id].interaction.ExtraInteraction();
-        }
+        //if (GameManager.GetManager().interactableManager.currInteractable == null)
+        //{
+        //    GameManager.GetManager().interactableManager.LookingAnInteractable(moreOptions[id].interaction);
+        //    moreOptions[id].interaction.ExtraInteraction();
+        //}
     }
 
     #endregion
     public override void EnterAction()
     {
+        canvas.gameObject.SetActive(true);
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
-
-        StartCoroutine(ShowOtherOptions());
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                break;
+            case DayController.Day.two:
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Sofa");
+                GameManager.GetManager().IncrementInteractableCount();
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+        }
+      //  StartCoroutine(ShowOtherOptions());
     }
 
     public override void ExitAction()
     {
-        if (GameManager.GetManager().interactableManager.currInteractable != null)
-            GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
+        //if (GameManager.GetManager().interactableManager.currInteractable != null)
+        //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-        canvas.SetBool("Showing", false);
+       // canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitAction();
     }
 
     private void Start()
     {
-        canvas.SetBool("Showing", true);
+        //canvas.SetBool("Showing", true);   
     }
 
     IEnumerator ShowOtherOptions()
     {
-        for (int i = 0; i < texts.Length; i++)
-            texts[i].text = moreOptions[i].canvasText;
+        yield return null;
+        //for (int i = 0; i < texts.Length; i++)
+        //    texts[i].text = moreOptions[i].canvasText;
 
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
-        canvas.SetBool("Showing", true);
+        //canvas.SetBool("Showing", true);
     }
 
     public override void DoInteraction(int id)
     {
-        Debug.Log("Parece funcionar....");
-        StartExtraInteraction(id);
+        //Debug.Log("Parece funcionar....");
+        //StartExtraInteraction(id);
     }
 }
