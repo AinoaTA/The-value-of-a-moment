@@ -105,6 +105,9 @@ public class GameManager : MonoBehaviour
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2Procrast");
                 }
+                StartCoroutine(Timbre("D2Timbre"));
+                StartCoroutine(Timbre("D2TimbreOp2"));
+                StartCoroutine(Llaves());
             }
             else // Cambio de hora
             {
@@ -117,6 +120,19 @@ public class GameManager : MonoBehaviour
     public void ResetInteractable()
     {
         realizedInteractables = 0;
+    }
+
+    IEnumerator Timbre(string dialogue)
+    {
+        yield return new WaitForSecondsRealtime(4f);
+        // Hacer sonar el timbre
+        GameManager.GetManager().dialogueManager.SetDialogue(dialogue);
+    }
+
+    IEnumerator Llaves()
+    {
+        yield return new WaitForSecondsRealtime(4f);
+        // Que suenen las llaves
     }
     #endregion
 }
