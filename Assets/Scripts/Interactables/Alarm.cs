@@ -111,7 +111,6 @@ public class Alarm : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
     }
 
     private void AlarmAndMood()
@@ -168,9 +167,6 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(true);
         alarm = false;
         ResetTime();
-
-
-
     }
     #region dialogues helps
     IEnumerator Delay()
