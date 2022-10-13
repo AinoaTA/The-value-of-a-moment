@@ -90,6 +90,7 @@ public class Window : Interactables, ITask
                 if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ventana");
+                    GameManager.GetManager().IncrementInteractableCount();
                 }
                 break;
             case 2:

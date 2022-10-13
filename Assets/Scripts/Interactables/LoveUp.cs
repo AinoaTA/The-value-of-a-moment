@@ -12,6 +12,7 @@ public class LoveUp : Interactables
                 break;
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_LoveUp");
+                GameManager.GetManager().IncrementInteractableCount();
                 break;
             default: break;
         }

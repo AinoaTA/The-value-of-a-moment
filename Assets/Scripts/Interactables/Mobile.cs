@@ -50,6 +50,7 @@ public class Mobile : GeneralActions
             if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
             {
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Chat");
+                GameManager.GetManager().IncrementInteractableCount();
             }
         }
         else

@@ -33,6 +33,7 @@ public class Drum : Interactables
                 if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2AccSelfcOcio_Bateria");
+                    GameManager.GetManager().IncrementInteractableCount();
                 }
                 StartCoroutine(StartActivity());
                 break;

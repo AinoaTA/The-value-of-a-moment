@@ -20,6 +20,7 @@ public class Book : Interactables
                     if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
                     {
                         GameManager.GetManager().dialogueManager.SetDialogue("D2AccSelfcOcio_Libro");
+                        GameManager.GetManager().IncrementInteractableCount();
                     }
                 }
                 break;

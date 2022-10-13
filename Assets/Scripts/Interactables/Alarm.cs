@@ -92,11 +92,11 @@ public class Alarm : MonoBehaviour
                     Show();
                 }
                 else
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
-                    {
-                        AlarmAndMood();
-                        Show();
-                    },forceInvoke:true);
+                GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
+                {
+                    AlarmAndMood();
+                    Show();
+                },forceInvoke:true);
                 break;
             case DayController.Day.three:
 

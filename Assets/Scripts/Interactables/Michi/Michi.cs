@@ -23,6 +23,7 @@ public class Michi : Interactables
                         break;
                     case DayController.Day.two:
                         GameManager.GetManager().dialogueManager.SetDialogue("D2AccMino_Acariciar");
+                        GameManager.GetManager().IncrementInteractableCount();
                         break;
                     default: break;
                 }

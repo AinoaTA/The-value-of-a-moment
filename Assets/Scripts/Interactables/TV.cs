@@ -46,6 +46,7 @@ public class TV : Interactables
                         break;
                     case DayController.Day.two:
                         GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_TV");
+                        GameManager.GetManager().IncrementInteractableCount();
                         break;
                     case DayController.Day.three:
                         break;

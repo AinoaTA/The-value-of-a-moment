@@ -67,6 +67,7 @@ public class BitterControl : MonoBehaviour
                 break;
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Bitter");
+                GameManager.GetManager().IncrementInteractableCount();
                 break;
             default: break;
         }

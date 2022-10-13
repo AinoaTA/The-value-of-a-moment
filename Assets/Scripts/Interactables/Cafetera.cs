@@ -20,6 +20,7 @@ public class Cafetera : Interactables
                         break;
                     case DayController.Day.two:
                         GameManager.GetManager().dialogueManager.SetDialogue("D2AccComBeb_Cafetera");
+                        GameManager.GetManager().IncrementInteractableCount();
                         break;
                     case DayController.Day.three:
                         break;

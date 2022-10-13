@@ -41,6 +41,7 @@ public class Sit : GeneralActions
                 break;
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Sofa");
+                GameManager.GetManager().IncrementInteractableCount();
                 break;
             case DayController.Day.three:
                 break;

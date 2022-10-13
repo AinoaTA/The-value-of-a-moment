@@ -45,6 +45,7 @@ public class Shower : GeneralActions
         if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
         {
             GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ducha");
+            GameManager.GetManager().IncrementInteractableCount();
         }
         if(GameManager.GetManager().autocontrol.m_currentValue < lowAutoConfidenceLimit)
         {

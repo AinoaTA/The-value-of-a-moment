@@ -35,6 +35,7 @@ public class Computer : Interactables
                         break;
                     case DayController.Day.two:
                         GameManager.GetManager().dialogueManager.SetDialogue("D2AccTrab_PCRevisar");
+                        GameManager.GetManager().IncrementInteractableCount();
                         break;
                     case DayController.Day.three:
                         break;
@@ -43,7 +44,6 @@ public class Computer : Interactables
                     default:
                         break;
                 }
-               
                 break;
         }
     }
@@ -112,6 +112,7 @@ public class Computer : Interactables
                 break;
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTrab_AgendaPlan");
+                GameManager.GetManager().IncrementInteractableCount();
                 break;
             default: break;
         }
@@ -133,6 +134,7 @@ public class Computer : Interactables
                 break;
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTrab_PCProgram");
+                GameManager.GetManager().IncrementInteractableCount();
                 break;
             default: break;
         }
@@ -154,6 +156,7 @@ public class Computer : Interactables
                 break;
             case DayController.Day.two:
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTrab_PCMirarMail");
+                GameManager.GetManager().IncrementInteractableCount();
                 break;
             default: break;
         }

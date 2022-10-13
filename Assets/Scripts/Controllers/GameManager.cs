@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AddInteractable()
+    public void IncrementInteractableCount()
     {
         realizedInteractables++;
         if(realizedInteractables >= 5)
@@ -98,14 +98,20 @@ public class GameManager : MonoBehaviour
             if (currentTime >= 3) // Es de noche
             {
                 blockController.BlockAll(true);
-                blockController.Unlock("");
+                blockController.Unlock("Ventanas");
+                blockController.Unlock("Bed");
             }
-            else
+            else // Cambio de hora
             {
                 dayController.ChangeDay(++currentTime);
                 realizedInteractables = 0;
             }
         }
+    }
+
+    public void ResetInteractable()
+    {
+        realizedInteractables = 0;
     }
     #endregion
 }
