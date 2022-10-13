@@ -47,11 +47,14 @@ public class DialogueManager : MonoBehaviour
         //this conver was played.
         saveAct = act;
 
+        if (forceInvoke)
+        {
+            saveAct?.Invoke();
+            return;
+        }
+        
         if (currentDialogue.lines[0].played)
         {
-            if (forceInvoke)
-                saveAct?.Invoke();
-
             saveAct = null;
             return;
         }
