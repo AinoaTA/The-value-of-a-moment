@@ -17,6 +17,10 @@ public class Book : Interactables
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Pickup", transform.position);
                     m_Grabbing.SetAccessCamera(true);
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
+                    if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccSelfcOcio_Libro");
+                    }
                 }
                 break;
         }
