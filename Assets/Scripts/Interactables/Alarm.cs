@@ -23,7 +23,6 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
 
-
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
@@ -293,7 +292,6 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
         {
             GameManager.GetManager().alexVisited = true;
-
             StartCoroutine(NormalWakeUp());
         });
     }
