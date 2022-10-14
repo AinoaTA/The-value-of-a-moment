@@ -5,7 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AlexController : Interactables
 {
-    public Transform exitTransform;
+    public Transform exitTransform, cuartoTransform;
 
     private NavMeshAgent navMeshAgent;
     private bool isGone = false, yaVisto = false;
@@ -28,7 +28,11 @@ public class AlexController : Interactables
         if (isGone) return;
 
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
+            PaCasa();
+            
+        if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
             gameObject.SetActive(false);
+
     }
 
     public override void Interaction(int options)
@@ -44,7 +48,10 @@ public class AlexController : Interactables
                 GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
                 {
                     // Permitir que Elle elija
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_");
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
+                    {
+                        navMeshAgent.SetDestination(cuartoTransform.position);
+                    });
                 });
                 break;
         }
