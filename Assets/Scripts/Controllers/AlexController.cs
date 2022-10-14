@@ -28,10 +28,7 @@ public class AlexController : Interactables
         if (isGone) return;
 
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
-        {
             gameObject.SetActive(false);
-            isGone = true;
-        }
     }
 
     public override void Interaction(int options)
@@ -40,10 +37,11 @@ public class AlexController : Interactables
         switch (options)
         {
             case 1:
-                GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
+                if(isGone)
                 {
-                    yaVisto = true;
-                });
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_AlexSeVa");
+                }
+                GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex");
                 break;
         }
     }
@@ -70,6 +68,7 @@ public class AlexController : Interactables
     {
         Debug.Log("Me voy");
         navMeshAgent.SetDestination(exitTransform.position);
+        isGone = true;
     }
 
     private IEnumerator MePiroDeCasa()
