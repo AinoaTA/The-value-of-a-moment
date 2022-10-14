@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
+    public GameObject diaDos;
     [Header("Interactables")]
     public BlockInteractables[] dayOneInteractable;
     public BlockInteractables[] dayTwoInteractable;

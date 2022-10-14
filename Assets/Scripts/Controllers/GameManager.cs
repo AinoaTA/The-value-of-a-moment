@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public bool programmedInteractableDone = false;
     public int realizedInteractables;
     public bool programmed, alexVisited, checkAida;
-    public GameObject diaDos;
+   
 
     private void OnEnable()
     {
@@ -72,13 +72,13 @@ public class GameManager : MonoBehaviour
 
     public void ToActive()
     {
-        diaDos.SetActive(false);
+       blockController.diaDos.SetActive(false);
         switch (dayController.GetDayNumber())
         {
             case DayController.Day.one:
                 break;
             case DayController.Day.two:
-                diaDos.SetActive(true);
+                blockController.diaDos.SetActive(true);
                 break;
             case DayController.Day.three:
                 break;
