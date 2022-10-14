@@ -313,6 +313,7 @@ public class Alarm : MonoBehaviour
             negated = true;
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
             StillSleeping();
+            GameManager.GetManager().alexController.PaCasa();
         });
     }
     #endregion

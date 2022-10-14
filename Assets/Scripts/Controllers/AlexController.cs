@@ -11,6 +11,11 @@ public class AlexController : Interactables
     private bool isGone = false, yaVisto = false;
     private Transform camera;
 
+    private void Awake()
+    {
+        GameManager.GetManager().alexController = this;
+    }
+
     void Start()
     {
         camera = Camera.main.transform;
@@ -61,10 +66,15 @@ public class AlexController : Interactables
         StartCoroutine(MePiroDeCasa());
     }
 
+    public void PaCasa()
+    {
+        Debug.Log("Me voy");
+        navMeshAgent.SetDestination(exitTransform.position);
+    }
+
     private IEnumerator MePiroDeCasa()
     {
         yield return new WaitForSecondsRealtime(4);
-        Debug.Log("Me voy");
-        navMeshAgent.SetDestination(exitTransform.position);
+        PaCasa();
     }
 }

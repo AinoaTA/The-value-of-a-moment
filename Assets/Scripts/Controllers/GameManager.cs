@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Alarm alarm { get; set; }
     public DialogueManager dialogueManager { get; set; }
     public BlockController blockController { get; set; }
+    public AlexController alexController { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }
