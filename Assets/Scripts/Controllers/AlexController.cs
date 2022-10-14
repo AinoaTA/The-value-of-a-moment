@@ -41,7 +41,11 @@ public class AlexController : Interactables
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_AlexSeVa");
                 }
-                GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex");
+                GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
+                {
+                    // Permitir que Elle elija
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_");
+                });
                 break;
         }
     }
