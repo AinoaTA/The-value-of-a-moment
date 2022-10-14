@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class IntroScrollView : MonoBehaviour
 {
     ScrollRect a;
-    public Button button;
+    public Button endButton;
+    public GameObject skipButton;
     private void OnEnable()
     {
         Tira.buttonEnd += ShowButton;
@@ -29,7 +30,8 @@ public class IntroScrollView : MonoBehaviour
 
     private void ShowButton()
     {
-        button.GetComponent<Animator>().Play("Show");
+        skipButton.gameObject.SetActive(false);
+        endButton.GetComponent<Animator>().Play("Show");
     }
 
     public void SceneLoad()
