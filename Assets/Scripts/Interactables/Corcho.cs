@@ -29,7 +29,6 @@ public class Corcho : Interactables
 
     public override void ExitInteraction()
     {
-
         BlockAll(false);
         ownCollider.enabled = true;
         GameManager.GetManager().StartThirdPersonCamera();

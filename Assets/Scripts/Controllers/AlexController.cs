@@ -31,8 +31,14 @@ public class AlexController : Interactables
             PaCasa();
             
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
+        {
             gameObject.SetActive(false);
-
+            // TODO: Algun sonido de puerta o algo??
+            GameManager.GetManager().dialogueManager.SetDialogue("D2PostCafe", delegate
+            {
+                GameManager.GetManager().blockController.BlockAll(false);
+            });
+        }
     }
 
     public override void Interaction(int options)

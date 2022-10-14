@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(4f);
         // TODO: Sonido de cerrar la puerta
 
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Cierre");
     }
     #endregion
 }
