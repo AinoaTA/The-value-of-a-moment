@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     public void IncrementInteractableCount()
     {
         realizedInteractables++;
-        if(realizedInteractables >= 5)
+        if (realizedInteractables >= 5)
         {
             int currentTime = (int)dayController.GetTimeDay();
             if (currentTime >= 3) // Es de noche

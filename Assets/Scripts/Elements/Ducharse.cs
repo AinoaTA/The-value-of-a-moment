@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Ducharse : Interactables
 {
     public override void ExtraInteraction()

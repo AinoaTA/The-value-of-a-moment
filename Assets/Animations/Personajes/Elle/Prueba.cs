@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Prueba : MonoBehaviour
@@ -17,9 +16,9 @@ public class Prueba : MonoBehaviour
         yield return new WaitForSeconds(5f);
         SetRoot(false);
         anim.SetTrigger("one");
-       
+
     }
-    public void SetRoot(bool v) 
+    public void SetRoot(bool v)
     {
         anim.applyRootMotion = v;
     }

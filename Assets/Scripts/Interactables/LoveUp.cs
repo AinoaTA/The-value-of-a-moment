@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class LoveUp : Interactables
 {
     int counter;

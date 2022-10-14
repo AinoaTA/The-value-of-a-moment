@@ -10,7 +10,7 @@ public class DialoguesList : ScriptableObject
     public List<DialogueJSON> dialogues;
 
     private Dictionary<string, DialogueJSON> dialoguesDictionary;
-    
+
     void Init()
     {
         dialoguesDictionary = new Dictionary<string, DialogueJSON>();

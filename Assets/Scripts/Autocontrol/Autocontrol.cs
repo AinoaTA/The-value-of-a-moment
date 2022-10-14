@@ -88,7 +88,7 @@ public class Autocontrol : MonoBehaviour
         yield return new WaitForSeconds(1);
         particles.Stop();
     }
-    
+
     public void UpdateAutcontrol()
     {
         if (m_Slider.value <= 0.3f)
@@ -105,7 +105,7 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
-            
+
             MusicGameplay.Mood(2f);
 
         }
@@ -113,7 +113,7 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
-            
+
             MusicGameplay.Mood(3f);
 
         }

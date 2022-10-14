@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
@@ -96,7 +96,7 @@ public class BlockController : MonoBehaviour
             {
                 for (int e = 0; e < dayInteractables[i].locks.Length; e++)
                     dayInteractables[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
-                
+
                 return;
             }
         }
@@ -133,7 +133,7 @@ public class BlockController : MonoBehaviour
             default:
                 break;
         }
-        
+
     }
 
     public void UnlockAll(DayController.DayTime time)

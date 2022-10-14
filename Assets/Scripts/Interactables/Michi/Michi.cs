@@ -7,7 +7,7 @@ public class Michi : Interactables
 
     private void Start()
     {
-        controller = this.GetComponent<MichiController>();
+        controller = GetComponent<MichiController>();
     }
 
     public override void Interaction(int options)
@@ -38,7 +38,7 @@ public class Michi : Interactables
                 break;
         }
     }
-    
+
     public override void ExitInteraction()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -46,5 +46,5 @@ public class Michi : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
-    
+
 }

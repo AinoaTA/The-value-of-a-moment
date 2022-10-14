@@ -1,7 +1,7 @@
-using UnityEngine.UI;
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Bitter : MonoBehaviour
 {
@@ -18,32 +18,32 @@ public class Bitter : MonoBehaviour
     public void Fav()
     {
         if (routine2 == null)
-            StartCoroutine(routine2 = BitUpdateFavs(favs,true));
+            StartCoroutine(routine2 = BitUpdateFavs(favs, true));
     }
     public void NoFav()
     {
         if (routine == null)
-            StartCoroutine(routine = BitUpdateFavs(no_favs,false));
+            StartCoroutine(routine = BitUpdateFavs(no_favs, false));
     }
 
 
     public void UpdateFavs()
     {
-        int good = (int)Random.Range(isGoodNumber.x,isGoodNumber.y);
+        int good = (int)Random.Range(isGoodNumber.x, isGoodNumber.y);
         int bad = (int)Random.Range(isBadNumber.x, isBadNumber.y);
         if (isBad)
         {
             favs.text = good.ToString();
-            no_favs.text = (bad / (int)Random.Range(2, 5)).ToString();
+            no_favs.text = (bad / Random.Range(2, 5)).ToString();
         }
         else
         {
-            favs.text = (good / (int)Random.Range(2, 5)).ToString();
+            favs.text = (good / Random.Range(2, 5)).ToString();
             no_favs.text = bad.ToString();
         }
     }
 
-    public void UpdateFavsPlayer() 
+    public void UpdateFavsPlayer()
     {
         int good = (int)Random.Range(numbersFavsPlayer.x, numbersFavsPlayer.y);
         int bad = (int)Random.Range(numbersFavsPlayer.x, numbersFavsPlayer.y);
@@ -53,14 +53,14 @@ public class Bitter : MonoBehaviour
     }
 
     IEnumerator routine, routine2;
-    IEnumerator BitUpdateFavs(TMP_Text text, bool add) 
+    IEnumerator BitUpdateFavs(TMP_Text text, bool add)
     {
-        int times = (int)Random.Range(1,10);
+        int times = Random.Range(1, 10);
         int number = int.Parse(text.text);
         int cur;
-        float t=0;
+        float t = 0;
         int desireValue = add ? number + times : number - times;
-        while (t<1)
+        while (t < 1)
         {
             t += Time.deltaTime;
             cur = (int)Mathf.Lerp(number, desireValue, t);

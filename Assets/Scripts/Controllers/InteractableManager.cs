@@ -63,7 +63,7 @@ public class InteractableManager : MonoBehaviour
         }
     }
 
-    public void LockInteractable() 
+    public void LockInteractable()
     {
         for (int i = 0; i < allInteractables.Count; i++)
         {

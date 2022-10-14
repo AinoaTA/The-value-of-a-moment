@@ -1,16 +1,16 @@
 using UnityEngine;
-public class GeneralActions : MonoBehaviour,ILock
+public class GeneralActions : MonoBehaviour, ILock
 {
     public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
-    [SerializeField]private bool _blocked;
+    [SerializeField] private bool _blocked;
     public GameObject OptionsCanvas;
     public Animator anim;
     protected bool showing;
     protected bool done;
 
-   [SerializeField]protected string nameAction;
+    [SerializeField] protected string nameAction;
 
-   
+
 
     public virtual void ResetObject()
     {
@@ -57,5 +57,5 @@ public class GeneralActions : MonoBehaviour,ILock
     }
 
 
-    public virtual void DoInteraction(int id)  { }
+    public virtual void DoInteraction(int id) { }
 }

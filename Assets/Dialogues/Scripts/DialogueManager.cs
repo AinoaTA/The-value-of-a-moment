@@ -1,5 +1,5 @@
-using System.Collections;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -27,14 +27,14 @@ public class DialogueManager : MonoBehaviour
         {
             for (int e = 0; e < dialogues.dialogues[i].lines.Count; e++)
             {
-                dialogues.dialogues[i].lines[e].played=false;
+                dialogues.dialogues[i].lines[e].played = false;
             }
         }
     }
     Action saveAct;
     bool canRepeat;
     string previusDialogue;
-    public bool waitDialogue=true;
+    public bool waitDialogue = true;
     public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
     {
         if (dialogue == previusDialogue) return;
@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
             saveAct?.Invoke();
             return;
         }
-        
+
         if (currentDialogue.lines[0].played)
         {
             saveAct = null;
@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
             //    print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
-        catch (System.Exception e)
+        catch (System.Exception)
         {
             //print(e);
         }

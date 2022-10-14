@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cuenco : Interactables
@@ -34,7 +32,7 @@ public class Cuenco : Interactables
                 break;
         }
     }
-    
+
     public override void ExitInteraction()
     {
         GameManager.GetManager().StartThirdPersonCamera();

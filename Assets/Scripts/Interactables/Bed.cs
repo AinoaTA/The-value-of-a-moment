@@ -221,7 +221,7 @@ public class Bed : Interactables, ITask
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
-                    if(GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
                     {
                         GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_HacerCam");
                     }

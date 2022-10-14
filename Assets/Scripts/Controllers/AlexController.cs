@@ -12,7 +12,7 @@ public class AlexController : Interactables
 
     void Start()
     {
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         InteractableBlocked = true;
     }
 
@@ -22,7 +22,7 @@ public class AlexController : Interactables
 
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             isGone = true;
         }
     }

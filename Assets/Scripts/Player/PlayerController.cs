@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.transform.position = pos;
     }
-    
+
     public Vector3 GetPlayerPos()
     {
         return playerAnimation.transform.position;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.transform.position = character.transform.position;
     }
-    
+
     public void ResetPlayerPos(Vector3 position)
     {
         playerAnimation.transform.position = position;

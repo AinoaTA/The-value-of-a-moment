@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BitterMinigame : MonoBehaviour
@@ -15,7 +13,7 @@ public class BitterMinigame : MonoBehaviour
         counter = 0;
         int numBeets = beetParent.transform.childCount;
         beets = new GameObject[numBeets];
-        for(int i = 0; i < numBeets; ++i)
+        for (int i = 0; i < numBeets; ++i)
         {
             GameObject beat = beetParent.transform.GetChild(i).gameObject;
             beat.SetActive(false);

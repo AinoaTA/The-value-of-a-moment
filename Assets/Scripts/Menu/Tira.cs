@@ -28,7 +28,7 @@ public class Tira : MonoBehaviour
                     StartCoroutine(FinalRecord());
                 }
             }
-        }   
+        }
     }
 
     IEnumerator FinalRecord()

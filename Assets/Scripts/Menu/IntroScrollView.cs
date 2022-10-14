@@ -1,6 +1,6 @@
-using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IntroScrollView : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class IntroScrollView : MonoBehaviour
     }
     void Awake()
     {
-        a=GetComponent<ScrollRect>();
+        a = GetComponent<ScrollRect>();
         a.enabled = false;
     }
 

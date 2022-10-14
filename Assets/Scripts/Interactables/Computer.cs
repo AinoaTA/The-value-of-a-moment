@@ -68,7 +68,7 @@ public class Computer : Interactables
     #region (des)-active gameObects
     public void ComputerON()
     {
-        GameManager.GetManager().playerController.SetAnimation("Computer",computerPos);
+        GameManager.GetManager().playerController.SetAnimation("Computer", computerPos);
         computerScreen.SetActive(true);
         programScreen.SetActive(false);
         programMinigame.SetActive(false);
@@ -99,7 +99,7 @@ public class Computer : Interactables
                 GameManager.GetManager().blockController.Unlock("Bed");
                 GameManager.GetManager().blockController.Unlock("Window");
             });
-        
+
         }
     }
 

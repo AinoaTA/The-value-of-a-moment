@@ -54,7 +54,7 @@ public class TV : Interactables
                         break;
                 }
 
-                
+
                 InteractableBlocked = true;
                 GameManager.GetManager().dayController.TaskDone();
                 break;

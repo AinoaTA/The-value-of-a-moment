@@ -8,9 +8,9 @@ public class Lock : MonoBehaviour, ILock
 
     [SerializeField] private UnityEvent eventButton;
 
-    public void Open() 
+    public void Open()
     {
         if (InteractableBlocked) return;
-            eventButton?.Invoke();
+        eventButton?.Invoke();
     }
 }
