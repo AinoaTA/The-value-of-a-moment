@@ -116,6 +116,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
+    public void UnlockBasicTasks()
+    {
+        blockController.Unlock("Ventanas");
+        blockController.Unlock("Michi");
+        blockController.Unlock("Ducha");
+    }
 
     public void ResetInteractable()
     {

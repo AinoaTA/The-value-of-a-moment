@@ -184,9 +184,7 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
             // TODO: unlock de los interactables
-            GameManager.GetManager().blockController.Unlock("Ventanas");
-            GameManager.GetManager().blockController.Unlock("Michi");
-            GameManager.GetManager().blockController.Unlock("Ducha");
+            GameManager.GetManager().UnlockBasicTasks();
         });
         StartAlarm();
     }
@@ -314,6 +312,7 @@ public class Alarm : MonoBehaviour
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
             StillSleeping();
             GameManager.GetManager().alexController.PaCasa();
+            GameManager.GetManager().UnlockBasicTasks();
         });
     }
     #endregion
