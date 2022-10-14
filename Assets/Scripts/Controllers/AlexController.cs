@@ -9,9 +9,11 @@ public class AlexController : Interactables
 
     private NavMeshAgent navMeshAgent;
     private bool isGone = false, yaVisto = false;
+    private Transform camera;
 
     void Start()
     {
+        camera = Camera.main.transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         InteractableBlocked = true;
     }
@@ -48,6 +50,7 @@ public class AlexController : Interactables
 
     private void OnMouseEnter()
     {
+        if (Vector3.Distance(camera.position, transform.position) > 7f) return;
         if (yaVisto) return;
         Debug.Log("Me estas mirando o k puta");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
