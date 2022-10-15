@@ -35,6 +35,7 @@ public class Sit : GeneralActions
         base.EnterAction();
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
+        GameManager.GetManager().playerController.SetAnimation("Sit");
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -57,6 +58,7 @@ public class Sit : GeneralActions
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         // canvas.SetBool("Showing", false);
+        GameManager.GetManager().playerController.SetAnimation("Stand");
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitAction();
     }
