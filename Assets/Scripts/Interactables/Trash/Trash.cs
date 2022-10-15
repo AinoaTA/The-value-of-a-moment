@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Trash : GeneralActions
@@ -22,9 +23,12 @@ public class Trash : GeneralActions
     public override void EnterAction()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes PickUp", transform.position);
-        grabbing = true;
+        GameManager.GetManager().gameStateController.ChangeGameState(2);
+
+        StartCoroutine(Delay());
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
         GameManager.GetManager().dialogueManager.SetDialogue("IRecogerHabitacion");
+        GameManager.GetManager().playerController.SetAnimation("Grab");
         if (onlySpeakOnce && GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
         {
             GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Basura");
@@ -32,23 +36,46 @@ public class Trash : GeneralActions
         }
     }
 
-    private void Update()
+    IEnumerator Delay()
     {
-        if (grabbing)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
+        yield return new WaitForSeconds(1f);
+        ///  grabbing = true;
+        // transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
+        transform.position = GameManager.GetManager().playerController.handBone.position;
+        transform.SetParent(GameManager.GetManager().playerController.handBone);
 
-            if (Vector3.Distance(transform.position, target.position) < 0.1f)
-            {
-                if (type == TrashType.TRASH)
-                    GameManager.GetManager().trashInventory.AddTrash(this);
-                else
-                    GameManager.GetManager().trashInventory.AddDirtyClothes(this);
+        yield return new WaitForSeconds(1);
 
-                gameObject.SetActive(false);
-            }
-        }
+        if (type == TrashType.TRASH)
+            GameManager.GetManager().trashInventory.AddTrash(this);
+        else
+            GameManager.GetManager().trashInventory.AddDirtyClothes(this);
+
+
+        yield return new WaitForSeconds(0.75f);
+        GameManager.GetManager().gameStateController.ChangeGameState(1);
+        gameObject.SetActive(false);
     }
+
+    //private void Update()
+    //{
+    //    if (grabbing)
+    //    {
+    //        // transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
+    //        transform.position = GameManager.GetManager().playerController.handBone.position;
+    //        transform.SetParent(GameManager.GetManager().playerController.handBone);
+
+    //        if (Vector3.Distance(transform.position, target.position) < 0.1f)
+    //        {
+    //            if (type == TrashType.TRASH)
+    //                GameManager.GetManager().trashInventory.AddTrash(this);
+    //            else
+    //                GameManager.GetManager().trashInventory.AddDirtyClothes(this);
+
+    //            gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
 
     public void ResetInteractable()
     {

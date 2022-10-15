@@ -15,7 +15,6 @@ public class EventAnimActivator : MonoBehaviour
         float t = 0;
         while (t < 1) 
         {
-            print(t);
             t += Time.deltaTime;
             alexAnimator.SetFloat("Walk", t);
             yield return null;
