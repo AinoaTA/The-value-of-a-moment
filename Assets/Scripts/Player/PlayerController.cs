@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             root.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
         else
 
-            root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationWakeup, 0));
+            root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationSleep, 0));
 
         //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
     }
@@ -154,4 +154,9 @@ public class PlayerController : MonoBehaviour
         GameManager.GetManager().dialogueManager.SetDialogue("D2EsTarde");
     }
 
+
+    public void PlayerMovementAnim(float speed) 
+    {
+        playerAnimation.anim.SetFloat("Speed", speed);
+    }
 }
