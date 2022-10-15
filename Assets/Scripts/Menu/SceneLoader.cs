@@ -74,6 +74,7 @@ public class SceneLoader : MonoBehaviour
     }
     IEnumerator LoadLoadingScene(string scene)
     {
+        print(scene);
         AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
         l_LoadLevel.allowSceneActivation = false;
         yield return new WaitForSeconds(1f);
