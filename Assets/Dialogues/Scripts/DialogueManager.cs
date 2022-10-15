@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public float defaultvoiceTime = 2;
     public float aditionalVoiceTime = 0.2f;
 
+    bool justVoice;
     DialogueJSON currentDialogue;
     int currentLine;
 
@@ -35,14 +36,14 @@ public class DialogueManager : MonoBehaviour
     bool canRepeat;
     string previusDialogue;
     public bool waitDialogue = true;
-    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
+    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false, bool onlyVoice = false)
     {
         if (dialogue == previusDialogue) return;
         previusDialogue = dialogue;
         waitDialogue = true;
         if (nextLineCoroutine != null) StopDialogue();
         eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
+        justVoice = onlyVoice;
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
         saveAct = act;
@@ -66,11 +67,12 @@ public class DialogueManager : MonoBehaviour
     void ShowLine()
     {
         DialogueLineJSON line = currentDialogue.lines[currentLine];
+        if(!justVoice)
         subtitle.enabled = true;
 
         bool langESP = LanguageGame.lang == LanguageGame.Languages.ESP;
-
-        subtitle.text = langESP ? line.es : line.en;
+        if (!justVoice)
+            subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
         int lenght;

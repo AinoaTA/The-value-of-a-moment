@@ -15,7 +15,8 @@ public class Drum : Interactables
     bool playingDrum = false;
     DrumInstrument pointedInstrument;
     public BoxCollider col;
-
+    public MeshRenderer mesh;
+    public Material drumMat;
     private int day;
 
     public override void Interaction(int optionNumber)
@@ -46,7 +47,7 @@ public class Drum : Interactables
         StopPlayingDrum();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().dialogueManager.SetDialogue("IBateria");
-
+        mesh.material = drumMat;
         base.ExitInteraction();
     }
 

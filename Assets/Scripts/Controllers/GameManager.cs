@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public bool programmedInteractableDone = false;
     public int realizedInteractables;
     public bool programmed, alexVisited, checkAida;
-    public GameObject diaDos;
+   
 
     private void OnEnable()
     {
@@ -72,13 +72,13 @@ public class GameManager : MonoBehaviour
 
     public void ToActive()
     {
-        diaDos.SetActive(false);
+       blockController.diaDos.SetActive(false);
         switch (dayController.GetDayNumber())
         {
             case DayController.Day.one:
                 break;
             case DayController.Day.two:
-                diaDos.SetActive(true);
+                blockController.diaDos.SetActive(true);
                 break;
             case DayController.Day.three:
                 break;
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Timbre(string dialogue)
     {
         yield return new WaitForSecondsRealtime(4f);
-        // TODO: Hacer sonar el timbre
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorBell", transform.position);
 
         yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue(dialogue);
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
         GameManager.GetManager().dialogueManager.SetDialogue("D2Epilogod2");
 
         yield return new WaitForSecondsRealtime(4f);
-        // TODO: Sonido de cerrar la puerta
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorClosed", transform.position);
 
         yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue("D2Cierre");
