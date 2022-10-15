@@ -8,13 +8,14 @@ public class TV : Interactables
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private Material[] channels;
     [SerializeField] private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
-
+    [SerializeField] private float timeChangeChannel = 3.5f;
     private void Start()
     {
         screen.SetActive(false);
         currChannel = 0;
     }
     IEnumerator routine;
+    bool one;
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -25,7 +26,7 @@ public class TV : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 screen.SetActive(true);
-             ChangeChannel();
+                ChangeChannel();
                 switch (GameManager.GetManager().dayController.GetDayNumber())
                 {
                     case DayController.Day.one:
@@ -57,15 +58,19 @@ public class TV : Interactables
                 }
 
 
-                InteractableBlocked = true;
-                GameManager.GetManager().dayController.TaskDone();
+                //InteractableBlocked = true;
+                if (!one)
+                {
+                    one = true;
+                    GameManager.GetManager().dayController.TaskDone();
+                }
                 break;
         }
     }
 
     private void Update()
     {
-          
+
     }
     public override void ExitInteraction()
     {
@@ -76,12 +81,12 @@ public class TV : Interactables
         base.ExitInteraction();
     }
 
-     void ChangeChannel()
+    void ChangeChannel()
     {
-       StartCoroutine(routine = ChangeTV());
+        StartCoroutine(routine = ChangeTV());
     }
 
-    IEnumerator ChangeTV() 
+    IEnumerator ChangeTV()
     {
         while (screen.activeSelf)
         {
@@ -91,7 +96,13 @@ public class TV : Interactables
             // Set screen to channels[currChannel]
             if (currChannel >= channels.Length) currChannel = 0;
             mesh.material = channels[currChannel];
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(timeChangeChannel);
         }
+    }
+
+    public override void ResetInteractable()
+    {
+        one = false;
+        base.ResetInteractable();
     }
 }
