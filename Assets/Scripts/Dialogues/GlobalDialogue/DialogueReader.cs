@@ -13,7 +13,7 @@ public class DialogueReader : MonoBehaviour
     }
 
     [System.Serializable]
-    public class DialogueList 
+    public class DialogueList
     {
         public Dialogue[] Alarm;
         public Dialogue[] Alarm1;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class WaterCan : MonoBehaviour
 {
@@ -54,7 +53,7 @@ public class WaterCan : MonoBehaviour
         particles.Stop();
     }
 
-    public void WaterPlant (float waterLevel)
+    public void WaterPlant(float waterLevel)
     {
         water.setParameterByName("WaterPlant", waterLevel);
     }

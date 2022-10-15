@@ -3,7 +3,7 @@ using UnityEngine.Events;
 public class ComputerButton : MonoBehaviour, ILock
 {
     public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
-    [SerializeField]bool _blocked;
+    [SerializeField] bool _blocked;
 
     [SerializeField] private Color[] colors;
     [SerializeField] private Vector3 defaultScale;
@@ -12,7 +12,7 @@ public class ComputerButton : MonoBehaviour, ILock
     [Space(20)]
 
     [SerializeField] private UnityEvent eventButton;
-  
+
     private void Awake()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();

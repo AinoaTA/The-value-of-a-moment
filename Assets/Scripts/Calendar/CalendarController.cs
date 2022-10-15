@@ -45,7 +45,7 @@ namespace Calendar
             calendar.SetActive(false);
             GameManager.GetManager().computer.ComputerON();
         }
-        
+
         public void SaveCalendar()
         {
             if (!modified)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Trash : GeneralActions 
+public class Trash : GeneralActions
 {
     public enum TrashType { CLOTHES, TRASH }
     public TrashType type = TrashType.TRASH;
@@ -36,9 +36,9 @@ public class Trash : GeneralActions
     {
         if (grabbing)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
-            if (Vector3.Distance(this.transform.position, target.position) < 0.1f)
+            if (Vector3.Distance(transform.position, target.position) < 0.1f)
             {
                 if (type == TrashType.TRASH)
                     GameManager.GetManager().trashInventory.AddTrash(this);

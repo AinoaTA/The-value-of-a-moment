@@ -48,7 +48,7 @@ public class Sit : GeneralActions
             case DayController.Day.fourth:
                 break;
         }
-      //  StartCoroutine(ShowOtherOptions());
+        //  StartCoroutine(ShowOtherOptions());
     }
 
     public override void ExitAction()
@@ -56,7 +56,7 @@ public class Sit : GeneralActions
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-       // canvas.SetBool("Showing", false);
+        // canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitAction();
     }

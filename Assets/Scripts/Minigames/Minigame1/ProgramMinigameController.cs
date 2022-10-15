@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class ProgramMinigameController : MonoBehaviour, ITask
 {
@@ -115,5 +115,5 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     }
     public bool GetSolved() { return allCorrect; }
 
-    public void SetCurrSolution(SolutionPiece  e) { currSolution = e; }
+    public void SetCurrSolution(SolutionPiece e) { currSolution = e; }
 }

@@ -18,11 +18,11 @@ public class MichiController : MonoBehaviour
 
     void Start()
     {
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
-        animator = this.GetComponent<Animator>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         reset = true;
         animator.SetBool("walking", true);
-        if(cuenco) cuencoPosition = cuenco.gameObject.transform.position;
+        if (cuenco) cuencoPosition = cuenco.gameObject.transform.position;
     }
 
     void Update()
@@ -40,7 +40,7 @@ public class MichiController : MonoBehaviour
             //newPos = new Vector3(xDist, this.transform.position.y, zDist);
             //targetRotation = Quaternion.LookRotation(newPos - this.transform.position);
         }
-        else if(!theresFood)
+        else if (!theresFood)
         {
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 reset = true;
@@ -54,10 +54,10 @@ public class MichiController : MonoBehaviour
             }
         }
 
-        if(theresFood)
+        if (theresFood)
         {
             Debug.Log("Food");
-            this.transform.position = Vector3.MoveTowards(this.transform.position, cuencoPosition, walkSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, cuencoPosition, walkSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, cuencoPosition) < .1f)
             {
                 Miau();

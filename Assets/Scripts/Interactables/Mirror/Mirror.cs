@@ -10,7 +10,7 @@ public class Mirror : Interactables
 
     private void Start()
     {
-       // GameManager.GetManager().Mirror = this;
+        // GameManager.GetManager().Mirror = this;
     }
 
     public override void Interaction(int options)
@@ -37,7 +37,7 @@ public class Mirror : Interactables
         yield return new WaitForSeconds(1);
         if (GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.3f)
         {
-          //  GameManager.GetManager().Dialogue.SetDialogue(bad1[counterbad1]);
+            //  GameManager.GetManager().Dialogue.SetDialogue(bad1[counterbad1]);
             counterbad1++;
             if (counterbad1 >= bad1.Length)
                 counterbad1 = 0;
@@ -59,7 +59,7 @@ public class Mirror : Interactables
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.5f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.8f)
         {
-           // GameManager.GetManager().Dialogue.SetDialogue(normal[counternormal]);
+            // GameManager.GetManager().Dialogue.SetDialogue(normal[counternormal]);
             counternormal++;
             if (counternormal >= normal.Length)
                 counternormal = 0;
@@ -68,7 +68,7 @@ public class Mirror : Interactables
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.8f)
         {
-           // GameManager.GetManager().Dialogue.SetDialogue(good[countergood]);
+            // GameManager.GetManager().Dialogue.SetDialogue(good[countergood]);
             countergood++;
             if (countergood >= good.Length)
                 countergood = 0;
@@ -78,7 +78,7 @@ public class Mirror : Interactables
         }
 
         yield return new WaitForSeconds(2);
-     //   GameManager.GetManager().Dialogue.StopDialogue();
+        //   GameManager.GetManager().Dialogue.StopDialogue();
         GameManager.GetManager().StartThirdPersonCamera();
     }
 
@@ -86,7 +86,7 @@ public class Mirror : Interactables
     {
         interactDone = false;
     }
-    
+
     public override void ExitInteraction()
     {
         GameManager.GetManager().StartThirdPersonCamera();

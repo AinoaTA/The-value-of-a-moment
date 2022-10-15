@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pienso : Interactables
@@ -21,7 +19,7 @@ public class Pienso : Interactables
                 // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
                 grabbed = true;
                 cuenco.GrabbedPienso();
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
                 break;
         }
     }

@@ -92,11 +92,11 @@ public class Alarm : MonoBehaviour
                     Show();
                 }
                 else
-                GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
-                {
-                    AlarmAndMood();
-                    Show();
-                },forceInvoke:true);
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
+                    {
+                        AlarmAndMood();
+                        Show();
+                    }, forceInvoke: true);
                 break;
             case DayController.Day.three:
 
@@ -184,9 +184,7 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
             // TODO: unlock de los interactables
-            GameManager.GetManager().blockController.Unlock("Ventanas");
-            GameManager.GetManager().blockController.Unlock("Michi");
-            GameManager.GetManager().blockController.Unlock("Ducha");
+            GameManager.GetManager().UnlockBasicTasks();
         });
         StartAlarm();
     }
@@ -235,7 +233,7 @@ public class Alarm : MonoBehaviour
                     {
                         StartAlarm();
                     }
-                },forceInvoke:true);
+                }, forceInvoke: true);
 
                 break;
             case DayController.Day.three:
@@ -313,6 +311,8 @@ public class Alarm : MonoBehaviour
             negated = true;
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
             StillSleeping();
+            GameManager.GetManager().alexController.PaCasa();
+            GameManager.GetManager().UnlockBasicTasks();
         });
     }
     #endregion

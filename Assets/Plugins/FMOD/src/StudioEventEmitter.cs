@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -87,7 +86,7 @@ namespace FMODUnity
         {
             // If at least once listener is within the max distance, ensure an event instance is playing
             bool playInstance = StudioListener.DistanceToNearestListener(transform.position) <= MaxDistance;
-            
+
             if (force || playInstance != IsPlaying())
             {
                 if (playInstance)
@@ -101,7 +100,7 @@ namespace FMODUnity
             }
         }
 
-        protected override void Start() 
+        protected override void Start()
         {
             RuntimeUtils.EnforceLibraryOrder();
             if (Preload)
@@ -212,7 +211,7 @@ namespace FMODUnity
                 PlayInstance();
             }
         }
-        
+
         private void PlayInstance()
         {
             if (!instance.isValid())

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FMODUnity;
+using UnityEngine;
 
 public class FMOD_OneShot_1 : MonoBehaviour
 {

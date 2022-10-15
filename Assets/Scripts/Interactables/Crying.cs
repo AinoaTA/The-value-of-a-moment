@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Crying : Interactables
 {
     public override void ExtraInteraction()

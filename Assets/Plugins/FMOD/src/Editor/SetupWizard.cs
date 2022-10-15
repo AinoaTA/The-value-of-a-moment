@@ -139,7 +139,8 @@ fmod_editor.log";
             public static UpdateTask Create(UpdateTaskType type, string name, string description,
                 Action execute, Func<bool> checkComplete)
             {
-                return new UpdateTask() {
+                return new UpdateTask()
+                {
                     Type = type,
                     Name = name,
                     Description = description,
@@ -266,7 +267,7 @@ fmod_editor.log";
                 descriptionStyle = new GUIStyle(titleStyle);
                 descriptionStyle.fontStyle = FontStyle.Normal;
                 descriptionStyle.alignment = TextAnchor.MiddleLeft;
-                descriptionStyle.margin = new RectOffset(5,0,0,0);
+                descriptionStyle.margin = new RectOffset(5, 0, 0, 0);
 
                 titleLeftStyle = new GUIStyle(descriptionStyle);
                 titleLeftStyle.fontStyle = FontStyle.Bold;
@@ -350,16 +351,16 @@ fmod_editor.log";
         {
             switch (currentPage)
             {
-                case PAGES.Welcome:                         break;
-                case PAGES.Updating: CheckUpdatesComplete();break;
-                case PAGES.Linking:     CheckStudioLinked();break;
-                case PAGES.Listener:    CheckListeners();   break;
-                case PAGES.UnityAudio:                      break;
-                case PAGES.UnitySources:CheckSources();     break;
-                case PAGES.SourceControl:                   break;
-                case PAGES.End:                             break;
-                case PAGES.Max:                             break;
-                default:                                    break;
+                case PAGES.Welcome: break;
+                case PAGES.Updating: CheckUpdatesComplete(); break;
+                case PAGES.Linking: CheckStudioLinked(); break;
+                case PAGES.Listener: CheckListeners(); break;
+                case PAGES.UnityAudio: break;
+                case PAGES.UnitySources: CheckSources(); break;
+                case PAGES.SourceControl: break;
+                case PAGES.End: break;
+                case PAGES.Max: break;
+                default: break;
             }
         }
 
@@ -515,7 +516,7 @@ fmod_editor.log";
 
             EditorGUILayout.LabelField("Choose how to access your FMOD Studio content:", titleLeftStyle);
 
-            EditorGUILayout.Space(); 
+            EditorGUILayout.Space();
             using (new GUILayout.HorizontalScope())
             {
                 using (new GUILayout.VerticalScope("box"))
@@ -871,7 +872,7 @@ fmod_editor.log";
                 {
                     if (currentPage == PAGES.End)
                     {
-                        this.Close();
+                        Close();
                     }
                     currentPage++;
                 }
@@ -993,7 +994,7 @@ fmod_editor.log";
 
         protected override TreeViewItem BuildRoot()
         {
-            var root = new TreeViewItem (-1, -1);
+            var root = new TreeViewItem(-1, -1);
 
             CreateItems(root, Resources.FindObjectsOfTypeAll<AudioSource>());
             showAlternatingRowBackgrounds = true;
@@ -1033,16 +1034,16 @@ fmod_editor.log";
                 switch (PrefabUtility.GetPrefabAssetType(go))
                 {
                     case PrefabAssetType.NotAPrefab:
-                    icon = (Texture2D)EditorGUIUtility.IconContent(goIcon).image;
+                        icon = (Texture2D)EditorGUIUtility.IconContent(goIcon).image;
                         break;
                     case PrefabAssetType.Regular:
-                    icon = (Texture2D)EditorGUIUtility.IconContent(prefabIcon).image;
+                        icon = (Texture2D)EditorGUIUtility.IconContent(prefabIcon).image;
                         break;
                     case PrefabAssetType.Model:
-                    icon = (Texture2D)EditorGUIUtility.IconContent(prefabModelIcon).image;
+                        icon = (Texture2D)EditorGUIUtility.IconContent(prefabModelIcon).image;
                         break;
                     case PrefabAssetType.Variant:
-                    icon = (Texture2D)EditorGUIUtility.IconContent(prefabVariantIcon).image;
+                        icon = (Texture2D)EditorGUIUtility.IconContent(prefabVariantIcon).image;
                         break;
                 }
             }
@@ -1054,7 +1055,7 @@ fmod_editor.log";
             const string sceneIcon = "SceneAsset Icon";
             const string folderIcon = "Folder Icon";
 
-            public SceneItem(Scene scene) : base (scene.GetHashCode())
+            public SceneItem(Scene scene) : base(scene.GetHashCode())
             {
                 m_scene = scene;
                 if (m_scene.IsValid())
@@ -1072,7 +1073,7 @@ fmod_editor.log";
 
         private void CreateItems(TreeViewItem root, AudioSource[] audioSources)
         {
-            for(int i = 0; i < audioSources.Length; i++)
+            for (int i = 0; i < audioSources.Length; i++)
             {
                 AudioSource audioSource = audioSources[i];
 

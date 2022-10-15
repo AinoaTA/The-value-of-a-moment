@@ -5,14 +5,21 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AlexController : Interactables
 {
-    public Transform exitTransform;
+    public Transform exitTransform, cuartoTransform;
 
     private NavMeshAgent navMeshAgent;
     private bool isGone = false, yaVisto = false;
+    private Transform camera;
+
+    private void Awake()
+    {
+        GameManager.GetManager().alexController = this;
+    }
 
     void Start()
     {
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
+        camera = Camera.main.transform;
+        navMeshAgent = GetComponent<NavMeshAgent>();
         InteractableBlocked = true;
     }
 
@@ -21,9 +28,16 @@ public class AlexController : Interactables
         if (isGone) return;
 
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
+            PaCasa();
+            
+        if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
         {
-            this.gameObject.SetActive(false);
-            isGone = true;
+            gameObject.SetActive(false);
+            // TODO: Algun sonido de puerta o algo??
+            GameManager.GetManager().dialogueManager.SetDialogue("D2PostCafe", delegate
+            {
+                GameManager.GetManager().blockController.BlockAll(false);
+            });
         }
     }
 
@@ -33,9 +47,17 @@ public class AlexController : Interactables
         switch (options)
         {
             case 1:
+                if(isGone)
+                {
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_AlexSeVa");
+                }
                 GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
                 {
-                    yaVisto = true;
+                    // Permitir que Elle elija
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
+                    {
+                        navMeshAgent.SetDestination(cuartoTransform.position);
+                    });
                 });
                 break;
         }
@@ -48,6 +70,7 @@ public class AlexController : Interactables
 
     private void OnMouseEnter()
     {
+        if (Vector3.Distance(camera.position, transform.position) > 7f) return;
         if (yaVisto) return;
         Debug.Log("Me estas mirando o k puta");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
@@ -58,10 +81,16 @@ public class AlexController : Interactables
         StartCoroutine(MePiroDeCasa());
     }
 
+    public void PaCasa()
+    {
+        Debug.Log("Me voy");
+        navMeshAgent.SetDestination(exitTransform.position);
+        isGone = true;
+    }
+
     private IEnumerator MePiroDeCasa()
     {
         yield return new WaitForSecondsRealtime(4);
-        Debug.Log("Me voy");
-        navMeshAgent.SetDestination(exitTransform.position);
+        PaCasa();
     }
 }

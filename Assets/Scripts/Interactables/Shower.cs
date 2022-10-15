@@ -62,7 +62,7 @@ public class Shower : GeneralActions
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-       // canvas.SetBool("Showing", false);
+        // canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().playerController.ResetPlayerPos(positionOnEnter);
         base.ExitAction();
@@ -103,7 +103,7 @@ public class Shower : GeneralActions
 
     private void Start()
     {
-       // canvas.SetBool("Showing", true);
+        // canvas.SetBool("Showing", true);
     }
 
     IEnumerator ShowOtherOptions()

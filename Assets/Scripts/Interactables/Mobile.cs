@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 public class Mobile : MonoBehaviour //GeneralActions
 {
     [SerializeField] private bool getMobile;
