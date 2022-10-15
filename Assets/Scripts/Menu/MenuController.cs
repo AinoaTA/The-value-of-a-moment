@@ -6,7 +6,6 @@ namespace Menu
 {
     public class MenuController : MonoBehaviour
     {
-        public AudioSource MusicAudio;
         public CanvasGroup loading, menuButtons, optionsButtons;
         public Slider loadingSlider;
         private IEnumerator routine;
@@ -17,6 +16,7 @@ namespace Menu
         {
             Screen.fullScreen = true;
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             StartCoroutine(routine = IcreaseAudioCo());
         }
         public void StartGame()
@@ -61,7 +61,7 @@ namespace Menu
             {
                 counter += Time.deltaTime;
 
-                MusicAudio.volume = Mathf.Lerp(1f, 0f, counter / 0.5f);
+               // MusicAudio.volume = Mathf.Lerp(1f, 0f, counter / 0.5f);
 
                 yield return null;
             }
@@ -74,7 +74,7 @@ namespace Menu
             {
                 counter += Time.deltaTime;
 
-                MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 4f);
+               // MusicAudio.volume = Mathf.Lerp(0f, 1f, counter / 4f);
 
                 yield return null;
             }

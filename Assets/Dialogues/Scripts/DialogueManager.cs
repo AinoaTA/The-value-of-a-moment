@@ -88,9 +88,9 @@ public class DialogueManager : MonoBehaviour
             //    print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
-        catch (System.Exception)
+        catch (System.Exception e)
         {
-            //print(e);
+            print(e);
         }
 
         if (!canRepeat)

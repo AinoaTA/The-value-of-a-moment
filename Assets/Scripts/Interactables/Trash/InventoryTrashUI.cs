@@ -29,7 +29,7 @@ public class InventoryTrashUI : MonoBehaviour
         dirtyClothesCollected++;
         current = t;
         dirtyClothesCounter.text = dirtyClothesCollected.ToString() + dirtyClothesPhrase;
-        GameManager.GetManager().gameStateController.ChangeGameState(1);
+       // GameManager.GetManager().gameStateController.ChangeGameState(1);
     }
 
     public void AddTrash(Trash t)
