@@ -70,26 +70,6 @@ public class GameManager : MonoBehaviour
         gameStateController.ChangeGameState(1);
     }
 
-    public void ToActive()
-    {
-       blockController.diaDos.SetActive(false);
-        switch (dayController.GetDayNumber())
-        {
-            case DayController.Day.one:
-                break;
-            case DayController.Day.two:
-                blockController.diaDos.SetActive(true);
-                break;
-            case DayController.Day.three:
-                break;
-            case DayController.Day.fourth:
-                break;
-            default:
-                break;
-        }
-
-    }
-
     public void IncrementInteractableCount()
     {
         realizedInteractables++;

@@ -303,7 +303,7 @@ public class Bed : Interactables, ITask
         GameManager.GetManager().autocontrol.AutocontrolSleep();
         GameManager.GetManager().dayController.NewDay();
         GameManager.GetManager().alarm.SetAlarmActive();
-        GameManager.GetManager().ToActive();
+        GameManager.GetManager().blockController.ToActive();
     }
 
     public override void ExitInteraction()

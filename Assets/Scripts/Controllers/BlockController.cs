@@ -6,6 +6,7 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
     public GameObject diaDos;
+    public Transform rotateAlexDoor;
     [Header("Interactables")]
     public BlockInteractables[] dayOneInteractable;
     public BlockInteractables[] dayTwoInteractable;
@@ -45,6 +46,7 @@ public class BlockController : MonoBehaviour
     }
     IEnumerator Start()
     {
+        ToActive();
         yield return new WaitWhile(() => stop);
         CheckUnlockInteractable(dayOneInteractable);
 
@@ -160,6 +162,25 @@ public class BlockController : MonoBehaviour
                     dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = true;
                 return;
             }
+        }
+    }
+    public void ToActive()
+    {
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                break;
+            case DayController.Day.two:
+                diaDos.SetActive(true);
+                rotateAlexDoor.rotation = Quaternion.Euler(0, -100, 0);
+                rotateAlexDoor.GetChild(0).GetComponent<Interactables>().enabled = false;
+                break;
+            case DayController.Day.three:
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
         }
     }
 }
