@@ -173,7 +173,6 @@ public class BlockController : MonoBehaviour
             case DayController.Day.two:
                 diaDos.SetActive(true);
                 rotateAlexDoor.rotation = Quaternion.Euler(0, -100, 0);
-                rotateAlexDoor.GetChild(0).GetComponent<Interactables>().enabled = false;
                 break;
             case DayController.Day.three:
                 break;

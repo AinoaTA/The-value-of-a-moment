@@ -1,18 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class TV : Interactables
 {
     public GameObject screen;
     // handle de canales
-    private int[] channels;
-    private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
+    [SerializeField] private MeshRenderer mesh;
+    [SerializeField] private Material[] channels;
+    [SerializeField] private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
 
     private void Start()
     {
         screen.SetActive(false);
         currChannel = 0;
     }
-
+    IEnumerator routine;
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -23,7 +25,7 @@ public class TV : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 screen.SetActive(true);
-
+             ChangeChannel();
                 switch (GameManager.GetManager().dayController.GetDayNumber())
                 {
                     case DayController.Day.one:
@@ -61,19 +63,35 @@ public class TV : Interactables
         }
     }
 
+    private void Update()
+    {
+          
+    }
     public override void ExitInteraction()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TVOff", transform.position);
         screen.SetActive(false);
+        StopCoroutine(routine);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
 
-    public void ChangeChannel()
+     void ChangeChannel()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh", transform.position);
-        // 1 funci�n para subir o bajar canal o 2 funciones
-        currChannel++;
-        // Set screen to channels[currChannel]
+       StartCoroutine(routine = ChangeTV());
+    }
+
+    IEnumerator ChangeTV() 
+    {
+        while (screen.activeSelf)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh", transform.position);
+            // 1 funci�n para subir o bajar canal o 2 funciones
+            currChannel++;
+            // Set screen to channels[currChannel]
+            if (currChannel >= channels.Length) currChannel = 0;
+            mesh.material = channels[currChannel];
+            yield return new WaitForSeconds(2);
+        }
     }
 }
