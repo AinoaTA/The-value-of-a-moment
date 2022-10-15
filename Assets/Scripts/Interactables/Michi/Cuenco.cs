@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cuenco : Interactables
@@ -21,6 +19,11 @@ public class Cuenco : Interactables
             case 1:
                 if (hasPienso)
                 {
+                    if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccMino_Alimentar");
+                        GameManager.GetManager().IncrementInteractableCount();
+                    }
                     comida.SetActive(true);
                     hasPienso = false;
                     InteractableBlocked = true;
@@ -29,7 +32,7 @@ public class Cuenco : Interactables
                 break;
         }
     }
-    
+
     public override void ExitInteraction()
     {
         GameManager.GetManager().StartThirdPersonCamera();

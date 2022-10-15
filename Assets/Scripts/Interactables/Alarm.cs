@@ -23,7 +23,6 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
 
-
         GameManager.GetManager().cameraController.StartInteractCam(1);
         CanvasAlarm.SetActive(false);
         StartCoroutine(StartDayDelay());
@@ -97,7 +96,7 @@ public class Alarm : MonoBehaviour
                     {
                         AlarmAndMood();
                         Show();
-                    },forceInvoke:true);
+                    }, forceInvoke: true);
                 break;
             case DayController.Day.three:
 
@@ -112,7 +111,6 @@ public class Alarm : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
     }
 
     private void AlarmAndMood()
@@ -139,7 +137,7 @@ public class Alarm : MonoBehaviour
                 GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
                 {
                     GameManager.GetManager().alexVisited = true;
-                    StartCoroutine(Delay());
+                    StartCoroutine(Delay2());
                 });
                 break;
 
@@ -169,9 +167,6 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(true);
         alarm = false;
         ResetTime();
-
-
-
     }
     #region dialogues helps
     IEnumerator Delay()
@@ -186,9 +181,16 @@ public class Alarm : MonoBehaviour
     IEnumerator Delay2()
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
+        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
+        {
+            // TODO: unlock de los interactables
+            GameManager.GetManager().UnlockBasicTasks();
+        });
         StartAlarm();
     }
+
     #endregion
+
     void Show()
     {
         CanvasAlarm.SetActive(true);
@@ -231,7 +233,7 @@ public class Alarm : MonoBehaviour
                     {
                         StartAlarm();
                     }
-                },forceInvoke:true);
+                }, forceInvoke: true);
 
                 break;
             case DayController.Day.three:
@@ -283,6 +285,7 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().canvasController.Lock(false);
         yield return new WaitForSeconds(4);
     }
+
     #region Alex Event
     bool unique;
     public void AfirmativoAlex()
@@ -293,10 +296,10 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
         {
             GameManager.GetManager().alexVisited = true;
-
             StartCoroutine(NormalWakeUp());
         });
     }
+
     bool negated;
     public void NegativeAlex()
     {
@@ -308,6 +311,8 @@ public class Alarm : MonoBehaviour
             negated = true;
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
             StillSleeping();
+            GameManager.GetManager().alexController.PaCasa();
+            GameManager.GetManager().UnlockBasicTasks();
         });
     }
     #endregion

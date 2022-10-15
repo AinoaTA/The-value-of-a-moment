@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class Tira : MonoBehaviour
 {
     [SerializeField] bool played;
-    [SerializeField] AudioClip audioToPlay;
-    [SerializeField] AudioSource Source;
+    [SerializeField] string nameAudio;
     [SerializeField] bool finalRecord;
 
     bool block;
@@ -16,19 +15,15 @@ public class Tira : MonoBehaviour
     {
         if (other.CompareTag("ComicAudio"))
         {
-            if (Source.clip != audioToPlay)
-            {
-                Source.Stop();
-                Source.clip = audioToPlay;
-                Source.Play();
-
+            GameManager.GetManager().dialogueManager.SetDialogue(nameAudio, canRepeat: true, onlyVoice:true);
+            
                 if (finalRecord && !block)
                 {
                     block = true;
                     StartCoroutine(FinalRecord());
                 }
-            }
-        }   
+            
+        }
     }
 
     IEnumerator FinalRecord()

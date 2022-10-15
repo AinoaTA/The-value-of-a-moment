@@ -221,13 +221,34 @@ public class Bed : Interactables, ITask
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
                     StartCoroutine(ActivateMinigameCanvas());
+                    if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                    {
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_HacerCam");
+                    }
                 }
                 break;
             case 2:
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
+                        {
+                            // cambiar de hora
+                            GameManager.GetManager().dayController.ChangeDay(1);
+                            Debug.Log("Al dormir hay cambio de hora. Pasa a ser: " + GameManager.GetManager().dayController.GetTimeDay());
+                            GameManager.GetManager().ResetInteractable();
+                        });
+                        break;
+                    case DayController.Day.three:
+                        break;
+
+                }
                 GameManager.GetManager().gameStateController.ChangeGameState(0);
                 GameManager.GetManager().canvasController.Lock();
-
                 StartCoroutine(DelayReset());
+
                 break;
             default:
                 break;
@@ -258,6 +279,8 @@ public class Bed : Interactables, ITask
 
                 break;
             case DayController.Day.two:
+                Debug.Log("Post dormir");
+                GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm1");
                 break;
             case DayController.Day.three:
                 break;

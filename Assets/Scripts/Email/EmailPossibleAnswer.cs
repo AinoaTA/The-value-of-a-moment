@@ -14,7 +14,7 @@ public class EmailPossibleAnswer : MonoBehaviour
         this.id = id;
     }
 
-    public void SelectedAnswer() 
+    public void SelectedAnswer()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/PC Keys", transform.position);
         GameManager.GetManager().emailController.mail.currentAnswerOpen.Selected(id);

@@ -49,7 +49,7 @@ public class GameStateController : MonoBehaviour
     /// Useful for interactions started after actions
     /// </summary>
     /// <returns></returns>
-    public bool CheckPreviousGameStateWasAnAction() 
+    public bool CheckPreviousGameStateWasAnAction()
     {
         return previousStateGame == StateGame.Action;
     }

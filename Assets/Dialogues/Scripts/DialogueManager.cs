@@ -1,5 +1,5 @@
-using System.Collections;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public float defaultvoiceTime = 2;
     public float aditionalVoiceTime = 0.2f;
 
+    bool justVoice;
     DialogueJSON currentDialogue;
     int currentLine;
 
@@ -27,22 +28,22 @@ public class DialogueManager : MonoBehaviour
         {
             for (int e = 0; e < dialogues.dialogues[i].lines.Count; e++)
             {
-                dialogues.dialogues[i].lines[e].played=false;
+                dialogues.dialogues[i].lines[e].played = false;
             }
         }
     }
     Action saveAct;
     bool canRepeat;
     string previusDialogue;
-    public bool waitDialogue=true;
-    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
+    public bool waitDialogue = true;
+    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false, bool onlyVoice = false)
     {
         if (dialogue == previusDialogue) return;
         previusDialogue = dialogue;
         waitDialogue = true;
         if (nextLineCoroutine != null) StopDialogue();
         eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
+        justVoice = onlyVoice;
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
         saveAct = act;
@@ -52,7 +53,7 @@ public class DialogueManager : MonoBehaviour
             saveAct?.Invoke();
             return;
         }
-        
+
         if (currentDialogue.lines[0].played)
         {
             saveAct = null;
@@ -66,11 +67,12 @@ public class DialogueManager : MonoBehaviour
     void ShowLine()
     {
         DialogueLineJSON line = currentDialogue.lines[currentLine];
+        if(!justVoice)
         subtitle.enabled = true;
 
         bool langESP = LanguageGame.lang == LanguageGame.Languages.ESP;
-
-        subtitle.text = langESP ? line.es : line.en;
+        if (!justVoice)
+            subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
         int lenght;
@@ -86,7 +88,7 @@ public class DialogueManager : MonoBehaviour
             //    print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
-        catch (System.Exception e)
+        catch (System.Exception)
         {
             //print(e);
         }

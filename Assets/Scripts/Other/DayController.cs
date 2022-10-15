@@ -24,11 +24,11 @@ public class DayController : MonoBehaviour
         counterTaskDay = 0;
         ChangeDay(0);
     }
+
     public void ChangeDay(int newState)
     {
-        print("ME ESTAS JODIENDO");
-        anims.SetInteger("time", (int)newState);
-        dayState= (DayTime)newState;
+        anims.SetInteger("time", newState);
+        dayState = (DayTime)newState;
         counterTaskDay = 0;
         counter = newState;
         switch (dayState)
@@ -48,15 +48,14 @@ public class DayController : MonoBehaviour
         }
     }
 
-    IEnumerator Delay() 
+    IEnumerator Delay()
     {
-        yield return new WaitWhile(()=>GameManager.GetManager().dialogueManager.waitDialogue);
-        GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar",
-                      delegate
-                      {
-                          GameManager.GetManager().blockController.UnlockAll(DayTime.Tarde);
-                          GameManager.GetManager().blockController.Unlock("Window");
-                      });
+        yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
+        GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar", delegate
+        {
+            GameManager.GetManager().blockController.UnlockAll(DayTime.Tarde);
+            GameManager.GetManager().blockController.Unlock("Window");
+        });
     }
     public void NewDay()
     {
@@ -86,7 +85,7 @@ public class DayController : MonoBehaviour
     {
         counterTaskDay++;
         if (dayState == DayTime.Noche)
-            GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat:true);
+            GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat: true);
 
         print(counterTaskDay + " nuevo stado" + (counterTaskDay % 5 == 0));
         if (counterTaskDay >= maxTasks)

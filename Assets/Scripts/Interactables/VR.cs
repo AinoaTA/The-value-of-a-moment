@@ -26,7 +26,7 @@ public class VR : Interactables
                 break;
         }
     }
-    
+
     public override void ExitInteraction()
     {
         GameManager.GetManager().StartThirdPersonCamera();

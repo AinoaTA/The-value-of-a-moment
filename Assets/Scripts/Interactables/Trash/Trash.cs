@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Trash : GeneralActions 
+public class Trash : GeneralActions
 {
     public enum TrashType { CLOTHES, TRASH }
     public TrashType type = TrashType.TRASH;
@@ -9,11 +9,14 @@ public class Trash : GeneralActions
     public Transform target;
     private Vector3 initPos;
     private float grabbingSpeed = 10f;
-    private bool grabbing = false;
+    private bool grabbing;
+    private bool onlySpeakOnce;
 
     private void Start()
     {
         initPos = transform.position;
+        grabbing = false;
+        onlySpeakOnce = true;
     }
 
     public override void EnterAction()
@@ -22,16 +25,20 @@ public class Trash : GeneralActions
         grabbing = true;
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
         GameManager.GetManager().dialogueManager.SetDialogue("IRecogerHabitacion");
-    
+        if (onlySpeakOnce && GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Basura");
+            onlySpeakOnce = false;
+        }
     }
 
     private void Update()
     {
         if (grabbing)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
-            if (Vector3.Distance(this.transform.position, target.position) < 0.1f)
+            if (Vector3.Distance(transform.position, target.position) < 0.1f)
             {
                 if (type == TrashType.TRASH)
                     GameManager.GetManager().trashInventory.AddTrash(this);

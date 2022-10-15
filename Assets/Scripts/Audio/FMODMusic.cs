@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FMODMusic : MonoBehaviour
@@ -12,22 +10,22 @@ public class FMODMusic : MonoBehaviour
         Music.release();
     }
 
-    public void Mood (float MoodLevel)
+    public void Mood(float MoodLevel)
     {
         Music.setParameterByName("Mood", MoodLevel);
     }
 
-    public void Location (float Loc)
+    public void Location(float Loc)
     {
         Music.setParameterByName("Location", Loc);
     }
 
-    public void Yoga (float YogaValue)
+    public void Yoga(float YogaValue)
     {
         Music.setParameterByName("Yoga", YogaValue);
     }
 
-    public void Drums (float DrumsValue)
+    public void Drums(float DrumsValue)
     {
         Music.setParameterByName("Drums", DrumsValue);
     }

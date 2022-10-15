@@ -7,7 +7,7 @@ public class Michi : Interactables
 
     private void Start()
     {
-        controller = this.GetComponent<MichiController>();
+        controller = GetComponent<MichiController>();
     }
 
     public override void Interaction(int options)
@@ -16,7 +16,17 @@ public class Michi : Interactables
         switch (options)
         {
             case 1:
-                GameManager.GetManager().dialogueManager.SetDialogue("IMino");
+                switch (GameManager.GetManager().dayController.GetDayNumber())
+                {
+                    case DayController.Day.one:
+                        GameManager.GetManager().dialogueManager.SetDialogue("IMino");
+                        break;
+                    case DayController.Day.two:
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccMino_Acariciar");
+                        GameManager.GetManager().IncrementInteractableCount();
+                        break;
+                    default: break;
+                }
                 FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet");
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
@@ -28,7 +38,7 @@ public class Michi : Interactables
                 break;
         }
     }
-    
+
     public override void ExitInteraction()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -36,5 +46,5 @@ public class Michi : Interactables
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
-    
+
 }

@@ -15,9 +15,10 @@ public class Drum : Interactables
     bool playingDrum = false;
     DrumInstrument pointedInstrument;
     public BoxCollider col;
-
+    public MeshRenderer mesh;
+    public Material drumMat;
     private int day;
-    
+
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -30,6 +31,11 @@ public class Drum : Interactables
                 GameManager.GetManager().canvasController.Lock();
                 col.enabled = false;
                 playingDrum = false;
+                if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                {
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2AccSelfcOcio_Bateria");
+                    GameManager.GetManager().IncrementInteractableCount();
+                }
                 StartCoroutine(StartActivity());
                 break;
         }
@@ -41,7 +47,7 @@ public class Drum : Interactables
         StopPlayingDrum();
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().dialogueManager.SetDialogue("IBateria");
-        
+        mesh.material = drumMat;
         base.ExitInteraction();
     }
 
@@ -52,8 +58,8 @@ public class Drum : Interactables
 
     IEnumerator StartActivity()
     {
-        day = (int) GameManager.GetManager().dayController.GetDayNumber();
-        
+        day = (int)GameManager.GetManager().dayController.GetDayNumber();
+
         yield return new WaitForSeconds(delayStart);
         rhythmPosition = 0;
         ShowNextInstrument();
@@ -61,7 +67,8 @@ public class Drum : Interactables
 
     void ShowNextInstrument()
     {
-        if (rhythmPosition >= rhythm[day].instrumentsOrder.Length) {
+        if (rhythmPosition >= rhythm[day].instrumentsOrder.Length)
+        {
             StartPlayerPractice();
             return;
         }
@@ -69,7 +76,7 @@ public class Drum : Interactables
         instruments[rhythm[day].instrumentsOrder[rhythmPosition]].SetRight();
         StartCoroutine(WaitNextInstrument());
     }
-    
+
     IEnumerator WaitNextInstrument()
     {
         yield return new WaitForSeconds(delayNextInstrument);
@@ -87,7 +94,8 @@ public class Drum : Interactables
             instrument.Enable(true);
     }
 
-    void DetectPlayingDrum() {
+    void DetectPlayingDrum()
+    {
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -167,8 +175,10 @@ public class Drum : Interactables
         GameManager.GetManager().cameraController.StartInteractCam(finalPlayCameraName);
     }
 
-    void StopPlayingDrum() {
-        if (playingDrum) {
+    void StopPlayingDrum()
+    {
+        if (playingDrum)
+        {
             playingDrum = false;
             foreach (DrumInstrument instrument in instruments)
                 instrument.Enable(false);

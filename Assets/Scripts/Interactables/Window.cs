@@ -87,6 +87,12 @@ public class Window : Interactables, ITask
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(4);
                 GameManager.GetManager().canvasController.Lock();
+                print("AAAAAAAAA");
+                if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
+                {
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ventana");
+                    GameManager.GetManager().IncrementInteractableCount();
+                }
                 break;
             case 2:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);

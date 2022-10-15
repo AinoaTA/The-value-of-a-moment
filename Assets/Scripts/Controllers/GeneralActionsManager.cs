@@ -24,7 +24,7 @@ public class GeneralActionsManager : MonoBehaviour
         GameManager.GetManager().playerInputs._FirstInteraction += InteractionManager;
         GameManager.GetManager().playerInputs._ExitInteraction += ExitActionManager;
         GameManager.GetManager().playerInputs._SecondInteraction += SecondExtraInteraction;
-    }    
+    }
 
     public void LookingAnInteractable(GeneralActions interactables)
     {

@@ -115,7 +115,7 @@ public class Email : MonoBehaviour
             paragraphsRecieve[i].text = mail.messagesParagraph[i];
     }
 
-    public void Close() 
+    public void Close()
     {
         writtingContent.SetActive(false);
         emailContent.SetActive(false);
