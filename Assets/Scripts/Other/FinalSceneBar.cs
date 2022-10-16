@@ -26,6 +26,7 @@ public class FinalSceneBar : MonoBehaviour
     public void ActivateAnim()
     {
         autoconfidence = GameManager.GetManager().autocontrol.GetAutcontrolValue();
+        autoconfidence = 0.5f;
         newScale = new Vector3(autoconfidence, barPivot.transform.localScale.y, barPivot.transform.localScale.z);
         SetFinalText();
         activated = true;
