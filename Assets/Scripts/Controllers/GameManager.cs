@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public DialogueManager dialogueManager { get; set; }
     public BlockController blockController { get; set; }
     public AlexController alexController { get; set; }
+    public TransitionController transitionController { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }

@@ -8,6 +8,11 @@ public class TransitionController : MonoBehaviour
     public Animator transitor;
     public float duration = 1.0f;
 
+    void Awake()
+    {
+        GameManager.GetManager().transitionController = this;
+    }
+
     void Start()
     {
         transform.GetChild(0).gameObject.SetActive(true);
