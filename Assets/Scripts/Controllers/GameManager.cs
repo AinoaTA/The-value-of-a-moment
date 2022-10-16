@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public bool programmedInteractableDone = false;
     public int realizedInteractables;
-    public bool programmed, alexVisited, checkAida;
+    public bool programmed, alexVisited, checkAida, openAida;
    
 
     private void OnEnable()
