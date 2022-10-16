@@ -35,7 +35,6 @@ public class Autocontrol : MonoBehaviour
         rawImage.texture = renderTexture;
         m_Slider.value = m_currentValue / maxValue;
         UpdateAutcontrol();
-
     }
 
     public void AddAutoControl(float value)
