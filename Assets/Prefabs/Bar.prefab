@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 3588422730801880185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.54031, y: 0.54031, z: 0.54031}
   m_Children:
   - {fileID: 3588422731511606673}
   - {fileID: 3588422732441109676}
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barPivot: {fileID: 3588422732441109676}
   scaleSpeed: 1
+  textMesh: {fileID: 0}
 --- !u!1 &3588422731511606672
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +212,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3588422732441109676}
-  - component: {fileID: 3588422732441109677}
   m_Layer: 5
   m_Name: Pivot
   m_TagString: Untagged
@@ -239,22 +239,3 @@ RectTransform:
   m_AnchoredPosition: {x: -244.1, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &3588422732441109677
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3588422732441109679}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

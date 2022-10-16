@@ -9,6 +9,7 @@ public class TransitionController : MonoBehaviour
     public FinalSceneBar bar;
     public Animator transitor;
     public float duration = 1.0f;
+    public GameObject text;
 
     void Awake()
     {
@@ -17,8 +18,10 @@ public class TransitionController : MonoBehaviour
 
     void Start()
     {
+        text.SetActive(false);
         canvas.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(true);
+        LoadFinalScene();
     }
 
     public void LoadFinalScene()
@@ -28,6 +31,7 @@ public class TransitionController : MonoBehaviour
 
     IEnumerator LoadScene()
     {
+        yield return new WaitForSeconds(duration);
         // Fundido a negro
         transitor.SetTrigger("Start");
         // Activamos canvas final
@@ -37,9 +41,10 @@ public class TransitionController : MonoBehaviour
         // Esperamos a que termine el fundido
         yield return new WaitForSeconds(duration);
 
-        // Esperamos a que el jugador lea una miqueta el texto
-        yield return new WaitForSeconds(4f);
         // Activamos animacion de la barra
         bar.ActivateAnim();
+
+        yield return new WaitForSeconds(4f);
+        text.SetActive(true);
     }
 }
