@@ -34,7 +34,6 @@ public class FinalSceneBar : MonoBehaviour
 
     private void SetFinalText()
     {
-        Debug.Log("setting");
         if      (autoconfidence < 0.2f) textMesh.text = "Inténtalo la próxima vez";
         else if (autoconfidence < 0.5f) textMesh.text = "Sigue así";
         else if (autoconfidence < 0.8f) textMesh.text = "Muy buen trabajo";

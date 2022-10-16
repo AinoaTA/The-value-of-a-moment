@@ -67,7 +67,6 @@ public class MichiController : MonoBehaviour
 
         if (theresFood)
         {
-            Debug.Log("Food");
             transform.position = Vector3.MoveTowards(transform.position, cuencoPosition, walkSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, cuencoPosition) < .1f)
             {
@@ -117,7 +116,6 @@ public class MichiController : MonoBehaviour
     }
     public void PetMichi()
     {
-        Debug.Log("petting");
         Miau();
         animator.Play("sit");
         petting = true;
@@ -126,7 +124,6 @@ public class MichiController : MonoBehaviour
 
     public void FeedMichi()
     {
-        Debug.Log("feeding");
         theresFood = true;
         reset = false;
     }
