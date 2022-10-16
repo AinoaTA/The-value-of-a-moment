@@ -20,6 +20,7 @@ public class AidaController : MonoBehaviour
     private void Update()
     {
         if (GameManager.GetManager().openAida) return;
+        print(t);
         if (t < maxTime)
         {
             t += Time.deltaTime;
@@ -47,12 +48,12 @@ public class AidaController : MonoBehaviour
         if (elleOpened)
         {
             animAida.Play("Idle");
-            GameManager.GetManager().dialogueManager.SetDialogue("D2MundoAida",delegate 
+            GameManager.GetManager().dialogueManager.SetDialogue("D2MundoAida", delegate
             {
+                doorAida.transform.rotation = Quaternion.Euler(0, -75, 0);
+                GameManager.GetManager().dialogueManager.SetDialogue("D2Epilogod2");
                 navMesh.SetDestination(roomAidaPos.position);
             });
-
-           
         }
 
         yield return null;

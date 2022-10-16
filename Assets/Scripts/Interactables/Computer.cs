@@ -68,24 +68,19 @@ public class Computer : Interactables
     #region (des)-active gameObects
     public void ComputerON()
     {
-        GameManager.GetManager().playerController.SetAnimation("Computer", computerPos);
         computerScreen.SetActive(true);
         programScreen.SetActive(false);
-        programMinigame.SetActive(false);
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         anyButtonScreenActive = false;
         email.SetActive(true);
         emailScreenMaterial.SetActive(false);
-        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
     public void ComputerOFF()
     {
-        GameManager.GetManager().playerController.TemporalExit();
         computerScreen.SetActive(false);
         programScreen.SetActive(false);
-        programMinigame.SetActive(false);
         programMinigame.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
@@ -121,12 +116,11 @@ public class Computer : Interactables
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(true);
         emailScreenMaterial.SetActive(false);
-        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
     public void ComputerProgram()
     {
-        if (anyButtonScreenActive) return;
+        if (anyButtonScreenActive|| GameManager.GetManager().programmed) return;
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -144,7 +138,6 @@ public class Computer : Interactables
         programScreen.SetActive(true);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(false);
-        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
 
     public void ComputerEmail()
@@ -163,10 +156,10 @@ public class Computer : Interactables
         }
         anyButtonScreenActive = true;
         GameManager.GetManager().emailController.ShowEmail(true);
+        programMinigame.SetActive(false);
         programScreen.SetActive(false);
         calendarMaterialScreen.SetActive(false);
         emailScreenMaterial.SetActive(true);
-        GameManager.GetManager().playerController.playerAnimation.InterctAnim();
     }
     #endregion
 }
