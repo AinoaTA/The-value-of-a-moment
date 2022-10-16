@@ -80,18 +80,18 @@ public class MichiController : MonoBehaviour
 
     }
 
-    public Vector3 RandomNavmeshLocation(float radius)
-    {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
-        {
-            finalPosition = hit.position;
-        }
-        return finalPosition;
-    }
+    //public Vector3 RandomNavmeshLocation(float radius)
+    //{
+    //    Vector3 randomDirection = Random.insideUnitSphere * radius;
+    //    randomDirection += transform.position;
+    //    NavMeshHit hit;
+    //    Vector3 finalPosition = Vector3.zero;
+    //    if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+    //    {
+    //        finalPosition = hit.position;
+    //    }
+    //    return finalPosition;
+    //}
 
     private void OnCollisionEnter(Collision other)
     {
@@ -109,11 +109,19 @@ public class MichiController : MonoBehaviour
         reset = true;
     }
 
+    public void Walk()
+    {
+        RenudarMichi();
+        animator.Play("walk");
+        petting = false;
+    }
     public void PetMichi()
     {
         Debug.Log("petting");
         Miau();
+        animator.Play("sit");
         petting = true;
+        navMeshAgent.isStopped = true;
     }
 
     public void FeedMichi()
@@ -134,5 +142,14 @@ public class MichiController : MonoBehaviour
     {
         int rnd = Random.Range(0, allPoses.Count);
         return allPoses[rnd];
+    }
+
+    public void RenudarMichi() 
+    {
+        reset = true;
+        animator.Play("Walk");
+        newPos = GetNewPoint().position;
+        navMeshAgent.SetDestination(newPos);
+
     }
 }
