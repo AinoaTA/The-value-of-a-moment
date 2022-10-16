@@ -39,7 +39,7 @@ public class AlexController : Interactables
         if (Vector3.Distance(transform.position, GameManager.GetManager().playerController.transform.position) < 3f)
             count = true;
         print(timeWithSayNothing);
-        if (timeWithSayNothing < maxTimeToLeave && count && talking)
+        if (timeWithSayNothing < maxTimeToLeave && count && !talking)
         {
             timeWithSayNothing += Time.deltaTime;
 
