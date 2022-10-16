@@ -87,23 +87,23 @@ public class PlayerController : MonoBehaviour
         {
             root.rotation = Quaternion.identity;
             root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationSleep, 0));
-            
+
 
             //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
         }
     }
 
-    IEnumerator GetUpRoutine() 
+    IEnumerator GetUpRoutine()
     {
         float t = 0;
         Quaternion rotInit = root.rotation;
         Vector3 posInit = root.position + new Vector3(0, 0.4f, 0);
         float maxTime = 0.2f;
-        while (t < maxTime) 
+        while (t < maxTime)
         {
             t += Time.deltaTime;
             root.position = Vector3.Lerp(posInit, playerGetUp.position, t / maxTime);
-            root.rotation = Quaternion.Lerp(rotInit, Quaternion.Euler(0, rotationWakeup, 0), t/ maxTime);
+            root.rotation = Quaternion.Lerp(rotInit, Quaternion.Euler(0, rotationWakeup, 0), t / maxTime);
 
             yield return null;
         }
@@ -158,8 +158,16 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void PlayerMovementAnim(float speed) 
+    public void PlayerMovementAnim(float speed)
     {
         playerAnimation.anim.SetFloat("Speed", speed);
+    }
+
+    public void AudioDialogue()
+    {
+        GameManager.GetManager().dialogueManager.SetDialogue("D2PostCafe", delegate
+         {
+             GameManager.GetManager().blockController.BlockAll(false);
+         });
     }
 }
