@@ -32,10 +32,14 @@ public class TransitionController : MonoBehaviour
         transitor.SetTrigger("Start");
         // Activamos canvas final
         canvas.SetActive(true);
+        // Bloqueamos los interactables
+        GameManager.GetManager().blockController.BlockAll(true);
         // Esperamos a que termine el fundido
         yield return new WaitForSeconds(duration);
 
-        // Activamos animación de la barra
+        // Esperamos a que el jugador lea una miqueta el texto
+        yield return new WaitForSeconds(4f);
+        // Activamos animacion de la barra
         bar.ActivateAnim();
     }
 }
