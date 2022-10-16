@@ -21,7 +21,6 @@ public class TransitionController : MonoBehaviour
         text.SetActive(false);
         canvas.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(true);
-        LoadFinalScene();
     }
 
     public void LoadFinalScene()
