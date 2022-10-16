@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diaDos: {fileID: 0}
+  rotateAlexDoor: {fileID: 0}
   dayOneInteractable:
   - name: Ventanas
     id: 0
@@ -78,7 +79,6 @@ MonoBehaviour:
   - name: Agenda
     id: 0
     locks:
-    - {fileID: 0}
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
@@ -200,15 +200,13 @@ MonoBehaviour:
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Ducha
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
-  - name: Cry
     id: 0
     locks:
     - {fileID: 0}
@@ -230,11 +228,6 @@ MonoBehaviour:
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
-  - name: Ropas
-    id: 0
-    locks:
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
@@ -268,17 +261,12 @@ MonoBehaviour:
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
-  - name: LoveUp
+  - name: Plantas
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
-  - name: Planta
-    id: 0
-    locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Michi
     id: 0
@@ -299,4 +287,4 @@ MonoBehaviour:
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 0
-  unlockAll: 0
+  unlockAll: 1

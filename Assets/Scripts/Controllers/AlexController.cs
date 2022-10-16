@@ -62,10 +62,10 @@ public class AlexController : Interactables
                 GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
                 {
                     // Permitir que Elle elija
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
-                    {
-                        StartCoroutine(Room());
-                    });
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_");//, delegate
+                    //{
+                    //    StartCoroutine(Room());
+                    //});
                 });
                 break;
         }
@@ -81,44 +81,69 @@ public class AlexController : Interactables
         base.OnMouseEnter();
         if (Vector3.Distance(cam.position, transform.position) > 7f) return;
         if (yaVisto) return;
+        yaVisto = true;
         Debug.Log("Me estas mirando o k puta");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
         {
-            yaVisto = true;
             InteractableBlocked = false;
         });
-        StartCoroutine(MePiroDeCasa());
+        StartCoroutine(CorrectRoutine());
     }
 
     public void PaCasa()
     {
         isGone = true;
-        StartCoroutine(DelayRoutine());
+        // StartCoroutine(DelayRoutine());
     }
 
-
-    IEnumerator Room()
+    IEnumerator CorrectRoutine()
     {
-        navMeshAgent.SetDestination(cuartoTransform.position);
-        yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
-        mochilaHand.SetActive(true);
-        mochilaRoom.SetActive(false);
-        yield return null;
-        PaCasa();
-    }
-    IEnumerator DelayRoutine()
-    {
+        isGone = true;
+        InteractableBlocked = true;
+        yield return new WaitForSecondsRealtime(4);
         Debug.Log("Me voy");
         animAlex.Play("Leave");
         yield return new WaitForSeconds(1f);
         animAlex.enabled = false;
         navMeshAgent.enabled = true;
+        navMeshAgent.SetDestination(cuartoTransform.position);
+        yield return null;
+        print(navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
+        print(!navMeshAgent.hasPath);
+        yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && !navMeshAgent.hasPath);
+        mochilaHand.SetActive(true);
+        mochilaRoom.SetActive(false);
+        mochilaHand.transform.SetParent(rightHand.transform);
+        mochilaHand.transform.localPosition = Vector3.zero;
         navMeshAgent.SetDestination(exitTransform.position);
+        PaCasa();
+        yield return new WaitUntil(()=>Vector3.Distance(transform.position, exitTransform.position) < 1f);
+        print("a");
+        GameManager.GetManager().blockController.BlockAll(false);
+        gameObject.SetActive(false);
+       
     }
 
-    private IEnumerator MePiroDeCasa()
-    {
-        yield return new WaitForSecondsRealtime(4);
-        PaCasa();
-    }
+    //IEnumerator Room()
+    //{
+    //    navMeshAgent.SetDestination(cuartoTransform.position);
+    //    // yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
+    //    mochilaHand.SetActive(true);
+    //    mochilaRoom.SetActive(false);
+    //    yield return null;
+    //    //PaCasa();
+    //}
+    //IEnumerator DelayRoutine()
+    //{
+
+    //    StartCoroutine(Room());
+    //    yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
+    //    navMeshAgent.SetDestination(exitTransform.position);
+    //}
+
+    //private IEnumerator MePiroDeCasa()
+    //{
+    //    yield return new WaitForSecondsRealtime(4);
+    //    PaCasa();
+    //}
 }
