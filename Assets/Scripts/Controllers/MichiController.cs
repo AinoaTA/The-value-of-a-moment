@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -15,6 +16,9 @@ public class MichiController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     [Range(0.1f, 2f)] public float walkSpeed;
+    public Transform poses;
+    List<Transform> allPoses = new List<Transform>();
+    [SerializeField] int currentIndexPose;
 
     void Start()
     {
@@ -23,6 +27,11 @@ public class MichiController : MonoBehaviour
         reset = true;
         animator.SetBool("walking", true);
         if (cuenco) cuencoPosition = cuenco.gameObject.transform.position;
+
+        for (int i = 0; i < poses.childCount; i++)
+        {
+            allPoses.Add(poses.GetChild(i));
+        }
     }
 
     void Update()
@@ -31,8 +40,10 @@ public class MichiController : MonoBehaviour
         if (reset)
         {
             reset = false;
-            animator.SetBool("walking", true);
-            newPos = RandomNavmeshLocation(20f);
+            // animator.SetBool("walking", true);
+            animator.Play("Walk");
+            //newPos = RandomNavmeshLocation(20f);
+            newPos = GetNewPoint().position;
             navMeshAgent.SetDestination(newPos);
             // Calculate new random position
             //float xDist = Random.Range(-5.0f, 5.0f);
@@ -42,8 +53,8 @@ public class MichiController : MonoBehaviour
         }
         else if (!theresFood)
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
-                reset = true;
+            //if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            //    reset = true;
 
             //this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
             //this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
@@ -66,6 +77,7 @@ public class MichiController : MonoBehaviour
                 theresFood = false;
             }
         }
+
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
@@ -91,9 +103,9 @@ public class MichiController : MonoBehaviour
 
     private void Miau()
     {
-        animator.SetBool("walking", false);
-        animator.ResetTrigger("hasArrived");
-        animator.SetTrigger("hasArrived");
+        //animator.SetBool("walking", false);
+        //animator.ResetTrigger("hasArrived");
+        //animator.SetTrigger("hasArrived");
         reset = true;
     }
 
@@ -115,5 +127,12 @@ public class MichiController : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(transform.position, newPos);
+    }
+
+
+    public Transform GetNewPoint()
+    {
+        int rnd = Random.Range(0, allPoses.Count);
+        return allPoses[rnd];
     }
 }
