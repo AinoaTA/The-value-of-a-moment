@@ -207,6 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 262327014}
+  - component: {fileID: 262327015}
   m_Layer: 5
   m_Name: Pivot
   m_TagString: Untagged
@@ -234,6 +235,25 @@ RectTransform:
   m_AnchoredPosition: {x: -244.1, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &262327015
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262327013}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &677327404
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,3 +798,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barPivot: {fileID: 262327014}
+  scaleSpeed: 1
