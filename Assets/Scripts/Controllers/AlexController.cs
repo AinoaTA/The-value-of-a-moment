@@ -11,6 +11,7 @@ public class AlexController : Interactables
     private bool isGone = false, yaVisto = false;
     private Transform cam;
     public Animator animAlex;
+    public Transform prop;
 
     public GameObject mochilaRoom, mochilaHand;
     private void Awake()
@@ -28,11 +29,15 @@ public class AlexController : Interactables
 
     void Update()
     {
+        if (navMeshAgent.enabled)
+            prop.localRotation = Quaternion.Euler(Vector3.zero);
+
+
         if (isGone) return;
 
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
             PaCasa();
-            
+
         if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
         {
             gameObject.SetActive(false);
@@ -50,7 +55,7 @@ public class AlexController : Interactables
         switch (options)
         {
             case 1:
-                if(isGone)
+                if (isGone)
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_AlexSeVa");
                 }
@@ -59,7 +64,7 @@ public class AlexController : Interactables
                     // Permitir que Elle elija
                     GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
                     {
-                        StartCoroutine(Room()); 
+                        StartCoroutine(Room());
                     });
                 });
                 break;
@@ -92,7 +97,7 @@ public class AlexController : Interactables
     }
 
 
-    IEnumerator Room() 
+    IEnumerator Room()
     {
         navMeshAgent.SetDestination(cuartoTransform.position);
         yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
@@ -101,7 +106,7 @@ public class AlexController : Interactables
         yield return null;
         PaCasa();
     }
-    IEnumerator DelayRoutine() 
+    IEnumerator DelayRoutine()
     {
         Debug.Log("Me voy");
         animAlex.Play("Leave");
