@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd951c43ba5cc7742bdc87d4c51e8c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   colors: []
   defaultScale: {x: 0, y: 0, z: 0}
   scale: 0
@@ -281,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd951c43ba5cc7742bdc87d4c51e8c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   colors: []
   defaultScale: {x: 0, y: 0, z: 0}
   scale: 0
@@ -725,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6603932814f4e5243a543adb32f7a297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   nameInteractable: Computer
   totalOptions: 1
   interactDone: 0
@@ -733,11 +736,15 @@ MonoBehaviour:
   m_MinAutoControl: 0
   OptionsCanvas: {fileID: 3691827169033927635}
   anim: {fileID: 6354318682121646669}
+  texts: []
   showing: 0
+  actionEnter: 0
   computerScreen: {fileID: 1023641421786972342}
   programScreen: {fileID: 2469580932307905543}
   calendarMaterialScreen: {fileID: 2789106672393339807}
   emailScreenMaterial: {fileID: 2844922091700476269}
+  email: {fileID: 0}
+  computerPos: {fileID: 0}
   programMinigame: {fileID: 0}
 --- !u!65 &2076714519881378804
 BoxCollider:
@@ -1002,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd951c43ba5cc7742bdc87d4c51e8c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   colors: []
   defaultScale: {x: 0, y: 0, z: 0}
   scale: 0
