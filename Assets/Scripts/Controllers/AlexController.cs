@@ -78,6 +78,8 @@ public class AlexController : Interactables
 
     protected override void OnMouseEnter()
     {
+        if (!GameManager.GetManager().alexVisited) return;
+
         base.OnMouseEnter();
         if (Vector3.Distance(cam.position, transform.position) > 7f) return;
         if (yaVisto) return;
@@ -118,7 +120,6 @@ public class AlexController : Interactables
         navMeshAgent.SetDestination(exitTransform.position);
         PaCasa();
         yield return new WaitUntil(()=>Vector3.Distance(transform.position, exitTransform.position) < 1f);
-        print("a");
         GameManager.GetManager().blockController.BlockAll(false);
         gameObject.SetActive(false);
        
