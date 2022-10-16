@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 551bf4f002af32a45ac31b47d9c2a45a, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 20291676e3950304da5886e0bd2c6908, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 477cc4148fad3449482a3bc3178594e2, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -2166,6 +2166,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9547052
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.2599999
       objectReference: {fileID: 0}
@@ -4048,7 +4052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50.69995, y: 245.90002}
+  m_AnchoredPosition: {x: 50.700195, y: 245.90015}
   m_SizeDelta: {x: 153.1431, y: 114.967}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &301877607
@@ -12455,7 +12459,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 5374907094123581616}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -14269,7 +14273,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
 --- !u!114 &1075987169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23478,7 +23482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -34802,6 +34806,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 817537212}
     - target: {fileID: 6378334322728317921, guid: 81b24434a9528234e821d2bd805b23ab, type: 3}
+      propertyPath: maxTimeToLeave
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378334322728317921, guid: 81b24434a9528234e821d2bd805b23ab, type: 3}
       propertyPath: cuartoTransform
       value: 
       objectReference: {fileID: 353268692}
@@ -35050,6 +35058,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4.902
       objectReference: {fileID: 0}
+    - target: {fileID: 1203441364913756225, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.271
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203441364913756225, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.4776104
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203441364913756225, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5214291
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203441364913756225, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.47761038
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203441364913756225, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5214291
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203441364913756225, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -95.023
+      objectReference: {fileID: 0}
     - target: {fileID: 1635590439941762224, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_text
       value: '[Q] Ignorar'
@@ -35122,6 +35154,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 5374907094123581616}
+    - target: {fileID: 5869623418718102364, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5885027042955487549, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: lights
       value: 
@@ -35237,6 +35273,10 @@ PrefabInstance:
     - target: {fileID: 7753349277102968826, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_text
       value: '[Q] Ignorar'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803564067485155893, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7891270561791756907, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: cursor

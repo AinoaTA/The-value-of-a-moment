@@ -39,11 +39,12 @@ public class AlexController : Interactables
         if (Vector3.Distance(transform.position, GameManager.GetManager().playerController.transform.position) < 3f)
             count = true;
         print(timeWithSayNothing);
-        if (timeWithSayNothing < maxTimeToLeave && count && !talking)
+
+        if (timeWithSayNothing < maxTimeToLeave && count && !talking && GameManager.GetManager().counterAlex)
         {
             timeWithSayNothing += Time.deltaTime;
 
-            if (timeWithSayNothing >= maxTimeToLeave)
+            if (timeWithSayNothing >= maxTimeToLeave && !talking)
                 StartCoroutine(CorrectRoutine());
         }
     }
@@ -54,13 +55,10 @@ public class AlexController : Interactables
         switch (options)
         {
             case 1:
-                //if (isGone)
-                //{
-                //    GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_AlexSeVa");
-                //}
+                InteractableBlocked = true;
+                talking = true;
                 GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
                 {
-                    talking = true;
                     // Permitir que Elle elija
                     GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_Op1" , delegate 
                     {
@@ -82,14 +80,14 @@ public class AlexController : Interactables
     protected override void OnMouseEnter()
     {
         if (!GameManager.GetManager().alexVisited) return;
-
+        InteractableBlocked = false;
         base.OnMouseEnter();
-
-        if (yaVisto) return;
-        yaVisto = true;
-        Debug.Log("Me estas mirando o k puta");
-        GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex");
-        StartCoroutine(CorrectRoutine());
+        if (yaVisto)
+        {
+            yaVisto = true;
+            Debug.Log("Me estas mirando o k puta");
+            GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex");
+        }
     }
 
     public void PaCasa()
