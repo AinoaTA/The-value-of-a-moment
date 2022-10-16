@@ -6,11 +6,13 @@ using UnityEngine.AI;
 public class AlexController : Interactables
 {
     public Transform exitTransform, cuartoTransform;
-
+    public Transform rightHand;
     private NavMeshAgent navMeshAgent;
     private bool isGone = false, yaVisto = false;
-    private Transform camera;
+    private Transform cam;
+    public Animator animAlex;
 
+    public GameObject mochilaRoom, mochilaHand;
     private void Awake()
     {
         GameManager.GetManager().alexController = this;
@@ -18,9 +20,10 @@ public class AlexController : Interactables
 
     void Start()
     {
-        camera = Camera.main.transform;
+        cam = Camera.main.transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         InteractableBlocked = true;
+        navMeshAgent.enabled = false;
     }
 
     void Update()
@@ -56,7 +59,7 @@ public class AlexController : Interactables
                     // Permitir que Elle elija
                     GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
                     {
-                        navMeshAgent.SetDestination(cuartoTransform.position);
+                        StartCoroutine(Room()); 
                     });
                 });
                 break;
@@ -68,9 +71,10 @@ public class AlexController : Interactables
         base.ExitInteraction();
     }
 
-    private void OnMouseEnter()
+    protected override void OnMouseEnter()
     {
-        if (Vector3.Distance(camera.position, transform.position) > 7f) return;
+        base.OnMouseEnter();
+        if (Vector3.Distance(cam.position, transform.position) > 7f) return;
         if (yaVisto) return;
         Debug.Log("Me estas mirando o k puta");
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
@@ -83,9 +87,28 @@ public class AlexController : Interactables
 
     public void PaCasa()
     {
-        Debug.Log("Me voy");
-        navMeshAgent.SetDestination(exitTransform.position);
         isGone = true;
+        StartCoroutine(DelayRoutine());
+    }
+
+
+    IEnumerator Room() 
+    {
+        navMeshAgent.SetDestination(cuartoTransform.position);
+        yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
+        mochilaHand.SetActive(true);
+        mochilaRoom.SetActive(false);
+        yield return null;
+        PaCasa();
+    }
+    IEnumerator DelayRoutine() 
+    {
+        Debug.Log("Me voy");
+        animAlex.Play("Leave");
+        yield return new WaitForSeconds(1f);
+        animAlex.enabled = false;
+        navMeshAgent.enabled = true;
+        navMeshAgent.SetDestination(exitTransform.position);
     }
 
     private IEnumerator MePiroDeCasa()
