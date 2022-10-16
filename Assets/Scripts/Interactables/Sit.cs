@@ -33,6 +33,7 @@ public class Sit : GeneralActions
     {
         canvas.gameObject.SetActive(true);
         base.EnterAction();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/Sit", transform.position);
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().playerController.SetAnimation("Sit");
@@ -61,6 +62,7 @@ public class Sit : GeneralActions
         GameManager.GetManager().playerController.SetAnimation("Stand");
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitAction();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/GetInBed", transform.position);
     }
 
     private void Start()

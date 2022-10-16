@@ -19,6 +19,7 @@ public class Regadera : GeneralActions
     {
         Grab();
         GameManager.GetManager().actionObjectManager.LookingAnInteractable(null);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Pickup", transform.position);
     }
 
     public override void ResetObject()
