@@ -17,6 +17,7 @@ public class Cuenco : Interactables
         switch (options)
         {
             case 1:
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FeedCat", transform.position);
                 if (hasPienso)
                 {
                     if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)

@@ -7,6 +7,7 @@ public class Door : GeneralActions
     int one;
     public override void EnterAction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorOpen", transform.position);
         if (one == 0)
         {
             one++;
