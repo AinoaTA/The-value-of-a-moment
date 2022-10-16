@@ -49,7 +49,7 @@ public class Interactables : MonoBehaviour, ILock
         SetCanvasValue(false);
     }
 
-    private void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         if (InteractableBlocked) return;
         Show();
