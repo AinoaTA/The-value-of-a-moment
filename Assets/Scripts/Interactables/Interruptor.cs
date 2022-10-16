@@ -5,14 +5,16 @@ public class Interruptor : GeneralActions
 {
     public GameObject lights;
     public TextMeshProUGUI textDisplay;
-    private bool isLightOn = false;
-    public int minLight = 6000, maxLight = 12000;
+    private bool isLightOn;
+    public float minLight = 925.4644f;
+    private float lightIntensity;
 
     private void Start()
     {
-        textDisplay.text = "[E] Encender";
+        isLightOn = true;
+        textDisplay.text = "[E] Apagar";
         foreach (var light in lights.GetComponentsInChildren<Light>())
-            light.intensity = minLight;
+            lightIntensity = light.intensity;
     }
 
     public override void EnterAction()
@@ -37,10 +39,9 @@ public class Interruptor : GeneralActions
                 light.intensity = minLight;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Env/LightOff", transform.position);
             }
-
             else
             {
-                light.intensity = maxLight;
+                light.intensity = lightIntensity;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Env/LightOn", transform.position);
             }
         }
