@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TransitionController : MonoBehaviour
 {
+    public GameObject canvas;
+    public FinalSceneBar bar;
     public Animator transitor;
     public float duration = 1.0f;
 
@@ -15,18 +17,25 @@ public class TransitionController : MonoBehaviour
 
     void Start()
     {
+        canvas.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    public void LoadNextScene(String sceneName)
+    public void LoadFinalScene()
     {
-        StartCoroutine(LoadScene(sceneName));
+        StartCoroutine(LoadScene());
     }
 
-    IEnumerator LoadScene(String sceneName)
+    IEnumerator LoadScene()
     {
+        // Fundido a negro
         transitor.SetTrigger("Start");
+        // Activamos canvas final
+        canvas.SetActive(true);
+        // Esperamos a que termine el fundido
         yield return new WaitForSeconds(duration);
-        SceneManager.LoadScene(sceneName);
+
+        // Activamos animación de la barra
+        bar.ActivateAnim();
     }
 }

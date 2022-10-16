@@ -13,12 +13,11 @@ public class FinalSceneBar : MonoBehaviour
 
     void Start()
     {
-        autoconfidence = 20f;
         activated = false;
-        maxAutoConfidence = 100f;
-        //autoconfidence = GameManager.GetManager().autocontrol.GetAutcontrolValue();
-        //Debug.Log(autoconfidence);
+        maxAutoConfidence = GameManager.GetManager().autocontrol.maxValue;
+        autoconfidence = GameManager.GetManager().autocontrol.GetAutcontrolValue();
         float autoconfidenceFactor = autoconfidence / maxAutoConfidence;
+        Debug.Log(autoconfidenceFactor);
         newScale = new Vector3(autoconfidenceFactor, 1f, 1f);
         ActivateAnim();
     }
