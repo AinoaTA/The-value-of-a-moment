@@ -76,6 +76,8 @@ public class Alarm : MonoBehaviour
     private void StartAlarm()
     {
         talking = false;
+        alarmsfx.start();
+        MusicGameplay.Mood(0f);
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -116,8 +118,7 @@ public class Alarm : MonoBehaviour
     private void AlarmAndMood()
     {
         talking = false;
-        alarmsfx.start();
-        MusicGameplay.Mood(0f);
+        
     }
 
     public IEnumerator NormalWakeUp()
@@ -159,6 +160,7 @@ public class Alarm : MonoBehaviour
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
+        alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         MusicGameplay.Mood(1f);
         GameManager.GetManager().cameraController.StartInteractCam(2);
         CanvasAlarm.SetActive(false);

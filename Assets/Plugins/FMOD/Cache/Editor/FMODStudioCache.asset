@@ -388,9 +388,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Shower/Shower
+  m_Name: parameter:/Shower/ShowerOnOff
   m_EditorClassIdentifier: 
-  Name: Shower
+  Name: ShowerOnOff
   StudioPath: 
   Min: 0
   Max: 1
@@ -912,7 +912,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Dialogue.bank
   Name: Dialogue
   StudioPath: bank:/Dialogue
-  lastModified: 638008485224705821
+  lastModified: 638015135373713200
   FileSizes: []
   Exists: 1
 --- !u!114 &-5312913760917385609
@@ -1467,7 +1467,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Environment.bank
   Name: Environment
   StudioPath: bank:/Environment
-  lastModified: 638014401730835652
+  lastModified: 638015135373803176
   FileSizes: []
   Exists: 1
 --- !u!114 &-3636087917265524578
@@ -2554,13 +2554,16 @@ MonoBehaviour:
   - {fileID: 2297779463098426115}
   - {fileID: 2331452798090751944}
   - {fileID: 7194123575907388112}
+  - {fileID: 910709264881480004}
+  - {fileID: 9105993807729279213}
+  - {fileID: 502755772175014896}
   EditorParameters:
   - {fileID: -6663940464907380191}
   MasterBanks:
   - {fileID: -5483434596975291380}
   StringsBanks:
   - {fileID: 2212001975378835804}
-  cacheTime: 638014401731563222
+  cacheTime: 638015135374473205
   cacheVersion: 131591
 --- !u!114 &239944170638127268
 MonoBehaviour:
@@ -2616,6 +2619,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 8265
+--- !u!114 &502755772175014896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Env/FridgeOpen
+  m_EditorClassIdentifier: 
+  Path: event:/Env/FridgeOpen
+  Guid:
+    Data1: -184818720
+    Data2: 1307031420
+    Data3: 367456183
+    Data4: -942337772
+  Banks:
+  - {fileID: -3719536160853198705}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &509237660457398763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2778,6 +2808,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 11954
+--- !u!114 &910709264881480004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Dialogue/ESP/Voz-Comic_Elle
+  m_EditorClassIdentifier: 
+  Path: event:/Dialogue/ESP/Voz-Comic_Elle
+  Guid:
+    Data1: -1021761959
+    Data2: 1149098870
+    Data3: -772997989
+    Data4: 1143878322
+  Banks:
+  - {fileID: -5468207981032199738}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 89573
 --- !u!114 &941582473105847529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3036,10 +3093,10 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638010409035221594
+  lastModified: 638015135373813191
   FileSizes:
   - Name: 
-    Value: 8490
+    Value: 8638
   Exists: 1
 --- !u!114 &2230435368827001637
 MonoBehaviour:
@@ -3317,7 +3374,7 @@ MonoBehaviour:
   Path: Assets/FMOD_bank/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638014401731513386
+  lastModified: 638015135374473205
   FileSizes: []
   Exists: 1
 --- !u!114 &2959336958688970625
@@ -4645,6 +4702,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &9105993807729279213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Env/DoorKeys
+  m_EditorClassIdentifier: 
+  Path: event:/Env/DoorKeys
+  Guid:
+    Data1: -1292783166
+    Data2: 1297135507
+    Data3: 355891128
+    Data4: -604530579
+  Banks:
+  - {fileID: -3719536160853198705}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &9210045101280710850
 MonoBehaviour:
   m_ObjectHideFlags: 0

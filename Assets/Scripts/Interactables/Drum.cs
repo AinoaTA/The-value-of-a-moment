@@ -19,6 +19,8 @@ public class Drum : Interactables
     public Material drumMat;
     private int day;
 
+    public FMODMusic MusicGameplay;
+
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -27,6 +29,7 @@ public class Drum : Interactables
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 // Inicia minijuego
+                MusicGameplay.Drums(1f);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 GameManager.GetManager().canvasController.Lock();
                 col.enabled = false;
@@ -45,6 +48,7 @@ public class Drum : Interactables
     {
         col.enabled = true;
         StopPlayingDrum();
+        MusicGameplay.Drums(0f);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().dialogueManager.SetDialogue("IBateria");
         mesh.material = drumMat;

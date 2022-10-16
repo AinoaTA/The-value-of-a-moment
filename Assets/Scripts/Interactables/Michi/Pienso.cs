@@ -16,7 +16,7 @@ public class Pienso : Interactables
         switch (optionNumber)
         {
             case 1:
-                // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/GrabCatFood", transform.position);
                 grabbed = true;
                 cuenco.GrabbedPienso();
                 gameObject.SetActive(false);
@@ -26,7 +26,6 @@ public class Pienso : Interactables
 
     public override void ExitInteraction()
     {
-        // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }

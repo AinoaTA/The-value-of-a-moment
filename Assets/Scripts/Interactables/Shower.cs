@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shower : GeneralActions
 {
+    private static FMOD.Studio.EventInstance ShowerSFX;
     private float lowAutoConfidenceLimit = 50f;
     #region Extra Actions
     public DoSomething[] moreOptions;
@@ -38,6 +39,8 @@ public class Shower : GeneralActions
     public override void EnterAction()
     {
         base.EnterAction();
+        ShowerSFX.start();
+        ShowerSFX.setParameterByName("ShowerOnOff", 0f);
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         positionOnEnter = GameManager.GetManager().playerController.GetPlayerPos();
@@ -57,6 +60,8 @@ public class Shower : GeneralActions
     public override void ExitAction()
     {
         InteractableBlocked = true;
+        ShowerSFX.setParameterByName("ShowerOnOff", 1f);
+        ShowerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         GameManager.GetManager().dayController.TaskDone();
         Debug.Log("IF pendiente de revisar......");
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
@@ -103,7 +108,13 @@ public class Shower : GeneralActions
 
     private void Start()
     {
+        ShowerSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Gameplay");
         // canvas.SetBool("Showing", true);
+    }
+
+    public void ShowerOnOff (float ShowerStat)
+    {
+        ShowerSFX.setParameterByName("ShowerOnOff", ShowerStat);
     }
 
     IEnumerator ShowOtherOptions()
