@@ -6,6 +6,7 @@ public class Nevera : GeneralActions
     public override void EnterAction()
     {
         base.EnterAction();
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeOpen", transform.position);
         //GameManager.GetManager().gameStateController.ChangeGameState(3);
         //GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().dialogueManager.SetDialogue("IPicarAlgo",
