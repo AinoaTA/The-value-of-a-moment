@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+
+
 
 [CustomEditor(typeof(DialoguesList))]
 public class DialoguesListEditor : Editor
@@ -54,3 +57,4 @@ public class DialoguesListEditor : Editor
         return null;
     }
 }
+#endif
