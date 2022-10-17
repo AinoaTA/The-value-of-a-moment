@@ -146,7 +146,11 @@ public class BlockController : MonoBehaviour
             for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
             {
                 if (dayOneInteractable[i].dayTimeCanUnlock == time)
+                {
+                    print(dayOneInteractable[i].locks[e].name);
                     dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+                  
+                }
             }
         }
     }
