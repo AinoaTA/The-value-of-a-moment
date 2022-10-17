@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Mobile : MonoBehaviour //GeneralActions
+public class Mobile : MonoBehaviour, ILock //GeneralActions
 {
     [SerializeField] private bool getMobile;
     [SerializeField] private GameObject realMobile;
@@ -8,6 +8,9 @@ public class Mobile : MonoBehaviour //GeneralActions
     private BoxCollider col;
     public GameObject cursor;
     bool active = false;
+
+    public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
+    [SerializeField] bool _blocked;
     private void Start()
     {
         // col = GetComponent<BoxCollider>();
@@ -35,6 +38,7 @@ public class Mobile : MonoBehaviour //GeneralActions
     //}
     private void OpenMobile()
     {
+        if (InteractableBlocked) return;
         //if (!getMobile) return;
         if (GameManager.GetManager().gameStateController.CheckGameState(1) && !active)
         {

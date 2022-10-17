@@ -291,6 +291,9 @@ public class Bed : Interactables, ITask
                 break;
         }
         yield return new WaitWhile(() => wait);
+
+        GameManager.GetManager().transitionController.FadeOut();
+
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();
         GameManager.GetManager().calendarController.GlobalReset();

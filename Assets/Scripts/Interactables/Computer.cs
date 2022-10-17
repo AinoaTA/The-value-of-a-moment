@@ -10,7 +10,7 @@ public class Computer : Interactables
     [SerializeField] Transform computerPos;
 
     [SerializeField] GameObject programMinigame;
-    bool anyButtonScreenActive;
+    [SerializeField]bool anyButtonScreenActive;
 
 
     private void Start()
@@ -143,6 +143,8 @@ public class Computer : Interactables
     public void ComputerEmail()
     {
         if (anyButtonScreenActive) return;
+        anyButtonScreenActive = true;
+        print("HOLA CARACOLA");
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -154,7 +156,7 @@ public class Computer : Interactables
                 break;
             default: break;
         }
-        anyButtonScreenActive = true;
+        
         GameManager.GetManager().emailController.ShowEmail(true);
         programMinigame.SetActive(false);
         programScreen.SetActive(false);

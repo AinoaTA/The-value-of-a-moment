@@ -28,6 +28,11 @@ public class TransitionController : MonoBehaviour
         StartCoroutine(LoadScene());
     }
 
+    public void FadeOut()
+    {
+        transitor.SetTrigger("Start");
+    }
+
     IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(duration);
