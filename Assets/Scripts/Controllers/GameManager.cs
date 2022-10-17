@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public bool programmed, alexVisited, checkAida, openAida,counterAlex;
    
 
+
     private void OnEnable()
     {
         if (gameManager == null)
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
         }
         else if (gameManager != this)
             Destroy(gameObject);
+
+        Application.targetFrameRate = 60;
     }
 
     #region SetStateGames
