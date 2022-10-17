@@ -1,6 +1,6 @@
 ﻿#if UNITY_ADDRESSABLES_EXIST
     // The Addressables package depends on the ScriptableBuildPipeline package
-#define UNITY_SCRIPTABLEBUILDPIPELINE_EXIST
+    #define UNITY_SCRIPTABLEBUILDPIPELINE_EXIST
 #endif
 
 using System;
@@ -212,7 +212,7 @@ namespace FMODUnity
 
             StringBuilder objectPath = new StringBuilder();
 
-            while (transform != null && transform.gameObject != root)
+            while(transform != null && transform.gameObject != root)
             {
                 if (objectPath.Length > 0)
                 {
@@ -463,7 +463,7 @@ namespace FMODUnity
                         paramValues[param.Name] = param.Value;
                     }
 
-                    args.eventInstance = PreviewEvent(eventRef, paramValues, behavior.CurrentVolume);
+                    args.eventInstance = PreviewEvent(eventRef, paramValues, behavior.CurrentVolume, behavior.ClipStartTime);
                 }
             };
 
@@ -636,7 +636,7 @@ namespace FMODUnity
 
         public static void OpenOnlineDocumentation(string section, string page = null, string anchor = null)
         {
-            const string Prefix = "https://fmod.com/resources/documentation-";
+            const string Prefix = "https://fmod.com/docs/";
             string version = string.Format("{0:X}.{1:X}", FMOD.VERSION.number >> 16, (FMOD.VERSION.number >> 8) & 0xFF);
             string url;
 
@@ -644,18 +644,18 @@ namespace FMODUnity
             {
                 if (!string.IsNullOrEmpty(anchor))
                 {
-                    url = string.Format("{0}{1}?version={2}&page={3}.html#{4}", Prefix, section, version, page, anchor);
+                    url = string.Format("{0}/{1}/{2}/{3}.html#{4}", Prefix, version, section, page, anchor);
                 }
                 else
                 {
-                    url = string.Format("{0}{1}?version={2}&page={3}.html", Prefix, section, version, page);
+                    url = string.Format("{0}/{1}/{2}/{3}.html", Prefix, version, section, page);
                 }
             }
             else
             {
-                url = string.Format("{0}{1}?version={2}", Prefix, section, version);
+                url = string.Format("{0}/{1}/{2}", Prefix, version, section);
             }
-
+                
             Application.OpenURL(url);
         }
 
@@ -713,7 +713,7 @@ namespace FMODUnity
             loadedPreviewBanks.Clear();
         }
 
-        public static FMOD.Studio.EventInstance PreviewEvent(EditorEventRef eventRef, Dictionary<string, float> previewParamValues, float volume = 1)
+        public static FMOD.Studio.EventInstance PreviewEvent(EditorEventRef eventRef, Dictionary<string, float> previewParamValues, float volume = 1, float startTime = 0.0f)
         {
             FMOD.Studio.EventDescription eventDescription;
             FMOD.Studio.EventInstance eventInstance;
@@ -737,6 +737,7 @@ namespace FMODUnity
             }
 
             CheckResult(eventInstance.setVolume(volume));
+            CheckResult(eventInstance.setTimelinePosition((int)(startTime * 1000.0f)));
             CheckResult(eventInstance.start());
 
             previewEventInstances.Add(eventInstance);
@@ -884,7 +885,7 @@ namespace FMODUnity
                 return false;
 
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 RuntimeUtils.DebugLogException(e);
                 return false;
@@ -1129,19 +1130,18 @@ namespace FMODUnity
                 .SelectMany(t => platformMac.GetBinaryAssetPaths(t, Platform.BinaryType.All))
                 .Distinct();
 
-            List<string> librariesToRepair = allLibraries.Where(path =>
-            {
-                string infoPlistPath = $"{path}/Contents/Info.plist";
+            List<string> librariesToRepair = allLibraries.Where(path => {
+                    string infoPlistPath = $"{path}/Contents/Info.plist";
 
-                if (File.Exists(infoPlistPath))
-                {
-                    string contents = File.ReadAllText(infoPlistPath);
+                    if (File.Exists(infoPlistPath))
+                    {
+                        string contents = File.ReadAllText(infoPlistPath);
 
-                    return contents.Contains("\r\n");
-                }
+                        return contents.Contains("\r\n");
+                    }
 
-                return false;
-            })
+                    return false;
+                })
                 .ToList();
 
             if (!librariesToRepair.Any())
@@ -1222,7 +1222,7 @@ namespace FMODUnity
                         RuntimeUtils.DebugLogFormat("FMOD: Removed obsolete file {0}", path);
                     }
                 }
-                if (AssetDatabase.MoveAssetToTrash(obsoleteFolder))
+                if(AssetDatabase.MoveAssetToTrash(obsoleteFolder))
                 {
                     RuntimeUtils.DebugLogFormat("FMOD: Removed obsolete folder {0}", obsoleteFolder);
                 }
@@ -1333,8 +1333,7 @@ namespace FMODUnity
             public static UpdateStep Create(Settings.SharedLibraryUpdateStages stage, string name, string description,
                 Func<string> details, Action execute)
             {
-                return new UpdateStep()
-                {
+                return new UpdateStep() {
                     Stage = stage,
                     Name = name,
                     Description = description,
@@ -1628,8 +1627,7 @@ namespace FMODUnity
 
         protected override void Prepare()
         {
-            style = new GUIStyle(GUI.skin.label)
-            {
+            style = new GUIStyle(GUI.skin.label) {
                 richText = true,
                 wordWrap = true,
                 alignment = TextAnchor.MiddleLeft,
@@ -1782,8 +1780,7 @@ namespace FMODUnity
 
         private static FMOD.GUID GetGuid(this SerializedProperty property)
         {
-            return new FMOD.GUID()
-            {
+            return new FMOD.GUID() {
                 Data1 = property.FindPropertyRelative("Data1").intValue,
                 Data2 = property.FindPropertyRelative("Data2").intValue,
                 Data3 = property.FindPropertyRelative("Data3").intValue,
@@ -1813,8 +1810,7 @@ namespace FMODUnity
             SerializedProperty pathProperty = property.FindPropertyRelative("Path");
             SerializedProperty guidProperty = property.FindPropertyRelative("Guid");
 
-            return new EventReference()
-            {
+            return new EventReference() {
                 Path = pathProperty.stringValue,
                 Guid = guidProperty.GetGuid(),
             };

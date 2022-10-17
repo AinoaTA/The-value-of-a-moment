@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace FMODUnity
 {
     [AddComponentMenu("FMOD Studio/FMOD Studio Global Parameter Trigger")]
-    public class StudioGlobalParameterTrigger : EventHandler
+    public class StudioGlobalParameterTrigger: EventHandler
     {
         [ParamRef]
         [FormerlySerializedAs("parameter")]
@@ -16,7 +17,7 @@ namespace FMODUnity
         public float Value;
 
         private FMOD.Studio.PARAMETER_DESCRIPTION parameterDescription;
-        public FMOD.Studio.PARAMETER_DESCRIPTION ParameterDesctription { get { return parameterDescription; } }
+        public FMOD.Studio.PARAMETER_DESCRIPTION ParameterDescription { get { return parameterDescription; } }
 
         private FMOD.RESULT Lookup()
         {
