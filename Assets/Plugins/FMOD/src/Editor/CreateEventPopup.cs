@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 namespace FMODUnity
 {
     public class CreateEventPopup : EditorWindow
-    {
+    {        
         private class FolderEntry
         {
             public FolderEntry parent;
@@ -94,7 +94,7 @@ namespace FMODUnity
             string itemCountString = EditorUtils.GetScriptOutput("cur.items.length;");
             int itemCount;
             Int32.TryParse(itemCountString, out itemCount);
-
+            
             // iterate children looking for folder
             for (int item = 0; item < itemCount; item++)
             {
@@ -118,7 +118,7 @@ namespace FMODUnity
             }
 
             // Recurse for child entries
-            foreach (var childEntry in entry.entries)
+            foreach(var childEntry in entry.entries)
             {
                 BuildTreeItem(childEntry);
             }
@@ -138,11 +138,11 @@ namespace FMODUnity
 
             if (!isConnected)
             {
-                ShowNotification(new GUIContent("FMOD Studio not running"));
+                this.ShowNotification(new GUIContent("FMOD Studio not running"));
                 return;
             }
 
-            RemoveNotification();
+            this.RemoveNotification();
 
             if (rootFolder == null)
             {
@@ -152,7 +152,6 @@ namespace FMODUnity
 
             var arrowIcon = EditorUtils.LoadImage("ArrowIcon.png");
             var hoverIcon = EditorUtils.LoadImage("SelectedAlt.png");
-            var titleIcon = EditorGUIUtility.Load("IN BigTitle") as Texture2D;
 
             var nextEntry = currentFolder;
 
@@ -175,7 +174,7 @@ namespace FMODUnity
                 if (Event.current.keyCode == KeyCode.DownArrow)
                 {
                     if (Event.current.type == EventType.KeyDown)
-                    {
+                    { 
                         lastHover = Math.Min(lastHover + 1, filteredEntries.Count - 1);
                         if (filteredEntries[lastHover].rect.y + filteredEntries[lastHover].rect.height > scrollPos.y + scrollRect.height)
                         {
@@ -206,13 +205,13 @@ namespace FMODUnity
             if (GUILayout.Button("Create Event"))
             {
                 CreateEventInStudio();
-                Close();
+                this.Close();
             }
             EditorGUI.EndDisabledGroup();
 
             {
                 GUI.SetNextControlName("name");
-
+                
                 EditorGUILayout.LabelField("Name");
                 eventName = EditorGUILayout.TextField(eventName);
             }
@@ -248,12 +247,11 @@ namespace FMODUnity
             // Draw the current folder as a title bar, click to go back one level
             {
                 Rect currentRect = EditorGUILayout.GetControlRect();
-
+                
                 var bg = new GUIStyle(GUI.skin.box);
-                bg.normal.background = titleIcon;
                 Rect bgRect = new Rect(currentRect);
                 bgRect.x = 2;
-                bgRect.width = position.width - 4;
+                bgRect.width = position.width-4;
                 GUI.Box(bgRect, GUIContent.none, bg);
 
                 Rect textureRect = currentRect;
@@ -264,8 +262,8 @@ namespace FMODUnity
                 }
 
                 Rect labelRect = currentRect;
-                labelRect.x += arrowIcon.width + 50;
-                labelRect.width -= arrowIcon.width + 50;
+                labelRect.x += arrowIcon.width;
+                labelRect.width -= arrowIcon.width;
                 GUI.Label(labelRect, currentFolder.name != null ? currentFolder.name : "Folders", EditorStyles.boldLabel);
 
                 if (Event.current.type == EventType.MouseDown && currentRect.Contains(Event.current.mousePosition) &&
@@ -282,7 +280,7 @@ namespace FMODUnity
             hover.normal.background = hoverIcon;
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, false, false);
-
+            
             for (int i = 0; i < filteredEntries.Count; i++)
             {
                 var entry = filteredEntries[i];

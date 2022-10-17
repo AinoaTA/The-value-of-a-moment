@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -454,13 +456,13 @@ namespace FMODUnity
             {
                 this.baseName = baseName;
                 this.path_1_10 = path_1_10;
-                oldestLayout = FileLayout.Release_1_10;
+                this.oldestLayout = FileLayout.Release_1_10;
             }
 
             public BinaryAssetFolderInfo(string baseName, FileLayout oldestLayout)
             {
                 this.baseName = baseName;
-                path_1_10 = null;
+                this.path_1_10 = null;
                 this.oldestLayout = oldestLayout;
             }
 
@@ -916,7 +918,7 @@ namespace FMODUnity
         }
 
         // The platforms which inherit their property values from this platform.
-        public List<string> ChildIdentifiers { get { return childIdentifiers; } }
+        public List<string> ChildIdentifiers { get { return childIdentifiers; } } 
 #endif
 
         // Checks whether this platform inherits from the given platform, so we can avoid creating
