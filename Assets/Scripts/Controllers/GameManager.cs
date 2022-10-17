@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
         else if (gameManager != this)
             Destroy(gameObject);
 
-        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 30;
     }
 
     #region SetStateGames

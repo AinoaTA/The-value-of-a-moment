@@ -43,8 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c740a36ac31e04b45a60b4b1e4c47b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaUno: {fileID: 0}
   diaDos: {fileID: 0}
   rotateAlexDoor: {fileID: 0}
+  rotateAidaDoor: {fileID: 0}
   dayOneInteractable:
   - name: Ventanas
     id: 0
@@ -62,7 +64,7 @@ MonoBehaviour:
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 1
+    dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
   - name: Encimera
     id: 0
@@ -87,12 +89,6 @@ MonoBehaviour:
     locks:
     - {fileID: 0}
     dayTimeCanUnlock: 2
-    hasConditionToUnlock: 1
-  - name: Bitter
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Calendar
     id: 0
@@ -177,6 +173,12 @@ MonoBehaviour:
     - {fileID: 0}
     dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
+  - name: Bitter
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
   dayTwoInteractable:
   - name: Ventanas
     id: 0
@@ -255,12 +257,6 @@ MonoBehaviour:
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
-  - name: Bitter
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
   - name: Plantas
     id: 0
     locks:
@@ -273,6 +269,19 @@ MonoBehaviour:
     locks:
     - {fileID: 0}
     dayTimeCanUnlock: 0
+    hasConditionToUnlock: 1
+  - name: Plantas
+    id: 0
+    locks:
+    - {fileID: 0}
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Bitter
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   dayThreeInteractable:
   - name: DoorAida
@@ -287,4 +296,4 @@ MonoBehaviour:
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 0
-  unlockAll: 1
+  unlockAll: 0

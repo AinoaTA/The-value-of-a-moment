@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
-
     // public Animator animator;
     private void Awake()
     {
@@ -79,15 +78,11 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.GetManager().gameStateController.CheckGameState(1))
         {
             m_CurrVelocityPlayer = 0;
+            print("ptuas");
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
             GameManager.GetManager().playerController.PlayerMovementAnim(m_CurrVelocityPlayer);
             return;
         }
-
-
-
-
-
         if (m_MovementAxis != Vector2.zero)
         {
             m_CurrVelocityPlayer = Mathf.Clamp(m_CharacterController.velocity.magnitude, 0, 1);
@@ -109,15 +104,15 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 movement = m_Direction * Time.deltaTime * speed;
 
-
-
             CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);
         }
         else
         {
+            print("AAAAAA");
             m_CurrVelocityPlayer -= Time.deltaTime * 2.5f;
+            if (m_CurrVelocityPlayer < 0) m_CurrVelocityPlayer = 0;
         }
-
+        //print(m_CurrVelocityPlayer);
         GameManager.GetManager().playerController.PlayerMovementAnim(m_CurrVelocityPlayer);
     }
 }
