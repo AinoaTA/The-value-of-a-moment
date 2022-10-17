@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using FMODUnity;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -80,12 +81,12 @@ public class DialogueManager : MonoBehaviour
 
         try
         {
-            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);
-            FMODUnity.RuntimeManager.GetEventDescription(FMODUnity.EventReference.Find(path)).getLength(out lenght);
+            eventAudio = RuntimeManager.CreateInstance(path);
+            RuntimeManager.GetEventDescription(EventReference.Find(path)).getLength(out lenght);
             eventAudio.start();
 
             float time = (float)lenght / 1000;
-            //    print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
+            print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
         catch (System.Exception e)
