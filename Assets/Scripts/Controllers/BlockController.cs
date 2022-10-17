@@ -126,7 +126,7 @@ public class BlockController : MonoBehaviour
                 {
                     for (int e = 0; e < dayTwoInteractable[i].locks.Length; e++)
                     {
-                        print("name: " + dayTwoInteractable[i] + " name obj: " + dayTwoInteractable[i].locks[e]);
+                        //print("name: " + dayTwoInteractable[i] + " name obj: " + dayTwoInteractable[i].locks[e]);
                         dayTwoInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = block;
                     }
                 }

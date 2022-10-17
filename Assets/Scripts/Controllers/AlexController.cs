@@ -85,7 +85,6 @@ public class AlexController : Interactables
         if (yaVisto)
         {
             yaVisto = true;
-            Debug.Log("Me estas mirando o k puta");
             GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex");
         }
     }
@@ -101,7 +100,6 @@ public class AlexController : Interactables
         isGone = true;
         InteractableBlocked = true;
         yield return new WaitForSecondsRealtime(4);
-        Debug.Log("Me voy");
         animAlex.Play("Leave");
         yield return new WaitForSeconds(1f);
         animAlex.enabled = false;
