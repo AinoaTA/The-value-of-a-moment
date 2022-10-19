@@ -72,6 +72,7 @@ public class MichiController : MonoBehaviour
             {
                 Miau();
                 // TODO: comer
+                FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Eat", transform.position);
                 cuenco.ResetCuenco(); // Desaparecer la comida
                 theresFood = false;
             }

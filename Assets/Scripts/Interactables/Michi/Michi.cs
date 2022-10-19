@@ -27,7 +27,7 @@ public class Michi : Interactables
                         break;
                     default: break;
                 }
-                FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet");
+                FMODUnity.RuntimeManager.PlayOneShot("event:/NPCs/Cat/Pet", transform.position);
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 Cursor.lockState = CursorLockMode.Confined;
