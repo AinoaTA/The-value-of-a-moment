@@ -138,6 +138,8 @@ public class Alarm : MonoBehaviour
                 GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
                 {
                     GameManager.GetManager().alexVisited = true;
+                    GameManager.GetManager().counterAlex = true;
+
                     StartCoroutine(Delay2());
                 });
                 break;

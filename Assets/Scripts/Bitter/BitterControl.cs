@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BitterControl : MonoBehaviour
+public class BitterControl : MonoBehaviour, ILock
 {
     [Header("Profiles")]
     [SerializeField] Sprite elleProfile;
@@ -30,6 +30,8 @@ public class BitterControl : MonoBehaviour
     int random;
     Bitter playerBit;
 
+    public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
+    [SerializeField]bool _blocked;
     private void Awake()
     {
         profileBitterNamesGood = new List<string>(bitterData.profileBitterNamesGood);

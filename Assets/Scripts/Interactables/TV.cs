@@ -7,7 +7,7 @@ public class TV : Interactables
     // handle de canales
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private Material[] channels;
-    [SerializeField] private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
+    private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
     [SerializeField] private float timeChangeChannel = 3.5f;
     private void Start()
     {
@@ -91,7 +91,7 @@ public class TV : Interactables
         while (screen.activeSelf)
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh", transform.position);
-            // 1 funci�n para subir o bajar canal o 2 funciones
+            // 1 funcion para subir o bajar canal o 2 funciones
             currChannel++;
             // Set screen to channels[currChannel]
             if (currChannel >= channels.Length) currChannel = 0;

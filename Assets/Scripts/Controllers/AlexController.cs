@@ -11,7 +11,8 @@ public class AlexController : Interactables
     private bool isGone = false, yaVisto = false;
     private Transform cam;
     public Animator animAlex;
-
+    public Transform prop;
+    [SerializeField] float maxTimeToLeave = 10;
     public GameObject mochilaRoom, mochilaHand;
     private void Awake()
     {
@@ -26,21 +27,25 @@ public class AlexController : Interactables
         navMeshAgent.enabled = false;
     }
 
+    float timeWithSayNothing;
+    bool count;
+    bool talking;
     void Update()
     {
-        if (isGone) return;
+        if (navMeshAgent.enabled)
+            prop.localRotation = Quaternion.Euler(Vector3.zero);
 
-        if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
-            PaCasa();
-            
-        if (Vector3.Distance(transform.position, exitTransform.position) < .2f)
+        if (isGone) return;
+        if (Vector3.Distance(transform.position, GameManager.GetManager().playerController.transform.position) < 3f)
+            count = true;
+        print(timeWithSayNothing);
+
+        if (timeWithSayNothing < maxTimeToLeave && count && !talking && GameManager.GetManager().counterAlex)
         {
-            gameObject.SetActive(false);
-            // TODO: Algun sonido de puerta o algo??
-            GameManager.GetManager().dialogueManager.SetDialogue("D2PostCafe", delegate
-            {
-                GameManager.GetManager().blockController.BlockAll(false);
-            });
+            timeWithSayNothing += Time.deltaTime;
+
+            if (timeWithSayNothing >= maxTimeToLeave && !talking)
+                StartCoroutine(CorrectRoutine());
         }
     }
 
@@ -50,16 +55,17 @@ public class AlexController : Interactables
         switch (options)
         {
             case 1:
-                if(isGone)
-                {
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_AlexSeVa");
-                }
+                InteractableBlocked = true;
+                talking = true;
                 GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex", delegate
                 {
                     // Permitir que Elle elija
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_Op1" , delegate 
                     {
-                        StartCoroutine(Room()); 
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
+                        {
+                            StartCoroutine(CorrectRoutine());
+                        });
                     });
                 });
                 break;
@@ -73,47 +79,47 @@ public class AlexController : Interactables
 
     protected override void OnMouseEnter()
     {
+        if (!GameManager.GetManager().alexVisited) return;
+        InteractableBlocked = false;
         base.OnMouseEnter();
-        if (Vector3.Distance(cam.position, transform.position) > 7f) return;
-        if (yaVisto) return;
-        Debug.Log("Me estas mirando o k puta");
-        GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex", delegate
+        if (yaVisto)
         {
             yaVisto = true;
-            InteractableBlocked = false;
-        });
-        StartCoroutine(MePiroDeCasa());
+            GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex");
+        }
     }
 
     public void PaCasa()
     {
         isGone = true;
-        StartCoroutine(DelayRoutine());
+        // StartCoroutine(DelayRoutine());
     }
 
-
-    IEnumerator Room() 
+    IEnumerator CorrectRoutine()
     {
-        navMeshAgent.SetDestination(cuartoTransform.position);
-        yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
-        mochilaHand.SetActive(true);
-        mochilaRoom.SetActive(false);
-        yield return null;
-        PaCasa();
-    }
-    IEnumerator DelayRoutine() 
-    {
-        Debug.Log("Me voy");
+        isGone = true;
+        InteractableBlocked = true;
+        yield return new WaitForSecondsRealtime(4);
         animAlex.Play("Leave");
         yield return new WaitForSeconds(1f);
         animAlex.enabled = false;
         navMeshAgent.enabled = true;
+        navMeshAgent.SetDestination(cuartoTransform.position);
+        yield return null;
+        print(navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete);
+        print(!navMeshAgent.hasPath);
+        yield return new WaitUntil(() => navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && !navMeshAgent.hasPath);
+        mochilaHand.SetActive(true);
+        mochilaRoom.SetActive(false);
+        mochilaHand.transform.SetParent(rightHand.transform);
+        mochilaHand.transform.localPosition = Vector3.zero;
         navMeshAgent.SetDestination(exitTransform.position);
-    }
-
-    private IEnumerator MePiroDeCasa()
-    {
-        yield return new WaitForSecondsRealtime(4);
         PaCasa();
+        yield return new WaitUntil(() => Vector3.Distance(transform.position, exitTransform.position) < 1f);
+        GameManager.GetManager().blockController.BlockAll(false);
+        GameManager.GetManager().playerController.AudioDialogue();
+        yield return null;
+        gameObject.SetActive(false);
+
     }
 }

@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public DialogueManager dialogueManager { get; set; }
     public BlockController blockController { get; set; }
     public AlexController alexController { get; set; }
+    public TransitionController transitionController { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public bool programmedInteractableDone = false;
     public int realizedInteractables;
-    public bool programmed, alexVisited, checkAida;
+    public bool programmed, alexVisited, checkAida, openAida,counterAlex;
    
 
     private void OnEnable()

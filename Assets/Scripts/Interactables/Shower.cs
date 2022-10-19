@@ -6,6 +6,7 @@ public class Shower : GeneralActions
 {
     private static FMOD.Studio.EventInstance ShowerSFX;
     private float lowAutoConfidenceLimit = 50f;
+    public GameObject cortinas;
     #region Extra Actions
     public DoSomething[] moreOptions;
     [System.Serializable]
@@ -36,6 +37,7 @@ public class Shower : GeneralActions
     }
 
     #endregion
+    IEnumerator routine;
     public override void EnterAction()
     {
         base.EnterAction();
@@ -46,6 +48,7 @@ public class Shower : GeneralActions
         positionOnEnter = GameManager.GetManager().playerController.GetPlayerPos();
         GameManager.GetManager().playerController.SetPlayerPos(showerPos.transform.position);
         duchado = true;
+        StartCoroutine(routine = Cortinas(true));
         if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
         {
             GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ducha");
@@ -59,11 +62,13 @@ public class Shower : GeneralActions
 
     public override void ExitAction()
     {
+        if (routine != null)
+            StopCoroutine(routine);
+        StartCoroutine(routine = Cortinas(false));
         InteractableBlocked = true;
         ShowerSFX.setParameterByName("ShowerOnOff", 1f);
         ShowerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         GameManager.GetManager().dayController.TaskDone();
-        Debug.Log("IF pendiente de revisar......");
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
@@ -112,7 +117,7 @@ public class Shower : GeneralActions
         // canvas.SetBool("Showing", true);
     }
 
-    public void ShowerOnOff (float ShowerStat)
+    public void ShowerOnOff(float ShowerStat)
     {
         ShowerSFX.setParameterByName("ShowerOnOff", ShowerStat);
     }
@@ -137,5 +142,20 @@ public class Shower : GeneralActions
     {
         duchado = false;
         base.ResetObject();
+    }
+
+    IEnumerator Cortinas(bool open)
+    {
+        float t = 0;
+        Vector3 scale = cortinas.transform.localScale;
+        while (t < 1)
+        {
+            t += Time.deltaTime;
+            if (open)
+                cortinas.transform.localScale = Vector3.Lerp(scale, new Vector3(2, 1, 1), t);
+            else
+                cortinas.transform.localScale = Vector3.Lerp(scale, new Vector3(1, 1, 1), t);
+            yield return null;
+        }
     }
 }

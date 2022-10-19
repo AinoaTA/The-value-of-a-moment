@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Autocontrol : MonoBehaviour
 {
-    private float maxValue = 100f;
+    public float maxValue = 100f;
     CanvasGroup canvasGroup;
     public float m_currentValue { get; private set; }
     [SerializeField] private Slider m_Slider;
@@ -35,7 +35,6 @@ public class Autocontrol : MonoBehaviour
         rawImage.texture = renderTexture;
         m_Slider.value = m_currentValue / maxValue;
         UpdateAutcontrol();
-
     }
 
     public void AddAutoControl(float value)
