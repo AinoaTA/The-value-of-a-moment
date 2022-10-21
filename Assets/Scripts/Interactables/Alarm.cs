@@ -32,6 +32,10 @@ public class Alarm : MonoBehaviour
             GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
             GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
         }
+        else 
+        {
+            counter = 0;
+        }
         GameManager.GetManager().playerInputs._FirstInteraction += StartDay;
         GameManager.GetManager().playerInputs._SecondInteraction += BackDay;
     }
@@ -98,7 +102,7 @@ public class Alarm : MonoBehaviour
                     {
                         AlarmAndMood();
                         Show();
-                    }, forceInvoke: true);
+                    });
                 break;
             case DayController.Day.three:
 
@@ -134,7 +138,7 @@ public class Alarm : MonoBehaviour
                 });
                 break;
             case DayController.Day.two:
-                if (GameManager.GetManager().alexVisited) yield break;
+                //if (GameManager.GetManager().alexVisited) yield break;
                 GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
                 {
                     GameManager.GetManager().alexVisited = true;
@@ -190,7 +194,7 @@ public class Alarm : MonoBehaviour
             // TODO: unlock de los interactables
             GameManager.GetManager().UnlockBasicTasks();
         });
-        StartAlarm();
+        //StartAlarm();
     }
 
     #endregion
@@ -228,6 +232,7 @@ public class Alarm : MonoBehaviour
 
                 GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
                 {
+                    print("=");
                     if (name == "D2Alarm_Op3" && !negated)
                     {
                         eventAlex.gameObject.SetActive(true);
@@ -235,9 +240,10 @@ public class Alarm : MonoBehaviour
                     }
                     else
                     {
+                        print("lloro");
                         StartAlarm();
                     }
-                }, forceInvoke: true);
+                }/*, forceInvoke: true*/);
 
                 break;
             case DayController.Day.three:
