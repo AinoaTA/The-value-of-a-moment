@@ -204,6 +204,7 @@ public class Bed : Interactables, ITask
         m_SheetBad.transform.position = initPosBadSheet;
         interactTextBed.SetActive(true);
         gameInitialized = false;
+        TaskReset();
     }
 
     public override void Interaction(int options)

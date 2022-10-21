@@ -2,8 +2,59 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class Shower : GeneralActions
+public class Shower : GeneralActions, ITask
 {
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    [SerializeField] private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
+
     private static FMOD.Studio.EventInstance ShowerSFX;
     private float lowAutoConfidenceLimit = 50f;
     public GameObject cortinas;
@@ -64,15 +115,13 @@ public class Shower : GeneralActions
     {
         if (routine != null)
             StopCoroutine(routine);
+        CheckDoneTask();
         StartCoroutine(routine = Cortinas(false));
         InteractableBlocked = true;
         ShowerSFX.setParameterByName("ShowerOnOff", 1f);
         ShowerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         GameManager.GetManager().dayController.TaskDone();
-        //if (GameManager.GetManager().interactableManager.currInteractable != null)
-        //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-        // canvas.SetBool("Showing", false);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().playerController.ResetPlayerPos(positionOnEnter);
         base.ExitAction();
@@ -114,6 +163,7 @@ public class Shower : GeneralActions
     private void Start()
     {
         ShowerSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Gameplay");
+        SetTask();
         // canvas.SetBool("Showing", true);
     }
 
@@ -140,6 +190,7 @@ public class Shower : GeneralActions
     }
     public override void ResetObject()
     {
+        TaskReset();
         duchado = false;
         base.ResetObject();
     }
