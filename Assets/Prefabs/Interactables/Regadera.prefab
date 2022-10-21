@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 175029623181432868}
   - component: {fileID: 8393124511925298199}
   - component: {fileID: 3485087467032578979}
-  - component: {fileID: 3679000700281475962}
   - component: {fileID: 5195696192707497063}
+  - component: {fileID: 6805545956073371902}
   m_Layer: 0
   m_Name: Regadera
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3679000700281475962
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6861415487871498131}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3130170304929540260, guid: f83f296c2b701fe4ba7c89ba356eb03f, type: 3}
 --- !u!114 &5195696192707497063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,11 +97,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a71bf95e586830418fe0bda81cd8309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blocked: 0
   OptionsCanvas: {fileID: 7257026978471176408}
   anim: {fileID: 1127362235063689542}
   nameAction: 
   waterCan: {fileID: 0}
   grabbed: 0
+--- !u!65 &6805545956073371902
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861415487871498131}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0023909316, y: 0.0037652836, z: 0.0033442245}
+  m_Center: {x: 1.732783e-11, y: 0.0007649224, z: 0.00055439316}
 --- !u!1001 &8546352978835020771
 PrefabInstance:
   m_ObjectHideFlags: 0
