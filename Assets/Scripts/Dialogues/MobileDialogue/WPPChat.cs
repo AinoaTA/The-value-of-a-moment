@@ -32,11 +32,11 @@ public class WPPChat : MonoBehaviour
         chatStarted = true;
     }
 
-
     public void ChatFinish()
     {
         chatStarted = false;
         chatFinish = true;
+        ShowAnswerContent(false);
     }
     public void NewDayNewChat()
     {
@@ -51,10 +51,13 @@ public class WPPChat : MonoBehaviour
         if (GameManager.GetManager().dayController.GetDayNumber() == dayActive)
         {
             answerContent.SetActive(true);
-
             return true;
         }
         answerContent.SetActive(false);
         return false;
+    }
+    public void ShowAnswerContent(bool v) 
+    {
+        answerContent.SetActive(v);
     }
 }
