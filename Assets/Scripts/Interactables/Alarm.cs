@@ -99,16 +99,6 @@ public class Alarm : MonoBehaviour
                         Show();
                     });
                 break;
-            //case DayController.Day.three:
-
-            //    GameManager.GetManager().dialogueManager.SetDialogue("D3Start", delegate
-            //    {
-            //        AlarmAndMood();
-            //        Show();
-            //    });
-            //    break;
-            //case DayController.Day.fourth:
-            //    break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -135,7 +125,6 @@ public class Alarm : MonoBehaviour
                 });
                 break;
             case DayController.Day.two:
-                //if (GameManager.GetManager().alexVisited) yield break;
                 GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
                 {
                     GameManager.GetManager().alexVisited = true;
@@ -144,25 +133,11 @@ public class Alarm : MonoBehaviour
                     StartCoroutine(Delay2());
                 });
                 break;
-
-            //case DayController.Day.three:
-            //    string names;
-            //    if (counter == 0) names = "D3Start_Op1";
-            //    else names = "D3Start_Op2a";
-            //    GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
-            //    {
-            //        StartCoroutine(Delay());
-            //    });
-
-            //    break;
-            //case DayController.Day.fourth:
-            //    break;
             default:
                 throw new ArgumentOutOfRangeException();
 
         }
         canInteract = false;
-        counter = 0;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         MusicGameplay.Mood(1f);
@@ -244,20 +219,6 @@ public class Alarm : MonoBehaviour
                 }/*, forceInvoke: true*/);
 
                 break;
-            case DayController.Day.three:
-                name = "D3Start_Op2";
-                if (counter == 0) name = "D3Start_Op2b";
-                else name = "Alarm3";
-
-                GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-                {
-                    if (name != "Alarm3")
-                        StartAlarm();
-                    else
-                        print("BAD EEEEEEEEEEEEEND");
-
-                });
-                break;
 
         }
         counter++;
@@ -287,6 +248,7 @@ public class Alarm : MonoBehaviour
         alarmRinging = false;
         canInteract = false;
         timer = 0;
+        counter = 0;
     }
 
     private IEnumerator StartDayDelay()
