@@ -41,10 +41,11 @@ public class MichiController : MonoBehaviour
         if (reset)
         {
             reset = false;
-            animator.SetBool("walking", true);
             //animator.Play("Walk");
             newPos = RandomNavmeshLocation(20f);
             navMeshAgent.SetDestination(newPos);
+            navMeshAgent.isStopped = false;
+            animator.SetBool("walking", true);
         }
         else if (!theresFood)
         {
@@ -102,6 +103,7 @@ public class MichiController : MonoBehaviour
 
     public void Miau()
     {
+        navMeshAgent.isStopped = true;
         animator.SetBool("walking", false);
         Debug.Log(false);
         animator.ResetTrigger("hasArrived");
