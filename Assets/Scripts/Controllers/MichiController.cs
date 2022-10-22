@@ -9,6 +9,7 @@ public class MichiController : MonoBehaviour
     private bool theresFood = false;
     [SerializeField] private Cuenco cuenco;
     [SerializeField] private Animator animator;
+    private NavMeshPath path;
     private Vector3 cuencoPosition;
     public Vector3 newPos;
     private float turningRate = 3f;
@@ -24,6 +25,7 @@ public class MichiController : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        path = new NavMeshPath();
         reset = true;
         initialSpeed = navMeshAgent.speed;
         animator.SetBool("walking", true);
@@ -42,23 +44,18 @@ public class MichiController : MonoBehaviour
         {
             reset = false;
             //animator.Play("Walk");
-            newPos = RandomNavmeshLocation(20f);
-            navMeshAgent.SetDestination(newPos);
             navMeshAgent.isStopped = false;
+            Debug.Log("reset");
+            newPos = RandomNavmeshLocation(20f);
+            NavMesh.CalculatePath(transform.position, newPos, NavMesh.AllAreas, path);
+            for (int i = 0; i < path.corners.Length - 1; i++)
+                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+            //navMeshAgent.SetDestination(newPos);
             animator.SetBool("walking", true);
         }
-        else if (!theresFood)
+        else if (!theresFood && Vector3.Distance(transform.position, newPos) < .2f)
         {
-            //if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
-            //    reset = true;
-
-            //this.transform.position = Vector3.MoveTowards(this.transform.position, newPos, walkSpeed * Time.deltaTime);
-            //this.transform.localRotation = Quaternion.Slerp(this.transform.rotation, targetRotation, turningRate * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, newPos) < .2f)
-            {
-                Miau();
-            }
+            Miau();
         }
 
         if (theresFood)
@@ -94,7 +91,7 @@ public class MichiController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
         if (other.gameObject.layer != 2)
         {
             Miau();
@@ -117,6 +114,7 @@ public class MichiController : MonoBehaviour
         animator.Play("walk");
         petting = false;
     }
+
     public void PetMichi()
     {
         Miau();
@@ -124,8 +122,10 @@ public class MichiController : MonoBehaviour
         petting = true;
         navMeshAgent.isStopped = true;
     }
+
     IEnumerator Sitting()
     {
+        Debug.Log("sitting");
         int seconds = Random.Range(2, 5);
         yield return new WaitForSecondsRealtime(seconds);
         animator.SetBool("walking", true);
@@ -140,10 +140,11 @@ public class MichiController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (path == null) return;
         Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position, newPos);
+        for (int i = 0; i < path.corners.Length - 1; i++)
+            Gizmos.DrawLine(path.corners[i], path.corners[i + 1]);
     }
-
 
     public Transform GetNewPoint()
     {
