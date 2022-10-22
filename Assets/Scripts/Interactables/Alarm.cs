@@ -13,6 +13,7 @@ public class Alarm : MonoBehaviour
     private int counter;
     [SerializeField] private float timer;
     private bool alarmRinging;
+    private bool canInteract;
     [SerializeField] private bool talking;
     public FMODMusic MusicGameplay;
     public GameObject eventAlex;
@@ -56,7 +57,7 @@ public class Alarm : MonoBehaviour
 
     private void StartDay()
     {
-        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
+        if (canInteract/*alarmRinging*/ && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
         {
             ResetTime();
             StartCoroutine(NormalWakeUp());
@@ -65,11 +66,12 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-        if (alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
+        if (canInteract/*alarmRinging*/ && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
         {
             StillSleeping();
         }
     }
+    bool once;
     private void StartAlarm()
     {
         alarmRinging = true;
@@ -79,10 +81,10 @@ public class Alarm : MonoBehaviour
         {
             case DayController.Day.one:
                 AlarmAndMood();
-                if (counter > 0)
-                    Show();
-                else
-                    GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
+
+                if (counter > 0) Show();
+                else GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
+
                 break;
             case DayController.Day.two:
                 if (counter > 0)
@@ -116,6 +118,7 @@ public class Alarm : MonoBehaviour
     {
         alarmsfx.start();
         talking = false;
+        canInteract = true;
         print("start sound");
     }
 
@@ -142,22 +145,23 @@ public class Alarm : MonoBehaviour
                 });
                 break;
 
-            case DayController.Day.three:
-                string names;
-                if (counter == 0) names = "D3Start_Op1";
-                else names = "D3Start_Op2a";
-                GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
-                {
-                    StartCoroutine(Delay());
-                });
+            //case DayController.Day.three:
+            //    string names;
+            //    if (counter == 0) names = "D3Start_Op1";
+            //    else names = "D3Start_Op2a";
+            //    GameManager.GetManager().dialogueManager.SetDialogue(names, delegate
+            //    {
+            //        StartCoroutine(Delay());
+            //    });
 
-                break;
-
-            case DayController.Day.fourth:
-                break;
+            //    break;
+            //case DayController.Day.fourth:
+            //    break;
             default:
                 throw new ArgumentOutOfRangeException();
+
         }
+        canInteract = false;
         counter = 0;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -201,6 +205,7 @@ public class Alarm : MonoBehaviour
     public void StillSleeping()
     {
         alarmRinging = false;
+        canInteract = false;
         talking = true;
         string name;
         switch (GameManager.GetManager().dayController.GetDayNumber())
@@ -273,13 +278,14 @@ public class Alarm : MonoBehaviour
     public void SetAlarmActive()
     {
         alarm = true;
+        ResetTime();
     }
 
     public void ResetTime()
     {
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-
         alarmRinging = false;
+        canInteract = false;
         timer = 0;
     }
 

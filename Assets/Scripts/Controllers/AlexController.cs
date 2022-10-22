@@ -38,7 +38,6 @@ public class AlexController : Interactables
         if (isGone) return;
         if (Vector3.Distance(transform.position, GameManager.GetManager().playerController.transform.position) < 3f)
             count = true;
-        print(timeWithSayNothing);
 
         if (timeWithSayNothing < maxTimeToLeave && count && !talking && GameManager.GetManager().counterAlex)
         {

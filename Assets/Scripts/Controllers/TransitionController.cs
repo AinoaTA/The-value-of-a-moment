@@ -28,10 +28,17 @@ public class TransitionController : MonoBehaviour
         StartCoroutine(LoadScene());
     }
 
-    public void FadeOut()
+    #region fades
+
+    public void FadeIn()
     {
         transitor.SetTrigger("Start");
     }
+    public void FadeOut()
+    {
+        transitor.SetTrigger("End");
+    }
+    #endregion
 
     IEnumerator LoadScene()
     {

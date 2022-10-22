@@ -195,8 +195,6 @@ public class Bed : Interactables, ITask
 
     public void ResetBed()
     {
-        GameManager.GetManager().alarm.SetAlarmActive();
-        //GameManager.GetManager().Alarm.ResetTime();
         interactDone = false;
         m_Sheet.SetActive(false);
         badBed.SetActive(true);
@@ -273,7 +271,6 @@ public class Bed : Interactables, ITask
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                print("Hola");
                 GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
                 {
                     wait = false;
@@ -293,7 +290,8 @@ public class Bed : Interactables, ITask
         }
         yield return new WaitWhile(() => wait);
 
-        GameManager.GetManager().transitionController.FadeOut();
+        GameManager.GetManager().transitionController.FadeIn();
+        yield return new WaitForSeconds(0.5f);
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();
@@ -309,6 +307,7 @@ public class Bed : Interactables, ITask
         GameManager.GetManager().dayController.NewDay();
         GameManager.GetManager().alarm.SetAlarmActive();
         GameManager.GetManager().blockController.ToActive();
+        GameManager.GetManager().transitionController.FadeOut();
     }
 
     public override void ExitInteraction()
