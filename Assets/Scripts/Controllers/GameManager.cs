@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Llaves()
     {
         yield return new WaitForSecondsRealtime(4f);
-        // TODO: Que suenen las llaves
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorKeys", transform.position);
 
         yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue("D2MundoAida");
