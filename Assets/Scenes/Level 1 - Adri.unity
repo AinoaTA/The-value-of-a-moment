@@ -814,6 +814,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1532177572}
     m_Modifications:
+    - target: {fileID: 722534135, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 3e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 722534135, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1e-45
+      objectReference: {fileID: 0}
     - target: {fileID: 722534136, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Follow
       value: 
@@ -16642,7 +16650,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 40
+  far clip plane: 100
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -16668,8 +16676,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
-  m_LocalRotation: {x: 0.18107365, y: 0.6833752, z: -0.18098487, w: 0.68370694}
-  m_LocalPosition: {x: -1.231, y: 2.693, z: 1.8930001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7275598, y: 1.510534, z: -0.6171298}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
@@ -17163,6 +17171,14 @@ PrefabInstance:
       propertyPath: programMinigame
       value: 
       objectReference: {fileID: 1874080408}
+    - target: {fileID: 3581032868698730330, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Height
+      value: 0.30843136
+      objectReference: {fileID: 0}
+    - target: {fileID: 3581032868698730330, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: m_Radius
+      value: 0.15421568
+      objectReference: {fileID: 0}
     - target: {fileID: 4146359698724653740, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_Convex
       value: 0
@@ -17291,5 +17307,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 31.99
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3581032868698730330, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
