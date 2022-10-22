@@ -66,7 +66,7 @@ public class BucketController : Interactables, ITask, IDependencies
 
     #endregion
     #region OnMouse
-    private void OnMouseEnter()
+    protected override void OnMouseEnter()
     {
         switch (type)
         {
