@@ -2074,6 +2074,10 @@ PrefabInstance:
       value: CamerasController
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9547052
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.26
       objectReference: {fileID: 0}
@@ -2980,6 +2984,10 @@ MonoBehaviour:
   OptionsCanvas: {fileID: 1405766713}
   anim: {fileID: 1405766712}
   nameAction: Limpiar
+  nameTask_: 
+  task_: 0
+  extraAutocontrol: 5
+  taskType_: {fileID: 0}
 --- !u!1 &210434595
 GameObject:
   m_ObjectHideFlags: 0
@@ -14126,6 +14134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d2b4aa1b0ee0f45994b6d78f8563b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxValue: 100
   m_Slider: {fileID: 1474524565}
   stateImage: {fileID: 513778986}
   backgroundBar: {fileID: 1011595591}
@@ -33915,7 +33924,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 35
+  far clip plane: 100
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -33942,7 +33951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.549, y: 1.97, z: -8.645}
+  m_LocalPosition: {x: 1.9547052, y: 1.4243827, z: -1.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
