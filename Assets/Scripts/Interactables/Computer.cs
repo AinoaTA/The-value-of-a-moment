@@ -6,12 +6,10 @@ public class Computer : Interactables
     GameObject computerScreen, programScreen,
         calendarMaterialScreen, emailScreenMaterial, email;
 
-
     [SerializeField] Transform computerPos;
 
     [SerializeField] GameObject programMinigame;
     [SerializeField]bool anyButtonScreenActive;
-
 
     private void Start()
     {
