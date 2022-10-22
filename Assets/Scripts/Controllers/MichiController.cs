@@ -6,64 +6,48 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class MichiController : MonoBehaviour
 {
-    private bool theresFood = false;
     [SerializeField] private Cuenco cuenco;
     [SerializeField] private Animator animator;
     private NavMeshPath path;
-    private Vector3 cuencoPosition;
-    public Vector3 newPos;
-    private float turningRate = 3f;
-    private Quaternion targetRotation;
-    private bool reset, petting;
     private NavMeshAgent navMeshAgent;
+    private Vector3 cuencoPosition, newPos;
+    private bool theresFood, reset, petting, sitting;
     private float initialSpeed;
     [Range(0.1f, 2f)] public float walkSpeed;
-    public Transform poses;
-    List<Transform> allPoses = new List<Transform>();
-    [SerializeField] int currentIndexPose;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         path = new NavMeshPath();
         reset = true;
+        theresFood = false;
         initialSpeed = navMeshAgent.speed;
         animator.SetBool("walking", true);
         if (cuenco) cuencoPosition = cuenco.gameObject.transform.position;
-
-        for (int i = 0; i < poses.childCount; i++)
-        {
-            allPoses.Add(poses.GetChild(i));
-        }
     }
 
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("sitting") || petting) return;
+        if (sitting || petting) return;
         if (reset)
         {
             reset = false;
-            //animator.Play("Walk");
             navMeshAgent.isStopped = false;
-            Debug.Log("reset");
             newPos = RandomNavmeshLocation(20f);
             NavMesh.CalculatePath(transform.position, newPos, NavMesh.AllAreas, path);
-            for (int i = 0; i < path.corners.Length - 1; i++)
-                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-            //navMeshAgent.SetDestination(newPos);
+            navMeshAgent.path = path;
             animator.SetBool("walking", true);
         }
-        else if (!theresFood && Vector3.Distance(transform.position, newPos) < .2f)
+        else if (!theresFood && navMeshAgent.remainingDistance < .2f)
         {
             Miau();
         }
 
         if (theresFood)
         {
-            navMeshAgent.SetDestination(cuencoPosition);
+            NavMesh.CalculatePath(transform.position, cuencoPosition, NavMesh.AllAreas, path);
             navMeshAgent.speed = 0.5f;
-            //transform.position = Vector3.MoveTowards(transform.position, cuencoPosition, walkSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, cuencoPosition) < .1f)
+            if (navMeshAgent.remainingDistance < .1f)
             {
                 navMeshAgent.speed = initialSpeed;
                 Miau();
@@ -73,16 +57,14 @@ public class MichiController : MonoBehaviour
                 theresFood = false;
             }
         }
-
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
-        NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, 1))
         {
             finalPosition = hit.position;
         }
@@ -91,45 +73,36 @@ public class MichiController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        //Debug.Log(other.gameObject.name);
         if (other.gameObject.layer != 2)
         {
-            Miau();
+            //Miau();
         }
     }
 
     public void Miau()
     {
+        sitting = true;
         navMeshAgent.isStopped = true;
         animator.SetBool("walking", false);
-        Debug.Log(false);
         animator.ResetTrigger("hasArrived");
         animator.SetTrigger("hasArrived");
         StartCoroutine(Sitting());
     }
 
-    public void Walk()
-    {
-        RenudarMichi();
-        animator.Play("walk");
-        petting = false;
-    }
-
     public void PetMichi()
     {
         Miau();
-        animator.Play("sit");
         petting = true;
         navMeshAgent.isStopped = true;
     }
 
     IEnumerator Sitting()
     {
-        Debug.Log("sitting");
-        int seconds = Random.Range(2, 5);
+        int seconds = Random.Range(5, 25);
         yield return new WaitForSecondsRealtime(seconds);
         animator.SetBool("walking", true);
         reset = true;
+        sitting = false;
     }
 
     public void FeedMichi()
@@ -144,20 +117,5 @@ public class MichiController : MonoBehaviour
         Gizmos.color = Color.magenta;
         for (int i = 0; i < path.corners.Length - 1; i++)
             Gizmos.DrawLine(path.corners[i], path.corners[i + 1]);
-    }
-
-    public Transform GetNewPoint()
-    {
-        int rnd = Random.Range(0, allPoses.Count);
-        return allPoses[rnd];
-    }
-
-    public void RenudarMichi() 
-    {
-        reset = true;
-        animator.Play("Walk");
-        newPos = GetNewPoint().position;
-        navMeshAgent.SetDestination(newPos);
-
     }
 }
