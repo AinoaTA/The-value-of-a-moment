@@ -16,7 +16,7 @@ public class AidaController : MonoBehaviour
     }
 
     float t = 0;
-    bool timeOut;
+    bool timeOut=false;
     private void Update()
     {
         if (GameManager.GetManager().openAida) return;

@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.GetManager().gameStateController.CheckGameState(1))
         {
             m_CurrVelocityPlayer = 0;
-            print("ptuas");
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
             GameManager.GetManager().playerController.PlayerMovementAnim(m_CurrVelocityPlayer);
             return;
@@ -108,11 +107,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            print("AAAAAA");
             m_CurrVelocityPlayer -= Time.deltaTime * 2.5f;
             if (m_CurrVelocityPlayer < 0) m_CurrVelocityPlayer = 0;
         }
-        //print(m_CurrVelocityPlayer);
         GameManager.GetManager().playerController.PlayerMovementAnim(m_CurrVelocityPlayer);
     }
 }

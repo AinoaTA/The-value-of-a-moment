@@ -76,20 +76,16 @@ public class PlayerController : MonoBehaviour
     }
     void GetUp(bool getUp)
     {
-
         if (getUp)
         {
-
-            //root.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
             StartCoroutine(GetUpRoutine());
         }
         else
         {
+            Vector3 pos = new Vector3(playerGetUp.position.x, transform.position.y,playerGetUp.position.z);
+            transform.SetPositionAndRotation(pos, Quaternion.Euler(0, rotationWakeup, 0));
             root.rotation = Quaternion.identity;
             root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationSleep, 0));
-
-
-            //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
         }
     }
 

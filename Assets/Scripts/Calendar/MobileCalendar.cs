@@ -24,13 +24,18 @@ namespace Calendar
         public void OpenCalendar()
         {
             bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayController.GetTimeDay()];
+
             if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
             {
                 noselected.SetActive(true);
+                selected.SetActive(false);
                 return;
             }
             else
+            {
+                noselected.SetActive(false);
                 selected.SetActive(true);
+            }
 
             if (content.childCount == 0)
             {

@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace FMODUnity
 {
@@ -7,6 +6,7 @@ namespace FMODUnity
     public struct EventReference
     {
         public FMOD.GUID Guid;
+
 
         public string Path;
 
@@ -34,5 +34,7 @@ namespace FMODUnity
 
             return new EventReference { Path = path, Guid = GuidLookupDelegate(path) };
         }
+
+
     }
 }

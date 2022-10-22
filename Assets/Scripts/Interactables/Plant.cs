@@ -76,7 +76,7 @@ public class Plant : Interactables, ITask, IDependencies
 
     #endregion
     #region OnMouse
-    private void OnMouseEnter()
+    protected override void OnMouseEnter()
     {
         hasNecessary = regadera.grabbed;
         if (!hasNecessary)

@@ -87,7 +87,6 @@ public class Window : Interactables, ITask
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(4);
                 GameManager.GetManager().canvasController.Lock();
-                print("AAAAAAAAA");
                 if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ventana");
@@ -193,6 +192,7 @@ public class Window : Interactables, ITask
             {
                 height = maxHeight;
                 isOpen = true;
+                print("??");
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -210,6 +210,7 @@ public class Window : Interactables, ITask
     #endregion
     private void WindowDone()
     {
+        tutorial.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
         ExitInteraction();
@@ -217,11 +218,16 @@ public class Window : Interactables, ITask
         gameInitialized = false;
         //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
+
         if (isOpen)
+        {
+            GameManager.GetManager().blockController.LockSpecific("Ventanas");
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+        }
         else
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
 
+        
         interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
         isOpen = false;
         isClosed = false;
@@ -230,7 +236,6 @@ public class Window : Interactables, ITask
     }
     IEnumerator Delay()
     {
-        GameManager.GetManager().blockController.LockSpecific("Ventanas");
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);
