@@ -58,7 +58,6 @@ public class Interactables : MonoBehaviour, ILock
 
         /// QUE VAMOS SOBRADES DE FPS DICES?
         inDistance = (Vector3.Distance(Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f)), transform.position) <= minDistanceToInteract);
-        print(inDistance + ": " + Vector3.Distance(Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f)), transform.position));
 
         if (!inDistance && showing)
             Hide();
