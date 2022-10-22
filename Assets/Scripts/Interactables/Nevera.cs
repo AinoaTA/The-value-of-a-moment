@@ -6,7 +6,7 @@ public class Nevera : GeneralActions
     public override void EnterAction()
     {
         base.EnterAction();
-        //FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeOpen", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeOpen", transform.position);
         //GameManager.GetManager().gameStateController.ChangeGameState(3);
         //GameManager.GetManager().cameraController.StartInteractCam(nameAction);
         GameManager.GetManager().dialogueManager.SetDialogue("IPicarAlgo",
@@ -28,6 +28,7 @@ public class Nevera : GeneralActions
 
     public override void ExitAction()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeClosed", transform.position);
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         //GameManager.GetManager().interactableManager.LookingAnInteractable(null);
