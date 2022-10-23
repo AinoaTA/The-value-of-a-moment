@@ -51,6 +51,9 @@ public class Limpiar : GeneralActions, ITask
     }
 
     #endregion
+
+    [SerializeField] GameObject platos;
+
     private void Start()
     {
         SetTask();
@@ -73,6 +76,7 @@ public class Limpiar : GeneralActions, ITask
             default:
                 break;
         }
+        platos.gameObject.SetActive(false);
         CheckDoneTask();
         InteractableBlocked = true;
         GameManager.GetManager().dayController.TaskDone();
@@ -86,6 +90,7 @@ public class Limpiar : GeneralActions, ITask
 
     public override void ResetObject()
     {
+        platos.gameObject.SetActive(true);
         TaskReset();
         base.ResetObject();
     }
