@@ -94,7 +94,8 @@ public class Michi : Interactables, ITask
     public override void ExitInteraction()
     {
         CheckDoneTask();
-        controller.Walk();
+        //controller.Walk();
+        controller.Miau();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameManager.GetManager().StartThirdPersonCamera();
