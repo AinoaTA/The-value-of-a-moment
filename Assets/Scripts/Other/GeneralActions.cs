@@ -17,6 +17,13 @@ public class GeneralActions : MonoBehaviour, ILock
     {
         done = false;
         showing = false;
+
+        ITask task = GetComponent<ITask>();
+        if (task != null)
+        {
+            print(task.nameTask);
+            task.SetTask();
+        }
     }
 
     protected virtual void OnMouseEnter()

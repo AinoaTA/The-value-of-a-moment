@@ -108,6 +108,12 @@ namespace Calendar
             {
                 allTimeTable[i].taskSave.Clear();
             }
+
+            foreach (Transform item in contentTask.transform)
+            {
+                Destroy(item.gameObject);
+            }
+
             modified = false;
         }
     }

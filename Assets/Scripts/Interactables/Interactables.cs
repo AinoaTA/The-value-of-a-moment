@@ -48,6 +48,14 @@ public class Interactables : MonoBehaviour, ILock
         if (interactDone && totalOptions > 1)
             ResetOptionsPos();
 
+        ITask task = GetComponent<ITask>();
+        if (task != null)
+        {
+            print(name);
+            print(task.nameTask);
+            task.SetTask();
+        }
+
         interactDone = false;
         SetCanvasValue(false);
     }
