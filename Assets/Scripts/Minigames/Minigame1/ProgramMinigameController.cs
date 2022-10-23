@@ -108,10 +108,10 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     public void ResetAllGame()
     {
         for (int i = 0; i < allPieces.Count; i++)
-        {
             allPieces[i].ResetPiece();
-        }
+
         GameManager.GetManager().programmed = false;
+        SetTask();
     }
     public bool GetSolved() { return allCorrect; }
 
