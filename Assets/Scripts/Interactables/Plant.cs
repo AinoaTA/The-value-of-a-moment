@@ -116,7 +116,7 @@ public class Plant : Interactables, ITask, IDependencies
                     timer = 0;
 
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
-                    GameManager.GetManager().canvasController.UnLock();
+                    GameManager.GetManager().canvasController.UnLock(false,true);
                     GameManager.GetManager().dialogueManager.SetDialogue("IPlanta");
                     StartCoroutine(routine = ActivateWaterCan());
                 }
