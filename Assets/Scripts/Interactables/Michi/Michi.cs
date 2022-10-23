@@ -95,7 +95,7 @@ public class Michi : Interactables, ITask
     {
         CheckDoneTask();
         //controller.Walk();
-        controller.Miau();
+        controller.UnpetMichi();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         GameManager.GetManager().StartThirdPersonCamera();

@@ -91,6 +91,13 @@ public class MichiController : MonoBehaviour
         StartCoroutine(Sitting());
     }
 
+    public void UnpetMichi()
+    {
+        reset = true;
+        petting = false;
+        sitting = false;
+    }
+
     public void PetMichi()
     {
         Miau();
