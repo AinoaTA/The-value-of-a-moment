@@ -94,7 +94,6 @@ public class Michi : Interactables, ITask
     public override void ExitInteraction()
     {
         CheckDoneTask();
-        //controller.Walk();
         controller.UnpetMichi();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
