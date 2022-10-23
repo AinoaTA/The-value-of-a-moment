@@ -48,7 +48,7 @@ public class MichiController : MonoBehaviour
             NavMesh.CalculatePath(transform.position, cuencoPosition, NavMesh.AllAreas, path);
             navMeshAgent.path = path;
             navMeshAgent.speed = 0.5f;
-            if (navMeshAgent.remainingDistance < 0.3f)
+            if (navMeshAgent.remainingDistance < 0.5f)
             {
                 navMeshAgent.speed = initialSpeed;
                 Miau();
