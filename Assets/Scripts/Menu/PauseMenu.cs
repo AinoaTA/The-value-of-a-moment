@@ -23,7 +23,7 @@ namespace Menu
             if (!paused)
             {
                 paused = true;
-                GameManager.GetManager().canvasController.UnLock(false, false);
+                GameManager.GetManager().canvasController.UnLock(false, true);
                 GameManager.GetManager().cameraController.Block3DMovement(!paused);
                 GameManager.GetManager().canvasController.ShowCanvas(pause);
                 MusicGameplay.Pause(1f);

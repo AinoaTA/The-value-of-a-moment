@@ -41,7 +41,6 @@ public class BlockController : MonoBehaviour
         for (int i = 0; i < locks.Count; i++)
             locks[i].InteractableBlocked = true;
 
-        print(locks.Count);
         stop = false;
     }
     IEnumerator Start()
