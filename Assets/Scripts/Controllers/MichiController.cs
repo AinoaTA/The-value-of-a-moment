@@ -11,9 +11,9 @@ public class MichiController : MonoBehaviour
     private NavMeshPath path;
     private NavMeshAgent navMeshAgent;
     private Vector3 cuencoPosition, newPos;
-    private bool theresFood, reset, petting, sitting;
+    private bool reset, petting, sitting;
+    public bool theresFood;
     private float initialSpeed;
-    [Range(0.1f, 2f)] public float walkSpeed;
 
     void Start()
     {
@@ -46,8 +46,9 @@ public class MichiController : MonoBehaviour
         if (theresFood)
         {
             NavMesh.CalculatePath(transform.position, cuencoPosition, NavMesh.AllAreas, path);
+            navMeshAgent.path = path;
             navMeshAgent.speed = 0.5f;
-            if (navMeshAgent.remainingDistance < .1f)
+            if (navMeshAgent.remainingDistance < 0.5f)
             {
                 navMeshAgent.speed = initialSpeed;
                 Miau();
@@ -82,6 +83,7 @@ public class MichiController : MonoBehaviour
     public void Miau()
     {
         sitting = true;
+        navMeshAgent.ResetPath();
         navMeshAgent.isStopped = true;
         animator.SetBool("walking", false);
         animator.ResetTrigger("hasArrived");
@@ -108,6 +110,7 @@ public class MichiController : MonoBehaviour
     public void FeedMichi()
     {
         theresFood = true;
+        navMeshAgent.ResetPath();
         reset = false;
     }
 
