@@ -291,7 +291,7 @@ public class Bed : Interactables, ITask
         yield return new WaitWhile(() => wait);
 
         GameManager.GetManager().transitionController.FadeIn();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();

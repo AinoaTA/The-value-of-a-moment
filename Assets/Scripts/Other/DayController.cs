@@ -87,7 +87,6 @@ public class DayController : MonoBehaviour
         if (dayState == DayTime.Noche)
             GameManager.GetManager().dialogueManager.SetDialogue("Anochece", canRepeat: true);
 
-        print(counterTaskDay + " nuevo stado" + (counterTaskDay % 5 == 0));
         if (counterTaskDay >= maxTasks)
         {
             if (counter < 4) counter++;

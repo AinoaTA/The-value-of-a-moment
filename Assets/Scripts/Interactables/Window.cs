@@ -192,7 +192,6 @@ public class Window : Interactables, ITask
             {
                 height = maxHeight;
                 isOpen = true;
-                print("??");
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }

@@ -21,6 +21,7 @@ public class Alarm : MonoBehaviour
 
     private void Start()
     {
+        counter = 0;
         GameManager.GetManager().alarm = this;
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
         GameManager.GetManager().cameraController.StartInteractCam(1);
@@ -30,15 +31,12 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
         GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
 
-        counter = 0;
-
         GameManager.GetManager().playerInputs._FirstInteraction += StartDay;
         GameManager.GetManager().playerInputs._SecondInteraction += BackDay;
     }
 
     private void OnDisable()
     {
-
         GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
         GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
 
@@ -261,7 +259,8 @@ public class Alarm : MonoBehaviour
     bool unique;
     public void AfirmativoAlex()
     {
-        if (!eventAlex.activeSelf && !unique) return;
+        if (!eventAlex.activeSelf && !unique && GameManager.GetManager().dayController.GetDayNumber() != DayController.Day.two) return;
+        print("tus muertos");
         unique = false;
         eventAlex.SetActive(false);
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
@@ -274,7 +273,8 @@ public class Alarm : MonoBehaviour
     bool negated;
     public void NegativeAlex()
     {
-        if (!eventAlex.activeSelf && !unique && GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two) return;
+        if (!eventAlex.activeSelf && !unique && GameManager.GetManager().dayController.GetDayNumber() != DayController.Day.two) return;
+        print("HOLA");
         unique = false;
         eventAlex.SetActive(false);
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op2", delegate
