@@ -162,7 +162,7 @@ public class Shower : GeneralActions, ITask
 
     private void Start()
     {
-        ShowerSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Gameplay");
+        ShowerSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Shower");
         SetTask();
         // canvas.SetBool("Showing", true);
     }
