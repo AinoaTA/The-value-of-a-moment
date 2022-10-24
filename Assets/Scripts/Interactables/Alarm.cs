@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,9 +12,6 @@ public class Alarm : MonoBehaviour
     [SerializeField] private bool alarmRinging = false;
     [SerializeField] private int counterNarrations;
 
-
-    private bool canInteract;
-
     public FMODMusic MusicGameplay;
     public GameObject eventAlex;
     private static FMOD.Studio.EventInstance alarmsfx;
@@ -29,27 +25,18 @@ public class Alarm : MonoBehaviour
         GameManager.GetManager().cameraController.StartInteractCam(1);
         alarmsfx = FMODUnity.RuntimeManager.CreateInstance("event:/Env/Alarm");
 
-
-        //StartCoroutine(StartDayDelay());
-
         counterNarrations = 0;
         CanvasAlarm.SetActive(false);
 
         GameManager.GetManager().canvasController.Lock(false, false);
         GameManager.GetManager().playerInputs._FirstInteraction += StartDay;
         GameManager.GetManager().playerInputs._SecondInteraction += BackDay;
-
-        //GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
-        //GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
     }
 
     private void OnDisable()
     {
         GameManager.GetManager().playerInputs._FirstInteraction -= StartDay;
         GameManager.GetManager().playerInputs._SecondInteraction -= BackDay;
-
-        //GameManager.GetManager().playerInputs._FirstInteraction += AfirmativoAlex;
-        //GameManager.GetManager().playerInputs._SecondInteraction += NegativeAlex;
     }
 
     private void Update()
@@ -255,14 +242,6 @@ public class Alarm : MonoBehaviour
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         alarmRinging = false;
         alarmIsActive = true;
-        canInteract = false;
-    }
-
-    private IEnumerator StartDayDelay()
-    {
-        //GameManager.GetManager().canvasController.Lock(false);
-        //yield return new WaitForSeconds(4);
-        yield return null;
     }
 
     #region Alex Event
