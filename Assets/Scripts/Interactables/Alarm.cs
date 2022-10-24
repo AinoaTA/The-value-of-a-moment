@@ -150,29 +150,6 @@ public class Alarm : MonoBehaviour
                 break;
         }
         yield return null;
-        //switch (GameManager.GetManager().dayController.GetDayNumber())
-        //{
-        //    case DayController.Day.one:
-        //        string name = counter == 0 ? "GetUp1" : "GetUp2";
-
-        //        GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-        //        {
-        //            StartCoroutine(Delay());
-        //        });
-        //        break;
-        //    case DayController.Day.two:
-        //        GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1", delegate
-        //        {
-        //            GameManager.GetManager().alexVisited = true;
-        //            GameManager.GetManager().counterAlex = true;
-
-        //            StartCoroutine(Delay2());
-        //        });
-        //        break;
-        //    default:
-        //        throw new ArgumentOutOfRangeException();
-
-        //}
         counterNarrations = 0;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/AlarmOff");
         alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -214,9 +191,6 @@ public class Alarm : MonoBehaviour
     {
         CanvasAlarm.SetActive(false);
         alarmIsActive = false;
-        //canInteract = false;
-        //talking = true;
-        //string name;
 
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
@@ -261,52 +235,7 @@ public class Alarm : MonoBehaviour
         }
 
         counterNarrations++;
-        //switch (GameManager.GetManager().dayController.GetDayNumber())
-        //{
-        //    case DayController.Day.one:
-        //        //string name = "alarm";
-        //        name = counter == 0 ? "Alarm2" : "Alarm3";
-
-        //        GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-        //        {
-        //            StartAlarm();
-        //        });
-
-        //        if (counter >= 2)
-        //            StartAlarm();
-        //        break;
-        //    case DayController.Day.two:
-
-        //        if (counter == 0) name = "D2Alarm_Op2";
-        //        else if (counter == 1) name = "D2Alarm_Op3";
-        //        else name = "D2Alarm_Op3";
-
-        //        GameManager.GetManager().dialogueManager.SetDialogue(name, delegate
-        //        {
-        //            print("=");
-        //            if (name == "D2Alarm_Op3" && !negated)
-        //            {
-        //                eventAlex.gameObject.SetActive(true);
-        //                unique = true;
-        //            }
-        //            else
-        //            {
-        //                print("lloro");
-        //                StartAlarm();
-        //            }
-        //        }/*, forceInvoke: true*/);
-
-        //        break;
-
-        //}
-        //counter++;
-
-        //alarm = true;
-        //ResetTime();
-        //CanvasAlarm.SetActive(false);
-
-        //GameManager.GetManager().gameStateController.ChangeGameState(0);
-        //GameManager.GetManager().autocontrol.RemoveAutoControl(m_Autocontrol);
+        GameManager.GetManager().autocontrol.RemoveAutoControl(5);
     }
 
     public bool GetIsActive()
@@ -316,11 +245,10 @@ public class Alarm : MonoBehaviour
 
     public void SetAlarmActive()
     {
-        //alarm = true;
-        //ResetTime();
+        ResetTime();
     }
 
-    public void ResetTime()
+    void ResetTime()
     {
         print("reset");
         timer = 0;
