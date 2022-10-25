@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace FMODUnity
 {
@@ -7,7 +8,7 @@ namespace FMODUnity
     {
         public FMOD.GUID Guid;
 
-
+#if UNITY_EDITOR
         public string Path;
 
         public static Func<string, FMOD.GUID> GuidLookupDelegate;
@@ -34,7 +35,19 @@ namespace FMODUnity
 
             return new EventReference { Path = path, Guid = GuidLookupDelegate(path) };
         }
+#else
+        public override string ToString()
+        {
+            return Guid.ToString();
+        }
 
-
+        public bool IsNull
+        {
+            get
+            {
+                return Guid.IsNull;
+            }
+        }
+#endif
     }
 }

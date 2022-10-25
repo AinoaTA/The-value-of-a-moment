@@ -8,7 +8,6 @@ public class DialogueManager : MonoBehaviour
 {
     public DialoguesList dialogues;
     public TMP_Text subtitle;
-    public TMP_Text debug;
     public float defaultvoiceTime = 2;
     public float aditionalVoiceTime = 0.2f;
 
@@ -69,8 +68,8 @@ public class DialogueManager : MonoBehaviour
     void ShowLine()
     {
         DialogueLineJSON line = currentDialogue.lines[currentLine];
-        if(!justVoice)
-        subtitle.enabled = true;
+        if (!justVoice)
+            subtitle.enabled = true;
 
         bool langESP = LanguageGame.lang == LanguageGame.Languages.ESP;
         if (!justVoice)
@@ -80,14 +79,11 @@ public class DialogueManager : MonoBehaviour
         int lenght;
         string path = "event:/Dialogue/" + LanguageGame.lang + "/" + line.ID;
 
+
         try
         {
-            RuntimeManager.GetEventDescription(EventReference.Find(path)).getLength(out lenght);
-            eventAudio = RuntimeManager.CreateInstance(EventReference.Find(path));
-            eventAudio.start();
-            emitter.EventReference = EventReference.Find(path);
-            emitter.Play();
-            debug.text = emitter.EventReference.ToString();
+            RuntimeManager.GetEventDescription(path).getLength(out lenght);
+            FMODUnity.RuntimeManager.PlayOneShot(path);
             float time = (float)lenght / 1000;
             Debug.Log("AUDIO LENGHT Mili: " + (float)lenght + " | in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
