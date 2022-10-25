@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     public DialoguesList dialogues;
     public TMP_Text subtitle;
+    public TMP_Text debug;
     public float defaultvoiceTime = 2;
     public float aditionalVoiceTime = 0.2f;
 
@@ -17,7 +18,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator nextLineCoroutine;
     private static FMOD.Studio.EventInstance eventAudio;
-
+    public FMODUnity.StudioEventEmitter emitter;
     private void Awake()
     {
         GameManager.GetManager().dialogueManager = this;
@@ -81,13 +82,12 @@ public class DialogueManager : MonoBehaviour
 
         try
         {
-            
-           // eventAudio = RuntimeManager.CreateInstance(path);
-            //RuntimeManager.GetEventDescription(EventReference.Find(path)).getLength(out lenght);
-            //eventAudio.start();
             RuntimeManager.GetEventDescription(EventReference.Find(path)).getLength(out lenght);
             eventAudio = RuntimeManager.CreateInstance(EventReference.Find(path));
             eventAudio.start();
+            emitter.EventReference = EventReference.Find(path);
+            emitter.Play();
+            debug.text = emitter.EventReference.ToString();
             float time = (float)lenght / 1000;
             Debug.Log("AUDIO LENGHT Mili: " + (float)lenght + " | in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
