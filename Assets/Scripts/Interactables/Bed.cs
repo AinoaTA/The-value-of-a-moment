@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bed : Interactables, ITask
 {
     public Camera cam;
-    public GameObject m_Tutorial;
+    public GameObject tutorial;
     private GameObject minigameCanvas = null;
     public GameObject m_SheetBad;
     public GameObject m_Sheet;
@@ -83,9 +83,9 @@ public class Bed : Interactables, ITask
     {
         SetTask();
 
-        if (m_Tutorial != null)
+        if (tutorial != null)
         {
-            minigameCanvas = m_Tutorial;
+            minigameCanvas = tutorial;
             minigameCanvas.SetActive(false);
         }
         if (m_SheetBad != null)
@@ -105,7 +105,7 @@ public class Bed : Interactables, ITask
             if (!tutorialShowed)
                 InitTutorial();
             else
-                m_Tutorial.SetActive(false);
+                tutorial.SetActive(false);
 
             float movement = m_SheetBad.transform.position.x;
             float displacement = GetMouseXaxisAsWorldPoint() + mOffset;
@@ -129,7 +129,7 @@ public class Bed : Interactables, ITask
     private void InitTutorial()
     {
         StartCoroutine(ActivateMinigameCanvas());
-        Animator animator = m_Tutorial.GetComponent<Animator>();
+        Animator animator = tutorial.GetComponent<Animator>();
         if (animator != null) animator.SetBool("show", true);
         StartCoroutine(HideTutorial());
         tutorialShowed = true;
@@ -138,7 +138,7 @@ public class Bed : Interactables, ITask
     private IEnumerator HideTutorial()
     {
         yield return new WaitForSecondsRealtime(8);
-        m_Tutorial.SetActive(false);
+        tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()
@@ -312,6 +312,7 @@ public class Bed : Interactables, ITask
 
     public override void ExitInteraction()
     {
+        tutorial.SetActive(false);
         cam.cullingMask = -1;
         base.ExitInteraction();
         gameInitialized = false;

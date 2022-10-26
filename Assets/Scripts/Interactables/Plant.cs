@@ -137,11 +137,11 @@ public class Plant : Interactables, ITask, IDependencies
 
     public override void ExitInteraction()
     {
+        tutorial.SetActive(false);
         if (!gameInitialized)
             return;
         if (routine != null)
             StopCoroutine(routine);
-
         GameManager.GetManager().StartThirdPersonCamera();
         gameInitialized = false;
         waterCan.gameObject.SetActive(false);

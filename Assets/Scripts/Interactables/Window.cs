@@ -174,7 +174,7 @@ public class Window : Interactables, ITask
     {
         if (gameInitialized)
         {
-            if (tutorialShowed && !interactDone) tutorial.SetActive(false);
+            if (tutorialShowed)tutorial.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;

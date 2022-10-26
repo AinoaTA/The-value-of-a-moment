@@ -82,7 +82,7 @@ public class DialogueManager : MonoBehaviour
         try
         {
             RuntimeManager.GetEventDescription(path).getLength(out lenght);
-            FMODUnity.RuntimeManager.PlayOneShot(path);
+            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);//FMODUnity.RuntimeManager.PlayOneShot(path);
             float time = (float)lenght / 1000;
             Debug.Log("AUDIO LENGHT Mili: " + (float)lenght + " | in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
