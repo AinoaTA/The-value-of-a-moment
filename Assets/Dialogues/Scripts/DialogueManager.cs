@@ -25,7 +25,8 @@ public class DialogueManager : MonoBehaviour
 
     public void Start()
     {
-        panel.gameObject.SetActive(false);
+        if (panel != null)
+            panel.gameObject.SetActive(false);
         for (int i = 0; i < dialogues.dialogues.Count; i++)
         {
             for (int e = 0; e < dialogues.dialogues[i].lines.Count; e++)
@@ -102,7 +103,8 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator NextLine(float waitTime)
     {
-        panel.gameObject.SetActive(true);
+        if (panel != null)
+            panel.gameObject.SetActive(true);
         yield return new WaitForSeconds(waitTime);
         currentLine++;
         if (currentLine < currentDialogue.lines.Count) ShowLine();
@@ -120,7 +122,8 @@ public class DialogueManager : MonoBehaviour
         if (saveAct != null)
             saveAct?.Invoke();
 
-        panel.gameObject.SetActive(false);
+        if (panel != null)
+            panel.gameObject.SetActive(false);
         subtitle.text = "";
         subtitle.enabled = false;
         previusDialogue = "";
