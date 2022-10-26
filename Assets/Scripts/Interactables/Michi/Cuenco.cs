@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Cuenco : Interactables, ITask
+public class Cuenco : Interactables, ITask, IDependencies
 {
     #region TASK
     [Space(20)]
@@ -53,6 +53,12 @@ public class Cuenco : Interactables, ITask
 
     #endregion
 
+    #region DEPENDENCIES
+    public Pienso _pienso;
+    private bool hasNecessary_;
+    public bool hasNecessary { get => _pienso.grabbed; set => hasNecessary_ = value; }
+
+    #endregion
 
     public MichiController michiController;
     public GameObject comida;
@@ -62,6 +68,24 @@ public class Cuenco : Interactables, ITask
     {
         ResetCuenco();
     }
+
+    #region onmouse
+
+    protected override void OnMouseOver()
+    {
+        hasNecessary = _pienso.grabbed;
+        if (!hasNecessary) return;
+        base.OnMouseOver();
+    }
+
+    protected override void OnMouseEnter()
+    {
+        if (!hasNecessary) return;
+        base.OnMouseOver();
+    }
+
+    #endregion
+
 
     public override void Interaction(int options)
     {

@@ -79,14 +79,21 @@ public class Plant : Interactables, ITask, IDependencies
     protected override void OnMouseEnter()
     {
         hasNecessary = regadera.grabbed;
-        if (!hasNecessary)
-            return;
+        Debug.Log(hasNecessary, gameObject);
+        if (!hasNecessary) return;
 
         base.Show();
     }
     private void OnMouseExit()
     {
+        if (!hasNecessary) return;
         base.Hide();
+    }
+
+    protected override void OnMouseOver()
+    {
+        if (!hasNecessary) return;
+        base.OnMouseOver();
     }
     #endregion
 

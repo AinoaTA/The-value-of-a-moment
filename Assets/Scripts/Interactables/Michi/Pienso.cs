@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Pienso : Interactables
 {
-    private bool grabbed;
+    [HideInInspector]public bool grabbed;
     [SerializeField] private Cuenco cuenco;
 
     private void Start()
