@@ -1454,6 +1454,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 565873931}
     m_Modifications:
+    - target: {fileID: 1830000223040253569, guid: 7a4b8201f5ca1644e8e779108f6bddef, type: 3}
+      propertyPath: m_IgnoreParentGroups
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7476030548470540833, guid: 7a4b8201f5ca1644e8e779108f6bddef, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1465,6 +1469,10 @@ PrefabInstance:
     - target: {fileID: 7476030548470540833, guid: 7a4b8201f5ca1644e8e779108f6bddef, type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476030548470540834, guid: 7a4b8201f5ca1644e8e779108f6bddef, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7476030548470540838, guid: 7a4b8201f5ca1644e8e779108f6bddef, type: 3}
       propertyPath: m_Name
@@ -4747,11 +4755,11 @@ Transform:
   m_Children:
   - {fileID: 1318540430}
   - {fileID: 1151735456}
-  - {fileID: 565873931}
   - {fileID: 1075987165}
   - {fileID: 2138616391}
   - {fileID: 1243805412}
   - {fileID: 1636910228}
+  - {fileID: 565873931}
   m_Father: {fileID: 1532177572}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7162,7 +7170,7 @@ RectTransform:
   - {fileID: 152314864}
   - {fileID: 95301521}
   m_Father: {fileID: 346218863}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7228,7 +7236,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!1 &568214507
 GameObject:
@@ -14466,7 +14474,7 @@ RectTransform:
   m_Children:
   - {fileID: 1474524564}
   m_Father: {fileID: 346218863}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15475,6 +15483,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f262f3913d77e164799f4a7f3ace5022, type: 3}
+--- !u!114 &1119047789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6378334322728317921, guid: 81b24434a9528234e821d2bd805b23ab, type: 3}
+  m_PrefabInstance: {fileID: 6378334321933264231}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41986d4486227c8408d65b0d8f021f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1134264170
 GameObject:
   m_ObjectHideFlags: 0
@@ -16352,7 +16371,7 @@ RectTransform:
   m_Children:
   - {fileID: 1840785641}
   m_Father: {fileID: 346218863}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -19387,7 +19406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9075711796165980263, guid: 56810e5cc1b87304da507c19c68a7115, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9075711796165980263, guid: 56810e5cc1b87304da507c19c68a7115, type: 3}
       propertyPath: m_AnchorMax.x
@@ -22303,7 +22322,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3555099450107175860, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
       propertyPath: currentDay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4741038191994103153, guid: ecaf96b46c9a585468c880fad4de4cb5, type: 3}
       propertyPath: m_RootOrder
@@ -34113,7 +34132,7 @@ RectTransform:
   - {fileID: 301877606}
   - {fileID: 2091316014}
   m_Father: {fileID: 346218863}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -35919,6 +35938,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7891270562170728848}
     - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.data[18].name
+      value: Alex
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.data[18].dayTimeCanUnlock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.data[18].locks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
       propertyPath: dayOneInteractable.Array.data[0].locks.Array.data[0]
       value: 
       objectReference: {fileID: 7891270562170728861}
@@ -36131,9 +36166,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2072479533}
     - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.data[18].locks.Array.data[0]
+      value: 
+      objectReference: {fileID: 1119047789}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.data[18].locks.Array.data[1]
+      value: 
+      objectReference: {fileID: 1119047789}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
       propertyPath: dayThreeInteractable.Array.data[0].locks.Array.data[0]
       value: 
       objectReference: {fileID: 511453095}
+    - target: {fileID: 8754938433432622407, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
+      propertyPath: dayTwoInteractable.Array.data[18].hasConditionToUnlock
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8754938433432622408, guid: b63cc1a5d0ff099428d1c6ee89f932dd, type: 3}
       propertyPath: m_RootOrder
       value: 7

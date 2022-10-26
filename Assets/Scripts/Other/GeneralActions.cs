@@ -11,7 +11,7 @@ public class GeneralActions : MonoBehaviour, ILock
     [SerializeField] protected string nameAction;
 
     [SerializeField] bool inDistance;
-    float minDistanceToInteract = 4f;
+    float minDistanceToInteract = 5.5f;
 
     public virtual void ResetObject()
     {

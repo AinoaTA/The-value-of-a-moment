@@ -24,7 +24,7 @@ public class Interactables : MonoBehaviour, ILock
     public virtual bool GetDone() { return interactDone; }
 
     [SerializeField] bool inDistance;
-    public float minDistanceToInteract = 5f;
+    public float minDistanceToInteract = 5.5f;
 
     public virtual void Interaction(int optionNumber)
     {

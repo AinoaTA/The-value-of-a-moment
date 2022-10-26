@@ -52,7 +52,7 @@ public class Alarm : MonoBehaviour
 
     private void StartDay()
     {
-        if (alarmIsActive && alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
+        if (!talking && alarmIsActive && alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
             StartCoroutine(NormalWakeUp());
         else if (eventAlex.activeSelf)
             AfirmativoAlex();
@@ -60,18 +60,19 @@ public class Alarm : MonoBehaviour
 
     private void BackDay()
     {
-        if (alarmIsActive && alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
+        if (!talking && alarmIsActive && alarmRinging && GameManager.GetManager().gameStateController.CheckGameState(0) && !eventAlex.activeSelf)
             StillSleeping();
         else if (eventAlex.activeSelf)
             NegativeAlex();
     }
     bool once;
+    bool talking;
     private void StartAlarm()
     {
         print("StartAlarm");
         alarmRinging = true;
         MusicGameplay.Mood(0f);
-        
+        talking = true;
 
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
@@ -94,10 +95,10 @@ public class Alarm : MonoBehaviour
                     Show();
                 }
                 else
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate 
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate
                     {
                         alarmsfx.start();
-                        Show(); 
+                        Show();
                     });
                 break;
         }
@@ -167,11 +168,15 @@ public class Alarm : MonoBehaviour
     IEnumerator Delay2()
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
-        GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
-        {
-            // TODO: unlock de los interactables
-            GameManager.GetManager().UnlockBasicTasks();
-        });
+        GameManager.GetManager().UnlockBasicTasks();
+        yield return null;
+        if (negated)
+            GameManager.GetManager().blockController.LockSpecific("Alex");
+        //GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
+        //{
+        //    // TODO: unlock de los interactables
+        //    GameManager.GetManager().UnlockBasicTasks();
+        //});
     }
 
     #endregion
@@ -181,6 +186,7 @@ public class Alarm : MonoBehaviour
         print("show");
         CanvasAlarm.SetActive(true);
         timer = 0;
+        talking = false;
     }
     public void StillSleeping()
     {
@@ -272,10 +278,10 @@ public class Alarm : MonoBehaviour
         print("HOLA alex no quiero");
         unique = false;
         eventAlex.SetActive(false);
+        negated = true;
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op2", delegate
         {
             ResetTime();
-            negated = true;
             GameManager.GetManager().autocontrol.RemoveAutoControl(5);
             GameManager.GetManager().alexController.PaCasa();
             GameManager.GetManager().UnlockBasicTasks();

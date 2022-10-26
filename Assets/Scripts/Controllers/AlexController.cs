@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class AlexController : Interactables
+public class AlexController : Interactables, ILock
 {
     public Transform exitTransform, cuartoTransform;
     public Transform rightHand;
