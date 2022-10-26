@@ -71,12 +71,13 @@ public class Alarm : MonoBehaviour
         print("StartAlarm");
         alarmRinging = true;
         MusicGameplay.Mood(0f);
-        alarmsfx.start();
+        
 
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             //DÍA UNO ENTERATE ---------------
             case DayController.Day.one:
+                alarmsfx.start();
                 print("day one");
                 if (counterNarrations > 0) Show();
                 else GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
@@ -88,9 +89,16 @@ public class Alarm : MonoBehaviour
                 print("day two");
 
                 if (counterNarrations > 0)
+                {
+                    alarmsfx.start();
                     Show();
+                }
                 else
-                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate { Show(); });
+                    GameManager.GetManager().dialogueManager.SetDialogue("D2Start", delegate 
+                    {
+                        alarmsfx.start();
+                        Show(); 
+                    });
                 break;
         }
     }
@@ -176,6 +184,7 @@ public class Alarm : MonoBehaviour
     }
     public void StillSleeping()
     {
+        alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         CanvasAlarm.SetActive(false);
         alarmIsActive = false;
 
@@ -187,9 +196,6 @@ public class Alarm : MonoBehaviour
                 string name = "alarm";
                 name = counterNarrations == 0 ? "Alarm2" : "Alarm3";
 
-                //if (counterNarrations >= 2)
-                //    StartAlarm();
-                //else
                 if (counterNarrations >= 2)
                     ResetTime();
                 else
@@ -239,7 +245,7 @@ public class Alarm : MonoBehaviour
     {
         print("reset");
         timer = 0;
-        alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         alarmRinging = false;
         alarmIsActive = true;
     }
