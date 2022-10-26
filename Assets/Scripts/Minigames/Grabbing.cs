@@ -29,23 +29,34 @@ public class Grabbing : MonoBehaviour
     {
         previousPos = transform.position;
         previousQuat = transform.rotation;
-        //cam = brain.ActiveVirtualCamera;
+
+        GameManager.GetManager().playerInputs._ExitInteraction += Leave;
+    }
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._ExitInteraction -= Leave;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Leave() 
     {
-        if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
+        if (isObjectGrabbed)
         {
             leaving = true;
             isObjectGrabbed = false;
             GameManager.GetManager().gameStateController.ChangeGameState(1);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Drop", transform.position);
-        }
-
-        if (leaving)
             LeaveObject();
+        }
+    }
+    void Update()
+    {
+        //if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
+        //{
+            
+        //}
 
+        //if (leaving)
+        //    LeaveObject();
         if (canAccesCamera)
         {
             if (!isObjectGrabbed && once)
@@ -92,6 +103,7 @@ public class Grabbing : MonoBehaviour
         GameManager.GetManager().canvasController.Pointer.SetActive(true);
         transform.position = Vector3.MoveTowards(transform.position, previousPos, grabbingSpeed * Time.deltaTime);
         transform.rotation = previousQuat;
+        GameManager.GetManager().StartThirdPersonCamera();
         if (Vector3.Distance(transform.position, previousPos) < 0.1f)
         {
             cam.cullingMask = -1;
