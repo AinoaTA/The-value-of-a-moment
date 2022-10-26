@@ -102,6 +102,7 @@ public class Window : Interactables, ITask
 
     public override void ExitInteraction()
     {
+        tutorial.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         gameInitialized = false;
         GameManager.GetManager().StartThirdPersonCamera();
@@ -173,7 +174,7 @@ public class Window : Interactables, ITask
     {
         if (gameInitialized)
         {
-            if (tutorialShowed) tutorial.SetActive(false);
+            if (tutorialShowed && !interactDone) tutorial.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
