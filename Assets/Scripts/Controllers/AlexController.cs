@@ -77,15 +77,20 @@ public class AlexController : Interactables, ILock
     }
 
     protected override void OnMouseEnter()
-    {
-        if (!GameManager.GetManager().alexVisited) return;
-        InteractableBlocked = false;
-        base.OnMouseEnter();
+    {        
         if (yaVisto)
         {
             yaVisto = true;
             GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex");
         }
+        if (!GameManager.GetManager().alexVisited) return;
+        InteractableBlocked = false;
+        base.OnMouseEnter();
+    }
+    protected override void OnMouseOver()
+    {
+        if (!GameManager.GetManager().alexVisited) return;
+        base.OnMouseOver();
     }
 
     public void PaCasa()

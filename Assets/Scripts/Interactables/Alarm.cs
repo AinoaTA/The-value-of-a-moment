@@ -170,8 +170,6 @@ public class Alarm : MonoBehaviour
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
         GameManager.GetManager().UnlockBasicTasks();
         yield return null;
-        if (negated)
-            GameManager.GetManager().blockController.LockSpecific("Alex");
         //GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         //{
         //    // TODO: unlock de los interactables
@@ -264,9 +262,9 @@ public class Alarm : MonoBehaviour
         print("tus muertos si quiero alex");
         unique = false;
         eventAlex.SetActive(false);
+        GameManager.GetManager().alexVisited = true;
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
         {
-            GameManager.GetManager().alexVisited = true;
             StartCoroutine(NormalWakeUp());
         });
     }
@@ -279,6 +277,7 @@ public class Alarm : MonoBehaviour
         unique = false;
         eventAlex.SetActive(false);
         negated = true;
+        GameManager.GetManager().alexVisited = false;
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op2", delegate
         {
             ResetTime();

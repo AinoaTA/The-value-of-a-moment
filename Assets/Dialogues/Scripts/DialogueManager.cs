@@ -17,7 +17,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator nextLineCoroutine;
     private static FMOD.Studio.EventInstance eventAudio;
-    public FMODUnity.StudioEventEmitter emitter;
     private void Awake()
     {
         GameManager.GetManager().dialogueManager = this;
