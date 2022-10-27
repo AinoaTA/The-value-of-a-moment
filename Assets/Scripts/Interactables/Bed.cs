@@ -232,7 +232,6 @@ public class Bed : Interactables, ITask
                     case DayController.Day.one:
                         break;
                     case DayController.Day.two:
-<<<<<<< HEAD
                         //GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
                         //{
                         //    // cambiar de hora
@@ -242,15 +241,7 @@ public class Bed : Interactables, ITask
                         //    GameManager.GetManager().ResetInteractable();
                         //    GameManager.GetManager().transitionController.LoadFinalScene();
                         //});
-=======
-                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
-                        {
-                            // cambiar de hora
-                            GameManager.GetManager().dayController.ChangeDay(1);
-                            GameManager.GetManager().ResetInteractable();
-                            GameManager.GetManager().transitionController.LoadFinalScene();
-                        });
->>>>>>> feature/Interactions
+
                         break;
                     case DayController.Day.three:
                         break;
@@ -316,7 +307,7 @@ public class Bed : Interactables, ITask
         GameManager.GetManager().transitionController.FadeIn();
         yield return new WaitForSeconds(1f);
 
-        
+
         GameManager.GetManager().cameraController.StartInteractCam(1);
         GameManager.GetManager().playerController.PlayerSleepPos();
         GameManager.GetManager().calendarController.GlobalReset();
@@ -329,7 +320,7 @@ public class Bed : Interactables, ITask
         yield return new WaitForSeconds(2);
         GameManager.GetManager().blockController.BlockAll(true);
         GameManager.GetManager().autocontrol.AutocontrolSleep();
-       
+
         GameManager.GetManager().alarm.SetAlarmActive();
         GameManager.GetManager().blockController.ToActive();
         GameManager.GetManager().transitionController.FadeOut();
