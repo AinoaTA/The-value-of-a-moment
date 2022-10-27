@@ -8,6 +8,7 @@ public class BucketController : Interactables, ITask, IDependencies
     [HideInInspector] public int currCapacity;
     [SerializeField] private int maxCapacity = 5;
     [SerializeField] private int trashGot;
+    public InventoryTrashUI inventoryUI;
 
     #region DEPENDENCIES
     private bool hasNecessary_;
@@ -84,6 +85,12 @@ public class BucketController : Interactables, ITask, IDependencies
 
         base.Show();
     }
+    protected override void OnMouseOver()
+    {
+        if (!hasNecessary)
+            return;
+        base.OnMouseOver();
+    }
     private void OnMouseExit()
     {
         base.Hide();
@@ -133,5 +140,6 @@ public class BucketController : Interactables, ITask, IDependencies
     {
         currCapacity = 0;
         trashGot = 0;
+        inventoryUI.ResetInventory();
     }
 }
