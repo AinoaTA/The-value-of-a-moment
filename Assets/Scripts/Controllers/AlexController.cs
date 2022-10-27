@@ -63,10 +63,12 @@ public class AlexController : Interactables, ILock
                     {
                         GameManager.GetManager().dialogueManager.SetDialogue("D2ConvAlex_", delegate
                         {
+                            GameManager.GetManager().UnlockBasicTasks();
                             StartCoroutine(CorrectRoutine());
                         });
                     });
                 });
+                GetComponent<CapsuleCollider>().enabled = false;
                 break;
         }
     }

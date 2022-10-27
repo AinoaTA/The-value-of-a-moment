@@ -164,7 +164,7 @@ public class Alarm : MonoBehaviour
     IEnumerator Delay2()
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
-        GameManager.GetManager().UnlockBasicTasks();
+       // GameManager.GetManager().UnlockBasicTasks();
         //GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         //{
         //    // TODO: unlock de los interactables

@@ -68,10 +68,10 @@ public class Cafetera : Interactables, ITask
                 switch (GameManager.GetManager().dayController.GetDayNumber())
                 {
                     case DayController.Day.one:
-                        GameManager.GetManager().dialogueManager.SetDialogue("ITomarCafe");
+                        GameManager.GetManager().dialogueManager.SetDialogue("ITomarCafe",canRepeat:true);
                         break;
                     case DayController.Day.two:
-                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccComBeb_Cafetera");
+                        GameManager.GetManager().dialogueManager.SetDialogue("ITomarCafe", canRepeat: true);
                         GameManager.GetManager().IncrementInteractableCount();
                         break;
                     case DayController.Day.three:

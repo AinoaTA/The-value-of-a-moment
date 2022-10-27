@@ -13,8 +13,10 @@ public class Trash : GeneralActions
     private bool grabbing;
     private bool onlySpeakOnce;
     BoxCollider col;
+    Transform parent;
     private void Start()
     {
+        parent = transform.parent;
         initPos = transform.position;
         grabbing = false;
         onlySpeakOnce = true;
@@ -58,11 +60,22 @@ public class Trash : GeneralActions
         GameManager.GetManager().gameStateController.ChangeGameState(1);
         gameObject.SetActive(false);
     }
-    public void ResetInteractable()
+
+    public override void ResetObject()
     {
+        transform.SetParent(parent);
         col.enabled = true;
         transform.position = initPos;
         grabbing = false;
         done = false;
+        base.ResetObject();
+    }
+
+    public void ResetInteractable()
+    {
+        //col.enabled = true;
+        //transform.position = initPos;
+        //grabbing = false;
+        //done = false;
     }
 }

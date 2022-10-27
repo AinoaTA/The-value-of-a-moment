@@ -132,6 +132,8 @@ public class DialogueManager : MonoBehaviour
 
     void StopDialogue()
     {
+        if (panel != null)
+            panel.gameObject.SetActive(false);
         StopCoroutine(nextLineCoroutine);
         subtitle.text = "";
         subtitle.enabled = false;

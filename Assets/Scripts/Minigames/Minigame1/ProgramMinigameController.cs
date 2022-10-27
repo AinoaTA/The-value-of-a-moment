@@ -75,10 +75,8 @@ public class ProgramMinigameController : MonoBehaviour, ITask
 
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().computer.ComputerON();
-        GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
-        {
-            GameManager.GetManager().dayController.ChangeDay(3);
-        });
+        GameManager.GetManager().dialogueManager.SetDialogue("Atardece");
+        GameManager.GetManager().dayController.ChangeDay(3);
     }
 
     public void QuitMiniGame()

@@ -34,7 +34,10 @@ public class GeneralActionsManager : MonoBehaviour
     public void ResetAll()
     {
         for (int i = 0; i < allObjects.Count; i++)
-            allObjects[i].ResetObject();
+        {
+            allObjects[i].gameObject.SetActive(true);
+              allObjects[i].ResetObject();
+        }
     }
 
     public void ExitActionManager()
