@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
-    public GameObject diaUno,diaDos;
+    public GameObject diaUno, diaDos;
     public Transform rotateAlexDoor, rotateAidaDoor;
     [Header("Interactables")]
     public BlockInteractables[] dayOneInteractable;
@@ -148,7 +148,7 @@ public class BlockController : MonoBehaviour
                 {
                     print(dayOneInteractable[i].locks[e].name);
                     dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
-                  
+
                 }
             }
         }
@@ -189,5 +189,15 @@ public class BlockController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public bool CheckBlockOneDay(string name)
+    {
+        for (int i = 0; i < dayOneInteractable.Length; i++)
+            if (dayOneInteractable[i].name == name)
+                for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+                    return dayOneInteractable[i].locks[0].GetComponent<ILock>().InteractableBlocked;
+
+        return false;
     }
 }

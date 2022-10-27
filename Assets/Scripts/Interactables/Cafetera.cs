@@ -63,8 +63,8 @@ public class Cafetera : Interactables, ITask
         {
             case 1:
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Coffee Brew", transform.position);
-                GameManager.GetManager().gameStateController.ChangeGameState(2);
-                GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
+                //GameManager.GetManager().gameStateController.ChangeGameState(2);
+               // GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 switch (GameManager.GetManager().dayController.GetDayNumber())
                 {
                     case DayController.Day.one:
@@ -83,11 +83,13 @@ public class Cafetera : Interactables, ITask
                 }
                 break;
         }
+
+        ExitInteraction();
     }
 
     public override void ExitInteraction()
     {
-        GameManager.GetManager().StartThirdPersonCamera();
+        //GameManager.GetManager().StartThirdPersonCamera();
         CheckDoneTask();
         base.ExitInteraction();
     }

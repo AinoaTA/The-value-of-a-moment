@@ -69,7 +69,6 @@ public class Alarm : MonoBehaviour
     bool talking;
     private void StartAlarm()
     {
-        print("StartAlarm");
         alarmRinging = true;
         MusicGameplay.Mood(0f);
         talking = true;
@@ -79,7 +78,6 @@ public class Alarm : MonoBehaviour
             //DÍA UNO ENTERATE ---------------
             case DayController.Day.one:
                 alarmsfx.start();
-                print("day one");
                 if (counterNarrations > 0) Show();
                 else GameManager.GetManager().dialogueManager.SetDialogue("Alarm", delegate { Show(); });
 
@@ -87,7 +85,6 @@ public class Alarm : MonoBehaviour
 
             //DÍA DOS ENTERATE ---------------
             case DayController.Day.two:
-                print("day two");
 
                 if (counterNarrations > 0)
                 {
@@ -117,7 +114,6 @@ public class Alarm : MonoBehaviour
     {
         CanvasAlarm.SetActive(false);
         alarmIsActive = false;
-        print("wake up");
 
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
@@ -169,7 +165,6 @@ public class Alarm : MonoBehaviour
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
         GameManager.GetManager().UnlockBasicTasks();
-        yield return null;
         //GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         //{
         //    // TODO: unlock de los interactables
@@ -247,9 +242,7 @@ public class Alarm : MonoBehaviour
 
     void ResetTime()
     {
-        print("reset");
         timer = 0;
-        //alarmsfx.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         alarmRinging = false;
         alarmIsActive = true;
     }
@@ -259,8 +252,8 @@ public class Alarm : MonoBehaviour
     public void AfirmativoAlex()
     {
         if (!eventAlex.activeSelf && !unique && GameManager.GetManager().dayController.GetDayNumber() != DayController.Day.two) return;
-        print("tus muertos si quiero alex");
         unique = false;
+        print("Alex deja reaccionar");
         eventAlex.SetActive(false);
         GameManager.GetManager().alexVisited = true;
         GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op3_Op1", delegate
@@ -273,7 +266,7 @@ public class Alarm : MonoBehaviour
     public void NegativeAlex()
     {
         if (!eventAlex.activeSelf && !unique && GameManager.GetManager().dayController.GetDayNumber() != DayController.Day.two) return;
-        print("HOLA alex no quiero");
+        print("Alex NO deja reaccionar");
         unique = false;
         eventAlex.SetActive(false);
         negated = true;

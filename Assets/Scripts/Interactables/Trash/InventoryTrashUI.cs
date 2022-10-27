@@ -50,9 +50,9 @@ public class InventoryTrashUI : MonoBehaviour
     public void ResetInventory()
     {
         trashCollected = 0;
-        // dirtyClothes = 0;
+        dirtyClothesCollected = 0;
+        trashCounter.text = "";
     }
-
     public void RemoveDirtyClothes(BucketController bucket)
     {
         currentbucket = bucket;
