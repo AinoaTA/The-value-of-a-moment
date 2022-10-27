@@ -9,6 +9,7 @@ public class Trash : GeneralActions
     public int maxTras = 5;
     public Transform target;
     private Vector3 initPos;
+    private Quaternion initRot;
     private float grabbingSpeed = 10f;
     private bool grabbing;
     private bool onlySpeakOnce;
@@ -66,6 +67,7 @@ public class Trash : GeneralActions
         transform.SetParent(parent);
         col.enabled = true;
         transform.position = initPos;
+        transform.rotation = initRot;
         grabbing = false;
         done = false;
         base.ResetObject();
