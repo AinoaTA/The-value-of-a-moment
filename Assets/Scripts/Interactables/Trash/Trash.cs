@@ -12,16 +12,18 @@ public class Trash : GeneralActions
     private float grabbingSpeed = 10f;
     private bool grabbing;
     private bool onlySpeakOnce;
-
+    BoxCollider col;
     private void Start()
     {
         initPos = transform.position;
         grabbing = false;
         onlySpeakOnce = true;
+        col = GetComponent<BoxCollider>();
     }
 
     public override void EnterAction()
     {
+        col.enabled = false;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Clothes PickUp", transform.position);
         GameManager.GetManager().gameStateController.ChangeGameState(2);
 
@@ -56,29 +58,9 @@ public class Trash : GeneralActions
         GameManager.GetManager().gameStateController.ChangeGameState(1);
         gameObject.SetActive(false);
     }
-
-    //private void Update()
-    //{
-    //    if (grabbing)
-    //    {
-    //        // transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
-    //        transform.position = GameManager.GetManager().playerController.handBone.position;
-    //        transform.SetParent(GameManager.GetManager().playerController.handBone);
-
-    //        if (Vector3.Distance(transform.position, target.position) < 0.1f)
-    //        {
-    //            if (type == TrashType.TRASH)
-    //                GameManager.GetManager().trashInventory.AddTrash(this);
-    //            else
-    //                GameManager.GetManager().trashInventory.AddDirtyClothes(this);
-
-    //            gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
-
     public void ResetInteractable()
     {
+        col.enabled = true;
         transform.position = initPos;
         grabbing = false;
         done = false;

@@ -115,14 +115,15 @@ public class Shower : GeneralActions, ITask
     {
         if (routine != null)
             StopCoroutine(routine);
+        print("??");
         CheckDoneTask();
         StartCoroutine(routine = Cortinas(false));
         InteractableBlocked = true;
         ShowerSFX.setParameterByName("ShowerOnOff", 1f);
         ShowerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         GameManager.GetManager().dayController.TaskDone();
-        GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         GameManager.GetManager().StartThirdPersonCamera();
+        GameManager.GetManager().interactableManager.LookingAnInteractable(null);
         GameManager.GetManager().playerController.ResetPlayerPos(positionOnEnter);
         base.ExitAction();
 
