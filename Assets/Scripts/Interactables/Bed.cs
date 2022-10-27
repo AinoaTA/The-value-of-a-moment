@@ -273,11 +273,16 @@ public class Bed : Interactables, ITask
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
-                GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
+                if (GameManager.GetManager().dayController.GetTimeDay() == DayController.DayTime.Noche)
                 {
+                    print("cant");
+                    GameManager.GetManager().dialogueManager.SetDialogue("AntesDeDormir", delegate
+                    {
+                        wait = false;
+                    });
+                }
+                else
                     wait = false;
-                });
-
                 break;
             case DayController.Day.two:
                 Debug.Log("Post dormir");

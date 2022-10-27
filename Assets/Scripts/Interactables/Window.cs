@@ -102,6 +102,7 @@ public class Window : Interactables, ITask
 
     public override void ExitInteraction()
     {
+
         tutorial.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         gameInitialized = false;
@@ -226,6 +227,7 @@ public class Window : Interactables, ITask
 
         if (isOpen)
         {
+            GameManager.GetManager().blockController.LockSpecific("Ventanas");
             //GameManager.GetManager().blockController.LockSpecific("Ventana");
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
         }
@@ -237,6 +239,7 @@ public class Window : Interactables, ITask
     }
     IEnumerator Delay()
     {
+       
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);

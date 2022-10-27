@@ -94,7 +94,7 @@ public class Mirror : Interactables,ITask
             GameManager.GetManager().dialogueManager.SetDialogue("IEspejo", canRepeat: true);
 
             GameManager.GetManager().playerController.SadMoment();
-            GameManager.GetManager().autocontrol.RemoveAutoControl(5);
+            GameManager.GetManager().autocontrol.RemoveAutoControl(15);
 
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.3f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.5f)
@@ -104,7 +104,7 @@ public class Mirror : Interactables,ITask
             if (counterless >= lessbad.Length)
                 counterless = 0;
             GameManager.GetManager().playerController.SadMoment();
-            GameManager.GetManager().autocontrol.RemoveAutoControl(2);
+            GameManager.GetManager().autocontrol.RemoveAutoControl(15);
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.5f && GameManager.GetManager().autocontrol.GetAutcontrolValue() <= 0.8f)
         {
@@ -113,7 +113,7 @@ public class Mirror : Interactables,ITask
             if (counternormal >= normal.Length)
                 counternormal = 0;
             GameManager.GetManager().playerController.HappyMoment();
-            GameManager.GetManager().autocontrol.AddAutoControl(2);
+            GameManager.GetManager().autocontrol.AddAutoControl(15);
         }
         else if (GameManager.GetManager().autocontrol.GetAutcontrolValue() > 0.8f)
         {
