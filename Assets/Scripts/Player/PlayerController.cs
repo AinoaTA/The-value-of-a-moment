@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour
 
     public void TemporalExit()
     {
-        Debug.Log("TEMPORAL");
         root.localPosition = new Vector3(0, -1.2f, 0);
         SetAnimation("Movement");
         root.localRotation = Quaternion.Euler(0, 180, 0);

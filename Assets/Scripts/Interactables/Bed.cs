@@ -236,7 +236,6 @@ public class Bed : Interactables, ITask
                         {
                             // cambiar de hora
                             GameManager.GetManager().dayController.ChangeDay(1);
-                            Debug.Log("Al dormir hay cambio de hora. Pasa a ser: " + GameManager.GetManager().dayController.GetTimeDay());
                             GameManager.GetManager().ResetInteractable();
                             GameManager.GetManager().transitionController.LoadFinalScene();
                         });
