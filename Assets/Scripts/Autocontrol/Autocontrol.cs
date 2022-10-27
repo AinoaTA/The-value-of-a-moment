@@ -94,9 +94,6 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
-            //gameObject.GetComponent<FMODMusic>().Mood();
-            //MusicGameplay
-            //Debug.Log("Temporal Line commented");
             MusicGameplay.Mood(1f);
 
         }
