@@ -232,6 +232,7 @@ public class Bed : Interactables, ITask
                     case DayController.Day.one:
                         break;
                     case DayController.Day.two:
+<<<<<<< HEAD
                         //GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
                         //{
                         //    // cambiar de hora
@@ -241,6 +242,15 @@ public class Bed : Interactables, ITask
                         //    GameManager.GetManager().ResetInteractable();
                         //    GameManager.GetManager().transitionController.LoadFinalScene();
                         //});
+=======
+                        GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
+                        {
+                            // cambiar de hora
+                            GameManager.GetManager().dayController.ChangeDay(1);
+                            GameManager.GetManager().ResetInteractable();
+                            GameManager.GetManager().transitionController.LoadFinalScene();
+                        });
+>>>>>>> feature/Interactions
                         break;
                     case DayController.Day.three:
                         break;

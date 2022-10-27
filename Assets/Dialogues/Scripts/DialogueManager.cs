@@ -78,17 +78,14 @@ public class DialogueManager : MonoBehaviour
             subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
-        int lenght;
         string path = "event:/Dialogue/" + LanguageGame.lang + "/" + line.ID;
-
 
         try
         {
-            RuntimeManager.GetEventDescription(path).getLength(out lenght);
-            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);//FMODUnity.RuntimeManager.PlayOneShot(path);
+            RuntimeManager.GetEventDescription(path).getLength(out int lenght);
+            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path); //FMODUnity.RuntimeManager.PlayOneShot(path);
             eventAudio.start();
             float time = (float)lenght / 1000;
-            Debug.Log("AUDIO LENGHT Mili: " + (float)lenght + " | in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
         catch (System.Exception e)

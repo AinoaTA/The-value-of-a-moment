@@ -184,6 +184,7 @@ public class Window : Interactables, ITask
             {
                 height = minHeight;
                 isClosed = true;
+                isOpen = false;
             }
 
             else if (displacement < maxHeight)
@@ -193,6 +194,7 @@ public class Window : Interactables, ITask
             {
                 height = maxHeight;
                 isOpen = true;
+                isClosed = false;
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -219,20 +221,19 @@ public class Window : Interactables, ITask
         //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
 
+        interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
+        GameManager.GetManager().dayController.TaskDone();
+
         if (isOpen)
         {
-            GameManager.GetManager().blockController.LockSpecific("Ventanas");
+            //GameManager.GetManager().blockController.LockSpecific("Ventana");
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
         }
         else
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
 
-        
-        interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
         isOpen = false;
         isClosed = false;
-        GameManager.GetManager().dayController.TaskDone();
-
     }
     IEnumerator Delay()
     {
