@@ -121,7 +121,7 @@ public class Plant : Interactables, ITask, IDependencies
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     gameInitialized = true;
                     timer = 0;
-
+                    
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                     GameManager.GetManager().canvasController.UnLock(false,true);
                     GameManager.GetManager().dialogueManager.SetDialogue("IPlanta");
@@ -175,6 +175,7 @@ public class Plant : Interactables, ITask, IDependencies
 
     public override void ResetInteractable()
     {
+        NextDay();
         base.ResetInteractable();
         regadera.ResetObject();
         waterCan.ResetWaterCan();

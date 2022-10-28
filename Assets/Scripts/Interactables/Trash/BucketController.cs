@@ -87,10 +87,12 @@ public class BucketController : Interactables, ITask, IDependencies
     }
     protected override void OnMouseOver()
     {
+        hasNecessary = trashGot > 0;
         if (!hasNecessary)
             return;
         base.OnMouseOver();
     }
+
     private void OnMouseExit()
     {
         base.Hide();
@@ -108,12 +110,12 @@ public class BucketController : Interactables, ITask, IDependencies
                 if (type == TypeBucket.CLOTHES)
                 {
                     GameManager.GetManager().trashInventory.RemoveDirtyClothes(this);
-
                 }
                 else if (type == TypeBucket.TRASH)
                 {
                     GameManager.GetManager().trashInventory.RemoveTrash();
                 }
+                trashGot = 0;
                 GameManager.GetManager().dayController.TaskDone();
                 GameManager.GetManager().dialogueManager.SetDialogue("IRopaSucia");
                 GameManager.GetManager().interactableManager.LookingAnInteractable(null);

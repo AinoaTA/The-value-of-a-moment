@@ -51,10 +51,10 @@ public class DayController : MonoBehaviour
     IEnumerator Delay()
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
-        GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar", delegate
+        GameManager.GetManager().dialogueManager.SetDialogue("PonerseATrabajar");/*, delegate
         {
             
-        });
+        });*/
         GameManager.GetManager().blockController.UnlockAll(DayTime.Tarde);
         GameManager.GetManager().blockController.Unlock("Window");
     }

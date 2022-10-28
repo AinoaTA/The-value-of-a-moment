@@ -42,8 +42,8 @@ public class Mobile : MonoBehaviour, ILock //GeneralActions
         //if (!getMobile) return;
         if (GameManager.GetManager().gameStateController.CheckGameState(1) && !active)
         {
-            cursor.SetActive(true);
             active = true;
+            cursor.SetActive(true);
             GameManager.GetManager().gameStateController.ChangeGameState(2);
             GameManager.GetManager().canvasController.UnLock(false);
             GameManager.GetManager().cameraController.Block3DMovement(false);
@@ -52,14 +52,12 @@ public class Mobile : MonoBehaviour, ILock //GeneralActions
             if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
             {
                 GameManager.GetManager().dialogueManager.SetDialogue("D2AccTelef_Chat");
-                GameManager.GetManager().IncrementInteractableCount();
+                //GameManager.GetManager().IncrementInteractableCount();
             }
-
         }
         else if (GameManager.GetManager().gameStateController.CheckGameState(2) && active)
         {
             cursor.SetActive(false);
-            active = false;
             GameManager.GetManager().StartThirdPersonCamera();
             GameManager.GetManager().gameStateController.ChangeGameState(1);
             GameManager.GetManager().canvasController.Lock();
@@ -67,6 +65,7 @@ public class Mobile : MonoBehaviour, ILock //GeneralActions
             CanvasMobile(false);
             CanvasMultiple(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/UI/Phone Lock");
+            active = false;
         }
     }
 

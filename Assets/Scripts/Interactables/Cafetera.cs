@@ -90,6 +90,7 @@ public class Cafetera : Interactables, ITask
     public override void ExitInteraction()
     {
         //GameManager.GetManager().StartThirdPersonCamera();
+        interactDone = true;
         CheckDoneTask();
         base.ExitInteraction();
     }

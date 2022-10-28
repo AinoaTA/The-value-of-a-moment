@@ -102,7 +102,6 @@ public class Window : Interactables, ITask
 
     public override void ExitInteraction()
     {
-
         tutorial.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         gameInitialized = false;
@@ -110,10 +109,17 @@ public class Window : Interactables, ITask
         base.ExitInteraction();
     }
 
+
+    public override void ResetInteractable()
+    {
+        ResetWindow();
+        base.ResetInteractable();
+    }
     public void ResetWindow()
     {
         interactDone = false;
         isOpen = interactDone;
+        isClosed = true;
         gameInitialized = false;
         glass.transform.position = initPos;
     }
@@ -205,9 +211,9 @@ public class Window : Interactables, ITask
     {
         if ((isOpen || isClosed) && gameInitialized)
             WindowDone();
-        else if (!isOpen)
+        else if (!isOpen && gameInitialized)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
-        else if (interactDone && isOpen)
+        else if (interactDone && isOpen && gameInitialized)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
     #endregion

@@ -85,15 +85,16 @@ public class AlexController : Interactables, ILock
             yaVisto = true;
             GameManager.GetManager().dialogueManager.SetDialogue("D2Alarm_Op1_MirarAlex");
         }
-        if (!GameManager.GetManager().alexVisited) return;
+        if (!GameManager.GetManager().alexVisited|| isGone) return;
         InteractableBlocked = false;
         base.OnMouseEnter();
     }
     protected override void OnMouseOver()
     {
-        if (!GameManager.GetManager().alexVisited) return;
+        if (!GameManager.GetManager().alexVisited || isGone) return;
         base.OnMouseOver();
     }
+
 
     public void PaCasa()
     {
@@ -104,6 +105,7 @@ public class AlexController : Interactables, ILock
     IEnumerator CorrectRoutine()
     {
         isGone = true;
+        Hide();
         InteractableBlocked = true;
         yield return new WaitForSecondsRealtime(4);
         animAlex.Play("Leave");

@@ -317,9 +317,11 @@ public class Bed : Interactables, ITask
         GameManager.GetManager().playerController.PlayerSleepPos();
         GameManager.GetManager().calendarController.GlobalReset();
         GameManager.GetManager().programMinigame.ResetAllGame();
+        GameManager.GetManager().blockController.BlockAll(true);
 
         GameManager.GetManager().interactableManager.ResetAll();
         GameManager.GetManager().actionObjectManager.ResetAll();
+        yield return null;
         GameManager.GetManager().dayController.NewDay();
         ResetBed();
         yield return new WaitForSeconds(2);
