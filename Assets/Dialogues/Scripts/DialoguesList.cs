@@ -5,12 +5,13 @@ using UnityEngine;
 public class DialoguesList : ScriptableObject
 {
     public TextAsset dialoguesFile;
+    FMODUnity.StudioEventEmitter emitter;
     //public string voicesPath = "";
     //public string voicesPathEn = "";
     public List<DialogueJSON> dialogues;
 
     private Dictionary<string, DialogueJSON> dialoguesDictionary;
-    
+
     void Init()
     {
         dialoguesDictionary = new Dictionary<string, DialogueJSON>();
@@ -37,8 +38,8 @@ public class DialogueLineJSON
 {
     public string ID;
     [HideInInspector] public string dialogue;
-    public AudioClip voice_es;
-    public AudioClip voice_en;
+    public FMODUnity.StudioEventEmitter voice_es;
+    public FMODUnity.StudioEventEmitter voice_en;
     public string es;
     public string en;
     public bool played;

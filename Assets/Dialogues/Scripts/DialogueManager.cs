@@ -1,7 +1,9 @@
-using System.Collections;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using FMODUnity;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -9,13 +11,13 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text subtitle;
     public float defaultvoiceTime = 2;
     public float aditionalVoiceTime = 0.2f;
-
+    public Image panel;
+    bool justVoice;
     DialogueJSON currentDialogue;
     int currentLine;
 
     IEnumerator nextLineCoroutine;
     private static FMOD.Studio.EventInstance eventAudio;
-
     private void Awake()
     {
         GameManager.GetManager().dialogueManager = this;
@@ -23,26 +25,28 @@ public class DialogueManager : MonoBehaviour
 
     public void Start()
     {
+        if (panel != null)
+            panel.gameObject.SetActive(false);
         for (int i = 0; i < dialogues.dialogues.Count; i++)
         {
             for (int e = 0; e < dialogues.dialogues[i].lines.Count; e++)
             {
-                dialogues.dialogues[i].lines[e].played=false;
+                dialogues.dialogues[i].lines[e].played = false;
             }
         }
     }
     Action saveAct;
     bool canRepeat;
     string previusDialogue;
-    public bool waitDialogue=true;
-    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false)
+    public bool waitDialogue = true;
+    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false, bool onlyVoice = false)
     {
         if (dialogue == previusDialogue) return;
         previusDialogue = dialogue;
         waitDialogue = true;
         if (nextLineCoroutine != null) StopDialogue();
         eventAudio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-
+        justVoice = onlyVoice;
         currentDialogue = dialogues.GetDialogue(dialogue);
         //this conver was played.
         saveAct = act;
@@ -52,7 +56,7 @@ public class DialogueManager : MonoBehaviour
             saveAct?.Invoke();
             return;
         }
-        
+
         if (currentDialogue.lines[0].played)
         {
             saveAct = null;
@@ -66,29 +70,27 @@ public class DialogueManager : MonoBehaviour
     void ShowLine()
     {
         DialogueLineJSON line = currentDialogue.lines[currentLine];
-        subtitle.enabled = true;
+        if (!justVoice)
+            subtitle.enabled = true;
 
         bool langESP = LanguageGame.lang == LanguageGame.Languages.ESP;
-
-        subtitle.text = langESP ? line.es : line.en;
+        if (!justVoice)
+            subtitle.text = langESP ? line.es : line.en;
 
         float waitTime = defaultvoiceTime;
-        int lenght;
         string path = "event:/Dialogue/" + LanguageGame.lang + "/" + line.ID;
 
         try
         {
-            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path);
-            FMODUnity.RuntimeManager.GetEventDescription(FMODUnity.EventReference.Find(path)).getLength(out lenght);
+            RuntimeManager.GetEventDescription(path).getLength(out int lenght);
+            eventAudio = FMODUnity.RuntimeManager.CreateInstance(path); //FMODUnity.RuntimeManager.PlayOneShot(path);
             eventAudio.start();
-
             float time = (float)lenght / 1000;
-            //    print("AUDIO LENGHT Mili: " + (float)lenght + "| in seconds: " + time);
             waitTime = time + aditionalVoiceTime;
         }
         catch (System.Exception e)
         {
-            //print(e);
+            Debug.Log(e);
         }
 
         if (!canRepeat)
@@ -98,6 +100,8 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator NextLine(float waitTime)
     {
+        if (panel != null)
+            panel.gameObject.SetActive(true);
         yield return new WaitForSeconds(waitTime);
         currentLine++;
         if (currentLine < currentDialogue.lines.Count) ShowLine();
@@ -114,6 +118,9 @@ public class DialogueManager : MonoBehaviour
 
         if (saveAct != null)
             saveAct?.Invoke();
+
+        if (panel != null)
+            panel.gameObject.SetActive(false);
         subtitle.text = "";
         subtitle.enabled = false;
         previusDialogue = "";
@@ -122,6 +129,8 @@ public class DialogueManager : MonoBehaviour
 
     void StopDialogue()
     {
+        if (panel != null)
+            panel.gameObject.SetActive(false);
         StopCoroutine(nextLineCoroutine);
         subtitle.text = "";
         subtitle.enabled = false;

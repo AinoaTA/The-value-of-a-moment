@@ -76,17 +76,24 @@ public class Plant : Interactables, ITask, IDependencies
 
     #endregion
     #region OnMouse
-    private void OnMouseEnter()
+    protected override void OnMouseEnter()
     {
         hasNecessary = regadera.grabbed;
-        if (!hasNecessary)
-            return;
+        Debug.Log(hasNecessary, gameObject);
+        if (!hasNecessary) return;
 
         base.Show();
     }
     private void OnMouseExit()
     {
+        if (!hasNecessary) return;
         base.Hide();
+    }
+
+    protected override void OnMouseOver()
+    {
+        if (!hasNecessary) return;
+        base.OnMouseOver();
     }
     #endregion
 
@@ -114,9 +121,9 @@ public class Plant : Interactables, ITask, IDependencies
                     GameManager.GetManager().gameStateController.ChangeGameState(2);
                     gameInitialized = true;
                     timer = 0;
-
+                    
                     GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
-                    GameManager.GetManager().canvasController.UnLock();
+                    GameManager.GetManager().canvasController.UnLock(false,true);
                     GameManager.GetManager().dialogueManager.SetDialogue("IPlanta");
                     StartCoroutine(routine = ActivateWaterCan());
                 }
@@ -137,11 +144,11 @@ public class Plant : Interactables, ITask, IDependencies
 
     public override void ExitInteraction()
     {
+        tutorial.SetActive(false);
         if (!gameInitialized)
             return;
         if (routine != null)
             StopCoroutine(routine);
-
         GameManager.GetManager().StartThirdPersonCamera();
         gameInitialized = false;
         waterCan.gameObject.SetActive(false);
@@ -168,6 +175,7 @@ public class Plant : Interactables, ITask, IDependencies
 
     public override void ResetInteractable()
     {
+        NextDay();
         base.ResetInteractable();
         regadera.ResetObject();
         waterCan.ResetWaterCan();

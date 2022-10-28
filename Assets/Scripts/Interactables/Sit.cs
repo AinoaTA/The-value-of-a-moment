@@ -31,10 +31,12 @@ public class Sit : GeneralActions
     #endregion
     public override void EnterAction()
     {
-        canvas.gameObject.SetActive(true);
+        //canvas.gameObject.SetActive(true);
         base.EnterAction();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/Sit", transform.position);
         GameManager.GetManager().gameStateController.ChangeGameState(3);
         GameManager.GetManager().cameraController.StartInteractCam(nameAction);
+        //GameManager.GetManager().playerController.SetAnimation("Sit");
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -48,7 +50,7 @@ public class Sit : GeneralActions
             case DayController.Day.fourth:
                 break;
         }
-      //  StartCoroutine(ShowOtherOptions());
+        //  StartCoroutine(ShowOtherOptions());
     }
 
     public override void ExitAction()
@@ -56,9 +58,11 @@ public class Sit : GeneralActions
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-       // canvas.SetBool("Showing", false);
+        // canvas.SetBool("Showing", false);
+        //GameManager.GetManager().playerController.SetAnimation("Stand");
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitAction();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Elle/GetInBed", transform.position);
     }
 
     private void Start()
@@ -66,16 +70,16 @@ public class Sit : GeneralActions
         //canvas.SetBool("Showing", true);   
     }
 
-    IEnumerator ShowOtherOptions()
-    {
-        yield return null;
-        //for (int i = 0; i < texts.Length; i++)
-        //    texts[i].text = moreOptions[i].canvasText;
+    //IEnumerator ShowOtherOptions()
+    //{
+    //    yield return null;
+    //    for (int i = 0; i < texts.Length; i++)
+    //        texts[i].text = moreOptions[i].canvasText;
 
-        //yield return new WaitForSeconds(1f);
+    //    yield return new WaitForSeconds(1f);
 
-        //canvas.SetBool("Showing", true);
-    }
+    //    canvas.SetBool("Showing", true);
+    //}
 
     public override void DoInteraction(int id)
     {

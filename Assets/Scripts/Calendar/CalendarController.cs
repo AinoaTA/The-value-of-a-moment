@@ -45,7 +45,7 @@ namespace Calendar
             calendar.SetActive(false);
             GameManager.GetManager().computer.ComputerON();
         }
-        
+
         public void SaveCalendar()
         {
             if (!modified)
@@ -108,6 +108,12 @@ namespace Calendar
             {
                 allTimeTable[i].taskSave.Clear();
             }
+
+            foreach (Transform item in contentTask.transform)
+            {
+                Destroy(item.gameObject);
+            }
+
             modified = false;
         }
     }

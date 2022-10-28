@@ -36,13 +36,13 @@ public class PlayerAnimationController : MonoBehaviour
     {
         float t = 0;
         anim.speed = 1;
-        while (t < 2) 
+        while (t < 2)
         {
             t += Time.deltaTime;
-            anim.speed = Mathf.Lerp(1, 0, t /2);
+            anim.speed = Mathf.Lerp(1, 0, t / 2);
             yield return null;
         }
-      
+
         routine = null;
     }
 }

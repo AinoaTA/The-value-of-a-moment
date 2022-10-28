@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public Alarm alarm { get; set; }
     public DialogueManager dialogueManager { get; set; }
     public BlockController blockController { get; set; }
+    public AlexController alexController { get; set; }
+    public TransitionController transitionController { get; set; }
 
     //special references, maybe temproal- temporal mis ocjones
     public Computer computer { get; set; }
@@ -37,9 +39,9 @@ public class GameManager : MonoBehaviour
 
     public bool programmedInteractableDone = false;
     public int realizedInteractables;
-    public bool programmed;
-    public bool alexVisited;
-    public GameObject diaDos;
+    public bool programmed, alexVisited, checkAida, openAida,counterAlex;
+   
+
 
     private void OnEnable()
     {
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviour
         }
         else if (gameManager != this)
             Destroy(gameObject);
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     #region SetStateGames
@@ -70,30 +75,10 @@ public class GameManager : MonoBehaviour
         gameStateController.ChangeGameState(1);
     }
 
-    public void ToActive()
-    {
-        diaDos.SetActive(false);
-        switch (dayController.GetDayNumber())
-        {
-            case DayController.Day.one:
-                break;
-            case DayController.Day.two:
-                diaDos.SetActive(true);
-                break;
-            case DayController.Day.three:
-                break;
-            case DayController.Day.fourth:
-                break;
-            default:
-                break;
-        }
-
-    }
-
     public void IncrementInteractableCount()
     {
         realizedInteractables++;
-        if(realizedInteractables >= 5)
+        if (realizedInteractables >= 5)
         {
             int currentTime = (int)dayController.GetTimeDay();
             if (currentTime >= 3) // Es de noche
@@ -116,6 +101,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
+    public void UnlockBasicTasks()
+    {
+        blockController.Unlock("Ventanas");
+        blockController.Unlock("Michi");
+        blockController.Unlock("Ducha");
+    }
 
     public void ResetInteractable()
     {
@@ -125,14 +117,28 @@ public class GameManager : MonoBehaviour
     IEnumerator Timbre(string dialogue)
     {
         yield return new WaitForSecondsRealtime(4f);
-        // Hacer sonar el timbre
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorBell", transform.position);
+
+        yield return new WaitForSecondsRealtime(4f);
         GameManager.GetManager().dialogueManager.SetDialogue(dialogue);
     }
 
     IEnumerator Llaves()
     {
         yield return new WaitForSecondsRealtime(4f);
-        // Que suenen las llaves
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorKeys", transform.position);
+
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2MundoAida");
+
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Epilogod2");
+
+        yield return new WaitForSecondsRealtime(4f);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/DoorClosed", transform.position);
+
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2Cierre");
     }
     #endregion
 }

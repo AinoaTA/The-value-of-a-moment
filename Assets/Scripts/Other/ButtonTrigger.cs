@@ -30,20 +30,20 @@ public class ButtonTrigger : MonoBehaviour
 
         m_NewScaleWakeUpButton = new Vector3(ScaleValue, ScaleValue, ScaleValue);
         m_NewScaleWakeUpButton += m_ScaleWakeUpButton;
-        
+
     }
 
     //WAKE UP BUTTON    
     public void LessEscaleWakeUp()
     {
         transform.localScale = m_ScaleWakeUpButton;
-        
+
         gameObject.transform.localScale -= new Vector3(ScaleValue, ScaleValue, ScaleValue);
         m_ScaleWakeUpButton = gameObject.transform.localScale;
 
         if (m_Counter < 3)
             m_NewScaleWakeUpButton = m_ScaleWakeUpButton + new Vector3(0.001f, 0.001f, 0.001f);
-        
+
         m_Counter++;
     }
 
@@ -63,10 +63,10 @@ public class ButtonTrigger : MonoBehaviour
         if (m_Counter >= 4)
         {
             m_ScaleWakeUpButton = m_InitialScale;
-            m_NewScaleWakeUpButton= m_ScaleWakeUpButton + new Vector3(ScaleValue, ScaleValue, ScaleValue);
+            m_NewScaleWakeUpButton = m_ScaleWakeUpButton + new Vector3(ScaleValue, ScaleValue, ScaleValue);
         }
-                
+
         else
-          transform.localScale = m_ScaleWakeUpButton;
+            transform.localScale = m_ScaleWakeUpButton;
     }
 }

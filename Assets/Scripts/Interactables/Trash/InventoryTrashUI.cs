@@ -1,6 +1,6 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class InventoryTrashUI : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class InventoryTrashUI : MonoBehaviour
         dirtyClothesCollected++;
         current = t;
         dirtyClothesCounter.text = dirtyClothesCollected.ToString() + dirtyClothesPhrase;
-        GameManager.GetManager().gameStateController.ChangeGameState(1);
+       // GameManager.GetManager().gameStateController.ChangeGameState(1);
     }
 
     public void AddTrash(Trash t)
@@ -50,9 +50,9 @@ public class InventoryTrashUI : MonoBehaviour
     public void ResetInventory()
     {
         trashCollected = 0;
-        // dirtyClothes = 0;
+        dirtyClothesCollected = 0;
+        trashCounter.text = "";
     }
-
     public void RemoveDirtyClothes(BucketController bucket)
     {
         currentbucket = bucket;

@@ -6,14 +6,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     private Vector3 m_Direction;
     private Camera cam;
-    [SerializeField] private float speed, maxSpeed = 1.4f;/*, stopSpeedOffset = 0.2f;*/
-    //public GameObject prop;
-    //bool moving;
+    private float speed;
+    [SerializeField] private float maxSpeed = 1.4f;
 
     //[SerializeField] float m_LerpRotationPercentatge = 0.2f;
     [SerializeField] float m_CurrVelocityPlayer;
     CharacterController m_CharacterController;
-
     // public Animator animator;
     private void Awake()
     {
@@ -79,12 +77,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!GameManager.GetManager().gameStateController.CheckGameState(1))
         {
-            //m_CurrVelocityPlayer = 0;
+            m_CurrVelocityPlayer = 0;
             //m_Anim.SetFloat("Speed", Mathf.Clamp(m_CurrVelocityPlayer, 0, 1));
+            GameManager.GetManager().playerController.PlayerMovementAnim(m_CurrVelocityPlayer);
             return;
         }
         if (m_MovementAxis != Vector2.zero)
         {
+            m_CurrVelocityPlayer = Mathf.Clamp(m_CharacterController.velocity.magnitude, 0, 1);
             Vector3 forward = cam.transform.forward;
             Vector3 right = cam.transform.right;
             forward.y = 0.0f;
@@ -95,10 +95,21 @@ public class PlayerMovement : MonoBehaviour
             Vector2 movementAxis = m_MovementAxis;
             m_Direction += forward * movementAxis.y;
             m_Direction += right * movementAxis.x;
+
             m_Direction.Normalize();
+
+            if (m_Direction != Vector3.zero)
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(m_Direction), 0.2F);
+
             Vector3 movement = m_Direction * Time.deltaTime * speed;
 
             CollisionFlags m_CollisionFlags = m_CharacterController.Move(movement);
         }
+        else
+        {
+            m_CurrVelocityPlayer -= Time.deltaTime * 2.5f;
+            if (m_CurrVelocityPlayer < 0) m_CurrVelocityPlayer = 0;
+        }
+        GameManager.GetManager().playerController.PlayerMovementAnim(m_CurrVelocityPlayer);
     }
 }

@@ -43,6 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c740a36ac31e04b45a60b4b1e4c47b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diaUno: {fileID: 0}
+  diaDos: {fileID: 0}
+  rotateAlexDoor: {fileID: 0}
+  rotateAidaDoor: {fileID: 0}
   dayOneInteractable:
   - name: Ventanas
     id: 0
@@ -60,7 +64,7 @@ MonoBehaviour:
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 1
+    dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
   - name: Encimera
     id: 0
@@ -78,7 +82,6 @@ MonoBehaviour:
     id: 0
     locks:
     - {fileID: 0}
-    - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
   - name: Programar
@@ -86,12 +89,6 @@ MonoBehaviour:
     locks:
     - {fileID: 0}
     dayTimeCanUnlock: 2
-    hasConditionToUnlock: 1
-  - name: Bitter
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Calendar
     id: 0
@@ -127,12 +124,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     dayTimeCanUnlock: 1
-    hasConditionToUnlock: 1
-  - name: Sentarse
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
   - name: Movil
     id: 0
@@ -182,64 +173,69 @@ MonoBehaviour:
     - {fileID: 0}
     dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
+  - name: Bitter
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: TV
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Corcho
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
   dayTwoInteractable:
   - name: Ventanas
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Bed
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Cesto Ropa
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Ropas
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Ducha
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
-  - name: Cry
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
-  - name: Libro
-    id: 0
-    locks:
-    - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Drum
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Agenda
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
-    hasConditionToUnlock: 1
-  - name: Ropas
-    id: 0
-    locks:
     - {fileID: 0}
     dayTimeCanUnlock: 0
     hasConditionToUnlock: 1
@@ -247,49 +243,88 @@ MonoBehaviour:
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Ordenador
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Mail
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Programar
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Gato
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Plantas
+    id: 0
+    locks:
+    - {fileID: 0}
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   - name: Bitter
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
-  - name: LoveUp
+  - name: AlimentarMichi
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
-  - name: Planta
+  - name: TV
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
-  - name: Michi
+  - name: Movil
     id: 0
     locks:
     - {fileID: 0}
-    dayTimeCanUnlock: 0
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Encimera
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Whats
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Corcho
+    id: 0
+    locks:
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
+    hasConditionToUnlock: 1
+  - name: Bitter
+    id: 0
+    locks:
+    - {fileID: 0}
+    - {fileID: 0}
+    dayTimeCanUnlock: 1
     hasConditionToUnlock: 1
   dayThreeInteractable:
   - name: DoorAida

@@ -23,6 +23,9 @@ public class Interactables : MonoBehaviour, ILock
     [HideInInspector] public bool actionEnter;
     public virtual bool GetDone() { return interactDone; }
 
+    [SerializeField] bool inDistance;
+    public float minDistanceToInteract = 5.5f;
+
     public virtual void Interaction(int optionNumber)
     {
         SetCanvasValue(false);
@@ -45,18 +48,39 @@ public class Interactables : MonoBehaviour, ILock
         if (interactDone && totalOptions > 1)
             ResetOptionsPos();
 
+        ITask task = GetComponent<ITask>();
+        if (task != null)
+        {
+            print(name);
+            print(task.nameTask);
+            task.SetTask();
+        }
+
         interactDone = false;
         SetCanvasValue(false);
     }
 
-    private void OnMouseEnter()
+    protected virtual void OnMouseOver()
     {
         if (InteractableBlocked) return;
+
+        /// QUE VAMOS SOBRADES DE FPS DICES?
+        inDistance = (Vector3.Distance(Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f)), transform.position) <= minDistanceToInteract);
+
+        if (!inDistance && showing)
+            Hide();
+        if (inDistance && !showing)
+            Show();
+    }
+
+    protected virtual void OnMouseEnter()
+    {
+        if (InteractableBlocked || !inDistance) return;
         Show();
     }
     private void OnMouseExit()
     {
-        if (InteractableBlocked) return;
+        if (InteractableBlocked || !inDistance) return;
         Hide();
     }
 

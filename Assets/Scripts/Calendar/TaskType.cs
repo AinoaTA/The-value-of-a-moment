@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 namespace Calendar
 {
     public class TaskType : MonoBehaviour
@@ -16,7 +16,7 @@ namespace Calendar
         [SerializeField] private Transform content;
         [SerializeField] private Color enterColor;
         [HideInInspector] public Image sprite;
-       
+
 
         [HideInInspector] public bool InAnySpaceCalendar;
         [HideInInspector] public SpaceCalendar calendar;

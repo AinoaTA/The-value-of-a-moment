@@ -4,7 +4,7 @@ public class SolutionPiece : MonoBehaviour
 {
     public int id;
 
-    public void Set() 
+    public void Set()
     {
         print("in");
         GameManager.GetManager().programMinigame.SetCurrSolution(this);

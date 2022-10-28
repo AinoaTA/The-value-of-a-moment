@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     //private bool sleep;
     public Transform root;
 
+
+    public Transform handBone;
     private CharacterController character;
     public PlayerAnimationController playerAnimation;
     private void Awake()
@@ -67,47 +69,43 @@ public class PlayerController : MonoBehaviour
 
     public void TemporalExit()
     {
-        Debug.Log("TEMPORAL");
         root.localPosition = new Vector3(0, -1.2f, 0);
         SetAnimation("Movement");
         root.localRotation = Quaternion.Euler(0, 180, 0);
     }
     void GetUp(bool getUp)
     {
-        root.rotation = Quaternion.identity;
         if (getUp)
-            root.SetPositionAndRotation(playerGetUp.position, Quaternion.Euler(0, rotationWakeup, 0));
+        {
+            StartCoroutine(GetUpRoutine());
+        }
         else
+        {
+            Vector3 pos = new Vector3(playerGetUp.position.x, transform.position.y,playerGetUp.position.z);
+            transform.SetPositionAndRotation(pos, Quaternion.Euler(0, rotationWakeup, 0));
+            root.rotation = Quaternion.identity;
+            root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationSleep, 0));
+        }
+    }
 
-            root.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(0, rotationWakeup, 0));
+    IEnumerator GetUpRoutine()
+    {
+        float t = 0;
+        Quaternion rotInit = root.rotation;
+        Vector3 posInit = root.position + new Vector3(0, 0.4f, 0);
+        float maxTime = 0.2f;
+        while (t < maxTime)
+        {
+            t += Time.deltaTime;
+            root.position = Vector3.Lerp(posInit, playerGetUp.position, t / maxTime);
+            root.rotation = Quaternion.Lerp(rotInit, Quaternion.Euler(0, rotationWakeup, 0), t / maxTime);
 
-        //transform.SetPositionAndRotation(playerSleep.position, Quaternion.Euler(rotationSleep, 0, rotationSleep));
+            yield return null;
+        }
     }
     IEnumerator StartDay()
     {
-        ////QUE ASCO LE ESTOY COGIENDO A LAS ANIMACIONES HELP ME
-
-        //Vector3 prevPos = root.localPosition;
-        //float provY = root.localPosition.y;
-        //float time = 3.5f;
-        //while (t < time)
-        //{
-        //    t += Time.deltaTime;
-        //    root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, provY, -1.0f), t / time);
-        //    yield return null;
-        //}
-        //yield return new WaitForSeconds(1.5f);
-        //t = 0;
-        //prevPos = root.localPosition;
-        //time = 1;
-        //while (t < time)
-        //{
-        //    t += Time.deltaTime;
-        //    root.localPosition = Vector3.Lerp(prevPos, new Vector3(0, -1.2f, 0), t / time);
-        //    yield return null;
-        //}
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4f);
         GameManager.GetManager().StartThirdPersonCamera();
     }
 
@@ -115,7 +113,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.transform.position = pos;
     }
-    
+
     public Vector3 GetPlayerPos()
     {
         return playerAnimation.transform.position;
@@ -125,9 +123,46 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimation.transform.position = character.transform.position;
     }
-    
+
     public void ResetPlayerPos(Vector3 position)
     {
         playerAnimation.transform.position = position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("PuertaAida")) return;
+
+        if (!GameManager.GetManager().checkAida)
+        {
+            GameManager.GetManager().dialogueManager.SetDialogue("D2PuertAida_RescMino", delegate
+            {
+                StartCoroutine(ChangeCheckAida());
+            });
+        }
+        else GameManager.GetManager().dialogueManager.SetDialogue("D2EsTarde_PuertAida");
+    }
+
+    IEnumerator ChangeCheckAida()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+        GameManager.GetManager().checkAida = true;
+
+        yield return new WaitForSecondsRealtime(10f);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2EsTarde");
+    }
+
+
+    public void PlayerMovementAnim(float speed)
+    {
+        playerAnimation.anim.SetFloat("Speed", speed);
+    }
+
+    public void AudioDialogue()
+    {
+        GameManager.GetManager().dialogueManager.SetDialogue("D2PostCafe", delegate
+         {
+             GameManager.GetManager().blockController.BlockAll(false);
+         });
     }
 }

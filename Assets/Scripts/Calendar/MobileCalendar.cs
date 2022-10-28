@@ -1,6 +1,7 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Calendar
@@ -12,6 +13,7 @@ namespace Calendar
         public GameObject selected, noselected;
         public Image bgDay;
         public Sprite[] timeDaySprites;
+        private bool previus;
         private void OnEnable()
         {
             TaskType.taskDelegate += TaskDone;
@@ -24,14 +26,35 @@ namespace Calendar
         public void OpenCalendar()
         {
             bgDay.sprite = timeDaySprites[(int)GameManager.GetManager().dayController.GetTimeDay()];
+
             if (GameManager.GetManager().calendarController.calendarInformation.Count == 0)
             {
                 noselected.SetActive(true);
+                selected.SetActive(false);
                 return;
             }
             else
+            {
+                noselected.SetActive(false);
                 selected.SetActive(true);
+//TEMPORAL FIX!!!!!!! ------------------------------
+                StartCoroutine(TemporalFix());
+            }
+//------------------------------------------
+            //if (content.childCount == 0)
+            //{
+            //    foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
+            //        if (item.Value.timeDate == GameManager.GetManager().dayController.GetTimeDay())
+            //            HandleTaskView(item);
+            //}
+        }
 
+        //TEMPORAL FIX!!!!
+
+        IEnumerator TemporalFix() 
+        {
+            ResetCalendar();
+            yield return null;
             if (content.childCount == 0)
             {
                 foreach (KeyValuePair<TaskType, SpaceCalendar> item in GameManager.GetManager().calendarController.calendarInformation)
@@ -39,7 +62,7 @@ namespace Calendar
                         HandleTaskView(item);
             }
         }
-
+        // ----------------
         private void HandleTaskView(KeyValuePair<TaskType, SpaceCalendar> item)
         {
             GameObject taskView = Instantiate(prefab, transform.position, Quaternion.identity, content);

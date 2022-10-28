@@ -1,6 +1,4 @@
-using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Grabbing : MonoBehaviour
@@ -29,28 +27,39 @@ public class Grabbing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        previousPos = this.transform.position;
-        previousQuat = this.transform.rotation;
-        //cam = brain.ActiveVirtualCamera;
+        previousPos = transform.position;
+        previousQuat = transform.rotation;
+
+        GameManager.GetManager().playerInputs._ExitInteraction += Leave;
+    }
+    private void OnDisable()
+    {
+        GameManager.GetManager().playerInputs._ExitInteraction -= Leave;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Leave() 
     {
-        if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
+        if (isObjectGrabbed)
         {
             leaving = true;
             isObjectGrabbed = false;
             GameManager.GetManager().gameStateController.ChangeGameState(1);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Book Drop", transform.position);
-        }
-
-        if (leaving)
             LeaveObject();
+        }
+    }
+    void Update()
+    {
+        //if (isObjectGrabbed && Input.GetKeyDown(KeyCode.Escape))
+        //{
+            
+        //}
 
-        if(canAccesCamera)
+        //if (leaving)
+        //    LeaveObject();
+        if (canAccesCamera)
         {
-            if(!isObjectGrabbed && once)
+            if (!isObjectGrabbed && once)
                 GrabObject();
 
             Vector2 MouseRot;
@@ -69,7 +78,7 @@ public class Grabbing : MonoBehaviour
             //cam.transform.localRotation = Quaternion.Euler(-cameraPitch, 0.0f, 0.0f);
         }
     }
-    
+
     public void SetAccessCamera(bool value)
     {
         canAccesCamera = value;
@@ -79,9 +88,9 @@ public class Grabbing : MonoBehaviour
     {
         GameManager.GetManager().gameStateController.ChangeGameState(2);
         GameManager.GetManager().canvasController.Pointer.SetActive(false);
-        this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, grabbingSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, grabbingSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(this.transform.position, target.position) < 0.5f)
+        if (Vector3.Distance(transform.position, target.position) < 0.5f)
         {
             StartCoroutine(MakePlayerDissapear());
             isObjectGrabbed = true;
@@ -92,9 +101,10 @@ public class Grabbing : MonoBehaviour
     private void LeaveObject()
     {
         GameManager.GetManager().canvasController.Pointer.SetActive(true);
-        this.transform.position = Vector3.MoveTowards(this.transform.position, previousPos, grabbingSpeed * Time.deltaTime);
-        this.transform.rotation = previousQuat;
-        if (Vector3.Distance(this.transform.position, previousPos) < 0.1f)
+        transform.position = Vector3.MoveTowards(transform.position, previousPos, grabbingSpeed * Time.deltaTime);
+        transform.rotation = previousQuat;
+        GameManager.GetManager().StartThirdPersonCamera();
+        if (Vector3.Distance(transform.position, previousPos) < 0.1f)
         {
             cam.cullingMask = -1;
             isObjectGrabbed = false;

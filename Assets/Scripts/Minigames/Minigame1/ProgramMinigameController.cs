@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class ProgramMinigameController : MonoBehaviour, ITask
 {
@@ -75,10 +75,8 @@ public class ProgramMinigameController : MonoBehaviour, ITask
 
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().computer.ComputerON();
-        GameManager.GetManager().dialogueManager.SetDialogue("Atardece", delegate
-        {
-            GameManager.GetManager().dayController.ChangeDay(3);
-        });
+        GameManager.GetManager().dialogueManager.SetDialogue("Atardece");
+        GameManager.GetManager().dayController.ChangeDay(3);
     }
 
     public void QuitMiniGame()
@@ -108,12 +106,12 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     public void ResetAllGame()
     {
         for (int i = 0; i < allPieces.Count; i++)
-        {
             allPieces[i].ResetPiece();
-        }
+
         GameManager.GetManager().programmed = false;
+        SetTask();
     }
     public bool GetSolved() { return allCorrect; }
 
-    public void SetCurrSolution(SolutionPiece  e) { currSolution = e; }
+    public void SetCurrSolution(SolutionPiece e) { currSolution = e; }
 }

@@ -87,7 +87,6 @@ public class Window : Interactables, ITask
                 // Inicia minijuego
                 GameManager.GetManager().cameraController.StartInteractCam(4);
                 GameManager.GetManager().canvasController.Lock();
-                print("AAAAAAAAA");
                 if (GameManager.GetManager().dayController.GetDayNumber() == DayController.Day.two)
                 {
                     GameManager.GetManager().dialogueManager.SetDialogue("D2AccHigLimp_Ventana");
@@ -103,16 +102,24 @@ public class Window : Interactables, ITask
 
     public override void ExitInteraction()
     {
+        tutorial.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Zoom Out", transform.position);
         gameInitialized = false;
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
 
+
+    public override void ResetInteractable()
+    {
+        ResetWindow();
+        base.ResetInteractable();
+    }
     public void ResetWindow()
     {
         interactDone = false;
         isOpen = interactDone;
+        isClosed = true;
         gameInitialized = false;
         glass.transform.position = initPos;
     }
@@ -174,7 +181,7 @@ public class Window : Interactables, ITask
     {
         if (gameInitialized)
         {
-            if (tutorialShowed) tutorial.SetActive(false);
+            if (tutorialShowed)tutorial.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Scratch", transform.position);
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
@@ -184,6 +191,7 @@ public class Window : Interactables, ITask
             {
                 height = minHeight;
                 isClosed = true;
+                isOpen = false;
             }
 
             else if (displacement < maxHeight)
@@ -193,6 +201,7 @@ public class Window : Interactables, ITask
             {
                 height = maxHeight;
                 isOpen = true;
+                isClosed = false;
             }
             glass.transform.position = new Vector3(glass.transform.position.x, height, glass.transform.position.z);
         }
@@ -202,14 +211,15 @@ public class Window : Interactables, ITask
     {
         if ((isOpen || isClosed) && gameInitialized)
             WindowDone();
-        else if (!isOpen)
+        else if (!isOpen && gameInitialized)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaClose");
-        else if (interactDone && isOpen)
+        else if (interactDone && isOpen && gameInitialized)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
     #endregion
     private void WindowDone()
     {
+        tutorial.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Window Clank", transform.position);
         streetAmb.start();
         ExitInteraction();
@@ -217,20 +227,25 @@ public class Window : Interactables, ITask
         gameInitialized = false;
         //OptionComplete();
         GameManager.GetManager().autocontrol.AddAutoControl(m_MinAutoControl);
+
+        interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
+        GameManager.GetManager().dayController.TaskDone();
+
         if (isOpen)
+        {
+            GameManager.GetManager().blockController.LockSpecific("Ventanas");
+            //GameManager.GetManager().blockController.LockSpecific("Ventana");
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+        }
         else
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
 
-        interactableText.text = isOpen ? stateOptions[0] : stateOptions[1];
         isOpen = false;
         isClosed = false;
-        GameManager.GetManager().dayController.TaskDone();
-
     }
     IEnumerator Delay()
     {
-        GameManager.GetManager().blockController.LockSpecific("Ventanas");
+       
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);

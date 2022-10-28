@@ -1,10 +1,12 @@
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
+    public GameObject diaUno, diaDos;
+    public Transform rotateAlexDoor, rotateAidaDoor;
     [Header("Interactables")]
     public BlockInteractables[] dayOneInteractable;
     public BlockInteractables[] dayTwoInteractable;
@@ -39,11 +41,11 @@ public class BlockController : MonoBehaviour
         for (int i = 0; i < locks.Count; i++)
             locks[i].InteractableBlocked = true;
 
-        print(locks.Count);
         stop = false;
     }
     IEnumerator Start()
     {
+        ToActive();
         yield return new WaitWhile(() => stop);
         CheckUnlockInteractable(dayOneInteractable);
 
@@ -96,7 +98,7 @@ public class BlockController : MonoBehaviour
             {
                 for (int e = 0; e < dayInteractables[i].locks.Length; e++)
                     dayInteractables[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
-                
+
                 return;
             }
         }
@@ -123,7 +125,7 @@ public class BlockController : MonoBehaviour
                 {
                     for (int e = 0; e < dayTwoInteractable[i].locks.Length; e++)
                     {
-                        print("name: " + dayTwoInteractable[i] + " name obj: " + dayTwoInteractable[i].locks[e]);
+                        //print("name: " + dayTwoInteractable[i] + " name obj: " + dayTwoInteractable[i].locks[e]);
                         dayTwoInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = block;
                     }
                 }
@@ -133,7 +135,7 @@ public class BlockController : MonoBehaviour
             default:
                 break;
         }
-        
+
     }
 
     public void UnlockAll(DayController.DayTime time)
@@ -143,7 +145,11 @@ public class BlockController : MonoBehaviour
             for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
             {
                 if (dayOneInteractable[i].dayTimeCanUnlock == time)
+                {
+                    print(dayOneInteractable[i].locks[e].name);
                     dayOneInteractable[i].locks[e].GetComponent<ILock>().InteractableBlocked = false;
+
+                }
             }
         }
     }
@@ -160,5 +166,38 @@ public class BlockController : MonoBehaviour
                 return;
             }
         }
+    }
+    public void ToActive()
+    {
+        switch (GameManager.GetManager().dayController.GetDayNumber())
+        {
+            case DayController.Day.one:
+                diaUno.SetActive(true);
+                break;
+            case DayController.Day.two:
+
+                diaUno.SetActive(false);
+                diaDos.SetActive(true);
+                rotateAlexDoor.rotation = Quaternion.Euler(0, -100, 0);
+                rotateAidaDoor.rotation = Quaternion.Euler(0, -100, 0);
+                break;
+            case DayController.Day.three:
+                diaDos.SetActive(false);
+                break;
+            case DayController.Day.fourth:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public bool CheckBlockOneDay(string name)
+    {
+        for (int i = 0; i < dayOneInteractable.Length; i++)
+            if (dayOneInteractable[i].name == name)
+                for (int e = 0; e < dayOneInteractable[i].locks.Length; e++)
+                    return dayOneInteractable[i].locks[0].GetComponent<ILock>().InteractableBlocked;
+
+        return false;
     }
 }

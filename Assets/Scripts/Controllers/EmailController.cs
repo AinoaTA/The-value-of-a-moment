@@ -18,7 +18,8 @@ public class EmailController : MonoBehaviour
             GameManager.GetManager().dayController.TaskDone();
         }
         emailCanvas.SetActive(v);
-        GameManager.GetManager().computer.ComputerON();
+        if (!v)
+            GameManager.GetManager().computer.ComputerON();
     }
 
     public void CloseOthers(Email e)

@@ -3,8 +3,8 @@ using UnityEngine.Events;
 public class ComputerButton : MonoBehaviour, ILock
 {
     public bool InteractableBlocked { get => _blocked; set => _blocked = value; }
-    [SerializeField]bool _blocked;
-
+    [SerializeField] bool _blocked;
+    [SerializeField] string nameBlocked;
     [SerializeField] private Color[] colors;
     [SerializeField] private Vector3 defaultScale;
     [SerializeField] private float scale;
@@ -12,7 +12,13 @@ public class ComputerButton : MonoBehaviour, ILock
     [Space(20)]
 
     [SerializeField] private UnityEvent eventButton;
-  
+
+    void OnEnable()
+    {
+        if (nameBlocked != "")
+            _blocked = GameManager.GetManager().blockController.CheckBlockOneDay(nameBlocked);
+    }
+
     private void Awake()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();

@@ -43,6 +43,11 @@ public class MobileController : MonoBehaviour
             for (int i = 0; i < currChat.answerContent.transform.childCount; i++)
                 Destroy(currChat.answerContent.transform.GetChild(i).transform.gameObject);
 
+        if (selected.nextText.Length == 0 && !startConver)
+        {
+            currChat.ChatFinish();
+        }
+
         for (int i = 0; i < selected.conver.Length; i++)
         {
             Messages rep;
@@ -59,10 +64,10 @@ public class MobileController : MonoBehaviour
         if (startConver)
             yield break;
 
-        if (selected.nextText.Length == 0)
-        {
-            currChat.ChatFinish();
-        }
+        //if (selected.nextText.Length == 0)
+        //{
+        //    currChat.ChatFinish();
+        //}
 
         for (int i = 0; i < selected.nextText.Length; i++)
         {

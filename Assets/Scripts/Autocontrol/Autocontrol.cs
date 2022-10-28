@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Autocontrol : MonoBehaviour
 {
-    private float maxValue = 100f;
+    public float maxValue = 100f;
     CanvasGroup canvasGroup;
     public float m_currentValue { get; private set; }
     [SerializeField] private Slider m_Slider;
@@ -35,7 +35,6 @@ public class Autocontrol : MonoBehaviour
         rawImage.texture = renderTexture;
         m_Slider.value = m_currentValue / maxValue;
         UpdateAutcontrol();
-
     }
 
     public void AddAutoControl(float value)
@@ -88,16 +87,13 @@ public class Autocontrol : MonoBehaviour
         yield return new WaitForSeconds(1);
         particles.Stop();
     }
-    
+
     public void UpdateAutcontrol()
     {
         if (m_Slider.value <= 0.3f)
         {
             stateImage.sprite = statesColor[0];
             backgroundBar.sprite = barBackGroundColor[0];
-            //gameObject.GetComponent<FMODMusic>().Mood();
-            //MusicGameplay
-            Debug.Log("Temporal Line commented");
             MusicGameplay.Mood(1f);
 
         }
@@ -105,7 +101,7 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[1];
             backgroundBar.sprite = barBackGroundColor[1];
-            
+
             MusicGameplay.Mood(2f);
 
         }
@@ -113,7 +109,7 @@ public class Autocontrol : MonoBehaviour
         {
             stateImage.sprite = statesColor[2];
             backgroundBar.sprite = barBackGroundColor[2];
-            
+
             MusicGameplay.Mood(3f);
 
         }

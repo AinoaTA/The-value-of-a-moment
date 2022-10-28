@@ -8,6 +8,7 @@ public class BucketController : Interactables, ITask, IDependencies
     [HideInInspector] public int currCapacity;
     [SerializeField] private int maxCapacity = 5;
     [SerializeField] private int trashGot;
+    public InventoryTrashUI inventoryUI;
 
     #region DEPENDENCIES
     private bool hasNecessary_;
@@ -66,7 +67,7 @@ public class BucketController : Interactables, ITask, IDependencies
 
     #endregion
     #region OnMouse
-    private void OnMouseEnter()
+    protected override void OnMouseEnter()
     {
         switch (type)
         {
@@ -84,6 +85,14 @@ public class BucketController : Interactables, ITask, IDependencies
 
         base.Show();
     }
+    protected override void OnMouseOver()
+    {
+        hasNecessary = trashGot > 0;
+        if (!hasNecessary)
+            return;
+        base.OnMouseOver();
+    }
+
     private void OnMouseExit()
     {
         base.Hide();
@@ -101,12 +110,12 @@ public class BucketController : Interactables, ITask, IDependencies
                 if (type == TypeBucket.CLOTHES)
                 {
                     GameManager.GetManager().trashInventory.RemoveDirtyClothes(this);
-
                 }
                 else if (type == TypeBucket.TRASH)
                 {
                     GameManager.GetManager().trashInventory.RemoveTrash();
                 }
+                trashGot = 0;
                 GameManager.GetManager().dayController.TaskDone();
                 GameManager.GetManager().dialogueManager.SetDialogue("IRopaSucia");
                 GameManager.GetManager().interactableManager.LookingAnInteractable(null);
@@ -133,5 +142,6 @@ public class BucketController : Interactables, ITask, IDependencies
     {
         currCapacity = 0;
         trashGot = 0;
+        inventoryUI.ResetInventory();
     }
 }

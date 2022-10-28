@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pienso : Interactables
 {
-    private bool grabbed;
+    [HideInInspector]public bool grabbed;
     [SerializeField] private Cuenco cuenco;
 
     private void Start()
@@ -18,17 +16,16 @@ public class Pienso : Interactables
         switch (optionNumber)
         {
             case 1:
-                // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Env/GrabCatFood", transform.position);
                 grabbed = true;
                 cuenco.GrabbedPienso();
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
                 break;
         }
     }
 
     public override void ExitInteraction()
     {
-        // FMODUnity.RuntimeManager.PlayOneShot("event:/Env/Pienso", transform.position);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }

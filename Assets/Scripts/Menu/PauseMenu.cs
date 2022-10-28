@@ -23,7 +23,7 @@ namespace Menu
             if (!paused)
             {
                 paused = true;
-                GameManager.GetManager().canvasController.UnLock(false, false);
+                GameManager.GetManager().canvasController.UnLock(false, true);
                 GameManager.GetManager().cameraController.Block3DMovement(!paused);
                 GameManager.GetManager().canvasController.ShowCanvas(pause);
                 MusicGameplay.Pause(1f);
@@ -38,7 +38,10 @@ namespace Menu
         {
             Time.timeScale = 1;
             paused = false;
-            GameManager.GetManager().canvasController.Lock(true, false);
+
+            if (GameManager.GetManager().gameStateController.CheckGameState(0)) GameManager.GetManager().canvasController.Lock(false, false);
+            else  GameManager.GetManager().canvasController.Lock(true, false);
+
             GameManager.GetManager().canvasController.HideCanvas(pause);
             GameManager.GetManager().cameraController.Block3DMovement(!paused);
             MusicGameplay.Pause(0f);

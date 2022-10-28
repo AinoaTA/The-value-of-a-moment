@@ -24,7 +24,7 @@ public class GeneralActionsManager : MonoBehaviour
         GameManager.GetManager().playerInputs._FirstInteraction += InteractionManager;
         GameManager.GetManager().playerInputs._ExitInteraction += ExitActionManager;
         GameManager.GetManager().playerInputs._SecondInteraction += SecondExtraInteraction;
-    }    
+    }
 
     public void LookingAnInteractable(GeneralActions interactables)
     {
@@ -34,7 +34,10 @@ public class GeneralActionsManager : MonoBehaviour
     public void ResetAll()
     {
         for (int i = 0; i < allObjects.Count; i++)
-            allObjects[i].ResetObject();
+        {
+            allObjects[i].gameObject.SetActive(true);
+              allObjects[i].ResetObject();
+        }
     }
 
     public void ExitActionManager()

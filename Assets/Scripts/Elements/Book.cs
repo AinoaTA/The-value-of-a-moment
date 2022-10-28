@@ -31,9 +31,9 @@ public class Book : Interactables
     public override void ExtraInteraction()
     {
         block = true;
-        GameManager.GetManager().dialogueManager.SetDialogue("D2AccSelfcOcio_Libro",delegate { block = false; },canRepeat:true);
+        GameManager.GetManager().dialogueManager.SetDialogue("D2AccSelfcOcio_Libro", delegate { block = false; }, canRepeat: true);
         counter++;
-        
+
     }
 
     public override void ExitInteraction()

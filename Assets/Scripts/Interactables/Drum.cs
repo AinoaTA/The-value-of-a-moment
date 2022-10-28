@@ -2,8 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drum : Interactables
+public class Drum : Interactables, ITask
 {
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    [SerializeField] private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
+
     public DrumRhythm[] rhythm;
     public List<DrumInstrument> instruments;
     public float delayStart = 1f;
@@ -15,9 +66,15 @@ public class Drum : Interactables
     bool playingDrum = false;
     DrumInstrument pointedInstrument;
     public BoxCollider col;
-
+    public MeshRenderer mesh;
+    public Material drumMat;
     private int day;
-    
+
+    public FMODMusic MusicGameplay;
+    private void Start()
+    {
+        SetTask();
+    }
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -26,6 +83,7 @@ public class Drum : Interactables
             case 1:
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 // Inicia minijuego
+                MusicGameplay.Drums(1f);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 GameManager.GetManager().canvasController.Lock();
                 col.enabled = false;
@@ -43,10 +101,12 @@ public class Drum : Interactables
     public override void ExitInteraction()
     {
         col.enabled = true;
+        CheckDoneTask();
         StopPlayingDrum();
+        MusicGameplay.Drums(0f);
         GameManager.GetManager().StartThirdPersonCamera();
         GameManager.GetManager().dialogueManager.SetDialogue("IBateria");
-        
+        mesh.material = drumMat;
         base.ExitInteraction();
     }
 
@@ -57,8 +117,8 @@ public class Drum : Interactables
 
     IEnumerator StartActivity()
     {
-        day = (int) GameManager.GetManager().dayController.GetDayNumber();
-        
+        day = (int)GameManager.GetManager().dayController.GetDayNumber();
+
         yield return new WaitForSeconds(delayStart);
         rhythmPosition = 0;
         ShowNextInstrument();
@@ -66,7 +126,8 @@ public class Drum : Interactables
 
     void ShowNextInstrument()
     {
-        if (rhythmPosition >= rhythm[day].instrumentsOrder.Length) {
+        if (rhythmPosition >= rhythm[day].instrumentsOrder.Length)
+        {
             StartPlayerPractice();
             return;
         }
@@ -74,7 +135,7 @@ public class Drum : Interactables
         instruments[rhythm[day].instrumentsOrder[rhythmPosition]].SetRight();
         StartCoroutine(WaitNextInstrument());
     }
-    
+
     IEnumerator WaitNextInstrument()
     {
         yield return new WaitForSeconds(delayNextInstrument);
@@ -92,7 +153,8 @@ public class Drum : Interactables
             instrument.Enable(true);
     }
 
-    void DetectPlayingDrum() {
+    void DetectPlayingDrum()
+    {
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -172,8 +234,10 @@ public class Drum : Interactables
         GameManager.GetManager().cameraController.StartInteractCam(finalPlayCameraName);
     }
 
-    void StopPlayingDrum() {
-        if (playingDrum) {
+    void StopPlayingDrum()
+    {
+        if (playingDrum)
+        {
             playingDrum = false;
             foreach (DrumInstrument instrument in instruments)
                 instrument.Enable(false);
@@ -184,5 +248,12 @@ public class Drum : Interactables
     {
         foreach (DrumInstrument instrument in instruments)
             instrument.Restore();
+    }
+
+    public override void ResetInteractable()
+    {
+        RestoreAllInstruments();
+        TaskReset();
+        base.ResetInteractable();
     }
 }

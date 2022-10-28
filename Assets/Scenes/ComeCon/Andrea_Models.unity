@@ -966,6 +966,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 039921240cffe5b47bfad99056291884, type: 2}
   - {fileID: 11400000, guid: 12d8fc6b153aaa7438e7a0d1d0e5fdfd, type: 2}
   notification: {fileID: 90679794}
+  day: 0
+  one: 0
 --- !u!114 &181249590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4587,6 +4589,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 50928778}
+    - target: {fileID: 543450653358141895, guid: 754ce1a9c19461c4d8a62d741fdd7506, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2341420014530853902, guid: 754ce1a9c19461c4d8a62d741fdd7506, type: 3}
       propertyPath: anim
       value: 
@@ -5923,11 +5929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f7b15b2848b374ea4626baab95d89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1096823566 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 741072820205921711, guid: 1c34ea5458b7463499978abcd42f8af8, type: 3}
-  m_PrefabInstance: {fileID: 520121569}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1134264170
 GameObject:
   m_ObjectHideFlags: 0
@@ -6067,6 +6068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailCanvas: {fileID: 1675416344}
   mail: {fileID: 0}
+  mails: []
 --- !u!4 &1151735456
 Transform:
   m_ObjectHideFlags: 0
@@ -16537,9 +16539,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.25
-  far clip plane: 2
-  field of view: 35.72803
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -16565,7 +16567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5374907094123581618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5434, y: 1.117, z: 2.769}
+  m_LocalPosition: {x: 7.421, y: 1.716, z: -3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446087301}
@@ -17040,14 +17042,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1961001295}
     m_Modifications:
-    - target: {fileID: 185822437, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 5374907094123581616}
-    - target: {fileID: 185822437, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1096823566}
     - target: {fileID: 2533969517244537370, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: programScreen
       value: 

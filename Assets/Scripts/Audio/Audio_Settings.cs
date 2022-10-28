@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Audio_Settings : MonoBehaviour
@@ -34,11 +32,11 @@ public class Audio_Settings : MonoBehaviour
         Master.setVolume(MasterVolume);
     }
 
-    public void MasterVolumeLevel (float newMasterVolume)
+    public void MasterVolumeLevel(float newMasterVolume)
     {
         MasterVolume = newMasterVolume;
     }
-    
+
     public void MusicVolumeLevel(float newMusicVolume)
     {
         MusicVolume = newMusicVolume;
@@ -68,7 +66,7 @@ public class Audio_Settings : MonoBehaviour
         }
     }
 
-    public void MuteToggle(bool muted) 
+    public void MuteToggle(bool muted)
     {
         if (muted)
         {

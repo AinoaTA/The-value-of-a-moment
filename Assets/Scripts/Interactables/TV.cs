@@ -1,18 +1,72 @@
+using System.Collections;
 using UnityEngine;
 
-public class TV : Interactables
+public class TV : Interactables, ITask
 {
+    #region TASK
+    [Space(20)]
+    [Header("TASK")]
+    [SerializeField] private string nameTask_;
+    [SerializeField] private Calendar.TaskType.Task task_;
+    [SerializeField] private int extraAutocontrol = 5;
+    [SerializeField] private Calendar.TaskType taskType_;
+    private bool taskCompleted_;
+
+    public int extraAutocontrolByCalendar { get => extraAutocontrol; }
+    public bool taskCompleted { get => taskCompleted_; set => taskCompleted_ = value; }
+    public string nameTask { get => nameTask_; }
+    public Calendar.TaskType.Task task { get => task_; }
+    public Calendar.TaskType taskAssociated { get => taskType_; set => taskType_ = value; }
+
+    public void TaskReset()
+    {
+        taskCompleted = false;
+    }
+
+    public void TaskCompleted()
+    {
+        taskCompleted = true;
+    }
+
+    public void RewardedTask()
+    {
+        Debug.Log("Rewarded Task");
+        GameManager.GetManager().autocontrol.AddAutoControl(extraAutocontrolByCalendar);
+    }
+
+    public void SetTask()
+    {
+        GameManager.GetManager().calendarController.CreateTasksInCalendar(this);
+    }
+
+    public void CheckDoneTask()
+    {
+        Calendar.CalendarController cal = GameManager.GetManager().calendarController;
+        if (cal.CheckReward(taskAssociated))
+        {
+            if (cal.CheckTimeTaskDone(GameManager.GetManager().dayController.GetTimeDay(), taskAssociated.calendar.type))
+            {
+                TaskCompleted();
+                cal.GetTaskReward(this);
+            }
+        }
+    }
+
+    #endregion
     public GameObject screen;
     // handle de canales
-    private int[] channels;
+    [SerializeField] private MeshRenderer mesh;
+    [SerializeField] private Material[] channels;
     private int currChannel;    // Esto permite guardar el canal al apagar la tele, como irl
-
+    [SerializeField] private float timeChangeChannel = 3.5f;
     private void Start()
     {
         screen.SetActive(false);
+        SetTask();
         currChannel = 0;
     }
-
+    IEnumerator routine;
+    bool one;
     public override void Interaction(int optionNumber)
     {
         base.Interaction(optionNumber);
@@ -23,7 +77,7 @@ public class TV : Interactables
                 GameManager.GetManager().gameStateController.ChangeGameState(2);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
                 screen.SetActive(true);
-
+                ChangeChannel();
                 switch (GameManager.GetManager().dayController.GetDayNumber())
                 {
                     case DayController.Day.one:
@@ -54,26 +108,54 @@ public class TV : Interactables
                         break;
                 }
 
-                
-                InteractableBlocked = true;
-                GameManager.GetManager().dayController.TaskDone();
+
+                //InteractableBlocked = true;
+                if (!one)
+                {
+                    one = true;
+                    GameManager.GetManager().dayController.TaskDone();
+                }
                 break;
         }
     }
 
+    private void Update()
+    {
+
+    }
     public override void ExitInteraction()
     {
+        CheckDoneTask();
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TVOff", transform.position);
         screen.SetActive(false);
+        StopCoroutine(routine);
         GameManager.GetManager().StartThirdPersonCamera();
         base.ExitInteraction();
     }
 
-    public void ChangeChannel()
+    void ChangeChannel()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh", transform.position);
-        // 1 funci�n para subir o bajar canal o 2 funciones
-        currChannel++;
-        // Set screen to channels[currChannel]
+        StartCoroutine(routine = ChangeTV());
+    }
+
+    IEnumerator ChangeTV()
+    {
+        while (screen.activeSelf)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TV SwitchCh", transform.position);
+            // 1 funcion para subir o bajar canal o 2 funciones
+            currChannel++;
+            // Set screen to channels[currChannel]
+            if (currChannel >= channels.Length) currChannel = 0;
+            mesh.material = channels[currChannel];
+            yield return new WaitForSeconds(timeChangeChannel);
+        }
+    }
+
+    public override void ResetInteractable()
+    {
+        TaskReset();
+        one = false;
+        base.ResetInteractable();
     }
 }
