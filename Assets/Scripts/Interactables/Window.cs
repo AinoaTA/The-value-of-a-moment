@@ -109,7 +109,6 @@ public class Window : Interactables, ITask
         base.ExitInteraction();
     }
 
-
     public override void ResetInteractable()
     {
         ResetWindow();
