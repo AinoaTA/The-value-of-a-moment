@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetPlayerPos(Vector3 pos)
     {
-        playerAnimation.transform.position = pos;
+        playerAnimation.transform.position = new Vector3(pos.x, playerAnimation.transform.position.y, pos.z);
     }
 
     public Vector3 GetPlayerPos()
