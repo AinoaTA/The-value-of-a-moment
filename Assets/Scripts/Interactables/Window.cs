@@ -114,6 +114,7 @@ public class Window : Interactables, ITask
         ResetWindow();
         base.ResetInteractable();
     }
+
     public void ResetWindow()
     {
         interactDone = false;
@@ -156,6 +157,7 @@ public class Window : Interactables, ITask
         minHeight = glass.transform.position.y;
         initPos = glass.transform.position;
     }
+
     private void Update()
     {
         if (gameInitialized)
@@ -214,7 +216,9 @@ public class Window : Interactables, ITask
         else if (interactDone && isOpen && gameInitialized)
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraNo");
     }
+
     #endregion
+
     private void WindowDone()
     {
         tutorial.SetActive(false);
@@ -242,6 +246,7 @@ public class Window : Interactables, ITask
         isOpen = false;
         isClosed = false;
     }
+
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.5f);
