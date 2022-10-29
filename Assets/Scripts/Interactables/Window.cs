@@ -186,7 +186,6 @@ public class Window : Interactables, ITask
             float height = glass.transform.position.y;
             float displacement = GetMouseYaxisAsWorldPoint() + mOffset;
 
-
             if (displacement < minHeight)
             {
                 height = minHeight;
@@ -194,7 +193,7 @@ public class Window : Interactables, ITask
                 isOpen = false;
             }
 
-            else if (displacement < maxHeight)
+            else if (displacement < (maxHeight - 0.2f))
                 height = displacement;
 
             else if (displacement > maxHeight)
