@@ -235,7 +235,8 @@ public class Window : Interactables, ITask
         {
             GameManager.GetManager().blockController.LockSpecific("Ventanas");
             //GameManager.GetManager().blockController.LockSpecific("Ventana");
-            GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen", delegate { StartCoroutine(Delay()); });
+            GameManager.GetManager().dialogueManager.SetDialogue("VentanaOpen"/*, delegate {  }*/);
+            StartCoroutine(Delay());
         }
         else
             GameManager.GetManager().dialogueManager.SetDialogue("VentanaCierraSi");
@@ -245,7 +246,6 @@ public class Window : Interactables, ITask
     }
     IEnumerator Delay()
     {
-       
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Tutorial2");
         yield return new WaitForSeconds(0.5f);

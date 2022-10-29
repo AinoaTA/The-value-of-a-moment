@@ -74,11 +74,15 @@ public class Nevera : GeneralActions, ITask
     {
         CheckDoneTask();
         InteractableBlocked = true;
+        
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Ducha", delegate
         {
-            GameManager.GetManager().blockController.Unlock("Ducha");
+            //GameManager.GetManager().blockController.Unlock("Ducha");
+       
         });
+
+        GameManager.GetManager().blockController.Unlock("Ducha");
     }
 
     public override void ResetObject()
@@ -89,6 +93,7 @@ public class Nevera : GeneralActions, ITask
     public override void ExitAction()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeClosed", transform.position);
+        base.ExitAction();
         //if (GameManager.GetManager().interactableManager.currInteractable != null)
         //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
         //GameManager.GetManager().interactableManager.LookingAnInteractable(null);

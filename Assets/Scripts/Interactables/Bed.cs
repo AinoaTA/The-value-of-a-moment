@@ -12,7 +12,7 @@ public class Bed : Interactables, ITask
     private bool gameInitialized;
     Vector3 initPosBadSheet;
     float minDesplacement;
-    float maxDesplacement = 2.17f;
+    float maxDesplacement = 1.8f;
     private float zWorldCoord;
     private float mOffset;
     private bool tutorialShowed = false;
@@ -112,7 +112,6 @@ public class Bed : Interactables, ITask
 
             if (displacement < minDesplacement)
             {
-                print("Not enough");
                 movement = minDesplacement;
             }
             else if (displacement < maxDesplacement)

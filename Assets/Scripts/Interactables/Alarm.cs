@@ -157,14 +157,16 @@ public class Alarm : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         {
-            GameManager.GetManager().blockController.Unlock("Ventanas");
+            //GameManager.GetManager().blockController.Unlock("Ventanas");
         });
+        GameManager.GetManager().blockController.Unlock("Ventanas");
+        GameManager.GetManager().blockController.Unlock("Bed");
     }
 
     IEnumerator Delay2()
     {
         yield return new WaitWhile(() => GameManager.GetManager().dialogueManager.waitDialogue);
-       // GameManager.GetManager().UnlockBasicTasks();
+        // GameManager.GetManager().UnlockBasicTasks();
         //GameManager.GetManager().dialogueManager.SetDialogue("Ventana", delegate
         //{
         //    // TODO: unlock de los interactables
