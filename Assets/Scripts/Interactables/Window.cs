@@ -135,13 +135,13 @@ public class Window : Interactables, ITask
 
     private IEnumerator HideTutorial()
     {
-        yield return new WaitForSecondsRealtime(8);
+        yield return new WaitForSeconds(8);
         tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()
     {
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSeconds(0.5f);
         minigameCanvas.SetActive(true);
     }
 

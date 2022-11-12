@@ -130,19 +130,20 @@ public class Bed : Interactables, ITask
         StartCoroutine(ActivateMinigameCanvas());
         Animator animator = tutorial.GetComponent<Animator>();
         if (animator != null) animator.SetBool("show", true);
+        if(!tutorialShowed)
         StartCoroutine(HideTutorial());
         tutorialShowed = true;
     }
 
     private IEnumerator HideTutorial()
     {
-        yield return new WaitForSecondsRealtime(8);
+        yield return new WaitForSeconds(8f);
         tutorial.SetActive(false);
     }
 
     private IEnumerator ActivateMinigameCanvas()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSeconds(0.5f);
         minigameCanvas.SetActive(true);
     }
 
@@ -161,6 +162,7 @@ public class Bed : Interactables, ITask
 
     public void BedDone()
     {
+        tutorial.SetActive(false);
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
@@ -230,17 +232,7 @@ public class Bed : Interactables, ITask
                 {
                     case DayController.Day.one:
                         break;
-                    case DayController.Day.two:
-                        //GameManager.GetManager().dialogueManager.SetDialogue("D2AccDescRelax_Dorm", delegate
-                        //{
-                        //    // cambiar de hora
-                        //    print("?");
-                        //    GameManager.GetManager().dayController.ChangeDay(1);
-                        //    Debug.Log("Al dormir hay cambio de hora. Pasa a ser: " + GameManager.GetManager().dayController.GetTimeDay());
-                        //    GameManager.GetManager().ResetInteractable();
-                        //    GameManager.GetManager().transitionController.LoadFinalScene();
-                        //});
-
+                    case DayController.Day.two: 
                         break;
                     case DayController.Day.three:
                         break;
