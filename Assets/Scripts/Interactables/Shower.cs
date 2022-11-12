@@ -117,16 +117,16 @@ public class Shower : GeneralActions, ITask
     }
 
     float timer=0;
-    IEnumerator TimeToExit() 
+    IEnumerator TimeToExit()
     {
+        timer = 0;
         yield return null;
         while (timer < maxTimeToTakeAShower) 
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        ExitAction();
-        timer = 0;
+        ExitAction(); 
     }
 
     public override void ExitAction()
@@ -134,7 +134,7 @@ public class Shower : GeneralActions, ITask
         if (timer < maxTimeToTakeAShower) return;
         if (routine != null)
             StopCoroutine(routine);
-        print("??");
+
         CheckDoneTask();
         StartCoroutine(routine = Cortinas(false));
         InteractableBlocked = true;

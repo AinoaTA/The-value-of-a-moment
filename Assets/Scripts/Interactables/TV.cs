@@ -117,10 +117,22 @@ public class TV : Interactables, ITask
                 }
                 break;
         }
+
+        StartCoroutine(WaitToExit());
     }
-    
+    IEnumerator WaitToExit() 
+    {
+        float timer = 0;
+        while (timer < 5) 
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        ExitInteraction();
+    }
     public override void ExitInteraction()
     {
+        
         CheckDoneTask();
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/TVOff", transform.position);
         screen.SetActive(false);
