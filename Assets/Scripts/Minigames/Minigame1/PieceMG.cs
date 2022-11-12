@@ -10,7 +10,7 @@ public class PieceMG : MonoBehaviour
     public Image image;
     private void Start()
     {
-        initialPos = transform.position;
+        initialPos = transform.localPosition;
     }
     public void ClickDown()
     {
@@ -40,6 +40,6 @@ public class PieceMG : MonoBehaviour
 
     public void ResetPiece()
     {
-        transform.position = initialPos;
+        transform.localPosition = initialPos;
     }
 }

@@ -40,8 +40,9 @@ namespace Calendar
 
         public void BackCalendar()
         {
-            if (warning.activeSelf)
-                return;
+            //if (warning.activeSelf)
+            //    return;
+            warning.gameObject.SetActive(false);
             calendar.SetActive(false);
             GameManager.GetManager().computer.ComputerON();
         }
@@ -50,7 +51,6 @@ namespace Calendar
         {
             if (!modified)
             {
-
                 GameManager.GetManager().dayController.TaskDone();
 
                 modified = true;
@@ -60,6 +60,10 @@ namespace Calendar
                     for (int i = 0; i < allTimeTable[a].taskSave.Count; i++)
                         calendarInformation.Add(allTimeTable[a].taskSave[i], allTimeTable[a]);
                 }
+
+                warning.gameObject.SetActive(false);
+                calendar.SetActive(false);
+                GameManager.GetManager().computer.ComputerON();
             }
         }
 

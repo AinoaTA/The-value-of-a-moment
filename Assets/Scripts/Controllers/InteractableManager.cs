@@ -61,6 +61,8 @@ public class InteractableManager : MonoBehaviour
         {
             allInteractables[i].ResetInteractable();
         }
+
+        LookingAnInteractable(null);
     }
 
     public void LockInteractable()

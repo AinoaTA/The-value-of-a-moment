@@ -38,6 +38,8 @@ public class GeneralActionsManager : MonoBehaviour
             allObjects[i].gameObject.SetActive(true);
               allObjects[i].ResetObject();
         }
+
+        LookingAnInteractable(null);
     }
 
     public void ExitActionManager()
