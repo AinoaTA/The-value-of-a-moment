@@ -8,7 +8,7 @@ public class PieceMG : MonoBehaviour
     public bool correctWhole;
     public int id;
     public Image image;
-    ButtonTrigger bTrigger;
+    public ButtonTrigger bTrigger;
     private void Start()
     {
         initialPos = transform.position;

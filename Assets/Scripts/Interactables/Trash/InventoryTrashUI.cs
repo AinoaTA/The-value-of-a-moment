@@ -44,6 +44,7 @@ public class InventoryTrashUI : MonoBehaviour
     public void RemoveTrash()
     {
         StartCoroutine(RemoveTrashDelay(current, trashCollected, trashCounter, trashPhrase));
+        trashCounter.gameObject.SetActive(false);
         trashCollected = 0;
     }
 
@@ -51,6 +52,11 @@ public class InventoryTrashUI : MonoBehaviour
     {
         trashCollected = 0;
         dirtyClothesCollected = 0;
+        trashCounter.text = "";
+
+        dirtyClothesCounter.gameObject.SetActive(false);
+        trashCounter.gameObject.SetActive(false);
+        dirtyClothesCounter.text = "";
         trashCounter.text = "";
     }
     public void RemoveDirtyClothes(BucketController bucket)
