@@ -60,6 +60,8 @@ public class Shower : GeneralActions, ITask
     public GameObject cortinas;
     #region Extra Actions
     public DoSomething[] moreOptions;
+
+    public float maxTimeToTakeAShower=1;
     [System.Serializable]
     public struct DoSomething
     {
@@ -92,6 +94,8 @@ public class Shower : GeneralActions, ITask
     public override void EnterAction()
     {
         base.EnterAction();
+
+        StartCoroutine(TimeToExit());
         ShowerSFX.start();
         ShowerSFX.setParameterByName("ShowerOnOff", 0f);
         GameManager.GetManager().gameStateController.ChangeGameState(3);
@@ -109,10 +113,25 @@ public class Shower : GeneralActions, ITask
         {
             //StartCoroutine(ShowOtherOptions());
         }
+
+    }
+
+    float timer=0;
+    IEnumerator TimeToExit() 
+    {
+        yield return null;
+        while (timer < maxTimeToTakeAShower) 
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        ExitAction();
+        timer = 0;
     }
 
     public override void ExitAction()
     {
+        if (timer < maxTimeToTakeAShower) return;
         if (routine != null)
             StopCoroutine(routine);
         print("??");
