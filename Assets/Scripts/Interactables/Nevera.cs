@@ -61,27 +61,17 @@ public class Nevera : GeneralActions, ITask
     {
         base.EnterAction();
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeOpen", transform.position);
-        //GameManager.GetManager().gameStateController.ChangeGameState(3);
-        //GameManager.GetManager().cameraController.StartInteractCam(nameAction);
-        GameManager.GetManager().dialogueManager.SetDialogue("IPicarAlgo",
-        delegate
-        {
-            StartCoroutine(Delay());
-        }, canRepeat: true);
+        GameManager.GetManager().dialogueManager.SetDialogue("IPicarAlgo", canRepeat: true);
+        StartCoroutine(Delay());
     }
 
     IEnumerator Delay()
     {
         CheckDoneTask();
         InteractableBlocked = true;
-        
+        ExitAction();
         yield return new WaitForSeconds(0.5f);
-        GameManager.GetManager().dialogueManager.SetDialogue("Ducha", delegate
-        {
-            //GameManager.GetManager().blockController.Unlock("Ducha");
-       
-        });
-
+        GameManager.GetManager().dialogueManager.SetDialogue("Ducha");
         GameManager.GetManager().blockController.Unlock("Ducha");
     }
 
@@ -93,12 +83,6 @@ public class Nevera : GeneralActions, ITask
     public override void ExitAction()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Env/FridgeClosed", transform.position);
-        base.ExitAction();
-        //if (GameManager.GetManager().interactableManager.currInteractable != null)
-        //    GameManager.GetManager().interactableManager.currInteractable.EndExtraInteraction();
-        //GameManager.GetManager().interactableManager.LookingAnInteractable(null);
-        ////canvas.SetBool("Showing", false);
-        //GameManager.GetManager().StartThirdPersonCamera();
-        //base.ExitAction();
+        base.ExitAction(); 
     }
 }
