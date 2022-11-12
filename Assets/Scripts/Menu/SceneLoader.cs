@@ -68,6 +68,7 @@ public class SceneLoader : MonoBehaviour
         }
         else if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
+            SceneManager.LoadSceneAsync("SceneLoader", LoadSceneMode.Single);
             m_LoadingSceneName = m_LevelNames[level];
             StartCoroutine(LoadLoadingScene(m_LoadingSceneName));
         }
@@ -81,11 +82,13 @@ public class SceneLoader : MonoBehaviour
         {
             if (l_LoadLevel.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(1f);
+                // yield return new WaitForSeconds(1f);
+                yield return new WaitWhile(() => GameManager.GetManager().levelData.isLoadingSceneActive);
                 l_LoadLevel.allowSceneActivation = true;
             }
             yield return null;
         }
+       
     }
 
     IEnumerator LoadLoadingSceneFromMenu(string scene)

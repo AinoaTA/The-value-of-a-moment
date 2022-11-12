@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LevelData : MonoBehaviour
 {
+    public bool isLoadingSceneActive;
     public enum Characters { Elle, Zoe, Ari }
     public Characters character;
     public string[] sceneNames;
