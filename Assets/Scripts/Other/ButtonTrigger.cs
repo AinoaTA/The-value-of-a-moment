@@ -4,7 +4,7 @@ public class ButtonTrigger : MonoBehaviour
 {
     public float m_Counter;
 
-    public float ScaleValue = 0.004f;
+    public float ScaleValue = 0.1f;
     private Vector3 m_InitialScale;
     private Vector3 m_ScaleWakeUpButton;
     private Vector3 m_NewScaleWakeUpButton;

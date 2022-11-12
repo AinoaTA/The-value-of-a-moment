@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tareas Disponibles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
-  m_sharedMaterial: {fileID: 8405298845142461501, guid: 619e359ded8d68844bc77b9db94598b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
+  m_sharedMaterial: {fileID: -2067520440824604490, guid: 4ca0ba7c5fd487e4c98cef1d1fcb44ae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 1915374815253030592}
   - component: {fileID: 3156954516204863391}
   - component: {fileID: 8625063304841495926}
+  - component: {fileID: 3217530875023920480}
   m_Layer: 0
   m_Name: Task1
   m_TagString: Untagged
@@ -225,16 +226,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16e8ccb3e89a7e45aa5fe0e1f08250a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  task: 0
+  nameTask: Programar
   colors:
   - {fileID: 4076072658342189316, guid: 3d544c5caa94e6f4e8d1a95128dd1cdb, type: 3}
   - {fileID: 7145961334070793690, guid: 3d544c5caa94e6f4e8d1a95128dd1cdb, type: 3}
   - {fileID: -7984933292352029259, guid: 3d544c5caa94e6f4e8d1a95128dd1cdb, type: 3}
+  completed: {fileID: -1746247484978257990, guid: 742a7c26d1b82ba4293369b89fdb545b, type: 3}
+  content: {fileID: 0}
   enterColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   sprite: {fileID: 0}
-  completed: {fileID: -1746247484978257990, guid: 742a7c26d1b82ba4293369b89fdb545b, type: 3}
-  task: 0
-  nameTask: Programar
-  content: {fileID: 0}
+  bTrigger: {fileID: 3217530875023920480}
   InAnySpaceCalendar: 0
   calendar: {fileID: 0}
 --- !u!114 &3156954516204863391
@@ -266,6 +268,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 3217530875023920480}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -273,6 +287,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1915374815253030592}
           m_TargetAssemblyTypeName: TaskType, Assembly-CSharp
           m_MethodName: ClicExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3217530875023920480}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -343,3 +369,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 48.91475, y: 44.05217, z: 5}
   m_Center: {x: 7.962761, y: 6.3639145, z: 0}
+--- !u!114 &3217530875023920480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915374815253030594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0

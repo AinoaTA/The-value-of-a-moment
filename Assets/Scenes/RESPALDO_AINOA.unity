@@ -2087,7 +2087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.26
+      value: -1.2599999
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787885, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Follow
@@ -2239,6 +2239,8 @@ GameObject:
   - component: {fileID: 181249591}
   - component: {fileID: 181249590}
   - component: {fileID: 181249589}
+  - component: {fileID: 181249594}
+  - component: {fileID: 181249593}
   m_Layer: 0
   m_Name: Mail1
   m_TagString: Untagged
@@ -2412,6 +2414,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181249587}
   m_CullTransparentMesh: 1
+--- !u!114 &181249593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181249587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
+--- !u!114 &181249594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181249587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 181249593}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 181249593}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &183582466
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,6 +2741,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346218863}
     m_Modifications:
+    - target: {fileID: 1558984668, guid: 413c2226d2439ce4789117898f8aa23b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 173986391664166889, guid: 413c2226d2439ce4789117898f8aa23b, type: 3}
       propertyPath: m_sharedMaterial
       value: 
@@ -3670,6 +3736,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &264465941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3953412591957868117, guid: 413c2226d2439ce4789117898f8aa23b, type: 3}
+  m_PrefabInstance: {fileID: 204070388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &264465942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264465941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 264465943}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 264465943}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &264465943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264465941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.004
+  blocker: 0
 --- !u!1 &271270095
 GameObject:
   m_ObjectHideFlags: 0
@@ -11175,6 +11306,71 @@ RectTransform:
   m_AnchoredPosition: {x: -33, y: -4.9999657}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &842085481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3953412592041627552, guid: 413c2226d2439ce4789117898f8aa23b, type: 3}
+  m_PrefabInstance: {fileID: 204070388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &842085482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842085481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 842085483}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 842085483}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &842085483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842085481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
 --- !u!1 &842399795
 GameObject:
   m_ObjectHideFlags: 0
@@ -11243,6 +11439,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867948936 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1558984666, guid: 413c2226d2439ce4789117898f8aa23b, type: 3}
+  m_PrefabInstance: {fileID: 204070388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &867948937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867948936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
+--- !u!114 &867948938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867948936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 867948937}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 867948937}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &879104617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13010,6 +13271,66 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3953412591615948012, guid: 413c2226d2439ce4789117898f8aa23b, type: 3}
   m_PrefabInstance: {fileID: 204070388}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &931014160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931014159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 931014161}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 931014161}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &931014161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931014159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
 --- !u!1 &932271819
 GameObject:
   m_ObjectHideFlags: 0
@@ -13156,6 +13477,8 @@ GameObject:
   - component: {fileID: 932953846}
   - component: {fileID: 932953845}
   - component: {fileID: 932953844}
+  - component: {fileID: 932953848}
+  - component: {fileID: 932953847}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -13277,6 +13600,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932953842}
   m_CullTransparentMesh: 1
+--- !u!114 &932953847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932953842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
+--- !u!114 &932953848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932953842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 932953847}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 932953847}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &933306408
 GameObject:
   m_ObjectHideFlags: 0
@@ -18793,6 +19176,8 @@ GameObject:
   - component: {fileID: 1386006784}
   - component: {fileID: 1386006783}
   - component: {fileID: 1386006782}
+  - component: {fileID: 1386006787}
+  - component: {fileID: 1386006786}
   m_Layer: 0
   m_Name: Mail3
   m_TagString: Untagged
@@ -18976,6 +19361,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386006780}
   m_CullTransparentMesh: 1
+--- !u!114 &1386006786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386006780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
+--- !u!114 &1386006787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386006780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1386006786}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1386006786}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1388836131
 GameObject:
   m_ObjectHideFlags: 0
@@ -18989,6 +19434,8 @@ GameObject:
   - component: {fileID: 1388836135}
   - component: {fileID: 1388836134}
   - component: {fileID: 1388836133}
+  - component: {fileID: 1388836138}
+  - component: {fileID: 1388836137}
   m_Layer: 0
   m_Name: Mail2
   m_TagString: Untagged
@@ -19172,6 +19619,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388836131}
   m_CullTransparentMesh: 1
+--- !u!114 &1388836137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388836131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
+--- !u!114 &1388836138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388836131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1388836137}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1388836137}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1393546064
 GameObject:
   m_ObjectHideFlags: 0
@@ -28121,6 +28628,8 @@ GameObject:
   - component: {fileID: 1879882363}
   - component: {fileID: 1879882362}
   - component: {fileID: 1879882361}
+  - component: {fileID: 1879882366}
+  - component: {fileID: 1879882365}
   m_Layer: 0
   m_Name: Mail4
   m_TagString: Untagged
@@ -28304,6 +28813,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879882359}
   m_CullTransparentMesh: 1
+--- !u!114 &1879882365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879882359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2942a7b5c272a648ade8dd218a68eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Counter: 0
+  ScaleValue: 0.1
+  blocker: 0
+--- !u!114 &1879882366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879882359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1879882365}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClicOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1879882365}
+          m_TargetAssemblyTypeName: ButtonTrigger, Assembly-CSharp
+          m_MethodName: OnClickExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &1896812577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e11fd076ea987ab4e823ae50d1772ede, type: 3}

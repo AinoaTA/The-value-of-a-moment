@@ -16,6 +16,7 @@ namespace Calendar
         [SerializeField] private Transform content;
         [SerializeField] private Color enterColor;
         [HideInInspector] public Image sprite;
+        [SerializeField] ButtonTrigger bTrigger;
 
 
         [HideInInspector] public bool InAnySpaceCalendar;
@@ -35,6 +36,10 @@ namespace Calendar
             parentTransform = gameObject.transform.parent;
             sprite = GetComponent<Image>();
             text = GetComponentInChildren<TMP_Text>();
+        }
+        private void OnEnable()
+        {
+            bTrigger.blocker = modifiedCalendar;
         }
         private void Start()
         {
