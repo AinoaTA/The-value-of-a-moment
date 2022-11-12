@@ -118,11 +118,7 @@ public class TV : Interactables, ITask
                 break;
         }
     }
-
-    private void Update()
-    {
-
-    }
+    
     public override void ExitInteraction()
     {
         CheckDoneTask();

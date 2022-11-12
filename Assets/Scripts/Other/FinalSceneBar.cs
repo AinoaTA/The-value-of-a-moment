@@ -18,15 +18,14 @@ public class FinalSceneBar : MonoBehaviour
         if (activated)
         {
             barPivot.transform.localScale = Vector3.Lerp(barPivot.transform.localScale, newScale, scaleSpeed * Time.deltaTime);
-            //if (transform.localScale.magnitude == newScale.magnitude)
-            //    activated = false;
+       
         }
     }
 
     public void ActivateAnim()
     {
         autoconfidence = GameManager.GetManager().autocontrol.GetAutcontrolValue();
-        autoconfidence = 0.5f;
+        //autoconfidence = 0.5f; XDXD??? jajsjajs 
         newScale = new Vector3(autoconfidence, barPivot.transform.localScale.y, barPivot.transform.localScale.z);
         SetFinalText();
         activated = true;
