@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Drum : Interactables, ITask
 {
@@ -71,6 +72,7 @@ public class Drum : Interactables, ITask
     private int day;
 
     public FMODMusic MusicGameplay;
+    private CinemachineVirtualCamera virtualCam;
     private void Start()
     {
         SetTask();
@@ -85,6 +87,8 @@ public class Drum : Interactables, ITask
                 // Inicia minijuego
                 MusicGameplay.Drums(1f);
                 GameManager.GetManager().cameraController.StartInteractCam(nameInteractable);
+                //virtualCam = GameManager.GetManager().cameraController.GetCamera(nameInteractable);
+                //virtualCam.
                 GameManager.GetManager().canvasController.Lock();
                 col.enabled = false;
                 playingDrum = false;
@@ -231,7 +235,8 @@ public class Drum : Interactables, ITask
         GameManager.GetManager().dayController.TaskDone();
         yield return new WaitForSeconds(delayFinish);
         RestoreAllInstruments();
-        GameManager.GetManager().cameraController.StartInteractCam(finalPlayCameraName);
+        ExitInteraction();
+        //GameManager.GetManager().cameraController.StartInteractCam(finalPlayCameraName);
     }
 
     void StopPlayingDrum()

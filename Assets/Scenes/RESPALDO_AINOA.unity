@@ -2011,11 +2011,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 722534135, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 3e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 722534135, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 722534136, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Follow
@@ -2087,7 +2087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787874, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.26
+      value: -1.2599999
       objectReference: {fileID: 0}
     - target: {fileID: 7979124586415787885, guid: e11670496f27726418738713e038c4ea, type: 3}
       propertyPath: m_Follow
@@ -23335,7 +23335,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 150
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -23359,7 +23359,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 150
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -38757,9 +38757,21 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5896139587565686803, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: delayStart
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5896139587565686803, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: delayFinish
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5896139587565686803, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: MusicGameplay
       value: 
       objectReference: {fileID: 1796884261}
+    - target: {fileID: 5896139587565686803, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
+      propertyPath: delayNextInstrument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5966406335966764464, guid: d16712be9b1a5ea42916db917657bb51, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647

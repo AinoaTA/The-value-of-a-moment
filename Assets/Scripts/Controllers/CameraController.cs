@@ -116,6 +116,16 @@ public class CameraController : MonoBehaviour
         SetPriorityCam(name);
     }
 
+    public CinemachineVirtualCamera GetCamera(string name)
+    {
+        for (int i = 0; i < virtualCameras.Length; i++)
+        {
+            if (virtualCameras[i].Name == name)
+                return virtualCameras[i].cameraType;
+        }
+        return null;
+    }
+
     #region CameraMovement
     private void CameraPitchDelta(float delta)
     {
