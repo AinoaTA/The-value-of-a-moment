@@ -15,6 +15,7 @@ namespace Calendar
         [SerializeField] private GameObject calendar, warning;
         [SerializeField] private MobileCalendar mobileCalendar;
         [HideInInspector] public bool modified;
+        [SerializeField] GameObject acceptButton;
 
         private void Awake()
         {
@@ -52,7 +53,7 @@ namespace Calendar
             if (!modified)
             {
                 GameManager.GetManager().dayController.TaskDone();
-
+                acceptButton.gameObject.SetActive(false);
                 modified = true;
                 warning.SetActive(false);
                 for (int a = 0; a < allTimeTable.Count; a++)
@@ -80,6 +81,7 @@ namespace Calendar
 
         public void ShowCalendar()
         {
+            acceptButton.gameObject.SetActive(!modified);
             calendar.SetActive(true);
         }
 

@@ -8,7 +8,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     private bool checking;
     private bool allCorrect;
     public float m_Autocontrol = 5;
-    public SolutionPiece currSolution;
+    [HideInInspector] public SolutionPiece currSolution;
 
     #region TASK
     [Space(20)]
@@ -68,6 +68,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
     }
     private IEnumerator GameFinished()
     {
+        currSolution = null;
         GameManager.GetManager().programmed = true;
         CheckDoneTask();
         GameManager.GetManager().dayController.TaskDone();
@@ -109,6 +110,7 @@ public class ProgramMinigameController : MonoBehaviour, ITask
             allPieces[i].ResetPiece();
 
         GameManager.GetManager().programmed = false;
+        allCorrect = false;
         SetTask();
     }
     public bool GetSolved() { return allCorrect; }

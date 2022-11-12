@@ -3,14 +3,16 @@ using UnityEngine.UI;
 
 public class PieceMG : MonoBehaviour
 {
-    private Vector3 initialPos;
+    [SerializeField] Vector3 initialPos;
 
     public bool correctWhole;
     public int id;
     public Image image;
+    ButtonTrigger bTrigger;
     private void Start()
     {
-        initialPos = transform.localPosition;
+        initialPos = transform.position;
+        bTrigger = GetComponent<ButtonTrigger>();
     }
     public void ClickDown()
     {
@@ -18,6 +20,7 @@ public class PieceMG : MonoBehaviour
     }
     public void Drag()
     {
+        if (correctWhole) return;
         Vector3 newPos = Input.mousePosition;
         newPos.z = 0;
         transform.position = newPos;
@@ -30,16 +33,20 @@ public class PieceMG : MonoBehaviour
             correctWhole = true;
             transform.position = GameManager.GetManager().programMinigame.currSolution.transform.position;
         }
-        else
+        else if(!correctWhole)
         {
             correctWhole = false;
             transform.position = initialPos;
         }
+
+        bTrigger.blocker = correctWhole;
         image.raycastTarget = true;
     }
 
     public void ResetPiece()
     {
-        transform.localPosition = initialPos;
+        transform.position = initialPos;
+        bTrigger.blocker = false;
+        correctWhole = false;
     }
 }
