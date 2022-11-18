@@ -150,24 +150,21 @@ public class Shower : GeneralActions, ITask
         if (!duchado) ducha = "DuchaNo";
         else ducha = "DuchaSi";
 
-        GameManager.GetManager().dialogueManager.SetDialogue(ducha, delegate
-        {
-            StartCoroutine(Delay());
-        });
+        GameManager.GetManager().dialogueManager.SetDialogue(ducha);
+        StartCoroutine(Delay());
+
     }
     IEnumerator Delay()
     {
+        yield return new WaitForSeconds(2);
         switch (GameManager.GetManager().dayController.GetDayNumber())
         {
             case DayController.Day.one:
                 canvas.gameObject.SetActive(false);
                 yield return new WaitForSeconds(1);
-                GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", delegate
-                {
-                    GameManager.GetManager().dayController.ChangeDay(1);
-                    GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
-                });
-
+                GameManager.GetManager().dialogueManager.SetDialogue("TutorialAgenda", canInterrumpt: false);
+                GameManager.GetManager().dayController.ChangeDay(1);
+                GameManager.GetManager().blockController.UnlockAll(DayController.DayTime.MedioDia);
                 break;
             case DayController.Day.two:
                 break;

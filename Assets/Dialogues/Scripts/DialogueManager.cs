@@ -39,9 +39,16 @@ public class DialogueManager : MonoBehaviour
     bool canRepeat;
     string previusDialogue;
     public bool waitDialogue = true;
-    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false, bool onlyVoice = false)
+    bool noInterrumpt;
+    public void SetDialogue(string dialogue, Action act = null, bool forceInvoke = false, bool canRepeat = false, bool onlyVoice = false, bool canInterrumpt=true)
     {
         if (dialogue == previusDialogue) return;
+        if (noInterrumpt) return;
+        if (!canInterrumpt) 
+        {
+            noInterrumpt = true;
+        }
+
         previusDialogue = dialogue;
         waitDialogue = true;
         if (nextLineCoroutine != null) StopDialogue();
@@ -115,7 +122,7 @@ public class DialogueManager : MonoBehaviour
             for (int i = 0; i < currentDialogue.lines.Count; i++)
                 currentDialogue.lines[i].played = false;
         }
-
+        noInterrumpt = false;
         if (saveAct != null)
             saveAct?.Invoke();
 
